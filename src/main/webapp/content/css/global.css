@@ -1,6 +1,9 @@
 /* ==============================================================
 Bootstrap tweaks
 ===============================================================*/
+body {
+    background-color: #54bdbd;
+}
 
 body,
 h1,
@@ -8,23 +11,39 @@ h2,
 h3,
 h4 {
     font-weight: 300;
+    color: #54bdbd;
 }
 
-body {
-    background: #e4e5e6;
+button {
+    background-color: #54bdbd;
+    color: white;
+    font-size: 1.8em;
+    font-weight: bold;
+    padding: 1%;
+    border-style: groove;
+    border-width: 3px;
+    border-radius: 5%;
 }
 
 a {
-    color: #533f03;
-    font-weight: bold;
+    color: white;
+    text-decoration: none;
+}
+
+a.dropdown-item.active {
+    color: #54bdbd;
+    text-decoration: none;
+}
+
+fa-icon {
+    color: #54bdbd;
 }
 
 a:hover {
-    color: #533f03;
-    font-weight: bold;
-    /* make sure browsers use the pointer cursor for anchors, even with no href */
-    cursor: pointer;
+    color: white;
+    text-decoration: none;
 }
+
 
 /* ==========================================================================
 Browser Upgrade Prompt

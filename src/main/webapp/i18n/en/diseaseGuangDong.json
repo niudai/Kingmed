@@ -2,42 +2,42 @@
     "jhipsterElasticsearchSampleApplicationApp": {
         "diseaseGuangDong": {
             "home": {
-                "title": "Disease Guang Dongs",
-                "createLabel": "Create a new Disease Guang Dong",
-                "createOrEditLabel": "Create or edit a Disease Guang Dong",
-                "search": "Search for Disease Guang Dong"
+                "title": "检验知识库 - 广东",
+                "createLabel": "创建一个新项目",
+                "createOrEditLabel": "编辑这个项目",
+                "search": "搜索这个项目"
             },
-            "created": "A new Disease Guang Dong is created with identifier {{ param }}",
-            "updated": "A Disease Guang Dong is updated with identifier {{ param }}",
-            "deleted": "A Disease Guang Dong is deleted with identifier {{ param }}",
+            "created": "新项目被创建 {{ param }}",
+            "updated": "项目被更新 {{ param }}",
+            "deleted": "项目已删除 {{ param }}",
             "delete": {
-                "question": "Are you sure you want to delete Disease Guang Dong {{ id }}?"
+                "question": "你确定要删除吗? {{ id }}?"
             },
             "detail": {
-                "title": "Disease Guang Dong"
+                "title": "检验知识库 - 广东"
             },
-            "name": "Name",
-            "subsidiary": "Subsidiary",
-            "supplement": "Supplement",
-            "testMethod": "Test Method",
-            "sample": "Sample",
-            "roomPreservation": "Room Preservation",
-            "coldStoragePreservation": "Cold Storage Preservation",
-            "freezing": "Freezing",
-            "clinicalApplication": "Clinical Application",
-            "tollStandard": "Toll Standard",
-            "reportingTime": "Reporting Time",
-            "remarks": "Remarks",
-            "chargeCode": "Charge Code",
-            "classification": "Classification",
-            "applicationUnitType": "Application Unit Type",
-            "series": "Series",
-            "projectChangeNotification": "Project Change Notification",
-            "specialInspectionItems": "Special Inspection Items",
-            "stopDeveloping": "Stop Developing",
-            "projectConcourse": "Project Concourse",
-            "testDepartment": "Test Department",
-            "suppliesSeries": "Supplies Series"
+            "name": "项目名",
+            "subsidiary": "子公司",
+            "supplement": "补充说明",
+            "testMethod": "检测方法",
+            "sample": "样本及样本量",
+            "roomPreservation": "室温保存",
+            "coldStoragePreservation": "冷藏保存",
+            "freezing": "冷冻保存",
+            "clinicalApplication": "临床应用",
+            "tollStandard": "标准收费（元)",
+            "reportingTime": "出报告时间",
+            "remarks": "备注",
+            "chargeCode": "收费代码",
+            "classification": "分类",
+            "applicationUnitType": "申请单类型",
+            "series": "系列",
+            "projectChangeNotification": "项目变动通知",
+            "specialInspectionItems": "特检普检区分",
+            "stopDeveloping": "是否停止开展",
+            "projectConcourse": "检测科室",
+            "testDepartment": "耗材类别",
+            "suppliesSeries": "耗材名称"
         }
     }
 }

@@ -1,15 +1,26 @@
 /* ==========================================================================
 Navbar
 ========================================================================== */
+a {
+    color: #54bdbd;
+}
+
 .navbar-version {
     font-size: 10px;
     color: #ccc;
 }
 
-.jh-navbar {
-    background-color: #353d47;
-    padding: 0.2em 1em;
+.head {
+    width: 100%;
+    background: url(http://www.kingmed.com.cn/images/bghead.jpg) repeat-x;
+    padding-bottom: 2rem;
 }
+
+.profile-image {
+    height: 2em;
+    width: 2em;
+}
+
 
 .jh-navbar .profile-image {
     margin: -10px 0px;
