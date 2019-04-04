@@ -1,0 +1,266 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-disease-guang-dong-heading" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.home.createOrEditLabel">Create or edit a Disease Guang Dong</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!diseaseGuangDong.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="diseaseGuangDong.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.name" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                        [(ngModel)]="diseaseGuangDong.name" maxlength="300"/>
+                    <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.name?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 300 }">
+                        This field cannot be longer than 300 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.subsidiary" for="field_subsidiary">Subsidiary</label>
+                    <input type="text" class="form-control" name="subsidiary" id="field_subsidiary"
+                        [(ngModel)]="diseaseGuangDong.subsidiary" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.subsidiary?.dirty && editForm.controls.subsidiary?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.subsidiary?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 50 }">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.supplement" for="field_supplement">Supplement</label>
+                    <input type="text" class="form-control" name="supplement" id="field_supplement"
+                        [(ngModel)]="diseaseGuangDong.supplement" maxlength="1000"/>
+                    <div [hidden]="!(editForm.controls.supplement?.dirty && editForm.controls.supplement?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.supplement?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 1000 }">
+                        This field cannot be longer than 1000 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.testMethod" for="field_testMethod">Test Method</label>
+                    <input type="text" class="form-control" name="testMethod" id="field_testMethod"
+                        [(ngModel)]="diseaseGuangDong.testMethod" maxlength="200"/>
+                    <div [hidden]="!(editForm.controls.testMethod?.dirty && editForm.controls.testMethod?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.testMethod?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 200 }">
+                        This field cannot be longer than 200 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.sample" for="field_sample">Sample</label>
+                    <input type="text" class="form-control" name="sample" id="field_sample"
+                        [(ngModel)]="diseaseGuangDong.sample" maxlength="600"/>
+                    <div [hidden]="!(editForm.controls.sample?.dirty && editForm.controls.sample?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.sample?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 600 }">
+                        This field cannot be longer than 600 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.roomPreservation" for="field_roomPreservation">Room Preservation</label>
+                    <input type="text" class="form-control" name="roomPreservation" id="field_roomPreservation"
+                        [(ngModel)]="diseaseGuangDong.roomPreservation" maxlength="200"/>
+                    <div [hidden]="!(editForm.controls.roomPreservation?.dirty && editForm.controls.roomPreservation?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.roomPreservation?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 200 }">
+                        This field cannot be longer than 200 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.coldStoragePreservation" for="field_coldStoragePreservation">Cold Storage Preservation</label>
+                    <input type="text" class="form-control" name="coldStoragePreservation" id="field_coldStoragePreservation"
+                        [(ngModel)]="diseaseGuangDong.coldStoragePreservation" maxlength="200"/>
+                    <div [hidden]="!(editForm.controls.coldStoragePreservation?.dirty && editForm.controls.coldStoragePreservation?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.coldStoragePreservation?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 200 }">
+                        This field cannot be longer than 200 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.freezing" for="field_freezing">Freezing</label>
+                    <input type="text" class="form-control" name="freezing" id="field_freezing"
+                        [(ngModel)]="diseaseGuangDong.freezing" maxlength="100"/>
+                    <div [hidden]="!(editForm.controls.freezing?.dirty && editForm.controls.freezing?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.freezing?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 100 }">
+                        This field cannot be longer than 100 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.clinicalApplication" for="field_clinicalApplication">Clinical Application</label>
+                    <input type="text" class="form-control" name="clinicalApplication" id="field_clinicalApplication"
+                        [(ngModel)]="diseaseGuangDong.clinicalApplication" maxlength="1000"/>
+                    <div [hidden]="!(editForm.controls.clinicalApplication?.dirty && editForm.controls.clinicalApplication?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.clinicalApplication?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 1000 }">
+                        This field cannot be longer than 1000 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.tollStandard" for="field_tollStandard">Toll Standard</label>
+                    <input type="text" class="form-control" name="tollStandard" id="field_tollStandard"
+                        [(ngModel)]="diseaseGuangDong.tollStandard" maxlength="500"/>
+                    <div [hidden]="!(editForm.controls.tollStandard?.dirty && editForm.controls.tollStandard?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.tollStandard?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 500 }">
+                        This field cannot be longer than 500 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.reportingTime" for="field_reportingTime">Reporting Time</label>
+                    <input type="text" class="form-control" name="reportingTime" id="field_reportingTime"
+                        [(ngModel)]="diseaseGuangDong.reportingTime" maxlength="500"/>
+                    <div [hidden]="!(editForm.controls.reportingTime?.dirty && editForm.controls.reportingTime?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.reportingTime?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 500 }">
+                        This field cannot be longer than 500 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.remarks" for="field_remarks">Remarks</label>
+                    <input type="text" class="form-control" name="remarks" id="field_remarks"
+                        [(ngModel)]="diseaseGuangDong.remarks" maxlength="2000"/>
+                    <div [hidden]="!(editForm.controls.remarks?.dirty && editForm.controls.remarks?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.remarks?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 2000 }">
+                        This field cannot be longer than 2000 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.chargeCode" for="field_chargeCode">Charge Code</label>
+                    <input type="text" class="form-control" name="chargeCode" id="field_chargeCode"
+                        [(ngModel)]="diseaseGuangDong.chargeCode" maxlength="500"/>
+                    <div [hidden]="!(editForm.controls.chargeCode?.dirty && editForm.controls.chargeCode?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.chargeCode?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 500 }">
+                        This field cannot be longer than 500 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.classification" for="field_classification">Classification</label>
+                    <input type="text" class="form-control" name="classification" id="field_classification"
+                        [(ngModel)]="diseaseGuangDong.classification" maxlength="100"/>
+                    <div [hidden]="!(editForm.controls.classification?.dirty && editForm.controls.classification?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.classification?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 100 }">
+                        This field cannot be longer than 100 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.applicationUnitType" for="field_applicationUnitType">Application Unit Type</label>
+                    <input type="text" class="form-control" name="applicationUnitType" id="field_applicationUnitType"
+                        [(ngModel)]="diseaseGuangDong.applicationUnitType" maxlength="100"/>
+                    <div [hidden]="!(editForm.controls.applicationUnitType?.dirty && editForm.controls.applicationUnitType?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.applicationUnitType?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 100 }">
+                        This field cannot be longer than 100 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.series" for="field_series">Series</label>
+                    <input type="text" class="form-control" name="series" id="field_series"
+                        [(ngModel)]="diseaseGuangDong.series" maxlength="100"/>
+                    <div [hidden]="!(editForm.controls.series?.dirty && editForm.controls.series?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.series?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 100 }">
+                        This field cannot be longer than 100 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.projectChangeNotification" for="field_projectChangeNotification">Project Change Notification</label>
+                    <input type="text" class="form-control" name="projectChangeNotification" id="field_projectChangeNotification"
+                        [(ngModel)]="diseaseGuangDong.projectChangeNotification" maxlength="500"/>
+                    <div [hidden]="!(editForm.controls.projectChangeNotification?.dirty && editForm.controls.projectChangeNotification?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.projectChangeNotification?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 500 }">
+                        This field cannot be longer than 500 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.specialInspectionItems" for="field_specialInspectionItems">Special Inspection Items</label>
+                    <input type="text" class="form-control" name="specialInspectionItems" id="field_specialInspectionItems"
+                        [(ngModel)]="diseaseGuangDong.specialInspectionItems" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.specialInspectionItems?.dirty && editForm.controls.specialInspectionItems?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.specialInspectionItems?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 50 }">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.stopDeveloping" for="field_stopDeveloping">Stop Developing</label>
+                    <input type="text" class="form-control" name="stopDeveloping" id="field_stopDeveloping"
+                        [(ngModel)]="diseaseGuangDong.stopDeveloping" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.stopDeveloping?.dirty && editForm.controls.stopDeveloping?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.stopDeveloping?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 50 }">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.projectConcourse" for="field_projectConcourse">Project Concourse</label>
+                    <input type="text" class="form-control" name="projectConcourse" id="field_projectConcourse"
+                        [(ngModel)]="diseaseGuangDong.projectConcourse" maxlength="100"/>
+                    <div [hidden]="!(editForm.controls.projectConcourse?.dirty && editForm.controls.projectConcourse?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.projectConcourse?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 100 }">
+                        This field cannot be longer than 100 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.testDepartment" for="field_testDepartment">Test Department</label>
+                    <input type="text" class="form-control" name="testDepartment" id="field_testDepartment"
+                        [(ngModel)]="diseaseGuangDong.testDepartment" maxlength="100"/>
+                    <div [hidden]="!(editForm.controls.testDepartment?.dirty && editForm.controls.testDepartment?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.testDepartment?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 100 }">
+                        This field cannot be longer than 100 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.suppliesSeries" for="field_suppliesSeries">Supplies Series</label>
+                    <input type="text" class="form-control" name="suppliesSeries" id="field_suppliesSeries"
+                        [(ngModel)]="diseaseGuangDong.suppliesSeries" maxlength="100"/>
+                    <div [hidden]="!(editForm.controls.suppliesSeries?.dirty && editForm.controls.suppliesSeries?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.suppliesSeries?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 100 }">
+                        This field cannot be longer than 100 characters.
+                        </small>
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

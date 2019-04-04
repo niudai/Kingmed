@@ -1,0 +1,43 @@
+{
+    "jhipsterElasticsearchSampleApplicationApp": {
+        "diseaseGuangDong": {
+            "home": {
+                "title": "Disease Guang Dongs",
+                "createLabel": "Create a new Disease Guang Dong",
+                "createOrEditLabel": "Create or edit a Disease Guang Dong",
+                "search": "Search for Disease Guang Dong"
+            },
+            "created": "A new Disease Guang Dong is created with identifier {{ param }}",
+            "updated": "A Disease Guang Dong is updated with identifier {{ param }}",
+            "deleted": "A Disease Guang Dong is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Disease Guang Dong {{ id }}?"
+            },
+            "detail": {
+                "title": "Disease Guang Dong"
+            },
+            "name": "Name",
+            "subsidiary": "Subsidiary",
+            "supplement": "Supplement",
+            "testMethod": "Test Method",
+            "sample": "Sample",
+            "roomPreservation": "Room Preservation",
+            "coldStoragePreservation": "Cold Storage Preservation",
+            "freezing": "Freezing",
+            "clinicalApplication": "Clinical Application",
+            "tollStandard": "Toll Standard",
+            "reportingTime": "Reporting Time",
+            "remarks": "Remarks",
+            "chargeCode": "Charge Code",
+            "classification": "Classification",
+            "applicationUnitType": "Application Unit Type",
+            "series": "Series",
+            "projectChangeNotification": "Project Change Notification",
+            "specialInspectionItems": "Special Inspection Items",
+            "stopDeveloping": "Stop Developing",
+            "projectConcourse": "Project Concourse",
+            "testDepartment": "Test Department",
+            "suppliesSeries": "Supplies Series"
+        }
+    }
+}
