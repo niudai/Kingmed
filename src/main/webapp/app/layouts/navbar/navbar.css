@@ -12,6 +12,7 @@ a {
 
 .head {
     width: 100%;
+    background: white;
     background: url(http://www.kingmed.com.cn/images/bghead.jpg) repeat-x;
     padding-bottom: 2rem;
 }

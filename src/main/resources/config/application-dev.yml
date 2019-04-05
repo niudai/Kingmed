@@ -37,7 +37,8 @@ spring:
             indent-output: true
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:h2:mem:jhipsterelasticsearchsampleapplication;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+        # url: jdbc:h2:mem:jhipsterelasticsearchsampleapplication;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+        url: jdbc:h2:file:./target/h2db/db/jhipster;DB_CLOSE_DELAY=-1
         username: jhipsterElasticsearchSampleApplication
         password:
         hikari:
@@ -45,7 +46,7 @@ spring:
             auto-commit: false
     h2:
         console:
-            enabled: false
+            enabled: true
     jpa:
         database-platform: io.github.jhipster.domain.util.FixedH2Dialect
         database: H2
