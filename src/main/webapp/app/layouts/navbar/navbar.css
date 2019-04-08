@@ -5,8 +5,13 @@ a {
     color: #54bdbd;
 }
 
+a.active {
+    color: #54bdbd;
+}
+
 .dropdown-item.active {
     background-color: white;
+    color: #54bdbd;
 }
 
 .navbar-version {
