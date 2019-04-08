@@ -1,15 +1,16 @@
 {
     "settings": {
-        "title": "User settings for [<b>{{username}}</b>]",
+        "title": "信息设置 [<b>{{username}}</b>]",
         "form": {
-            "firstname": "First Name",
+            "firstname": "名",
             "firstname.placeholder": "Your first name",
-            "lastname": "Last Name",
+            "lastname": "姓",
             "lastname.placeholder": "Your last name",
             "language": "Language",
-            "button": "Save"
+            "button": "保存"
         },
         "messages": {
+            "saved": "已保存",
             "error": {
                 "fail": "<strong>An error has occurred!</strong> Settings could not be saved.",
                 "emailexists": "<strong>Email is already in use!</strong> Please choose another one."
@@ -17,12 +18,12 @@
             "success": "<strong>Settings saved!</strong>",
             "validate": {
                 "firstname": {
-                    "required": "Your first name is required.",
+                    "required": "请填写名。",
                     "minlength": "Your first name is required to be at least 1 character",
                     "maxlength": "Your first name cannot be longer than 50 characters"
                 },
                 "lastname": {
-                    "required": "Your last name is required.",
+                    "required": "请填写姓。",
                     "minlength": "Your last name is required to be at least 1 character",
                     "maxlength": "Your last name cannot be longer than 50 characters"
                 }

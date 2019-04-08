@@ -39,15 +39,15 @@
         },
         "form": {
             "username": "用户名",
-            "username.placeholder": "username",
+            "username.placeholder": "",
             "currentpassword": "当前密码",
             "currentpassword.placeholder": "Current password",
-            "newpassword": "新密码",
-            "newpassword.placeholder": "New password",
-            "confirmpassword": "New password confirmation",
-            "confirmpassword.placeholder": "Confirm the new password",
-            "email": "Email",
-            "email.placeholder": "Your email"
+            "newpassword": "密码",
+            "newpassword.placeholder": "",
+            "confirmpassword": "密码验证",
+            "confirmpassword.placeholder": "",
+            "email": "邮箱",
+            "email.placeholder": ""
         },
         "messages": {
             "info": {
@@ -62,7 +62,7 @@
                 }
             },
             "error": {
-                "dontmatch": "The password and its confirmation do not match!"
+                "dontmatch": "密码不匹配！"
             },
             "validate": {
                 "newpassword": {
@@ -95,21 +95,21 @@
     "entity": {
         "action": {
             "addblob": "Add blob",
-            "addimage": "Add image",
-            "back": "Back",
-            "cancel": "Cancel",
-            "delete": "Delete",
-            "edit": "Edit",
-            "open": "Open",
-            "save": "Save",
-            "view": "View"
+            "addimage": "添加图像",
+            "back": "返回",
+            "cancel": "取消",
+            "delete": "删除",
+            "edit": "编辑",
+            "open": "打开",
+            "save": "保存",
+            "view": "预览"
         },
         "detail": {
             "field": "Field",
             "value": "Value"
         },
         "delete": {
-            "title": "Confirm delete operation"
+            "title": "确定删除"
         },
         "validation": {
             "required": "This field is required.",

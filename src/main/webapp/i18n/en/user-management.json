@@ -5,7 +5,7 @@
             "createLabel": "创建一个新用户",
             "createOrEditLabel": "创建或编辑一个用户"
         },
-        "created": "用户以创建 {{ param }}",
+        "created": "用户已创建 {{ param }}",
         "updated": "用户信息以更新 {{ param }}",
         "deleted": "用户被删除 {{ param }}",
         "delete": {
@@ -20,7 +20,7 @@
         "email": "邮箱",
         "activated": "激活",
         "deactivated": "冻结",
-        "profiles": "Profiles",
+        "profiles": "用户级别",
         "langKey": "语言",
         "createdBy": "创建自",
         "createdDate": "创建日期",

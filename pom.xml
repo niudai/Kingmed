@@ -937,7 +937,8 @@
                                     <arguments>install</arguments>
                                 </configuration>
                             </execution>
-                            <execution>
+                            <!-- The execution of build test is diabled -->
+                            <!-- <execution>
                                 <id>webpack build test</id>
                                 <goals>
                                     <goal>npm</goal>
@@ -947,7 +948,7 @@
                                     <arguments>run webpack:test</arguments>
                                     <npmInheritsProxyConfigFromMaven>false</npmInheritsProxyConfigFromMaven>
                                 </configuration>
-                            </execution>
+                            </execution> -->
                             <execution>
                                 <id>webpack build prod</id>
                                 <goals>
