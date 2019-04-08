@@ -1,23 +1,23 @@
 {
     "register": {
-        "title": "Registration",
+        "title": "注册",
         "form": {
-            "button": "Register"
+            "button": "注册"
         },
         "messages": {
             "validate": {
                 "login": {
-                    "required": "Your username is required.",
-                    "minlength": "Your username is required to be at least 1 character.",
-                    "maxlength": "Your username cannot be longer than 50 characters.",
-                    "pattern": "Your username can only contain letters and digits."
+                    "required": "请填写用户名",
+                    "minlength": "用户名长度至少为1",
+                    "maxlength": "用户名不能超过50个子",
+                    "pattern": "用户名只能包含字母和数字"
                 }
             },
-            "success": "<strong>Registration saved!</strong> Please check your email for confirmation.",
+            "success": "<strong>注册成功</strong> 待管理员验证通过后即可正常使用",
             "error": {
-                "fail": "<strong>Registration failed!</strong> Please try again later.",
-                "userexists": "<strong>Login name already registered!</strong> Please choose another one.",
-                "emailexists": "<strong>Email is already in use!</strong> Please choose another one."
+                "fail": "<strong>注册失败!</strong> 请一会儿再试",
+                "userexists": "<strong>用户名已被注册</strong> 请选择其他用户名",
+                "emailexists": "<strong>邮箱已被使用</strong>"
             }
         }
     }

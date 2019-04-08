@@ -1,19 +1,19 @@
 {
     "login": {
-        "title": "Sign in",
+        "title": "登录",
         "form": {
-            "password": "Password",
+            "password": "密码",
             "password.placeholder": "Your password",
-            "rememberme": "Remember me",
-            "button": "Sign in"
+            "rememberme": "记住密码",
+            "button": "登录"
         },
         "messages": {
             "error": {
-                "authentication": "<strong>Failed to sign in!</strong> Please check your credentials and try again."
+                "authentication": "<strong>登录失败!</strong> 请确定账号密码正确!"
             }
         },
         "password": {
-            "forgot": "Did you forget your password?"
+            "forgot": "忘记密码?"
         }
     }
 }

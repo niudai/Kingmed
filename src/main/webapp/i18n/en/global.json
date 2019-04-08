@@ -1,6 +1,6 @@
 {
     "global": {
-        "title": "JhipsterElasticsearchSampleApplication",
+        "title": "金域检验中心",
         "browsehappy": "You are using an <strong>outdated</strong> browser. Please <a href=\"http://browsehappy.com/?locale=en\">upgrade your browser</a> to improve your experience.",
         "menu": {
             "home": "Home",
@@ -14,18 +14,18 @@
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
-                "main": "Account",
-                "settings": "Settings",
-                "password": "Password",
-                "sessions": "Sessions",
-                "login": "Sign in",
-                "logout": "Sign out",
-                "register": "Register"
+                "main": "账号",
+                "settings": "设置",
+                "password": "密码",
+                "sessions": "会话",
+                "login": "登入",
+                "logout": "登出",
+                "register": "注册"
             },
             "admin": {
-                "main": "Administration",
-                "userManagement": "User management",
-                "tracker": "User tracker",
+                "main": "管理",
+                "userManagement": "用户管理",
+                "tracker": "用户记录",
                 "metrics": "Metrics",
                 "health": "Health",
                 "configuration": "Configuration",
@@ -38,11 +38,11 @@
             "language": "Language"
         },
         "form": {
-            "username": "Username",
-            "username.placeholder": "Your username",
-            "currentpassword": "Current password",
+            "username": "用户名",
+            "username.placeholder": "username",
+            "currentpassword": "当前密码",
             "currentpassword.placeholder": "Current password",
-            "newpassword": "New password",
+            "newpassword": "新密码",
             "newpassword.placeholder": "New password",
             "confirmpassword": "New password confirmation",
             "confirmpassword.placeholder": "Confirm the new password",
@@ -57,8 +57,8 @@
                     "suffix": ", you can try the default accounts:<br/>- Administrator (login=\"admin\" and password=\"admin\") <br/>- User (login=\"user\" and password=\"user\")."
                 },
                 "register": {
-                    "noaccount": "You don't have an account yet?",
-                    "link": "Register a new account"
+                    "noaccount": "还没有账号?",
+                    "link": "注册一个吧!"
                 }
             },
             "error": {

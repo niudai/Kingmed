@@ -1,13 +1,13 @@
 {
     "reset": {
         "request": {
-            "title": "Reset your password",
+            "title": "重设密码",
             "form": {
-                "button": "Reset password"
+                "button": "确定"
             },
             "messages": {
-                "info": "Enter the email address you used to register",
-                "success": "Check your emails for details on how to reset your password.",
+                "info": "输入你的邮箱",
+                "success": "验证邮件已发送至您的邮箱",
                 "notfound": "<strong>Email address isn't registered!</strong> Please check and try again"
             }
         },
