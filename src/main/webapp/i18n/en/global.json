@@ -3,14 +3,14 @@
         "title": "金域检验中心",
         "browsehappy": "You are using an <strong>outdated</strong> browser. Please <a href=\"http://browsehappy.com/?locale=en\">upgrade your browser</a> to improve your experience.",
         "menu": {
-            "home": "Home",
+            "home": "金域家园",
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {
-                "main": "Entities",
+                "main": "检验知识库",
                 "bankAccount": "Bank Account",
                 "label": "Label",
                 "operation": "Operation",
-                "diseaseGuangDong": "Disease Guang Dong",
+                "diseaseGuangDong": "检验知识库 - 广东",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

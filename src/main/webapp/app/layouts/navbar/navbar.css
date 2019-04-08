@@ -5,6 +5,10 @@ a {
     color: #54bdbd;
 }
 
+.dropdown-item.active {
+    background-color: white;
+}
+
 .navbar-version {
     font-size: 10px;
     color: #ccc;
@@ -33,7 +37,7 @@ a {
 .jh-navbar .dropdown-item.active,
 .jh-navbar .dropdown-item.active:focus,
 .jh-navbar .dropdown-item.active:hover {
-    background-color: #353d47;
+    /* background-color: #353d47; */
 }
 
 .jh-navbar .dropdown-toggle::after {
@@ -98,4 +102,8 @@ Logo styles
     display: inline-block;
     vertical-align: middle;
     width: 70px;
+}
+
+.navbar {
+    background-color:white;
 }
