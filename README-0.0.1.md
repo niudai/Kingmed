@@ -1,4 +1,4 @@
-# 金域检验知识库 0.0.1 版本特性
+# 金域检验知识库 1.0 版本特性
 
 ## 前端界面PC端移动端完美适配
 
@@ -48,6 +48,21 @@ UI设计风格简约流畅, 和公司logo配色暗合, 以蓝绿色和白色为�
 
 ![Image](src/main/webapp/content/images/kingmed_knowledge_user_admin_edit_pc.png)
 
+## 智能邮件验证，忘记密码不用愁
+
+当你忘记密码时，可以在首页中点击`忘记密码`, 进入密码找回和密码重设步骤:
+
+![Image](src/main/webapp/content/images/kingmed_password_reset_pc.png)
+
+进入重设密码页面:
+
+![Image](src/main/webapp/content/images/kingmed_password_reset_mail_pc.png)
+
+输入你的邮箱, 点击确定, 随后你的邮箱就会收到一封来自`金域检验`的密码重设邮件:
+
+![Image](src/main/webapp/content/images/kingmed_password_reset_mail_mobile.jpg)
+
+点击生成的链接, 完成密码更改。
 
 
 

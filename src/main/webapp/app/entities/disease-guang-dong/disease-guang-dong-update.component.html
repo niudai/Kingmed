@@ -33,7 +33,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.supplement" for="field_supplement">Supplement</label>
-                    <input type="text" class="form-control" name="supplement" id="field_supplement"
+                    <input  type="text" class="form-control" name="supplement" id="field_supplement"
                         [(ngModel)]="diseaseGuangDong.supplement" maxlength="1000"/>
                     <div [hidden]="!(editForm.controls.supplement?.dirty && editForm.controls.supplement?.invalid)">
                         <small class="form-text text-danger"
@@ -99,7 +99,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.clinicalApplication" for="field_clinicalApplication">Clinical Application</label>
-                    <input type="text" class="form-control" name="clinicalApplication" id="field_clinicalApplication"
+                    <input style="height:200px" type="text" class="form-control" name="clinicalApplication" id="field_clinicalApplication"
                         [(ngModel)]="diseaseGuangDong.clinicalApplication" maxlength="1000"/>
                     <div [hidden]="!(editForm.controls.clinicalApplication?.dirty && editForm.controls.clinicalApplication?.invalid)">
                         <small class="form-text text-danger"

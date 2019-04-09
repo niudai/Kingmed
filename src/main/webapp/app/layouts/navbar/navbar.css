@@ -1,17 +1,21 @@
 /* ==========================================================================
 Navbar
 ========================================================================== */
-a {
+.nav-link {
     color: #54bdbd;
 }
 
-a.active {
-    color: #54bdbd;
+.nav-link:hover {
+    color: #336b6b;
 }
 
-.dropdown-item.active {
+.dropdown-item:hover {
     background-color: white;
-    color: #54bdbd;
+    color: #336b6b;
+}
+
+.dropdown-item:active {
+    background-color: rgb(230, 208, 208);
 }
 
 .navbar-version {
@@ -21,7 +25,7 @@ a.active {
 
 .head {
     width: 100%;
-    background: white;
+    /* background: white; */
     background: url(http://www.kingmed.com.cn/images/bghead.jpg) repeat-x;
     padding-bottom: 2rem;
 }
@@ -37,12 +41,6 @@ a.active {
     height: 40px;
     width: 40px;
     border-radius: 50%;
-}
-
-.jh-navbar .dropdown-item.active,
-.jh-navbar .dropdown-item.active:focus,
-.jh-navbar .dropdown-item.active:hover {
-    /* background-color: #353d47; */
 }
 
 .jh-navbar .dropdown-toggle::after {
