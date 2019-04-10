@@ -2,4 +2,14 @@
 Main page styles
 ========================================================================== */
 
+a {
+    color: white;
+}
 
+a:hover {
+    color: rgb(226, 203, 197);
+}
+
+a:active {
+    color: darkcyan;
+}

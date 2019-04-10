@@ -33,8 +33,8 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.supplement" for="field_supplement">Supplement</label>
-                    <input  type="text" class="form-control" name="supplement" id="field_supplement"
-                        [(ngModel)]="diseaseGuangDong.supplement" maxlength="1000"/>
+                    <textarea rows="5" cols="50" class="form-control" name="supplement" id="field_supplement"
+                        [(ngModel)]="diseaseGuangDong.supplement" maxlength="1000">
                     <div [hidden]="!(editForm.controls.supplement?.dirty && editForm.controls.supplement?.invalid)">
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.supplement?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 1000 }">
@@ -99,8 +99,17 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.clinicalApplication" for="field_clinicalApplication">Clinical Application</label>
-                    <input style="height:200px" type="text" class="form-control" name="clinicalApplication" id="field_clinicalApplication"
+                    <!-- <input style="height:200px" type="text" class="form-control" name="clinicalApplication" id="field_clinicalApplication"
+                        [(ngModel)]="diseaseGuangDong.clinicalApplication" maxlength="1000"/> -->
+
+                    <!-- <textarea style="height:200px" type="text" class="form-control" name="clinicalApplication" id="field_clinicalApplication"
                         [(ngModel)]="diseaseGuangDong.clinicalApplication" maxlength="1000"/>
+                    </textarea> -->
+
+                    <textarea class="form-control" name="clinicalApplication" id="field_clinicalApplication" rows="6" cols="50"
+                    [(ngModel)]="diseaseGuangDong.clinicalApplication" maxlength="1000">
+                    </textarea>
+
                     <div [hidden]="!(editForm.controls.clinicalApplication?.dirty && editForm.controls.clinicalApplication?.invalid)">
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.clinicalApplication?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 1000 }">
@@ -132,8 +141,9 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.remarks" for="field_remarks">Remarks</label>
-                    <input type="text" class="form-control" name="remarks" id="field_remarks"
-                        [(ngModel)]="diseaseGuangDong.remarks" maxlength="2000"/>
+                    <textarea class="form-control" name="remarks" id="field_remarks"
+                        [(ngModel)]="diseaseGuangDong.remarks" maxlength="2000" rows="6" cols="50">
+                    </textarea>
                     <div [hidden]="!(editForm.controls.remarks?.dirty && editForm.controls.remarks?.invalid)">
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.remarks?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 2000 }">

@@ -1,5 +1,8 @@
 {
     "global": {
+        "navigation": {
+            "back": "返回主页"
+        },
         "title": "金域检验中心",
         "browsehappy": "You are using an <strong>outdated</strong> browser. Please <a href=\"http://browsehappy.com/?locale=en\">upgrade your browser</a> to improve your experience.",
         "menu": {
@@ -66,19 +69,19 @@
             },
             "validate": {
                 "newpassword": {
-                    "required": "Your password is required.",
-                    "minlength": "Your password is required to be at least 4 characters.",
-                    "maxlength": "Your password cannot be longer than 50 characters.",
-                    "strength": "Password strength:"
+                    "required": "请填写密码",
+                    "minlength": "密码至少要四个字符",
+                    "maxlength": "密码不能超过五十个字符",
+                    "strength": "密码强度:"
                 },
                 "confirmpassword": {
-                    "required": "Your confirmation password is required.",
+                    "required": "请填写确认密码",
                     "minlength": "Your confirmation password is required to be at least 4 characters.",
                     "maxlength": "Your confirmation password cannot be longer than 50 characters."
                 },
                 "email": {
-                    "required": "Your email is required.",
-                    "invalid": "Your email is invalid.",
+                    "required": "请填写邮箱",
+                    "invalid": "邮箱无效",
                     "minlength": "Your email is required to be at least 5 characters.",
                     "maxlength": "Your email cannot be longer than 50 characters."
                 }

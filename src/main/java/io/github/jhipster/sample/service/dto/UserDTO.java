@@ -18,6 +18,12 @@ import java.util.stream.Collectors;
  */
 public class UserDTO {
 
+    /**
+     *
+     */
+
+    private static final int _15 = 15;
+
     private Long id;
 
     @NotBlank
@@ -30,6 +36,10 @@ public class UserDTO {
 
     @Size(max = 50)
     private String lastName;
+
+    // @Digits(integer = 15, fraction = 0)
+    // @Size(max = 50)
+    // private String phoneNum;
 
     @Email
     @Size(min = 5, max = 254)

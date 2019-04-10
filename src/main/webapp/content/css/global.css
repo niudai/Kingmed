@@ -26,7 +26,7 @@ button {
 }
 
 a {
-    color: white;
+    color: #54bdbd;
     text-decoration: none;
 }
 
@@ -40,7 +40,7 @@ fa-icon {
 }
 
 a:hover {
-    color: white;
+    color: #34c5c5;
     text-decoration: none;
 }
 

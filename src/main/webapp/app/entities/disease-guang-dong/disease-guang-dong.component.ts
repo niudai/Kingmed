@@ -13,7 +13,8 @@ import { DiseaseGuangDongService } from './disease-guang-dong.service';
 
 @Component({
     selector: 'jhi-disease-guang-dong',
-    templateUrl: './disease-guang-dong.component.html'
+    templateUrl: './disease-guang-dong.component.html',
+    styleUrls: ['./disease-guang-dong-component.css']
 })
 export class DiseaseGuangDongComponent implements OnInit, OnDestroy {
     currentAccount: any;
@@ -167,4 +168,9 @@ export class DiseaseGuangDongComponent implements OnInit, OnDestroy {
     protected onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
     }
+
+    previousState() {
+        window.history.back();
+    }
+
 }
