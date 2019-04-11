@@ -4,7 +4,8 @@
             "back": "返回主页"
         },
         "title": "金域检验中心",
-        "browsehappy": "You are using an <strong>outdated</strong> browser. Please <a href=\"http://browsehappy.com/?locale=en\">upgrade your browser</a> to improve your experience.",
+        "browsehappy":
+            "You are using an <strong>outdated</strong> browser. Please <a href=\"http://browsehappy.com/?locale=en\">upgrade your browser</a> to improve your experience.",
         "menu": {
             "home": "金域家园",
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
@@ -14,6 +15,7 @@
                 "label": "Label",
                 "operation": "Operation",
                 "diseaseGuangDong": "检验知识库 - 广东",
+                "qArobot": "QA 小博士",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
@@ -57,7 +59,8 @@
                 "authenticated": {
                     "prefix": "If you want to ",
                     "link": "sign in",
-                    "suffix": ", you can try the default accounts:<br/>- Administrator (login=\"admin\" and password=\"admin\") <br/>- User (login=\"user\" and password=\"user\")."
+                    "suffix":
+                        ", you can try the default accounts:<br/>- Administrator (login=\"admin\" and password=\"admin\") <br/>- User (login=\"user\" and password=\"user\")."
                 },
                 "register": {
                     "noaccount": "还没有账号?",

@@ -1,0 +1,32 @@
+{
+    "jhipsterElasticsearchSampleApplicationApp": {
+        "qArobot": {
+            "home": {
+                "title": "QA小博士",
+                "createLabel": "创建一个新问题",
+                "createOrEditLabel": "编辑问题",
+                "search": "搜索问题"
+            },
+            "created": "问题已创建 {{ param }}",
+            "updated": "问题已更新 {{ param }}",
+            "deleted": "问题已删除 {{ param }}",
+            "delete": {
+                "question": "你确定要删除吗? {{ id }}?"
+            },
+            "detail": {
+                "title": "QA小博士"
+            },
+            "diseaseSeries": "疾病大体系列",
+            "projectSeries": "项目系列",
+            "level": "级别",
+            "questionType": "问题类型",
+            "question": "问题",
+            "answer": "答案",
+            "updateDate": "更新日期",
+            "submitter": "提交人",
+            "qaSubsidiary": "提交QA子公司",
+            "specialProcess": "是否为子公司特殊流程",
+            "qaClass": "普特检"
+        }
+    }
+}

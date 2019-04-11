@@ -36,10 +36,10 @@
         <table class="table table-striped">
             <thead>
             <!-- <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)"> -->
-            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse">
-            <th *jhiHasAnyAuthority="'ROLE_ADMIN'"><span>编辑</span></th>
+            <tr>
             <!-- <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
-            <th jhiSortBy="name"><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th *jhiHasAnyAuthority="'ROLE_ADMIN'"><span>编辑</span></th>
             <!-- <th jhiSortBy="subsidiary"><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.subsidiary">Subsidiary</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="supplement"><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.supplement">Supplement</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="testMethod"><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.testMethod">Test Method</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -61,13 +61,15 @@
             <th jhiSortBy="projectConcourse"><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.projectConcourse">Project Concourse</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="testDepartment"><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.testDepartment">Test Department</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="suppliesSeries"><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.suppliesSeries">Supplies Series</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
-            <th></th>
+            <!-- <th></th> -->
             </tr>
             </thead>
             <tbody>
+
             <!-- <tr *ngFor="let diseaseGuangDong of diseaseGuangDongs ;trackBy: trackId"> -->
             <tr *ngFor="let diseaseGuangDong of diseaseGuangDongs">
                 <!-- <td><a [routerLink]="['/disease-guang-dong', diseaseGuangDong.id, 'view' ]">{{diseaseGuangDong.id}}</a></td> -->
+                <td><a [routerLink]="['/disease-guang-dong', diseaseGuangDong.id, 'view' ]">{{diseaseGuangDong.name}}</a></td>
                 <td *jhiHasAnyAuthority="'ROLE_ADMIN'" class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <!-- <button type="submit"
@@ -92,7 +94,7 @@
                             </button>
                     </div>
                 </td>
-                <td><a [routerLink]="['/disease-guang-dong', diseaseGuangDong.id, 'view' ]">{{diseaseGuangDong.name}}</a></td>
+
                 <!-- <td>{{diseaseGuangDong.subsidiary}}</td>
                 <td>{{diseaseGuangDong.supplement}}</td>
                 <td>{{diseaseGuangDong.testMethod}}</td>

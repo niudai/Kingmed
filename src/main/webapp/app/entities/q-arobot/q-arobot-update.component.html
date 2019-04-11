@@ -1,0 +1,145 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-q-arobot-heading" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.home.createOrEditLabel">Create or edit a Q Arobot</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!qArobot.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="qArobot.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.diseaseSeries" for="field_diseaseSeries">Disease Series</label>
+                    <input type="text" class="form-control" name="diseaseSeries" id="field_diseaseSeries"
+                        [(ngModel)]="qArobot.diseaseSeries" maxlength="30"/>
+                    <div [hidden]="!(editForm.controls.diseaseSeries?.dirty && editForm.controls.diseaseSeries?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.diseaseSeries?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 30 }">
+                        This field cannot be longer than 30 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.projectSeries" for="field_projectSeries">Project Series</label>
+                    <input type="text" class="form-control" name="projectSeries" id="field_projectSeries"
+                        [(ngModel)]="qArobot.projectSeries" maxlength="40"/>
+                    <div [hidden]="!(editForm.controls.projectSeries?.dirty && editForm.controls.projectSeries?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.projectSeries?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 40 }">
+                        This field cannot be longer than 40 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.level" for="field_level">Level</label>
+                    <input type="text" class="form-control" name="level" id="field_level"
+                        [(ngModel)]="qArobot.level" maxlength="30"/>
+                    <div [hidden]="!(editForm.controls.level?.dirty && editForm.controls.level?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.level?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 30 }">
+                        This field cannot be longer than 30 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.questionType" for="field_questionType">Question Type</label>
+                    <input type="text" class="form-control" name="questionType" id="field_questionType"
+                        [(ngModel)]="qArobot.questionType" maxlength="20"/>
+                    <div [hidden]="!(editForm.controls.questionType?.dirty && editForm.controls.questionType?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.questionType?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 20 }">
+                        This field cannot be longer than 20 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.question" for="field_question">Question</label>
+                    <input type="text" class="form-control" name="question" id="field_question"
+                        [(ngModel)]="qArobot.question" maxlength="400"/>
+                    <div [hidden]="!(editForm.controls.question?.dirty && editForm.controls.question?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.question?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 400 }">
+                        This field cannot be longer than 400 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.answer" for="field_answer">Answer</label>
+                    <input type="text" class="form-control" name="answer" id="field_answer"
+                        [(ngModel)]="qArobot.answer" maxlength="1500"/>
+                    <div [hidden]="!(editForm.controls.answer?.dirty && editForm.controls.answer?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.answer?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 1500 }">
+                        This field cannot be longer than 1500 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.updateDate" for="field_updateDate">Update Date</label>
+                    <input type="text" class="form-control" name="updateDate" id="field_updateDate"
+                        [(ngModel)]="qArobot.updateDate" maxlength="40"/>
+                    <div [hidden]="!(editForm.controls.updateDate?.dirty && editForm.controls.updateDate?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.updateDate?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 40 }">
+                        This field cannot be longer than 40 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.submitter" for="field_submitter">Submitter</label>
+                    <input type="text" class="form-control" name="submitter" id="field_submitter"
+                        [(ngModel)]="qArobot.submitter" maxlength="12"/>
+                    <div [hidden]="!(editForm.controls.submitter?.dirty && editForm.controls.submitter?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.submitter?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 12 }">
+                        This field cannot be longer than 12 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.qaSubsidiary" for="field_qaSubsidiary">Qa Subsidiary</label>
+                    <input type="text" class="form-control" name="qaSubsidiary" id="field_qaSubsidiary"
+                        [(ngModel)]="qArobot.qaSubsidiary" maxlength="20"/>
+                    <div [hidden]="!(editForm.controls.qaSubsidiary?.dirty && editForm.controls.qaSubsidiary?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.qaSubsidiary?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 20 }">
+                        This field cannot be longer than 20 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.specialProcess" for="field_specialProcess">Special Process</label>
+                    <input type="text" class="form-control" name="specialProcess" id="field_specialProcess"
+                        [(ngModel)]="qArobot.specialProcess" maxlength="20"/>
+                    <div [hidden]="!(editForm.controls.specialProcess?.dirty && editForm.controls.specialProcess?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.specialProcess?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 20 }">
+                        This field cannot be longer than 20 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.qaClass" for="field_qaClass">Qa Class</label>
+                    <input type="text" class="form-control" name="qaClass" id="field_qaClass"
+                        [(ngModel)]="qArobot.qaClass" maxlength="20"/>
+                    <div [hidden]="!(editForm.controls.qaClass?.dirty && editForm.controls.qaClass?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.qaClass?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 20 }">
+                        This field cannot be longer than 20 characters.
+                        </small>
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

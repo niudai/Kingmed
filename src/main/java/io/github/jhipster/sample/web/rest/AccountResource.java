@@ -45,7 +45,7 @@ public class AccountResource {
     }
 
     /**
-     * POST  /register : register the user.
+     * POST  /register : register the user. Mail sending was removed intentionaly
      *
      * @param managedUserVM the managed user View Model
      * @throws InvalidPasswordException 400 (Bad Request) if the password is incorrect

@@ -1,0 +1,50 @@
+// JDL definition for application 'jhipsterElasticsearchSampleApplication' generated with command 'jhipster export-jdl'
+
+entity BankAccount {
+  name String required,
+  balance BigDecimal required
+}
+entity Label {
+  label String required minlength(3)
+}
+entity Operation {
+  date DateTime required,
+  description String,
+  amount BigDecimal required
+}
+entity DiseaseGuangDong {
+  name String maxlength(300),
+  subsidiary String maxlength(50),
+  supplement String maxlength(1000),
+  testMethod String maxlength(200),
+  sample String maxlength(600),
+  roomPreservation String maxlength(200),
+  coldStoragePreservation String maxlength(200),
+  freezing String maxlength(100),
+  clinicalApplication String maxlength(1000),
+  tollStandard String maxlength(500),
+  reportingTime String maxlength(500),
+  remarks String maxlength(2000),
+  chargeCode String maxlength(500),
+  classification String maxlength(100),
+  applicationUnitType String maxlength(100),
+  series String maxlength(100),
+  projectChangeNotification String maxlength(500),
+  specialInspectionItems String maxlength(50),
+  stopDeveloping String maxlength(50),
+  projectConcourse String maxlength(100),
+  testDepartment String maxlength(100),
+  suppliesSeries String maxlength(100)
+}
+relationship OneToMany {
+  BankAccount{operation} to Operation{bankAccount(name)}
+}
+relationship ManyToOne {
+  BankAccount{user(login)} to User
+}
+relationship ManyToMany {
+  Operation{label(label)} to Label{operation}
+}
+
+paginate Operation with infinite-scroll
+paginate DiseaseGuangDong with pager

@@ -19,6 +19,10 @@ import { RouterModule } from '@angular/router';
             {
                 path: 'disease-guang-dong',
                 loadChildren: './disease-guang-dong/disease-guang-dong.module#JhipsterElasticsearchSampleApplicationDiseaseGuangDongModule'
+            },
+            {
+                path: 'q-arobot',
+                loadChildren: './q-arobot/q-arobot.module#JhipsterElasticsearchSampleApplicationQArobotModule'
             }
             /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
         ])

@@ -1,0 +1,67 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="qArobot">
+            <h2><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.detail.title">Q Arobot</span> {{qArobot.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.diseaseSeries">Disease Series</span></dt>
+                <dd>
+                    <span>{{qArobot.diseaseSeries}}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.projectSeries">Project Series</span></dt>
+                <dd>
+                    <span>{{qArobot.projectSeries}}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.level">Level</span></dt>
+                <dd>
+                    <span>{{qArobot.level}}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.questionType">Question Type</span></dt>
+                <dd>
+                    <span>{{qArobot.questionType}}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.question">Question</span></dt>
+                <dd>
+                    <span>{{qArobot.question}}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.answer">Answer</span></dt>
+                <dd>
+                    <span>{{qArobot.answer}}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.updateDate">Update Date</span></dt>
+                <dd>
+                    <span>{{qArobot.updateDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.submitter">Submitter</span></dt>
+                <dd>
+                    <span>{{qArobot.submitter}}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.qaSubsidiary">Qa Subsidiary</span></dt>
+                <dd>
+                    <span>{{qArobot.qaSubsidiary}}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.specialProcess">Special Process</span></dt>
+                <dd>
+                    <span>{{qArobot.specialProcess}}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.qaClass">Qa Class</span></dt>
+                <dd>
+                    <span>{{qArobot.qaClass}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/q-arobot', qArobot.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
