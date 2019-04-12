@@ -1,3 +1,4 @@
+
 import './vendor.ts';
 
 import { NgModule } from '@angular/core';
@@ -17,9 +18,11 @@ import { JhipsterElasticsearchSampleApplicationAppRoutingModule } from './app-ro
 import { JhipsterElasticsearchSampleApplicationHomeModule } from './home/home.module';
 import { JhipsterElasticsearchSampleApplicationAccountModule } from './account/account.module';
 import { JhipsterElasticsearchSampleApplicationEntityModule } from './entities/entity.module';
+import { JhipsterElasticsearchSampleApplicationServiceModule } from './service/service.module';
 import * as moment from 'moment';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ActiveMenuDirective, ErrorComponent } from './layouts';
+// import { ServiceComponent } from './service/service.component';
 
 @NgModule({
     imports: [
@@ -35,6 +38,7 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
         JhipsterElasticsearchSampleApplicationSharedModule.forRoot(),
         JhipsterElasticsearchSampleApplicationCoreModule,
         JhipsterElasticsearchSampleApplicationHomeModule,
+        JhipsterElasticsearchSampleApplicationServiceModule,
         JhipsterElasticsearchSampleApplicationAccountModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
         JhipsterElasticsearchSampleApplicationEntityModule,

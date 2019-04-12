@@ -153,13 +153,13 @@ export class QArobotComponent implements OnInit, OnDestroy {
         window.history.back();
     }
 
-    // sort() {
-    //     const result = [this.predicate + ',' + (this.reverse ? 'asc' : 'desc')];
-    //     if (this.predicate !== 'id') {
-    //         result.push('id');
-    //     }
-    //     return result;
-    // }
+    sort() {
+        const result = [this.predicate + ',' + (this.reverse ? 'asc' : 'desc')];
+        if (this.predicate !== 'id') {
+            result.push('id');
+        }
+        return result;
+    }
 
     protected paginateQArobots(data: IQArobot[], headers: HttpHeaders) {
         this.links = this.parseLinks.parse(headers.get('link'));

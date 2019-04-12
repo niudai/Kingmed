@@ -2,7 +2,7 @@ package io.github.jhipster.sample;
 
 import io.github.jhipster.sample.config.ApplicationProperties;
 import io.github.jhipster.sample.config.DefaultProfileUtil;
-
+import io.github.jhipster.sample.config.StorageProperties;
 import io.github.jhipster.config.JHipsterConstants;
 
 import org.apache.commons.lang3.StringUtils;
@@ -21,7 +21,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 @SpringBootApplication
-@EnableConfigurationProperties({LiquibaseProperties.class, ApplicationProperties.class})
+@EnableConfigurationProperties({LiquibaseProperties.class, ApplicationProperties.class, StorageProperties.class})
 public class JhipsterElasticsearchSampleApplicationApp {
 
     private static final Logger log = LoggerFactory.getLogger(JhipsterElasticsearchSampleApplicationApp.class);

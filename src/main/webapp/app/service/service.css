@@ -1,0 +1,51 @@
+.img1 {
+    object-fit: cover;
+    display: inline-block;
+    width: 300px;
+    height: 450px;
+    background: url('../../content/images/1.jpg') no-repeat center top;
+    background-size: contain;
+}
+
+.img2 {
+    object-fit: cover;
+    display: inline-block;
+    width: 300px;
+    height: 450px;
+    background: url('../../content/images/2.jpg') no-repeat center top;
+    background-size: contain;
+}
+
+.img3 {
+    object-fit: cover;
+    display: inline-block;
+    width: 300px;
+    height: 450px;
+    background: url('../../content/images/3.jpg') no-repeat center top;
+    background-size: contain;
+}
+
+.img4 {
+    object-fit: cover;
+    display: inline-block;
+    width: 300px;
+    height: 450px;
+    background: url('../../content/images/4.jpg') no-repeat center top;
+    background-size: contain;
+}
+/* .img1 {
+    background: url('../../content/images/1.jpg') no-repeat center top;
+}
+
+.img2 {
+    background: url('../../content/images/2.jpg') no-repeat center top;
+}
+
+.img3 {
+    background: url('../../content/images/3.jpg') no-repeat center top;
+}
+
+.img4 {
+    background: url('../../content/images/4.jpg') no-repeat center top;
+} */
+

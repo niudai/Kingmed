@@ -34,6 +34,7 @@ io\github\jhipster\sample\domain\Label.class
 io\github\jhipster\sample\security\jwt\JWTFilter.class
 io\github\jhipster\sample\web\rest\errors\LoginAlreadyUsedException.class
 io\github\jhipster\sample\config\SecurityConfiguration.class
+io\github\jhipster\sample\web\rest\errors\StorageFileNotFoundException.class
 io\github\jhipster\sample\web\rest\vm\KeyAndPasswordVM.class
 io\github\jhipster\sample\web\rest\UserJWTController.class
 io\github\jhipster\sample\web\rest\errors\FieldErrorVM.class
@@ -49,6 +50,7 @@ io\github\jhipster\sample\web\rest\errors\ErrorConstants.class
 io\github\jhipster\sample\domain\Authority_.class
 io\github\jhipster\sample\repository\search\LabelSearchRepository.class
 io\github\jhipster\sample\config\audit\AuditEventConverter.class
+io\github\jhipster\sample\web\rest\ImageUploadController.class
 io\github\jhipster\sample\config\LiquibaseConfiguration.class
 io\github\jhipster\sample\service\dto\UserDTO.class
 io\github\jhipster\sample\config\LoggingConfiguration$LogbackLoggerContextListener.class
@@ -67,10 +69,12 @@ io\github\jhipster\sample\web\rest\UserResource.class
 io\github\jhipster\sample\config\DatabaseConfiguration.class
 io\github\jhipster\sample\config\LoggingConfiguration.class
 io\github\jhipster\sample\web\rest\errors\CustomParameterizedException.class
+io\github\jhipster\sample\web\rest\errors\StorageException.class
 io\github\jhipster\sample\repository\CustomAuditEventRepository.class
 io\github\jhipster\sample\web\rest\ElasticSearchReindex.class
 io\github\jhipster\sample\domain\DiseaseGuangDong.class
 io\github\jhipster\sample\config\CacheConfiguration.class
+io\github\jhipster\sample\service\StorageService.class
 io\github\jhipster\sample\aop\logging\LoggingAspect.class
 io\github\jhipster\sample\domain\QArobot_.class
 io\github\jhipster\sample\security\UserNotActivatedException.class
@@ -78,11 +82,13 @@ io\github\jhipster\sample\web\rest\vm\LoggerVM.class
 io\github\jhipster\sample\domain\Operation_.class
 io\github\jhipster\sample\web\rest\LabelResource.class
 io\github\jhipster\sample\service\UserService.class
+io\github\jhipster\sample\service\image\ImageSerivce.class
 io\github\jhipster\sample\config\LoggingAspectConfiguration.class
 io\github\jhipster\sample\service\MailService.class
 io\github\jhipster\sample\web\rest\AccountResource.class
 io\github\jhipster\sample\config\ApplicationProperties.class
 io\github\jhipster\sample\config\ElasticsearchConfiguration$CustomEntityMapper.class
+io\github\jhipster\sample\config\StorageProperties.class
 io\github\jhipster\sample\web\rest\errors\EmailNotFoundException.class
 io\github\jhipster\sample\security\jwt\TokenProvider.class
 io\github\jhipster\sample\config\DateTimeFormatConfiguration.class
