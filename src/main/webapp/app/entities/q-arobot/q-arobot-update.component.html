@@ -55,8 +55,8 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.question" for="field_question">Question</label>
-                    <input type="text" class="form-control" name="question" id="field_question"
-                        [(ngModel)]="qArobot.question" maxlength="400"/>
+                    <textarea cols="50" rows="3" class="form-control" name="question" id="field_question"
+                        [(ngModel)]="qArobot.question" maxlength="400"></textarea>
                     <div [hidden]="!(editForm.controls.question?.dirty && editForm.controls.question?.invalid)">
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.question?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 400 }">
@@ -66,8 +66,8 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.answer" for="field_answer">Answer</label>
-                    <input type="text" class="form-control" name="answer" id="field_answer"
-                        [(ngModel)]="qArobot.answer" maxlength="1500"/>
+                    <textarea rows="6" class="form-control" name="answer" id="field_answer"
+                        [(ngModel)]="qArobot.answer" maxlength="1500"></textarea>
                     <div [hidden]="!(editForm.controls.answer?.dirty && editForm.controls.answer?.invalid)">
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.answer?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 1500 }">

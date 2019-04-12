@@ -1,6 +1,6 @@
 <div>
     <h2 id="page-heading">
-        <button (click)="previousState()" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-disease-guang-dong">
+        <button routerLink="/" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-disease-guang-dong">
             <fa-icon [icon]="'arrow-left'"></fa-icon>
             <span class="hidden-sm-down" jhiTranslate="global.navigation.back">
                 返回
@@ -21,9 +21,9 @@
             <form name="searchForm" class="form-inline">
                 <div class="input-group w-100 mt-3">
                     <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.home.search' | translate }}">
-                    <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                    <!-- <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
                         <fa-icon [icon]="'trash-alt'"></fa-icon>
-                    </button>
+                    </button> -->
                     <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
                         <fa-icon [icon]="'search'"></fa-icon>
                     </button>
