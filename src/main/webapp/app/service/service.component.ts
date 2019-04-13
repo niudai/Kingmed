@@ -1,3 +1,4 @@
+import { SERVER_API_URL } from 'app/app.constants';
 
 import { Component, OnInit } from '@angular/core';
 
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['service.css']
 })
 export class ServiceComponent implements OnInit {
+  public resourceUrl = SERVER_API_URL + 'api/images';
 
-  constructor() { }
+  afuConfig: any;
+  constructor() {
+    this.afuConfig = {
+        uploadAPI: {
+            url: this.resourceUrl
+        }
+      };
+   }
 
+  
   ngOnInit() {
   }
 

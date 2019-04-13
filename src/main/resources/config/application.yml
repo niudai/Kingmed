@@ -117,11 +117,11 @@ jhipster:
         #allow-credentials: true
         #max-age: 1800
     mail:
-        from: jhipsterElasticsearchSampleApplication@localhost
+        from: Kingmed@localhost
     swagger:
         default-include-pattern: /api/.*
-        title: jhipsterElasticsearchSampleApplication API
-        description: jhipsterElasticsearchSampleApplication API documentation
+        title: Kingmed API
+        description: Kingmed API documentation
         version: 0.0.1
         terms-of-service-url:
         contact-name:

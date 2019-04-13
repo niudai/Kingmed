@@ -18,4 +18,5 @@ public class ApplicationWebXml extends SpringBootServletInitializer {
         DefaultProfileUtil.addDefaultProfile(application.application());
         return application.sources(JhipsterElasticsearchSampleApplicationApp.class);
     }
+
 }

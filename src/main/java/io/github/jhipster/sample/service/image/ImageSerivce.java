@@ -51,17 +51,7 @@ public class ImageSerivce implements StorageService {
                 Files.copy(inputStream, this.rootLocation.resolve(filename), StandardCopyOption.REPLACE_EXISTING);
             }
         } catch (java.io.IOException e) {
-            throw new StorageException("Failed to store image" + filename);
-        }
-    }
-
-    @Override
-    public void init() {
-        try {
-            Files.createDirectories(rootLocation);
-        } catch (java.io.IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            throw new StorageException("Failed to store image" + filename, e);
         }
     }
 
@@ -99,7 +89,16 @@ public class ImageSerivce implements StorageService {
             throw new StorageFileNotFoundException("Could not read file: " + filename);
         }
 
-	}
+    }
+
+    @Override
+    public void init() {
+        try {
+            Files.createDirectories(rootLocation);
+        } catch (java.io.IOException e) {
+            throw new StorageException("Could not initialize the image directory", e);
+        }
+    }
 
 	@Override
 	public void deleteAll() {

@@ -1,6 +1,29 @@
 <div class="main">
+    <button [routerLink]="['/']" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-q-arobot">
+        <fa-icon [icon]="'arrow-left'"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="global.navigation.back">
+            返回主页
+        </span>
+    </button>
     <span class="hipster img1"></span>
     <span class="hipster img2"></span>
     <span class="hipster img3"></span>
     <span class="hipster img4"></span>
+
+    <angular-file-uploader
+      [config]="afuConfig">
+    </angular-file-uploader>
+
+    <form name="editForm" role="form" novalidate (ngSubmit)>
+
+    </form>
+
+    <div>
+		<form method="POST" enctype="multipart/form-data" action="http://localhost:8080/api/images">
+			<table>
+				<tr><td>要上传的文件:</td><td><input type="file" name="file" /></td></tr>
+				<tr><td></td><td><input type="submit" value="Upload" /></td></tr>
+			</table>
+		</form>
+	</div>
 </div>
