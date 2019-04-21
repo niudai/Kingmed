@@ -3,13 +3,39 @@ Main page styles
 ========================================================================== */
 
 a {
-    color: white;
+    color: rgb(255, 255, 255);
 }
 
 a:hover {
-    color: rgb(226, 203, 197);
+    color: rgb(220, 248, 218);
 }
 
 a:active {
-    color: darkcyan;
+    color: rgb(195, 245, 245);
 }
+
+.menu {
+    width: 49%;
+    height: 100px;
+    text-align: center;
+    padding: 2%;
+    background-size: cover;
+}
+
+#project {
+    background-image: url("../../content/images/project.jpg");
+}
+
+#qaRobot {
+    background-image: url("../../content/images/qaRobot.jpg");
+}
+
+#servicePlatform {
+    background-image: url("../../content/images/servicePlatform.jpg");
+}
+
+#projectItem {
+    background-image: url("../../content/images/projectItem.png");
+}
+
+

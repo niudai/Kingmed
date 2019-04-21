@@ -109,6 +109,7 @@
         ]
     },
     "scripts": {
+        "rimraf": "rimraf",
         "prettier:format": "prettier --write \"{,src/**/}*.{md,json,ts,css,scss}\"",
         "lint": "tslint --project tsconfig.json -e 'node_modules/**'",
         "lint:fix": "npm run lint -- --fix",

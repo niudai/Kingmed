@@ -8,11 +8,11 @@
                 <div class="alert alert-success" *ngSwitchCase="true">
                     <span id="home-logged-message" *ngIf="account">你好, "{{account.login}}". </span>
                 </div>
-                <div *ngSwitchCase="true">
-                    <button class = "menu"><a routerLink="/disease-guang-dong">广州项目</a></button>
-                    <button class = "munu"><a routerLink="/q-arobot">QA小博士</a></button>
-                    <button class = "munu"><a routerLink="/service">服务平台</a></button>
-                    <button class = "munu"><a routerLink="/knowledge/project-items">项目清单</a></button>
+                <div class = "context" *ngSwitchCase="true">
+                    <button class = "menu" id = "project"><a routerLink="/disease-guang-dong">广州项目</a></button>
+                    <button class = "menu" id = "qaRobot"><a routerLink="/q-arobot">QA小博士</a></button>
+                    <button class = "menu" id = "servicePlatform"><a routerLink="/service">服务平台</a></button>
+                    <button class = "menu" id = "projectItem"><a routerLink="/knowledge/project-items">项目清单</a></button>
                 </div>
                 <div class="alert alert-warning" *ngSwitchCase="false">
                     <span>如果你是公司员工, 可以直接 </span>
