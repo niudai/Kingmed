@@ -17,8 +17,9 @@ module.exports = (options) => webpackMerge(commonConfig({ env: ENV }), {
     devtool: 'eval-source-map',
     devServer: {
         contentBase: './target/www',
-        proxy: [{
-            context: [
+        proxy: [
+            {
+                context: [
                 /* jhipster-needle-add-entity-to-webpack - JHipster will add entity api paths here */
                 '/api',
                 '/management',
@@ -26,12 +27,22 @@ module.exports = (options) => webpackMerge(commonConfig({ env: ENV }), {
                 '/v2/api-docs',
                 '/h2-console',
                 '/auth'
-            ],
-            target: `http${options.tls ? 's' : ''}://127.0.0.1:8080`,
-            secure: false,
-            changeOrigin: options.tls,
-            headers: { host: 'localhost:9000' }
-        }],
+                ],
+                target: `http${options.tls ? 's' : ''}://127.0.0.1:8080`,
+                secure: false,
+                changeOrigin: options.tls,
+                headers: { host: 'localhost:9000' }
+            },
+            {
+                context: [
+                    '/files'
+                ],
+                target: `http${options.tls ? 's': ''}://127.0.0.1:8081`,
+                secure: false,
+                changeOrigin: options.tls,
+                headers: { host: 'localhost:9000' }
+            }
+        ],
         stats: options.stats,
         watchOptions: {
             ignored: /node_modules/

@@ -49,7 +49,7 @@ public class ImageUploadController {
         //         .collect(Collectors.toList()));
         return imageService.loadAll().map(
             path -> MvcUriComponentsBuilder.fromMethodName(ImageUploadController.class,
-                    "serveFile", path.getFileName().toString()).build().toString())
+                    "serveImage", path.getFileName().toString()).build().toString())
             .collect(Collectors.toList());
     }
 

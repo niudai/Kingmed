@@ -5,25 +5,20 @@
             返回主页
         </span>
     </button>
-    <span class="hipster img1"></span>
-    <span class="hipster img2"></span>
-    <span class="hipster img3"></span>
-    <span class="hipster img4"></span>
-
-    <!-- <angular-file-uploader
-      [config]="afuConfig">
-    </angular-file-uploader> -->
-
-    <!-- <form name="editForm" role="form" novalidate (ngSubmit)>
-
-    </form> -->
-
-    <!-- <div>
-		<form method="POST" enctype="multipart/form-data" action="http://localhost:8080/api/images">
-			<table>
-				<tr><td>要上传的文件:</td><td><input type="file" name="file" /></td></tr>
-				<tr><td></td><td><input type="submit" value="Upload" /></td></tr>
-			</table>
-		</form>
-	</div> -->
+    <span *ngFor="let image of images">
+        <img class = "hipster" src="{{image.path}}">
+        <form *jhiHasAnyAuthority="'ROLE_ADMIN'" name="deleteForm" (ngSubmit)="confirmDelete(image.name)">
+                <p>{{image.name}}</p>
+                <button type="submit" class="btn btn-danger">
+                    <fa-icon [icon]="'times'"></fa-icon>
+                    <span jhiTranlate="entity.action.delete">删除</span>
+                </button>
+        </form>
+    </span>
+    <form *jhiHasAnyAuthority="'ROLE_ADMIN'" name="uploadForm" (ngSubmit)="confirmUpload(file)">
+        <input type="file" [(ngModel)]="file">
+        <button type="submit" class="btn btn-primary">
+            <fa-icon [icon]="'save'"></fa-icon><span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </form>
 </div>

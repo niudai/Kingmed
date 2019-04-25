@@ -1,6 +1,6 @@
 {
     "home": {
-        "title": "欢饮, 这里是金域检验中心!",
+        "title": "欢迎, 这里是金域检验中心!",
         "subtitle": "这里是金域检验!",
         "logged": {
             "message": "你现在已登陆, \"{{username}}\"."

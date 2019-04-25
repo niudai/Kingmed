@@ -28,6 +28,7 @@ a:active {
 
 #qaRobot {
     background-image: url("../../content/images/qaRobot.jpg");
+    padding: 0%;
 }
 
 #servicePlatform {
