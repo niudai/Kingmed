@@ -5,20 +5,23 @@
             返回主页
         </span>
     </button>
+
+    <!-- Showing all the images uploaded -->
     <span *ngFor="let image of images">
         <img class = "hipster" src="{{image.path}}">
-        <form *jhiHasAnyAuthority="'ROLE_ADMIN'" name="deleteForm" (ngSubmit)="confirmDelete(image.name)">
-                <p>{{image.name}}</p>
-                <button type="submit" class="btn btn-danger">
-                    <fa-icon [icon]="'times'"></fa-icon>
-                    <span jhiTranlate="entity.action.delete">删除</span>
-                </button>
-        </form>
+            <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit" class="btn btn-danger" (click)="confirmDelete(image.name)">
+                <fa-icon [icon]="'times'"></fa-icon>
+                <span jhiTranlate="entity.action.delete">删除</span>
+            </button>
     </span>
-    <form *jhiHasAnyAuthority="'ROLE_ADMIN'" name="uploadForm" (ngSubmit)="confirmUpload(file)">
-        <input type="file" [(ngModel)]="file">
-        <button type="submit" class="btn btn-primary">
-            <fa-icon [icon]="'save'"></fa-icon><span jhiTranslate="entity.action.save">Save</span>
+
+    <!-- Showing the upload button -->
+    <form *jhiHasAnyAuthority="'ROLE_ADMIN'" [formGroup]="fileForm" (ngSubmit)="onSubmit()" name="uploadForm">
+        <label>
+            <input type="file" formControlName="image" value="上传图片" (change)="onFileChange($event)">
+        </label>
+        <button class="btn btn-primary" type="submit" [disabled]="!fileForm.valid">
+            <fa-icon [icon]="'save'"></fa-icon><span jhiTranslate="entity.action.upload">upload</span>
         </button>
     </form>
 </div>

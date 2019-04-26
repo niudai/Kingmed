@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { throwError, Observable } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { IImage } from 'app/shared/model/image.model';
+import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 
 @Component({
     selector: 'jhi-service',
@@ -16,36 +17,15 @@ export class ServiceComponent implements OnInit {
     public resourceUrl = 'files/images';
     public resourceUrlOfNames = 'files/imagesName';
     //   public resourceUrl = 'api/images';
+    fileForm: FormGroup;
+
     file: any;
     images: IImage[];
     nameOfImages: string[];
 
-    constructor(protected http: HttpClient) {
-        this.http.get<IImage[]>(this.resourceUrl)
-            .subscribe(
-                res => this.images = res
-            );
-        this.http.get<string[]>(this.resourceUrlOfNames)
-            .subscribe(
-                res => this.nameOfImages = res
-            );
-    }
-
-    private handleError(error: HttpErrorResponse) {
-        if (error.error instanceof ErrorEvent) {
-            // A client side or network error occured.
-            console.error('An error occured', error.error.message);
-        } else {
-            // the backend returned an unsuccessful response code.
-            // the response body may contain clues as to what went wrong.
-            console.error(
-                `Backend returned code ${error.status}, ` +
-                `body was: ${error.error}`);
-        }
-        // return an observable with a user-facing error message
-        return throwError(
-            'Something bad happened; please try again later.');
-
+    constructor(protected http: HttpClient,
+            private formBuilder: FormBuilder) {
+        this.getImages();
     }
 
     delete(filename: string): Observable<HttpResponse<any>> {
@@ -56,16 +36,35 @@ export class ServiceComponent implements OnInit {
         return this.http.post<any>(`${this.resourceUrl}`, file);
     }
 
-    confirmDelete(filename: string) {
-        this.delete(filename).subscribe();
+    getImages(): Observable<HttpResponse<IImage[]>> {
+        this.http.get<IImage[]>(this.resourceUrl)
+            .subscribe(res => this.images = res);
+        return;
     }
 
-    confirmUpload(file: any) {
-        this.upload(file).subscribe();
+    confirmDelete(filename: string) {
+        this.delete(filename).subscribe();
+        this.getImages();
+    }
+
+    onFileChange(event) {
+        if (event.target.files.length > 0) {
+          const file = event.target.files[0];
+          this.fileForm.get('image').setValue(file);
+        }
+    }
+
+    onSubmit() {
+        const formData = new FormData();
+        formData.append('image', this.fileForm.get('image').value);
+        this.upload(formData).subscribe();
+        this.getImages();
     }
 
     ngOnInit() {
-
+        this.fileForm = this.formBuilder.group({
+            image: ['']
+        });
     }
 
 }
