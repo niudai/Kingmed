@@ -1,5 +1,8 @@
 package io.github.jhipster.sample.web.rest;
+
+import io.github.jhipster.sample.domain.BankAccount;
 import io.github.jhipster.sample.domain.Operation;
+import io.github.jhipster.sample.repository.BankAccountRepository;
 import io.github.jhipster.sample.repository.OperationRepository;
 import io.github.jhipster.sample.repository.search.OperationSearchRepository;
 import io.github.jhipster.sample.web.rest.errors.BadRequestAlertException;
@@ -18,9 +21,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -39,9 +43,13 @@ public class OperationResource {
 
     private final OperationRepository operationRepository;
 
+    private final BankAccountRepository bankAccountRepository;
+
     private final OperationSearchRepository operationSearchRepository;
 
-    public OperationResource(OperationRepository operationRepository, OperationSearchRepository operationSearchRepository) {
+    public OperationResource(OperationRepository operationRepository, OperationSearchRepository operationSearchRepository
+                    , BankAccountRepository bankAccountRepository) {
+        this.bankAccountRepository = bankAccountRepository;
         this.operationRepository = operationRepository;
         this.operationSearchRepository = operationSearchRepository;
     }
@@ -59,6 +67,12 @@ public class OperationResource {
         if (operation.getId() != null) {
             throw new BadRequestAlertException("A new operation cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        BankAccount bankAccount = operation.getBankAccount();
+        log.debug("bankAccount of current operation: {}", bankAccount);
+        Set<Operation> operations = bankAccount.getOperations();
+        operations.add(operation);
+        bankAccount.setOperations(operations);
+        bankAccountRepository.save(bankAccount);
         Operation result = operationRepository.save(operation);
         operationSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/operations/" + result.getId()))

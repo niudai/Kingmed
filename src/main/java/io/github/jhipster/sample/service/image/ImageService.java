@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Base64;
 import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,15 +25,15 @@ import io.github.jhipster.sample.web.rest.errors.StorageFileNotFoundException;
 import io.jsonwebtoken.io.IOException;
 
 /**
- * ImageSerivce
+ * ImageService
  */
 @Service
-public class ImageSerivce implements StorageService {
+public class ImageService implements StorageService {
 
     private final Path rootLocation;
 
     @Autowired
-    public ImageSerivce(StorageProperties properties) {
+    public ImageService(StorageProperties properties) {
         this.rootLocation = Paths.get(properties.getImageLocation());
     }
 
@@ -40,55 +41,73 @@ public class ImageSerivce implements StorageService {
     public void store(MultipartFile file) {
         String filename = StringUtils.cleanPath(file.getOriginalFilename());
         try {
-
             if (file.isEmpty()) {
-                throw new StorageException("Failed to store empty file");
+                throw new StorageException("Failed to store empty file " + filename);
             }
             if (filename.contains("..")) {
-                throw new StorageException("cannot store image with relative path" + filename);
+                // This is a security check
+                throw new StorageException(
+                        "Cannot store file with relative path outside current directory "
+                                + filename);
             }
             try (InputStream inputStream = file.getInputStream()) {
-                Files.copy(inputStream, this.rootLocation.resolve(filename), StandardCopyOption.REPLACE_EXISTING);
+                Files.copy(inputStream, this.rootLocation.resolve(filename),
+                    StandardCopyOption.REPLACE_EXISTING);
+            } catch (java.io.IOException e) {
+                throw new StorageException("Failed to store file" + filename, e);
             }
-        } catch (java.io.IOException e) {
-            throw new StorageException("Failed to store image" + filename, e);
+        }
+        catch (IOException e) {
+            throw new StorageException("Failed to store file " + filename, e);
         }
     }
 
     @Override
     public Stream<Path> loadAll() {
         try {
-            return Files.walk(this.rootLocation, 1).filter(path -> !path.equals(this.rootLocation))
+            return Files.walk(this.rootLocation, 1)
+                    .filter(path -> !path.equals(this.rootLocation))
                     .map(this.rootLocation::relativize);
         } catch (java.io.IOException e) {
             // TODO Auto-generated catch block
             throw new StorageException("Failed to read stored files", e);
         }
+
     }
 
     @Override
-    public Path load(String filename) {
-        return rootLocation.resolve(filename);
+    public void delete(String filename) {
+        try {
+            FileSystemUtils.deleteRecursively(rootLocation.resolve(filename));
+        } catch (java.io.IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
     }
 
     @Override
     public Resource loadAsResource(String filename) {
         try {
-            Path file = load(filename);
+            Path file = rootLocation.resolve(filename);
             Resource resource = new UrlResource(file.toUri());
             if (resource.exists() || resource.isReadable()) {
                 return resource;
             }
             else {
                 throw new StorageFileNotFoundException(
-                    "Could Not Read File: " + filename
-                );
+                        "Could not read file: " + filename);
+
             }
         }
         catch (MalformedURLException e) {
-            throw new StorageFileNotFoundException("Could not read file: " + filename);
+            throw new StorageFileNotFoundException("Could not read file: " + filename, e);
         }
+    }
 
+    @Override
+    public void deleteAll() {
+        FileSystemUtils.deleteRecursively(rootLocation.toFile());
     }
 
     @Override
@@ -96,12 +115,7 @@ public class ImageSerivce implements StorageService {
         try {
             Files.createDirectories(rootLocation);
         } catch (java.io.IOException e) {
-            throw new StorageException("Could not initialize the image directory", e);
+            throw new StorageException("Could not initialize storage", e);
         }
     }
-
-	@Override
-	public void deleteAll() {
-        FileSystemUtils.deleteRecursively(rootLocation.toFile());
-	}
 }

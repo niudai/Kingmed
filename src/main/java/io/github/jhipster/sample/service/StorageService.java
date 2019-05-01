@@ -1,7 +1,7 @@
 package io.github.jhipster.sample.service;
 
-
 import java.util.stream.Stream;
+import java.io.IOException;
 import java.nio.file.Path;
 import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
@@ -12,11 +12,12 @@ public interface StorageService {
 
     void store(MultipartFile file);
 
-    Stream<Path> loadAll();
+    void delete(String filename) throws IOException;
 
-    Path load(String filename);
+    Stream<Path> loadAll();
 
     Resource loadAsResource(String filename);
 
     void deleteAll();
+
 }

@@ -1,4 +1,4 @@
-import { HttpClient, HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { SERVER_API_URL } from 'app/app.constants';
 
 import { Component, OnInit } from '@angular/core';
@@ -13,10 +13,8 @@ import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
     styleUrls: ['service.css']
 })
 export class ServiceComponent implements OnInit {
-    //   public resourceUrl = SERVER_API_URL + 'api/images';
-    public resourceUrl = 'files/images';
-    public resourceUrlOfNames = 'files/imagesName';
-    //   public resourceUrl = 'api/images';
+    public resourceUrl = SERVER_API_URL + 'api/images';
+
     fileForm: FormGroup;
 
     file: any;
