@@ -20,6 +20,11 @@ logging:
         io.github.jhipster.sample: DEBUG
 
 spring:
+    servlet:
+        multipart:
+            file-size-threshold: 5MB
+            max-file-size: 5MB
+            max-request-size: 5MB
     profiles:
         active: dev
         include:
