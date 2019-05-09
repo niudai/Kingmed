@@ -1,5 +1,5 @@
 import { DiseaseGuangDongPricesDeletePopupComponent, DiseaseGuangDongPricesDeleteComponent } from './disease-guang-dong-prices-delete/disease-guang-dong-prices-delete.component';
-import { Price } from './../../shared/model/price.model';
+import { Price, IPrice } from './../../shared/model/price.model';
 import { DiseaseGuangDongPricesComponent } from './disease-guang-dong-prices/disease-guang-dong-prices.component';
 import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
@@ -40,10 +40,10 @@ export class PriceResolve implements Resolve<IDiseaseGuangDong> {
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IDiseaseGuangDong> {
         const id = route.params['priceId'] ? route.params['priceId'] : null;
         if (id) {
-            // return this.service.find(id).pipe(
-            //     filter((response: HttpResponse<DiseaseGuangDong>) => response.ok),
-            //     map((diseaseGuangDong: HttpResponse<DiseaseGuangDong>) => diseaseGuangDong.body)
-            // );
+            return this.service.getPrice(id).pipe(
+                filter((response: HttpResponse<IPrice>) => response.ok),
+                map((price: HttpResponse<Price>) => price.body)
+            );
         }
         return of(new Price());
     }
@@ -84,11 +84,6 @@ export const diseaseGuangDongRoute: Routes = [
                 component: DiseaseGuangDongPricesDeleteComponent,
                 canActivate: [UserRouteAccessService],
                 outlet: 'pricePopup'
-            },
-            {
-                path: ':priceId/update',
-                component: DiseaseGuangDongUpdateComponent,
-                canActivate: [UserRouteAccessService]
             }
         ],
         resolve: {
@@ -123,6 +118,23 @@ export const diseaseGuangDongRoute: Routes = [
             pageTitle: 'jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.home.title'
         },
         canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'updatePrice/:priceId',
+        component: DiseaseGuangDongPricesUpdateComponent,
+        resolve: {
+            price: PriceResolve
+        },
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'deletePrice/:priceId',
+        component: DiseaseGuangDongPricesDeleteComponent,
+        canActivate: [UserRouteAccessService],
     },
     {
         path: ':id/edit',

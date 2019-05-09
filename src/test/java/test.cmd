@@ -13,6 +13,11 @@ curl -X PUT --header "Content-Type: application/json" -d '{"id":1,"prices": null
 REM POST api/disease-guang-dongs/addPrice/{id} : add a new price to a disease
 curl -X POST --header "Content-Type: application/json" -d '{"tollStandard": "200元","reportingTime": "5day","chargeCode": "2333", "subsidiary": "XiAn"}' http://localhost:8080/api/disease-guang-dongs/addPrice/1
 
-REM DELETE api/disease-guang-dongs/delete/{id} : delete a disease
+REM DELETE api/disease-guang-dongs/deletePrice/{id} : delete a price
 curl -X DELETE http://localhost:8080/api/disease-guang-dongs/deletePrice/6
 
+REM PUT api/disease-guang-dongs/updatePrice/{id} : update a price
+curl -X PUT  --header "Content-Type: application/json" -d '{"id":10, "tollStandard": "200元","reportingTime": "5day","chargeCode": "2333", "subsidiary": "XiAn"}' http://localhost:8080/api/disease-guang-dongs/updatePrice/
+
+REM GET api/disease-guang-dongs/getPrice/{id} : get a price
+curl -X GET http://localhost:8080/api/disease-guang-dongs/getPrice/12

@@ -43,6 +43,14 @@ export class DiseaseGuangDongService {
         return this.http.delete<any>(`${this.resourceUrl}/deletePrice/${id}`);
     }
 
+    updatePrice(price: IPrice): Observable<EntityResponseType> {
+        return this.http.put<IPrice>(`${this.resourceUrl}/updatePrice`, price, { observe: 'response'});
+    }
+
+    getPrice(id: number): Observable<EntityResponseType> {
+        return this.http.get<IPrice>(`${this.resourceUrl}/getPrice/${id}`, { observe: 'response'});
+    }
+
     delete(id: number): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }

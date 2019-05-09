@@ -138,6 +138,18 @@ public class DiseaseGuangDongResource {
     }
 
     /**
+     * Request /disease-guang-dongs/getPrice/{id} : get price with a specified id.
+     * @param id the id of price
+     * @return response entity with price as response
+     */
+    @GetMapping("/disease-guang-dongs/getPrice/{id}")
+    public ResponseEntity<Prices> getPrice(@PathVariable Long id) {
+        log.debug("REST request to get price: {}", id);
+        Prices result = priceRepository.findById(id).get();
+        return ResponseEntity.ok().body(result);
+    }
+
+    /**
      * Request /disease-guang-dongs/addPrice/{id} : add price to a diseaseGuangDong
      * @param price Price to be added
      * @param id the id of diseaseGuangDong
@@ -153,6 +165,24 @@ public class DiseaseGuangDongResource {
         return ResponseEntity.ok().build();
     }
 
+    /**
+     * Request to update a price
+     * @param price the price to be updated
+     * @param id the id of price
+     * @return response entity with price as its body.
+     */
+    @PutMapping("/disease-guang-dongs/updatePrice")
+    public ResponseEntity<Prices> updatePrice(@Valid @RequestBody Prices price) {
+        log.debug("REST request to update price: {}", price);
+        Prices result = priceRepository.save(price);
+        return ResponseEntity.ok().body(result);
+    }
+
+    /**
+     * Delete price
+     * @param priceId the id of price to be deleted
+     * @return 200 ok.
+     */
     @DeleteMapping("/disease-guang-dongs/deletePrice/{priceId}")
     public ResponseEntity<Void> deletePrice(@PathVariable Long priceId) {
         log.debug("REST request to delete Price: {}", priceId);

@@ -35,9 +35,12 @@ export class DiseaseGuangDongPricesUpdateComponent implements OnInit {
   save() {
       this.isSaving = true;
       if (this.price.id === undefined) {
-          this.price.id = 5;
           this.diseaseGuangDongService.addNewPrice(this.id, this.price)
             .subscribe((res: HttpResponse<IPrice>) => this.onSaveSuccess()
+                , (res: HttpErrorResponse) => this.onSaveError());
+      } else {
+            this.diseaseGuangDongService.updatePrice(this.price)
+             .subscribe((res: HttpResponse<IPrice>) => this.onSaveSuccess()
                 , (res: HttpErrorResponse) => this.onSaveError());
       }
   }
