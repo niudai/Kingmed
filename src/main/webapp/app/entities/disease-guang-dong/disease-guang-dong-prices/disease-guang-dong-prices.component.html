@@ -1,0 +1,75 @@
+<div class="row justify-content-center">
+    <h2 id="page-heading">
+        <button id="jh-create-entity" (click)="previousState()"
+            class="btn btn-primary float-right jh-create-entity create-disease-guang-dong">
+            <fa-icon [icon]="'arrow-left'"></fa-icon>
+            <span class="hidden-sm-down" jhiTranslate="global.navigation.goBack">
+                返回
+            </span>
+        </button>
+        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" id="jh-create-entity" type="submit"
+            [routerLink]="['/disease-guang-dong', 'newPrice', diseaseGuangDong.id]"
+            class="btn btn-primary float-right jh-create-entity create-disease-guang-dong">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span class="hidden-sm-down" jhiTranslate="entity.price.addNewPrice">
+                添加新价格
+            </span>
+        </button>
+        <span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.home.title">Disease Guang
+            Dongs</span>
+    </h2>
+    <div class="table-responsive" *ngIf="diseaseGuangDong">
+        <table class="table table-striped">
+            <thead>
+                <!-- <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)"> -->
+                <tr>
+                    <!-- <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
+                    <!-- <th><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.subsidiary">Subsidiary</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
+                    <th><span jhiTranslate="entity.price.subsidiary">子公司</span></th>
+                    <th><span jhiTranslate="entity.price.tollStandard">标准收费</span></th>
+                    <th><span jhiTranslate="entity.price.chargeCode">收费码</span></th>
+                    <th><span jhiTranslate="entity.price.reportingTime">出报告时间</span></th>
+                    <th *jhiHasAnyAuthority="'ROLE_ADMIN'"><span>编辑</span></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <!-- <tr *ngFor="let diseaseGuangDong of diseaseGuangDongs ;trackBy: trackId"> -->
+                <tr *ngFor="let price of diseaseGuangDong.prices">
+                    <!-- <td><a [routerLink]="['/disease-guang-dong', diseaseGuangDong.id, 'view' ]">{{diseaseGuangDong.id}}</a></td> -->
+                    <td>{{price.subsidiary}}</td>
+                    <td>{{price.tollStandard}}</td>
+                    <td>{{price.chargeCode}}</td>
+                    <td>{{price.reportingTime}}</td>
+                    <td *jhiHasAnyAuthority="'ROLE_ADMIN'" class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
+                                [routerLink]="[price.id, 'delete']"
+                                class="btn btn-primary btn-sm">
+                                <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+                            <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
+                            [routerLink]="[{ outlets: { pricePopup: price.id + '/delete'} }]"
+                            queryParamsHandling="merge"  class="btn btn-danger btn-sm">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                            <!-- [routerLink]="[{ outlets: { popup: diseaseGuangDong.id + '/deletePrice' } }]"
+                                replaceUrl="true" queryParamsHandling="merge" -->
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <button id="jh-create-entity" [routerLink]="['/disease-guang-dong', diseaseGuangDong.id, 'view']"
+        class="btn btn-primary jh-create-entity create-disease-guang-dong">
+        <fa-icon [icon]="'eye'"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="entity.project.detail">
+            项目详情
+        </span>
+    </button>
+    <!-- <router-outer name="pricePopup"></router-outer> -->
+</div>
+<router-outlet name="pricePopup"></router-outlet>

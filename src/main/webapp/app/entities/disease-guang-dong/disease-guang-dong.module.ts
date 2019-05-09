@@ -13,6 +13,10 @@ import {
     diseaseGuangDongRoute,
     diseaseGuangDongPopupRoute
 } from './';
+import { DiseaseGuangDongPricesComponent } from './disease-guang-dong-prices/disease-guang-dong-prices.component';
+import { DiseaseGuangDongPricesUpdateComponent } from './disease-guang-dong-prices-update/disease-guang-dong-prices-update.component';
+import { DiseaseGuangDongPricesDeleteComponent } from './disease-guang-dong-prices-delete/disease-guang-dong-prices-delete.component';
+import { DiseaseGuangDongPricesDeletePopupComponent } from './disease-guang-dong-prices-delete/disease-guang-dong-prices-delete.component';
 
 const ENTITY_STATES = [...diseaseGuangDongRoute, ...diseaseGuangDongPopupRoute];
 
@@ -23,7 +27,11 @@ const ENTITY_STATES = [...diseaseGuangDongRoute, ...diseaseGuangDongPopupRoute];
         DiseaseGuangDongDetailComponent,
         DiseaseGuangDongUpdateComponent,
         DiseaseGuangDongDeleteDialogComponent,
-        DiseaseGuangDongDeletePopupComponent
+        DiseaseGuangDongDeletePopupComponent,
+        DiseaseGuangDongPricesComponent,
+        DiseaseGuangDongPricesUpdateComponent,
+        DiseaseGuangDongPricesDeleteComponent,
+        DiseaseGuangDongPricesDeletePopupComponent
     ],
     entryComponents: [
         DiseaseGuangDongComponent,

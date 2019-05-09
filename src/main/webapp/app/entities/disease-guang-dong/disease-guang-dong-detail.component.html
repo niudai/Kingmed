@@ -41,22 +41,22 @@
                 <dd>
                     <span>{{diseaseGuangDong.clinicalApplication}}</span>
                 </dd>
-                <dt><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.tollStandard">Toll Standard</span></dt>
+                <!-- <dt><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.tollStandard">Toll Standard</span></dt>
                 <dd>
                     <span>{{diseaseGuangDong.tollStandard}}</span>
                 </dd>
                 <dt><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.reportingTime">Reporting Time</span></dt>
                 <dd>
                     <span>{{diseaseGuangDong.reportingTime}}</span>
-                </dd>
+                </dd> -->
                 <dt><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.remarks">Remarks</span></dt>
                 <dd>
                     <span>{{diseaseGuangDong.remarks}}</span>
                 </dd>
-                <dt><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.chargeCode">Charge Code</span></dt>
+                <!-- <dt><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.chargeCode">Charge Code</span></dt>
                 <dd>
                     <span>{{diseaseGuangDong.chargeCode}}</span>
-                </dd>
+                </dd> -->
                 <dt><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.classification">Classification</span></dt>
                 <dd>
                     <span>{{diseaseGuangDong.classification}}</span>
@@ -95,10 +95,14 @@
                 </dd>
             </dl>
 
+            <button class="btn btn-info" [routerLink]="['/disease-guang-dong', diseaseGuangDong.id, 'prices']">
+                <fa-icon [icon]="'dollar-sign'"></fa-icon>&nbsp;<span jhiTranslate="entity.diseaseGuangDong.price">价格详情</span>
+            </button>
+
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="global.navigation.goBack"> 返回</span>
             </button>
 
             <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="button"
