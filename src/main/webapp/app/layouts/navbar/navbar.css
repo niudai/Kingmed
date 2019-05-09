@@ -89,7 +89,7 @@ Navbar
 /* ==========================================================================
 Logo styles
 ========================================================================== */
-.navbar-brand.logo {
+/* .navbar-brand.logo {
     padding: 5px 15px;
 }
 
@@ -105,7 +105,7 @@ Logo styles
     display: inline-block;
     vertical-align: middle;
     width: 70px;
-}
+} */
 
 .navbar {
     background-color:white;

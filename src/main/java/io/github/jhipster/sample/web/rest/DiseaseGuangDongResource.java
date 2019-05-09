@@ -1,6 +1,8 @@
 package io.github.jhipster.sample.web.rest;
 import io.github.jhipster.sample.domain.DiseaseGuangDong;
+import io.github.jhipster.sample.domain.Prices;
 import io.github.jhipster.sample.repository.DiseaseGuangDongRepository;
+import io.github.jhipster.sample.repository.PriceRepository;
 import io.github.jhipster.sample.repository.search.DiseaseGuangDongSearchRepository;
 import io.github.jhipster.sample.web.rest.errors.BadRequestAlertException;
 import io.github.jhipster.sample.web.rest.util.HeaderUtil;
@@ -41,9 +43,14 @@ public class DiseaseGuangDongResource {
 
     private final DiseaseGuangDongSearchRepository diseaseGuangDongSearchRepository;
 
-    public DiseaseGuangDongResource(DiseaseGuangDongRepository diseaseGuangDongRepository, DiseaseGuangDongSearchRepository diseaseGuangDongSearchRepository) {
+    private final PriceRepository priceRepository;
+
+    public DiseaseGuangDongResource(DiseaseGuangDongRepository diseaseGuangDongRepository
+        , DiseaseGuangDongSearchRepository diseaseGuangDongSearchRepository
+        , PriceRepository priceRepository) {
         this.diseaseGuangDongRepository = diseaseGuangDongRepository;
         this.diseaseGuangDongSearchRepository = diseaseGuangDongSearchRepository;
+        this.priceRepository = priceRepository;
     }
 
     /**
@@ -128,6 +135,29 @@ public class DiseaseGuangDongResource {
         diseaseGuangDongSearchRepository.deleteAll();
         List<DiseaseGuangDong> diseaseGuangDongs = diseaseGuangDongRepository.findAll();
         diseaseGuangDongSearchRepository.saveAll(diseaseGuangDongs);
+    }
+
+    /**
+     * Request /disease-guang-dongs/addPrice/{id} : add price to a diseaseGuangDong
+     * @param price Price to be added
+     * @param id the id of diseaseGuangDong
+     * @return ok with 200 status code.
+     */
+    @PostMapping("/disease-guang-dongs/addPrice/{id}")
+    public ResponseEntity<Void> addNewPrice(@Valid @RequestBody Prices price, @PathVariable Long id) {
+        log.debug("REST request to add new price: {}", price);
+        DiseaseGuangDong disease = diseaseGuangDongRepository.findById(id).get();
+        disease.getPrices().add(price);
+        diseaseGuangDongRepository.save(disease);
+        diseaseGuangDongSearchRepository.save(disease);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/disease-guang-dongs/deletePrice/{priceId}")
+    public ResponseEntity<Void> deletePrice(@PathVariable Long priceId) {
+        log.debug("REST request to delete Price: {}", priceId);
+        priceRepository.deleteById(priceId);
+        return ResponseEntity.ok().build();
     }
 
 

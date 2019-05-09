@@ -4,7 +4,7 @@
 
     <groupId>io.github.jhipster.sample</groupId>
     <artifactId>jhipster-elasticsearch-sample-application</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.3-SNAPSHOT</version>
     <!-- <packaging>war</packaging> -->
     <packaging>jar</packaging>
     <name>Jhipster Elasticsearch Sample Application</name>

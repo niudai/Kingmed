@@ -9,6 +9,7 @@ import io.github.jhipster.config.jcache.BeanClassLoaderAwareJCacheRegionFactory;
 import io.github.jhipster.config.JHipsterProperties;
 
 import org.springframework.boot.autoconfigure.cache.JCacheManagerCustomizer;
+import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.*;
 
@@ -46,6 +47,7 @@ public class CacheConfiguration {
             cm.createCache(io.github.jhipster.sample.domain.Operation.class.getName() + ".labels", jcacheConfiguration);
             cm.createCache(io.github.jhipster.sample.domain.DiseaseGuangDong.class.getName(), jcacheConfiguration);
             cm.createCache(io.github.jhipster.sample.domain.QArobot.class.getName(), jcacheConfiguration);
+            cm.createCache(io.github.jhipster.sample.domain.Prices.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

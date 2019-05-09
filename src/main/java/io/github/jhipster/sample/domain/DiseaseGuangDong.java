@@ -9,6 +9,8 @@ import javax.validation.constraints.*;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -21,10 +23,24 @@ import java.util.Objects;
 public class DiseaseGuangDong implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @OneToMany(cascade = CascadeType.ALL
+        , orphanRemoval = true,
+        fetch = FetchType.EAGER)
+    @JoinColumn(name = "disease_guang_dong_id")
+    private List<Prices> prices = new ArrayList<Prices>();
+
+    public List<Prices> getPrices() {
+        return this.prices;
+    }
+
+    public void setPrices(List<Prices> prices) {
+        this.prices = prices;
+    }
 
     @Size(max = 300)
     @Column(name = "name", length = 300)
@@ -434,6 +450,7 @@ public class DiseaseGuangDong implements Serializable {
     public String toString() {
         return "DiseaseGuangDong{" +
             "id=" + getId() +
+            // ", prices= '" + getPrices() + "'" +
             ", name='" + getName() + "'" +
             ", subsidiary='" + getSubsidiary() + "'" +
             ", supplement='" + getSupplement() + "'" +

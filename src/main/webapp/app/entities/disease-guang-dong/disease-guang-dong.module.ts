@@ -17,11 +17,16 @@ import { DiseaseGuangDongPricesComponent } from './disease-guang-dong-prices/dis
 import { DiseaseGuangDongPricesUpdateComponent } from './disease-guang-dong-prices-update/disease-guang-dong-prices-update.component';
 import { DiseaseGuangDongPricesDeleteComponent } from './disease-guang-dong-prices-delete/disease-guang-dong-prices-delete.component';
 import { DiseaseGuangDongPricesDeletePopupComponent } from './disease-guang-dong-prices-delete/disease-guang-dong-prices-delete.component';
+import { enableDebugTools } from '@angular/platform-browser';
 
 const ENTITY_STATES = [...diseaseGuangDongRoute, ...diseaseGuangDongPopupRoute];
 
 @NgModule({
-    imports: [JhipsterElasticsearchSampleApplicationSharedModule, RouterModule.forChild(ENTITY_STATES)],
+    imports: [
+        JhipsterElasticsearchSampleApplicationSharedModule,
+        RouterModule.forChild(
+            ENTITY_STATES)
+    ],
     declarations: [
         DiseaseGuangDongComponent,
         DiseaseGuangDongDetailComponent,
