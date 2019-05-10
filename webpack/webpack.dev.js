@@ -123,7 +123,8 @@ module.exports = (options) => webpackMerge(commonConfig({ env: ENV }), {
                     heartbeatTimeout: 60000
                 }
             }
-        }, {
+        },
+        {
             reload: false
         }),
         new webpack.ContextReplacementPlugin(

@@ -4,7 +4,7 @@
 
     <groupId>io.github.jhipster.sample</groupId>
     <artifactId>jhipster-elasticsearch-sample-application</artifactId>
-    <version>0.0.3-SNAPSHOT</version>
+    <version>0.0.4-SNAPSHOT</version>
     <!-- <packaging>war</packaging> -->
     <packaging>jar</packaging>
     <name>Jhipster Elasticsearch Sample Application</name>
@@ -763,7 +763,7 @@
             </dependencies>
             <build>
                 <plugins>
-                    <plugin>
+                    <!-- <plugin>
                         <groupId>com.github.eirslett</groupId>
                         <artifactId>frontend-maven-plugin</artifactId>
                         <executions>
@@ -795,7 +795,7 @@
                                 </configuration>
                             </execution>
                         </executions>
-                    </plugin>
+                    </plugin> -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-war-plugin</artifactId>
@@ -919,7 +919,7 @@
                             </execution>
                         </executions>
                     </plugin>
-                    <plugin>
+                    <!-- <plugin>
                         <groupId>com.github.eirslett</groupId>
                         <artifactId>frontend-maven-plugin</artifactId>
                         <executions>
@@ -942,8 +942,8 @@
                                     <arguments>install</arguments>
                                 </configuration>
                             </execution>
-                            <!-- The execution of build test is diabled -->
-                            <!-- <execution>
+                            The execution of build test is diabled
+                            <execution>
                                 <id>webpack build test</id>
                                 <goals>
                                     <goal>npm</goal>
@@ -953,7 +953,7 @@
                                     <arguments>run webpack:test</arguments>
                                     <npmInheritsProxyConfigFromMaven>false</npmInheritsProxyConfigFromMaven>
                                 </configuration>
-                            </execution> -->
+                            </execution>
                             <execution>
                                 <id>webpack build prod</id>
                                 <goals>
@@ -966,7 +966,7 @@
                                 </configuration>
                             </execution>
                         </executions>
-                    </plugin>
+                    </plugin> -->
                     <plugin>
                         <groupId>pl.project13.maven</groupId>
                         <artifactId>git-commit-id-plugin</artifactId>
