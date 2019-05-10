@@ -48,6 +48,7 @@ public class CacheConfiguration {
             cm.createCache(io.github.jhipster.sample.domain.DiseaseGuangDong.class.getName(), jcacheConfiguration);
             cm.createCache(io.github.jhipster.sample.domain.QArobot.class.getName(), jcacheConfiguration);
             cm.createCache(io.github.jhipster.sample.domain.Prices.class.getName(), jcacheConfiguration);
+            cm.createCache(io.github.jhipster.sample.domain.DiseaseXiAn.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

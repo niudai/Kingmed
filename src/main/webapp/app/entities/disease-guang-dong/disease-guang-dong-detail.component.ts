@@ -5,7 +5,8 @@ import { IDiseaseGuangDong } from 'app/shared/model/disease-guang-dong.model';
 
 @Component({
     selector: 'jhi-disease-guang-dong-detail',
-    templateUrl: './disease-guang-dong-detail.component.html'
+    templateUrl: './disease-guang-dong-detail.component.html',
+    styleUrls: ['disease-guang-dong-detail.component.css']
 })
 export class DiseaseGuangDongDetailComponent implements OnInit {
     diseaseGuangDong: IDiseaseGuangDong;
