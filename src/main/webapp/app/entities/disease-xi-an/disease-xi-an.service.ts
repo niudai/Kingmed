@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { IDiseaseXiAn } from 'app/shared/model/disease-xi-an.model';
+import { IPriceXiAn } from 'app/shared/model/price-xi-an.model';
 
 type EntityResponseType = HttpResponse<IDiseaseXiAn>;
 type EntityArrayResponseType = HttpResponse<IDiseaseXiAn[]>;
@@ -31,6 +32,22 @@ export class DiseaseXiAnService {
     query(req?: any): Observable<EntityArrayResponseType> {
         const options = createRequestOption(req);
         return this.http.get<IDiseaseXiAn[]>(this.resourceUrl, { params: options, observe: 'response' });
+    }
+
+    addNewPrice(id: number, price: IPriceXiAn): Observable<EntityResponseType> {
+        return this.http.post<IPriceXiAn>(`${this.resourceUrl}/addPrice/${id}`, price, { observe: 'response'});
+    }
+
+    deletePrice(id: number): Observable<EntityResponseType> {
+        return this.http.delete<any>(`${this.resourceUrl}/deletePrice/${id}`);
+    }
+
+    updatePrice(price: IPriceXiAn): Observable<EntityResponseType> {
+        return this.http.put<IPriceXiAn>(`${this.resourceUrl}/updatePrice`, price, { observe: 'response'});
+    }
+
+    getPrice(id: number): Observable<EntityResponseType> {
+        return this.http.get<IPriceXiAn>(`${this.resourceUrl}/getPrice/${id}`, { observe: 'response'});
     }
 
     delete(id: number): Observable<HttpResponse<any>> {

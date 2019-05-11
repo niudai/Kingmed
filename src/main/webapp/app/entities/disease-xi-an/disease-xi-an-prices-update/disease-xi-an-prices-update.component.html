@@ -1,0 +1,82 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-disease-xi-an-heading"
+                jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.home.createOrEditLabel">Create
+                or edit a Disease Guang Dong</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="entity.price.subsidiary"
+                        for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name" [(ngModel)]="price.subsidiary"
+                        maxlength="300" />
+                    <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                        <small class="form-text text-danger" [hidden]="!editForm.controls.name?.errors?.maxlength"
+                            jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 300 }">
+                            This field cannot be longer than 300 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="entity.price.tollStandard"
+                        for="field_subsidiary">Subsidiary</label>
+                    <input type="text" class="form-control" name="subsidiary" id="field_subsidiary"
+                        [(ngModel)]="price.tollStandard" maxlength="50" />
+                    <div [hidden]="!(editForm.controls.subsidiary?.dirty && editForm.controls.subsidiary?.invalid)">
+                        <small class="form-text text-danger" [hidden]="!editForm.controls.subsidiary?.errors?.maxlength"
+                            jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 50 }">
+                            This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="entity.price.chargeCode"
+                        for="field_supplement">Supplement</label>
+                    <input type="text" class="form-control" name="testMethod" id="field_testMethod"
+                        [(ngModel)]="price.chargeCode" maxlength="100" />
+                    <div [hidden]="!(editForm.controls.supplement?.dirty && editForm.controls.supplement?.invalid)">
+                        <small class="form-text text-danger" [hidden]="!editForm.controls.supplement?.errors?.maxlength"
+                            jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 1000 }">
+                            This field cannot be longer than 1000 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="entity.price.reportingTime"
+                        for="field_testMethod">Test Method</label>
+                    <input type="text" class="form-control" name="testMethod" id="field_testMethod"
+                        [(ngModel)]="price.reportingTime" maxlength="200" />
+                    <div [hidden]="!(editForm.controls.testMethod?.dirty && editForm.controls.testMethod?.invalid)">
+                        <small class="form-text text-danger" [hidden]="!editForm.controls.testMethod?.errors?.maxlength"
+                            jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 200 }">
+                            This field cannot be longer than 200 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="entity.price.subseries"
+                        for="field_testMethod">Test Method</label>
+                    <input type="text" class="form-control" name="testMethod" id="field_testMethod"
+                        [(ngModel)]="price.subseries" maxlength="200" />
+                    <div [hidden]="!(editForm.controls.testMethod?.dirty && editForm.controls.testMethod?.invalid)">
+                        <small class="form-text text-danger" [hidden]="!editForm.controls.testMethod?.errors?.maxlength"
+                            jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 200 }">
+                            This field cannot be longer than 200 characters.
+                        </small>
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving"
+                    class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

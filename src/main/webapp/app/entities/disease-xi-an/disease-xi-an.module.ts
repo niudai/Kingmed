@@ -11,8 +11,11 @@ import {
     DiseaseXiAnDeletePopupComponent,
     DiseaseXiAnDeleteDialogComponent,
     diseaseXiAnRoute,
-    diseaseXiAnPopupRoute
+    diseaseXiAnPopupRoute,
 } from './';
+import { DiseaseXiAnPricesComponent } from './disease-xi-an-prices/disease-xi-an-prices.component';
+import { DiseaseXiAnPricesDeleteComponent } from './disease-xi-an-prices-delete/disease-xi-an-prices-delete.component';
+import { DiseaseXiAnPricesUpdateComponent } from './disease-xi-an-prices-update/disease-xi-an-prices-update.component';
 
 const ENTITY_STATES = [...diseaseXiAnRoute, ...diseaseXiAnPopupRoute];
 
@@ -23,7 +26,10 @@ const ENTITY_STATES = [...diseaseXiAnRoute, ...diseaseXiAnPopupRoute];
         DiseaseXiAnDetailComponent,
         DiseaseXiAnUpdateComponent,
         DiseaseXiAnDeleteDialogComponent,
-        DiseaseXiAnDeletePopupComponent
+        DiseaseXiAnDeletePopupComponent,
+        DiseaseXiAnPricesComponent,
+        DiseaseXiAnPricesDeleteComponent,
+        DiseaseXiAnPricesUpdateComponent,
     ],
     entryComponents: [DiseaseXiAnComponent, DiseaseXiAnUpdateComponent, DiseaseXiAnDeleteDialogComponent, DiseaseXiAnDeletePopupComponent],
     providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }],

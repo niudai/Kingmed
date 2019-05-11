@@ -1,7 +1,9 @@
+import { IPriceXiAn } from './price-xi-an.model';
 export interface IDiseaseXiAn {
     id?: number;
     subsidiary?: string;
     name?: string;
+    prices?: IPriceXiAn[];
     projectCode?: string;
     chargeCode?: string;
     tollStandard?: string;
@@ -27,6 +29,7 @@ export class DiseaseXiAn implements IDiseaseXiAn {
         public id?: number,
         public subsidiary?: string,
         public name?: string,
+        public prices?: IPriceXiAn[],
         public projectCode?: string,
         public chargeCode?: string,
         public tollStandard?: string,

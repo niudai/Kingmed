@@ -13,6 +13,10 @@ export class DiseaseXiAnDetailComponent implements OnInit {
     checkDemandsIsOpen: boolean;
     tatAboutIsOpen: boolean;
     remarkIsOpen: boolean;
+    chargeCodeIsOpen: boolean;
+    subSeriesIsOpen: boolean;
+    tollStandardIsOpen: boolean;
+    reportingTimeIsOpen: boolean;
     diseaseXiAn: IDiseaseXiAn;
 
     constructor(protected activatedRoute: ActivatedRoute) {}
@@ -31,6 +35,22 @@ export class DiseaseXiAnDetailComponent implements OnInit {
 
     remarkIsOpenToggle() {
         this.remarkIsOpen = !this.remarkIsOpen;
+    }
+
+    chargeCodeIsOpenToggle() {
+        this.chargeCodeIsOpen = !this.chargeCodeIsOpen;
+    }
+
+    subSeriesIsOpenToggle() {
+        this.subSeriesIsOpen = !this.subSeriesIsOpen;
+    }
+
+    tollStandardIsOpenToggle() {
+        this.tollStandardIsOpen = !this.tollStandardIsOpen;
+    }
+
+    reportingTimeIsOpenToggle() {
+        this.reportingTimeIsOpen = !this.reportingTimeIsOpen;
     }
 
     ngOnInit() {

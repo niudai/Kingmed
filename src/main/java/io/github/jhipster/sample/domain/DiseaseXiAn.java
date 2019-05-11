@@ -1,6 +1,5 @@
 package io.github.jhipster.sample.domain;
 
-
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -9,6 +8,8 @@ import javax.validation.constraints.*;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -21,10 +22,16 @@ import java.util.Objects;
 public class DiseaseXiAn implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @OneToMany(cascade = CascadeType.ALL
+        , orphanRemoval = true,
+        fetch = FetchType.EAGER)
+    @JoinColumn(name = "disease_xi_an_id")
+    private List<PriceXiAn> prices = new ArrayList<PriceXiAn>();
 
     @Size(max = 50)
     @Column(name = "subsidiary", length = 50)
@@ -169,6 +176,19 @@ public class DiseaseXiAn implements Serializable {
 
     public String getTollStandard() {
         return tollStandard;
+    }
+
+    public List<PriceXiAn> getPrices() {
+        return this.prices;
+    }
+
+    public void setPrices(List<PriceXiAn> prices) {
+        this.prices = prices;
+    }
+
+    public DiseaseXiAn prices(List<PriceXiAn> prices) {
+        this.prices = prices;
+        return this;
     }
 
     public DiseaseXiAn tollStandard(String tollStandard) {
@@ -401,6 +421,7 @@ public class DiseaseXiAn implements Serializable {
         return "DiseaseXiAn{" +
             "id=" + getId() +
             ", subsidiary='" + getSubsidiary() + "'" +
+            // ", prices='" + getPrices() + "'" +
             ", name='" + getName() + "'" +
             ", projectCode='" + getProjectCode() + "'" +
             ", chargeCode='" + getChargeCode() + "'" +

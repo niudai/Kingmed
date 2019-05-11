@@ -102,7 +102,15 @@
     },
     "entity": {
         "project": {
-            "detail": "项目详情"
+            "detail": "项目详情",
+            "price": "价格详情"
+        },
+        "price": {
+            "subseries": "子公司系列划分",
+            "tollStandard": "标准收费",
+            "reportingTime" : "出报告时间",
+            "chargeCode": "物价编码",
+            "subsidiary": "子公司"
         },
         "action": {
             "addblob": "Add blob",

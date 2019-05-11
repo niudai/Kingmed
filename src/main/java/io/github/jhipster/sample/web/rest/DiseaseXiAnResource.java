@@ -1,6 +1,8 @@
 package io.github.jhipster.sample.web.rest;
 import io.github.jhipster.sample.domain.DiseaseXiAn;
+import io.github.jhipster.sample.domain.PriceXiAn;
 import io.github.jhipster.sample.repository.DiseaseXiAnRepository;
+import io.github.jhipster.sample.repository.PriceXiAnRepository;
 import io.github.jhipster.sample.repository.search.DiseaseXiAnSearchRepository;
 import io.github.jhipster.sample.web.rest.errors.BadRequestAlertException;
 import io.github.jhipster.sample.web.rest.util.HeaderUtil;
@@ -41,9 +43,14 @@ public class DiseaseXiAnResource {
 
     private final DiseaseXiAnSearchRepository diseaseXiAnSearchRepository;
 
-    public DiseaseXiAnResource(DiseaseXiAnRepository diseaseXiAnRepository, DiseaseXiAnSearchRepository diseaseXiAnSearchRepository) {
+    private final PriceXiAnRepository priceRepository;
+
+    public DiseaseXiAnResource(DiseaseXiAnRepository diseaseXiAnRepository
+        , DiseaseXiAnSearchRepository diseaseXiAnSearchRepository
+        , PriceXiAnRepository priceXiAnRepository) {
         this.diseaseXiAnRepository = diseaseXiAnRepository;
         this.diseaseXiAnSearchRepository = diseaseXiAnSearchRepository;
+        this.priceRepository = priceXiAnRepository;
     }
 
     /**
@@ -114,6 +121,73 @@ public class DiseaseXiAnResource {
         Optional<DiseaseXiAn> diseaseXiAn = diseaseXiAnRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(diseaseXiAn);
     }
+
+    /**
+     * Request /disease-xi-ans-reindex : reindex the diseaseGuangDong
+     *
+     */
+    @GetMapping("/disease-xi-ans-reindex")
+    public void reindexDiseaseXiAn() {
+        log.debug("REST request to reindex DiseaseXiAn");
+        diseaseXiAnSearchRepository.deleteAll();
+        List<DiseaseXiAn> diseaseXiAns = diseaseXiAnRepository.findAll();
+        diseaseXiAnSearchRepository.saveAll(diseaseXiAns);
+    }
+
+    /**
+     * Request /disease-xi-ans/getPrice/{id} : get price with a specified id.
+     * @param id the id of price
+     * @return response entity with price as response
+     */
+    @GetMapping("/disease-xi-ans/getPrice/{id}")
+    public ResponseEntity<PriceXiAn> getPrice(@PathVariable Long id) {
+        log.debug("REST request to get price: {}", id);
+        PriceXiAn result = priceRepository.findById(id).get();
+        return ResponseEntity.ok().body(result);
+    }
+
+
+    /**
+     * Request /disease-xi-ans/addPrice/{id} : add price to a diseaseXiAn
+     * @param price Price to be added
+     * @param id the id of diseaseXiAn
+     * @return ok with 200 status code.
+     */
+    @PostMapping("/disease-xi-ans/addPrice/{id}")
+    public ResponseEntity<Void> addNewPrice(@Valid @RequestBody PriceXiAn price, @PathVariable Long id) {
+        log.debug("REST request to add new price: {}", price);
+        DiseaseXiAn disease = diseaseXiAnRepository.findById(id).get();
+        disease.getPrices().add(price);
+        diseaseXiAnRepository.save(disease);
+        diseaseXiAnSearchRepository.save(disease);
+        return ResponseEntity.ok().build();
+    }
+
+    /**
+     * Request to update a price
+     * @param price the price to be updated
+     * @param id the id of price
+     * @return response entity with price as its body.
+     */
+    @PutMapping("/disease-xi-ans/updatePrice")
+    public ResponseEntity<PriceXiAn> updatePrice(@Valid @RequestBody PriceXiAn price) {
+        log.debug("REST request to update price: {}", price);
+        PriceXiAn result = priceRepository.save(price);
+        return ResponseEntity.ok().body(result);
+    }
+
+    /**
+     * Delete price
+     * @param priceId the id of price to be deleted
+     * @return 200 ok.
+     */
+    @DeleteMapping("/disease-xi-ans/deletePrice/{priceId}")
+    public ResponseEntity<Void> deletePrice(@PathVariable Long priceId) {
+        log.debug("REST request to delete Price: {}", priceId);
+        priceRepository.deleteById(priceId);
+        return ResponseEntity.ok().build();
+    }
+
 
     /**
      * DELETE  /disease-xi-ans/:id : delete the "id" diseaseXiAn.
