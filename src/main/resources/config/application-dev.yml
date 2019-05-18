@@ -87,7 +87,7 @@ spring:
         cache: false
 
 server:
-    port: 8080
+    port: 80
 
 # ===================================================================
 # JHipster specific properties
@@ -121,7 +121,7 @@ jhipster:
     mail: # specific JHipster mail property, for standard properties see MailProperties
         # from: jhipsterElasticsearchSampleApplication@localhost
         from: kingmed01@outlook.com
-        base-url: http://xiaodaicoding:8080
+        base-url: http://xiaodaicoding
     metrics:
         logs: # Reports metrics in the logs
             enabled: false

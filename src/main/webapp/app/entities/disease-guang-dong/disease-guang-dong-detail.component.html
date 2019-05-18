@@ -3,7 +3,7 @@
         <div *ngIf="diseaseGuangDong">
             <h3>
                 <fa-icon class="icon-2" [icon]="'book-medical'"></fa-icon>
-                {{ diseaseGuangDong.name }}  - {{diseaseGuangDong.subsidiary}}
+                {{ diseaseGuangDong.name }} - {{diseaseGuangDong.subsidiary}}
             </h3>
             <hr>
             <jhi-alert-error></jhi-alert-error>
@@ -12,10 +12,10 @@
                 <dd>
                     <span>{{diseaseGuangDong.name}}</span>
                 </dd> -->
-                <dt>
+                <dt (click)="checkDemandsIsOpenToggle()" class="dropdown-toggle">
                     <fa-icon class="icon-2" [icon]="'circle'"></fa-icon>送检需求
                 </dt>
-                <dd>
+                <dd *ngIf="checkDemandsIsOpen">
                     <dl>
                         <dt class="subItem">
                             <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
@@ -30,19 +30,69 @@
                         <dt class="subItem">
                             <fa-icon class="icon-4" [icon]="'star'"></fa-icon><span
                                 jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.freezing">Freezing</span>
-                                <span> : {{diseaseGuangDong.freezing}}</span>
+                            <span> : {{diseaseGuangDong.freezing}}</span>
                         </dt>
+                    </dl>
+                </dd>
+                <dt (click)="checkAboutIsOpenToggle()" class="dropdown-toggle">
+                    <fa-icon class="icon-3" [icon]="'circle'"></fa-icon>检测相关
+                </dt>
+                <dd *ngIf="checkAboutIsOpen">
+                    <dl>
                         <dt class="subItem">
                             <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
-                                jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.testDepartment">Test
-                                Department</span><span> : {{diseaseGuangDong.testDepartment}}</span>
+                                jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.testMethod">Room
+                                Preservation</span><span> : {{diseaseGuangDong.testMethod}}</span>
                         </dt>
                         <dt class="subItem">
                             <fa-icon class="icon-3" [icon]="'star'"></fa-icon><span
-                                jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.suppliesSeries">Supplies
-                                Series</span><span> : {{diseaseGuangDong.suppliesSeries}}</span>
+                                jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.projectConcourse">Cold
+                                Storage Preservation</span><span> : {{diseaseGuangDong.projectConcourse}}</span>
                         </dt>
+                        <dt class="subItem">
+                            <fa-icon class="icon-4" [icon]="'star'"></fa-icon><span
+                                jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.specialInspectionItems">Freezing</span>
+                            <span> : {{diseaseGuangDong.specialInspectionItems}}</span>
+                        </dt>
+                        <dt class="subItem">
+                            <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
+                                jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.series">Test
+                                Department</span><span> : {{diseaseGuangDong.series}}</span>
+                        </dt>
+                        <dt class="subItem">
+                            <fa-icon class="icon-3" [icon]="'star'"></fa-icon><span
+                                jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.applicationUnitType">Supplies
+                                Series</span><span> : {{diseaseGuangDong.applicationUnitType}}</span>
+                        </dt>
+                        <dt class="subItem">
+                                <fa-icon class="icon-3" [icon]="'star'"></fa-icon><span
+                                    jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.classification">Supplies
+                                    Series</span><span> : {{diseaseGuangDong.classification}}</span>
+                            </dt>
                     </dl>
+                </dd>
+                <dt (click)="sampleAndSuppliesIsOpenToggle()" class="dropdown-toggle">
+                    <fa-icon class="icon-3" [icon]="'circle'"></fa-icon>样品及耗材
+                </dt>
+                <dd *ngIf="sampleAndSuppliesIsOpen">
+                                <dl>
+                                    <dt class="subItem">
+                                        <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
+                                            jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.testDepartment">Room
+                                            Preservation</span><span> : {{diseaseGuangDong.testDepartment}}</span>
+                                    </dt>
+                                    <dt class="subItem">
+                                        <fa-icon class="icon-3" [icon]="'star'"></fa-icon><span
+                                            jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.suppliesSeries">Cold
+                                            Storage Preservation</span><span> : {{diseaseGuangDong.suppliesSeries}}</span>
+                                    </dt>
+                                    <dt class="subItem">
+                                        <fa-icon class="icon-3" [icon]="'star'"></fa-icon><span
+                                            jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.sample">Cold
+                                            Storage Preservation</span><span> : {{diseaseGuangDong.sample}}</span>
+                                    </dt>
+                                </dl>
+
                 </dd>
                 <dt>
                     <fa-icon class="icon-3" [icon]="'circle'"></fa-icon><span
@@ -52,27 +102,12 @@
                     <span>{{diseaseGuangDong.supplement}}</span>
                 </dd>
                 <dt>
-                    <fa-icon class="icon-4" [icon]="'circle'"></fa-icon><span
-                        jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.testMethod">Test
-                        Method</span>
-                </dt>
-                <dd>
-                    <span>{{diseaseGuangDong.testMethod}}</span>
-                </dd>
-                <dt>
-                    <fa-icon class="icon-1" [icon]="'circle'"></fa-icon><span
-                        jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.sample">Sample</span>
-                </dt>
-                <dd>
-                    <span>{{diseaseGuangDong.sample}}</span>
-                </dd>
-                <dt>
-                <dt>
+                <dt class="dropdown-toggle" (click)="clinicalApplicationIsOpenToggle()">
                     <fa-icon class="icon-1" [icon]="'circle'"></fa-icon><span
                         jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.clinicalApplication">Clinical
                         Application</span>
                 </dt>
-                <dd>
+                <dd *ngIf="clinicalApplicationIsOpen">
                     <span>{{diseaseGuangDong.clinicalApplication}}</span>
                 </dd>
                 <!-- <dt><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.tollStandard">Toll Standard</span></dt>
@@ -83,39 +118,18 @@
                 <dd>
                     <span>{{diseaseGuangDong.reportingTime}}</span>
                 </dd> -->
-                <dt>
+                <dt class="dropdown-toggle" (click)="remarkIsOpenToggle()">
                     <fa-icon class="icon-2" [icon]="'circle'"></fa-icon><span
                         jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.remarks">Remarks</span>
                 </dt>
-                <dd>
+                <!-- <dd *ngIf="remarkIsOpen"> -->
+                <dd *ngIf="remarkIsOpen">
                     <span>{{diseaseGuangDong.remarks}}</span>
                 </dd>
                 <!-- <dt><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.chargeCode">Charge Code</span></dt>
                 <dd>
                     <span>{{diseaseGuangDong.chargeCode}}</span>
                 </dd> -->
-                <dt>
-                    <fa-icon class="icon-3" [icon]="'circle'"></fa-icon><span
-                        jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.classification">Classification</span>
-                </dt>
-                <dd>
-                    <span>{{diseaseGuangDong.classification}}</span>
-                </dd>
-                <dt>
-                    <fa-icon class="icon-4" [icon]="'circle'"></fa-icon><span
-                        jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.applicationUnitType">Application
-                        Unit Type</span>
-                </dt>
-                <dd>
-                    <span>{{diseaseGuangDong.applicationUnitType}}</span>
-                </dd>
-                <dt>
-                    <fa-icon class="icon-1" [icon]="'circle'"></fa-icon><span
-                        jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.series">Series</span>
-                </dt>
-                <dd>
-                    <span>{{diseaseGuangDong.series}}</span>
-                </dd>
                 <dt>
                     <fa-icon class="icon-2" [icon]="'circle'"></fa-icon><span
                         jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.projectChangeNotification">Project
@@ -125,14 +139,6 @@
                     <span>{{diseaseGuangDong.projectChangeNotification}}</span>
                 </dd>
                 <dt>
-                    <fa-icon class="icon-3" [icon]="'circle'"></fa-icon><span
-                        jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.specialInspectionItems">Special
-                        Inspection Items</span>
-                </dt>
-                <dd>
-                    <span>{{diseaseGuangDong.specialInspectionItems}}</span>
-                </dd>
-                <dt>
                     <fa-icon class="icon-4" [icon]="'circle'"></fa-icon><span
                         jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.stopDeveloping">Stop
                         Developing</span>
@@ -140,19 +146,10 @@
                 <dd>
                     <span>{{diseaseGuangDong.stopDeveloping}}</span>
                 </dd>
-                <dt>
-                    <fa-icon class="icon-1" [icon]="'circle'"></fa-icon><span
-                        jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.projectConcourse">Project
-                        Concourse</span>
-                </dt>
-                <dd>
-                    <span>{{diseaseGuangDong.projectConcourse}}</span>
-                </dd>
             </dl>
 
             <button class="btn btn-info" [routerLink]="['/disease-guang-dong', diseaseGuangDong.id, 'prices']">
-                <fa-icon [icon]="'dollar-sign'"></fa-icon>&nbsp;<span
-                    jhiTranslate="entity.project.price">价格详情</span>
+                <fa-icon [icon]="'dollar-sign'"></fa-icon>&nbsp;<span jhiTranslate="entity.project.price">价格详情</span>
             </button>
 
             <button type="submit" (click)="previousState()" class="btn btn-info">

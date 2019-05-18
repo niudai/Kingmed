@@ -25,7 +25,7 @@ describe('Service Tests', () => {
                 0,
                 'AAAAAAA',
                 'AAAAAAA',
-                'AAAAAAA',
+                null,
                 'AAAAAAA',
                 'AAAAAAA',
                 'AAAAAAA',

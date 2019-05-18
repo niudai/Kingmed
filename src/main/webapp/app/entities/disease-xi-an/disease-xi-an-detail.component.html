@@ -1,7 +1,9 @@
 <div class="row justify-content-center">
     <div class="col-11">
         <div *ngIf="diseaseXiAn">
-            <h2><span>{{diseaseXiAn.name}} - {{diseaseXiAn.subsidiary}} </span></h2>
+            <h2>
+                <fa-icon class="icon-2" [icon]="'book-medical'"></fa-icon>
+                <span>{{diseaseXiAn.name}} - {{diseaseXiAn.subsidiary}} </span></h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
@@ -20,28 +22,16 @@
                                 jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.projectCode">Project
                                 Code</span><span> : {{diseaseXiAn.projectCode}}</span>
                         </dt>
-                        <dt class="subItem dropdown-toggle" (click)="chargeCodeIsOpenToggle()">
+                        <dt class="subItem" (click)="chargeCodeIsOpenToggle()">
                             <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
                                 jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.chargeCode">Charge
-                                Code</span><span> : </span>
+                                Code</span><span> : {{ currentChargeCode }}</span>
                         </dt>
-                        <dd *ngIf="chargeCodeIsOpen">
-                            <span>{{diseaseXiAn.subsidiary}} : {{diseaseXiAn.chargeCode}}</span>
-                            <div *ngFor="let price of diseaseXiAn.prices">
-                                <span>{{price.subsidiary}} : {{price.chargeCode}}</span>
-                            </div>
-                        </dd>
-                        <dt class="subItem dropdown-toggle" (click)="tollStandardIsOpenToggle()">
+                        <dt class="subItem" (click)="tollStandardIsOpenToggle()">
                             <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
                                 jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.tollStandard">Toll
-                                Standard</span><span></span>
+                                Standard</span><span> : {{ currentPrice }}</span>
                         </dt>
-                        <dd *ngIf="tollStandardIsOpen">
-                                <span>{{diseaseXiAn.subsidiary}} : {{diseaseXiAn.tollStandard}} 元</span>
-                                <div *ngFor="let price of diseaseXiAn.prices">
-                                    <span>{{price.subsidiary}} : {{price.tollStandard}} 元</span>
-                                </div>
-                        </dd>
                     </dl>
                 </dd>
                 <dt (click)="checkDemandsIsOpenToggle()" class="dropdown-toggle">
@@ -137,44 +127,38 @@
                         <dd>
                             <span>{{diseaseXiAn.hurryDepartment}}</span>
                         </dd>
-                        <dt class="subItem dropdown-toggle" (click)="reportingTimeIsOpenToggle()">
+                        <dt class="subItem" (click)="reportingTimeIsOpenToggle()">
                             <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
                                 jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.reportingTime">Reporting
-                                Time</span>
+                                Time</span><span> : {{currentReportingTime}}</span>
                         </dt>
-                        <dd *ngIf="reportingTimeIsOpen">
-                                <span>{{diseaseXiAn.subsidiary}} : {{diseaseXiAn.reportingTime}}</span>
-                                <div *ngFor="let price of diseaseXiAn.prices">
-                                    <span>{{price.subsidiary}} : {{price.reportingTime}}</span>
-                                </div>
-                            </dd>
-                        <dt class="subItem">
-                            <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
-                                jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.clinicalApplication">Clinical
-                                Application</span>
-                        </dt>
-                        <dd>
-                            <span>{{diseaseXiAn.clinicalApplication}}</span>
-                        </dd>
-                        <dt class="subItem">
-                            <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
-                                jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.series">Series</span>
-                        </dt>
-                        <dd>
-                            <span>{{diseaseXiAn.series}}</span>
-                        </dd>
-                        <dt class="subItem dropdown-toggle" (click)="subSeriesIsOpenToggle()">
-                            <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
-                                jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.subSeries">Sub
-                                Series</span>
-                        </dt>
-                        <dd *ngIf="subSeriesIsOpen">
-                            <span>{{diseaseXiAn.subsidiary}} : {{diseaseXiAn.subSeries}}</span>
-                            <div *ngFor="let price of diseaseXiAn.prices">
-                                <span>{{price.subsidiary}} : {{price.subseries}}</span>
-                            </div>
-                        </dd>
-
+                    </dl>
+                </dd>
+                <dt (click)="diseaseAboutIsOpenToggle()" class="dropdown-toggle">
+                    <fa-icon class="icon-5" [icon]="'circle'"></fa-icon><span>疾病险相关</span>
+                </dt>
+                <dd *ngIf="diseaseAboutIsOpen">
+                    <dl>
+                            <dt class="subItem dropdown-toggle" (click)="clinicalApplicationIsOpenToggle()">
+                                    <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
+                                        jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.clinicalApplication">Clinical
+                                        Application</span>
+                                </dt>
+                            <dd *ngIf="clinicalApplicationIsOpen">
+                                    <span>{{diseaseXiAn.clinicalApplication}}</span>
+                                </dd>
+                                <dt class="subItem">
+                                    <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
+                                        jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.series">Series</span>
+                                </dt>
+                                <dd>
+                                    <span>{{diseaseXiAn.series}}</span>
+                                </dd>
+                                <dt class="subItem" (click)="subSeriesIsOpenToggle()">
+                                    <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
+                                        jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.subSeries">Sub
+                                        Series</span><span> : {{ currentSubseries }}</span>
+                                </dt>
                     </dl>
                 </dd>
                 <dt (click)="remarkIsOpenToggle()" class="dropdown-toggle">
@@ -185,6 +169,23 @@
                     <span>{{diseaseXiAn.remarks}}</span>
                 </dd>
             </dl>
+
+            <div class="table-responsive">
+                    <table class="table table-striped">
+                            <thead></thead>
+                            <tbody>
+                                <tr>
+                                    <!--  -->
+                                    <td><button class="btn btn-success" (click)="currentDefault()">{{diseaseXiAn.subsidiary}}</button></td>
+                                    <td *ngFor="let price of diseaseXiAn.prices">
+                                        <button class="btn btn-success" (click)="currentToggle(price)">{{ price.subsidiary }}</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+            </div>
+            <!-- toggle between several companies -->
+
 
             <button class="btn btn-info" [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'prices']">
                 <fa-icon [icon]="'dollar-sign'"></fa-icon>&nbsp;<span jhiTranslate="entity.project.price">价格详情</span>

@@ -1,3 +1,5 @@
+import { PriceXiAn } from './../../shared/model/price-xi-an.model';
+import { Price } from './../../shared/model/price.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -9,15 +11,18 @@ import { IDiseaseXiAn } from 'app/shared/model/disease-xi-an.model';
     styleUrls: ['disease-xi-an-detail.component.css']
 })
 export class DiseaseXiAnDetailComponent implements OnInit {
+    diseaseAboutIsOpen: boolean;
     projectAndPriceIsOpen: boolean;
     checkDemandsIsOpen: boolean;
     tatAboutIsOpen: boolean;
     remarkIsOpen: boolean;
-    chargeCodeIsOpen: boolean;
-    subSeriesIsOpen: boolean;
-    tollStandardIsOpen: boolean;
-    reportingTimeIsOpen: boolean;
+    clinicalApplicationIsOpen: boolean; // 临床应用
     diseaseXiAn: IDiseaseXiAn;
+
+    currentPrice: string;
+    currentChargeCode: string;
+    currentReportingTime: string;
+    currentSubseries: string;
 
     constructor(protected activatedRoute: ActivatedRoute) {}
 
@@ -37,20 +42,12 @@ export class DiseaseXiAnDetailComponent implements OnInit {
         this.remarkIsOpen = !this.remarkIsOpen;
     }
 
-    chargeCodeIsOpenToggle() {
-        this.chargeCodeIsOpen = !this.chargeCodeIsOpen;
+    clinicalApplicationIsOpenToggle() {
+        this.clinicalApplicationIsOpen = !this.clinicalApplicationIsOpen;
     }
 
-    subSeriesIsOpenToggle() {
-        this.subSeriesIsOpen = !this.subSeriesIsOpen;
-    }
-
-    tollStandardIsOpenToggle() {
-        this.tollStandardIsOpen = !this.tollStandardIsOpen;
-    }
-
-    reportingTimeIsOpenToggle() {
-        this.reportingTimeIsOpen = !this.reportingTimeIsOpen;
+    diseaseAboutIsOpenToggle() {
+        this.diseaseAboutIsOpen = !this.diseaseAboutIsOpen;
     }
 
     ngOnInit() {
@@ -58,9 +55,23 @@ export class DiseaseXiAnDetailComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ diseaseXiAn }) => {
             this.diseaseXiAn = diseaseXiAn;
         });
+        this.currentChargeCode = this.diseaseXiAn.chargeCode;
+        this.currentPrice = this.diseaseXiAn.tollStandard;
+        this.currentReportingTime = this.diseaseXiAn.reportingTime;
+        this.currentSubseries = this.currentSubseries;
     }
 
-    previousState() {
-        window.history.back();
+    public currentToggle(price: PriceXiAn): void {
+        this.currentPrice = price.tollStandard;
+        this.currentChargeCode = price.chargeCode;
+        this.currentReportingTime = price.reportingTime;
+        this.currentSubseries = price.subseries;
+    }
+
+    public currentDefault(): void {
+        this.currentPrice = this.diseaseXiAn.tollStandard;
+        this.currentChargeCode = this.diseaseXiAn.chargeCode;
+        this.currentReportingTime = this.diseaseXiAn.reportingTime;
+        this.currentSubseries = this.diseaseXiAn.subSeries;
     }
 }

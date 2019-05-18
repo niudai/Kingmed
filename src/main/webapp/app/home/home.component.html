@@ -2,18 +2,29 @@
         <!-- <div class="col-md-3">
             <span class="hipster img-fluid rounded"></span>
         </div> -->
-        <div class="col-md-11">
+        <div class="col-md-12">
             <h3 class="display-7 title">你好, 这里是金域医学检验中心!</h3>
             <div [ngSwitch]="isAuthenticated()">
                 <div class="alert alert-success" *ngSwitchCase="true">
                     <span id="home-logged-message" *ngIf="account">你好, "{{account.login}}". </span>
                 </div>
-                <div class = "context" *ngSwitchCase="true">
-                    <button class = "menu" id = "project"><a routerLink="/disease-guang-dong">广州项目</a></button>
-                    <button class = "menu" id = "qaRobot"><a routerLink="/q-arobot">QA小博士</a></button>
-                    <button class = "menu" id = "servicePlatform"><a routerLink="/service">服务平台</a></button>
-                    <button class = "menu" id = "projectItem"><a routerLink="/disease-xi-an">西安项目</a></button>
-                </div>
+                <div class="container col-md-12" *ngSwitchCase="true">
+                        <div class="row">
+                          <div class="col-sm-3">
+                            <button class = "menu" id = "project"><a routerLink="/disease-guang-dong">广州项目</a></button>
+                          </div>
+                          <div class="col-sm-3">
+                                <button class = "menu" id = "projectItem"><a routerLink="/disease-xi-an">西安项目</a></button>
+                          </div>
+                          <div class="col-sm-3">
+                                <button class = "menu" id = "qaRobot"><a routerLink="/q-arobot">QA小博士</a></button>
+
+                          </div>
+                          <div class="col-sm-3">
+                                <button class = "menu" id = "servicePlatform"><a routerLink="/service">服务平台</a></button>
+                          </div>
+                        </div>
+                      </div>
                 <div class="alert alert-warning" *ngSwitchCase="false">
                     <span>如果你是公司员工, 可以直接 </span>
                     <a class="alert-link" (click)="login()">登陆</a>
@@ -42,4 +53,5 @@
             </p>
              -->
         </div>
+
     </div>
