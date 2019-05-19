@@ -74,4 +74,9 @@ export class DiseaseXiAnDetailComponent implements OnInit {
         this.currentReportingTime = this.diseaseXiAn.reportingTime;
         this.currentSubseries = this.diseaseXiAn.subSeries;
     }
+
+    previousState() {
+        window.history.back();
+    }
+
 }

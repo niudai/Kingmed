@@ -3,9 +3,13 @@
         <div *ngIf="diseaseXiAn">
             <h2>
                 <fa-icon class="icon-2" [icon]="'book-medical'"></fa-icon>
-                <span>{{diseaseXiAn.name}} - {{diseaseXiAn.subsidiary}} </span></h2>
+                <span>{{diseaseXiAn.name}} - {{diseaseXiAn.subsidiary}} </span>
+
+            </h2>
             <hr>
+
             <jhi-alert-error></jhi-alert-error>
+
             <dl class="row-md jh-entity-details">
                 <dt (click)="projectAndPriceIsOpenToggle()" class="dropdown-toggle">
                     <fa-icon class="icon-3" [icon]="'circle'"></fa-icon><span>项目开展与收费</span>
@@ -22,12 +26,12 @@
                                 jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.projectCode">Project
                                 Code</span><span> : {{diseaseXiAn.projectCode}}</span>
                         </dt>
-                        <dt class="subItem" (click)="chargeCodeIsOpenToggle()">
+                        <dt class="subItem">
                             <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
                                 jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.chargeCode">Charge
                                 Code</span><span> : {{ currentChargeCode }}</span>
                         </dt>
-                        <dt class="subItem" (click)="tollStandardIsOpenToggle()">
+                        <dt class="subItem">
                             <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
                                 jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.tollStandard">Toll
                                 Standard</span><span> : {{ currentPrice }}</span>
@@ -127,7 +131,7 @@
                         <dd>
                             <span>{{diseaseXiAn.hurryDepartment}}</span>
                         </dd>
-                        <dt class="subItem" (click)="reportingTimeIsOpenToggle()">
+                        <dt class="subItem">
                             <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
                                 jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.reportingTime">Reporting
                                 Time</span><span> : {{currentReportingTime}}</span>
