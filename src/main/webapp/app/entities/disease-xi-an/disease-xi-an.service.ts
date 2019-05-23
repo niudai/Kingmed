@@ -1,3 +1,4 @@
+import { QArobot, IQArobot } from 'app/shared/model/q-arobot.model';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -52,6 +53,18 @@ export class DiseaseXiAnService {
 
     delete(id: number): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+    }
+
+    getQArobot(id: number): Observable<HttpResponse<IQArobot[]>> {
+        return this.http.get<IQArobot[]>(`${this.resourceUrl}/getQArobotsOfDisease/${id}`, { observe: 'response'});
+    }
+
+    associate(diseaseId: number, qarobotId: number): Observable<HttpResponse<any>> {
+        return this.http.get<any>(`${this.resourceUrl}/associate/${diseaseId}/${qarobotId}`);
+    }
+
+    deassociate(diseaseId: number, qarobotId: number): Observable<HttpResponse<any>> {
+        return this.http.get<any>(`${this.resourceUrl}/deassociate/${diseaseId}/${qarobotId}`);
     }
 
     search(req?: any): Observable<EntityArrayResponseType> {

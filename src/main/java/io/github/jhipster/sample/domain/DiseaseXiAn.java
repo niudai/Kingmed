@@ -9,8 +9,10 @@ import javax.validation.constraints.*;
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A DiseaseXiAn.
@@ -32,6 +34,20 @@ public class DiseaseXiAn implements Serializable {
         fetch = FetchType.EAGER)
     @JoinColumn(name = "disease_xi_an_id")
     private List<PriceXiAn> prices = new ArrayList<PriceXiAn>();
+
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(name = "disease_xi_an_q_arobot"
+        , joinColumns = @JoinColumn(name = "disease_xi_an_id", referencedColumnName = "id")
+        , inverseJoinColumns = @JoinColumn(name = "q_arobot_id", referencedColumnName = "id"))
+    private Set<QArobot> qarobots = new HashSet<>();
+
+    public Set<QArobot> getQarobots() {
+        return this.qarobots;
+    }
+
+    public void setQarobots(Set<QArobot> qarobots) {
+        this.qarobots = qarobots;
+    }
 
     @Size(max = 50)
     @Column(name = "subsidiary", length = 50)

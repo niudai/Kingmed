@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { IQArobot } from 'app/shared/model/q-arobot.model';
+import { IDiseaseXiAn } from 'app/shared/model/disease-xi-an.model';
 
 type EntityResponseType = HttpResponse<IQArobot>;
 type EntityArrayResponseType = HttpResponse<IQArobot[]>;
@@ -40,5 +41,9 @@ export class QArobotService {
     search(req?: any): Observable<EntityArrayResponseType> {
         const options = createRequestOption(req);
         return this.http.get<IQArobot[]>(this.resourceSearchUrl, { params: options, observe: 'response' });
+    }
+
+    getDisease(id: number): Observable<HttpResponse<IDiseaseXiAn[]>> {
+        return this.http.get<IDiseaseXiAn[]>(`${this.resourceUrl}/getDiseasesOfQArobot/${id}`, { observe: 'response'});
     }
 }

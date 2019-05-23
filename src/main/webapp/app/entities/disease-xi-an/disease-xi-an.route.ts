@@ -1,10 +1,15 @@
+import { DiseaseXiAnQarobotsUpdateComponent } from './disease-xi-an-qarobots-update/disease-xi-an-qarobots-update.component';
+import { DiseaseXiAnQarobotsDeleteComponent } from './disease-xi-an-qarobots-delete/disease-xi-an-qarobots-delete.component';
+import { QArobot } from 'app/shared/model/q-arobot.model';
+import { IQArobot } from './../../shared/model/q-arobot.model';
+
 import { DiseaseXiAnPricesDeleteComponent } from './disease-xi-an-prices-delete/disease-xi-an-prices-delete.component';
 import { PriceXiAn } from './../../shared/model/price-xi-an.model';
 import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
 import { JhiPaginationUtil, JhiResolvePagingParams } from 'ng-jhipster';
-import { UserRouteAccessService } from 'app/core';
+import { UserRouteAccessService, User } from 'app/core';
 import { Observable, of } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { DiseaseXiAn } from 'app/shared/model/disease-xi-an.model';
@@ -17,6 +22,7 @@ import { IDiseaseXiAn } from 'app/shared/model/disease-xi-an.model';
 import { IPriceXiAn } from 'app/shared/model/price-xi-an.model';
 import { DiseaseXiAnPricesComponent } from './disease-xi-an-prices/disease-xi-an-prices.component';
 import { DiseaseXiAnPricesUpdateComponent } from './disease-xi-an-prices-update/disease-xi-an-prices-update.component';
+import { DiseaseXiAnQarobotsComponent } from './disease-xi-an-qarobots/disease-xi-an-qarobots.component';
 @Injectable({ providedIn: 'root' })
 export class DiseaseXiAnResolve implements Resolve<IDiseaseXiAn> {
     constructor(private service: DiseaseXiAnService) {}
@@ -30,6 +36,21 @@ export class DiseaseXiAnResolve implements Resolve<IDiseaseXiAn> {
             );
         }
         return of(new DiseaseXiAn());
+    }
+}
+
+@Injectable({ providedIn: 'root' })
+export class QArobotResolve implements Resolve<IQArobot[]> {
+    constructor(private service: DiseaseXiAnService) {}
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IQArobot[]> {
+        const id = route.params['id'] ? route.params['id'] : null;
+        if (id) {
+            return this.service.getQArobot(id).pipe(
+                filter((response: HttpResponse<IQArobot[]>) => response.ok),
+                map((qarobots: HttpResponse<IQArobot[]>) => qarobots.body)
+            );
+        }
+        return of([ new QArobot() ]);
     }
 }
 
@@ -96,6 +117,21 @@ export const diseaseXiAnRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
+        path: ':id/qarobots',
+        component: DiseaseXiAnQarobotsComponent,
+        resolve: {
+            qarobots: QArobotResolve
+        },
+        // resolve: {
+        //     diseaseXiAn: DiseaseXiAnResolve
+        // },
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
         path: 'new',
         component: DiseaseXiAnUpdateComponent,
         resolve: {
@@ -135,6 +171,17 @@ export const diseaseXiAnRoute: Routes = [
         path: 'deletePrice/:priceId',
         component: DiseaseXiAnPricesDeleteComponent,
         canActivate: [UserRouteAccessService],
+    },
+    {
+        path: 'deleteQArobot/:diseaseId/:qarobotId',
+        component: DiseaseXiAnQarobotsDeleteComponent,
+        canActivate: [UserRouteAccessService]
+
+    },
+    {
+        path: 'addQArobot/:diseaseId',
+        component: DiseaseXiAnQarobotsUpdateComponent,
+        canActivate: [UserRouteAccessService]
     },
     {
         path: ':id/edit',

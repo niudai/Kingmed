@@ -41,8 +41,9 @@ export class ServiceComponent implements OnInit {
     }
 
     confirmDelete(filename: string) {
-        this.delete(filename).subscribe();
-        this.getImages();
+        this.delete(filename).subscribe(
+            any => this.getImages()
+        );
     }
 
     onFileChange(event) {
@@ -55,8 +56,9 @@ export class ServiceComponent implements OnInit {
     onSubmit() {
         const formData = new FormData();
         formData.append('image', this.fileForm.get('image').value);
-        this.upload(formData).subscribe();
-        this.getImages();
+        this.upload(formData).subscribe(
+            any => this.getImages()
+        );
     }
 
     ngOnInit() {

@@ -3,25 +3,53 @@
             <span class="hipster img-fluid rounded"></span>
         </div> -->
         <div class="col-md-12">
+            <!-- <video class="a-j" autoplay="autoplay" loop="loop" muted="muted" style="height: 911px;">
+                    <source src="../../content/images/zy68.mp4" type="video/mp4">
+            </video> -->
             <h3 class="display-7 title">你好, 这里是金域医学检验中心!</h3>
             <div [ngSwitch]="isAuthenticated()">
                 <div class="alert alert-success" *ngSwitchCase="true">
                     <span id="home-logged-message" *ngIf="account">你好, "{{account.login}}". </span>
                 </div>
+                <!-- <ul class="container col-md-12" *ngSwitchCase="true">
+                    <div class = "col-sm-3">
+                            <li class = "menu">
+                                    <a routerLink="/disease-guang-dong">
+                                        <div class = "project">
+
+                                        </div>
+                                        <div class="b-d">报告查询</div>
+                                    </a>
+                                </li>
+                    </div>
+
+                    <li class = "menu projectItem col-sm-3">
+
+                    </li>
+                    <li class = "menu qaRobot col-sm-3">
+
+                    </li>
+                    <li class = "menu servicePlatform col-sm-3">
+
+                    </li>
+                </ul> -->
                 <div class="container col-md-12" *ngSwitchCase="true">
                         <div class="row">
                           <div class="col-sm-3">
                             <button class = "menu" id = "project"><a routerLink="/disease-guang-dong">广州项目</a></button>
-                          </div>
+                            <!-- <div class = "menu" id = "project"><a routerLink="/disease-guang-dong">广州项目</a></div> -->
+                        </div>
                           <div class="col-sm-3">
-                                <button class = "menu" id = "projectItem"><a routerLink="/disease-xi-an">西安项目</a></button>
+                            <!-- <div class = "menu" id = "projectItem"><a routerLink="/disease-xi-an">西安项目</a></div> -->
+                            <button class = "menu" id = "projectItem"><a routerLink="/disease-xi-an">西安项目</a></button>
                           </div>
                           <div class="col-sm-3">
                                 <button class = "menu" id = "qaRobot"><a routerLink="/q-arobot">QA小博士</a></button>
-
+                                <!-- <div class = "menu" id = "qaRobot"><a routerLink="/q-arobot">QA小博士</a></div> -->
                           </div>
                           <div class="col-sm-3">
                                 <button class = "menu" id = "servicePlatform"><a routerLink="/service">服务平台</a></button>
+                                <!-- <div class = "menu" id = "servicePlatform"><a routerLink="/service">服务平台</a></div> -->
                           </div>
                         </div>
                       </div>

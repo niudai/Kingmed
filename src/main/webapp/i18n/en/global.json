@@ -103,7 +103,8 @@
     "entity": {
         "project": {
             "detail": "项目详情",
-            "price": "价格详情"
+            "price": "价格详情",
+            "qarobot": "相关问题"
         },
         "price": {
             "subseries": "子公司系列划分",

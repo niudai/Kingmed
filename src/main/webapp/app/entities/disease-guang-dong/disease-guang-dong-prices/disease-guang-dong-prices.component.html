@@ -33,6 +33,28 @@
                 </tr>
             </thead>
             <tbody>
+                <tr>
+                        <td>{{diseaseGuangDong.subsidiary}}</td>
+                        <td>{{diseaseGuangDong.tollStandard}}</td>
+                        <td>{{diseaseGuangDong.chargeCode}}</td>
+                        <td>{{diseaseGuangDong.reportingTime}}</td>
+                        <td *jhiHasAnyAuthority="'ROLE_ADMIN'" class="text-right">
+                            <div class="btn-group flex-btn-group-container">
+                                <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
+                                    class="btn btn-primary btn-sm disabled">
+                                    <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                                </button>
+                                <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
+                                queryParamsHandling="merge"  class="btn btn-danger btn-sm disabled">
+                                    <fa-icon [icon]="'times'"></fa-icon>
+                                    <span class="d-none d-md-inline " jhiTranslate="entity.action.delete">Delete</span>
+                                </button>
+                                <!-- [routerLink]="[{ outlets: { popup: diseaseGuangDong.id + '/deletePrice' } }]"
+                                    replaceUrl="true" queryParamsHandling="merge" -->
+                            </div>
+                        </td>
+                </tr>
 
                 <!-- <tr *ngFor="let diseaseGuangDong of diseaseGuangDongs ;trackBy: trackId"> -->
                 <tr *ngFor="let price of diseaseGuangDong.prices">

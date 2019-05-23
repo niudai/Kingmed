@@ -1,9 +1,12 @@
 package io.github.jhipster.sample.web.rest;
+
 import io.github.jhipster.sample.domain.DiseaseXiAn;
 import io.github.jhipster.sample.domain.PriceXiAn;
+import io.github.jhipster.sample.domain.QArobot;
 import io.github.jhipster.sample.repository.DiseaseXiAnRepository;
 import io.github.jhipster.sample.repository.PriceXiAnRepository;
 import io.github.jhipster.sample.repository.search.DiseaseXiAnSearchRepository;
+import io.github.jhipster.sample.service.DiseaseXiAnService;
 import io.github.jhipster.sample.web.rest.errors.BadRequestAlertException;
 import io.github.jhipster.sample.web.rest.util.HeaderUtil;
 import io.github.jhipster.sample.web.rest.util.PaginationUtil;
@@ -20,7 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -45,12 +48,16 @@ public class DiseaseXiAnResource {
 
     private final PriceXiAnRepository priceRepository;
 
+    private final DiseaseXiAnService diseaseXiAnService;
+
     public DiseaseXiAnResource(DiseaseXiAnRepository diseaseXiAnRepository
         , DiseaseXiAnSearchRepository diseaseXiAnSearchRepository
-        , PriceXiAnRepository priceXiAnRepository) {
+        , PriceXiAnRepository priceXiAnRepository
+        , DiseaseXiAnService diseaseXiAnService) {
         this.diseaseXiAnRepository = diseaseXiAnRepository;
         this.diseaseXiAnSearchRepository = diseaseXiAnSearchRepository;
         this.priceRepository = priceXiAnRepository;
+        this.diseaseXiAnService = diseaseXiAnService;
     }
 
     /**
@@ -108,6 +115,55 @@ public class DiseaseXiAnResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/disease-xi-ans");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
+
+    /**
+     * Associate a QA with a disease xi an
+     * @param diseaseId
+     * @param qarobotId
+     * @return ok 200
+     */
+    @GetMapping("/disease-xi-ans/associate/{diseaseId}/{qarobotId}")
+    public ResponseEntity<Void> associate(@PathVariable Long diseaseId
+        , @PathVariable Long qarobotId) {
+
+        diseaseXiAnService.associate(diseaseId, qarobotId);
+        return ResponseEntity.ok().build();
+    }
+
+    /**
+     * De associate a QA with a disease xi an
+     * @param diseaseId
+     * @param qarobotId
+     * @return ok 200
+     */
+    @GetMapping("/disease-xi-ans/deassociate/{diseaseId}/{qarobotId}")
+    public ResponseEntity<Void> deassociate(@PathVariable Long diseaseId
+        , @PathVariable Long qarobotId) {
+
+        diseaseXiAnService.deassociate(diseaseId, qarobotId);
+        return ResponseEntity.ok().build();
+    }
+
+    /**
+     * get associated qarobots of disease
+     * @param id id of disease
+     * @return ok 200
+     */
+    @GetMapping("/disease-xi-ans/getQArobotsOfDisease/{id}")
+    public ResponseEntity<Collection<QArobot>> getQArobotsOfDisease(@PathVariable Long id) {
+        return ResponseEntity.ok().body(diseaseXiAnService.findQArobotsOfDiseaseXiAn(id));
+    }
+
+    /**
+     * get associated disease of qarobot
+     * @param id id of qarobot
+     * @return ok 200
+     */
+    @GetMapping("/disease-xi-ans/getDiseasesOfQArobot/{id}")
+    public ResponseEntity<Collection<DiseaseXiAn>> getPublishersOfBook(@PathVariable Long id) {
+        return ResponseEntity.ok().body(diseaseXiAnService.findDiseaseXiAnsOfQArobot(id));
+    }
+
 
     /**
      * GET  /disease-xi-ans/:id : get the "id" diseaseXiAn.

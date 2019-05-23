@@ -139,7 +139,7 @@
                     </dl>
                 </dd>
                 <dt (click)="diseaseAboutIsOpenToggle()" class="dropdown-toggle">
-                    <fa-icon class="icon-5" [icon]="'circle'"></fa-icon><span>疾病险相关</span>
+                    <fa-icon class="icon-5" [icon]="'circle'"></fa-icon><span>疾病线相关</span>
                 </dt>
                 <dd *ngIf="diseaseAboutIsOpen">
                     <dl>
@@ -158,7 +158,7 @@
                                 <dd>
                                     <span>{{diseaseXiAn.series}}</span>
                                 </dd>
-                                <dt class="subItem" (click)="subSeriesIsOpenToggle()">
+                                <dt class="subItem">
                                     <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
                                         jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.subSeries">Sub
                                         Series</span><span> : {{ currentSubseries }}</span>
@@ -193,6 +193,10 @@
 
             <button class="btn btn-info" [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'prices']">
                 <fa-icon [icon]="'dollar-sign'"></fa-icon>&nbsp;<span jhiTranslate="entity.project.price">价格详情</span>
+            </button>
+
+            <button class="btn btn-success" [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'qarobots']">
+                <fa-icon [icon]="'dollar-sign'"></fa-icon>&nbsp;<span jhiTranslate="entity.project.qarobot">价格详情</span>
             </button>
 
             <button type="submit" (click)="previousState()" class="btn btn-info">

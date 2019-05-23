@@ -22,9 +22,9 @@ logging:
 spring:
     servlet:
         multipart:
-            file-size-threshold: 5MB
-            max-file-size: 5MB
-            max-request-size: 5MB
+            file-size-threshold: 10MB
+            max-file-size: 10MB
+            max-request-size: 10MB
     profiles:
         active: dev
         include:
@@ -51,6 +51,8 @@ spring:
             auto-commit: false
     h2:
         console:
+            settings:
+                web-allow-others: true
             enabled: true
     jpa:
         database-platform: io.github.jhipster.domain.util.FixedH2Dialect

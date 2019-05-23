@@ -13,6 +13,7 @@ import {
     qArobotRoute,
     qArobotPopupRoute
 } from './';
+import { QArobotDiseaseComponent } from './q-arobot-disease/q-arobot-disease.component';
 
 const ENTITY_STATES = [...qArobotRoute, ...qArobotPopupRoute];
 
@@ -23,7 +24,8 @@ const ENTITY_STATES = [...qArobotRoute, ...qArobotPopupRoute];
         QArobotDetailComponent,
         QArobotUpdateComponent,
         QArobotDeleteDialogComponent,
-        QArobotDeletePopupComponent
+        QArobotDeletePopupComponent,
+        QArobotDiseaseComponent
     ],
     entryComponents: [QArobotComponent, QArobotUpdateComponent, QArobotDeleteDialogComponent, QArobotDeletePopupComponent],
     providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }],

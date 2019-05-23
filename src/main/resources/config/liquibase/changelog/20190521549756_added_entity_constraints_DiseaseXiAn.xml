@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Operation.
+    -->
+    <changeSet id="20150805215054-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="disease_xi_an_id"
+                                 baseTableName="disease_xi_an_q_arobot"
+                                 constraintName="fk_disease_xi_an_q_arobot_q_disease_xi_an_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="disease_xi_an"/>
+        <addForeignKeyConstraint baseColumnNames="q_arobot_id"
+                                 baseTableName="disease_xi_an_q_arobot"
+                                 constraintName="fk_disease_xi_an_q_arobot_q_arobot_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="q_arobot"/>
+
+    </changeSet>
+</databaseChangeLog>

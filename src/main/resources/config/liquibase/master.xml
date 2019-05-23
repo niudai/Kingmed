@@ -20,5 +20,6 @@
     <include file="config/liquibase/changelog/20190507524565_added_column_to_Prices.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190511105255_added_entity_PriceXiAn.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190506030028_added_entity_constraints_PriceXiAn.xml" relativeToChangelogFile="false"/>
-
+    <include file="config/liquibase/changelog/20190521564563_added_entity_DiseaseXiAn_QArobot.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190521549756_added_entity_constraints_DiseaseXiAn.xml" relativeToChangelogFile="false"/>
 </databaseChangeLog>

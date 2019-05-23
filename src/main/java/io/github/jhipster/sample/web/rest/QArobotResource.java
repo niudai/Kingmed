@@ -1,7 +1,11 @@
 package io.github.jhipster.sample.web.rest;
+
+import io.github.jhipster.sample.domain.DiseaseXiAn;
 import io.github.jhipster.sample.domain.QArobot;
+import io.github.jhipster.sample.repository.DiseaseXiAnRepository;
 import io.github.jhipster.sample.repository.QArobotRepository;
 import io.github.jhipster.sample.repository.search.QArobotSearchRepository;
+import io.github.jhipster.sample.service.DiseaseXiAnService;
 import io.github.jhipster.sample.web.rest.errors.BadRequestAlertException;
 import io.github.jhipster.sample.web.rest.util.HeaderUtil;
 import io.github.jhipster.sample.web.rest.util.PaginationUtil;
@@ -18,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -41,9 +45,14 @@ public class QArobotResource {
 
     private final QArobotSearchRepository qArobotSearchRepository;
 
-    public QArobotResource(QArobotRepository qArobotRepository, QArobotSearchRepository qArobotSearchRepository) {
+    private final DiseaseXiAnService diseaseXiAnService;
+
+    public QArobotResource(QArobotRepository qArobotRepository
+        , QArobotSearchRepository qArobotSearchRepository
+        , DiseaseXiAnService diseaseXiAnService) {
         this.qArobotRepository = qArobotRepository;
         this.qArobotSearchRepository = qArobotSearchRepository;
+        this.diseaseXiAnService = diseaseXiAnService;
     }
 
     /**
@@ -112,6 +121,16 @@ public class QArobotResource {
         Page<QArobot> page = qArobotRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/q-arobots");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
+     * GET /q-arobots/getDiseasesOfQArobot/{id} : get diseases of QA.
+     * @param id id of QArobot
+     * @return ok 200
+     */
+    @GetMapping("/q-arobots/getDiseasesOfQArobot/{id}")
+    public ResponseEntity<Collection<DiseaseXiAn>> getDiseasesOfQArobot(@PathVariable Long id) {
+        return ResponseEntity.ok().body(diseaseXiAnService.findDiseaseXiAnsOfQArobot(id));
     }
 
     /**
