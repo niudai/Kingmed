@@ -1,4 +1,3 @@
-import { IFile } from './../shared/model/file.model';
 import { HttpClient, HttpResponse, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { SERVER_API_URL } from 'app/app.constants';
 
@@ -7,13 +6,15 @@ import { throwError, Observable } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { IImage } from 'app/shared/model/image.model';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { IFile } from 'app/shared/model/file.model';
 
 @Component({
-    selector: 'jhi-service',
-    templateUrl: './service.component.html',
-    styleUrls: ['service.component.css']
+  selector: 'jhi-service-application',
+  templateUrl: './service-application.component.html',
+  styles: []
 })
-export class ServiceComponent implements OnInit {
+export class ServiceApplicationComponent implements OnInit {
+
     // url for plain images.
     public resourceUrl = SERVER_API_URL + 'api/images';
 

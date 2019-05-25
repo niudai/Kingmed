@@ -1,17 +1,15 @@
-import { ServiceComponent } from './service.component';
-import { Route, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { UserRouteAccessService } from 'app/core';
+import { ServicePlatformComponent } from './service-platform.component';
 
-export const SERIVCE_ROUTE: Routes = [
-
+export const servicePlatformRoute: Routes = [
     {
-        path: 'service',
-        component: ServiceComponent,
+        path: '',
+        component: ServicePlatformComponent,
         data: {
             authorities: ['ROLE_USER'],
             pageTitle: 'jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.home.title'
         },
         canActivate: [UserRouteAccessService]
-    },
-
+    }
 ];

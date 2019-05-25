@@ -1,27 +1,25 @@
-<div class="main">
-    <button [routerLink]="['/']" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-q-arobot">
+<div class="container col-md-12">
+        <div class="row">
+          <div class="col-sm-3">
+            <button class = "menu" id = "service_platform" routerLink="/service-platform"></button>
+            <button class = "menu_title"><span>服务平台</span></button>
+        </div>
+          <div class="col-sm-3">
+              <button class = "menu" id = "service_application" routerLink="/service-application"></button>
+              <button class = "menu_title"><span>申请模板</span></button>
+          </div>
+          <div class="col-sm-3">
+              <button class = "menu" id = "service_supplies" routerLink="/service-supplies"></button>
+              <button class = "menu_title"><span>耗材图片</span></button>
+          </div>
+        </div>
+</div>
+<div>
+        <button routerLink="/" id="jh-create-entity"
+        class="btn btn-primary float-right jh-create-entity create-disease-guang-dong">
         <fa-icon [icon]="'arrow-left'"></fa-icon>
         <span class="hidden-sm-down" jhiTranslate="global.navigation.back">
-            返回主页
+            返回
         </span>
-    </button>
-
-    <!-- Showing all the images uploaded -->
-    <span *ngFor="let image of images">
-        <img class = "hipster" src="{{image.path}}">
-            <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit" class="btn btn-danger" (click)="confirmDelete(image.name)">
-                <fa-icon [icon]="'times'"></fa-icon>
-                <span jhiTranlate="entity.action.delete">删除</span>
-            </button>
-    </span>
-
-    <!-- Showing the upload button -->
-    <form *jhiHasAnyAuthority="'ROLE_ADMIN'" [formGroup]="fileForm" (ngSubmit)="onSubmit()" name="uploadForm">
-        <label>
-            <input type="file" formControlName="image" value="上传图片" (change)="onFileChange($event)">
-        </label>
-        <button class="btn btn-primary" type="submit" [disabled]="!fileForm.valid">
-            <fa-icon [icon]="'save'"></fa-icon><span jhiTranslate="entity.action.upload">upload</span>
         </button>
-    </form>
 </div>

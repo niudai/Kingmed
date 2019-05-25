@@ -29,7 +29,11 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import io.github.jhipster.sample.domain.Image;
+import io.github.jhipster.sample.domain.ImageApplication;
+import io.github.jhipster.sample.domain.ImagePlatform;
 import io.github.jhipster.sample.service.StorageService;
+import io.github.jhipster.sample.service.image.ImageApplicationService;
+import io.github.jhipster.sample.service.image.ImageService;
 import io.github.jhipster.sample.web.rest.errors.StorageFileNotFoundException;
 
 /**
@@ -41,12 +45,62 @@ public class ImageUploadController {
 
     private final Logger log = LoggerFactory.getLogger(ImageUploadController.class);
 
-    private final StorageService storageService;
+    private final ImageService storageService;
+
+    private final ImageApplicationService imageApplicationService;
 
     @Autowired
-    public ImageUploadController(StorageService storageService) {
+    public ImageUploadController(ImageService storageService
+        , ImageApplicationService imageApplicationService) {
         this.storageService = storageService;
+        this.imageApplicationService = imageApplicationService;
     }
+
+    /*********************************** Application Files Method Mapping ************************** */
+
+     /**
+     * GET /images/:filename get image with name :filename.
+     */
+    @GetMapping("/images/application/{id}")
+    public ResponseEntity<Resource> serveApplication(@PathVariable Long id) {
+
+        Resource file = imageApplicationService.loadAsResource(id);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
+                .body(file);
+    }
+
+     /**
+     * DELETE /images/:filename get image with name :filename.
+     */
+    @DeleteMapping("/images/application/{id}")
+    public ResponseEntity<Resource> deleteApplication(@PathVariable Long id) {
+        imageApplicationService.delete(id);
+        return ResponseEntity.ok().build();
+    }
+
+    /**
+     * POST /api/images/ : upload a new image
+     * @param image to be uploaded which is multipart file
+     * @return responsebody with 200.
+     */
+    @PostMapping("/images/application")
+    public ResponseEntity<Resource> handleApplicationUpload(@RequestParam("image") MultipartFile file) {
+        imageApplicationService.store(file);
+        return ResponseEntity.ok().build();
+    }
+
+    /**
+     * GET /images/application : get all applications
+     * @return
+     */
+    @GetMapping("/images/application")
+    public List<ImageApplication> listUploadedApplications() {
+        return imageApplicationService.loadAll();
+    }
+
+    /************************************* Plain Images Upload Mapping *******************************************/
+
 
     /**
      * DELETE /images/:filename delete image with name :filename.

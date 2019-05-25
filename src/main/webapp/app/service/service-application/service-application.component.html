@@ -1,0 +1,28 @@
+<div class="main">
+        <button [routerLink]="['/']" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-q-arobot">
+            <fa-icon [icon]="'arrow-left'"></fa-icon>
+            <span class="hidden-sm-down" jhiTranslate="global.navigation.back">
+                返回主页
+            </span>
+        </button>
+            <!-- Showing all the applications uploaded -->
+            <span *ngFor="let application of applications">
+                    <img class = "hipster" [src]="[applicationUrl + '/' + application.id]">
+            </span>
+
+                <div class="card">
+                        <div class="card-body">
+                          <h4 class="card-title">申请单上传</h4>
+                          <form *jhiHasAnyAuthority="'ROLE_ADMIN'" [formGroup]="fileForm" (ngSubmit)="onApplicationSubmit()" name="uploadForm">
+                                <label>
+                                    <input type="file" formControlName="image" value="上传图片" (change)="onFileChange($event)">
+                                </label>
+                                <button class="btn btn-primary" type="submit" [disabled]="!fileForm.valid">
+                                    <fa-icon [icon]="'save'"></fa-icon><span jhiTranslate="entity.action.upload">upload</span>
+                                </button>
+                            </form>
+                        </div>
+                </div>
+
+
+    </div>

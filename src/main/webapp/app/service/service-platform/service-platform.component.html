@@ -1,0 +1,33 @@
+<div class="main container col-sm-12">
+        <button [routerLink]="['/']" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-q-arobot">
+            <fa-icon [icon]="'arrow-left'"></fa-icon>
+            <span class="hidden-sm-down" jhiTranslate="global.navigation.back">
+                返回主页
+            </span>
+        </button>
+
+        <!-- Showing all the images uploaded -->
+        <span *ngFor = "let image of images">
+            <img class = "hipster" src="{{image.path}}">
+                <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit" class="btn btn-danger" (click)="confirmDelete(image.name)">
+                    <fa-icon [icon]="'times'"></fa-icon>
+                    <span jhiTranlate="entity.action.delete">删除</span>
+                </button>
+        </span>
+
+        <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">服务平台图片上传</h4>
+                  <form *jhiHasAnyAuthority="'ROLE_ADMIN'" [formGroup]="fileForm" (ngSubmit)="onSubmit()" name="uploadForm">
+                        <label>
+                            <input type="file" formControlName="image" value="上传图片" (change)="onFileChange($event)">
+                        </label>
+                        <button class="btn btn-primary" type="submit" [disabled]="!fileForm.valid">
+                            <fa-icon [icon]="'save'"></fa-icon><span jhiTranslate="entity.action.upload">upload</span>
+                        </button>
+                    </form>
+                </div>
+        </div>
+        <!-- Showing the upload button -->
+
+    </div>

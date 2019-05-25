@@ -13,7 +13,8 @@ import { DiseaseXiAnService } from './disease-xi-an.service';
 
 @Component({
     selector: 'jhi-disease-xi-an',
-    templateUrl: './disease-xi-an.component.html'
+    templateUrl: './disease-xi-an.component.html',
+    styleUrls: ['./disease-xi-an.component.css']
 })
 export class DiseaseXiAnComponent implements OnInit, OnDestroy {
     currentAccount: any;

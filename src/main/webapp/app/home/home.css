@@ -1,6 +1,18 @@
 /* ==========================================================================
 Main page styles
 ========================================================================== */
+button {
+    margin: 0;
+    padding: 0;
+}
+
+.card-img-top {
+    /* height: 220px; */
+}
+
+.card {
+    cursor: pointer;
+}
 
 a {
     color: rgb(255, 255, 255);
@@ -14,7 +26,24 @@ a:active {
     color: rgb(195, 245, 245);
 }
 
+.menu:hover {
+    cursor: pointer;
+}
+
+.menu_title {
+    background-color: #c5cacf;
+    width: 100%;
+    height: 30px;
+    border: none;
+    border-width: 0;
+    border-style: none;
+    border-radius: 0;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
 .menu {
+    border-width: 0;
     width: 100%;
     height: 100px;
     text-align: center;
