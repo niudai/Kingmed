@@ -48,7 +48,8 @@ import {
     faQuestion,
     faLightbulb,
     faInfo,
-    faHospital
+    faHospital,
+    faDownload
 } from '@fortawesome/free-solid-svg-icons';
 
 // Adds the SVG icon to the library so you can use it in your page
@@ -95,5 +96,6 @@ library.add(faQuestion);
 library.add(faLightbulb);
 library.add(faInfo);
 library.add(faHospital);
+library.add(faDownload);
 
 // jhipster-needle-add-element-to-vendor - JHipster will add new menu items here

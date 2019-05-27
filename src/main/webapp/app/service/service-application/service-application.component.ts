@@ -25,12 +25,10 @@ export class ServiceApplicationComponent implements OnInit {
 
     file: any;
     applications: IFile[];
-    images: IImage[];
     nameOfImages: string[];
 
     constructor(protected http: HttpClient,
             private formBuilder: FormBuilder) {
-        this.getImages();
         this.getApplications();
     }
 
@@ -46,13 +44,6 @@ export class ServiceApplicationComponent implements OnInit {
         return this.http.post<any>(`${this.applicationUrl}`, file);
     }
 
-    // get all plain images path and name
-    getImages(): Observable<HttpResponse<IImage[]>> {
-        this.http.get<IImage[]>(this.resourceUrl)
-            .subscribe(res => this.images = res);
-        return;
-    }
-
     // get all applications name and path
     getApplications(): Observable<HttpResponse<IFile[]>> {
         this.http.get<IFile[]>(this.applicationUrl)
@@ -62,7 +53,7 @@ export class ServiceApplicationComponent implements OnInit {
 
     confirmDelete(filename: string) {
         this.delete(filename).subscribe(
-            any => this.getImages()
+            any => this.getApplications()
         );
     }
 
@@ -77,7 +68,7 @@ export class ServiceApplicationComponent implements OnInit {
         const formData = new FormData();
         formData.append('image', this.fileForm.get('image').value);
         this.upload(formData).subscribe(
-            any => this.getImages()
+            any => this.getApplications()
         );
     }
 
@@ -85,7 +76,7 @@ export class ServiceApplicationComponent implements OnInit {
         const formData = new FormData();
         formData.append('image', this.fileForm.get('image').value);
         this.applicationUpload(formData).subscribe(
-            any => this.getImages()
+            any => this.getApplications()
         );
     }
 

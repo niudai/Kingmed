@@ -48,7 +48,7 @@ public class ImageApplicationService {
         this.rootLocation = Paths.get(properties.getImageApplicationLocation());
     }
 
-    public void store(MultipartFile file) {
+    public Long store(MultipartFile file, String name) {
         ImageApplication image = new ImageApplication();
 
         String filename = StringUtils.cleanPath(file.getOriginalFilename());
@@ -57,6 +57,7 @@ public class ImageApplicationService {
         Long generatedId = imageApplicationRepository.save(image).getId();
         image.setPath(
             generatedId.toString() + '.' + extension);
+        image.setName(name);
         try {
             if (file.isEmpty()) {
                 throw new StorageException("Failed to store empty file " + filename);
@@ -77,7 +78,7 @@ public class ImageApplicationService {
         catch (IOException e) {
             throw new StorageException("Failed to store file " + filename, e);
         }
-        imageApplicationRepository.save(image);
+        return imageApplicationRepository.save(image).getId();
     }
 
     /**

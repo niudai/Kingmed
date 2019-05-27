@@ -1,0 +1,12 @@
+<div class = "container col-sm-12">
+        <button class = "btn btn-primary" (click)="previousState()">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>返回</button>
+                <button class = "btn btn-primary">
+                        <fa-icon [icon]="'download'"></fa-icon>
+                    <a [href] = "[applicationUrl + '/' + id]">下载</a>
+                </button>
+        <div class = "row">
+                <img [src] = "[applicationUrl + '/' + id]" (click)="downLoad()" class = "application col-sm-12">
+        </div>
+</div>
+

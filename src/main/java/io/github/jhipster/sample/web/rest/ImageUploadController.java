@@ -97,8 +97,8 @@ public class ImageUploadController {
      * @return responsebody with 200.
      */
     @PostMapping("/images/application")
-    public ResponseEntity<Resource> handleApplicationUpload(@RequestParam("image") MultipartFile file) {
-        imageApplicationService.store(file);
+    public ResponseEntity<Resource> handleApplicationUpload(@RequestParam("image") MultipartFile file, @RequestParam("name") String name) {
+        imageApplicationService.store(file, name);
         return ResponseEntity.ok().build();
     }
 
