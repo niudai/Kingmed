@@ -11,7 +11,7 @@ import { IFile } from 'app/shared/model/file.model';
 @Component({
   selector: 'jhi-service-application',
   templateUrl: './service-application.component.html',
-  styles: []
+  styleUrls: ['./service-application.component.css']
 })
 export class ServiceApplicationComponent implements OnInit {
 

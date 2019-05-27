@@ -80,6 +80,18 @@ public class ImageUploadController {
     }
 
     /**
+     * GET /images/application/{id}/{name} : update the name of application
+     * @param id id of application.
+     * @param name name of application.
+     * @return 200 if ok.
+     */
+    @GetMapping("/images/application/{id}/{name}")
+    public ResponseEntity<Resource> updateApplication(@PathVariable Long id, @PathVariable String name) {
+        imageApplicationService.update(id, name);
+        return ResponseEntity.ok().build();
+    }
+
+    /**
      * POST /api/images/ : upload a new image
      * @param image to be uploaded which is multipart file
      * @return responsebody with 200.

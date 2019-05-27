@@ -80,6 +80,20 @@ public class ImageApplicationService {
         imageApplicationRepository.save(image);
     }
 
+    /**
+     * Method to rename an application.
+     * @param id
+     * @param name
+     */
+    public void update(Long id, String name) {
+        ImageApplication imageApplication = imageApplicationRepository.findById(id).get();
+        imageApplication.name = name;
+        imageApplicationRepository.save(imageApplication);
+    }
+
+    /**
+     * Load All ImageApplications as a list.
+     */
     public List<ImageApplication> loadAll() {
         return imageApplicationRepository.findAll();
 

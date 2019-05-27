@@ -8,7 +8,7 @@ export const serviceSuppliesRoute: Routes = [
         component: ServiceSuppliesComponent,
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.home.title'
+            pageTitle: 'service.supplies'
         },
         canActivate: [UserRouteAccessService]
     }

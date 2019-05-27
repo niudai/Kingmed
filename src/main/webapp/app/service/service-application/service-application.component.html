@@ -8,6 +8,7 @@
             <!-- Showing all the applications uploaded -->
             <span *ngFor="let application of applications">
                     <img class = "hipster" [src]="[applicationUrl + '/' + application.id]">
+                    <h4><a class = "btn btn-success" [href] = "[applicationUrl + '/' + application.id]">{{application.name}}</a></h4>
             </span>
 
                 <div class="card">

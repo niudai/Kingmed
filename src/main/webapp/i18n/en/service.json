@@ -1,3 +1,7 @@
 {
-
+    "service": {
+        "platform": "服务平台",
+        "application": "申请单",
+        "supplies": "耗材图片"
+    }
 }
