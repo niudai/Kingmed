@@ -1,10 +1,10 @@
 <div class="main">
         <h2 id="page-heading">
                 <span>申请模板</span>
-                <button [routerLink]="['/']" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity">
+                <button (click) = "previousState()" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity">
                     <fa-icon [icon]="'arrow-left'"></fa-icon>
-                    <span class="hidden-sm-down" jhiTranslate="global.navigation.back">
-                        返回主页
+                    <span class="hidden-sm-down">
+                        返回
                     </span>
                 </button>
                 <button *jhiHasAnyAuthority="'ROLE_ADMIN'" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-q-arobot" [routerLink]="['create']">
@@ -28,7 +28,7 @@
                         <tbody>
                         <tr *ngFor="let application of applications">
                             <td *jhiHasAnyAuthority="'ROLE_ADMIN'">{{application.id}}</td>
-                            <td><a [href] = "[applicationUrl + '/' + application.id]">{{application.name}}</a></td>
+                            <td><a [href] = "[service.applicationUrl + '/' + application.id]">{{application.name}}</a></td>
                             <td>
                                 <button class = "btn btn-success" [routerLink]="['view', application.id]"><fa-icon [icon] = "'eye'"></fa-icon></button>
 

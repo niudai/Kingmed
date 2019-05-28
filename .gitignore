@@ -6,6 +6,8 @@
 /src/test/javascript/coverage/
 /application/*
 /images/*
+/supplies/*
+/platform/*
 
 ######################
 # Node

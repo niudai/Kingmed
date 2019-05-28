@@ -1,3 +1,67 @@
-<p>
-  service-supplies works!
-</p>
+<div class="main">
+        <h2 id="page-heading">
+                <span>耗材图片</span>
+                <button (click) = "previousState()" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity">
+                    <fa-icon [icon]="'arrow-left'"></fa-icon>
+                    <span class="hidden-sm-down">
+                        返回
+                    </span>
+                </button>
+                <button *jhiHasAnyAuthority="'ROLE_ADMIN'" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-q-arobot" [routerLink]="['create']">
+                    <fa-icon [icon]="'plus'"></fa-icon>
+                    <span class="hidden-sm-down">
+                    上传新耗材
+                    </span>
+                </button>
+            </h2>
+            <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <!-- <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)"> -->
+                        <tr>
+                        <th *jhiHasAnyAuthority="'ROLE_ADMIN'"><span jhiTranslate="global.field.id">ID</span></th>
+                        <th><span>申请单</span></th>
+                        <th><span>预览</span></th>
+                        <th><span>详细</span></th>
+                        <th><span>编辑</span></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let supplies of suppliess">
+                            <td *jhiHasAnyAuthority="'ROLE_ADMIN'">{{supplies.id}}</td>
+                            <td><a [href] = "[service.suppliesUrl + '/' + supplies.id]">{{supplies.name}}</a>
+                            </td>
+                            <td><img class = "supplies" [src] = "[service.suppliesUrl + '/' + supplies.id]"></td>
+                            <td>
+                                <button class = "btn btn-success" [routerLink]="['view', supplies.id]"><fa-icon [icon] = "'eye'"></fa-icon></button>
+
+                            </td>
+                            <td class="text-right"  *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                                <div class="btn-group flex-btn-group-container">
+                                    <!-- <button type="submit"
+                                            [routerLink]="['/q-arobot', qArobot.id, 'view' ]"
+                                            class="btn btn-info btn-sm">
+                                        <fa-icon [icon]="'eye'"></fa-icon>
+                                        <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                                    </button> -->
+                                    <button type="submit"
+                                            [routerLink]="['update' , supplies.id]"
+                                            class="btn btn-primary btn-sm">
+                                        <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                                        <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                                    </button>
+                                    <button type="submit"
+                                            [routerLink]="['delete' , supplies.id]"
+                                            replaceUrl="true"
+                                            queryParamsHandling="merge"
+                                            class="btn btn-danger btn-sm">
+                                        <fa-icon [icon]="'times'"></fa-icon>
+                                        <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+    </div>
