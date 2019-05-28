@@ -31,9 +31,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import io.github.jhipster.sample.domain.Image;
 import io.github.jhipster.sample.domain.ImageApplication;
 import io.github.jhipster.sample.domain.ImagePlatform;
+import io.github.jhipster.sample.domain.ImageSupplies;
 import io.github.jhipster.sample.service.StorageService;
 import io.github.jhipster.sample.service.image.ImageApplicationService;
+import io.github.jhipster.sample.service.image.ImagePlatformService;
 import io.github.jhipster.sample.service.image.ImageService;
+import io.github.jhipster.sample.service.image.ImageSuppliesService;
 import io.github.jhipster.sample.web.rest.errors.StorageFileNotFoundException;
 
 /**
@@ -49,9 +52,17 @@ public class ImageUploadController {
 
     private final ImageApplicationService imageApplicationService;
 
+    private final ImageSuppliesService imageSuppliesService;
+
+    private final ImagePlatformService imagePlatformService;
+
     @Autowired
     public ImageUploadController(ImageService storageService
-        , ImageApplicationService imageApplicationService) {
+        , ImageApplicationService imageApplicationService
+        , ImageSuppliesService imageSuppliesService
+        , ImagePlatformService imagePlatformService) {
+        this.imagePlatformService = imagePlatformService;
+        this.imageSuppliesService = imageSuppliesService;
         this.storageService = storageService;
         this.imageApplicationService = imageApplicationService;
     }
@@ -109,6 +120,116 @@ public class ImageUploadController {
     @GetMapping("/images/application")
     public List<ImageApplication> listUploadedApplications() {
         return imageApplicationService.loadAll();
+    }
+
+    /*********************************** Supplies Files Method Mapping ************************** */
+
+     /**
+     * GET /images/:filename get image with name :filename.
+     */
+    @GetMapping("/images/supplies/{id}")
+    public ResponseEntity<Resource> serveSupplies(@PathVariable Long id) {
+
+        Resource file = imageSuppliesService.loadAsResource(id);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
+                .body(file);
+    }
+
+     /**
+     * DELETE /images/:filename get image with name :filename.
+     */
+    @DeleteMapping("/images/supplies/{id}")
+    public ResponseEntity<Resource> deleteSupplies(@PathVariable Long id) {
+        imageSuppliesService.delete(id);
+        return ResponseEntity.ok().build();
+    }
+
+    /**
+     * GET /images/supplies/{id}/{name} : update the name of supplies
+     * @param id id of supplies.
+     * @param name name of supplies.
+     * @return 200 if ok.
+     */
+    @GetMapping("/images/supplies/{id}/{name}")
+    public ResponseEntity<Resource> updateSupplies(@PathVariable Long id, @PathVariable String name) {
+        imageSuppliesService.update(id, name);
+        return ResponseEntity.ok().build();
+    }
+
+    /**
+     * POST /api/images/ : upload a new image
+     * @param image to be uploaded which is multipart file
+     * @return responsebody with 200.
+     */
+    @PostMapping("/images/supplies")
+    public ResponseEntity<Resource> handleSuppliesUpload(@RequestParam("image") MultipartFile file, @RequestParam("name") String name) {
+        imageSuppliesService.store(file, name);
+        return ResponseEntity.ok().build();
+    }
+
+    /**
+     * GET /images/supplies : get all suppliess
+     * @return
+     */
+    @GetMapping("/images/supplies")
+    public List<ImageSupplies> listUploadedSuppliess() {
+        return imageSuppliesService.loadAll();
+    }
+
+        /*********************************** Platform Files Method Mapping ************************** */
+
+     /**
+     * GET /images/:filename get image with name :filename.
+     */
+    @GetMapping("/images/platform/{id}")
+    public ResponseEntity<Resource> servePlatform(@PathVariable Long id) {
+
+        Resource file = imagePlatformService.loadAsResource(id);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
+                .body(file);
+    }
+
+     /**
+     * DELETE /images/:filename get image with name :filename.
+     */
+    @DeleteMapping("/images/platform/{id}")
+    public ResponseEntity<Resource> deletePlatform(@PathVariable Long id) {
+        imagePlatformService.delete(id);
+        return ResponseEntity.ok().build();
+    }
+
+    /**
+     * GET /images/platform/{id}/{name} : update the name of platform
+     * @param id id of platform.
+     * @param name name of platform.
+     * @return 200 if ok.
+     */
+    @GetMapping("/images/platform/{id}/{name}")
+    public ResponseEntity<Resource> updatePlatform(@PathVariable Long id, @PathVariable String name) {
+        imagePlatformService.update(id, name);
+        return ResponseEntity.ok().build();
+    }
+
+    /**
+     * POST /api/images/ : upload a new image
+     * @param image to be uploaded which is multipart file
+     * @return responsebody with 200.
+     */
+    @PostMapping("/images/platform")
+    public ResponseEntity<Resource> handlePlatformUpload(@RequestParam("image") MultipartFile file, @RequestParam("name") String name) {
+        imagePlatformService.store(file, name);
+        return ResponseEntity.ok().build();
+    }
+
+    /**
+     * GET /images/platform : get all platforms
+     * @return
+     */
+    @GetMapping("/images/platform")
+    public List<ImagePlatform> listUploadedPlatforms() {
+        return imagePlatformService.loadAll();
     }
 
     /************************************* Plain Images Upload Mapping *******************************************/

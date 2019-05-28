@@ -5,8 +5,9 @@
                         <fa-icon [icon]="'download'"></fa-icon>
                     <a [href] = "[applicationUrl + '/' + id]">下载</a>
                 </button>
-        <div class = "row">
-                <img [src] = "[applicationUrl + '/' + id]" (click)="downLoad()" class = "application col-sm-12">
-        </div>
 </div>
+<img [src] = "[applicationUrl + '/' + id]" (click)="downLoad()" class = "application col-sm-12">
+<div class = "alert alert-warning">
+        <strong>pdf文件无法预览!</strong>
+    </div>
 

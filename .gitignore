@@ -4,6 +4,8 @@
 /target/www/**
 /target/*
 /src/test/javascript/coverage/
+/application/*
+/images/*
 
 ######################
 # Node

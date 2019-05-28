@@ -22,4 +22,8 @@ export class ServiceApplicationService {
     delete(id: number): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.applicationUrl}/${id}`);
     }
+
+    update(id: number, name: string): Observable<HttpResponse<any>> {
+        return this.http.get<any>(`${this.applicationUrl}/${id}/${name}`);
+    }
 }

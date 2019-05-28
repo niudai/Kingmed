@@ -1,3 +1,25 @@
-<p>
-  service-application-name works!
-</p>
+<div class="card">
+        <div class="card-body">
+          <h4 class="card-title">申请单上传</h4>
+          <form name="editForm" role="form" novalidate (ngSubmit)="confirmUpdate()" #editForm="ngForm">
+                <div>
+                    <jhi-alert-error></jhi-alert-error>
+                    <div class="form-group" [hidden]="!qArobot.id">
+                        <label>申请单名称</label>
+                        <input type="text" class="form-control" id="id" name="id"
+                            [(ngModel)]="name"/>
+                    </div>
+                </div>
+                <div>
+                    <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="cancel()">
+                        <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                    </button>
+                    <button type="submit" id="save-entity" [disabled]="editForm.form.invalid" class="btn btn-primary">
+                        <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+
+</div>
