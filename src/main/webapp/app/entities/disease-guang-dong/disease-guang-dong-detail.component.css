@@ -1,0 +1,44 @@
+dt {
+    font-size: 22px;
+    margin: 5px;
+}
+
+.subItem {
+    font-size: 20px;
+    margin: 3px;
+    font-weight: 400;
+}
+
+dl {
+    list-style-type: disc;
+}
+
+dd {
+    margin-left: 20px;
+    font-weight: 500;
+}
+
+fa-icon {
+
+    margin-right: 10px;
+}
+
+.icon-1 {
+    color: rgb(250, 253, 72);
+}
+
+.icon-2 {
+    color: rgb(240, 177, 95);
+}
+
+.icon-3 {
+    color: rgb(61, 253, 61);
+}
+
+.icon-4 {
+    color: rgb(253, 61, 189);
+}
+
+.icon-5 {
+    color: rgb(105, 247, 247);
+}

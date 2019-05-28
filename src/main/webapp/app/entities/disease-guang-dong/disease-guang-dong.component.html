@@ -1,18 +1,23 @@
 <div>
     <h2 id="page-heading">
-        <button routerLink="/" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-disease-guang-dong">
+        <button routerLink="/" id="jh-create-entity"
+            class="btn btn-primary float-right jh-create-entity create-disease-guang-dong">
             <fa-icon [icon]="'arrow-left'"></fa-icon>
             <span class="hidden-sm-down" jhiTranslate="global.navigation.back">
                 返回
             </span>
         </button>
-        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-disease-guang-dong" [routerLink]="['/disease-guang-dong/new']">
+        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" id="jh-create-entity"
+            class="btn btn-primary float-right jh-create-entity create-disease-guang-dong"
+            [routerLink]="['/disease-guang-dong/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
-            <span class="hidden-sm-down"  jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.home.createLabel">
+            <span class="hidden-sm-down"
+                jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.home.createLabel">
                 Create new Disease Guang Dong
             </span>
         </button>
-        <span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.home.title">Disease Guang Dongs</span>
+        <span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.home.title">Disease Guang
+            Dongs</span>
 
     </h2>
     <jhi-alert></jhi-alert>
@@ -20,7 +25,9 @@
         <div class="col-sm-12">
             <form name="searchForm" class="form-inline">
                 <div class="input-group w-100 mt-3">
-                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.home.search' | translate }}">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch"
+                        name="currentSearch"
+                        placeholder="{{ 'jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.home.search' | translate }}">
                     <!-- <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
                         <fa-icon [icon]="'trash-alt'"></fa-icon>
                     </button> -->
@@ -31,93 +38,57 @@
             </form>
         </div>
     </div>
-    <br/>
+    <br />
     <div class="table-responsive" *ngIf="diseaseGuangDongs">
         <table class="table table-striped">
             <thead>
-            <!-- <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)"> -->
-            <tr>
-            <!-- <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
-            <th><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <!-- <th><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.subsidiary">Subsidiary</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
-            <th *jhiHasAnyAuthority="'ROLE_ADMIN'"><span>编辑</span></th>
-
-            <!-- <th jhiSortBy="supplement"><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.supplement">Supplement</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="testMethod"><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.testMethod">Test Method</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="sample"><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.sample">Sample</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="roomPreservation"><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.roomPreservation">Room Preservation</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="coldStoragePreservation"><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.coldStoragePreservation">Cold Storage Preservation</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="freezing"><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.freezing">Freezing</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="clinicalApplication"><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.clinicalApplication">Clinical Application</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="tollStandard"><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.tollStandard">Toll Standard</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="reportingTime"><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.reportingTime">Reporting Time</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="remarks"><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.remarks">Remarks</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="chargeCode"><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.chargeCode">Charge Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="classification"><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.classification">Classification</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="applicationUnitType"><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.applicationUnitType">Application Unit Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="series"><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.series">Series</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="projectChangeNotification"><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.projectChangeNotification">Project Change Notification</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="specialInspectionItems"><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.specialInspectionItems">Special Inspection Items</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="stopDeveloping"><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.stopDeveloping">Stop Developing</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="projectConcourse"><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.projectConcourse">Project Concourse</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="testDepartment"><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.testDepartment">Test Department</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="suppliesSeries"><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.suppliesSeries">Supplies Series</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th></th> -->
-            </tr>
+                <!-- <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)"> -->
+                <tr>
+                    <!-- <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
+                    <th><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.name">Name</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <!-- <th><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.subsidiary">Subsidiary</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
+                    <th><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.price">价格</span>
+                    </th>
+                    <th *jhiHasAnyAuthority="'ROLE_ADMIN'"><span>编辑</span></th>
+                </tr>
             </thead>
             <tbody>
 
-            <!-- <tr *ngFor="let diseaseGuangDong of diseaseGuangDongs ;trackBy: trackId"> -->
-            <tr *ngFor="let diseaseGuangDong of diseaseGuangDongs">
-                <!-- <td><a [routerLink]="['/disease-guang-dong', diseaseGuangDong.id, 'view' ]">{{diseaseGuangDong.id}}</a></td> -->
-                <td><a [routerLink]="['/disease-guang-dong', diseaseGuangDong.id, 'view' ]">{{diseaseGuangDong.name}}</a></td>
-                <!-- <td>{{diseaseGuangDong.subsidiary}}</td> -->
-                <td *jhiHasAnyAuthority="'ROLE_ADMIN'" class="text-right">
+                <!-- <tr *ngFor="let diseaseGuangDong of diseaseGuangDongs ;trackBy: trackId"> -->
+                <tr *ngFor="let diseaseGuangDong of diseaseGuangDongs">
+                    <!-- <td><a [routerLink]="['/disease-guang-dong', diseaseGuangDong.id, 'view' ]">{{diseaseGuangDong.id}}</a></td> -->
+                    <td><a
+                            [routerLink]="[diseaseGuangDong.id, 'view' ]">{{diseaseGuangDong.name}}</a>
+                    </td>
+                    <!-- <td>{{diseaseGuangDong.subsidiary}}</td> -->
+                    <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
-                            <!-- <button type="submit"
-                                    [routerLink]="['/disease-guang-dong', diseaseGuangDong.id, 'view' ]"
-                                    class="btn btn-info btn-sm">
-                                <fa-icon [icon]="'eye'"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                            </button> -->
+                                <button [routerLink]="[diseaseGuangDong.id, 'prices']" class="btn btn-primary btn-sm">
+                                        <fa-icon [icon]="'dollar-sign'"></fa-icon>
+                                        <span class="d-none d-md-inline"
+                                        jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.price">价格</span>
+                                </button>
+                        </div>
+                    </td>
+                    <td *jhiHasAnyAuthority="'ROLE_ADMIN'" class="text-right">
+                        <div class="btn-group flex-btn-group-container">
                             <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
-                                    [routerLink]="['/disease-guang-dong', diseaseGuangDong.id, 'edit']"
-                                    class="btn btn-primary btn-sm">
+                                [routerLink]="[diseaseGuangDong.id, 'edit']"
+                                class="btn btn-primary btn-sm">
                                 <fa-icon [icon]="'pencil-alt'"></fa-icon>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                             </button>
                             <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
-                                    [routerLink]="['/', 'disease-guang-dong', { outlets: { popup: diseaseGuangDong.id + '/delete'} }]"
-                                    replaceUrl="true"
-                                    queryParamsHandling="merge"
-                                    class="btn btn-danger btn-sm">
+                                [routerLink]="[{ outlets: { popup: diseaseGuangDong.id + '/delete' } }]"
+                                replaceUrl="true" queryParamsHandling="merge" class="btn btn-danger btn-sm">
                                 <fa-icon [icon]="'times'"></fa-icon>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
                             </button>
-                    </div>
-                </td>
-                <!-- <td>{{diseaseGuangDong.supplement}}</td>
-                <td>{{diseaseGuangDong.testMethod}}</td>
-                <td>{{diseaseGuangDong.sample}}</td>
-                <td>{{diseaseGuangDong.roomPreservation}}</td>
-                <td>{{diseaseGuangDong.coldStoragePreservation}}</td>
-                <td>{{diseaseGuangDong.freezing}}</td>
-                <td>{{diseaseGuangDong.clinicalApplication}}</td>
-                <td>{{diseaseGuangDong.tollStandard}}</td>
-                <td>{{diseaseGuangDong.reportingTime}}</td>
-                <td>{{diseaseGuangDong.remarks}}</td>
-                <td>{{diseaseGuangDong.chargeCode}}</td>
-                <td>{{diseaseGuangDong.classification}}</td>
-                <td>{{diseaseGuangDong.applicationUnitType}}</td>
-                <td>{{diseaseGuangDong.series}}</td>
-                <td>{{diseaseGuangDong.projectChangeNotification}}</td>
-                <td>{{diseaseGuangDong.specialInspectionItems}}</td>
-                <td>{{diseaseGuangDong.stopDeveloping}}</td>
-                <td>{{diseaseGuangDong.projectConcourse}}</td>
-                <td>{{diseaseGuangDong.testDepartment}}</td>
-                <td>{{diseaseGuangDong.suppliesSeries}}</td> -->
-
-            </tr>
+                        </div>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
@@ -127,7 +98,8 @@
             <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
         </div>
         <div class="row justify-content-center">
-            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5"
+                [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
         </div>
     </div>
 </div>

@@ -22,9 +22,9 @@ logging:
 spring:
     servlet:
         multipart:
-            file-size-threshold: 5MB
-            max-file-size: 5MB
-            max-request-size: 5MB
+            file-size-threshold: 10MB
+            max-file-size: 10MB
+            max-request-size: 10MB
     profiles:
         active: dev
         include:
@@ -51,6 +51,8 @@ spring:
             auto-commit: false
     h2:
         console:
+            settings:
+                web-allow-others: true
             enabled: true
     jpa:
         database-platform: io.github.jhipster.domain.util.FixedH2Dialect
@@ -87,7 +89,7 @@ spring:
         cache: false
 
 server:
-    port: 8080
+    port: 80
 
 # ===================================================================
 # JHipster specific properties
@@ -121,7 +123,7 @@ jhipster:
     mail: # specific JHipster mail property, for standard properties see MailProperties
         # from: jhipsterElasticsearchSampleApplication@localhost
         from: kingmed01@outlook.com
-        base-url: http://xiaodaicoding:8080
+        base-url: http://xiaodaicoding
     metrics:
         logs: # Reports metrics in the logs
             enabled: false

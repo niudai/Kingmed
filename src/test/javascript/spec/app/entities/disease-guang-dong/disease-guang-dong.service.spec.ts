@@ -24,7 +24,7 @@ describe('Service Tests', () => {
             elemDefault = new DiseaseGuangDong(
                 0,
                 'AAAAAAA',
-                'AAAAAAA',
+                null,
                 'AAAAAAA',
                 'AAAAAAA',
                 'AAAAAAA',

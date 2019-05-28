@@ -12,6 +12,7 @@ entity Operation {
   description String,
   amount BigDecimal required
 }
+
 entity DiseaseGuangDong {
   name String maxlength(300),
   subsidiary String maxlength(50),
@@ -36,6 +37,7 @@ entity DiseaseGuangDong {
   testDepartment String maxlength(100),
   suppliesSeries String maxlength(100)
 }
+
 relationship OneToMany {
   BankAccount{operation} to Operation{bankAccount(name)}
 }

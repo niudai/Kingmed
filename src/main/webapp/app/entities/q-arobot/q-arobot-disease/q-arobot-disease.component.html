@@ -1,0 +1,33 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.home.title">Q Arobots</span>
+        <button [routerLink]="['/']" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-q-arobot">
+            <fa-icon [icon]="'arrow-left'"></fa-icon>
+            <span class="hidden-sm-down"  jhiTranslate="global.navigation.back">
+            返回主页
+            </span>
+        </button>
+    </h2>
+    <br/>
+    <div class="table-responsive" *ngIf="diseaseXiAns">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>项目名</span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let diseaseXiAn of diseaseXiAns">
+                <td><a [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'view' ]">{{diseaseXiAn.name}}</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <button id="jh-create-entity" (click)="previousState()"
+    class="btn btn-primary float-right jh-create-entity create-disease-xi-an">
+    <fa-icon [icon]="'arrow-left'"></fa-icon>
+    <span class="hidden-sm-down" jhiTranslate="global.navigation.goBack">
+        返回
+    </span>
+    </button>
+</div>

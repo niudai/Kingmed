@@ -1,0 +1,57 @@
+/* ==========================================================================
+Main page styles
+========================================================================== */
+
+a {
+    color: rgb(255, 255, 255);
+}
+
+a:hover {
+    color: rgb(220, 248, 218);
+}
+
+a:active {
+    color: rgb(195, 245, 245);
+}
+
+.menu {
+    margin-top: 20px;
+    width: 100%;
+    height: 100px;
+    text-align: center;
+    border: none;
+    border-style: none;
+    border-radius: 0;
+    background-size: contain;
+}
+
+.menu:hover {
+    cursor: pointer;
+}
+
+.menu_title {
+    background-color: #c5cacf;
+    width: 100%;
+    height: 30px;
+    border: none;
+    border-style: none;
+    border-radius: 0;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+#service_platform {
+    background-image: url("../../content/images/service_platform.png");
+}
+
+#service_application {
+    background-image: url("../../content/images/service_application.png");
+    padding: 0%;
+}
+
+#service_supplies {
+    background-image: url("../../content/images/service_supplies.png");
+}
+
+
+

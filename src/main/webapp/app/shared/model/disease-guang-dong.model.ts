@@ -1,6 +1,8 @@
+import { IPrice } from './price.model';
 export interface IDiseaseGuangDong {
     id?: number;
     name?: string;
+    prices?: IPrice[];
     subsidiary?: string;
     supplement?: string;
     testMethod?: string;
@@ -28,6 +30,7 @@ export class DiseaseGuangDong implements IDiseaseGuangDong {
     constructor(
         public id?: number,
         public name?: string,
+        public prices?: IPrice[],
         public subsidiary?: string,
         public supplement?: string,
         public testMethod?: string,

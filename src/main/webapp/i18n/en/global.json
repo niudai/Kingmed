@@ -1,7 +1,8 @@
 {
     "global": {
         "navigation": {
-            "back": "返回主页"
+            "back": "返回主页",
+            "goBack": "返回"
         },
         "title": "金域检验中心",
         "browsehappy":
@@ -16,6 +17,7 @@
                 "operation": "Operation",
                 "diseaseGuangDong": "检验知识库 - 广东",
                 "qArobot": "QA 小博士",
+                "diseaseXiAn": "Disease Xi An",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
@@ -99,6 +101,18 @@
         "item-count": "Showing {{first}} - {{second}} of {{total}} items."
     },
     "entity": {
+        "project": {
+            "detail": "项目详情",
+            "price": "价格详情",
+            "qarobot": "相关问题"
+        },
+        "price": {
+            "subseries": "子公司系列划分",
+            "tollStandard": "标准收费",
+            "reportingTime" : "出报告时间",
+            "chargeCode": "物价编码",
+            "subsidiary": "子公司"
+        },
         "action": {
             "addblob": "Add blob",
             "addimage": "添加图像",
