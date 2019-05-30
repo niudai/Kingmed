@@ -42,14 +42,16 @@ export class DiseaseGuangDongDeleteDialogComponent {
 export class DiseaseGuangDongDeletePopupComponent implements OnInit, OnDestroy {
     protected ngbModalRef: NgbModalRef;
 
-    constructor(protected activatedRoute: ActivatedRoute, protected router: Router, protected modalService: NgbModal) {}
+    constructor(protected activatedRoute: ActivatedRoute
+        , protected router: Router
+        , protected modalService: NgbModal) {}
 
     ngOnInit() {
         this.activatedRoute.data.subscribe(({ diseaseGuangDong }) => {
             setTimeout(() => {
                 this.ngbModalRef = this.modalService.open(DiseaseGuangDongDeleteDialogComponent as Component, {
                     size: 'lg',
-                    backdrop: 'static'
+                    backdrop: true
                 });
                 this.ngbModalRef.componentInstance.diseaseGuangDong = diseaseGuangDong;
                 this.ngbModalRef.result.then(

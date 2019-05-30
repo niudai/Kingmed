@@ -1,0 +1,8 @@
+img {
+    object-fit: cover;
+    display: inline-block;
+    width: 300px;
+    height: 450px;
+    /* background: url('../../content/images/1.jpg') no-repeat center top;
+    background-size: contain; */
+}

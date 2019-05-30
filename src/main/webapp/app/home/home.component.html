@@ -1,30 +1,87 @@
 <div class="row main">
-        <!-- <div class="col-md-3">
+    <!-- <div class="col-md-3">
             <span class="hipster img-fluid rounded"></span>
         </div> -->
-        <div class="col-md-9">
-            <h3 class="display-7 title">你好, 这里是金域医学检验中心!</h3>
-            <div [ngSwitch]="isAuthenticated()">
-                <div class="alert alert-success" *ngSwitchCase="true">
-                    <span id="home-logged-message" *ngIf="account">你好, "{{account.login}}". </span>
-                </div>
-                <div class = "context" *ngSwitchCase="true">
-                    <button class = "menu" id = "project"><a routerLink="/disease-guang-dong">广州项目</a></button>
-                    <button class = "menu" id = "qaRobot"><a routerLink="/q-arobot">QA小博士</a></button>
-                    <button class = "menu" id = "servicePlatform"><a routerLink="/service">服务平台</a></button>
-                    <button class = "menu" id = "projectItem"><a routerLink="/knowledge/project-items">项目清单</a></button>
-                </div>
-                <div class="alert alert-warning" *ngSwitchCase="false">
-                    <span>如果你是公司员工, 可以直接 </span>
-                    <a class="alert-link" (click)="login()">登陆</a>
-                </div>
-                <div class="alert alert-warning" *ngSwitchCase="false">
-                    <span>没有账户?</span>&nbsp;
-                    <a class="alert-link" routerLink="register">你可以注册一个新账户</a>
-                </div>
+    <div class="col-md-12">
+        <!-- <video class="a-j" autoplay="autoplay" loop="loop" muted="muted" style="height: 911px;">
+                    <source src="../../content/images/zy68.mp4" type="video/mp4">
+            </video> -->
+        <h3 class="display-7 title">你好, 这里是金域医学检验中心!</h3>
+        <div [ngSwitch]="isAuthenticated()">
+            <div class="alert alert-success" *ngSwitchCase="true">
+                <span id="home-logged-message" *ngIf="account">你好, "{{account.login}}". </span>
             </div>
+            <!-- <ul class="container col-md-12" *ngSwitchCase="true">
+                    <div class = "col-sm-3">
+                            <li class = "menu">
+                                    <a routerLink="/disease-guang-dong">
+                                        <div class = "project">
 
-            <!--
+                                        </div>
+                                        <div class="b-d">报告查询</div>
+                                    </a>
+                                </li>
+                    </div>
+
+                    <li class = "menu projectItem col-sm-3">
+
+                    </li>
+                    <li class = "menu qaRobot col-sm-3">
+
+                    </li>
+                    <li class = "menu servicePlatform col-sm-3">
+
+                    </li>
+                </ul> -->
+            <div class="container col-md-12" *ngSwitchCase="true">
+                <div class="row">
+                    <div class="card col-sm-3" routerLink="/disease-guang-dong" style="width:400px">
+                        <img class="card-img-top" src="../../content/images/project.jpg" alt="Card image">
+                        <div class="card-body">
+                            <h4 class="card-title">广东项目</h4>
+                            <p class="card-text">位于广州的全套医学检查项目。</p>
+                            <!-- <a routerLink="/disease-guang-dong" class="btn btn-primary stretched-link">进入</a> -->
+                        </div>
+                    </div>
+                    <div class="card col-sm-3" style="width:400px" routerLink="/disease-xi-an">
+                        <img class="card-img-top" src="../../content/images/projectItem.jpg" alt="Card image">
+                        <div class="card-body">
+                            <h4 class="card-title">西安项目</h4>
+                            <p class="card-text">位于西安的全套医学检查项目。</p>
+                            <!-- <a routerLink="/disease-xi-an" class="btn btn-primary stretched-link">进入</a> -->
+                        </div>
+                    </div>
+                    <div class="card col-sm-3" style="width:400px" routerLink="/q-arobot">
+                        <img class="card-img-top" src="../../content/images/qaRobot.jpg" alt="Card image">
+                        <div class="card-body">
+                            <h4 class="card-title">QA小博士</h4>
+                            <p class="card-text">用问答解决疑难。</p>
+                            <!-- <a routerLink="/q-arobot" class="btn btn-primary stretched-link">进入</a> -->
+                        </div>
+                    </div>
+                    <div class="card col-sm-3" style="width:400px" routerLink="/service">
+                        <img class="card-img-top" src="../../content/images/servicePlatform.png" alt="Card image">
+                        <div class="card-body">
+                            <h4 class="card-title">服务平台</h4>
+                            <p class="card-text">全方位信息平台。</p>
+                            <!-- <a routerLink="/service" class="btn btn-primary stretched-link">进入</a> -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="alert alert-warning" *ngSwitchCase="false">
+                <span>如果你是公司员工, 可以直接 </span>
+                <a class="alert-link" (click)="login()">登陆</a>
+            </div>
+            <div class="alert alert-warning" *ngSwitchCase="false">
+                <span>没有账户?</span>&nbsp;
+                <a class="alert-link" routerLink="register">你可以注册一个新账户</a>
+            </div>
+        </div>
+
+
+        <!--
             <p jhiTranslate="home.question">
                 If you have any question on JHipster:
             </p>
@@ -41,5 +98,6 @@
                 <span jhiTranslate="home.like">If you like JHipster, don't forget to give us a star on</span> <a href="https://github.com/jhipster/generator-jhipster" target="_blank" rel="noopener" jhiTranslate="home.github">GitHub</a>!
             </p>
              -->
-        </div>
     </div>
+
+</div>

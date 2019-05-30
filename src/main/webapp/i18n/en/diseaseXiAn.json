@@ -1,0 +1,42 @@
+{
+    "jhipsterElasticsearchSampleApplicationApp": {
+        "diseaseXiAn": {
+            "home": {
+                "title": "西安项目",
+                "createLabel": "创建一个新项目",
+                "createOrEditLabel": "编辑这个项目",
+                "search": "搜索这个项目"
+            },
+            "created": "新项目被创建 {{ param }}",
+            "updated": "项目被更新 {{ param }}",
+            "deleted": "项目已删除 {{ param }}",
+            "delete": {
+                "question": "你确定要删除吗? {{ id }}?"
+            },
+            "detail": {
+                "title": "检验知识库 - 西安"
+            },
+            "id": "项目ID",
+            "subsidiary": "检测子公司",
+            "name": "项目名称",
+            "projectCode": "项目代码",
+            "chargeCode": "物价编码",
+            "tollStandard": "物价",
+            "supplement": "样本与样本量",
+            "sample": "耗材",
+            "tutorial": "分析前培训",
+            "preservation": "保存条件与保存时长",
+            "transportation": "运输要求",
+            "applicationUnitType": "申请单",
+            "applicationRemark": "申请单填写注意事项",
+            "medicalMethod": "检测方法",
+            "projectConcourse": "检测科室",
+            "hurryDepartment": "加急结果派单岗位",
+            "reportingTime": "出结果时间",
+            "clinicalApplication": "临床应用",
+            "series": "集团疾病线分类",
+            "subSeries": "子公司系列划分",
+            "remarks": "备注"
+        }
+    }
+}

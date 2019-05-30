@@ -24,21 +24,21 @@ Navbar
 }
 
 .head {
-    width: 100%;
-    /* background: white; */
-    background: url(http://www.kingmed.com.cn/images/bghead.jpg) repeat-x;
-    padding-bottom: 2rem;
+    /* width: 100%; */
+    background: white;
+    /* background: url(http://www.kingmed.com.cn/images/bghead.jpg) repeat-x; */
+    /* padding-bottom: 2rem; */
 }
 
-.profile-image {
+/* .profile-image {
     height: 2em;
     width: 2em;
-}
+} */
 
 
 .jh-navbar .profile-image {
     margin: -10px 0px;
-    height: 40px;
+    height: 20px;
     width: 40px;
     border-radius: 50%;
 }
@@ -89,7 +89,7 @@ Navbar
 /* ==========================================================================
 Logo styles
 ========================================================================== */
-.navbar-brand.logo {
+/* .navbar-brand.logo {
     padding: 5px 15px;
 }
 
@@ -105,7 +105,7 @@ Logo styles
     display: inline-block;
     vertical-align: middle;
     width: 70px;
-}
+} */
 
 .navbar {
     background-color:white;

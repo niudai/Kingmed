@@ -132,6 +132,7 @@ public class OperationResource {
     public ResponseEntity<Operation> getOperation(@PathVariable Long id) {
         log.debug("REST request to get Operation : {}", id);
         Optional<Operation> operation = operationRepository.findOneWithEagerRelationships(id);
+
         return ResponseUtil.wrapOrNotFound(operation);
     }
 

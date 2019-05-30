@@ -1,6 +1,5 @@
 package io.github.jhipster.sample.domain;
 
-
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -9,7 +8,9 @@ import javax.validation.constraints.*;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A QArobot.
@@ -21,10 +22,23 @@ import java.util.Objects;
 public class QArobot implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToMany(mappedBy = "qarobots"
+        , fetch = FetchType.LAZY
+        , cascade = CascadeType.PERSIST)
+    private Set<DiseaseXiAn> diseaseXiAns = new HashSet<>();
+
+    public Set<DiseaseXiAn> getDiseaseXiAns() {
+        return this.diseaseXiAns;
+    }
+
+    public void setDiseaseXiAns(Set<DiseaseXiAn> diseaseXiAns) {
+        this.diseaseXiAns = diseaseXiAns;
+    }
 
     @Size(max = 30)
     @Column(name = "disease_series", length = 30)
