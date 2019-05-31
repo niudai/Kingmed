@@ -1,12 +1,19 @@
 package io.github.jhipster.sample.domain;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.ManyToAny;
 
 /**
  * Image in Service Platform
@@ -19,6 +26,19 @@ public class ImageApplication {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
+
+    @ManyToMany(mappedBy = "applications"
+        , fetch = FetchType.LAZY
+        , cascade = CascadeType.PERSIST)
+    private Set<DiseaseXiAn> diseaseXiAns = new HashSet<>();
+
+    public Set<DiseaseXiAn> getDiseaseXiAns() {
+        return this.diseaseXiAns;
+    }
+
+    public void setDiseaseXiAns(Set<DiseaseXiAn> diseaseXiAns) {
+        this.diseaseXiAns = diseaseXiAns;
+    }
 
     public String name = "未命名";
 

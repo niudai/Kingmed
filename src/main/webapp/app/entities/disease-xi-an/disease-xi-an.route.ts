@@ -1,3 +1,9 @@
+import { DiseaseXiAnSuppliessDeleteComponent } from './disease-xi-an-suppliess-delete/disease-xi-an-suppliess-delete.component';
+import { DiseaseXiAnApplicationsDeleteComponent } from './disease-xi-an-applications-delete/disease-xi-an-applications-delete.component';
+import { DiseaseXiAnSuppliessUpdateComponent } from './disease-xi-an-suppliess-update/disease-xi-an-suppliess-update.component';
+import { DiseaseXiAnApplicationsUpdateComponent } from './disease-xi-an-applications-update/disease-xi-an-applications-update.component';
+import { DiseaseXiAnSuppliessComponent } from './disease-xi-an-suppliess/disease-xi-an-suppliess.component';
+import { DiseaseXiAnApplicationsComponent } from './disease-xi-an-applications/disease-xi-an-applications.component';
 import { DiseaseXiAnQarobotsUpdateComponent } from './disease-xi-an-qarobots-update/disease-xi-an-qarobots-update.component';
 import { DiseaseXiAnQarobotsDeleteComponent } from './disease-xi-an-qarobots-delete/disease-xi-an-qarobots-delete.component';
 import { QArobot } from 'app/shared/model/q-arobot.model';
@@ -132,6 +138,30 @@ export const diseaseXiAnRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
+        path: ':id/applications',
+        component: DiseaseXiAnApplicationsComponent,
+        resolve: {
+            qarobots: QArobotResolve
+        },
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: ':id/suppliess',
+        component: DiseaseXiAnSuppliessComponent,
+        resolve: {
+            qarobots: QArobotResolve
+        },
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
         path: 'new',
         component: DiseaseXiAnUpdateComponent,
         resolve: {
@@ -156,15 +186,18 @@ export const diseaseXiAnRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'updatePrice/:priceId',
-        component: DiseaseXiAnPricesUpdateComponent,
-        resolve: {
-            price: PriceResolve
-        },
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.home.title'
-        },
+        path: 'newQArobot/:diseaseId',
+        component: DiseaseXiAnQarobotsUpdateComponent,
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'newApplication/:diseaseId',
+        component: DiseaseXiAnApplicationsUpdateComponent,
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'newSupplies/:diseaseId',
+        component: DiseaseXiAnSuppliessUpdateComponent,
         canActivate: [UserRouteAccessService]
     },
     {
@@ -179,8 +212,25 @@ export const diseaseXiAnRoute: Routes = [
 
     },
     {
-        path: 'addQArobot/:diseaseId',
-        component: DiseaseXiAnQarobotsUpdateComponent,
+        path: 'deleteApplication/:diseaseId/:applicationId',
+        component: DiseaseXiAnApplicationsDeleteComponent,
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'deleteSupplies/:diseaseId/:suppliesId',
+        component: DiseaseXiAnSuppliessDeleteComponent,
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'updatePrice/:priceId',
+        component: DiseaseXiAnPricesUpdateComponent,
+        resolve: {
+            price: PriceResolve
+        },
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.home.title'
+        },
         canActivate: [UserRouteAccessService]
     },
     {

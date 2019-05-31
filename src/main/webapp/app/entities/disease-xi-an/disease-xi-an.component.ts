@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -17,6 +17,7 @@ import { DiseaseXiAnService } from './disease-xi-an.service';
     styleUrls: ['./disease-xi-an.component.css']
 })
 export class DiseaseXiAnComponent implements OnInit, OnDestroy {
+    windowWidth: number;
     currentAccount: any;
     diseaseXiAns: IDiseaseXiAn[];
     error: any;
@@ -41,6 +42,7 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
         protected router: Router,
         protected eventManager: JhiEventManager
     ) {
+        this.windowWidth = window.innerWidth;
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
             this.page = data.pagingParams.page;
@@ -52,6 +54,11 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
             this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['search']
                 ? this.activatedRoute.snapshot.params['search']
                 : '';
+    }
+
+    @HostListener('window:resize', ['$event'])
+    onResize(event) {
+        this.windowWidth = window.innerWidth;
     }
 
     loadAll() {

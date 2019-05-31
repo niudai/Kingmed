@@ -49,8 +49,11 @@ import {
     faLightbulb,
     faInfo,
     faHospital,
-    faDownload
+    faDownload,
+    faFileAlt,
+    faMagic
 } from '@fortawesome/free-solid-svg-icons';
+import { literalArr } from '@angular/compiler/src/output/output_ast';
 
 // Adds the SVG icon to the library so you can use it in your page
 library.add(faUser);
@@ -97,5 +100,7 @@ library.add(faLightbulb);
 library.add(faInfo);
 library.add(faHospital);
 library.add(faDownload);
+library.add(faFileAlt);
+library.add(faMagic);
 
 // jhipster-needle-add-element-to-vendor - JHipster will add new menu items here

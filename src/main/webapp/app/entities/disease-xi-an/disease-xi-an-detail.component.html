@@ -4,7 +4,9 @@
             <h2>
                 <fa-icon class="icon-2" [icon]="'book-medical'"></fa-icon>
                 <span>{{diseaseXiAn.name}} - {{diseaseXiAn.subsidiary}} </span>
-
+                <button type="submit" (click)="previousState()" class="btn btn-info">
+                    <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+                </button>
             </h2>
             <hr>
 
@@ -196,16 +198,20 @@
             </button>
 
             <button class="btn btn-success" [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'qarobots']">
-                <fa-icon [icon]="'dollar-sign'"></fa-icon>&nbsp;<span jhiTranslate="entity.project.qarobot">价格详情</span>
+                <fa-icon [icon]="'question'"></fa-icon>&nbsp;<span jhiTranslate="entity.project.qarobot">QA博士</span>
             </button>
 
-            <button type="submit" (click)="previousState()" class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            <button class="btn btn-warning" [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'applications']">
+                <fa-icon [icon]="'file-alt'"></fa-icon>&nbsp;<span>申请单</span>
             </button>
 
-            <button type="button" [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'edit']" class="btn btn-primary">
+            <button class="btn btn-primary" [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'suppliess']">
+                <fa-icon [icon]="'magic'"></fa-icon>&nbsp;<span>耗材图片</span>
+            </button>
+
+            <!-- <button type="button" [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'edit']" class="btn btn-primary">
                 <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
-            </button>
+            </button> -->
         </div>
     </div>
 </div>

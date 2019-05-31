@@ -19,6 +19,12 @@ import { DiseaseXiAnPricesUpdateComponent } from './disease-xi-an-prices-update/
 import { DiseaseXiAnQarobotsComponent } from './disease-xi-an-qarobots/disease-xi-an-qarobots.component';
 import { DiseaseXiAnQarobotsDeleteComponent } from './disease-xi-an-qarobots-delete/disease-xi-an-qarobots-delete.component';
 import { DiseaseXiAnQarobotsUpdateComponent } from './disease-xi-an-qarobots-update/disease-xi-an-qarobots-update.component';
+import { DiseaseXiAnApplicationsComponent } from './disease-xi-an-applications/disease-xi-an-applications.component';
+import { DiseaseXiAnApplicationsDeleteComponent } from './disease-xi-an-applications-delete/disease-xi-an-applications-delete.component';
+import { DiseaseXiAnApplicationsUpdateComponent } from './disease-xi-an-applications-update/disease-xi-an-applications-update.component';
+import { DiseaseXiAnSuppliessComponent } from './disease-xi-an-suppliess/disease-xi-an-suppliess.component';
+import { DiseaseXiAnSuppliessDeleteComponent } from './disease-xi-an-suppliess-delete/disease-xi-an-suppliess-delete.component';
+import { DiseaseXiAnSuppliessUpdateComponent } from './disease-xi-an-suppliess-update/disease-xi-an-suppliess-update.component';
 
 const ENTITY_STATES = [...diseaseXiAnRoute, ...diseaseXiAnPopupRoute];
 
@@ -36,6 +42,12 @@ const ENTITY_STATES = [...diseaseXiAnRoute, ...diseaseXiAnPopupRoute];
         DiseaseXiAnQarobotsComponent,
         DiseaseXiAnQarobotsDeleteComponent,
         DiseaseXiAnQarobotsUpdateComponent,
+        DiseaseXiAnApplicationsComponent,
+        DiseaseXiAnApplicationsDeleteComponent,
+        DiseaseXiAnApplicationsUpdateComponent,
+        DiseaseXiAnSuppliessComponent,
+        DiseaseXiAnSuppliessDeleteComponent,
+        DiseaseXiAnSuppliessUpdateComponent,
     ],
     entryComponents: [DiseaseXiAnComponent, DiseaseXiAnUpdateComponent, DiseaseXiAnDeleteDialogComponent, DiseaseXiAnDeletePopupComponent],
     providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }],

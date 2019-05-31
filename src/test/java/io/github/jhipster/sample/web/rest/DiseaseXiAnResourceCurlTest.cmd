@@ -24,3 +24,6 @@ curl -X PUT  --header "Content-Type: application/json" -d '{"id":10, "tollStanda
 
 REM GET api/disease-xi-ans/getPrice/{id} : get a price
 curl -X GET http://localhost:8080/api/disease-xi-ans/getPrice/12
+
+REM GET api/disease-xi-ans/associateWithApplication/{diseaseId}/{applicationId} : get a price
+curl -X GET http://localhost/api/disease-xi-ans/associateWithApplication/1/1;

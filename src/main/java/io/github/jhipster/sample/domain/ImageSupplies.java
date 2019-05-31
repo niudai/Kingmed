@@ -1,11 +1,16 @@
 package io.github.jhipster.sample.domain;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 /**
@@ -24,7 +29,20 @@ public class ImageSupplies {
 
     public String path = " Default Path ";
 
+    @ManyToMany(mappedBy = "suppliess"
+    , fetch = FetchType.LAZY
+    , cascade = CascadeType.PERSIST)
+    private Set<DiseaseXiAn> diseaseXiAns = new HashSet<>();
+
     public ImageSupplies() {
+    }
+
+    public Set<DiseaseXiAn> getDiseaseXiAns() {
+        return this.diseaseXiAns;
+    }
+
+    public void setDiseaseXiAns(Set<DiseaseXiAn> diseaseXiAns) {
+        this.diseaseXiAns = diseaseXiAns;
     }
 
     public Long getId() {

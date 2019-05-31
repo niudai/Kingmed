@@ -25,7 +25,7 @@ export class ServiceApplicationCreateComponent implements OnInit {
 
     constructor(protected http: HttpClient,
         protected formBuilder: FormBuilder,
-        protected serviceApplicationService: ServiceApplicationService) { }
+        public serviceApplicationService: ServiceApplicationService) { }
 
     ngOnInit() {
         this.fileForm = this.formBuilder.group({

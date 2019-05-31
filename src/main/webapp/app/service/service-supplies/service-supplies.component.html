@@ -24,7 +24,7 @@
                         <th><span>耗材</span></th>
                         <th><span>预览</span></th>
                         <th><span>详细</span></th>
-                        <th><span>编辑</span></th>
+                        <th *jhiHasAnyAuthority="'ROLE_ADMIN'"><span>编辑</span></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -39,12 +39,6 @@
                             </td>
                             <td class="text-right"  *jhiHasAnyAuthority="'ROLE_ADMIN'">
                                 <div class="btn-group flex-btn-group-container">
-                                    <!-- <button type="submit"
-                                            [routerLink]="['/q-arobot', qArobot.id, 'view' ]"
-                                            class="btn btn-info btn-sm">
-                                        <fa-icon [icon]="'eye'"></fa-icon>
-                                        <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                                    </button> -->
                                     <button type="submit"
                                             [routerLink]="['update' , supplies.id]"
                                             class="btn btn-primary btn-sm">

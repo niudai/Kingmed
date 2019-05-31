@@ -14,7 +14,7 @@ export class ServiceSuppliesDeleteComponent implements OnInit {
     public id: number;
     constructor(protected route: ActivatedRoute,
         protected router: Router,
-        protected service: ServiceSuppliesService) {
+        public service: ServiceSuppliesService) {
 
     }
 

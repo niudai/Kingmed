@@ -1,0 +1,51 @@
+<div>
+    <h2 id="page-heading">
+        <button [routerLink]="['/']" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-q-arobot">
+            <fa-icon [icon]="'arrow-left'"></fa-icon>
+            <span class="hidden-sm-down"  jhiTranslate="global.navigation.back">
+            返回主页
+            </span>
+        </button>
+        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-q-arobot" [routerLink]="['/disease-xi-an/newSupplies', diseaseId]">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span class="hidden-sm-down"  >
+             关联一个新耗材
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="suppliess">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>耗材</span></th>
+            <th><span>预览</span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let supplies of suppliess">
+                <td><a [routerLink]="['/service-supplies', 'view', supplies.id  ]">{{supplies.name}}</a></td>
+                <td><img class = "supplies" [src] = "[suppliesService.suppliesUrl + '/' + supplies.id]"></td>
+                <td class="text-right"  *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/disease-xi-an/deleteSupplies', diseaseId, supplies.id]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit" (click)="previousState()" class="btn btn-info">
+        <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+</div>
+

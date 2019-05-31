@@ -1,9 +1,6 @@
+<h1>{{windowWidth}}</h1>
 <div>
     <h2 id="page-heading">
-<<<<<<< HEAD
-        <fa-icon [icon] = "'eye'"></fa-icon>
-=======
->>>>>>> 53b577e819a51a4a9f705980acb662a730736e29
         <button routerLink="/" id="jh-create-entity"
             class="btn btn-primary float-right jh-create-entity create-disease-guang-dong">
             <fa-icon [icon]="'arrow-left'"></fa-icon>
@@ -48,6 +45,8 @@
                     </th>
                     <!-- <th><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.subsidiary">Subsidiary</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
                     <th><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.price">价格</span>
+                    <th><span>申请单</span>
+                    <th *ngIf = "windowWidth > 600"><span>耗材图片</span>
                     <th><span>QA</span>
                     </th>
                     <th *jhiHasAnyAuthority="'ROLE_ADMIN'"><span>编辑</span></th>
@@ -69,6 +68,25 @@
                             </button>
                     </div>
                 </td>
+                <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                                <button [routerLink]="[diseaseXiAn.id, 'applications']" class="btn btn-primary btn-sm">
+                                        <fa-icon class = "dollar-sign" [icon]="'file-alt'"></fa-icon>
+                                        <span class="d-none d-md-inline"
+                                        ></span>
+                                </button>
+                        </div>
+                    </td>
+
+                    <td *ngIf = "windowWidth > 600" class="text-right">
+                            <div class="btn-group flex-btn-group-container">
+                                    <button [routerLink]="[diseaseXiAn.id, 'suppliess']" class="btn btn-primary btn-sm">
+                                            <fa-icon class = "dollar-sign" [icon]="'magic'"></fa-icon>
+                                            <span class="d-none d-md-inline"
+                                            ></span>
+                                    </button>
+                            </div>
+                        </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                             <button [routerLink]="[diseaseXiAn.id, 'qarobots']" class="btn btn-warning btn-sm">

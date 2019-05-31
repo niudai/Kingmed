@@ -22,7 +22,7 @@ export class ServiceSuppliesComponent implements OnInit {
 
     suppliess: IFile[];
 
-    constructor(protected service: ServiceSuppliesService) {
+    constructor(public service: ServiceSuppliesService) {
     }
 
     ngOnInit() {

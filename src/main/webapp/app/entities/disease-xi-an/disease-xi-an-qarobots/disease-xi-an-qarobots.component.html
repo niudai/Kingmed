@@ -7,7 +7,7 @@
                 返回主页
                 </span>
             </button>
-            <button *jhiHasAnyAuthority="'ROLE_ADMIN'" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-q-arobot" [routerLink]="['/disease-xi-an/addQArobot', diseaseId]">
+            <button *jhiHasAnyAuthority="'ROLE_ADMIN'" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-q-arobot" [routerLink]="['/disease-xi-an/newQArobot', diseaseId]">
                 <fa-icon [icon]="'plus'"></fa-icon>
                 <span class="hidden-sm-down"  >
                  关联一个新问题
@@ -15,71 +15,19 @@
             </button>
         </h2>
         <jhi-alert></jhi-alert>
-        <!-- <div class="row">
-            <div class="col-sm-12">
-                <form name="searchForm" class="form-inline">
-                    <div class="input-group w-100 mt-3">
-                        <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'jhipsterElasticsearchSampleApplicationApp.qArobot.home.search' | translate }}">
-                        <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
-                            <fa-icon [icon]="'trash-alt'"></fa-icon>
-                        </button>
-                        <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
-                            <fa-icon [icon]="'search'"></fa-icon>
-                        </button>
-
-                    </div>
-                </form>
-            </div>
-        </div> -->
         <br/>
         <div class="table-responsive" *ngIf="qarobots">
             <table class="table table-striped">
                 <thead>
-                <!-- <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)"> -->
                 <tr>
-                <!-- <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-                <th jhiSortBy="diseaseSeries"><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.diseaseSeries">Disease Series</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-                <th jhiSortBy="projectSeries"><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.projectSeries">Project Series</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-                <th jhiSortBy="level"><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.level">Level</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-                <th jhiSortBy="questionType"><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.questionType">Question Type</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
                 <th><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.question">Question</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-                <!-- <th jhiSortBy="answer"><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.answer">Answer</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-                <th jhiSortBy="updateDate"><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.updateDate">Update Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-                <th jhiSortBy="submitter"><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.submitter">Submitter</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-                <th jhiSortBy="qaSubsidiary"><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.qaSubsidiary">Qa Subsidiary</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-                <th jhiSortBy="specialProcess"><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.specialProcess">Special Process</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-                <th jhiSortBy="qaClass"><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.qaClass">Qa Class</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-                <th></th> -->
                 </tr>
                 </thead>
                 <tbody>
                 <tr *ngFor="let qArobot of qarobots">
-                    <!-- <td><a [routerLink]="['/q-arobot', qArobot.id, 'view' ]">{{qArobot.id}}</a></td> -->
-                    <!-- <td>{{qArobot.diseaseSeries}}</td>
-                    <td>{{qArobot.projectSeries}}</td>
-                    <td>{{qArobot.level}}</td>
-                    <td>{{qArobot.questionType}}</td> -->
                     <td><a [routerLink]="['/q-arobot', qArobot.id, 'view' ]">{{qArobot.question}}</a></td>
-                    <!-- <td>{{qArobot.answer}}</td>
-                    <td>{{qArobot.updateDate}}</td>
-                    <td>{{qArobot.submitter}}</td>
-                    <td>{{qArobot.qaSubsidiary}}</td>
-                    <td>{{qArobot.specialProcess}}</td>
-                    <td>{{qArobot.qaClass}}</td> -->
                     <td class="text-right"  *jhiHasAnyAuthority="'ROLE_ADMIN'">
                         <div class="btn-group flex-btn-group-container">
-                            <!-- <button type="submit"
-                                    [routerLink]="['/q-arobot', qArobot.id, 'view' ]"
-                                    class="btn btn-info btn-sm">
-                                <fa-icon [icon]="'eye'"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                            </button> -->
-                            <!-- <button type="submit"
-                                    [routerLink]="['/q-arobot', qArobot.id, 'edit']"
-                                    class="btn btn-primary btn-sm">
-                                <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                            </button> -->
                             <button type="submit"
                                     [routerLink]="['/disease-xi-an/deleteQArobot', diseaseId, qArobot.id]"
                                     replaceUrl="true"
@@ -98,14 +46,5 @@
         <button type="submit" (click)="previousState()" class="btn btn-info">
             <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
         </button>
-        <!-- Pager is not implemented yet, so this is normal pagination instead -->
-        <!-- <div *ngIf="qArobots && qArobots.length">
-            <div class="row justify-content-center">
-                <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
-            </div>
-            <div class="row justify-content-center">
-                <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
-            </div>
-        </div> -->
     </div>
 

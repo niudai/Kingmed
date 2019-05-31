@@ -14,7 +14,7 @@ export class ServiceSuppliesUpdateComponent implements OnInit {
     name: string; // name to be updated.
 
     constructor(protected route: ActivatedRoute
-        , protected service: ServiceSuppliesService) { }
+        , public service: ServiceSuppliesService) { }
 
     ngOnInit() {
         this.id = +this.route.snapshot.paramMap.get('id');

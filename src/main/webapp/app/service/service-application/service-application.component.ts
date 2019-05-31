@@ -16,7 +16,7 @@ export class ServiceApplicationComponent implements OnInit {
     filter: string;
     applications: IFile[];
 
-    constructor(protected service: ServiceApplicationService) {}
+    constructor(public service: ServiceApplicationService) {}
 
     ngOnInit() {
         this.service.loadAll().subscribe(res => this.applications = res.body);

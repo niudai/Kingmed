@@ -1,8 +1,11 @@
 import { IPriceXiAn } from './price-xi-an.model';
+import { IFile } from './file.model';
 export interface IDiseaseXiAn {
     id?: number;
     subsidiary?: string;
     name?: string;
+    applications?: IFile[];
+    suppliess?: IFile[];
     prices?: IPriceXiAn[];
     projectCode?: string;
     chargeCode?: string;

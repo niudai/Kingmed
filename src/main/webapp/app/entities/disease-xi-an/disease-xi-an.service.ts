@@ -1,4 +1,5 @@
-import { QArobot, IQArobot } from 'app/shared/model/q-arobot.model';
+import { IQArobot } from './../../shared/model/q-arobot.model';
+import { QArobot } from 'app/shared/model/q-arobot.model';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -7,6 +8,7 @@ import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { IDiseaseXiAn } from 'app/shared/model/disease-xi-an.model';
 import { IPriceXiAn } from 'app/shared/model/price-xi-an.model';
+import { IFile } from 'app/shared/model/file.model';
 
 type EntityResponseType = HttpResponse<IDiseaseXiAn>;
 type EntityArrayResponseType = HttpResponse<IDiseaseXiAn[]>;
@@ -55,8 +57,10 @@ export class DiseaseXiAnService {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }
 
+    ////////////// QArobot ////////////////////////
+
     getQArobot(id: number): Observable<HttpResponse<IQArobot[]>> {
-        return this.http.get<IQArobot[]>(`${this.resourceUrl}/getQArobotsOfDisease/${id}`, { observe: 'response'});
+        return this.http.get<IFile[]>(`${this.resourceUrl}/getQArobotsOfDisease/${id}`, { observe: 'response'});
     }
 
     associate(diseaseId: number, qarobotId: number): Observable<HttpResponse<any>> {
@@ -65,6 +69,34 @@ export class DiseaseXiAnService {
 
     deassociate(diseaseId: number, qarobotId: number): Observable<HttpResponse<any>> {
         return this.http.get<any>(`${this.resourceUrl}/deassociate/${diseaseId}/${qarobotId}`);
+    }
+
+    /////////////// Application ///////////////////////
+
+    getApplications(id: number): Observable<HttpResponse<IFile[]>> {
+        return this.http.get<IFile[]>(`${this.resourceUrl}/getApplicationsOfDisease/${id}`, { observe: 'response'});
+    }
+
+    associateWithApplication(diseaseId: number, applicationId: number): Observable<HttpResponse<any>> {
+        return this.http.get<any>(`${this.resourceUrl}/associateWithApplication/${diseaseId}/${applicationId}`);
+    }
+
+    deassociateWithApplication(diseaseId: number, applicationId: number): Observable<HttpResponse<any>> {
+        return this.http.get<any>(`${this.resourceUrl}/deassociateWithApplication/${diseaseId}/${applicationId}`);
+    }
+
+    ///////////////// Supplies ////////////////////////////
+
+    getSuppliess(id: number): Observable<HttpResponse<IFile[]>> {
+        return this.http.get<IFile[]>(`${this.resourceUrl}/getSuppliessOfDisease/${id}`, { observe: 'response'});
+    }
+
+    associateWithSupplies(diseaseId: number, suppliesId: number): Observable<HttpResponse<any>> {
+        return this.http.get<any>(`${this.resourceUrl}/associateWithSupplies/${diseaseId}/${suppliesId}`);
+    }
+
+    deassociateWithSupplies(diseaseId: number, suppliesId: number): Observable<HttpResponse<any>> {
+        return this.http.get<any>(`${this.resourceUrl}/deassociateWithSupplies/${diseaseId}/${suppliesId}`);
     }
 
     search(req?: any): Observable<EntityArrayResponseType> {

@@ -4,7 +4,7 @@
           <form name="editForm" role="form" novalidate (ngSubmit)="confirmUpdate()" #editForm="ngForm">
                 <div>
                     <jhi-alert-error></jhi-alert-error>
-                    <div class="form-group" [hidden]="!qArobot.id">
+                    <div class="form-group">
                         <label>申请单名称</label>
                         <input type="text" class="form-control" id="id" name="id"
                             [(ngModel)]="name"/>

@@ -41,6 +41,35 @@ public class DiseaseXiAn implements Serializable {
         , inverseJoinColumns = @JoinColumn(name = "q_arobot_id", referencedColumnName = "id"))
     private Set<QArobot> qarobots = new HashSet<>();
 
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(name = "disease_xi_an_image_application"
+        , joinColumns = @JoinColumn(name = "disease_xi_an_id", referencedColumnName = "id")
+        , inverseJoinColumns = @JoinColumn(name = "image_application_id", referencedColumnName = "id"))
+    private Set<ImageApplication> applications = new HashSet<>();
+
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(name = "disease_xi_an_image_supplies"
+        , joinColumns = @JoinColumn(name = "disease_xi_an_id", referencedColumnName = "id")
+        , inverseJoinColumns = @JoinColumn(name = "image_supplies_id", referencedColumnName = "id"))
+    private Set<ImageSupplies> suppliess = new HashSet<>();
+
+    public Set<ImageSupplies> getSuppliess() {
+        return this.suppliess;
+    }
+
+    public void setSuppliess(Set<ImageSupplies> suppliess) {
+        this.suppliess = suppliess;
+    }
+
+
+    public Set<ImageApplication> getApplications() {
+        return this.applications;
+    }
+
+    public void setApplications(Set<ImageApplication> applications) {
+        this.applications = applications;
+    }
+
     public Set<QArobot> getQarobots() {
         return this.qarobots;
     }

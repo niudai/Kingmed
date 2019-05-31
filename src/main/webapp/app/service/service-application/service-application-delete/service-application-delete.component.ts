@@ -14,7 +14,7 @@ export class ServiceApplicationDeleteComponent implements OnInit {
     public id: number;
     constructor(protected route: ActivatedRoute,
         protected router: Router,
-        protected service: ServiceApplicationService) {
+        public service: ServiceApplicationService) {
 
     }
 
