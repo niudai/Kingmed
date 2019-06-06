@@ -1,4 +1,3 @@
-<h1>{{windowWidth}}</h1>
 <div>
     <h2 id="page-heading">
         <button routerLink="/" id="jh-create-entity"
@@ -8,7 +7,7 @@
                 返回
             </span>
         </button>
-        <span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.home.title">Disease Xi Ans</span>
+        <span>集团项目</span>
         <button *jhiHasAnyAuthority="'ROLE_ADMIN'" id="jh-create-entity"
             class="btn btn-primary float-right jh-create-entity create-disease-xi-an"
             [routerLink]="['/disease-xi-an/new']">
@@ -44,10 +43,11 @@
                         <fa-icon [icon]="'sort'"></fa-icon>
                     </th>
                     <!-- <th><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.subsidiary">Subsidiary</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
-                    <th><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.price">价格</span>
-                    <th><span>申请单</span>
+                    <th *ngIf="windowWidth > 600"><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.price">价格</span>
+                    <th ><span>检测科室</span>
+                    <th *ngIf="windowWidth > 600"><span>申请单</span>
                     <th *ngIf = "windowWidth > 600"><span>耗材图片</span>
-                    <th><span>QA</span>
+                    <th *ngIf="windowWidth > 600"><span>QA</span>
                     </th>
                     <th *jhiHasAnyAuthority="'ROLE_ADMIN'"><span>编辑</span></th>
                 </tr>
@@ -56,10 +56,24 @@
                 <tr *ngFor="let diseaseXiAn of diseaseXiAns">
                     <!-- <td><a [routerLink]="['/disease-guang-dong', diseaseXiAn.id, 'view' ]">{{diseaseXiAn.id}}</a></td> -->
                     <td><a
-                        [routerLink]="[diseaseXiAn.id, 'view' ]">{{diseaseXiAn.name}}</a>
+                        [routerLink]="[diseaseXiAn.id, 'view' ]">{{diseaseXiAn.name}} - <strong>{{diseaseXiAn.subsidiary}}</strong></a>
+                        <br>
+                        <div *ngIf = "windowWidth < 600">
+                                <button [routerLink]="[diseaseXiAn.id, 'qarobots']" class="btn btn-warning btn-sm">
+                                        <fa-icon [icon]="'question'"></fa-icon>
+                                        <span class="d-none d-md-inline"
+                                        ></span>
+                                </button>
+                                <button [routerLink]="[diseaseXiAn.id, 'prices']" class="btn btn-primary btn-sm">
+                                        <fa-icon class = "dollar-sign" [icon]="'dollar-sign'"></fa-icon>
+                                        <span class="d-none d-md-inline"
+                                        ></span>
+                                </button>
+                        </div>
+
                 </td>
                 <!-- <td>{{diseaseXiAn.subsidiary}}</td> -->
-                <td class="text-right">
+                <td *ngIf = "windowWidth > 600" class="text-right">
                     <div class="btn-group flex-btn-group-container">
                             <button [routerLink]="[diseaseXiAn.id, 'prices']" class="btn btn-primary btn-sm">
                                     <fa-icon class = "dollar-sign" [icon]="'dollar-sign'"></fa-icon>
@@ -70,8 +84,15 @@
                 </td>
                 <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
+
+                            <span>{{diseaseXiAn.projectConcourse}}</span>
+
+                        </div>
+                </td>
+                <td *ngIf = "windowWidth > 600" class="text-right">
+                        <div class="btn-group flex-btn-group-container">
                                 <button [routerLink]="[diseaseXiAn.id, 'applications']" class="btn btn-primary btn-sm">
-                                        <fa-icon class = "dollar-sign" [icon]="'file-alt'"></fa-icon>
+                                        <fa-icon [icon]="'file-alt'"></fa-icon>
                                         <span class="d-none d-md-inline"
                                         ></span>
                                 </button>
@@ -81,13 +102,13 @@
                     <td *ngIf = "windowWidth > 600" class="text-right">
                             <div class="btn-group flex-btn-group-container">
                                     <button [routerLink]="[diseaseXiAn.id, 'suppliess']" class="btn btn-primary btn-sm">
-                                            <fa-icon class = "dollar-sign" [icon]="'magic'"></fa-icon>
+                                            <fa-icon [icon]="'magic'"></fa-icon>
                                             <span class="d-none d-md-inline"
                                             ></span>
                                     </button>
                             </div>
                         </td>
-                <td class="text-right">
+                <td *ngIf = "windowWidth > 600" class="text-right">
                     <div class="btn-group flex-btn-group-container">
                             <button [routerLink]="[diseaseXiAn.id, 'qarobots']" class="btn btn-warning btn-sm">
                                     <fa-icon [icon]="'question'"></fa-icon>

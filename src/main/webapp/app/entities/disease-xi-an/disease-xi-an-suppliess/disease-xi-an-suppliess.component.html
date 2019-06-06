@@ -26,7 +26,11 @@
             <tbody>
             <tr *ngFor="let supplies of suppliess">
                 <td><a [routerLink]="['/service-supplies', 'view', supplies.id  ]">{{supplies.name}}</a></td>
-                <td><img class = "supplies" [src] = "[suppliesService.suppliesUrl + '/' + supplies.id]"></td>
+                <!-- <td><img class = "supplies" [src] = "[suppliesService.suppliesUrl + '/' + supplies.id]"></td> -->
+                <td>
+                        <button class = "btn btn-success" [routerLink]="['/service-supplies', 'view', supplies.id]"><fa-icon [icon] = "'eye'"></fa-icon></button>
+
+                </td>
                 <td class="text-right"  *jhiHasAnyAuthority="'ROLE_ADMIN'">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

@@ -22,7 +22,7 @@
                         <tr>
                         <th *jhiHasAnyAuthority="'ROLE_ADMIN'"><span jhiTranslate="global.field.id">ID</span></th>
                         <th><span>耗材</span></th>
-                        <th><span>预览</span></th>
+                        <!-- <th><span>预览</span></th> -->
                         <th><span>详细</span></th>
                         <th *jhiHasAnyAuthority="'ROLE_ADMIN'"><span>编辑</span></th>
                         </tr>
@@ -32,7 +32,7 @@
                             <td *jhiHasAnyAuthority="'ROLE_ADMIN'">{{supplies.id}}</td>
                             <td><a [href] = "[service.suppliesUrl + '/' + supplies.id]">{{supplies.name}}</a>
                             </td>
-                            <td><img class = "supplies" [src] = "[service.suppliesUrl + '/' + supplies.id]"></td>
+                            <!-- <td><img class = "supplies" [src] = "[service.suppliesUrl + '/' + supplies.id]"></td> -->
                             <td>
                                 <button class = "btn btn-success" [routerLink]="['view', supplies.id]"><fa-icon [icon] = "'eye'"></fa-icon></button>
 

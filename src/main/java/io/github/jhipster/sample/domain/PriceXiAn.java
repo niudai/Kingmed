@@ -34,20 +34,20 @@ public class PriceXiAn implements Serializable {
     @Column(name = "subsidiary", length = 10)
     private String subsidiary; // 子公司
 
-    @Size(max = 50)
-    @Column(name = "toll_standard", length = 50)
+    @Size(max = 300)
+    @Column(name = "toll_standard", length = 300)
     private String tollStandard; // 物价
 
-    @Size(max = 50)
-    @Column(name = "reporting_time", length = 50)
+    @Size(max = 100)
+    @Column(name = "reporting_time", length = 100)
     private String reportingTime; // 出结果时间
 
-    @Size(max = 60)
-    @Column(name = "charge_code", length = 50)
+    @Size(max = 500)
+    @Column(name = "charge_code", length = 500)
     private String chargeCode; // 物价编码
 
-    @Size(max = 50)
-    @Column(name = "subseries", length = 50)
+    @Size(max = 100)
+    @Column(name = "subseries", length = 100)
     private String subseries;
 
     public PriceXiAn() {

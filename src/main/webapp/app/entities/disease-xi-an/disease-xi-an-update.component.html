@@ -1,233 +1,120 @@
 <div class="row justify-content-center">
     <div class="col-12">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="jhi-disease-xi-an-heading" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.home.createOrEditLabel">Create or edit a Disease Xi An</h2>
+            <h2 id="jhi-disease-xi-an-heading"
+                jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.home.createOrEditLabel">Create or
+                edit a Disease Xi An</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
                 <div class="form-group" [hidden]="!diseaseXiAn.id">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id"
-                        [(ngModel)]="diseaseXiAn.id" readonly />
+                    <input type="text" class="form-control" id="id" name="id" [(ngModel)]="diseaseXiAn.id" readonly />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.subsidiary" for="field_subsidiary">Subsidiary</label>
+                    <label class="form-control-label"
+                        jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.subsidiary"
+                        for="field_subsidiary">Subsidiary</label>
                     <input type="text" class="form-control" name="subsidiary" id="field_subsidiary"
-                        [(ngModel)]="diseaseXiAn.subsidiary" maxlength="50"/>
-                    <div [hidden]="!(editForm.controls.subsidiary?.dirty && editForm.controls.subsidiary?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.subsidiary?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 50 }">
-                        This field cannot be longer than 50 characters.
-                        </small>
-                    </div>
+                        [(ngModel)]="diseaseXiAn.subsidiary" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.name" for="field_name">Name</label>
+                    <label class="form-control-label"
+                        jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.name"
+                        for="field_name">Name</label>
                     <input type="text" class="form-control" name="name" id="field_name"
-                        [(ngModel)]="diseaseXiAn.name" maxlength="300"/>
-                    <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.name?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 300 }">
-                        This field cannot be longer than 300 characters.
-                        </small>
-                    </div>
+                        [(ngModel)]="diseaseXiAn.name" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.projectCode" for="field_projectCode">Project Code</label>
-                    <input type="text" class="form-control" name="projectCode" id="field_projectCode"
-                        [(ngModel)]="diseaseXiAn.projectCode" maxlength="50"/>
-                    <div [hidden]="!(editForm.controls.projectCode?.dirty && editForm.controls.projectCode?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.projectCode?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 50 }">
-                        This field cannot be longer than 50 characters.
-                        </small>
-                    </div>
+                    <label class="form-control-label"
+                        jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.projectCode"
+                        for="field_projectCode">Project Code</label>
+                    <textarea rows="3" type="text" class="form-control" name="projectCode" id="field_projectCode"
+                        [(ngModel)]="diseaseXiAn.projectCode">
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.chargeCode" for="field_chargeCode">Charge Code</label>
-                    <input type="text" class="form-control" name="chargeCode" id="field_chargeCode"
-                        [(ngModel)]="diseaseXiAn.chargeCode" maxlength="60"/>
-                    <div [hidden]="!(editForm.controls.chargeCode?.dirty && editForm.controls.chargeCode?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.chargeCode?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 60 }">
-                        This field cannot be longer than 60 characters.
-                        </small>
-                    </div>
+                        <textarea rows="4" type="text" class="form-control" name="chargeCode" id="field_chargeCode"
+                        [(ngModel)]="diseaseXiAn.chargeCode" ></textarea>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.tollStandard" for="field_tollStandard">Toll Standard</label>
                     <input type="text" class="form-control" name="tollStandard" id="field_tollStandard"
-                        [(ngModel)]="diseaseXiAn.tollStandard" maxlength="500"/>
-                    <div [hidden]="!(editForm.controls.tollStandard?.dirty && editForm.controls.tollStandard?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.tollStandard?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 500 }">
-                        This field cannot be longer than 500 characters.
-                        </small>
-                    </div>
+                        [(ngModel)]="diseaseXiAn.tollStandard"/>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.supplement" for="field_supplement">Supplement</label>
                     <textarea rows="5" type="text" class="form-control" name="supplement" id="field_supplement"
-                        [(ngModel)]="diseaseXiAn.supplement" maxlength="600">
-                    <div [hidden]="!(editForm.controls.supplement?.dirty && editForm.controls.supplement?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.supplement?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 600 }">
-                        This field cannot be longer than 600 characters.
-                        </small>
-                    </div>
+                        [(ngModel)]="diseaseXiAn.supplement" ></textarea>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.sample" for="field_sample">Sample</label>
                     <textarea rows = "5" type="text" class="form-control" name="sample" id="field_sample"
-                        [(ngModel)]="diseaseXiAn.sample" maxlength="600">
-                    <div [hidden]="!(editForm.controls.sample?.dirty && editForm.controls.sample?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.sample?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 600 }">
-                        This field cannot be longer than 600 characters.
-                        </small>
-                    </div>
+                        [(ngModel)]="diseaseXiAn.sample"></textarea>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.tutorial" for="field_tutorial">Tutorial</label>
                     <textarea rows = "5" type="text" class="form-control" name="tutorial" id="field_tutorial"
-                        [(ngModel)]="diseaseXiAn.tutorial" maxlength="500">
-                    <div [hidden]="!(editForm.controls.tutorial?.dirty && editForm.controls.tutorial?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.tutorial?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 500 }">
-                        This field cannot be longer than 500 characters.
-                        </small>
-                    </div>
+                        [(ngModel)]="diseaseXiAn.tutorial"></textarea>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.preservation" for="field_preservation">Preservation</label>
                     <textarea rows = "5" type="text" class="form-control" name="preservation" id="field_preservation"
-                        [(ngModel)]="diseaseXiAn.preservation" maxlength="200">
-                    <div [hidden]="!(editForm.controls.preservation?.dirty && editForm.controls.preservation?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.preservation?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 200 }">
-                        This field cannot be longer than 200 characters.
-                        </small>
-                    </div>
+                        [(ngModel)]="diseaseXiAn.preservation" ></textarea>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.transportation" for="field_transportation">Transportation</label>
                     <textarea rows = "5" type="text" class="form-control" name="transportation" id="field_transportation"
-                        [(ngModel)]="diseaseXiAn.transportation" maxlength="600">
-                    <div [hidden]="!(editForm.controls.transportation?.dirty && editForm.controls.transportation?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.transportation?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 600 }">
-                        This field cannot be longer than 600 characters.
-                        </small>
-                    </div>
+                        [(ngModel)]="diseaseXiAn.transportation" ></textarea>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.applicationUnitType" for="field_applicationUnitType">Application Unit Type</label>
                     <textarea rows = "2" type="text" class="form-control" name="applicationUnitType" id="field_applicationUnitType"
-                        [(ngModel)]="diseaseXiAn.applicationUnitType" maxlength="100">
-                    <div [hidden]="!(editForm.controls.applicationUnitType?.dirty && editForm.controls.applicationUnitType?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.applicationUnitType?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 100 }">
-                        This field cannot be longer than 100 characters.
-                        </small>
-                    </div>
+                        [(ngModel)]="diseaseXiAn.applicationUnitType" ></textarea>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.applicationRemark" for="field_applicationRemark">Application Remark</label>
                     <textarea rows = "5" type="text" class="form-control" name="applicationRemark" id="field_applicationRemark"
-                        [(ngModel)]="diseaseXiAn.applicationRemark" maxlength="500">
-                    <div [hidden]="!(editForm.controls.applicationRemark?.dirty && editForm.controls.applicationRemark?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.applicationRemark?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 500 }">
-                        This field cannot be longer than 500 characters.
-                        </small>
-                    </div>
+                        [(ngModel)]="diseaseXiAn.applicationRemark" ></textarea>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.medicalMethod" for="field_medicalMethod">Medical Method</label>
                     <textarea rows = "3" type="text" class="form-control" name="medicalMethod" id="field_medicalMethod"
-                        [(ngModel)]="diseaseXiAn.medicalMethod" maxlength="100">
-                    <div [hidden]="!(editForm.controls.medicalMethod?.dirty && editForm.controls.medicalMethod?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.medicalMethod?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 100 }">
-                        This field cannot be longer than 100 characters.
-                        </small>
-                    </div>
+                        [(ngModel)]="diseaseXiAn.medicalMethod"></textarea>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.projectConcourse" for="field_projectConcourse">Project Concourse</label>
                     <textarea rows = "2" type="text" class="form-control" name="projectConcourse" id="field_projectConcourse"
-                        [(ngModel)]="diseaseXiAn.projectConcourse" maxlength="100">
-                    <div [hidden]="!(editForm.controls.projectConcourse?.dirty && editForm.controls.projectConcourse?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.projectConcourse?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 100 }">
-                        This field cannot be longer than 100 characters.
-                        </small>
-                    </div>
+                        [(ngModel)]="diseaseXiAn.projectConcourse" ></textarea>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.hurryDepartment" for="field_hurryDepartment">Hurry Department</label>
                     <textarea rows = "3" type="text" class="form-control" name="hurryDepartment" id="field_hurryDepartment"
-                        [(ngModel)]="diseaseXiAn.hurryDepartment" maxlength="100">
-                    <div [hidden]="!(editForm.controls.hurryDepartment?.dirty && editForm.controls.hurryDepartment?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.hurryDepartment?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 100 }">
-                        This field cannot be longer than 100 characters.
-                        </small>
-                    </div>
+                        [(ngModel)]="diseaseXiAn.hurryDepartment" ></textarea>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.reportingTime" for="field_reportingTime">Reporting Time</label>
                     <textarea rows = "3" type="text" class="form-control" name="reportingTime" id="field_reportingTime"
-                        [(ngModel)]="diseaseXiAn.reportingTime" maxlength="200">
-                    <div [hidden]="!(editForm.controls.reportingTime?.dirty && editForm.controls.reportingTime?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.reportingTime?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 200 }">
-                        This field cannot be longer than 200 characters.
-                        </small>
-                    </div>
+                        [(ngModel)]="diseaseXiAn.reportingTime" ></textarea>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.clinicalApplication" for="field_clinicalApplication">Clinical Application</label>
                     <textarea rows = "8" type="text" class="form-control" name="clinicalApplication" id="field_clinicalApplication"
-                        [(ngModel)]="diseaseXiAn.clinicalApplication" maxlength="1500">
-                    <div [hidden]="!(editForm.controls.clinicalApplication?.dirty && editForm.controls.clinicalApplication?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.clinicalApplication?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 1500 }">
-                        This field cannot be longer than 1500 characters.
-                        </small>
-                    </div>
+                        [(ngModel)]="diseaseXiAn.clinicalApplication"></textarea>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.series" for="field_series">Series</label>
                     <textarea rows = "3" type="text" class="form-control" name="series" id="field_series"
-                        [(ngModel)]="diseaseXiAn.series" maxlength="60">
-                    <div [hidden]="!(editForm.controls.series?.dirty && editForm.controls.series?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.series?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 60 }">
-                        This field cannot be longer than 60 characters.
-                        </small>
-                    </div>
+                        [(ngModel)]="diseaseXiAn.series"></textarea>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.subSeries" for="field_subSeries">Sub Series</label>
                     <textarea rows = "2" type="text" class="form-control" name="subSeries" id="field_subSeries"
-                        [(ngModel)]="diseaseXiAn.subSeries" maxlength="60">
-                    <div [hidden]="!(editForm.controls.subSeries?.dirty && editForm.controls.subSeries?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.subSeries?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 60 }">
-                        This field cannot be longer than 60 characters.
-                        </small>
-                    </div>
+                        [(ngModel)]="diseaseXiAn.subSeries"></textarea>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.remarks" for="field_remarks">Remarks</label>
                     <textarea rows = "8" type="text" class="form-control" name="remarks" id="field_remarks"
-                        [(ngModel)]="diseaseXiAn.remarks" maxlength="2000">
-                    <div [hidden]="!(editForm.controls.remarks?.dirty && editForm.controls.remarks?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.remarks?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 2000 }">
-                        This field cannot be longer than 2000 characters.
-                        </small>
-                    </div>
+                        [(ngModel)]="diseaseXiAn.remarks" ></textarea>
                 </div>
 
             </div>

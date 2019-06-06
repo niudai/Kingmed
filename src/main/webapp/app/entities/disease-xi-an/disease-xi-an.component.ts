@@ -68,7 +68,7 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
                     page: this.page - 1,
                     query: this.currentSearch,
                     size: this.itemsPerPage,
-                    sort: this.sort()
+                    // sort: this.sort()
                 })
                 .subscribe(
                     (res: HttpResponse<IDiseaseXiAn[]>) => this.paginateDiseaseXiAns(res.body, res.headers),
@@ -80,7 +80,7 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
             .query({
                 page: this.page - 1,
                 size: this.itemsPerPage,
-                sort: this.sort()
+                // sort: this.sort()
             })
             .subscribe(
                 (res: HttpResponse<IDiseaseXiAn[]>) => this.paginateDiseaseXiAns(res.body, res.headers),
@@ -101,7 +101,7 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
                 page: this.page,
                 size: this.itemsPerPage,
                 search: this.currentSearch,
-                sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
+                // sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
             }
         });
         this.loadAll();
@@ -114,7 +114,7 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
             '/disease-xi-an',
             {
                 page: this.page,
-                sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
+                // sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
             }
         ]);
         this.loadAll();
@@ -131,7 +131,7 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
             {
                 search: this.currentSearch,
                 page: this.page,
-                sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
+                // sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
             }
         ]);
         this.loadAll();
@@ -157,13 +157,13 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
         this.eventSubscriber = this.eventManager.subscribe('diseaseXiAnListModification', response => this.loadAll());
     }
 
-    sort() {
-        const result = [this.predicate + ',' + (this.reverse ? 'asc' : 'desc')];
-        if (this.predicate !== 'id') {
-            result.push('id');
-        }
-        return result;
-    }
+    // sort() {
+    //     const result = [this.predicate + ',' + (this.reverse ? 'asc' : 'desc')];
+    //     if (this.predicate !== 'id') {
+    //         result.push('id');
+    //     }
+    //     return result;
+    // }
 
     protected paginateDiseaseXiAns(data: IDiseaseXiAn[], headers: HttpHeaders) {
         this.links = this.parseLinks.parse(headers.get('link'));

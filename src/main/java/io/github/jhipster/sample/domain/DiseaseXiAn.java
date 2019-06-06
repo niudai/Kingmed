@@ -86,11 +86,11 @@ public class DiseaseXiAn implements Serializable {
     @Column(name = "name", length = 300)
     private String name;
 
-    @Size(max = 50)
+    @Size(max = 500)
     @Column(name = "project_code", length = 50)
     private String projectCode;
 
-    @Size(max = 60)
+    @Size(max = 1000)
     @Column(name = "charge_code", length = 60)
     private String chargeCode;
 
@@ -106,11 +106,11 @@ public class DiseaseXiAn implements Serializable {
     @Column(name = "jhi_sample", length = 600)
     private String sample;
 
-    @Size(max = 500)
+    @Size(max = 2000)
     @Column(name = "tutorial", length = 500)
     private String tutorial;
 
-    @Size(max = 200)
+    @Size(max = 500)
     @Column(name = "preservation", length = 200)
     private String preservation;
 
@@ -142,7 +142,7 @@ public class DiseaseXiAn implements Serializable {
     @Column(name = "reporting_time", length = 200)
     private String reportingTime;
 
-    @Size(max = 1500)
+    @Size(max = 3000)
     @Column(name = "clinical_application", length = 1500)
     private String clinicalApplication;
 
@@ -154,7 +154,7 @@ public class DiseaseXiAn implements Serializable {
     @Column(name = "sub_series", length = 60)
     private String subSeries;
 
-    @Size(max = 2000)
+    @Size(max = 3000)
     @Column(name = "remarks", length = 2000)
     private String remarks;
 
