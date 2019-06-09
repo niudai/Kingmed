@@ -3,9 +3,10 @@ import { OperationService } from 'app/entities/operation/operation.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { SERVER_API_URL } from 'app/app.constants';
-import { HttpClient, HttpResponse, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpParams, HttpEventType } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IFile } from 'app/shared/model/file.model';
+import { error } from '@angular/compiler/src/util';
 
 @Component({
     selector: 'jhi-service-application-create',
@@ -19,15 +20,22 @@ export class ServiceApplicationCreateComponent implements OnInit {
 
     public applications: IFile[];
 
+    public uploadResponse = { status: '', message: '', filePath: '' };
+
+    isSaving: boolean;
+    isAttached: boolean;
     fileForm: FormGroup;
     fileName: string; // file name.
     file: any;
+    error: string;
 
     constructor(protected http: HttpClient,
         protected formBuilder: FormBuilder,
         public serviceApplicationService: ServiceApplicationService) { }
 
     ngOnInit() {
+        this.isAttached = false;
+        this.isSaving = false;
         this.fileForm = this.formBuilder.group({
             image: ['']
         });
@@ -35,17 +43,20 @@ export class ServiceApplicationCreateComponent implements OnInit {
 
     onFileChange(event) {
         if (event.target.files.length > 0) {
+            this.isAttached = true;
             const file = event.target.files[0];
             this.fileForm.get('image').setValue(file);
         }
     }
 
     onApplicationSubmit() {
+        this.isSaving = true;
         const formData = new FormData();
         formData.append('image', this.fileForm.get('image').value);
         this.serviceApplicationService.upload(formData, this.fileName)
             .subscribe(
-                any => window.history.back()
+                res => this.uploadResponse = res,
+                err => this.error = err,
             );
 
     }

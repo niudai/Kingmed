@@ -1,8 +1,9 @@
-import { HttpClient, HttpResponse, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpParams, HttpEventType } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { SERVER_API_URL } from 'app/app.constants';
 import { Observable } from 'rxjs';
 import { IFile } from 'app/shared/model/file.model';
+import { map } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -14,10 +15,28 @@ export class ServiceApplicationService {
 
     constructor(protected http: HttpClient) { }
 
-    upload(file: any, name: string): Observable<HttpResponse<any>> {
+    upload(file: any, name: string) {
         const options = name ?
-        { params: new HttpParams().set('name', name) } : {};
-        return this.http.post<any>(`${this.applicationUrl}`, file, options);
+            { params: new HttpParams().set('name', name), } : {};
+        return this.http.post<any>(`${this.applicationUrl}`, file,
+            {
+                params: new HttpParams().set('name', name), // name of the file
+                reportProgress: true,
+                observe: 'events'
+            }).pipe(map(event => {
+
+                switch (event.type) {
+
+                    case HttpEventType.UploadProgress:
+                        const progress = Math.round(100 * event.loaded / event.total);
+                        return { status: 'progress', message: progress };
+
+                    case HttpEventType.Response:
+                        return event.body;
+                    default:
+                        return `Unhandled event: ${event.type}`;
+                }
+            }));
     }
 
     loadAll(): Observable<HttpResponse<IFile[]>> {
