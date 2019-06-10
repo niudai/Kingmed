@@ -23,10 +23,10 @@ export class DiseaseXiAnPricesUpdateComponent implements OnInit {
 
   ngOnInit() {
       this.isSaving = false;
-      this.id = +this.activatedRoute.snapshot.paramMap.get('id');
       this.activatedRoute.data.subscribe(({ price }) => {
         this.price = price;
       });
+      this.id = +this.activatedRoute.snapshot.paramMap.get('id');
   }
 
   previousState() {

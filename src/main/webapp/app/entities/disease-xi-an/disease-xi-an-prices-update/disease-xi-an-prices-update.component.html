@@ -8,28 +8,28 @@
                 <jhi-alert-error></jhi-alert-error>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="entity.price.subsidiary"
-                        for="field_name">Name</label>
-                    <input type="text" class="form-control" [(ngModel)]="price.subsidiary" />
+                        for="field_subsidiary">Name</label>
+                    <input type="text" class="form-control" [(ngModel)]="price.subsidiary" name="subsidiary" id="field_subsidiary"/>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="entity.price.tollStandard"
-                        for="field_subsidiary">tollStandard</label>
-                    <input type="text" class="form-control" name="subsidiary" id="field_subsidiary"
+                        for="field_tollStandard">tollStandard</label>
+                    <input type="text" class="form-control" name="tollStandard" id="field_tollStandard"
                         [(ngModel)]="price.tollStandard"/>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="entity.price.chargeCode">chargeCode</label>
-                    <input type="text" class="form-control" name="testMethod" id="field_testMethod"
+                    <label class="form-control-label" jhiTranslate="entity.price.chargeCode" for="field_chargeCode">chargeCode</label>
+                    <input type="text" class="form-control" name="chargeCode" id="field_chargeCode"
                         [(ngModel)]="price.chargeCode"/>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="entity.price.reportingTime">reportingTime</label>
-                    <input type="text" class="form-control" id="field_testMethod"
+                    <label class="form-control-label" jhiTranslate="entity.price.reportingTime" for="field_reportingTime">reportingTime</label>
+                    <input type="text" class="form-control" name="reportingTime" id="field_reportingTime"
                         [(ngModel)]="price.reportingTime"  />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="entity.price.subseries">subSeries</label>
-                    <input type="text" class="form-control" name="testMethod" id="field_testMethod"
+                    <label class="form-control-label" jhiTranslate="entity.price.subseries" for="field_subSeries">subSeries</label>
+                    <input type="text" class="form-control" name="subSeries" id="field_subSeries"
                         [(ngModel)]="price.subseries"/>
                 </div>
 

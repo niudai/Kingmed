@@ -40,7 +40,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Test class for the DiseaseXiAnResource REST controller.
  *
- * @see DiseaseXiAnResource
+ * @see DiseaseMapController
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = JhipsterElasticsearchSampleApplicationApp.class)
@@ -139,7 +139,7 @@ public class DiseaseXiAnResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final DiseaseXiAnResource diseaseXiAnResource = new DiseaseXiAnResource(diseaseXiAnRepository, mockDiseaseXiAnSearchRepository);
+        final DiseaseMapController diseaseXiAnResource = new DiseaseMapController(diseaseXiAnRepository, mockDiseaseXiAnSearchRepository);
         this.restDiseaseXiAnMockMvc = MockMvcBuilders.standaloneSetup(diseaseXiAnResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -278,7 +278,7 @@ public class DiseaseXiAnResourceIntTest {
             .andExpect(jsonPath("$.[*].subSeries").value(hasItem(DEFAULT_SUB_SERIES.toString())))
             .andExpect(jsonPath("$.[*].remarks").value(hasItem(DEFAULT_REMARKS.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getDiseaseXiAn() throws Exception {

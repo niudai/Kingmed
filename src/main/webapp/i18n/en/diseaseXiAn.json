@@ -2,7 +2,7 @@
     "jhipsterElasticsearchSampleApplicationApp": {
         "diseaseXiAn": {
             "home": {
-                "title": "西安项目",
+                "title": "集团项目",
                 "createLabel": "创建一个新项目",
                 "createOrEditLabel": "编辑这个项目",
                 "search": "搜索这个项目"
@@ -14,7 +14,7 @@
                 "question": "你确定要删除吗? {{ id }}?"
             },
             "detail": {
-                "title": "检验知识库 - 西安"
+                "title": "检验知识库"
             },
             "id": "项目ID",
             "subsidiary": "检测子公司",

@@ -1,18 +1,16 @@
 {
-    "entity": {
-        "price": {
-            "subsidiary": "子公司",
-            "tollStandard": "标准收费（元)",
-            "reportingTime": "出报告时间",
-            "chargeCode": "收费代码",
-            "addNewPrice": "添加新价格",
-            "delete": "确定删除此价格吗?"
-        },
-        "diseaseGuangDong": {
-            "localPrice": "本地价格",
-            "foreignPrice": "外地价格",
-            "price": "价格详情",
-            "goBack": "返回"
-        }
+    "prices": {
+        "subsidiary": "子公司",
+        "tollStandard": "标准收费（元)",
+        "reportingTime": "出报告时间",
+        "chargeCode": "收费代码",
+        "addNewPrice": "添加新价格",
+        "delete": "确定删除此价格吗?"
+    },
+    "diseaseGuangDong": {
+        "localPrice": "本地价格",
+        "foreignPrice": "外地价格",
+        "price": "价格详情",
+        "goBack": "返回"
     }
 }

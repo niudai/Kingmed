@@ -20,6 +20,38 @@
                     </span>
                 </a>
             </li>
+            <li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active">
+                <a class="nav-link dropdown-toggle" id="service-menu" ngbDropdownToggle>
+                    <span>
+                        <fa-icon icon="info"></fa-icon>
+                        <span jhiTranslate="global.menu.service.main">
+                            服务平台
+                        </span>
+                    </span>
+                </a>
+                <ul ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                    <li ngbDropdownItem>
+                        <a class="dropdown-item" routerLink="service-platform" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.service.main">服务平台</span>
+                        </a></li>
+                    <li ngbDropdownItem>
+                        <a class="dropdown-item" routerLink="service-supplies" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.service.supplies">耗材</span>
+                        </a>
+                    </li>
+                    <li ngbDropdownItem>
+                        <a class="dropdown-item" routerLink="service-application" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.service.application">申请单</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
             <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
             <li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active"
                 [routerLinkActiveOptions]="{exact: true}">

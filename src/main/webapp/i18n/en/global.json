@@ -20,6 +20,11 @@
                 "diseaseXiAn": "Disease Xi An",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
+            "service": {
+                "main": "服务平台",
+                "application": "申请单",
+                "supplies": "耗材"
+            },
             "account": {
                 "main": "账号",
                 "settings": "设置",
@@ -99,52 +104,6 @@
             "dev": "Development"
         },
         "item-count": "Showing {{first}} - {{second}} of {{total}} items."
-    },
-    "entity": {
-        "project": {
-            "detail": "项目详情",
-            "price": "价格详情",
-            "qarobot": "相关问题"
-        },
-        "price": {
-            "subseries": "子公司系列划分",
-            "tollStandard": "标准收费",
-            "reportingTime" : "出报告时间",
-            "chargeCode": "物价编码",
-            "subsidiary": "子公司"
-        },
-        "action": {
-            "addblob": "Add blob",
-            "addimage": "添加图像",
-            "back": "返回",
-            "cancel": "取消",
-            "delete": "删除",
-            "edit": "编辑",
-            "open": "打开",
-            "save": "保存",
-            "view": "预览",
-            "upload": "上传"
-        },
-        "detail": {
-            "field": "Field",
-            "value": "Value"
-        },
-        "delete": {
-            "title": "确定删除"
-        },
-        "validation": {
-            "required": "This field is required.",
-            "minlength": "This field is required to be at least {{ min }} characters.",
-            "maxlength": "This field cannot be longer than {{ max }} characters.",
-            "min": "This field should be at least {{ min }}.",
-            "max": "This field cannot be more than {{ max }}.",
-            "minbytes": "This field should be at least {{ min }} bytes.",
-            "maxbytes": "This field cannot be more than {{ max }} bytes.",
-            "pattern": "This field should follow pattern for {{ pattern }}.",
-            "number": "This field should be a number.",
-            "datetimelocal": "This field should be a date and time.",
-            "patternLogin": "This field can only contain letters, digits and e-mail addresses."
-        }
     },
     "error": {
         "internalServerError": "Internal server error",

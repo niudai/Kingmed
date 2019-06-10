@@ -5,7 +5,7 @@ import io.github.jhipster.sample.domain.QArobot;
 import io.github.jhipster.sample.repository.DiseaseXiAnRepository;
 import io.github.jhipster.sample.repository.QArobotRepository;
 import io.github.jhipster.sample.repository.search.QArobotSearchRepository;
-import io.github.jhipster.sample.service.DiseaseXiAnService;
+import io.github.jhipster.sample.service.DiseaseMapService;
 import io.github.jhipster.sample.web.rest.errors.BadRequestAlertException;
 import io.github.jhipster.sample.web.rest.util.HeaderUtil;
 import io.github.jhipster.sample.web.rest.util.PaginationUtil;
@@ -45,11 +45,11 @@ public class QArobotResource {
 
     private final QArobotSearchRepository qArobotSearchRepository;
 
-    private final DiseaseXiAnService diseaseXiAnService;
+    private final DiseaseMapService diseaseXiAnService;
 
     public QArobotResource(QArobotRepository qArobotRepository
         , QArobotSearchRepository qArobotSearchRepository
-        , DiseaseXiAnService diseaseXiAnService) {
+        , DiseaseMapService diseaseXiAnService) {
         this.qArobotRepository = qArobotRepository;
         this.qArobotSearchRepository = qArobotSearchRepository;
         this.diseaseXiAnService = diseaseXiAnService;
