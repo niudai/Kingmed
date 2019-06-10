@@ -3,7 +3,7 @@ package io.github.jhipster.sample.web.rest;
 import io.github.jhipster.sample.JhipsterElasticsearchSampleApplicationApp;
 
 import io.github.jhipster.sample.domain.DiseaseGuangDong;
-import io.github.jhipster.sample.repository.DiseaseGuangDongRepository;
+import io.github.jhipster.sample.repository.DiseaseBranchRepository;
 import io.github.jhipster.sample.repository.search.DiseaseGuangDongSearchRepository;
 import io.github.jhipster.sample.web.rest.errors.ExceptionTranslator;
 
@@ -113,7 +113,7 @@ public class DiseaseGuangDongResourceIntTest {
     private static final String UPDATED_SUPPLIES_SERIES = "BBBBBBBBBB";
 
     @Autowired
-    private DiseaseGuangDongRepository diseaseGuangDongRepository;
+    private DiseaseBranchRepository diseaseGuangDongRepository;
 
     /**
      * This repository is mocked in the io.github.jhipster.sample.repository.search test package.
@@ -290,7 +290,7 @@ public class DiseaseGuangDongResourceIntTest {
             .andExpect(jsonPath("$.[*].testDepartment").value(hasItem(DEFAULT_TEST_DEPARTMENT.toString())))
             .andExpect(jsonPath("$.[*].suppliesSeries").value(hasItem(DEFAULT_SUPPLIES_SERIES.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getDiseaseGuangDong() throws Exception {

@@ -51,7 +51,8 @@ import {
     faHospital,
     faDownload,
     faFileAlt,
-    faMagic
+    faMagic,
+    faUserFriends
 } from '@fortawesome/free-solid-svg-icons';
 import { literalArr } from '@angular/compiler/src/output/output_ast';
 
@@ -102,5 +103,6 @@ library.add(faHospital);
 library.add(faDownload);
 library.add(faFileAlt);
 library.add(faMagic);
+library.add(faUserFriends);
 
 // jhipster-needle-add-element-to-vendor - JHipster will add new menu items here

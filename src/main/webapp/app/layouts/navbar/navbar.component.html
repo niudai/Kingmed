@@ -23,7 +23,7 @@
             <li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active">
                 <a class="nav-link dropdown-toggle" id="service-menu" ngbDropdownToggle>
                     <span>
-                        <fa-icon icon="info"></fa-icon>
+                        <fa-icon icon="user-friends"></fa-icon>
                         <span jhiTranslate="global.menu.service.main">
                             服务平台
                         </span>
@@ -107,24 +107,17 @@
                             </a>
                         </li> -->
                     <li>
-                        <a class="dropdown-item" routerLink="service" routerLinkActive="active"
-                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                            <span>服务平台</span>
-                        </a>
-                    </li>
-                    <li>
                         <a class="dropdown-item" routerLink="q-arobot" routerLinkActive="active"
                             [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                            <span>QA小博士</span>
+                            <span jhiTranslate="global.menu.entities.qArobot">QA小博士</span>
                         </a>
                     </li>
                     <li>
                         <a class="dropdown-item" routerLink="disease-xi-an" routerLinkActive="active"
                             [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                            <span>检验知识库 - 西安</span>
+                            <span jhiTranslate="global.menu.entities.diseaseXiAn">集团项目</span>
                         </a>
                     </li>
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->

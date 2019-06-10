@@ -1,6 +1,7 @@
 package io.github.jhipster.sample.web.rest;
 import io.github.jhipster.sample.domain.DiseaseGuangDong;
 import io.github.jhipster.sample.domain.Prices;
+import io.github.jhipster.sample.repository.DiseaseBranchRepository;
 import io.github.jhipster.sample.repository.DiseaseGuangDongRepository;
 import io.github.jhipster.sample.repository.PriceRepository;
 import io.github.jhipster.sample.repository.search.DiseaseGuangDongSearchRepository;

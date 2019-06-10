@@ -9,6 +9,7 @@ import io.github.jhipster.sample.repository.DiseaseXiAnRepository;
 import io.github.jhipster.sample.repository.PriceXiAnRepository;
 import io.github.jhipster.sample.repository.search.DiseaseXiAnSearchRepository;
 import io.github.jhipster.sample.service.DiseaseMapService;
+import io.github.jhipster.sample.service.DiseaseXiAnService;
 import io.github.jhipster.sample.web.rest.errors.BadRequestAlertException;
 import io.github.jhipster.sample.web.rest.util.HeaderUtil;
 import io.github.jhipster.sample.web.rest.util.PaginationUtil;
@@ -50,12 +51,12 @@ public class DiseaseXiAnResource {
 
     private final PriceXiAnRepository priceRepository;
 
-    private final DiseaseMapService diseaseXiAnService;
+    private final DiseaseXiAnService diseaseXiAnService;
 
     public DiseaseXiAnResource(DiseaseXiAnRepository diseaseXiAnRepository
         , DiseaseXiAnSearchRepository diseaseXiAnSearchRepository
         , PriceXiAnRepository priceXiAnRepository
-        , DiseaseMapService diseaseXiAnService) {
+        , DiseaseXiAnService diseaseXiAnService) {
         this.diseaseXiAnRepository = diseaseXiAnRepository;
         this.diseaseXiAnSearchRepository = diseaseXiAnSearchRepository;
         this.priceRepository = priceXiAnRepository;
