@@ -35,7 +35,7 @@ public class DiseaseBranch implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL
         , orphanRemoval = true,
-        fetch = FetchType.EAGER)
+        fetch = FetchType.LAZY)
     @JoinColumn(name = "disease_branch_id")
     private List<DiseaseMap> diseaseMaps = new ArrayList<DiseaseMap>();
 

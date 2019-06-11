@@ -48,6 +48,17 @@ public class DiseaseMapController {
     }
 
     /**
+     * get all disease maps in a disease branch
+     * @param diseaseBranchId
+     * @return
+     */
+    @GetMapping("/get-all-disease-map")
+    public List<DiseaseMap> getAllDiseaseMap(Long diseaseBranchId) {
+        return diseaseMapService.getAllDiseaseMap(diseaseBranchId);
+    }
+
+
+    /**
      * deattach a disease branch
      * @param diseaseBranchId
      * @return 200

@@ -67,6 +67,18 @@ public class DiseaseMapService {
     }
 
     /**
+     * get all disease maps in a disease branch
+     * @param diseaseBranchId
+     * @return
+     */
+    @Transactional
+    public List<DiseaseMap> getAllDiseaseMap(Long diseaseBranchId) {
+        List<DiseaseMap> diseaseMaps =  diseaseBranchRepository.findById(diseaseBranchId).get().getDiseaseMaps();
+        diseaseMaps.size();
+        return diseaseMaps;
+    }
+
+    /**
      * Deattach disease branch
      * @param diseaseBranchId
      */

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Disease Map
+    -->
+    <changeSet id="20150506030025-1" author="jhipster">
+
+        <!-- Add foreign constraint for one-to-many relationship with disease_map. -->
+        <addForeignKeyConstraint baseColumnNames="disease_map_id"
+                                 baseTableName="disease_map"
+                                 constraintName="fk_disease_map_disease_map_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="disease_map"/>
+        <!-- Add foreign constraint for one-to-many relationship with disease branch -->
+        <addForeignKeyConstraint baseColumnNames="disease_branch_id"
+                                 baseTableName="disease_map"
+                                 constraintName="fk_disease_map_disease_branch_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="disease_branch"/>
+
+        <!-- Create table for many to many relationship of disease_map with q_arobot -->
+
+        <createTable tableName="disease_map_q_arobot">
+            <column name="disease_map_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="q_arobot_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <!-- Add primary key and foreign key -->
+
+        <addPrimaryKey columnNames="disease_map_id, q_arobot_id" tableName="disease_map_q_arobot"/>
+
+        <addForeignKeyConstraint baseColumnNames="disease_map_id"
+                                 baseTableName="disease_map_q_arobot"
+                                 constraintName="fk_disease_map_q_arobot_disease_map_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="disease_map"/>
+        <addForeignKeyConstraint baseColumnNames="q_arobot_id"
+                                 baseTableName="disease_map_q_arobot"
+                                 constraintName="fk_disease_map_q_arobot_q_arobot_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="q_arobot"/>
+
+        <!-- Create table for many to many relationship between disease_map and disease_xi_an -->
+
+        <createTable tableName="disease_map_disease_xi_an">
+            <column name="disease_map_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="disease_xi_an_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <!-- Add primary and foreign keys: -->
+
+        <addPrimaryKey columnNames="disease_map_id, disease_xi_an_id" tableName="disease_map_disease_xi_an"/>
+
+        <addForeignKeyConstraint baseColumnNames="disease_map_id"
+                                 baseTableName="disease_map_disease_xi_an"
+                                 constraintName="fk_disease_map_disease_xi_an_disease_map_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="disease_map"/>
+        <addForeignKeyConstraint baseColumnNames="disease_xi_an_id"
+                                 baseTableName="disease_map_disease_xi_an"
+                                 constraintName="fk_disease_map_disease_xi_an_disease_xi_an_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="disease_xi_an"/>
+
+
+    </changeSet>
+</databaseChangeLog>
