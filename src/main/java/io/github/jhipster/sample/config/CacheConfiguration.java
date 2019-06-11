@@ -50,6 +50,9 @@ public class CacheConfiguration {
             cm.createCache(io.github.jhipster.sample.domain.Prices.class.getName(), jcacheConfiguration);
             cm.createCache(io.github.jhipster.sample.domain.DiseaseXiAn.class.getName(), jcacheConfiguration);
             cm.createCache(io.github.jhipster.sample.domain.PriceXiAn.class.getName(), jcacheConfiguration);
+            cm.createCache(io.github.jhipster.sample.domain.DiseaseBranch.class.getName(), jcacheConfiguration);
+            cm.createCache(io.github.jhipster.sample.domain.DiseaseMap.class.getName(), jcacheConfiguration);
+
             // jhipster-needle-ehcache-add-entry
         };
     }

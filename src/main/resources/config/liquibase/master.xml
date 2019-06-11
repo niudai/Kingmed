@@ -31,4 +31,8 @@
     <include file="config/liquibase/changelog/00000000_change_column_clinical_application.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/change_columns_disease_xi_an.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/0000000_change_column_price_xi_an.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/create_table_disease_branch.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/create_table_disease_map.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/added_constraint_disease_map.xml" relativeToChangelogFile="false"/>
+
 </databaseChangeLog>

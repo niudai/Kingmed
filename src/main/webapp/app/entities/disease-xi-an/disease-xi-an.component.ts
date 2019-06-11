@@ -42,18 +42,6 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
         protected router: Router,
         protected eventManager: JhiEventManager
     ) {
-        this.windowWidth = window.innerWidth;
-        this.itemsPerPage = ITEMS_PER_PAGE;
-        this.routeData = this.activatedRoute.data.subscribe(data => {
-            this.page = data.pagingParams.page;
-            this.previousPage = data.pagingParams.page;
-            this.reverse = data.pagingParams.ascending;
-            this.predicate = data.pagingParams.predicate;
-        });
-        this.currentSearch =
-            this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['search']
-                ? this.activatedRoute.snapshot.params['search']
-                : '';
     }
 
     @HostListener('window:resize', ['$event'])
@@ -96,14 +84,14 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
     }
 
     transition() {
-        this.router.navigate(['/disease-xi-an'], {
-            queryParams: {
-                page: this.page,
-                size: this.itemsPerPage,
+        this.router.navigate(['/disease-xi-an',
+            {
                 search: this.currentSearch,
-                // sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
+                size: this.itemsPerPage,
+                page: this.page,
+            // sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
             }
-        });
+            ]);
         this.loadAll();
     }
 
@@ -138,6 +126,22 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        this.windowWidth = window.innerWidth;
+        this.itemsPerPage = ITEMS_PER_PAGE;
+        // this.routeData = this.activatedRoute.data.subscribe(data => {
+        //     this.page = data.pagingParams.page;
+        //     this.previousPage = data.pagingParams.page;
+        //     this.reverse = data.pagingParams.ascending;
+        //     this.predicate = data.pagingParams.predicate;
+        // });
+        this.currentSearch =
+            this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['search']
+                ? this.activatedRoute.snapshot.params['search']
+                : '';
+        this.page =
+            this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['page']
+            ? this.activatedRoute.snapshot.params['page']
+                : '';
         this.loadAll();
         this.accountService.identity().then(account => {
             this.currentAccount = account;
