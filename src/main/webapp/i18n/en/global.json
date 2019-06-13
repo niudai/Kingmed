@@ -11,6 +11,7 @@
             "home": "金域家园",
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {
+                "diseaseMap": "疾病险地图",
                 "main": "检验知识库",
                 "bankAccount": "Bank Account",
                 "label": "Label",

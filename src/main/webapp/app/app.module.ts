@@ -44,7 +44,7 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
         JhipsterElasticsearchSampleApplicationEntityModule,
         JhipsterElasticsearchSampleApplicationAppRoutingModule
     ],
-    declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
+    declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent, DiseaseBranchComponent],
     providers: [
         {
             provide: HTTP_INTERCEPTORS,

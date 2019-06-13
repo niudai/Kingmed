@@ -1,0 +1,61 @@
+[
+    {
+        "id": 1,
+        "name": "DiseaseMap1",
+        "diseaseMaps": [
+            {
+                "id": 2,
+                "name": "SubDiseaseMap1",
+                "diseaseMaps": [],
+                "diseaseXiAns": [],
+                "qarobots": []
+            }
+        ],
+        "diseaseXiAns": [
+            {
+                "id": 6000,
+                "prices": [],
+                "qarobots": null,
+                "applications": null,
+                "suppliess": null,
+                "subsidiary": "广州",
+                "name": "脱落细胞学检查与诊断：妇  科 \r\n(Conventionalcytologytestanddiagnosisforcervicalsmear)",
+                "projectCode": null,
+                "chargeCode": "270200004",
+                "tollStandard": "75",
+                "supplement": "子宫内膜、宫颈、阴道等,涂抹于玻片上",
+                "sample": "涂片",
+                "tutorial": "将已涂涂片放置于玻片盒中",
+                "preservation": "【室温保存】长期 【冷藏保存】禁止【冷冻保存】禁止",
+                "transportation": null,
+                "applicationUnitType": "病理申请单",
+                "applicationRemark": null,
+                "medicalMethod": "巴氏染色/显微镜检查",
+                "projectConcourse": "细胞病理室",
+                "hurryDepartment": null,
+                "reportingTime": "3天",
+                "clinicalApplication": "脱落细胞中查找肿瘤细胞。",
+                "series": "细胞病理",
+                "subSeries": null,
+                "remarks": null
+            }
+        ],
+        "qarobots": [
+            {
+                "id": 1,
+                "diseaseXiAns": null,
+                "diseaseSeries": null,
+                "projectSeries": null,
+                "level": null,
+                "questionType": "拉拉地方瓦尔额",
+                "question": "测试问题1",
+                "answer": null,
+                "updateDate": null,
+                "submitter": null,
+                "qaSubsidiary": null,
+                "specialProcess": null,
+                "qaClass": null
+            }
+        ]
+    }
+]

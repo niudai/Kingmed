@@ -52,8 +52,8 @@ public class DiseaseMapController {
      * @param diseaseBranchId
      * @return
      */
-    @GetMapping("/get-all-disease-map")
-    public List<DiseaseMap> getAllDiseaseMap(Long diseaseBranchId) {
+    @GetMapping("/get-all-disease-map/{diseaseBranchId}")
+    public List<DiseaseMap> getAllDiseaseMap(@PathVariable Long diseaseBranchId) {
         return diseaseMapService.getAllDiseaseMap(diseaseBranchId);
     }
 
@@ -63,8 +63,8 @@ public class DiseaseMapController {
      * @param diseaseBranchId
      * @return 200
      */
-    @GetMapping("/deattach-disease-branch")
-    public ResponseEntity<Void> deattachDiseaseBranch(Long diseaseBranchId) {
+    @GetMapping("/deattach-disease-branch/{diseaseBranchId}")
+    public ResponseEntity<Void> deattachDiseaseBranch(@PathVariable Long diseaseBranchId) {
         diseaseMapService.deattachDiseaseBranch(diseaseBranchId);
         return ResponseEntity.ok().build();
     }
