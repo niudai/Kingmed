@@ -22,6 +22,9 @@ import { JhipsterElasticsearchSampleApplicationServiceModule } from './service/s
 import * as moment from 'moment';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ActiveMenuDirective, ErrorComponent } from './layouts';
+import { DiseaseBranchComponent } from './disease-map/disease-branch/disease-branch.component';
+import { DiseaseMapModule } from './disease-map/disease-map.module';
+import { DiseaseMapComponent } from './disease-map/disease-map/disease-map.component';
 // import { ServiceComponent } from './service/service.component';
 
 @NgModule({
@@ -42,9 +45,11 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
         JhipsterElasticsearchSampleApplicationAccountModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
         JhipsterElasticsearchSampleApplicationEntityModule,
-        JhipsterElasticsearchSampleApplicationAppRoutingModule
+        JhipsterElasticsearchSampleApplicationAppRoutingModule,
+        DiseaseMapModule
     ],
-    declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent, DiseaseBranchComponent],
+    declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent, DiseaseBranchComponent
+        , DiseaseMapComponent],
     providers: [
         {
             provide: HTTP_INTERCEPTORS,
