@@ -28,7 +28,7 @@ import { JhiLanguageHelper } from 'app/core';
 ],
   imports: [
     CommonModule,
-    // RouterModule.forChild(SERIVCE_ROUTE),
+    RouterModule.forChild(SERIVCE_ROUTE),
     JhipsterElasticsearchSampleApplicationSharedModule
   ],
   exports: [      DiseaseBranchComponent

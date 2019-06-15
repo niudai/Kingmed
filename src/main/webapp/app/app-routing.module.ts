@@ -13,6 +13,10 @@ const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
                     path: 'admin',
                     loadChildren: './admin/admin.module#JhipsterElasticsearchSampleApplicationAdminModule'
                 },
+                {
+                    path: 'disease-map',
+                    loadChildren: () => import('./disease-map/disease-map.module').then(mod => mod.DiseaseMapModule)
+                },
                 ...LAYOUT_ROUTES
             ],
             { useHash: true, enableTracing: DEBUG_INFO_ENABLED }

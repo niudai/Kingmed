@@ -46,10 +46,8 @@ import { DiseaseMapComponent } from './disease-map/disease-map/disease-map.compo
         // jhipster-needle-angular-add-module JHipster will add new module here
         JhipsterElasticsearchSampleApplicationEntityModule,
         JhipsterElasticsearchSampleApplicationAppRoutingModule,
-        DiseaseMapModule
     ],
-    declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent, DiseaseBranchComponent
-        , DiseaseMapComponent],
+    declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
     providers: [
         {
             provide: HTTP_INTERCEPTORS,
