@@ -1,13 +1,15 @@
-<div class = "container">
-        <div *ngFor="let diseaseBranch of diseaseBranches">
-                <span></span>
-                <div class="card col-sm-3" style="width: 18rem;">
-                        <div class="card-body">
-                          <h5 class="card-title">{{diseaseBranch.name}}</h5>
-                          <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                      </div>
+<div class="container col-12">
+    <button class="btn btn-primary" [routerLink]="'attach-disease-branch'">创建一份新地图</button>
+    <div class="row">
+        <div *ngFor="let diseaseBranch of diseaseBranches" class="card col-sm-3">
+            <div class="card-body">
+                <h5 class="card-title">{{diseaseBranch.name}}</h5>
+                <a href="#" class="btn btn-success">进入</a>
+                <button class="btn btn-danger" (click)="open()">删除</button>
             </div>
+        </div>
 
+    </div>
 </div>
+
 

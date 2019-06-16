@@ -1,3 +1,24 @@
-<p>
-  disease-branch-create works!
-</p>
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">创建一份新地图</h4>
+        <form name="editForm" role="form" novalidate (ngSubmit)="submit()" #editForm="ngForm">
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group">
+                    <label>地图名称</label>
+                    <input type="text" class="form-control" id="id" name="id" [(ngModel)]="diseaseBranch.name" />
+                </div>
+            </div>
+                <div>
+                    <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                        <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                    </button>
+                    <button type="submit" id="save-entity" class="btn btn-primary">
+                        <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                    </button>
+                </div>
+        </form>
+    </div>
+
+
+</div>

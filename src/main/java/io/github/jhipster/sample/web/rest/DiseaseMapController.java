@@ -63,7 +63,7 @@ public class DiseaseMapController {
      * @param diseaseBranchId
      * @return 200
      */
-    @GetMapping("/deattach-disease-branch/{diseaseBranchId}")
+    @DeleteMapping("/deattach-disease-branch/{diseaseBranchId}")
     public ResponseEntity<Void> deattachDiseaseBranch(@PathVariable Long diseaseBranchId) {
         diseaseMapService.deattachDiseaseBranch(diseaseBranchId);
         return ResponseEntity.ok().build();

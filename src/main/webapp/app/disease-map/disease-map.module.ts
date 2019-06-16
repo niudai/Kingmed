@@ -5,7 +5,7 @@ import { JhipsterElasticsearchSampleApplicationSharedModule } from './../shared/
 import { JhipsterElasticsearchSampleApplicationSharedCommonModule } from './../shared/shared-common.module';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DiseaseBranchComponent } from './disease-branch/disease-branch.component';
+import { DiseaseBranchComponent, DiseaseBranchDeleteModalComponent } from './disease-branch/disease-branch.component';
 import { DiseaseMapComponent } from './disease-map/disease-map.component';
 import { DiseaseBranchCreateComponent } from './disease-branch-create/disease-branch-create.component';
 import { DiseaseBranchDeleteComponent } from './disease-branch-delete/disease-branch-delete.component';
@@ -25,7 +25,11 @@ import { JhiLanguageHelper } from 'app/core';
     , DiseaseMapAssociateDiseaseXiAnComponent
     , DiseaseMapCreateComponent
     , DiseaseBranchCreateDiseaseMapComponent
+    , DiseaseBranchDeleteModalComponent
 ],
+    entryComponents: [
+        DiseaseBranchDeleteModalComponent
+    ],
   imports: [
     CommonModule,
     RouterModule.forChild(SERIVCE_ROUTE),

@@ -1,3 +1,4 @@
+import { DiseaseBranchCreateComponent } from './disease-branch-create/disease-branch-create.component';
 import { DiseaseMapComponent } from './disease-map/disease-map.component';
 import { DiseaseBranchComponent } from './disease-branch/disease-branch.component';
 import { Route, Routes } from '@angular/router';
@@ -15,8 +16,8 @@ export const SERIVCE_ROUTE: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'disease-map/:id',
-        component: DiseaseMapComponent,
+        path: 'attach-disease-branch',
+        component: DiseaseBranchCreateComponent,
         data: {
             authorities: ['ROLE_USER'],
             pageTitle: 'global.menu.entities.diseaseMap'
