@@ -2,6 +2,7 @@ import { IDiseaseBranch } from './../../shared/model/disease-branch.model';
 import { DiseaseMapService } from './../disease-map.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'jhi-disease-branch',
@@ -13,39 +14,60 @@ export class DiseaseBranchComponent implements OnInit {
     public diseaseBranches: IDiseaseBranch[];
 
     constructor(protected diseaseMapService: DiseaseMapService
-        , protected modalService: NgbModal) { }
+        , protected modalService: NgbModal
+        , protected router: Router
+        , protected route: ActivatedRoute) { }
 
     ngOnInit() {
         this.diseaseMapService.getAllDiseaseBranch()
-            .subscribe(res => this.diseaseBranches = res);
+        .subscribe(res => this.diseaseBranches = res);
     }
 
-    open() {
-        const modalRef = this.modalService.open(DiseaseBranchDeleteModalComponent);
-        modalRef.componentInstance.name = 'World';
+    open(diseaseBranch: IDiseaseBranch) {
+        const modalRef = this.modalService.open(DiseaseBranchDeleteModalComponent as Component, {
+            size: 'lg',
+            backdrop: 'static'
+        });
+        modalRef.componentInstance.id = diseaseBranch.id;
+        modalRef.componentInstance.name = diseaseBranch.name;
+        modalRef.result.then(
+            result => {
+                this.diseaseMapService.getAllDiseaseBranch()
+                    .subscribe(res => this.diseaseBranches = res);
+                this.router.navigate(['./'], { relativeTo: this.route });
+                this.router.navigate(['/']);
+            },
+            reason => {
+                this.diseaseMapService.getAllDiseaseBranch()
+                    .subscribe(res => this.diseaseBranches = res);
+                this.router.navigate(['./'], { relativeTo: this.route });
+                // this.router.navigate(['/']);
+            }
+        );
     }
 
 }
 
 @Component({
-    selector: 'jhi-disease-branch-create',
-    template: `
-      <div class="modal-header">
-        <h4 class="modal-title">Hi there!</h4>
-        <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Hello, {{name}}!</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
-      </div>
-    `
+    selector: 'jhi-disease-branch-delete-modal',
+    templateUrl: './disease-branch-delete-modal.component.html'
 })
 export class DiseaseBranchDeleteModalComponent {
-    @Input() name;
 
-    constructor(public activeModal: NgbActiveModal) { }
+    @Input() id: number;
+
+    @Input() name: string;
+
+    constructor(public activeModal: NgbActiveModal
+        , public diseaseMapService: DiseaseMapService) { }
+
+    confirmDelete() {
+        this.diseaseMapService.deattachDiseaseBranch(this.id)
+            .subscribe(any => this.activeModal.dismiss(true));
+    }
+
+    previousState() {
+        window.history.back();
+    }
+
 }

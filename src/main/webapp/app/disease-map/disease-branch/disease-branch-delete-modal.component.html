@@ -1,0 +1,16 @@
+<div class="modal-header">
+
+    <h4 class="modal-title">地图删除</h4>
+    <button type="button" class="close btn btn-primary" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+
+    </button>
+</div>
+<div class="modal-body">
+    <ngb-alert [type]="'danger'">确认删除<span class = "text-primary">{{name}}</span>吗?</ngb-alert>
+    <span class="text-danger">删除后无法恢复!</span>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-info" (click)="activeModal.close('Close click')"><fa-icon [icon]="'ban'"></fa-icon>取消</button>
+    <button class = "btn btn-danger" (click)="confirmDelete()"><fa-icon [icon]="'times'"></fa-icon>删除</button>
+</div>
