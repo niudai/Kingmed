@@ -15,15 +15,15 @@ import { UserRouteAccessService } from 'app/core';
         RouterModule.forChild([
             {
                 path: 'service-supplies',
-                loadChildren: './service-supplies/service-supplies.module#ServiceSuppliesModule'
+                loadChildren: () => import('./service-supplies/service-supplies.module').then(m => m.ServiceSuppliesModule)
             },
             {
                 path: 'service-platform',
-                loadChildren: './service-platform/service-platform.module#ServicePlatformModule'
+                loadChildren: () => import('./service-platform/service-platform.module').then(m => m.ServicePlatformModule)
             },
             {
                 path: 'service-application',
-                loadChildren: './service-application/service-application.module#ServiceApplicationModule'
+                loadChildren: () => import('./service-application/service-application.module').then(m => m.ServiceApplicationModule)
             },
             {
                 path: 'service',

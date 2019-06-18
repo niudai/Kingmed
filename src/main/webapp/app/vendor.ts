@@ -52,7 +52,9 @@ import {
     faDownload,
     faFileAlt,
     faMagic,
-    faUserFriends
+    faUserFriends,
+    faWindowClose,
+    faArrowRight
 } from '@fortawesome/free-solid-svg-icons';
 import { literalArr } from '@angular/compiler/src/output/output_ast';
 
@@ -104,5 +106,7 @@ library.add(faDownload);
 library.add(faFileAlt);
 library.add(faMagic);
 library.add(faUserFriends);
+library.add(faWindowClose);
+library.add(faArrowRight);
 
 // jhipster-needle-add-element-to-vendor - JHipster will add new menu items here

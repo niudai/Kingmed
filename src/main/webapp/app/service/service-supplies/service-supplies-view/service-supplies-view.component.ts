@@ -1,7 +1,6 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { SERVER_API_URL } from 'app/app.constants';
-import { routerNgProbeToken } from '@angular/router/src/router_module';
 
 @Component({
     selector: 'jhi-service-supplies-view',

@@ -67,6 +67,14 @@ public class DiseaseMapService {
     }
 
     /**
+     * get disease branch.
+     * @return
+     */
+    public DiseaseBranch getDiseaseBranch(Long diseaseBranchId) {
+        return diseaseBranchRepository.findById(diseaseBranchId).get();
+    }
+
+    /**
      * get all disease maps in a disease branch
      * @param diseaseBranchId
      * @return

@@ -11,13 +11,13 @@ REM POST api/disease-map/get-all-disease-branch : Create a new Disease
 curl -X GET http://localhost/api/disease-map/get-all-disease-branch
 
 REM GET /get-all-disease-map/{diseaseBranchId} :
-curl -X GET http://localhost/api/disease-map/get-all-disease-map/1
+curl -X GET http://localhost/api/disease-map/get-all-disease-map/35
 
 REM GET api/deattach-disease-branch/{diseaseBranchId} :
 curl -X GET http://localhost/api/disease-map/deattach-disease-branch/2
 
 REM POST /attach-disease-map-to-disease-branch/{diseaseBranchId} :
-curl -X POST --header "Content-Type: application/json" -d '{"name": "DiseaseMap1" }'   http://localhost/api/disease-map/attach-disease-map-to-disease-branch/1
+curl -X POST --header "Content-Type: application/json" -d '{"name": "DiseaseMap2" }'   http://localhost/api/disease-map/attach-disease-map-to-disease-branch/35
 
 REM DELETE /delete-disease-map/{diseaseMapId} : ***
 curl -X DELETE   http://localhost/api/disease-map/delete-disease-map/1

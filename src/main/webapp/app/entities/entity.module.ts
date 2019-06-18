@@ -6,27 +6,27 @@ import { RouterModule } from '@angular/router';
         RouterModule.forChild([
             {
                 path: 'bank-account',
-                loadChildren: './bank-account/bank-account.module#JhipsterElasticsearchSampleApplicationBankAccountModule'
+                loadChildren: () => import('./bank-account/bank-account.module').then(m => m.JhipsterElasticsearchSampleApplicationBankAccountModule)
             },
             {
                 path: 'label',
-                loadChildren: './label/label.module#JhipsterElasticsearchSampleApplicationLabelModule'
+                loadChildren: () => import('./label/label.module').then(m => m.JhipsterElasticsearchSampleApplicationLabelModule)
             },
             {
                 path: 'operation',
-                loadChildren: './operation/operation.module#JhipsterElasticsearchSampleApplicationOperationModule'
+                loadChildren: () => import('./operation/operation.module').then(m => m.JhipsterElasticsearchSampleApplicationOperationModule)
             },
             {
                 path: 'disease-guang-dong',
-                loadChildren: './disease-guang-dong/disease-guang-dong.module#JhipsterElasticsearchSampleApplicationDiseaseGuangDongModule'
+                loadChildren: () => import('./disease-guang-dong/disease-guang-dong.module').then(m => m.JhipsterElasticsearchSampleApplicationDiseaseGuangDongModule)
             },
             {
                 path: 'q-arobot',
-                loadChildren: './q-arobot/q-arobot.module#JhipsterElasticsearchSampleApplicationQArobotModule'
+                loadChildren: () => import('./q-arobot/q-arobot.module').then(m => m.JhipsterElasticsearchSampleApplicationQArobotModule)
             },
             {
                 path: 'disease-xi-an',
-                loadChildren: './disease-xi-an/disease-xi-an.module#JhipsterElasticsearchSampleApplicationDiseaseXiAnModule'
+                loadChildren: () => import('./disease-xi-an/disease-xi-an.module').then(m => m.JhipsterElasticsearchSampleApplicationDiseaseXiAnModule)
             }
             /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
         ])

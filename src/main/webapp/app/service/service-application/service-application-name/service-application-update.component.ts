@@ -1,7 +1,6 @@
 import { ServiceApplicationService } from './../service-application.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { routerNgProbeToken } from '@angular/router/src/router_module';
 
 @Component({
     selector: 'jhi-service-application-update',

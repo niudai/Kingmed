@@ -25,6 +25,10 @@ export class DiseaseMapService {
         return this.http.get<DiseaseBranch[]>(`${this.diseaseMapUrl}/get-all-disease-branch`, { observe: 'body'});
     }
 
+    getDiseaseBranch(diseaseBranchId: number) {
+        return this.http.get<DiseaseBranch>(`${this.diseaseMapUrl}/get-disease-branch/${diseaseBranchId}`, { observe: 'body'});
+    }
+
     getAllDiseaseMap(diseaseBranchId: number) {
         return this.http.get<DiseaseMap[]>(`${this.diseaseMapUrl}/get-all-disease-map/${diseaseBranchId}`, { observe: 'body'});
     }

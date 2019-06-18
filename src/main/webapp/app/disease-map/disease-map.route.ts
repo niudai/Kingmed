@@ -23,6 +23,15 @@ export const SERIVCE_ROUTE: Routes = [
             pageTitle: 'global.menu.entities.diseaseMap'
         },
         canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'view-disease-map/:diseaseBranchId',
+        component: DiseaseMapComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'global.menu.entities.diseaseMap'
+        },
+        canActivate: [UserRouteAccessService]
     }
 
 ];

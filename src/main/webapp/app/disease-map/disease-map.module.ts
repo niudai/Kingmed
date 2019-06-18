@@ -3,7 +3,8 @@ import { DiseaseMapAssociateQArobotComponent } from './disease-map-associate-q-a
 import { DiseaseMapAssociateDiseaseXiAnComponent } from './disease-map-associate-disease-xi-an/disease-branch-map-associate-disease-xi-an.component';
 import { JhipsterElasticsearchSampleApplicationSharedModule } from './../shared/shared.module';
 import { JhipsterElasticsearchSampleApplicationSharedCommonModule } from './../shared/shared-common.module';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+// import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { DiseaseBranchComponent, DiseaseBranchDeleteModalComponent } from './disease-branch/disease-branch.component';
 import { DiseaseMapComponent } from './disease-map/disease-map.component';
@@ -14,38 +15,41 @@ import { DiseaseBranchCreateDiseaseMapComponent } from './disease-branch-create-
 import { SERIVCE_ROUTE } from './disease-map.route';
 import { JhiLanguageService } from 'ng-jhipster';
 import { JhiLanguageHelper } from 'app/core';
+import { NgModule } from '@angular/core';
+import { MatButtonModule, MatCheckbox, MatCardModule } from '@angular/material';
+// import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/compiler/src/core';
 
 @NgModule({
-  declarations: [
-      DiseaseBranchComponent
-    , DiseaseMapComponent
-    , DiseaseBranchCreateComponent
-    , DiseaseBranchDeleteComponent
-    , DiseaseMapAssociateQArobotComponent
-    , DiseaseMapAssociateDiseaseXiAnComponent
-    , DiseaseMapCreateComponent
-    , DiseaseBranchCreateDiseaseMapComponent
-    , DiseaseBranchDeleteModalComponent
-],
+    declarations: [
+        DiseaseBranchComponent
+        , DiseaseMapComponent
+        , DiseaseBranchCreateComponent
+        , DiseaseBranchDeleteComponent
+        , DiseaseMapAssociateQArobotComponent
+        , DiseaseMapAssociateDiseaseXiAnComponent
+        , DiseaseMapCreateComponent
+        , DiseaseBranchCreateDiseaseMapComponent
+        , DiseaseBranchDeleteModalComponent
+    ],
     entryComponents: [
         DiseaseBranchDeleteModalComponent
     ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(SERIVCE_ROUTE),
-    JhipsterElasticsearchSampleApplicationSharedModule
-  ],
-  exports: [      DiseaseBranchComponent
-    , DiseaseMapComponent
-    , DiseaseBranchCreateComponent
-    , DiseaseBranchDeleteComponent
-    , DiseaseMapAssociateQArobotComponent
-    , DiseaseMapAssociateDiseaseXiAnComponent
-    , DiseaseMapCreateComponent
-    , DiseaseBranchCreateDiseaseMapComponent, CommonModule,
-    JhipsterElasticsearchSampleApplicationSharedModule],
-  providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    imports: [
+        MatCardModule,
+        RouterModule.forChild(SERIVCE_ROUTE),
+        JhipsterElasticsearchSampleApplicationSharedModule
+    ],
+    exports: [DiseaseBranchComponent
+        , DiseaseMapComponent
+        , DiseaseBranchCreateComponent
+        , DiseaseBranchDeleteComponent
+        , DiseaseMapAssociateQArobotComponent
+        , DiseaseMapAssociateDiseaseXiAnComponent
+        , DiseaseMapCreateComponent
+        , DiseaseBranchCreateDiseaseMapComponent, CommonModule,
+        JhipsterElasticsearchSampleApplicationSharedModule],
+    providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }],
+    // schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class DiseaseMapModule {
     constructor(private languageService: JhiLanguageService, private languageHelper: JhiLanguageHelper) {
@@ -55,4 +59,4 @@ export class DiseaseMapModule {
             }
         });
     }
- }
+}
