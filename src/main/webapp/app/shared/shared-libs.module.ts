@@ -1,3 +1,4 @@
+import { MatButtonModule, MatTreeModule, MatCardModule, MatIconModule } from '@angular/material';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -9,7 +10,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
     imports: [NgbModule.forRoot(), InfiniteScrollModule, CookieModule.forRoot(), FontAwesomeModule],
-    exports: [FormsModule, CommonModule, NgbModule, NgJhipsterModule, InfiniteScrollModule, FontAwesomeModule]
+    exports: [FormsModule, CommonModule, NgbModule, NgJhipsterModule, InfiniteScrollModule, FontAwesomeModule
+        , MatButtonModule, MatTreeModule, MatCardModule, MatIconModule]
 })
 export class JhipsterElasticsearchSampleApplicationSharedLibsModule {
     static forRoot() {
