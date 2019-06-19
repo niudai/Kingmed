@@ -7,7 +7,7 @@ import { JhipsterElasticsearchSampleApplicationSharedCommonModule } from './../s
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { DiseaseBranchComponent, DiseaseBranchDeleteModalComponent } from './disease-branch/disease-branch.component';
-import { DiseaseMapComponent } from './disease-map/disease-map.component';
+import { DiseaseMapComponent, DiseaseMapActionBottomSheetComponent } from './disease-map/disease-map.component';
 import { DiseaseBranchCreateComponent } from './disease-branch-create/disease-branch-create.component';
 import { DiseaseBranchDeleteComponent } from './disease-branch-delete/disease-branch-delete.component';
 import { DiseaseMapCreateComponent } from './disease-map-create/disease-map-create.component';
@@ -16,10 +16,15 @@ import { SERIVCE_ROUTE } from './disease-map.route';
 import { JhiLanguageService } from 'ng-jhipster';
 import { JhiLanguageHelper } from 'app/core';
 import { NgModule } from '@angular/core';
-import { MatButtonModule, MatCheckbox, MatCardModule } from '@angular/material';
+import { ReactiveFormsModule } from '@angular/forms';
 // import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/compiler/src/core';
 
 @NgModule({
+    imports: [
+        RouterModule.forChild(SERIVCE_ROUTE),
+        JhipsterElasticsearchSampleApplicationSharedModule,
+        ReactiveFormsModule,
+    ],
     declarations: [
         DiseaseBranchComponent
         , DiseaseMapComponent
@@ -30,24 +35,12 @@ import { MatButtonModule, MatCheckbox, MatCardModule } from '@angular/material';
         , DiseaseMapCreateComponent
         , DiseaseBranchCreateDiseaseMapComponent
         , DiseaseBranchDeleteModalComponent
+        , DiseaseMapActionBottomSheetComponent
     ],
     entryComponents: [
         DiseaseBranchDeleteModalComponent
+        , DiseaseMapActionBottomSheetComponent
     ],
-    imports: [
-        MatCardModule,
-        RouterModule.forChild(SERIVCE_ROUTE),
-        JhipsterElasticsearchSampleApplicationSharedModule
-    ],
-    exports: [DiseaseBranchComponent
-        , DiseaseMapComponent
-        , DiseaseBranchCreateComponent
-        , DiseaseBranchDeleteComponent
-        , DiseaseMapAssociateQArobotComponent
-        , DiseaseMapAssociateDiseaseXiAnComponent
-        , DiseaseMapCreateComponent
-        , DiseaseBranchCreateDiseaseMapComponent, CommonModule,
-        JhipsterElasticsearchSampleApplicationSharedModule],
     providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }],
     // schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

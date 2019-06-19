@@ -1,3 +1,4 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import './vendor.ts';
 
@@ -30,6 +31,7 @@ import { DiseaseMapComponent } from './disease-map/disease-map/disease-map.compo
 @NgModule({
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         Ng2Webstorage.forRoot({ prefix: 'jhi', separator: '-' }),
         NgJhipsterModule.forRoot({
             // set below to true to make alerts look like toast
@@ -54,21 +56,21 @@ import { DiseaseMapComponent } from './disease-map/disease-map/disease-map.compo
             useClass: AuthInterceptor,
             multi: true
         },
-        // {
-        //     provide: HTTP_INTERCEPTORS,
-        //     useClass: AuthExpiredInterceptor,
-        //     multi: true
-        // },
-        // {
-        //     provide: HTTP_INTERCEPTORS,
-        //     useClass: ErrorHandlerInterceptor,
-        //     multi: true
-        // },
-        // {
-        //     provide: HTTP_INTERCEPTORS,
-        //     useClass: NotificationInterceptor,
-        //     multi: true
-        // }
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthExpiredInterceptor,
+            multi: true
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: ErrorHandlerInterceptor,
+            multi: true
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: NotificationInterceptor,
+            multi: true
+        }
     ],
     bootstrap: [JhiMainComponent]
 })
