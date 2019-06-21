@@ -41,4 +41,8 @@ export class DiseaseMapService {
         return this.http.post<any>(`${this.diseaseMapUrl}/attach-disease-map-to-disease-branch/${diseaseBranchId}`, diseaseMap, {observe: 'body'});
     }
 
+    attachDiseaseMapToDiseaseMap(diseaseMap: DiseaseMap, diseaseMapId: number) {
+        return this.http.post<any>(`${this.diseaseMapUrl}/attach-disease-map-to-disease-map/${diseaseMapId}`, diseaseMap, {observe: 'body'});
+    }
+
 }
