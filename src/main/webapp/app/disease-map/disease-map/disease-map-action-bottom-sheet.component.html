@@ -1,21 +1,25 @@
 <mat-nav-list>
         <a  mat-list-item (click)="openLink($event)">
-          <span mat-line>Google Keep</span>
-          <span mat-line>Add to a note</span>
+          <span mat-line>关联QA</span>
+          <span mat-line></span>
         </a>
 
         <a  mat-list-item (click)="openLink($event)">
-          <span mat-line>Google Docs</span>
+          <span mat-line>关联项目</span>
           <span mat-line>Embed in a document</span>
         </a>
 
         <a  mat-list-item (click)="openLink($event)">
-          <span mat-line>Google Plus</span>
+          <span mat-line>添加子地图</span>
           <span mat-line>Share with your friends</span>
         </a>
 
         <a  mat-list-item (click)="openLink($event)">
-          <span mat-line>Google Hangouts</span>
+                <span mat-line>删除<span class = "text-primary">{{data.diseaseMap.name}}</span></span>
+                <span mat-line>Share with your friends</span>
+        </a>
+        <a  mat-list-item (click)="openLink($event)">
+          <span mat-line>关闭</span>
           <span mat-line>Show to your coworkers</span>
         </a>
 </mat-nav-list>
