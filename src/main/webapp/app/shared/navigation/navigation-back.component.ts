@@ -12,7 +12,7 @@ import { JhiAlertService } from 'ng-jhipster';
             </div>
         </div>`
 })
-export class Navigatio implements OnInit, OnDestroy {
+export class NavigationBackComponent implements OnInit, OnDestroy {
     alerts: any[];
 
     constructor(private alertService: JhiAlertService) {}
@@ -30,5 +30,9 @@ export class Navigatio implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.alerts = [];
+    }
+
+    previousState() {
+        window.history.back();
     }
 }

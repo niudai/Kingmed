@@ -1,12 +1,13 @@
 import { DiseaseBranch } from './../../shared/model/disease-branch.model';
 
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DiseaseMapService } from './../disease-map.service';
 import { IDiseaseMap, DiseaseMap } from 'app/shared/model/disease-map.model';
 import { IDiseaseBranch } from 'app/shared/model/disease-branch.model';
 import { Component, OnInit, Inject } from '@angular/core';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource, MatBottomSheet, MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA, MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
+import { relative } from 'path';
 
 @Component({
     selector: 'jhi-disease-map',
@@ -22,7 +23,8 @@ export class DiseaseMapComponent implements OnInit {
         (node => node.diseaseMaps);
     constructor(protected diseaseMapService: DiseaseMapService
         , protected route: ActivatedRoute
-        , protected bottomSheet: MatBottomSheet) { }
+        , protected bottomSheet: MatBottomSheet
+        , protected router: Router) { }
 
     public hasChild = (_: number, node: IDiseaseMap) => !!node.diseaseMaps && node.diseaseMaps.length > 0;
 
@@ -57,6 +59,10 @@ export class DiseaseMapComponent implements OnInit {
             .subscribe(diseaseMaps => this.dataSource.data = diseaseMaps);
         this.diseaseMapService.getDiseaseBranch(this.id)
             .subscribe(diseaseBranch => this.diseaseBranch = diseaseBranch);
+    }
+
+    previousState() {
+        this.router.navigate(['../../'], { relativeTo: this.route });
     }
 
 }

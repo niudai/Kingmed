@@ -1,4 +1,7 @@
-<mat-card>{{diseaseBranch.name}} <button mat-mini-fab color="primary" (click)="openBranchBottomSheet()" class = "add">+</button></mat-card>
+<mat-card>{{diseaseBranch.name}}
+    <button mat-mini-fab color="primary" (click)="openBranchBottomSheet()" class = "add">+</button>
+    <button mat-raised-button (click) = "previousState()" class = "nav-back"><fa-icon [icon]="'arrow-left'"></fa-icon></button>
+</mat-card>
 <!-- <button mat-raised-button (click)="openBranchBottomSheet()">Open file</button> -->
 <br>
 <div class="container col-12">
