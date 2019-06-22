@@ -84,10 +84,55 @@ export class DiseaseMapActionBottomSheetComponent {
             const diseaseMap: DiseaseMap = new DiseaseMap();
             diseaseMap.name = result;
             this.diseaseMapService
-            .attachDiseaseMapToDiseaseMap(diseaseMap, this.data.diseaseMap.id).subscribe();
+            .attachDiseaseMapToDiseaseMap(this.data.diseaseMap.id, result).subscribe();
             console.log('The dialog was closed');
         });
       }
+
+    associateWithDiseaseXiAn(): void {
+        const dialogRef = this.dialog.open(DiseaseMapAssociateDialogComponent, {
+            data: {
+                input: true,
+                title: '项目关联',
+                description: '输入项目ID:',
+                }
+          });
+          dialogRef.afterClosed().subscribe(result => {
+              this.diseaseMapService
+              .associateWithDiseaseXiAn(this.data.diseaseMap.id, result).subscribe();
+              console.log('The dialog was closed');
+          });
+    }
+
+    associateWithQArobot(): void {
+        const dialogRef = this.dialog.open(DiseaseMapAssociateDialogComponent, {
+            data: {
+                input: true,
+                title: 'QA关联',
+                description: '输入QA的ID:',
+                }
+            });
+          dialogRef.afterClosed().subscribe(result => {
+              this.diseaseMapService
+              .associateWithQArobot(this.data.diseaseMap.id, result).subscribe();
+              console.log('The dialog was closed');
+          });
+    }
+
+    deleteDiseaseMap(): void {
+        const dialogRef = this.dialog.open(DiseaseMapAssociateDialogComponent, {
+            data: {
+                input: false,
+                title: '删除地图',
+                description: '确定删除?',
+                }
+            });
+          dialogRef.afterClosed().subscribe(result => {
+              this.diseaseMapService
+              .deleteDiseaseMap(this.data.diseaseMap.id).subscribe();
+              console.log('The dialog was closed');
+          });
+    }
 }
 
 @Component({
@@ -143,7 +188,7 @@ export class DiseaseBranchCreateDiseaseMapDialogComponent implements OnInit {
          }
 
     ngOnInit(): void {
-        throw new Error("Method not implemented.");
+        throw new Error('Method not implemented.');
     }
 
     onNoClick(): void {
@@ -154,6 +199,40 @@ export class DiseaseBranchCreateDiseaseMapDialogComponent implements OnInit {
     //     this.diseaseMapService
     //         .attachDiseaseMapToDiseaseBranch(this.diseaseMap, this.data.diseaseBranch.id);
     // }
+
+    previousState() {
+        window.history.back();
+    }
+
+}
+
+export interface AssociateDialog {
+    title?: string;
+    description?: string;
+    id?: number;
+    input?: boolean;
+}
+
+@Component({
+    selector: 'jhi-disease-map-associate-dialog',
+    templateUrl: './disease-map-associate-dialog.component.html',
+})
+export class DiseaseMapAssociateDialogComponent implements OnInit {
+
+    diseaseMap: IDiseaseMap;
+
+    constructor(
+        public dialogRef: MatDialogRef<DiseaseBranchCreateDiseaseMapDialogComponent>,
+        @Inject(MAT_DIALOG_DATA) public data
+        , protected diseaseMapService: DiseaseMapService ) {
+         }
+
+    ngOnInit(): void {
+    }
+
+    onNoClick(): void {
+        this.dialogRef.close();
+    }
 
     previousState() {
         window.history.back();

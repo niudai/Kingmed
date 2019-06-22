@@ -4,7 +4,7 @@ export interface IDiseaseMap {
     id?: number;
     name?: string;
     diseaseMaps?: IDiseaseMap[];
-    qArobots?: IQArobot[];
+    qarobots?: IQArobot[];
     diseaseXiAns?: IDiseaseXiAn[];
 }
 
@@ -13,7 +13,7 @@ export class DiseaseMap implements IDiseaseMap {
         public id?: number,
         public name?: string,
         public diseaseMaps?: IDiseaseMap[],
-        public qArobots?: IQArobot[],
+        public qarobots?: IQArobot[],
         public diseaseXiAns?: IDiseaseXiAn[]
     ) {}
 }

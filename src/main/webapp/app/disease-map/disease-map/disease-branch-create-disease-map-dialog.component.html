@@ -9,29 +9,3 @@
   <button mat-button (click)="onNoClick()">取消</button>
   <button mat-button  [mat-dialog-close]="data.name" cdkFocusInitial>确定</button>
 </div>
-
-<!-- <div class="row justify-content-center">
-        <div class="col-12">
-            <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-                <h2 id="jhi-disease-xi-an-heading"
-                    jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.home.createOrEditLabel">Create
-                    or edit a Disease Guang Dong</h2>
-                <div>
-                    <div class="form-group">
-                        <label class="form-control-label"
-                            for="field_name">QA ID:</label>
-                        <input type="text" class="form-control" name="name" id="field_name" [(ngModel)]="diseaseMap.name" />
-                    </div>
-                </div>
-                <div>
-                    <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
-                        <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-                    </button>
-                    <button type="submit" id="save-entity"
-                        class="btn btn-primary">
-                        <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div> -->

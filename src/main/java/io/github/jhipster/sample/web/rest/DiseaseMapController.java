@@ -105,6 +105,11 @@ public class DiseaseMapController {
         diseaseMapService.associateWithDiseaseXiAn(diseaseMapId, diseaseXiAnId);
     }
 
+    @GetMapping("/deassocaite-with-disease-xi-an/{diseaseMapId}/{diseaseXiAnId}")
+    public void deassociateWithDiseaseXiAn(@PathVariable Long diseaseMapId, @PathVariable Long diseaseXiAnId) {
+       diseaseMapService.deassociateWithDiseaseXiAn(diseaseMapId, diseaseXiAnId);
+   }
+
     /**
      * associate diseaseMap with QArobot.
      * @param diseaseMapId

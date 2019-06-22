@@ -128,6 +128,21 @@ public class DiseaseMapService {
     }
 
     /**
+     * deassociate diseaseMap with a diseaseXiAn
+     * @param diseaseMapId
+     * @param diseaseXiAnId
+     */
+    // @Transactional
+    // public void deassociateWithDiseaseXiAn(Long diseaseMapId, Long diseaseXiAnId) {
+    //     DiseaseMap diseaseMap = diseaseMapRepository.findById(diseaseMapId).get();
+    //     DiseaseXiAn diseaseXiAn = diseaseXiAnRepository.findById(diseaseXiAnId).get();
+    //     for (diseaseXiAn: diseaseMap.getDiseaseXiAns()) {
+
+    //     }
+    //     diseaseMap.getDiseaseXiAns().(diseaseXiAn);
+    // }
+
+    /**
      * associate diseaseMap with QArobot.
      * @param diseaseMapId
      * @param qArobotId

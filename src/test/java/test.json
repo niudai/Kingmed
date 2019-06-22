@@ -7,3 +7,304 @@
         }
     ]
 }
+
+[
+    {
+        "id": 68,
+        "name": "撒地方",
+        "diseaseMaps": [
+            {
+                "id": 74,
+                "name": "子地图",
+                "diseaseMaps": [
+                    {
+                        "id": 87,
+                        "name": "新子地图",
+                        "diseaseMaps": [],
+                        "diseaseXiAns": [
+                            {
+                                "id": 5888,
+                                "prices": [],
+                                "qarobots": null,
+                                "applications": null,
+                                "suppliess": null,
+                                "subsidiary": "广州",
+                                "name": "RB1基因突变检测 \r\n(Rb,测序+MLPA)",
+                                "projectCode": "LIR系统：1041 \r\nKMCS系统：80715",
+                                "chargeCode": null,
+                                "tollStandard": "2760",
+                                "supplement": "EDTA抗凝外周血/1-3ml",
+                                "sample": "EDTA.K2紫色真空采血管 (阳普)，规格：2ml/支",
+                                "tutorial": "1.申请时可单独申请突变检测和大片段缺失与插入检测，也可同时申请 \r\n2.家庭携带已知基因突变时，仅需申请已知位点检测即可。 \r\n3.★科研项目",
+                                "preservation": "【室温保存】24h 【冷藏保存】72h【冷冻保存】禁止",
+                                "transportation": null,
+                                "applicationUnitType": "实体肿瘤易感基因检测申请单",
+                                "applicationRemark": null,
+                                "medicalMethod": "脱氧核糖核酸 (DNA) 测序 MLPA 法",
+                                "projectConcourse": "分子病理室",
+                                "hurryDepartment": null,
+                                "reportingTime": "30天",
+                                "clinicalApplication": "1.遗传性视网膜母细胞瘤的鉴别诊断 \r\n2.不同人群风险评估",
+                                "series": "适应征检测-遗传性视网膜母细胞瘤",
+                                "subSeries": null,
+                                "remarks": null
+                            },
+                            {
+                                "id": 5688,
+                                "prices": [],
+                                "qarobots": null,
+                                "applications": null,
+                                "suppliess": null,
+                                "subsidiary": "广州",
+                                "name": "TFE3基因重排",
+                                "projectCode": "81510",
+                                "chargeCode": "/",
+                                "tollStandard": "1900",
+                                "supplement": "固定组织、石蜡白片",
+                                "sample": null,
+                                "tutorial": "1.癌组织、癌转移部位切除、穿刺组织石蜡包埋标本或细胞学标本（加10%中性福尔马林液固定6~72h）。\r\n2.石蜡蜡块及石蜡切片：可送检石蜡蜡块；送检石蜡切片者，切片保存时间必须≤6周，石蜡组织防脱切片(未染色)4~8张，厚度4~6μm，65℃烘烤3个小时以上。",
+                                "preservation": "【室温保存】长期 【冷藏保存】/【冷冻保存】/",
+                                "transportation": null,
+                                "applicationUnitType": null,
+                                "applicationRemark": null,
+                                "medicalMethod": "荧光原位杂交(FISH)",
+                                "projectConcourse": "细胞遗传室",
+                                "hurryDepartment": null,
+                                "reportingTime": "7天",
+                                "clinicalApplication": "TFE3基因重排与多种肿瘤的发生有关，可用于此类肿瘤的辅助诊断。 \r\n（1）MiTF-TFE转位相关肾细胞癌：常见于儿童，约占儿童肾肿瘤的5%，此类肿瘤的特点是TFE3（Xp11.2）或TFEB（6p21）基因转位，并导致相应蛋白高表达。该种肾细胞癌对辅助治疗均不敏感，但有文献报道酪氨酸激酶抑制剂和mTOR抑制剂靶向治疗对部分患者有效。 \r\n（2）腺泡状软组织肉瘤：较少见，仅占所有软组织肉瘤的0.4-1.0%，具有特异性的染色体易位der(17)(X;17)(p11;q25)， 产生ASPL-TFE3融合基因，TFE3蛋白亦高表达。 \r\n（3）上皮样血管内皮瘤： 有5%的上皮样血管内皮瘤存在YAP1-TFE3基因融合t(11;X)，另外95%的上皮样血管内皮瘤存在WWTR1-CAMTA1基因融合。（4） PEComa：新近研究发现约23%的PEComa病例中存在TFE3基因重排（Xp11.2），被认为是PEComa的一种特殊亚型，发病机制与经典PEComa有所不同，采用mTOR抑制剂可能无效。",
+                                "series": "/",
+                                "subSeries": null,
+                                "remarks": null
+                            }
+                        ],
+                        "qarobots": [
+                            {
+                                "id": 1,
+                                "diseaseXiAns": null,
+                                "diseaseSeries": null,
+                                "projectSeries": null,
+                                "level": null,
+                                "questionType": "拉拉地方瓦尔额",
+                                "question": "测试问题1",
+                                "answer": null,
+                                "updateDate": null,
+                                "submitter": null,
+                                "qaSubsidiary": null,
+                                "specialProcess": null,
+                                "qaClass": null
+                            }
+                        ]
+                    },
+                    {
+                        "id": 89,
+                        "name": null,
+                        "diseaseMaps": [],
+                        "diseaseXiAns": [],
+                        "qarobots": []
+                    },
+                    {
+                        "id": 90,
+                        "name": null,
+                        "diseaseMaps": [],
+                        "diseaseXiAns": [],
+                        "qarobots": []
+                    }
+                ],
+                "diseaseXiAns": [
+                    {
+                        "id": 5639,
+                        "prices": [],
+                        "qarobots": null,
+                        "applications": null,
+                        "suppliess": null,
+                        "subsidiary": "广州",
+                        "name": "拉莫三嗪",
+                        "projectCode": "20678",
+                        "chargeCode": null,
+                        "tollStandard": "290",
+                        "supplement": "血清/血浆/0.5ml",
+                        "sample": "阳普无抗凝采血管(红色)（红头干燥管）或EDTA.K2紫色真空采血管 (阳普)，规格：2ml/支",
+                        "tutorial": "1.标本为新鲜血清或血浆。应避免使用溶血、脂血及浑浊标本。\r\n2.采血后及时离心▲分离血清或血浆。",
+                        "preservation": "【室温保存】/ 【冷藏保存】2-8℃7天【冷冻保存】-20℃2个月",
+                        "transportation": null,
+                        "applicationUnitType": "双联申请单",
+                        "applicationRemark": null,
+                        "medicalMethod": "均相酶免疫法",
+                        "projectConcourse": "血液室",
+                        "hurryDepartment": null,
+                        "reportingTime": "周二到周日检测，2天出报告",
+                        "clinicalApplication": "阿立哌唑主要用于治疗各类型的精神分裂症，对精神分裂症的阳性和阴性症状均有明显疗效。拉莫三嗪用于治疗癫痫，其严重不良反应与血液系统中的游离的药物浓度有关，且稳态的最高血药浓度在个体间差异额大。对给药患者血液中阿立哌唑或拉莫三嗪浓度进行监测可以保障临床安全合理用药，减少副作用及不良反应的发生。",
+                        "series": null,
+                        "subSeries": null,
+                        "remarks": null
+                    }
+                ],
+                "qarobots": []
+            },
+            {
+                "id": 86,
+                "name": "sd f",
+                "diseaseMaps": [],
+                "diseaseXiAns": [],
+                "qarobots": []
+            },
+            {
+                "id": 88,
+                "name": null,
+                "diseaseMaps": [],
+                "diseaseXiAns": [],
+                "qarobots": []
+            }
+        ],
+        "diseaseXiAns": [
+            {
+                "id": 5639,
+                "prices": [],
+                "qarobots": null,
+                "applications": null,
+                "suppliess": null,
+                "subsidiary": "广州",
+                "name": "拉莫三嗪",
+                "projectCode": "20678",
+                "chargeCode": null,
+                "tollStandard": "290",
+                "supplement": "血清/血浆/0.5ml",
+                "sample": "阳普无抗凝采血管(红色)（红头干燥管）或EDTA.K2紫色真空采血管 (阳普)，规格：2ml/支",
+                "tutorial": "1.标本为新鲜血清或血浆。应避免使用溶血、脂血及浑浊标本。\r\n2.采血后及时离心▲分离血清或血浆。",
+                "preservation": "【室温保存】/ 【冷藏保存】2-8℃7天【冷冻保存】-20℃2个月",
+                "transportation": null,
+                "applicationUnitType": "双联申请单",
+                "applicationRemark": null,
+                "medicalMethod": "均相酶免疫法",
+                "projectConcourse": "血液室",
+                "hurryDepartment": null,
+                "reportingTime": "周二到周日检测，2天出报告",
+                "clinicalApplication": "阿立哌唑主要用于治疗各类型的精神分裂症，对精神分裂症的阳性和阴性症状均有明显疗效。拉莫三嗪用于治疗癫痫，其严重不良反应与血液系统中的游离的药物浓度有关，且稳态的最高血药浓度在个体间差异额大。对给药患者血液中阿立哌唑或拉莫三嗪浓度进行监测可以保障临床安全合理用药，减少副作用及不良反应的发生。",
+                "series": null,
+                "subSeries": null,
+                "remarks": null
+            }
+        ],
+        "qarobots": []
+    },
+    {
+        "id": 69,
+        "name": "特",
+        "diseaseMaps": [
+            {
+                "id": 76,
+                "name": "子地图2",
+                "diseaseMaps": [
+                    {
+                        "id": 80,
+                        "name": "撒地方阿斯蒂",
+                        "diseaseMaps": [
+                            {
+                                "id": 83,
+                                "name": "委任为啊人瓦尔",
+                                "diseaseMaps": [
+                                    {
+                                        "id": 84,
+                                        "name": "wear安慰",
+                                        "diseaseMaps": [],
+                                        "diseaseXiAns": [],
+                                        "qarobots": []
+                                    }
+                                ],
+                                "diseaseXiAns": [],
+                                "qarobots": []
+                            },
+                            {
+                                "id": 85,
+                                "name": "瓦尔安危任瓦尔",
+                                "diseaseMaps": [],
+                                "diseaseXiAns": [],
+                                "qarobots": []
+                            }
+                        ],
+                        "diseaseXiAns": [],
+                        "qarobots": []
+                    }
+                ],
+                "diseaseXiAns": [],
+                "qarobots": []
+            },
+            {
+                "id": 77,
+                "name": null,
+                "diseaseMaps": [],
+                "diseaseXiAns": [],
+                "qarobots": []
+            }
+        ],
+        "diseaseXiAns": [],
+        "qarobots": []
+    },
+    {
+        "id": 70,
+        "name": "微软为",
+        "diseaseMaps": [
+            {
+                "id": 81,
+                "name": "撒地方安慰二完",
+                "diseaseMaps": [],
+                "diseaseXiAns": [],
+                "qarobots": []
+            }
+        ],
+        "diseaseXiAns": [],
+        "qarobots": []
+    },
+    {
+        "id": 71,
+        "name": "试点范围",
+        "diseaseMaps": [
+            {
+                "id": 75,
+                "name": null,
+                "diseaseMaps": [],
+                "diseaseXiAns": [],
+                "qarobots": []
+            }
+        ],
+        "diseaseXiAns": [],
+        "qarobots": []
+    },
+    {
+        "id": 72,
+        "name": "宫颈",
+        "diseaseMaps": [
+            {
+                "id": 82,
+                "name": "wearwear瓦尔人",
+                "diseaseMaps": [],
+                "diseaseXiAns": [],
+                "qarobots": []
+            }
+        ],
+        "diseaseXiAns": [],
+        "qarobots": []
+    },
+    {
+        "id": 73,
+        "name": "特殊子节点",
+        "diseaseMaps": [
+            {
+                "id": 78,
+                "name": "撒地方",
+                "diseaseMaps": [],
+                "diseaseXiAns": [],
+                "qarobots": []
+            }
+        ],
+        "diseaseXiAns": [],
+        "qarobots": []
+    },
+    {
+        "id": 79,
+        "name": null,
+        "diseaseMaps": [],
+        "diseaseXiAns": [],
+        "qarobots": []
+    }
+]

@@ -45,4 +45,24 @@ export class DiseaseMapService {
         return this.http.post<any>(`${this.diseaseMapUrl}/attach-disease-map-to-disease-map/${diseaseMapId}`, diseaseMap, {observe: 'body'});
     }
 
+    associateWithQArobot(diseaseMapId: number, qArobotId: number) {
+        return this.http.get<any>(`${this.diseaseMapUrl}/associate-with-q-arobot/${diseaseMapId}/${qArobotId}`, {observe: 'response'});
+    }
+
+    associateWithDiseaseXiAn(diseaseMapId: number, diseaseXiAnId: number) {
+        return this.http.get<any>(`${this.diseaseMapUrl}/assocaite-with-disease-xi-an/${diseaseMapId}/${diseaseXiAnId}`, {observe: 'response'});
+    }
+
+    deassociateWithQArobot(diseaseMapId: number, qArobotId: number) {
+        return this.http.get<any>(`${this.diseaseMapUrl}/deassociate-with-q-arobot/${diseaseMapId}/${qArobotId}`, {observe: 'response'});
+    }
+
+    deassociateWithDiseaseXiAn(diseaseMapId: number, diseaseXiAnId: number) {
+        return this.http.get<any>(`${this.diseaseMapUrl}/deassocaite-with-disease-xi-an/${diseaseMapId}/${diseaseXiAnId}`, {observe: 'response'});
+    }
+
+    deleteDiseaseMap(diseaseMapId: number) {
+        return this.http.delete<any>(`${this.diseaseMapUrl}/delete-disease-map/${diseaseMapId}`, {observe: 'response'});
+    }
+
 }

@@ -7,7 +7,7 @@ import { JhipsterElasticsearchSampleApplicationSharedCommonModule } from './../s
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { DiseaseBranchComponent, DiseaseBranchDeleteModalComponent } from './disease-branch/disease-branch.component';
-import { DiseaseMapComponent, DiseaseMapActionBottomSheetComponent, DiseaseBranchActionBottomSheetComponent, DiseaseBranchCreateDiseaseMapDialogComponent } from './disease-map/disease-map.component';
+import { DiseaseMapComponent, DiseaseMapActionBottomSheetComponent, DiseaseBranchActionBottomSheetComponent, DiseaseBranchCreateDiseaseMapDialogComponent, DiseaseMapAssociateDialogComponent } from './disease-map/disease-map.component';
 import { DiseaseBranchCreateComponent } from './disease-branch-create/disease-branch-create.component';
 import { DiseaseBranchDeleteComponent } from './disease-branch-delete/disease-branch-delete.component';
 import { DiseaseMapCreateComponent } from './disease-map-create/disease-map-create.component';
@@ -38,12 +38,14 @@ import { ReactiveFormsModule } from '@angular/forms';
         , DiseaseMapActionBottomSheetComponent
         , DiseaseBranchActionBottomSheetComponent
         , DiseaseBranchCreateDiseaseMapDialogComponent
+        , DiseaseMapAssociateDialogComponent
     ],
     entryComponents: [
         DiseaseBranchDeleteModalComponent
         , DiseaseMapActionBottomSheetComponent
         , DiseaseBranchActionBottomSheetComponent
         , DiseaseBranchCreateDiseaseMapDialogComponent
+        , DiseaseMapAssociateDialogComponent
     ],
     providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }],
     // schemas: [CUSTOM_ELEMENTS_SCHEMA]

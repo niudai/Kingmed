@@ -11,6 +11,10 @@
                         <fa-icon [icon]="'circle'"></fa-icon>{{node.name}}
                         <button mat-mini-fab color="primary" (click)="openMapBottomSheet(node)" class = "add">+</button>
                         <br>
+                        <mat-nav-list>
+                            <mat-list-item *ngFor="let diseaseXiAn of node.diseaseXiAns" [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'view']"><fa-icon [icon]="'eye'"></fa-icon> {{diseaseXiAn.name}}</mat-list-item>
+                            <mat-list-item *ngFor="let qarobot of node.qarobots" [routerLink]="['/q-arobot', qarobot.id, 'view']"> <fa-icon [icon]="'question'"></fa-icon>{{qarobot.question}}</mat-list-item>
+                        </mat-nav-list>
                         <hr>
                 </div>
             </li>
