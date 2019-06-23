@@ -90,7 +90,7 @@ export class DiseaseMapActionBottomSheetComponent {
             const diseaseMap: DiseaseMap = new DiseaseMap();
             diseaseMap.name = result;
             this.diseaseMapService
-            .attachDiseaseMapToDiseaseMap(this.data.diseaseMap.id, result).subscribe();
+            .attachDiseaseMapToDiseaseMap(diseaseMap, this.data.diseaseMap.id).subscribe();
             console.log('The dialog was closed');
         });
       }

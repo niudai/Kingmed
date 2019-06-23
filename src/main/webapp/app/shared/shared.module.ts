@@ -9,7 +9,6 @@ import {
     HasAnyAuthorityDirective
 } from './';
 import { NavigationBackComponent } from './navigation/navigation-back.component';
-
 @NgModule({
     imports: [JhipsterElasticsearchSampleApplicationSharedLibsModule, JhipsterElasticsearchSampleApplicationSharedCommonModule],
     declarations: [JhiLoginModalComponent, HasAnyAuthorityDirective, NavigationBackComponent],

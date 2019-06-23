@@ -100,15 +100,15 @@ public class DiseaseMapController {
      * @param diseaseMapId
      * @param diseaseXiAnId
      */
-    @GetMapping("/assocaite-with-disease-xi-an/{diseaseMapId}/{diseaseXiAnId}")
-     public void associateWithDiseaseXiAn(@PathVariable Long diseaseMapId, @PathVariable Long diseaseXiAnId) {
-        diseaseMapService.associateWithDiseaseXiAn(diseaseMapId, diseaseXiAnId);
-    }
+//     @GetMapping("/assocaite-with-disease-xi-an/{diseaseMapId}/{diseaseXiAnId}")
+//      public void associateWithDiseaseXiAn(@PathVariable Long diseaseMapId, @PathVariable Long diseaseXiAnId) {
+//         diseaseMapService.associateWithDiseaseXiAn(diseaseMapId, diseaseXiAnId);
+//     }
 
-    @GetMapping("/deassocaite-with-disease-xi-an/{diseaseMapId}/{diseaseXiAnId}")
-    public void deassociateWithDiseaseXiAn(@PathVariable Long diseaseMapId, @PathVariable Long diseaseXiAnId) {
-       diseaseMapService.deassociateWithDiseaseXiAn(diseaseMapId, diseaseXiAnId);
-   }
+//     @GetMapping("/deassocaite-with-disease-xi-an/{diseaseMapId}/{diseaseXiAnId}")
+//     public void deassociateWithDiseaseXiAn(@PathVariable Long diseaseMapId, @PathVariable Long diseaseXiAnId) {
+//        diseaseMapService.deassociateWithDiseaseXiAn(diseaseMapId, diseaseXiAnId);
+//    }
 
     /**
      * associate diseaseMap with QArobot.

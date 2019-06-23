@@ -1,5 +1,5 @@
 <mat-card>{{diseaseBranch.name}}
-    <button mat-mini-fab color="primary" (click)="openBranchBottomSheet()" class = "add">+</button>
+    <button mat-mini-fab color="primary" *jhiHasAnyAuthority="'ROLE_ADMIN'" (click)="openBranchBottomSheet()" class = "add">+</button>
     <button mat-raised-button (click) = "previousState()" class = "nav-back"><fa-icon [icon]="'arrow-left'"></fa-icon></button>
 </mat-card>
 <!-- <button mat-raised-button (click)="openBranchBottomSheet()">Open file</button> -->
@@ -12,7 +12,7 @@
 
                 <div>
                         <fa-icon [icon]="'circle'"></fa-icon>{{node.name}}
-                        <button mat-mini-fab color="primary" (click)="openMapBottomSheet(node)" class = "add">+</button>
+                        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" mat-mini-fab color="primary" (click)="openMapBottomSheet(node)" class = "add">+</button>
                         <br>
                         <mat-nav-list>
                             <mat-list-item *ngFor="let diseaseXiAn of node.diseaseXiAns" [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'view']"><fa-icon [icon]="'eye'"></fa-icon> {{diseaseXiAn.name}}</mat-list-item>

@@ -1,14 +1,13 @@
 <div class="container col-12">
-    <button class="btn btn-primary" [routerLink]="'attach-disease-branch'">创建一份新地图</button>
+    <button class="btn btn-primary" *jhiHasAnyAuthority="'ROLE_ADMIN'" [routerLink]="'attach-disease-branch'">创建一份新地图</button>
     <div class="row">
         <div *ngFor="let diseaseBranch of diseaseBranches" class="card col-sm-3">
             <div class="card-body">
                 <h5 class="card-title">{{diseaseBranch.name}}</h5>
                 <a href="#" class="btn btn-success" [routerLink]="['view-disease-map', diseaseBranch.id]"><fa-icon [icon]="'arrow-right'"></fa-icon>进入</a>
-                <button class="btn btn-danger" (click)="open(diseaseBranch)"><fa-icon [icon]="'times'"></fa-icon>删除</button>
+                <button class="btn btn-danger" *jhiHasAnyAuthority="'ROLE_ADMIN'" (click)="open(diseaseBranch)"><fa-icon [icon]="'times'"></fa-icon>删除</button>
             </div>
         </div>
-
     </div>
 </div>
 
