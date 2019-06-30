@@ -86,6 +86,10 @@ public class DiseaseXiAn implements Serializable {
     @Column(name = "name", length = 300)
     private String name;
 
+    @NotNull
+    @Column(nullable = false)
+    private boolean activated = false;
+
     @Size(max = 500)
     @Column(name = "project_code", length = 50)
     private String projectCode;
@@ -487,5 +491,13 @@ public class DiseaseXiAn implements Serializable {
             ", subSeries='" + getSubSeries() + "'" +
             ", remarks='" + getRemarks() + "'" +
             "}";
+    }
+
+    public boolean isActivated() {
+        return activated;
+    }
+
+    public void setActivated(boolean activated) {
+        this.activated = activated;
     }
 }

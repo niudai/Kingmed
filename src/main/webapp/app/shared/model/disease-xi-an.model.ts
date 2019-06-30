@@ -4,6 +4,7 @@ export interface IDiseaseXiAn {
     id?: number;
     subsidiary?: string;
     name?: string;
+    activated?: boolean;
     applications?: IFile[];
     suppliess?: IFile[];
     prices?: IPriceXiAn[];
@@ -32,6 +33,7 @@ export class DiseaseXiAn implements IDiseaseXiAn {
         public id?: number,
         public subsidiary?: string,
         public name?: string,
+        public activated?: boolean,
         public prices?: IPriceXiAn[],
         public projectCode?: string,
         public chargeCode?: string,

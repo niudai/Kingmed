@@ -46,6 +46,12 @@ public class DiseaseXiAnService {
     }
 
     @Transactional
+    public void activateDiseaseXiAn(Long id, Boolean activated) {
+        DiseaseXiAn diseaseXiAn = diseaseXiAnRepository.findById(id).get();
+        diseaseXiAn.setActivated(activated);
+    }
+
+    @Transactional
     public Collection<DiseaseXiAn> findDiseaseXiAnsOfQArobot(Long id) {
         QArobot qArobot = qArobotRepository.findById(id).get();
         qArobot.getDiseaseXiAns().size();

@@ -5,3 +5,11 @@
 fa-icon {
     color: white;
 }
+
+.activated {
+    color: rgb(122, 233, 122);
+}
+
+.deactivated {
+    color: red;
+}
