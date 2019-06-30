@@ -1,4 +1,3 @@
-import { NavigationBackComponent } from './navigation/navigation-back.component';
 import { NgModule } from '@angular/core';
 
 import {

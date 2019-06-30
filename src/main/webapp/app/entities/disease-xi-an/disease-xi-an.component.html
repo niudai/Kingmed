@@ -39,9 +39,11 @@
             <thead>
                 <tr>
                     <!-- <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
+                    <th><span>ID</span></th>
                     <th><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.name">Name</span>
                         <fa-icon [icon]="'sort'"></fa-icon>
                     </th>
+
                     <!-- <th><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.subsidiary">Subsidiary</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
                     <th *ngIf="windowWidth > 600"><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.price">价格</span>
                     <th ><span>检测科室</span>
@@ -54,6 +56,11 @@
             </thead>
             <tbody>
                 <tr *ngFor="let diseaseXiAn of diseaseXiAns">
+                        <td *ngIf = "windowWidth > 600" class="text-right">
+                                <div class="btn-group flex-btn-group-container">
+                                        <span>{{diseaseXiAn.id}}</span>
+                                </div>
+                            </td>
                     <!-- <td><a [routerLink]="['/disease-guang-dong', diseaseXiAn.id, 'view' ]">{{diseaseXiAn.id}}</a></td> -->
                     <td><a
                         [routerLink]="[diseaseXiAn.id, 'view' ]">{{diseaseXiAn.name}} - <strong>{{diseaseXiAn.subsidiary}}</strong></a>

@@ -11,20 +11,19 @@ import { ServicePlatformComponent } from './service-platform/service-platform.co
 import { UserRouteAccessService } from 'app/core';
 
 @NgModule({
-    imports: [JhipsterElasticsearchSampleApplicationSharedModule,
+    imports: [
         RouterModule.forChild([
             {
                 path: 'service-supplies',
-                loadChildren: () => import('./service-supplies/service-supplies.module').then(m => m.ServiceSuppliesModule)
+                loadChildren: './service-supplies/service-supplies.module#ServiceSuppliesModule'
             },
             {
                 path: 'service-platform',
-                loadChildren: () => import('./service-platform/service-platform.module').then(m => m.ServicePlatformModule)
+                loadChildren: './service-platform/service-platform.module#ServicePlatformModule'
             },
             {
                 path: 'service-application',
-                loadChildren: () => import('./service-application/service-application.module').then(m => m.ServiceApplicationModule)
-            },
+                loadChildren: './service-application/service-application.module#ServiceApplicationModule'            },
             {
                 path: 'service',
                 component: ServiceComponent,

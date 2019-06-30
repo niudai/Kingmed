@@ -27,16 +27,14 @@
         <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
             <li>
                 <div>
-                    <!-- <button mat-icon-button matTreeNodeToggle
-                              [attr.aria-label]="'toggle ' + node.name"> -->
-                    <!-- <mat-icon class="mat-icon-rtl-mirror">
-                          {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
-                        </mat-icon> -->
-                    <!-- </button> -->
-                    <fa-icon [icon]="'circle'"></fa-icon>{{node.name}}
-                    <button mat-mini-fab color="primary" class = "add" (click)="openMapBottomSheet(node)">+</button>
-                    <br>
-                    <hr>
+                        <fa-icon [icon]="'circle'"></fa-icon>{{node.name}}
+                        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" mat-mini-fab color="primary" (click)="openMapBottomSheet(node)" class = "add">+</button>
+                        <br>
+                        <mat-nav-list>
+                            <mat-list-item *ngFor="let diseaseXiAn of node.diseaseXiAns" [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'view']"><fa-icon [icon]="'eye'"></fa-icon> {{diseaseXiAn.name}}</mat-list-item>
+                            <mat-list-item *ngFor="let qarobot of node.qarobots" [routerLink]="['/q-arobot', qarobot.id, 'view']"> <fa-icon [icon]="'question'"></fa-icon>{{qarobot.question}}</mat-list-item>
+                        </mat-nav-list>
+                        <hr>
                 </div>
                 <ul [class.example-tree-invisible]="!treeControl.isExpanded(node)">
                     <ng-container matTreeNodeOutlet></ng-container>

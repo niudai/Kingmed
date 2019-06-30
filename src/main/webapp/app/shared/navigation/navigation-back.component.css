@@ -1,0 +1,10 @@
+.floating {
+    position: fixed;
+    bottom: 4px;
+    left: 4px;
+    background-color: rgb(241, 238, 56);
+}
+
+.nav-button {
+    margin: 4px;
+}

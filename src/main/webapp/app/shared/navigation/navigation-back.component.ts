@@ -3,7 +3,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 
 @Component({
     selector: 'jhi-navigation-back',
-    templateUrl: './navigation-back.component.html'
+    templateUrl: './navigation-back.component.html',
+    styleUrls: ['./navigation-back.component.css']
 })
 export class NavigationBackComponent implements OnInit, OnDestroy {
     alerts: any[];
