@@ -8,7 +8,7 @@ import { CookieModule } from 'ngx-cookie';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CdkTableModule } from '@angular/cdk/table';
 import { CdkTreeModule } from '@angular/cdk/tree';
-import { MatButtonModule, MatTreeModule, MatCardModule, MatIconModule, MatListModule, MatBottomSheetModule, MatDialogModule, MatInputModule, MatMenuModule } from '@angular/material';
+import { MatButtonModule, MatTreeModule, MatCardModule, MatIconModule, MatListModule, MatBottomSheetModule, MatDialogModule, MatInputModule, MatMenuModule, MatTooltipModule } from '@angular/material';
 
 @NgModule({
     imports: [
@@ -59,7 +59,7 @@ import { MatButtonModule, MatTreeModule, MatCardModule, MatIconModule, MatListMo
         // MatTableModule,
         // MatTabsModule,
         // MatToolbarModule,
-        // MatTooltipModule,
+        MatTooltipModule,
         MatTreeModule,
         // PortalModule,
         // ScrollingModule,
