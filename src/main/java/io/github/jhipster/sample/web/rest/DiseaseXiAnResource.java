@@ -70,7 +70,7 @@ public class DiseaseXiAnResource {
      * @return the ResponseEntity with status 201 (Created) and with body the new diseaseXiAn, or with status 400 (Bad Request) if the diseaseXiAn has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PutMapping("/disease-xi-ans/activate/{diseaseXiAn}/{activated}")
+    @PutMapping("/disease-xi-ans/activate/{diseaseXiAnId}/{activated}")
     public ResponseEntity<DiseaseXiAn> activateDiseaseXiAn(@PathVariable Long diseaseXiAnId, @PathVariable Boolean activated) throws URISyntaxException {
         diseaseXiAnService.activateDiseaseXiAn(diseaseXiAnId, activated);
         return ResponseEntity.ok().build();

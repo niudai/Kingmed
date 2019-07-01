@@ -32,6 +32,10 @@ export class DiseaseXiAnService {
         return this.http.get<IDiseaseXiAn>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }
 
+    activate(id: number, activated: boolean): Observable<EntityResponseType> {
+        return this.http.put<any>(`${this.resourceUrl}/activate/${id}/${activated}`, { observe: 'response'});
+    }
+
     query(req?: any): Observable<EntityArrayResponseType> {
         const options = createRequestOption(req);
         return this.http.get<IDiseaseXiAn[]>(this.resourceUrl, { params: options, observe: 'response' });

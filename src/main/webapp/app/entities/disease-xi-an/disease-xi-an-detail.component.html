@@ -190,9 +190,11 @@
                             </tbody>
                         </table>
             </div>
+
+            <mat-slide-toggle (toggleChange)="activateDiseaseXiAn()"
+                 [checked]="diseaseXiAn.activated" [jhiTranslate]="">{{activatedToggleLabel}}</mat-slide-toggle>
+
             <!-- toggle between several companies -->
-
-
             <button class="btn btn-info" [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'prices']">
                 <fa-icon [icon]="'dollar-sign'"></fa-icon>&nbsp;<span jhiTranslate="entity.project.price">价格详情</span>
             </button>

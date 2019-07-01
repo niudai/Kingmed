@@ -15,6 +15,7 @@ import io.github.jhipster.sample.repository.DiseaseXiAnRepository;
 import io.github.jhipster.sample.repository.ImageApplicationRepository;
 import io.github.jhipster.sample.repository.ImageSuppliesRepository;
 import io.github.jhipster.sample.repository.QArobotRepository;
+import io.github.jhipster.sample.repository.search.DiseaseXiAnSearchRepository;
 
 /**
  * DiseaseXiAnService
@@ -22,15 +23,18 @@ import io.github.jhipster.sample.repository.QArobotRepository;
 @Service
 public class DiseaseXiAnService {
     private final DiseaseXiAnRepository diseaseXiAnRepository;
+    private final DiseaseXiAnSearchRepository diseaseXiAnSearchRepository;
     private final QArobotRepository qArobotRepository;
     private final ImageApplicationRepository imageApplicationRepository;
     private final ImageSuppliesRepository imageSuppliesRepository;
 
     @Autowired
     public DiseaseXiAnService(DiseaseXiAnRepository diseaseXiAnRepository
+        , DiseaseXiAnSearchRepository diseaseXiAnSearchRepository
         , QArobotRepository qArobotRepository
         , ImageApplicationRepository imageApplicationRepository
         , ImageSuppliesRepository imageSuppliesRepository) {
+        this.diseaseXiAnSearchRepository = diseaseXiAnSearchRepository;
         this.imageSuppliesRepository = imageSuppliesRepository;
         this.imageApplicationRepository = imageApplicationRepository;
         this.diseaseXiAnRepository = diseaseXiAnRepository;
@@ -49,6 +53,7 @@ public class DiseaseXiAnService {
     public void activateDiseaseXiAn(Long id, Boolean activated) {
         DiseaseXiAn diseaseXiAn = diseaseXiAnRepository.findById(id).get();
         diseaseXiAn.setActivated(activated);
+        diseaseXiAnSearchRepository.save(diseaseXiAn);
     }
 
     @Transactional

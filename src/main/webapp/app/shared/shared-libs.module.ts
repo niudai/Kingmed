@@ -8,8 +8,8 @@ import { CookieModule } from 'ngx-cookie';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CdkTableModule } from '@angular/cdk/table';
 import { CdkTreeModule } from '@angular/cdk/tree';
-import { MatButtonModule, MatTreeModule, MatCardModule, MatIconModule, MatListModule, MatBottomSheetModule, MatDialogModule, MatInputModule, MatMenuModule, MatTooltipModule } from '@angular/material';
-
+import { MatButtonModule, MatTreeModule, MatCardModule, MatIconModule, MatListModule, MatBottomSheetModule, MatDialogModule, MatInputModule, MatMenuModule, MatTooltipModule, MatSlideToggleModule } from '@angular/material';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 @NgModule({
     imports: [
         NgbModule.forRoot(), InfiniteScrollModule, CookieModule.forRoot(), FontAwesomeModule],
@@ -44,6 +44,7 @@ import { MatButtonModule, MatTreeModule, MatCardModule, MatIconModule, MatListMo
         MatInputModule,
         MatListModule,
         MatMenuModule,
+        DragDropModule,
         // MatNativeDateModule,
         // MatPaginatorModule,
         // MatProgressBarModule,
@@ -53,7 +54,7 @@ import { MatButtonModule, MatTreeModule, MatCardModule, MatIconModule, MatListMo
         // MatSelectModule,
         // MatSidenavModule,
         // MatSliderModule,
-        // MatSlideToggleModule,
+        MatSlideToggleModule,
         // MatSnackBarModule,
         // MatSortModule,
         // MatTableModule,

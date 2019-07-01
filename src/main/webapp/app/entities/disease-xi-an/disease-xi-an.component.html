@@ -66,7 +66,12 @@
                         [routerLink]="[diseaseXiAn.id, 'view' ]">{{diseaseXiAn.name}}
                              - <strong>{{diseaseXiAn.subsidiary}}</strong>
                              <fa-icon *ngIf="!diseaseXiAn.activated" [icon]="'circle'" class = "deactivated"></fa-icon>
-                            <fa-icon *ngIf="diseaseXiAn.activated" [icon]="'circle'" class = "activated"></fa-icon>
+                            <!-- <fa-icon *ngIf="diseaseXiAn.activated" [icon]="'circle'" class = "activated"></fa-icon> -->
+                            <button class="btn btn-danger btn-sm" *ngIf="!diseaseXiAn.activated"
+                                >停用</button>
+                            <button class="btn btn-success btn-sm" *ngIf="diseaseXiAn.activated"
+                                >运行</button>
+
                         </a>
                         <br>
                         <div *ngIf = "windowWidth < 600">
