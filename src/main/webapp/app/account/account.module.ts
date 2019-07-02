@@ -13,6 +13,8 @@ import {
     SettingsComponent,
     accountState
 } from './';
+import { JhiLanguageService } from 'ng-jhipster';
+import { JhiLanguageHelper } from 'app/core';
 
 @NgModule({
     imports: [JhipsterElasticsearchSampleApplicationSharedModule, RouterModule.forChild(accountState)],
@@ -25,6 +27,15 @@ import {
         PasswordResetFinishComponent,
         SettingsComponent
     ],
+    providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class JhipsterElasticsearchSampleApplicationAccountModule {}
+export class JhipsterElasticsearchSampleApplicationAccountModule {
+    constructor(private languageService: JhiLanguageService, private languageHelper: JhiLanguageHelper) {
+        this.languageHelper.language.subscribe((languageKey: string) => {
+            if (languageKey !== undefined) {
+                this.languageService.changeLanguage(languageKey);
+            }
+        });
+    }
+}

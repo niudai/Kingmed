@@ -1,3 +1,4 @@
+import { HomeComponent } from './home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import './vendor.ts';
@@ -42,14 +43,15 @@ import { DiseaseMapComponent } from './disease-map/disease-map/disease-map.compo
         }),
         JhipsterElasticsearchSampleApplicationSharedModule.forRoot(),
         JhipsterElasticsearchSampleApplicationCoreModule,
-        JhipsterElasticsearchSampleApplicationHomeModule,
+        // JhipsterElasticsearchSampleApplicationHomeModule,
         JhipsterElasticsearchSampleApplicationServiceModule,
-        JhipsterElasticsearchSampleApplicationAccountModule,
+        // JhipsterElasticsearchSampleApplicationAccountModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
         JhipsterElasticsearchSampleApplicationEntityModule,
         JhipsterElasticsearchSampleApplicationAppRoutingModule,
     ],
-    declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
+    declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent
+        , HomeComponent],
     providers: [
         {
             provide: HTTP_INTERCEPTORS,

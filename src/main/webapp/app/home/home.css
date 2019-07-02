@@ -6,10 +6,6 @@ button {
     padding: 0;
 }
 
-.card-img-top {
-    /* height: 220px; */
-}
-
 .card {
     cursor: pointer;
 }

@@ -6,7 +6,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { IDiseaseXiAn } from 'app/shared/model/disease-xi-an.model';
-import { JhiTranslateComponent } from 'ng-jhipster';
 
 @Component({
     selector: 'jhi-disease-xi-an-detail',
@@ -29,8 +28,7 @@ export class DiseaseXiAnDetailComponent implements OnInit {
     currentSubseries: string;
 
     constructor(protected activatedRoute: ActivatedRoute
-        , protected diseaseXiAnService: DiseaseXiAnService
-        , protected jhiTranslate: JhiTranslateComponent) {}
+        , protected diseaseXiAnService: DiseaseXiAnService) {}
 
     projectAndPriceIsOpenToggle() {
         this.projectAndPriceIsOpen = !this.projectAndPriceIsOpen;

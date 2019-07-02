@@ -3,9 +3,11 @@ import { RouterModule } from '@angular/router';
 
 import { JhipsterElasticsearchSampleApplicationSharedModule } from 'app/shared';
 import { HOME_ROUTE, HomeComponent } from './';
+import { JhipsterElasticsearchSampleApplicationCoreModule } from 'app/core';
 
 @NgModule({
-    imports: [JhipsterElasticsearchSampleApplicationSharedModule, RouterModule.forChild([HOME_ROUTE])],
+    imports: [JhipsterElasticsearchSampleApplicationSharedModule
+        , RouterModule.forChild([HOME_ROUTE])],
     declarations: [HomeComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
