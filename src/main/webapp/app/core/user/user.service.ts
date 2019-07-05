@@ -9,6 +9,7 @@ import { IUser } from './user.model';
 @Injectable({ providedIn: 'root' })
 export class UserService {
     public resourceUrl = SERVER_API_URL + 'api/users';
+    public resourceSearchUrl = SERVER_API_URL + 'api/_search/users';
 
     constructor(private http: HttpClient) {}
 
@@ -31,6 +32,11 @@ export class UserService {
 
     delete(login: string): Observable<HttpResponse<any>> {
         return this.http.delete(`${this.resourceUrl}/${login}`, { observe: 'response' });
+    }
+
+    search(req?: any): Observable<HttpResponse<IUser[]>> {
+        const options = createRequestOption(req);
+        return this.http.get<IUser[]>(this.resourceSearchUrl, { params: options, observe: 'response' });
     }
 
     authorities(): Observable<string[]> {
