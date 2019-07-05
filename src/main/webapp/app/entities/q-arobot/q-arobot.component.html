@@ -1,13 +1,13 @@
 <div class = "container col-sm-12">
     <div class="row">
             <mat-card class = "col-sm-12">
-                    <form name="searchForm" class="form-inline">
+                    <form name="searchForm" class="form-inline col-sm-6">
                             <div class="input-group w-100 mt-3">
                                 <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'jhipsterElasticsearchSampleApplicationApp.qArobot.home.search' | translate }}">
                                 <!-- <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
                                     <fa-icon [icon]="'trash-alt'"></fa-icon>
                                 </button>                    -->
-                                <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+                                <button mat-raised-button class="input-group-append" color="warn" (click)="search(currentSearch)">
                                     <fa-icon [icon]="'search'"></fa-icon>
                                 </button>
             

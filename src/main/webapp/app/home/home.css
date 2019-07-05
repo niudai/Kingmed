@@ -6,13 +6,12 @@ button {
     padding: 0;
 }
 
-.example-card {
-    /* max-width: px; */
-    max-width: 180px;
+.index-card {
+    cursor: pointer;
 }
-  
-  .example-header-image {
-    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+
+.example-header-image {
+    background-image: url("../../content/images/kingmedMiniIcon.png");
     background-size: cover;
   }
 

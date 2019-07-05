@@ -1,15 +1,64 @@
 <div class="row main">
     <div class="col-md-12">
-        <h3 class="display-7 title">你好, 这里是<span class="text-alert">金域医学检验中心</span>!</h3>
+        <mat-card><span class=".mat-display-4">你好, <span class="text-primary">{{account.login}}</span>. 这里是金域医学检验中心!</span></mat-card>
+        <mat-divider></mat-divider>
         <div [ngSwitch]="isAuthenticated()">
-            <div class="alert alert-success" *ngSwitchCase="true">
-                <span id="home-logged-message" *ngIf="account">你好, "{{account.login}}". </span>
-            </div>
             <div class="container col-md-12" *ngSwitchCase="true">
                 <div class="row">
+                        <mat-card class="col-sm-3 index-card" matRipple routerLink="/disease-xi-an">
+                                <mat-card-header>
+                                  <div mat-card-avatar class="example-header-image"></div>
+                                  <mat-card-title>集团项目</mat-card-title>
+                                  <mat-card-subtitle>全套医学项目详细信息</mat-card-subtitle>
+                                </mat-card-header>
+                                <img mat-card-image src="../../content/images/projectItem.jpg" alt="Photo of a Shiba Inu">
+                                <mat-card-content>
+                                  <p>
+                                    金域医学旗下全套医学项目详情。
+                                  </p>
+                                </mat-card-content>
+                        </mat-card>
+                        <mat-card class="col-sm-3 index-card" matRipple routerLink="/q-arobot">
+                            <mat-card-header>
+                              <div mat-card-avatar class="example-header-image"></div>
+                              <mat-card-title>QA小博士</mat-card-title>
+                              <mat-card-subtitle>问题与答案</mat-card-subtitle>
+                            </mat-card-header>
+                            <img mat-card-image src="../../content/images/qaRobot.jpg" alt="Photo of a Shiba Inu">
+                            <mat-card-content>
+                              <p>
+                                    用问答解决疑难。
+                              </p>
+                            </mat-card-content>
+                    </mat-card>
+                    <mat-card class="col-sm-3 index-card" matRipple routerLink="/service">
+                        <mat-card-header>
+                          <div mat-card-avatar class="example-header-image"></div>
+                          <mat-card-title>服务平台</mat-card-title>
+                          <mat-card-subtitle>资料</mat-card-subtitle>
+                        </mat-card-header>
+                        <img mat-card-image src="../../content/images/servicePlatform.png" alt="Photo of a Shiba Inu">
+                        <mat-card-content>
+                          <p>
+                               耗材种类, 申请单。
+                          </p>
+                        </mat-card-content>
+                    </mat-card>
+                    <mat-card class="col-sm-3 index-card" matRipple routerLink="/disease-map">
+                        <mat-card-header>
+                          <div mat-card-avatar class="example-header-image"></div>
+                          <mat-card-title>疾病地图</mat-card-title>
+                          <mat-card-subtitle>资料</mat-card-subtitle>
+                        </mat-card-header>
+                        <img mat-card-image src="../../content/images/diseaseMap.jpg" alt="Photo of a Shiba Inu">
+                        <mat-card-content>
+                          <p>
+                               疾病地图, 快速定位。
+                          </p>
+                        </mat-card-content>
+                    </mat-card>
                         
-
-                    <div class="card col-sm-3" style="width:400px" routerLink="/disease-xi-an">
+                    <!-- <div class="card col-sm-3" style="width:400px" routerLink="/disease-xi-an">
                         <img class="card-img-top" src="../../content/images/projectItem.jpg" alt="Card image">
                         <div class="card-body">
                             <h4 class="card-title">集团项目</h4>
@@ -36,7 +85,7 @@
                             <h4 class="card-title" jhiTranslate="global.menu.entities.diseaseMap" >疾病线地图</h4>
                             <p class="card-text">疾病地图, 快速定位。</p>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
 
             </div>

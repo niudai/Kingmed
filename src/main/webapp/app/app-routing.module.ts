@@ -9,8 +9,19 @@ const LAYOUT_ROUTES = [...navbarRoute];
 const ERROR_ROUTES = [...errorRoute];
 
 const HOME_ROUTE = [
-    { path: '', redirectTo: '/home', pathMatch: 'full'},
-    { path: 'home', component: HomeComponent }
+    {
+        path: '',
+        redirectTo: '/home',
+        pathMatch: 'full'
+    },
+    {
+        path: 'home',
+        component: HomeComponent,
+        data: {
+            authorities: [],
+            pageTitle: 'global.title'
+        }
+    }
 ];
 
 const LAZY_ROUTE = [

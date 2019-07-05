@@ -64,11 +64,11 @@
                         </a>
                         <br>
                         <div *ngIf="windowWidth < 600">
-                            <button [routerLink]="[diseaseXiAn.id, 'qarobots']" class="btn btn-warning btn-sm">
+                            <button [routerLink]="[diseaseXiAn.id, 'qarobots']"  mat-mini-fab color="accent">
                                 <fa-icon [icon]="'question'"></fa-icon>
                                 <span class="d-none d-md-inline"></span>
                             </button>
-                            <button [routerLink]="[diseaseXiAn.id, 'prices']" class="btn btn-primary btn-sm">
+                            <button [routerLink]="[diseaseXiAn.id, 'prices']"  mat-mini-fab color="primary">
                                 <fa-icon class="dollar-sign" [icon]="'dollar-sign'"></fa-icon>
                                 <span class="d-none d-md-inline"></span>
                             </button>
@@ -78,7 +78,7 @@
                     <!-- <td>{{diseaseXiAn.subsidiary}}</td> -->
                     <td *ngIf="windowWidth > 600" class="text-right">
                         <div class="btn-group flex-btn-group-container">
-                            <button [routerLink]="[diseaseXiAn.id, 'prices']" class="btn btn-primary btn-sm">
+                            <button [routerLink]="[diseaseXiAn.id, 'prices']"  mat-mini-fab color="primary">
                                 <fa-icon class="dollar-sign" [icon]="'dollar-sign'"></fa-icon>
                                 <span class="d-none d-md-inline"></span>
                             </button>
@@ -93,7 +93,7 @@
                     </td>
                     <td *ngIf="windowWidth > 600" class="text-right">
                         <div class="btn-group flex-btn-group-container">
-                            <button [routerLink]="[diseaseXiAn.id, 'applications']" class="btn btn-primary btn-sm">
+                            <button [routerLink]="[diseaseXiAn.id, 'applications']"  mat-mini-fab color="primary">
                                 <fa-icon [icon]="'file-alt'"></fa-icon>
                                 <span class="d-none d-md-inline"></span>
                             </button>

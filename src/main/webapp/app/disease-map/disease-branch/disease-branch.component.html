@@ -1,12 +1,22 @@
 <div class="container col-12">
-    <button class="btn btn-primary" *jhiHasAnyAuthority="'ROLE_ADMIN'" [routerLink]="'attach-disease-branch'">创建一份新地图</button>
+    <button mat-raised-button color="primary" *jhiHasAnyAuthority="'ROLE_ADMIN'" [routerLink]="'attach-disease-branch'">创建一份新地图</button>
     <div class="row">
         <div *ngFor="let diseaseBranch of diseaseBranches" class="card col-sm-3">
-            <div class="card-body">
+                <mat-card class="example-card">
+                        <mat-card-header>
+                          <div mat-card-avatar class="example-header-image"></div>
+                          <mat-card-title>{{diseaseBranch.name}}</mat-card-title>
+                        </mat-card-header>
+                        <mat-card-actions>
+                          <button mat-raised-button color="accent" [routerLink]="['view-disease-map', diseaseBranch.id]">进入</button>
+                          <button mat-raised-button color="warn" (click)="open(diseaseBranch)" *jhiHasAnyAuthority="'ROLE_ADMIN'">删除</button>
+                        </mat-card-actions>
+                      </mat-card>
+            <!-- <div class="card-body">
                 <h5 class="card-title">{{diseaseBranch.name}}</h5>
                 <a href="#" class="btn btn-success" [routerLink]="['view-disease-map', diseaseBranch.id]"><fa-icon [icon]="'arrow-right'"></fa-icon>进入</a>
                 <button class="btn btn-danger" *jhiHasAnyAuthority="'ROLE_ADMIN'" (click)="open(diseaseBranch)"><fa-icon [icon]="'times'"></fa-icon>删除</button>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>

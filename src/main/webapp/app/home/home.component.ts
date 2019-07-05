@@ -18,6 +18,7 @@ export interface Tile {
 })
 export class HomeComponent implements OnInit {
 
+    rippleColor: string;
     tiles: Tile[] = [
         {text: 'One', cols: 3, rows: 1, color: 'lightblue'},
         {text: 'Two', cols: 1, rows: 2, color: 'lightgreen'},
@@ -34,6 +35,7 @@ export class HomeComponent implements OnInit {
     ) {}
 
     ngOnInit() {
+        this.rippleColor = 'pink';
         this.accountService.identity().then((account: Account) => {
             this.account = account;
         });

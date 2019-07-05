@@ -7,7 +7,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 @Component({
     selector: 'jhi-disease-branch',
     templateUrl: './disease-branch.component.html',
-    styles: []
+    styleUrls: ['./disease-branch.component.css']
 })
 export class DiseaseBranchComponent implements OnInit {
 

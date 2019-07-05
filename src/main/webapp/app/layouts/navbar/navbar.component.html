@@ -20,8 +20,9 @@
                     </span>
                 </a>
             </li>
-            <li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active">
-                <a class="nav-link dropdown-toggle" id="service-menu" ngbDropdownToggle>
+            <li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link dropdown-toggle" id="service-menu" ngbDropdownToggle href="javascript:void(0);" id="entity-menu">
                     <span>
                         <fa-icon icon="user-friends"></fa-icon>
                         <span jhiTranslate="global.menu.service.main">
@@ -64,48 +65,6 @@
                     </span>
                 </a>
                 <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu">
-                    <!-- <li>
-                            <a class="dropdown-item" routerLink="country" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                                <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                                <span jhiTranslate="global.menu.entities.country">Country</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" routerLink="disease-check-info" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                                <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                                <span jhiTranslate="global.menu.entities.diseaseCheckInfo">Disease Check Info</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" routerLink="disease-knowledge" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                                <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                                <span jhiTranslate="global.menu.entities.diseaseKnowledge">Disease Knowledge</span>
-                            </a>
-                        </li> -->
-                    <!-- <li>
-                            <a class="dropdown-item" routerLink="disease-knowledge-guang-dong" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                                <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                                <span jhiTranslate="global.menu.entities.diseaseKnowledgeGuangDong">Disease Knowledge Guang Dong</span>
-                            </a>
-                        </li> -->
-                    <!-- <li>
-                            <a class="dropdown-item" routerLink="bank-account" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                                <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                                <span jhiTranslate="global.menu.entities.bankAccount">Disease Guang Dong</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" routerLink="operation" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                                <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                                <span jhiTranslate="global.menu.entities.operation">Disease Guang Dong</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" routerLink="label" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                                <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                                <span jhiTranslate="global.menu.entities.label">Disease Guang Dong</span>
-                            </a>
-                        </li> -->
                     <li>
                         <a class="dropdown-item" routerLink="q-arobot" routerLinkActive="active"
                             [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
