@@ -1,9 +1,10 @@
 <div class="row main">
     <div class="col-md-12">
-        <mat-card><span class=".mat-display-4">你好, <span class="text-primary">{{account.login}}</span>. 这里是金域医学检验中心!</span></mat-card>
-        <mat-divider></mat-divider>
+        
         <div [ngSwitch]="isAuthenticated()">
             <div class="container col-md-12" *ngSwitchCase="true">
+                <mat-card><span class=".mat-display-4">你好, <span class="text-primary">{{account.login}}</span>. 这里是金域医学检验中心!</span></mat-card>
+                <mat-divider></mat-divider>
                 <div class="row">
                         <mat-card class="col-sm-3 index-card" matRipple routerLink="/disease-xi-an">
                                 <mat-card-header>

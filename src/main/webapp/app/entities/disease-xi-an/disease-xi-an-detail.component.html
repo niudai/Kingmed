@@ -27,8 +27,11 @@
                         <mat-list-item>
                             <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
                                 jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.chargeCode">Charge
-                                Code</span><span> : {{ currentChargeCode }}</span>
+                                Code</span><span> :</span>
                         </mat-list-item>
+                        <mat-card>
+                                <p> {{ currentChargeCode }}</p>
+                        </mat-card>
                         <mat-list-item>
                             <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
                                 jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.tollStandard">Toll
@@ -46,40 +49,47 @@
                         <mat-list-item>
                             <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
                                 jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.supplement">Supplement</span>
-                            <span> : </span> <span>{{diseaseXiAn.supplement}}</span>
+                            <span> : </span>
                         </mat-list-item>
+                        <mat-card><p>{{diseaseXiAn.supplement}}</p></mat-card>
                         <mat-list-item>
                             <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
                                 jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.sample">Sample</span>
                             <span> : </span>
                         </mat-list-item>
-                        <p>
-                            <span>{{diseaseXiAn.sample}}</span>
-                        </p>
+                        <mat-card><p>
+                                <span>{{diseaseXiAn.sample}}</span>
+                            </p></mat-card>
                         <mat-list-item>
                             <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
                                 jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.tutorial">Tutorial</span>
                             <span> : </span>
                         </mat-list-item>
-                        <p>
-                            <span>{{diseaseXiAn.tutorial}}</span>
-                        </p>
+                        <mat-card>
+                                <p>
+                                        <span>{{diseaseXiAn.tutorial}}</span>
+                                    </p>
+                        </mat-card>
                         <mat-list-item>
                             <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
                                 jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.preservation">Preservation</span>
                             <span> : </span>
                         </mat-list-item>
-                        <p>
-                            <span>{{diseaseXiAn.preservation}}</span>
-                        </p>
+                        <mat-card>
+                                <p>
+                                        <span>{{diseaseXiAn.preservation}}</span>
+                                    </p>
+                        </mat-card>  
                         <mat-list-item>
                             <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
                                 jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.transportation">Transportation</span>
                             <span> : </span>
                         </mat-list-item>
-                        <p>
-                            <span>{{diseaseXiAn.transportation}}</span>
-                        </p>
+                        <mat-card>
+                                <p>
+                                    <span>{{diseaseXiAn.transportation}}</span>
+                                </p>
+                        </mat-card>
                         <mat-list-item>
                             <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
                                 jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.applicationUnitType">Application
@@ -139,7 +149,9 @@
                             <span> : </span>
 
                         </mat-list-item>
-                        <p><span>{{diseaseXiAn.clinicalApplication}}</span></p>
+                        <mat-card>
+                                <p><span>{{diseaseXiAn.clinicalApplication}}</span></p>
+                        </mat-card>
                         <mat-list-item>
                             <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
                                 jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.series">Series</span>
@@ -185,7 +197,7 @@
                 [jhiTranslate]="">{{activatedToggleLabel}}</mat-slide-toggle>
             <hr>
             <!-- toggle between several companies -->
-            <button class="btn"  mat-raised-button color="primary" [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'prices']">
+            <button class="btn"  mat-raised-button color="primary" style="background-color: teal" [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'prices']">
                 <fa-icon [icon]="'dollar-sign'"></fa-icon>&nbsp;<span jhiTranslate="entity.project.price">价格详情</span>
             </button>
 
