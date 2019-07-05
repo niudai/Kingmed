@@ -1,12 +1,14 @@
 <div class="row main">
     <div class="col-md-12">
-        <h3 class="display-7 title">你好, 这里是金域医学检验中心!</h3>
+        <h3 class="display-7 title">你好, 这里是<span class="text-alert">金域医学检验中心</span>!</h3>
         <div [ngSwitch]="isAuthenticated()">
             <div class="alert alert-success" *ngSwitchCase="true">
                 <span id="home-logged-message" *ngIf="account">你好, "{{account.login}}". </span>
             </div>
             <div class="container col-md-12" *ngSwitchCase="true">
                 <div class="row">
+                        
+
                     <div class="card col-sm-3" style="width:400px" routerLink="/disease-xi-an">
                         <img class="card-img-top" src="../../content/images/projectItem.jpg" alt="Card image">
                         <div class="card-body">
@@ -40,11 +42,11 @@
             </div>
             <div class="alert alert-warning" *ngSwitchCase="false">
                 <span>如果你是公司员工, 可以直接 </span>
-                <a class="alert-link" (click)="login()">登陆</a>
+                <button mat-raised-button (click)="login()" color="accent" routerLinkActive="active">登录</button>
             </div>
             <div class="alert alert-warning" *ngSwitchCase="false">
                 <span>没有账户?</span>&nbsp;
-                <a class="alert-link" routerLink="register">你可以注册一个新账户</a>
+                <button mat-raised-button color="primary" [routerLink]="['/account', 'register']" routerLinkActive="active">注册</button>
             </div>
         </div>
     </div>

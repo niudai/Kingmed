@@ -1,54 +1,48 @@
-<div>
-    <h2 id="page-heading">
-        <button routerLink="/" id="jh-create-entity"
-            class="btn btn-primary float-right jh-create-entity create-disease-guang-dong">
-            <fa-icon [icon]="'arrow-left'"></fa-icon>
-            <span class="hidden-sm-down" jhiTranslate="global.navigation.back">
-                返回
-            </span>
-        </button>
-        <span>集团项目</span>
-        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" id="jh-create-entity"
-            class="btn btn-primary float-right jh-create-entity create-disease-xi-an"
-            [routerLink]="['/disease-xi-an/new']">
-            <fa-icon [icon]="'plus'"></fa-icon>
-            <span class="hidden-sm-down"
-                jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.home.createLabel">
-                Create new Disease Xi An
-            </span>
-        </button>
-    </h2>
-    <jhi-alert></jhi-alert>
+<div class="container col-sm-12">
     <div class="row">
-        <div class="col-sm-12">
-            <form name="searchForm" class="form-inline">
-                <div class="input-group w-100 mt-3">
-                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch"
-                        name="currentSearch" value=""
-                        placeholder="{{ 'jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.home.search' | translate }}">
-                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
-                        <fa-icon [icon]="'search'"></fa-icon>
-                    </button>
-                </div>
-            </form>
-        </div>
+        <mat-card class = "col-sm-12">
+                <form name="searchForm" class="form-inline col-sm-6">
+                        <div class="input-group w-100 mt-3 ">
+                            <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch"
+                                name="currentSearch" value=""
+                                placeholder="{{ 'jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.home.search' | translate }}">
+                            <button mat-raised-button class="input-group-append" color="warn" (click)="search(currentSearch)">
+                                <fa-icon [icon]="'search'"></fa-icon>
+                            </button>
+                        </div>
+                    </form>
+                    <div>
+                            <button mat-raised-button color="accent" *jhiHasAnyAuthority="'ROLE_ADMIN'" id="jh-create-entity"
+                                class="float-right jh-create-entity create-disease-xi-an" [routerLink]="['/disease-xi-an/new']">
+                                <fa-icon [icon]="'plus'"></fa-icon>
+                                <span class="hidden-sm-down"
+                                    jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.home.createLabel">
+                                    Create new Disease Xi An
+                                </span>
+                            </button>
+                        </div>
+        </mat-card>
+        
     </div>
+
+
     <br />
     <div class="table-responsive" *ngIf="diseaseXiAns">
         <table class="table table-striped">
             <thead>
                 <tr>
                     <!-- <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
-                    <th><span>ID</span></th>
+                    <th *ngIf="windowWidth > 600"><span>ID</span></th>
                     <th><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.name">Name</span>
                         <fa-icon [icon]="'sort'"></fa-icon>
                     </th>
 
                     <!-- <th><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.subsidiary">Subsidiary</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
-                    <th *ngIf="windowWidth > 600"><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.price">价格</span>
-                    <th ><span>检测科室</span>
+                    <th *ngIf="windowWidth > 600"><span
+                            jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseGuangDong.price">价格</span>
+                    <th><span>检测科室</span>
                     <th *ngIf="windowWidth > 600"><span>申请单</span>
-                    <th *ngIf = "windowWidth > 600"><span>耗材图片</span>
+                    <th *ngIf="windowWidth > 600"><span>耗材图片</span>
                     <th *ngIf="windowWidth > 600"><span>QA</span>
                     </th>
                     <th *jhiHasAnyAuthority="'ROLE_ADMIN'"><span>编辑</span></th>
@@ -56,98 +50,87 @@
             </thead>
             <tbody>
                 <tr *ngFor="let diseaseXiAn of diseaseXiAns">
-                        <td *ngIf = "windowWidth > 600" class="text-right">
-                                <div class="btn-group flex-btn-group-container">
-                                        <span>{{diseaseXiAn.id}}</span>
-                                </div>
-                            </td>
+                    <td *ngIf="windowWidth > 600" class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <span>{{diseaseXiAn.id}}</span>
+                        </div>
+                    </td>
                     <!-- <td><a [routerLink]="['/disease-guang-dong', diseaseXiAn.id, 'view' ]">{{diseaseXiAn.id}}</a></td> -->
                     <td>
-                        <a
-                        [routerLink]="[diseaseXiAn.id, 'view' ]">{{diseaseXiAn.name}}
-                             - <strong>{{diseaseXiAn.subsidiary}}</strong>
-                            <button class="btn btn-danger btn-sm" *ngIf="!diseaseXiAn.activated"
-                                >停用</button>
-                            <button class="btn btn-success btn-sm" *ngIf="diseaseXiAn.activated"
-                                >运行</button>
-
+                        <a [routerLink]="[diseaseXiAn.id, 'view' ]">{{diseaseXiAn.name}}
+                            - <strong>{{diseaseXiAn.subsidiary}}</strong>
+                            <button mat-fab color="warn" *ngIf="!diseaseXiAn.activated">停用</button>
+                            <!-- <button mat-raised-button color="warn" *ngIf="diseaseXiAn.activated">运行</button> -->
                         </a>
                         <br>
-                        <div *ngIf = "windowWidth < 600">
-                                <button [routerLink]="[diseaseXiAn.id, 'qarobots']" class="btn btn-warning btn-sm">
-                                        <fa-icon [icon]="'question'"></fa-icon>
-                                        <span class="d-none d-md-inline"
-                                        ></span>
-                                </button>
-                                <button [routerLink]="[diseaseXiAn.id, 'prices']" class="btn btn-primary btn-sm">
-                                        <fa-icon class = "dollar-sign" [icon]="'dollar-sign'"></fa-icon>
-                                        <span class="d-none d-md-inline"
-                                        ></span>
-                                </button>
+                        <div *ngIf="windowWidth < 600">
+                            <button [routerLink]="[diseaseXiAn.id, 'qarobots']" class="btn btn-warning btn-sm">
+                                <fa-icon [icon]="'question'"></fa-icon>
+                                <span class="d-none d-md-inline"></span>
+                            </button>
+                            <button [routerLink]="[diseaseXiAn.id, 'prices']" class="btn btn-primary btn-sm">
+                                <fa-icon class="dollar-sign" [icon]="'dollar-sign'"></fa-icon>
+                                <span class="d-none d-md-inline"></span>
+                            </button>
                         </div>
 
-                </td>
-                <!-- <td>{{diseaseXiAn.subsidiary}}</td> -->
-                <td *ngIf = "windowWidth > 600" class="text-right">
-                    <div class="btn-group flex-btn-group-container">
+                    </td>
+                    <!-- <td>{{diseaseXiAn.subsidiary}}</td> -->
+                    <td *ngIf="windowWidth > 600" class="text-right">
+                        <div class="btn-group flex-btn-group-container">
                             <button [routerLink]="[diseaseXiAn.id, 'prices']" class="btn btn-primary btn-sm">
-                                    <fa-icon class = "dollar-sign" [icon]="'dollar-sign'"></fa-icon>
-                                    <span class="d-none d-md-inline"
-                                    ></span>
+                                <fa-icon class="dollar-sign" [icon]="'dollar-sign'"></fa-icon>
+                                <span class="d-none d-md-inline"></span>
                             </button>
-                    </div>
-                </td>
-                <td class="text-right">
+                        </div>
+                    </td>
+                    <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
 
                             <span>{{diseaseXiAn.projectConcourse}}</span>
 
                         </div>
-                </td>
-                <td *ngIf = "windowWidth > 600" class="text-right">
+                    </td>
+                    <td *ngIf="windowWidth > 600" class="text-right">
                         <div class="btn-group flex-btn-group-container">
-                                <button [routerLink]="[diseaseXiAn.id, 'applications']" class="btn btn-primary btn-sm">
-                                        <fa-icon [icon]="'file-alt'"></fa-icon>
-                                        <span class="d-none d-md-inline"
-                                        ></span>
-                                </button>
+                            <button [routerLink]="[diseaseXiAn.id, 'applications']" class="btn btn-primary btn-sm">
+                                <fa-icon [icon]="'file-alt'"></fa-icon>
+                                <span class="d-none d-md-inline"></span>
+                            </button>
                         </div>
                     </td>
 
-                    <td *ngIf = "windowWidth > 600" class="text-right">
-                            <div class="btn-group flex-btn-group-container">
-                                    <button [routerLink]="[diseaseXiAn.id, 'suppliess']" class="btn btn-primary btn-sm">
-                                            <fa-icon [icon]="'magic'"></fa-icon>
-                                            <span class="d-none d-md-inline"
-                                            ></span>
-                                    </button>
-                            </div>
-                        </td>
-                <td *ngIf = "windowWidth > 600" class="text-right">
-                    <div class="btn-group flex-btn-group-container">
-                            <button [routerLink]="[diseaseXiAn.id, 'qarobots']" class="btn btn-warning btn-sm">
-                                    <fa-icon [icon]="'question'"></fa-icon>
-                                    <span class="d-none d-md-inline"
-                                    ></span>
+                    <td *ngIf="windowWidth > 600" class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button [routerLink]="[diseaseXiAn.id, 'suppliess']" class="btn btn-primary btn-sm">
+                                <fa-icon [icon]="'magic'"></fa-icon>
+                                <span class="d-none d-md-inline"></span>
                             </button>
-                    </div>
-                </td>
-                <td *jhiHasAnyAuthority="'ROLE_ADMIN'" class="text-right">
-                    <div class="btn-group flex-btn-group-container">
-                        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
-                            [routerLink]="[diseaseXiAn.id, 'edit']"
-                            class="btn btn-primary btn-sm">
-                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                        </button>
-                        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
-                            [routerLink]="[{ outlets: { popup: diseaseXiAn.id + '/delete' } }]"
-                            replaceUrl="true" queryParamsHandling="merge" class="btn btn-danger btn-sm">
-                            <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                        </button>
-                    </div>
-                </td>
+                        </div>
+                    </td>
+                    <td *ngIf="windowWidth > 600" class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button [routerLink]="[diseaseXiAn.id, 'qarobots']" class="btn btn-warning btn-sm">
+                                <fa-icon [icon]="'question'"></fa-icon>
+                                <span class="d-none d-md-inline"></span>
+                            </button>
+                        </div>
+                    </td>
+                    <td *jhiHasAnyAuthority="'ROLE_ADMIN'" class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
+                                [routerLink]="[diseaseXiAn.id, 'edit']" class="btn btn-primary btn-sm">
+                                <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+                            <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
+                                [routerLink]="[{ outlets: { popup: diseaseXiAn.id + '/delete' } }]" replaceUrl="true"
+                                queryParamsHandling="merge" class="btn btn-danger btn-sm">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
                 </tr>
             </tbody>
         </table>

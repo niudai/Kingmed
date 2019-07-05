@@ -28,15 +28,16 @@
                         <span jhiTranslate="login.form.rememberme">Remember me</span>
                     </label>
                 </div>
-                <button type="submit" class="btn btn-primary" jhiTranslate="login.form.button">Sign in</button>
+                <button mat-raised-button type="submit" color="accent" jhiTranslate="login.form.button">Accent</button>
             </form>
             <p></p>
             <div class="alert alert-warning">
-                <a class="alert-link" (click)="requestResetPassword()" jhiTranslate="login.password.forgot">Did you forget your password?</a>
+                <a class="alert-link" jhiTranslate="login.password.forgot">Did you forget your password?</a>
+                <button mat-raised-button type="submit" (click)="requestResetPassword()" color="primary">重置密码</button>
             </div>
             <div class="alert alert-warning">
                 <span jhiTranslate="global.messages.info.register.noaccount">You don't have an account yet?</span>
-                <a class="alert-link" (click)="register()" jhiTranslate="global.messages.info.register.link">Register a new account</a>
+                <button mat-raised-button type="submit" (click)="register()" color="warn">注册</button>
             </div>
         </div>
     </div>

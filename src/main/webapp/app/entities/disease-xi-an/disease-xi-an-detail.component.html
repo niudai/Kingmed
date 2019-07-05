@@ -1,219 +1,205 @@
 <div class="row justify-content-center">
     <div class="col-11">
         <div *ngIf="diseaseXiAn">
-            <h2>
+            <mat-card>
                 <fa-icon class="icon-2" [icon]="'book-medical'"></fa-icon>
-                <span>{{diseaseXiAn.name}} - {{diseaseXiAn.subsidiary}} </span>
-                <button type="submit" (click)="previousState()" class="btn btn-info">
-                    <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
-                </button>
-            </h2>
+                <span>{{diseaseXiAn.name}} - <span class = "text-primary">{{diseaseXiAn.subsidiary}}</span> </span>
+            </mat-card>
             <hr>
+            <mat-accordion>
 
-            <jhi-alert-error></jhi-alert-error>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        项目开展与收费
+                    </mat-expansion-panel-header>
 
-            <dl class="row-md jh-entity-details">
-                <dt (click)="projectAndPriceIsOpenToggle()" class="dropdown-toggle">
-                    <fa-icon class="icon-3" [icon]="'circle'"></fa-icon><span>项目开展与收费</span>
-                </dt>
-                <dd *ngIf="projectAndPriceIsOpen">
-                    <dl>
-                        <dt class="subItem">
+                    <mat-list>
+                        <mat-list-item>
                             <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
                                 jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.id">Project
                                 Code</span><span> : {{diseaseXiAn.id}}</span>
-                        </dt>
-                        <dt class="subItem">
+                        </mat-list-item>
+                        <mat-list-item>
                             <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
                                 jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.projectCode">Project
                                 Code</span><span> : {{diseaseXiAn.projectCode}}</span>
-                        </dt>
-                        <dt class="subItem">
+                        </mat-list-item>
+                        <mat-list-item>
                             <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
                                 jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.chargeCode">Charge
                                 Code</span><span> : {{ currentChargeCode }}</span>
-                        </dt>
-                        <dt class="subItem">
+                        </mat-list-item>
+                        <mat-list-item>
                             <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
                                 jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.tollStandard">Toll
                                 Standard</span><span> : {{ currentPrice }}</span>
-                        </dt>
-                    </dl>
-                </dd>
-                <dt (click)="checkDemandsIsOpenToggle()" class="dropdown-toggle">
-                    <fa-icon class="icon-1" [icon]="'circle'"></fa-icon><span>送检要求</span>
-                </dt>
-                <dd *ngIf="checkDemandsIsOpen">
-                    <dl>
-                        <dt class="subItem">
+                        </mat-list-item>
+                    </mat-list>
+                </mat-expansion-panel>
+
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        送检要求
+                    </mat-expansion-panel-header>
+
+                    <mat-list>
+                        <mat-list-item>
                             <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
                                 jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.supplement">Supplement</span>
-                            <span> : </span>
-                        </dt>
-                        <dd>
-                            <span>{{diseaseXiAn.supplement}}</span>
-                        </dd>
-                        <dt class="subItem">
+                            <span> : </span> <span>{{diseaseXiAn.supplement}}</span>
+                        </mat-list-item>
+                        <mat-list-item>
                             <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
                                 jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.sample">Sample</span>
                             <span> : </span>
-                        </dt>
-                        <dd>
+                        </mat-list-item>
+                        <p>
                             <span>{{diseaseXiAn.sample}}</span>
-                        </dd>
-                        <dt class="subItem">
+                        </p>
+                        <mat-list-item>
                             <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
                                 jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.tutorial">Tutorial</span>
                             <span> : </span>
-                        </dt>
-                        <dd>
+                        </mat-list-item>
+                        <p>
                             <span>{{diseaseXiAn.tutorial}}</span>
-                        </dd>
-                        <dt class="subItem">
+                        </p>
+                        <mat-list-item>
                             <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
                                 jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.preservation">Preservation</span>
                             <span> : </span>
-                        </dt>
-                        <dd>
+                        </mat-list-item>
+                        <p>
                             <span>{{diseaseXiAn.preservation}}</span>
-                        </dd>
-                        <dt class="subItem">
+                        </p>
+                        <mat-list-item>
                             <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
                                 jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.transportation">Transportation</span>
                             <span> : </span>
-                        </dt>
-                        <dd>
+                        </mat-list-item>
+                        <p>
                             <span>{{diseaseXiAn.transportation}}</span>
-                        </dd>
-                        <dt class="subItem">
+                        </p>
+                        <mat-list-item>
                             <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
                                 jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.applicationUnitType">Application
-                                Unit Type</span><span> : </span>
-                        </dt>
-                        <dd>
+                                Unit Type</span><span>: </span>
                             <span>{{diseaseXiAn.applicationUnitType}}</span>
-                        </dd>
-                        <dt class="subItem">
+                        </mat-list-item>
+                        <mat-list-item>
                             <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
                                 jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.applicationRemark">Application
                                 Remark</span><span> : </span>
-                        </dt>
-                        <dd>
+                        </mat-list-item>
+                        <p>
                             <span>{{diseaseXiAn.applicationRemark}}</span>
-                        </dd>
-                    </dl>
+                        </p>
+                    </mat-list>
+                </mat-expansion-panel>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        TAT相关
+                    </mat-expansion-panel-header>
+                    <mat-list-item>
+                        <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
+                            jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.medicalMethod">Medical
+                            Method: </span>
+                        <span>: </span>
+                        <span>{{diseaseXiAn.medicalMethod}}</span>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
+                            jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.projectConcourse">Project
+                            Concourse: </span>
+                        <span>: </span>
+                        <span>{{diseaseXiAn.projectConcourse}}</span>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
+                            jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.hurryDepartment">Hurry
+                            Department: </span>
+                        <span>: </span>
+                        <span>{{diseaseXiAn.hurryDepartment}}</span>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
+                            jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.reportingTime">Reporting
+                            Time</span><span> : {{currentReportingTime}}</span>
+                    </mat-list-item>
+                </mat-expansion-panel>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        疾病线相关
+                    </mat-expansion-panel-header>
+                    <mat-list>
+                        <mat-list-item>
+                            <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
+                                jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.clinicalApplication">Clinical
+                                Application</span>
+                            <span> : </span>
 
-                </dd>
-                <dt (click)="tatAboutIsOpenToggle()" class="dropdown-toggle">
-                    <fa-icon class="icon-4" [icon]="'circle'"></fa-icon><span>TAT相关</span>
-                </dt>
-                <dd *ngIf="tatAboutIsOpen">
-                    <dl>
-                        <dt class="subItem">
+                        </mat-list-item>
+                        <p><span>{{diseaseXiAn.clinicalApplication}}</span></p>
+                        <mat-list-item>
                             <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
-                                jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.medicalMethod">Medical
-                                Method</span>
-                        </dt>
-                        <dd>
-                            <span>{{diseaseXiAn.medicalMethod}}</span>
-                        </dd>
-                        <dt class="subItem">
+                                jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.series">Series</span>
+                            <span>{{diseaseXiAn.series}}</span>
+                        </mat-list-item>
+                        <mat-list-item>
                             <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
-                                jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.projectConcourse">Project
-                                Concourse</span>
-                        </dt>
-                        <dd>
-                            <span>{{diseaseXiAn.projectConcourse}}</span>
-                        </dd>
-                        <dt class="subItem">
-                            <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
-                                jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.hurryDepartment">Hurry
-                                Department</span>
-                        </dt>
-                        <dd>
-                            <span>{{diseaseXiAn.hurryDepartment}}</span>
-                        </dd>
-                        <dt class="subItem">
-                            <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
-                                jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.reportingTime">Reporting
-                                Time</span><span> : {{currentReportingTime}}</span>
-                        </dt>
-                    </dl>
-                </dd>
-                <dt (click)="diseaseAboutIsOpenToggle()" class="dropdown-toggle">
-                    <fa-icon class="icon-5" [icon]="'circle'"></fa-icon><span>疾病线相关</span>
-                </dt>
-                <dd *ngIf="diseaseAboutIsOpen">
-                    <dl>
-                            <dt class="subItem dropdown-toggle" (click)="clinicalApplicationIsOpenToggle()">
-                                    <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
-                                        jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.clinicalApplication">Clinical
-                                        Application</span>
-                                </dt>
-                            <dd *ngIf="clinicalApplicationIsOpen">
-                                    <span>{{diseaseXiAn.clinicalApplication}}</span>
-                                </dd>
-                                <dt class="subItem">
-                                    <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
-                                        jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.series">Series</span>
-                                </dt>
-                                <dd>
-                                    <span>{{diseaseXiAn.series}}</span>
-                                </dd>
-                                <dt class="subItem">
-                                    <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
-                                        jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.subSeries">Sub
-                                        Series</span><span> : {{ currentSubseries }}</span>
-                                </dt>
-                    </dl>
-                </dd>
-                <dt (click)="remarkIsOpenToggle()" class="dropdown-toggle">
-                    <fa-icon class="icon-5" [icon]="'circle'"></fa-icon><span
-                        jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.remarks">Remarks</span>
-                </dt>
-                <dd *ngIf="remarkIsOpen">
-                    <span>{{diseaseXiAn.remarks}}</span>
-                </dd>
-            </dl>
+                                jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.subSeries">Sub
+                                Series</span><span> : {{ currentSubseries }}</span>
+                        </mat-list-item>
+                    </mat-list>
+                </mat-expansion-panel>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        备注
+                    </mat-expansion-panel-header>
+                    <p>
+                        {{diseaseXiAn.remarks}}
+                    </p>
+                </mat-expansion-panel>
+
+
+            </mat-accordion>
 
             <div class="table-responsive">
-                    <table class="table table-striped">
-                            <thead></thead>
-                            <tbody>
-                                <tr>
-                                    <!--  -->
-                                    <td><button class="btn btn-success" (click)="currentDefault()">{{diseaseXiAn.subsidiary}}</button></td>
-                                    <td *ngFor="let price of diseaseXiAn.prices">
-                                        <button class="btn btn-success" (click)="currentToggle(price)">{{ price.subsidiary }}</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                <table class="table table-striped">
+                    <thead></thead>
+                    <tbody>
+                        <tr>
+                            <!--  -->
+                            <td><button mat-raised-button color="accent"
+                                    (click)="currentDefault()">{{diseaseXiAn.subsidiary}}</button></td>
+                            <td *ngFor="let price of diseaseXiAn.prices">
+                                <button mat-raised-button color="accent"
+                                    (click)="currentToggle(price)">{{ price.subsidiary }}</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
-            <mat-slide-toggle (toggleChange)="activateDiseaseXiAn()"
-                 [checked]="diseaseXiAn.activated" [jhiTranslate]="">{{activatedToggleLabel}}</mat-slide-toggle>
+            <mat-slide-toggle (toggleChange)="activateDiseaseXiAn()" [checked]="diseaseXiAn.activated"
+                [jhiTranslate]="">{{activatedToggleLabel}}</mat-slide-toggle>
             <hr>
             <!-- toggle between several companies -->
-            <button class="btn btn-info" [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'prices']">
+            <button class="btn"  mat-raised-button color="primary" [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'prices']">
                 <fa-icon [icon]="'dollar-sign'"></fa-icon>&nbsp;<span jhiTranslate="entity.project.price">价格详情</span>
             </button>
 
-            <button class="btn btn-success" [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'qarobots']">
+            <button mat-raised-button color="warn" [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'qarobots']">
                 <fa-icon [icon]="'question'"></fa-icon>&nbsp;<span jhiTranslate="entity.project.qarobot">QA博士</span>
             </button>
 
-            <button class="btn btn-warning" [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'applications']">
+            <button mat-raised-button color="accent" [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'applications']">
                 <fa-icon [icon]="'file-alt'"></fa-icon>&nbsp;<span>申请单</span>
             </button>
 
-            <button class="btn btn-primary" [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'suppliess']">
+            <button mat-raised-button color="primary" [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'suppliess']">
                 <fa-icon [icon]="'magic'"></fa-icon>&nbsp;<span>耗材图片</span>
             </button>
-
-            <!-- <button type="button" [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'edit']" class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
-            </button> -->
         </div>
     </div>
 </div>

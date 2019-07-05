@@ -67,17 +67,19 @@ export class QArobotComponent implements OnInit, OnDestroy {
                     (res: HttpErrorResponse) => this.onError(res.message)
                 );
             return;
+        } else {
+            this.qArobots = null;
         }
-        this.qArobotService
-            .query({
-                page: this.page - 1,
-                size: this.itemsPerPage,
-                // sort: this.sort()
-            })
-            .subscribe(
-                (res: HttpResponse<IQArobot[]>) => this.paginateQArobots(res.body, res.headers),
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
+        // this.qArobotService
+        //     .query({
+        //         page: this.page - 1,
+        //         size: this.itemsPerPage,
+        //         // sort: this.sort()
+        //     })
+        //     .subscribe(
+        //         (res: HttpResponse<IQArobot[]>) => this.paginateQArobots(res.body, res.headers),
+        //         (res: HttpErrorResponse) => this.onError(res.message)
+        //     );
     }
 
     loadPage(page: number) {

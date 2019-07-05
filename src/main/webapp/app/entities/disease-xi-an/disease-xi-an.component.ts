@@ -63,17 +63,19 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
                     (res: HttpErrorResponse) => this.onError(res.message)
                 );
             return;
+        } else {
+            this.diseaseXiAns = null;
         }
-        this.diseaseXiAnService
-            .query({
-                page: this.page - 1,
-                size: this.itemsPerPage,
-                // sort: this.sort()
-            })
-            .subscribe(
-                (res: HttpResponse<IDiseaseXiAn[]>) => this.paginateDiseaseXiAns(res.body, res.headers),
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
+        // this.diseaseXiAnService
+        //     .query({
+        //         page: this.page - 1,
+        //         size: this.itemsPerPage,
+        //         sort: this.sort()
+        //     })
+        //     .subscribe(
+        //         (res: HttpResponse<IDiseaseXiAn[]>) => this.paginateDiseaseXiAns(res.body, res.headers),
+        //         (res: HttpErrorResponse) => this.onError(res.message)
+        //     );
     }
 
     loadPage(page: number) {
@@ -98,6 +100,7 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
     clear() {
         this.page = 0;
         this.currentSearch = '';
+        this.diseaseXiAns = null;
         this.router.navigate([
             '/disease-xi-an',
             {
@@ -105,10 +108,9 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
                 // sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
             }
         ]);
-        this.loadAll();
     }
 
-    search(query) {
+    search(query: string) {
         if (!query) {
             return this.clear();
         }

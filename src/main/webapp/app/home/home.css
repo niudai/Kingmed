@@ -6,6 +6,16 @@ button {
     padding: 0;
 }
 
+.example-card {
+    /* max-width: px; */
+    max-width: 180px;
+}
+  
+  .example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+  }
+
 .card {
     cursor: pointer;
 }
