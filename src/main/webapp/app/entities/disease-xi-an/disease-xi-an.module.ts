@@ -1,3 +1,4 @@
+import { MatPaginatorIntl } from '@angular/material';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { JhiLanguageService } from 'ng-jhipster';
@@ -25,6 +26,7 @@ import { DiseaseXiAnApplicationsUpdateComponent } from './disease-xi-an-applicat
 import { DiseaseXiAnSuppliessComponent } from './disease-xi-an-suppliess/disease-xi-an-suppliess.component';
 import { DiseaseXiAnSuppliessDeleteComponent } from './disease-xi-an-suppliess-delete/disease-xi-an-suppliess-delete.component';
 import { DiseaseXiAnSuppliessUpdateComponent } from './disease-xi-an-suppliess-update/disease-xi-an-suppliess-update.component';
+import { Paginator } from 'app/shared/paginator/paginator';
 
 const ENTITY_STATES = [...diseaseXiAnRoute, ...diseaseXiAnPopupRoute];
 
@@ -50,7 +52,8 @@ const ENTITY_STATES = [...diseaseXiAnRoute, ...diseaseXiAnPopupRoute];
         DiseaseXiAnSuppliessUpdateComponent,
     ],
     entryComponents: [DiseaseXiAnComponent, DiseaseXiAnUpdateComponent, DiseaseXiAnDeleteDialogComponent, DiseaseXiAnDeletePopupComponent],
-    providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }],
+    providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }
+     , {provide: MatPaginatorIntl, useClass: Paginator}],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class JhipsterElasticsearchSampleApplicationDiseaseXiAnModule {

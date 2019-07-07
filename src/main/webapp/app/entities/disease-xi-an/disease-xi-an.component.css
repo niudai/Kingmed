@@ -13,3 +13,7 @@ fa-icon {
 .deactivated {
     color: red;
 }
+
+table {
+    width: 100%;
+}

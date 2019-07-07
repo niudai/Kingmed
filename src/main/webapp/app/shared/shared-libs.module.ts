@@ -8,7 +8,7 @@ import { CookieModule } from 'ngx-cookie';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CdkTableModule } from '@angular/cdk/table';
 import { CdkTreeModule } from '@angular/cdk/tree';
-import { MatButtonModule, MatTreeModule, MatCardModule, MatIconModule, MatListModule, MatBottomSheetModule, MatDialogModule, MatInputModule, MatMenuModule, MatTooltipModule, MatSlideToggleModule, MatGridListModule, MatExpansionModule, MatRippleModule } from '@angular/material';
+import { MatButtonModule, MatTreeModule, MatCardModule, MatIconModule, MatListModule, MatBottomSheetModule, MatDialogModule, MatInputModule, MatMenuModule, MatTooltipModule, MatSlideToggleModule, MatGridListModule, MatExpansionModule, MatRippleModule, MatTableModule, MatPaginatorModule } from '@angular/material';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 @NgModule({
     imports: [
@@ -46,7 +46,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
         MatMenuModule,
         DragDropModule,
         // MatNativeDateModule,
-        // MatPaginatorModule,
+        MatPaginatorModule,
         // MatProgressBarModule,
         // MatProgressSpinnerModule,
         // MatRadioModule,
@@ -57,7 +57,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
         MatSlideToggleModule,
         // MatSnackBarModule,
         // MatSortModule,
-        // MatTableModule,
+        MatTableModule,
         // MatTabsModule,
         // MatToolbarModule,
         MatTooltipModule,

@@ -10,6 +10,7 @@ import { AccountService } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { DiseaseXiAnService } from './disease-xi-an.service';
+import { PageEvent } from '@angular/material';
 
 @Component({
     selector: 'jhi-disease-xi-an',
@@ -17,7 +18,11 @@ import { DiseaseXiAnService } from './disease-xi-an.service';
     styleUrls: ['./disease-xi-an.component.css']
 })
 export class DiseaseXiAnComponent implements OnInit, OnDestroy {
-    windowWidth: number;
+    PC_COL: string[] =  ['ID', 'namePC', 'price', 'projectConcourse', 'applications', 'suppliess',
+    'qarobot', 'edit', 'delete'];
+    MOBILE_COL: string[] = ['nameMobile', 'projectConcourse'];
+    displayedColumns: string[];
+    windowWidth = 1000;
     currentAccount: any;
     diseaseXiAns: IDiseaseXiAn[];
     error: any;
@@ -32,7 +37,7 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
     predicate: any;
     previousPage: any;
     reverse: any;
-
+    pageEvent: PageEvent;
     constructor(
         protected diseaseXiAnService: DiseaseXiAnService,
         protected parseLinks: JhiParseLinks,
@@ -46,16 +51,27 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
 
     @HostListener('window:resize', ['$event'])
     onResize(event) {
-        this.windowWidth = window.innerWidth;
+        this.columnToggle();
     }
 
-    loadAll() {
+    /**
+     * change column to be displayed in terms of the width of device.
+     */
+    columnToggle() {
+        if (window.innerWidth < 600) {
+            this.displayedColumns = this.MOBILE_COL;
+        } else {
+            this.displayedColumns = this.PC_COL;
+        }
+    }
+
+    loadAll(pageIndex: number) {
         if (this.currentSearch) {
             this.diseaseXiAnService
                 .search({
-                    page: this.page - 1,
+                    page: pageIndex,
                     query: this.currentSearch,
-                    size: this.itemsPerPage,
+                    size: this.pageEvent ? this.pageEvent.pageSize : 10,
                     // sort: this.sort()
                 })
                 .subscribe(
@@ -81,20 +97,29 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
     loadPage(page: number) {
         if (page !== this.previousPage) {
             this.previousPage = page;
-            this.transition();
+            this.transition(page);
         }
     }
 
-    transition() {
+    loadDiseases($event: PageEvent) {
+        // if ($event.pageIndex !== this.previousPage) {'
+            this.page = $event.pageIndex;
+            this.pageEvent = $event;
+            this.previousPage = $event.pageIndex;
+            this.transition($event.pageIndex);
+        // }
+    }
+
+    transition(pageIndex: number) {
         this.router.navigate(['/disease-xi-an',
             {
                 search: this.currentSearch,
                 size: this.itemsPerPage,
-                page: this.page,
+                page: pageIndex,
             // sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
             }
             ]);
-        this.loadAll();
+        this.loadAll(pageIndex);
     }
 
     clear() {
@@ -124,11 +149,11 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
                 // sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
             }
         ]);
-        this.loadAll();
+        this.loadAll(0);
     }
 
     ngOnInit() {
-        this.windowWidth = window.innerWidth;
+        this.columnToggle();
         this.itemsPerPage = ITEMS_PER_PAGE;
         // this.routeData = this.activatedRoute.data.subscribe(data => {
         //     this.page = data.pagingParams.page;
@@ -144,7 +169,7 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
             this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['page']
             ? this.activatedRoute.snapshot.params['page']
                 : '';
-        this.loadAll();
+        this.loadAll(this.page);
         this.accountService.identity().then(account => {
             this.currentAccount = account;
         });
