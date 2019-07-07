@@ -163,6 +163,19 @@ public class UserResource {
     }
 
     /**
+     * Request /users/reindex : reindex the users
+     *
+     */
+    @GetMapping("/users/reindex")
+    @PreAuthorize("hasRole(\"" + AuthoritiesConstants.ADMIN + "\")")
+    public void reindexUsers() {
+        log.debug("REST request to reindex DiseaseXiAn");
+        userSearchRepository.deleteAll();
+        List<User> users = userRepository.findAll();
+        userSearchRepository.saveAll(users);
+    }
+
+    /**
      * GET /users/:login : get the "login" user.
      *
      * @param login the login of the user to find
@@ -197,10 +210,11 @@ public class UserResource {
      * @param query the query to search
      * @return the result of the search
      */
-    @GetMapping("/_search/users/{query}")
-    public List<User> search(@PathVariable String query) {
-        return StreamSupport
-            .stream(userSearchRepository.search(queryStringQuery(query)).spliterator(), false)
-            .collect(Collectors.toList());
+    @GetMapping("/_search/users")
+    public ResponseEntity<List<User>> search(@RequestParam String query, Pageable pageable) {
+        log.debug("REST request to search for a page of Users for query {}", query);
+        Page<User> page = userSearchRepository.search(queryStringQuery(query) , pageable);
+        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/users");
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 }

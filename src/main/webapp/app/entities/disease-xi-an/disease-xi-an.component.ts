@@ -185,7 +185,7 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
     }
 
     registerChangeInDiseaseXiAns() {
-        this.eventSubscriber = this.eventManager.subscribe('diseaseXiAnListModification', response => this.loadAll());
+        this.eventSubscriber = this.eventManager.subscribe('diseaseXiAnListModification', response => this.loadAll(this.pageEvent.pageIndex));
     }
 
     // sort() {

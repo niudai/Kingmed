@@ -179,13 +179,6 @@
                 showFirstLastButtons 
                 (page)="loadDiseases($event)">
              </mat-paginator>
-             <div *ngIf="pageEvent">
-                    <h5>Page Change Event Properties {{page}}</h5>
-                    <div>List length: {{pageEvent.length}}</div>
-                    <div>List length: {{pageEvent.length}}</div>
-                    <div>Page size: {{itemsPerPage}}</div>
-                    <div>Page index: {{pageEvent.pageIndex}}</div>
-                </div>
               
     <!-- <div class="table-responsive" *ngIf="diseaseXiAns">
         <table class="table table-striped">

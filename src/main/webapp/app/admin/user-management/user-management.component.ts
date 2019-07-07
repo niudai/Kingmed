@@ -1,12 +1,13 @@
+import { PageEvent } from '@angular/material';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
+import { HttpResponse, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
-import { AccountService, UserService, User } from 'app/core';
+import { AccountService, UserService, User, IUser } from 'app/core';
 import { UserMgmtDeleteDialogComponent } from 'app/admin';
 
 @Component({
@@ -14,6 +15,7 @@ import { UserMgmtDeleteDialogComponent } from 'app/admin';
     templateUrl: './user-management.component.html'
 })
 export class UserMgmtComponent implements OnInit, OnDestroy {
+    currentSearch: string;
     currentAccount: any;
     users: User[];
     error: any;
@@ -26,6 +28,7 @@ export class UserMgmtComponent implements OnInit, OnDestroy {
     predicate: any;
     previousPage: any;
     reverse: any;
+    pageEvent: PageEvent;
 
     constructor(
         private userService: UserService,
@@ -48,6 +51,7 @@ export class UserMgmtComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.accountService.identity().then(account => {
+            this.currentSearch = '';
             this.currentAccount = account;
             this.loadAll();
             this.registerChangeInUsers();
@@ -56,6 +60,37 @@ export class UserMgmtComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.routeData.unsubscribe();
+    }
+
+    search(query: string) {
+        this.page = 0;
+        this.currentSearch = query;
+        this.router.navigate([
+            '/admin/user-management',
+            {
+                search: this.currentSearch,
+                page: this.page,
+                // sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
+            }
+        ]);
+        this.loadAll();
+    }
+
+    loadAll() {
+        this.userService.search({
+            page: this.pageEvent.pageIndex,
+            query: this.currentSearch,
+            size: this.pageEvent ? this.pageEvent.pageSize : 10
+        })
+        .subscribe(
+            (res: HttpResponse<IUser[]>) => this.paginateUsers(res.body, res.headers),
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+
+    paginateUsers(data: IUser[], headers: HttpHeaders) {
+        this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
+        this.users = data;
     }
 
     registerChangeInUsers() {
@@ -77,18 +112,18 @@ export class UserMgmtComponent implements OnInit, OnDestroy {
         });
     }
 
-    loadAll() {
-        this.userService
-            .query({
-                page: this.page - 1,
-                size: this.itemsPerPage,
-                sort: this.sort()
-            })
-            .subscribe(
-                (res: HttpResponse<User[]>) => this.onSuccess(res.body, res.headers),
-                (res: HttpResponse<any>) => this.onError(res.body)
-            );
-    }
+    // loadAll() {
+    //     this.userService
+    //         .query({
+    //             page: this.page - 1,
+    //             size: this.itemsPerPage,
+    //             sort: this.sort()
+    //         })
+    //         .subscribe(
+    //             (res: HttpResponse<User[]>) => this.onSuccess(res.body, res.headers),
+    //             (res: HttpResponse<any>) => this.onError(res.body)
+    //         );
+    // }
 
     trackIdentity(index, item: User) {
         return item.id;

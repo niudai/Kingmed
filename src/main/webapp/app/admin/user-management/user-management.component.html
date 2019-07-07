@@ -1,4 +1,19 @@
-<div>
+<div class="container col-sm-12">
+        <div class="row">
+                <mat-card class = "col-sm-12">
+                        <form name="searchForm" class="form-inline col-sm-6">
+                                <div class="input-group w-100 mt-3 ">
+                                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch"
+                                        name="currentSearch" value=""
+                                        placeholder="{{ 'jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.home.search' | translate }}">
+                                    <button mat-raised-button class="input-group-append" color="warn" (click)="search(currentSearch)">
+                                        <fa-icon [icon]="'search'"></fa-icon>
+                                    </button>
+                                </div>
+                            </form>
+                </mat-card>
+                
+            </div>
     <h2>
         <span id="user-management-page-heading" jhiTranslate="userManagement.home.title">Users</span>
         <button class="btn btn-primary float-right jh-create-entity" [routerLink]="['./new']">
@@ -9,7 +24,7 @@
     <div class="table-responsive" *ngIf="users">
         <table class="table table-striped">
             <thead>
-            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse">
                 <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th jhiSortBy="login"><span jhiTranslate="userManagement.login">Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th jhiSortBy="email"><span jhiTranslate="userManagement.email">Email</span> <fa-icon [icon]="'sort'"></fa-icon></th>
