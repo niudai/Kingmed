@@ -116,7 +116,6 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
                 search: this.currentSearch,
                 size: this.itemsPerPage,
                 page: pageIndex,
-            // sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
             }
             ]);
         this.loadAll(pageIndex);

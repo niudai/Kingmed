@@ -1,3 +1,4 @@
+import { MatPaginatorIntl } from '@angular/material';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { JhiLanguageService } from 'ng-jhipster';
@@ -14,6 +15,7 @@ import {
     qArobotPopupRoute
 } from './';
 import { QArobotDiseaseComponent } from './q-arobot-disease/q-arobot-disease.component';
+import { Paginator } from 'app/shared/paginator/paginator';
 
 const ENTITY_STATES = [...qArobotRoute, ...qArobotPopupRoute];
 
@@ -28,7 +30,8 @@ const ENTITY_STATES = [...qArobotRoute, ...qArobotPopupRoute];
         QArobotDiseaseComponent
     ],
     entryComponents: [QArobotComponent, QArobotUpdateComponent, QArobotDeleteDialogComponent, QArobotDeletePopupComponent],
-    providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }],
+    providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService },
+     {provide: MatPaginatorIntl, useClass: Paginator}],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class JhipsterElasticsearchSampleApplicationQArobotModule {

@@ -1,4 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { PageEvent } from '@angular/material';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -13,9 +14,13 @@ import { QArobotService } from './q-arobot.service';
 
 @Component({
     selector: 'jhi-q-arobot',
-    templateUrl: './q-arobot.component.html'
+    templateUrl: './q-arobot.component.html',
+    styleUrls: ['./q-arobot.component.css']
 })
 export class QArobotComponent implements OnInit, OnDestroy {
+    PC_COL: string[] =  ['ID', 'questionPC', 'disease', 'diseaseSeries', 'projectSeries', 'edit', 'delete'];
+    MOBILE_COL: string[] = ['questionMobile', 'disease'];
+    displayedColumns: string[];
     currentAccount: any;
     qArobots: IQArobot[];
     error: any;
@@ -30,6 +35,7 @@ export class QArobotComponent implements OnInit, OnDestroy {
     predicate: any;
     previousPage: any;
     reverse: any;
+    pageEvent: PageEvent;
 
     constructor(
         protected qArobotService: QArobotService,
@@ -53,13 +59,32 @@ export class QArobotComponent implements OnInit, OnDestroy {
                 : '';
     }
 
+    @HostListener('window:resize', ['$event'])
+    onResize(event) {
+        this.columnToggle();
+    }
+
+    /**
+     * change column to be displayed in terms of the width of device.
+     */
+    columnToggle() {
+        if (window.innerWidth < 600) {
+            this.displayedColumns = this.MOBILE_COL;
+        } else {
+            this.displayedColumns = this.PC_COL;
+        }
+    }
+
     loadAll() {
+        this.router.navigate(['/q-arobot', {page: this.pageEvent && this.pageEvent.pageIndex ? this.pageEvent.pageIndex : 0,
+            size: this.pageEvent && this.pageEvent.pageSize ? this.pageEvent.pageSize : 10,
+            search: this.currentSearch}]);
         if (this.currentSearch) {
             this.qArobotService
                 .search({
-                    page: this.page - 1,
+                    page: this.pageEvent ? this.pageEvent.pageIndex : 0,
                     query: this.currentSearch,
-                    size: this.itemsPerPage,
+                    size: this.pageEvent ? this.pageEvent.pageSize : 10,
                     // sort: this.sort()
                 })
                 .subscribe(
@@ -70,68 +95,22 @@ export class QArobotComponent implements OnInit, OnDestroy {
         } else {
             this.qArobots = null;
         }
-        // this.qArobotService
-        //     .query({
-        //         page: this.page - 1,
-        //         size: this.itemsPerPage,
-        //         // sort: this.sort()
-        //     })
-        //     .subscribe(
-        //         (res: HttpResponse<IQArobot[]>) => this.paginateQArobots(res.body, res.headers),
-        //         (res: HttpErrorResponse) => this.onError(res.message)
-        //     );
     }
 
-    loadPage(page: number) {
-        if (page !== this.previousPage) {
-            this.previousPage = page;
-            this.transition();
-        }
-    }
-
-    transition() {
-        this.router.navigate(['/q-arobot'], {
-            queryParams: {
-                page: this.page,
-                size: this.itemsPerPage,
-                search: this.currentSearch,
-                // sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
-            }
-        });
-        this.loadAll();
-    }
-
-    clear() {
-        this.page = 0;
-        this.currentSearch = '';
-        this.router.navigate([
-            '/q-arobot',
-            {
-                page: this.page,
-                // sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
-            }
-        ]);
-        this.loadAll();
-    }
-
-    search(query) {
-        if (!query) {
-            return this.clear();
-        }
-        this.page = 0;
-        this.currentSearch = query;
-        this.router.navigate([
-            '/q-arobot',
-            {
-                search: this.currentSearch,
-                page: this.page,
-                // sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
-            }
-        ]);
+    loadPage($event: PageEvent) {
+        this.pageEvent = $event;
         this.loadAll();
     }
 
     ngOnInit() {
+        this.pageEvent = new PageEvent();
+        this.columnToggle();
+        this.currentSearch = this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['search']
+            ? this.activatedRoute.snapshot.params['search'] : '';
+        // this.currentSearch = 'test';
+        this.pageEvent.pageIndex = this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['page']
+        ? this.activatedRoute.snapshot.params['page']
+            : '';
         this.loadAll();
         this.accountService.identity().then(account => {
             this.currentAccount = account;
