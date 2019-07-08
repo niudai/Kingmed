@@ -14,6 +14,7 @@
         "detail": {
             "title": "用户"
         },
+        "search": "搜索用户(用户名或邮箱)",
         "login": "登录",
         "firstName": "名",
         "lastName": "姓",

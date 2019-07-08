@@ -62,14 +62,14 @@ export class UserMgmtComponent implements OnInit, OnDestroy {
         this.routeData.unsubscribe();
     }
 
-    search(query: string) {
+    search() {
         this.page = 0;
-        this.currentSearch = query;
+        // this.currentSearch = query;
         this.router.navigate([
             '/admin/user-management',
             {
                 search: this.currentSearch,
-                page: this.page,
+                page: this.pageEvent ? this.pageEvent.pageIndex : 0,
                 // sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
             }
         ]);
@@ -77,15 +77,27 @@ export class UserMgmtComponent implements OnInit, OnDestroy {
     }
 
     loadAll() {
-        this.userService.search({
-            page: this.pageEvent.pageIndex,
-            query: this.currentSearch,
-            size: this.pageEvent ? this.pageEvent.pageSize : 10
-        })
-        .subscribe(
-            (res: HttpResponse<IUser[]>) => this.paginateUsers(res.body, res.headers),
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
+        if (!this.currentSearch || this.currentSearch === '') {
+            this.userService.query({
+                page: this.page - 1,
+                size: this.pageEvent ? this.pageEvent.pageSize : 10,
+                sort: this.sort()
+            })
+                .subscribe(
+                    (res: HttpResponse<User[]>) => this.onSuccess(res.body, res.headers),
+                    (res: HttpResponse<any>) => this.onError(res.body)
+                );
+        } else {
+            this.userService.search({
+                page: this.pageEvent ? this.pageEvent.pageIndex : 0,
+                query: this.currentSearch,
+                size: this.pageEvent ? this.pageEvent.pageSize : 10
+            })
+                .subscribe(
+                    (res: HttpResponse<IUser[]>) => this.paginateUsers(res.body, res.headers),
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+        }
     }
 
     paginateUsers(data: IUser[], headers: HttpHeaders) {
