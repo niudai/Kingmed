@@ -147,7 +147,7 @@
                 <td mat-cell *matCellDef="let element">
                     <div class="btn-group flex-btn-group-container">
                         <button *jhiHasAnyAuthority="'ROLE_ADMIN'" mat-mini-fab type="submit"
-                            style="background-color: lightblue;" [routerLink]="[element.id, 'edit']">
+                            style="background-color: lightblue" [routerLink]="[element.id, 'edit']">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                         </button>
                     </div>

@@ -9,12 +9,27 @@ import {
     HasAnyAuthorityDirective
 } from './';
 import { NavigationBackComponent } from './navigation/navigation-back.component';
+import { HideIfNullDirective } from './pipe/hide-if-null.directive';
 @NgModule({
-    imports: [JhipsterElasticsearchSampleApplicationSharedLibsModule, JhipsterElasticsearchSampleApplicationSharedCommonModule],
-    declarations: [JhiLoginModalComponent, HasAnyAuthorityDirective, NavigationBackComponent],
+    imports: [
+        JhipsterElasticsearchSampleApplicationSharedLibsModule,
+        JhipsterElasticsearchSampleApplicationSharedCommonModule
+    ],
+    declarations: [
+        JhiLoginModalComponent,
+        HasAnyAuthorityDirective,
+        NavigationBackComponent,
+        HideIfNullDirective,
+    ],
     providers: [{ provide: NgbDateAdapter, useClass: NgbDateMomentAdapter }],
     entryComponents: [JhiLoginModalComponent],
-    exports: [JhipsterElasticsearchSampleApplicationSharedCommonModule, JhiLoginModalComponent, HasAnyAuthorityDirective, NavigationBackComponent],
+    exports: [
+        JhipsterElasticsearchSampleApplicationSharedCommonModule,
+        JhiLoginModalComponent,
+        HasAnyAuthorityDirective,
+        HideIfNullDirective,
+        NavigationBackComponent
+    ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class JhipsterElasticsearchSampleApplicationSharedModule {

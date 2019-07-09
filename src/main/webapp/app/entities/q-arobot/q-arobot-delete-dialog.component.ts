@@ -7,8 +7,8 @@ import { JhiEventManager } from 'ng-jhipster';
 import { IQArobot } from 'app/shared/model/q-arobot.model';
 import { QArobotService } from './q-arobot.service';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
-import { DialogData } from './q-arobot-detail.component';
 import { on } from 'cluster';
+import { DeleteDialogData } from './q-arobot-delete-dialog-data';
 
 @Component({
     selector: 'jhi-q-arobot-delete-dialog',
@@ -18,7 +18,7 @@ export class QArobotDeleteDialogComponent {
 
     constructor(
         public dialogRef: MatDialogRef<QArobotDeleteDialogComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: DialogData,
+        @Inject(MAT_DIALOG_DATA) public data: DeleteDialogData,
         protected qArobotService: QArobotService,
         protected router: Router) {}
 

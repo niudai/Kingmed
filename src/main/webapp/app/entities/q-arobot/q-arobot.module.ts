@@ -1,3 +1,4 @@
+import { DialogData } from 'app/disease-map/disease-map/disease-map.component';
 import { MatPaginatorIntl } from '@angular/material';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';

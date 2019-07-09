@@ -1,7 +1,7 @@
 .floating {
     position: fixed;
     bottom: 4px;
-    left: 4px;
+    right: 4px;
     background-color: rgb(241, 239, 119);
 }
 

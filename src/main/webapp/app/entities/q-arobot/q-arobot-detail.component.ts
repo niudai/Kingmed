@@ -6,10 +6,6 @@ import { IQArobot } from 'app/shared/model/q-arobot.model';
 import { MatDialog } from '@angular/material';
 import { QArobotDeleteDialogComponent } from '.';
 
-export interface DialogData {
-    qArobot: IQArobot;
-}
-
 @Component({
     selector: 'jhi-q-arobot-detail',
     templateUrl: './q-arobot-detail.component.html',
