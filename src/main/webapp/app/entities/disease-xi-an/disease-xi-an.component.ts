@@ -19,7 +19,7 @@ import { PageEvent } from '@angular/material';
 })
 export class DiseaseXiAnComponent implements OnInit, OnDestroy {
     PC_COL: string[] =  ['ID', 'namePC', 'price', 'projectConcourse', 'applications', 'suppliess',
-    'qarobot', 'edit', 'delete'];
+    'qarobot'];
     MOBILE_COL: string[] = ['nameMobile', 'projectConcourse'];
     displayedColumns: string[];
     windowWidth = 1000;
@@ -152,6 +152,10 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        if (this.accountService.hasAnyAuthority(['ROLE_ADMIN'])) {
+            this.PC_COL.push('edit');
+            this.PC_COL.push('delete');
+        }
         this.columnToggle();
         this.itemsPerPage = ITEMS_PER_PAGE;
         // this.routeData = this.activatedRoute.data.subscribe(data => {

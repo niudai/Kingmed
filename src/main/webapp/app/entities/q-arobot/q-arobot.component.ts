@@ -19,7 +19,7 @@ import { QArobotDeleteDialogComponent } from '.';
     styleUrls: ['./q-arobot.component.css']
 })
 export class QArobotComponent implements OnInit, OnDestroy {
-    PC_COL: string[] =  ['ID', 'questionPC', 'disease', 'diseaseSeries', 'projectSeries', 'edit', 'delete'];
+    PC_COL: string[] =  ['ID', 'questionPC', 'disease', 'diseaseSeries', 'projectSeries'];
     MOBILE_COL: string[] = ['questionMobile', 'disease'];
     displayedColumns: string[];
     currentAccount: any;
@@ -117,6 +117,10 @@ export class QArobotComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        if (this.accountService.hasAnyAuthority(['ROLE_ADMIN'])) {
+            this.PC_COL.push('edit');
+            this.PC_COL.push('delete');
+        }
         this.pageEvent = new PageEvent();
         this.columnToggle();
         this.currentSearch = this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['search']
