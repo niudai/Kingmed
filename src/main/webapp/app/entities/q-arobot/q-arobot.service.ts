@@ -1,3 +1,4 @@
+import { MatDialog } from '@angular/material';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -6,6 +7,7 @@ import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { IQArobot } from 'app/shared/model/q-arobot.model';
 import { IDiseaseXiAn } from 'app/shared/model/disease-xi-an.model';
+import { QArobotDeleteDialogComponent } from '.';
 
 type EntityResponseType = HttpResponse<IQArobot>;
 type EntityArrayResponseType = HttpResponse<IQArobot[]>;
@@ -15,7 +17,7 @@ export class QArobotService {
     public resourceUrl = SERVER_API_URL + 'api/q-arobots';
     public resourceSearchUrl = SERVER_API_URL + 'api/_search/q-arobots';
 
-    constructor(protected http: HttpClient) {}
+    constructor(protected http: HttpClient, protected dialog: MatDialog) {}
 
     create(qArobot: IQArobot): Observable<EntityResponseType> {
         return this.http.post<IQArobot>(this.resourceUrl, qArobot, { observe: 'response' });

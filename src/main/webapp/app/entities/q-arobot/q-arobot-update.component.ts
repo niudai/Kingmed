@@ -1,3 +1,4 @@
+import { MatDialog } from '@angular/material';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
@@ -5,6 +6,7 @@ import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { IQArobot } from 'app/shared/model/q-arobot.model';
 import { QArobotService } from './q-arobot.service';
+import { QArobotDeleteDialogComponent } from '.';
 
 @Component({
     selector: 'jhi-q-arobot-update',
@@ -14,7 +16,9 @@ export class QArobotUpdateComponent implements OnInit {
     qArobot: IQArobot;
     isSaving: boolean;
 
-    constructor(protected qArobotService: QArobotService, protected activatedRoute: ActivatedRoute) {}
+    constructor(protected qArobotService: QArobotService
+        , protected activatedRoute: ActivatedRoute
+        , protected dialog: MatDialog) {}
 
     ngOnInit() {
         this.isSaving = false;

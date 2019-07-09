@@ -1,4 +1,4 @@
-import { PageEvent } from '@angular/material';
+import { PageEvent, MatDialog } from '@angular/material';
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -11,6 +11,7 @@ import { AccountService } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { QArobotService } from './q-arobot.service';
+import { QArobotDeleteDialogComponent } from '.';
 
 @Component({
     selector: 'jhi-q-arobot',
@@ -44,7 +45,8 @@ export class QArobotComponent implements OnInit, OnDestroy {
         protected accountService: AccountService,
         protected activatedRoute: ActivatedRoute,
         protected router: Router,
-        protected eventManager: JhiEventManager
+        protected eventManager: JhiEventManager,
+        protected dialog: MatDialog
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
@@ -73,6 +75,18 @@ export class QArobotComponent implements OnInit, OnDestroy {
         } else {
             this.displayedColumns = this.PC_COL;
         }
+    }
+
+    openDialog(qA: IQArobot): void {
+        const dialogRef = this.dialog.open(QArobotDeleteDialogComponent, {
+          width: '250px',
+          data: {qArobot: qA}
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+        //   console.log('The dialog was closed');
+            this.loadAll();
+        });
     }
 
     loadAll() {

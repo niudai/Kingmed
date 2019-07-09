@@ -4,87 +4,113 @@
             <!-- <h3><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.detail.title">Q Arobot</span>
                 {{qArobot.question}}
             </h3> -->
-            <jhi-alert-error></jhi-alert-error>
-            <dl class="row-md jh-entity-details">
-                <dt><fa-icon class="question" [icon]="'question'"></fa-icon><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.question">Question</span></dt>
-                <dd>
-                    <span>{{qArobot.question}}</span>
-                </dd>
-                <dt class="dropdown-toggle" (click) = "answerToggle()">
-                    <fa-icon class="answer" [icon]="'lightbulb'"></fa-icon><span
-                        jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.answer">Answer</span>
-                </dt>
-                <dd *ngIf="answerIsOpen">
-                    <span>{{qArobot.answer}}</span>
-                </dd>
-                <dt class="dropdown-toggle" (click) = "questionAboutToggle()">
-                    <fa-icon class="answer" [icon]="'info'"></fa-icon>
-                    <span>问题相关信息</span>
-                </dt>
-                <dd *ngIf="questionAboutIsOpen">
-                    <dl class="subList">
-                        <dt><fa-icon [icon]="'circle'"></fa-icon><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.diseaseSeries">Disease
-                                Series</span></dt>
-                        <dd>
-                            <span>{{qArobot.diseaseSeries}}</span>
-                        </dd>
-                        <dt><fa-icon [icon]="'circle'"></fa-icon><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.projectSeries">Project
-                                Series</span></dt>
-                        <dd>
-                            <span>{{qArobot.projectSeries}}</span>
-                        </dd>
-                        <dt><fa-icon [icon]="'circle'"></fa-icon><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.level">Level</span>
-                        </dt>
-                        <dd>
-                            <span>{{qArobot.level}}</span>
-                        </dd>
-                        <dt><fa-icon [icon]="'circle'"></fa-icon><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.questionType">Question
-                                Type</span></dt>
-                        <dd>
-                            <span>{{qArobot.questionType}}</span>
-                        </dd>
+            <mat-card>
+                <fa-icon class="question" [icon]="'question'"></fa-icon>
+                {{qArobot.question}} - <span class = "text-primary">{{qArobot.qaSubsidiary}}</span>
+            </mat-card>
+            <hr>
+            <mat-accordion>
+                    <mat-expansion-panel>
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    <fa-icon class="answer" [icon]="'lightbulb'"></fa-icon>答案
+                                </mat-panel-title>
+                                <mat-panel-description>
+                                </mat-panel-description>
+                            </mat-expansion-panel-header>
+                            <p>{{qArobot.answer}} </p>
+                        </mat-expansion-panel>
+                        <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        <fa-icon class="answer" [icon]="'info'"></fa-icon>相关信息
+                                    </mat-panel-title>
+                                    <mat-panel-description>
+                                    </mat-panel-description>
+                                </mat-expansion-panel-header>
+                                <mat-list>
+                                        <dt>
+                                                <fa-icon [icon]="'circle'"></fa-icon><span
+                                                    jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.diseaseSeries">Disease
+                                                    Series</span>
+                                            </dt>
+                                            <dd>
+                                                <span>{{qArobot.diseaseSeries}}</span>
+                                            </dd>
+                                            <dt>
+                                                <fa-icon [icon]="'circle'"></fa-icon><span
+                                                    jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.projectSeries">Project
+                                                    Series</span>
+                                            </dt>
+                                            <dd>
+                                                <span>{{qArobot.projectSeries}}</span>
+                                            </dd>
+                                            <dt>
+                                                <fa-icon [icon]="'circle'"></fa-icon><span
+                                                    jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.level">Level</span>
+                                            </dt>
+                                            <dd>
+                                                <span>{{qArobot.level}}</span>
+                                            </dd>
+                                            <dt>
+                                                <fa-icon [icon]="'circle'"></fa-icon><span
+                                                    jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.questionType">Question
+                                                    Type</span>
+                                            </dt>
+                                            <dd>
+                                                <span>{{qArobot.questionType}}</span>
+                                            </dd>
 
 
-                        <dt><fa-icon [icon]="'circle'"></fa-icon><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.updateDate">Update
-                                Date</span>
-                        </dt>
-                        <dd>
-                            <span>{{qArobot.updateDate}}</span>
-                        </dd>
-                        <dt><fa-icon [icon]="'circle'"></fa-icon><span
-                                jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.submitter">Submitter</span>
-                        </dt>
-                        <dd>
-                            <span>{{qArobot.submitter}}</span>
-                        </dd>
-                        <dt><fa-icon [icon]="'circle'"></fa-icon><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.qaSubsidiary">Qa
-                                Subsidiary</span></dt>
-                        <dd>
-                            <span>{{qArobot.qaSubsidiary}}</span>
-                        </dd>
-                        <dt><fa-icon [icon]="'circle'"></fa-icon><span
-                                jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.specialProcess">Special
-                                Process</span></dt>
-                        <dd>
-                            <span>{{qArobot.specialProcess}}</span>
-                        </dd>
-                        <dt><fa-icon [icon]="'circle'"></fa-icon><span jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.qaClass">Qa
-                                Class</span></dt>
-                        <dd>
-                            <span>{{qArobot.qaClass}}</span>
-                        </dd>
-                    </dl>
-                </dd>
-
-            </dl>
-
-            <button type="submit" (click)="previousState()" class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+                                            <dt>
+                                                <fa-icon [icon]="'circle'"></fa-icon><span
+                                                    jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.updateDate">Update
+                                                    Date</span>
+                                            </dt>
+                                            <dd>
+                                                <span>{{qArobot.updateDate}}</span>
+                                            </dd>
+                                            <dt>
+                                                <fa-icon [icon]="'circle'"></fa-icon><span
+                                                    jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.submitter">Submitter</span>
+                                            </dt>
+                                            <dd>
+                                                <span>{{qArobot.submitter}}</span>
+                                            </dd>
+                                            <dt>
+                                                <fa-icon [icon]="'circle'"></fa-icon><span
+                                                    jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.qaSubsidiary">Qa
+                                                    Subsidiary</span>
+                                            </dt>
+                                            <dd>
+                                                <span>{{qArobot.qaSubsidiary}}</span>
+                                            </dd>
+                                            <dt>
+                                                <fa-icon [icon]="'circle'"></fa-icon><span
+                                                    jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.specialProcess">Special
+                                                    Process</span>
+                                            </dt>
+                                            <dd>
+                                                <span>{{qArobot.specialProcess}}</span>
+                                            </dd>
+                                            <dt>
+                                                <fa-icon [icon]="'circle'"></fa-icon><span
+                                                    jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.qaClass">Qa
+                                                    Class</span>
+                                            </dt>
+                                            <dd>
+                                                <span>{{qArobot.qaClass}}</span>
+                                            </dd>
+                                       </mat-list>                            </mat-expansion-panel>
+            </mat-accordion>
+            <hr>
+            <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="button" mat-raised-button [routerLink]="['/q-arobot', qArobot.id, 'edit']">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> 编辑</span>
             </button>
-
-            <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="button" [routerLink]="['/q-arobot', qArobot.id, 'edit']"
+            <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="button" mat-raised-button (click)="openDialog(qArobot)" replaceUrl="true"
+            queryParamsHandling="merge"
                 class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+                <fa-icon [icon]="'times'"></fa-icon>&nbsp;<span> 删除</span>
             </button>
         </div>
     </div>

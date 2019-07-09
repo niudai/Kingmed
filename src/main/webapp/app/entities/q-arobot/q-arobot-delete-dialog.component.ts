@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
@@ -6,28 +6,30 @@ import { JhiEventManager } from 'ng-jhipster';
 
 import { IQArobot } from 'app/shared/model/q-arobot.model';
 import { QArobotService } from './q-arobot.service';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
+import { DialogData } from './q-arobot-detail.component';
+import { on } from 'cluster';
 
 @Component({
     selector: 'jhi-q-arobot-delete-dialog',
     templateUrl: './q-arobot-delete-dialog.component.html'
 })
 export class QArobotDeleteDialogComponent {
-    qArobot: IQArobot;
 
-    constructor(protected qArobotService: QArobotService, public activeModal: NgbActiveModal, protected eventManager: JhiEventManager) {}
+    constructor(
+        public dialogRef: MatDialogRef<QArobotDeleteDialogComponent>,
+        @Inject(MAT_DIALOG_DATA) public data: DialogData,
+        protected qArobotService: QArobotService,
+        protected router: Router) {}
 
-    clear() {
-        this.activeModal.dismiss('cancel');
+    onNoClick(): void {
+        this.dialogRef.close();
     }
 
-    confirmDelete(id: number) {
-        this.qArobotService.delete(id).subscribe(response => {
-            this.eventManager.broadcast({
-                name: 'qArobotListModification',
-                content: 'Deleted an qArobot'
-            });
-            this.activeModal.dismiss(true);
-        });
+    confirmDelete(): void {
+        this.qArobotService.delete(this.data.qArobot.id).subscribe(
+            any => this.dialogRef.close()
+        );
     }
 }
 
@@ -38,28 +40,28 @@ export class QArobotDeleteDialogComponent {
 export class QArobotDeletePopupComponent implements OnInit, OnDestroy {
     protected ngbModalRef: NgbModalRef;
 
-    constructor(protected activatedRoute: ActivatedRoute, protected router: Router, protected modalService: NgbModal) {}
+    constructor(protected activatedRoute: ActivatedRoute
+        , protected router: Router
+        , protected modalService: NgbModal
+        , protected dialog: MatDialog) {}
 
-    ngOnInit() {
-        this.activatedRoute.data.subscribe(({ qArobot }) => {
-            setTimeout(() => {
-                this.ngbModalRef = this.modalService.open(QArobotDeleteDialogComponent as Component, { size: 'lg', backdrop: 'static' });
-                this.ngbModalRef.componentInstance.qArobot = qArobot;
-                this.ngbModalRef.result.then(
-                    result => {
-                        this.router.navigate(['/q-arobot', { outlets: { popup: null } }]);
-                        this.ngbModalRef = null;
-                    },
-                    reason => {
-                        this.router.navigate(['/q-arobot', { outlets: { popup: null } }]);
-                        this.ngbModalRef = null;
-                    }
-                );
-            }, 0);
+    openDialog(): void {
+        const dialogRef = this.dialog.open(QArobotDeleteDialogComponent, {
+          width: '250px',
+        //   data: {name: this.name, animal: this.animal}
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+          console.log('The dialog was closed');
+        //   this.animal = result;
         });
     }
 
+    ngOnInit() {
+
+    }
+
     ngOnDestroy() {
-        this.ngbModalRef = null;
+        // this.ngbModalRef = null;
     }
 }
