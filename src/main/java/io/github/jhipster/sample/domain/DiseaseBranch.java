@@ -109,7 +109,6 @@ public class DiseaseBranch implements Serializable {
         return "{" +
             " id='" + getId() + "'" +
             ", name='" + getName() + "'" +
-            ", diseaseMaps='" + getDiseaseMaps() + "'" +
             "}";
     }
 

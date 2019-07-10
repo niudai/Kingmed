@@ -106,6 +106,25 @@ public class DiseaseMapService {
     }
 
     /**
+     * Put Disease Map what already exists in database to modify some content.
+     * @param diseaseMap
+     */
+    @Transactional
+    public void modifyDiseaseMap(DiseaseMap diseaseMap) {
+        diseaseMapRepository.findById(diseaseMap.getId()).get().setName(diseaseMap.getName());
+    }
+
+    /**
+     * Modify disease Branch
+     * @param diseaseMap
+     */
+    @Transactional
+    public void modifyDiseaseBranch(DiseaseBranch diseaseBranch) {
+        diseaseBranchRepository
+            .findById(diseaseBranch.getId()).get().setName(diseaseBranch.getName());
+    }
+
+    /**
      * delete a disease map. all sub disease map related to this map would be deleted.
      * @param diseaseMapId
      */

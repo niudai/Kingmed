@@ -85,6 +85,24 @@ public class DiseaseMapController {
     }
 
     /**
+     * modify disease map
+     * @param diseaseMap
+     */
+    @PutMapping("/modify-disease-map")
+    public void modifyDiseaseMap(@Valid @RequestBody DiseaseMap diseaseMap) {
+        diseaseMapService.modifyDiseaseMap(diseaseMap);
+    }
+
+    /**
+     * modify disease branch
+     * @param diseaseMapId
+     */
+    @PutMapping("/modify-disease-branch")
+    public void modifyDiseaseBranch(@Valid @RequestBody DiseaseBranch diseaseBranch) {
+        diseaseMapService.modifyDiseaseBranch(diseaseBranch);
+    }
+
+    /**
      *
      * @param diseaseXiAn
      * @return

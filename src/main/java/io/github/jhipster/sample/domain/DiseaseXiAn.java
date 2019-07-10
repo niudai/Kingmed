@@ -88,7 +88,7 @@ public class DiseaseXiAn implements Serializable {
 
     @NotNull
     @Column(nullable = false)
-    private boolean activated = false;
+    private boolean activated = true;
 
     @Size(max = 500)
     @Column(name = "project_code", length = 50)

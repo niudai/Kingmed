@@ -1,28 +1,10 @@
-{
-    "id": 5644,
-    "prices": [],
-    "qarobots": null,
-    "applications": null,
-    "suppliess": null,
-    "subsidiary": "广州",
-    "name": "原醛筛查三项（ALD，PRC，ADRR）",
-    "activated": true,
-    "projectCode": "ZH02536\r\n",
-    "chargeCode": null,
-    "tollStandard": "97",
-    "supplement": "血浆1.4ml，▲分离血浆冰冻送检",
-    "sample": "EDTA.K2紫色真空采血管 (阳普)，规格：2ml/支",
-    "tutorial": "EDTA抗凝管收集，为保证肾素浓度的特性和样本稳定性，标本必须及时▲分离冰冻送检。\r\n备注：①立位和卧位有不同的参考值。其中立位指站立30分钟以上坐姿抽血，卧位指仰卧30分钟以上卧位抽血；\r\n②醛固酮/肾素（ADRR）筛查原发性醛固酮增多症时，推荐上午7-10点立位采血，采血前起床活动2小时以上",
-    "preservation": "【室温保存】/ 【冷藏保存】/【冷冻保存】4周",
-    "transportation": null,
-    "applicationUnitType": "双联申请单",
-    "applicationRemark": null,
-    "medicalMethod": "测序",
-    "projectConcourse": "发光室",
-    "hurryDepartment": null,
-    "reportingTime": "每周一，三，五检测",
-    "clinicalApplication": "1.高血压：为最早出现症状。多数患者血压大幅升高，但恶性高血压罕见。原发性醛固酮增多症（PA）可能伴随顽固性高血压，其定义为即使坚持使用适当的含利尿剂在内的3种药物治疗方案后血压（BP）仍不达标，但极少数患者可不伴高血压。　\r\n2. 神经肌肉功能障碍：（1）肌无力及周期性麻痹甚为常见。一般说来血钾愈低，肌肉受累愈重，常见诱因为劳累，或服用氢氯噻嗪、呋塞米等促进排钾的利尿药，但多数并不明显。（2）肢端麻木，手足搐搦。在低钾严重时，由于神经肌肉应激性降低，手足搐搦可较轻或不出现，而在补钾后，手足搐搦往往变得明显。\r\n3. 肾脏表现：因大量失钾，肾小管上皮细胞呈空泡变形，浓缩功能减退，伴多尿，尤其夜尿多，继发口渴、多饮，常易并发尿路感染。尿蛋白增多，少数可发生肾功能减退。",
-    "series": null,
-    "subSeries": null,
-    "remarks": null
-}
+curl 'http://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=633a31f6-7f9c-4bc4-97a0-0ec1eefa5898' \
+   -H 'Content-Type: application/json' \
+   -d '
+   {
+        "msgtype": "text",
+        "text": {
+            "content": "hello world"
+        }
+   }'
+https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=a40d73df-6591-4eea-96a1-8fbe387d5aeb
