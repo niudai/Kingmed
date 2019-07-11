@@ -151,15 +151,12 @@ public class DiseaseMapService {
      * @param diseaseMapId
      * @param diseaseXiAnId
      */
-    // @Transactional
-    // public void deassociateWithDiseaseXiAn(Long diseaseMapId, Long diseaseXiAnId) {
-    //     DiseaseMap diseaseMap = diseaseMapRepository.findById(diseaseMapId).get();
-    //     DiseaseXiAn diseaseXiAn = diseaseXiAnRepository.findById(diseaseXiAnId).get();
-    //     for (diseaseXiAn: diseaseMap.getDiseaseXiAns()) {
-
-    //     }
-    //     diseaseMap.getDiseaseXiAns().(diseaseXiAn);
-    // }
+    @Transactional
+    public void deassociateWithDiseaseXiAn(Long diseaseMapId, Long diseaseXiAnId) {
+        DiseaseMap diseaseMap = diseaseMapRepository.findById(diseaseMapId).get();
+        DiseaseXiAn diseaseXiAn = diseaseXiAnRepository.findById(diseaseXiAnId).get();
+        diseaseMap.getDiseaseXiAns().remove(diseaseXiAn);
+    }
 
     /**
      * associate diseaseMap with QArobot.
@@ -171,6 +168,18 @@ public class DiseaseMapService {
         DiseaseMap diseaseMap = diseaseMapRepository.findById(diseaseMapId).get();
         QArobot qArobot = qArobotRepository.findById(qArobotId).get();
         diseaseMap.getQArobots().add(qArobot);
+    }
+
+    /**
+     * deassociate diseaseMap with QArobot.
+     * @param diseaseMapId
+     * @param qArobotId
+     */
+    @Transactional
+    public void deassociatedWithQArobot(Long diseaseMapId, Long qArobotId) {
+        DiseaseMap diseaseMap = diseaseMapRepository.findById(diseaseMapId).get();
+        QArobot qArobot =  qArobotRepository.findById(qArobotId).get();
+        diseaseMap.getQArobots().remove(qArobot);
     }
 
     /**

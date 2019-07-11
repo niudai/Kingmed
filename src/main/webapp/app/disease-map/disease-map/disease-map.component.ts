@@ -26,7 +26,8 @@ export class DiseaseMapComponent implements OnInit {
     constructor(protected diseaseMapService: DiseaseMapService
         , protected route: ActivatedRoute
         , protected bottomSheet: MatBottomSheet
-        , protected router: Router) { }
+        , protected router: Router
+        , protected dialog: MatDialog) { }
 
     @HostListener('window:resize', ['$event'])
     onResize(event) {
@@ -53,6 +54,28 @@ export class DiseaseMapComponent implements OnInit {
         matBottomSheetRef.afterDismissed()
             .subscribe(any => this.fetchDiseaseMap());
         // window.history.back();
+    }
+
+    deassociateWithDiseaseXiAn(diseaseXiAnId: number, diseaseMapId: number): void {
+        const dialogRef = this.dialog.open(DiseaseXiAnDeleteDialogComponent , {data: {
+            input: false,
+            title: '取消关联',
+            description: '确定取消该关联?',
+            diseaseXiAnId,
+            diseaseMapId
+        }});
+        dialogRef.afterClosed().subscribe(any => this.fetchDiseaseMap());
+    }
+
+    deassociateWithQArobot(qArobotId: number, diseaseMapId: number): void {
+        const dialogRef = this.dialog.open(QArobotDeleteDialogComponent , {data: {
+            input: false,
+            title: '取消关联',
+            description: '确定取消该关联?',
+            qArobotId,
+            diseaseMapId
+        }});
+        dialogRef.afterClosed().subscribe(any => this.fetchDiseaseMap());
     }
 
     fetchDiseaseMap() {
@@ -122,6 +145,24 @@ export class DiseaseMapActionBottomSheetComponent {
         });
     }
 
+    modifyDiseaseMap(): void {
+        const dialogRef = this.dialog.open(DiseaseMapAssociateDialogComponent, {
+            data: {
+                input: true,
+                title: '更改地图名称',
+                description: '输入要更改的名称:',
+            }
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            if (result !== undefined) {
+                this.data.diseaseMap.name = result;
+                this.diseaseMapService
+                    .modifyDiseaseMap(this.data.diseaseMap).subscribe();
+                console.log('The dialog was closed');
+            }
+        });
+    }
+
     associateWithQArobot(): void {
         const dialogRef = this.dialog.open(DiseaseMapAssociateDialogComponent, {
             data: {
@@ -169,8 +210,10 @@ export class DiseaseBranchActionBottomSheetComponent {
     }
 
     createDiseaseMap(): void {
-        const dialogRef = this.dialog.open(DiseaseBranchCreateDiseaseMapDialogComponent, {
-            data: { name: this.animal }
+        const dialogRef = this.dialog.open(DiseaseMap, {
+            data: {
+
+            }
         });
         dialogRef.afterClosed().subscribe(result => {
             if (result !== undefined) {
@@ -180,6 +223,24 @@ export class DiseaseBranchActionBottomSheetComponent {
                     .attachDiseaseMapToDiseaseBranch(diseaseMap, this.data.diseaseBranch.id).subscribe();
                 console.log('The dialog was closed');
                 this.animal = result;
+            }
+        });
+    }
+
+    modifyDiseaseBranch(): void {
+        const dialogRef = this.dialog.open(DiseaseMapAssociateDialogComponent, {
+            data: {
+                input: true,
+                title: '更改地图名',
+                description: '输入新的地图名:'
+            }
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            if (result !== undefined) {
+                this.data.diseaseBranch.name = result;
+                this.diseaseMapService
+                    .modifyDiseaseBranch(this.data.diseaseBranch).subscribe();
+                console.log('The dialog was closed');
             }
         });
     }
@@ -277,6 +338,72 @@ export class DiseaseMapDeleteDialogComponent implements OnInit {
     confirmDelete() {
         this.diseaseMapService
             .deleteDiseaseMap(this.data.id).subscribe(any => this.onNoClick());
+        console.log('The dialog was closed');
+    }
+
+    onNoClick(): void {
+        this.dialogRef.close();
+    }
+
+    previousState() {
+        window.history.back();
+    }
+
+}
+
+@Component({
+    selector: 'jhi-disease-xi-an-delete-dialog',
+    templateUrl: './disease-map-delete-dialog.component.html',
+})
+export class DiseaseXiAnDeleteDialogComponent implements OnInit {
+
+    diseaseMap: IDiseaseMap;
+
+    constructor(
+        public dialogRef: MatDialogRef<DiseaseMapDeleteDialogComponent>,
+        @Inject(MAT_DIALOG_DATA) public data
+        , protected diseaseMapService: DiseaseMapService) {
+    }
+
+    ngOnInit(): void {
+    }
+
+    confirmDelete() {
+        this.diseaseMapService
+            .deassociateWithDiseaseXiAn(this.data.diseaseMapId, this.data.diseaseXiAnId).subscribe(any => this.onNoClick());
+        console.log('The dialog was closed');
+    }
+
+    onNoClick(): void {
+        this.dialogRef.close();
+    }
+
+    previousState() {
+        window.history.back();
+    }
+
+}
+
+@Component({
+    selector: 'jhi-q-arobot-delete-dialog',
+    templateUrl: './disease-map-delete-dialog.component.html',
+})
+export class QArobotDeleteDialogComponent implements OnInit {
+
+    diseaseMap: IDiseaseMap;
+
+    constructor(
+        public dialogRef: MatDialogRef<DiseaseMapDeleteDialogComponent>,
+        @Inject(MAT_DIALOG_DATA) public data
+        , protected diseaseMapService: DiseaseMapService) {
+    }
+
+    ngOnInit(): void {
+    }
+
+    confirmDelete() {
+        this.diseaseMapService
+            .deassociateWithQArobot(this.data.qArobotId, this.data.diseaseXiAnId).subscribe(any => this.onNoClick());
         console.log('The dialog was closed');
     }
 

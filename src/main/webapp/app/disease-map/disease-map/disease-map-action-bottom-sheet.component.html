@@ -11,6 +11,10 @@
           <span mat-line>添加子地图</span>
         </a>
 
+        <a  mat-list-item (click) = "modifyDiseaseMap()">
+            <span mat-line>更改子地图名称</span>
+        </a>
+
         <a  mat-list-item (click)="deleteDiseaseMap()">
                 <span mat-line>删除<span class = "text-primary">{{data.diseaseMap.name}}</span></span>
         </a>

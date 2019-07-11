@@ -1,6 +1,9 @@
 <mat-card>{{diseaseBranch.name}}
-    <button mat-mini-fab color="primary" *jhiHasAnyAuthority="'ROLE_ADMIN'" (click)="openBranchBottomSheet()" class = "add">+</button>
-    <button mat-raised-button (click) = "previousState()" class = "nav-back"><fa-icon [icon]="'arrow-left'"></fa-icon></button>
+    <button mat-mini-fab color="primary" *jhiHasAnyAuthority="'ROLE_ADMIN'" (click)="openBranchBottomSheet()"
+        class="add">+</button>
+    <button mat-raised-button (click)="previousState()" class="nav-back">
+        <fa-icon [icon]="'arrow-left'"></fa-icon>
+    </button>
 </mat-card>
 <!-- <button mat-raised-button (click)="openBranchBottomSheet()">Open file</button> -->
 <br>
@@ -11,16 +14,41 @@
             <li class="mat-tree-node">
 
                 <div>
-                        <fa-icon [icon]="'circle'"></fa-icon>{{node.name}}
-                        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" mat-mini-fab color="primary" (click)="openMapBottomSheet(node)" class = "add">+</button>
-                        <br>
-                        <mat-nav-list>
-                            <mat-list-item *ngFor="let diseaseXiAn of node.diseaseXiAns" [matTooltip]="diseaseXiAn.name" [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'view']"><fa-icon [icon]="'eye'"></fa-icon>
-                                 {{diseaseXiAn.name | trim: windowWidth}}
-                            </mat-list-item>
-                            <mat-list-item *ngFor="let qarobot of node.qarobots" [matTooltip]="qarobot.question"  [routerLink]="['/q-arobot', qarobot.id, 'view']"> <fa-icon [icon]="'question'"></fa-icon>{{qarobot.question | trim: windowWidth}}</mat-list-item>
-                        </mat-nav-list>
-                        <hr>
+                    <fa-icon [icon] = "'chevron-right'"></fa-icon>
+                    <span>{{node.name}}</span>
+                    <button *jhiHasAnyAuthority="'ROLE_ADMIN'" mat-mini-fab color="primary"
+                        (click)="openMapBottomSheet(node)" class="add">+</button>
+                    <br>
+                    <mat-nav-list *ngFor="let diseaseXiAn of node.diseaseXiAns">
+                        <mat-card matRipple >
+                            <fa-icon [icon]="'book-medical'" style="color: darkturquoise"></fa-icon>
+                            <a [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'view']">{{diseaseXiAn.name}}</a>
+                            <fa-icon [icon]="'chevron-right'"></fa-icon>
+                            <button mat-raised-button style="background-color: cornsilk" disabled><span
+                                    style="color: cadetblue">{{diseaseXiAn.subsidiary}}</span> -
+                                {{diseaseXiAn.projectCode}}
+                            </button>
+                            <button mat-mini-fab color = "warn" *jhiHasAnyAuthority="'ROLE_ADMIN'"
+                                        (click) = "deassociateWithDiseaseXiAn(diseaseXiAn.id, node.id)">
+                                        <fa-icon [icon] = "'times'"></fa-icon>
+                                    </button>
+                        </mat-card>
+                    </mat-nav-list>
+                    <mat-nav-list *ngFor="let qarobot of node.qarobots">
+                        <mat-card matRipple >
+                            <fa-icon [icon]="'question'" style="color: yellow"></fa-icon>{{node.name}}
+                            <a [routerLink]="['/q-arobot', qarobot.id, 'view']">{{qarobot.question}}</a>
+                                <fa-icon [icon]="'chevron-right'"></fa-icon>
+                                <button mat-raised-button style="background-color: cornsilk" disabled><span
+                                        style="color: cadetblue">{{qarobot.qaSubsidiary}}</span> -
+                                </button>
+                                <button mat-mini-fab color = "warn" *jhiHasAnyAuthority="'ROLE_ADMIN'"
+                                        (click) = "deassociateWithDiseaseXiAn(qarobot.id, node.id)">
+                                        <fa-icon [icon] = "'times'"></fa-icon>
+                                    </button>
+                            </mat-card>
+                    </mat-nav-list>
+                    <hr>
                 </div>
             </li>
         </mat-tree-node>
@@ -29,14 +57,44 @@
         <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
             <li>
                 <div>
-                        <fa-icon [icon]="'circle'"></fa-icon>{{node.name}}
-                        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" mat-mini-fab color="primary" (click)="openMapBottomSheet(node)" class = "add">+</button>
-                        <br>
-                        <mat-nav-list>
-                            <mat-list-item *ngFor="let diseaseXiAn of node.diseaseXiAns" [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'view']"><fa-icon [icon]="'eye'"></fa-icon> {{diseaseXiAn.name}}</mat-list-item>
-                            <mat-list-item *ngFor="let qarobot of node.qarobots" [routerLink]="['/q-arobot', qarobot.id, 'view']"> <fa-icon [icon]="'question'"></fa-icon>{{qarobot.question}}</mat-list-item>
-                        </mat-nav-list>
-                        <hr>
+                    <div>
+                            <fa-icon [icon] = "'chevron-right'"></fa-icon>
+                            <span>{{node.name}}</span>
+                            <button *jhiHasAnyAuthority="'ROLE_ADMIN'" mat-mini-fab color="primary"
+                                (click)="openMapBottomSheet(node)" class="add">+</button>
+                            <br>
+                            <mat-nav-list *ngFor="let diseaseXiAn of node.diseaseXiAns">
+                                <mat-card matRipple>
+                                    <fa-icon [icon]="'book-medical'" style="color: darkturquoise"></fa-icon>
+                                    <a [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'view']">{{diseaseXiAn.name}}</a>
+                                    <fa-icon [icon]="'chevron-right'"></fa-icon>
+                                    <button mat-raised-button style="background-color: cornsilk" disabled><span
+                                            style="color: cadetblue">{{diseaseXiAn.subsidiary}}</span> -
+                                        {{diseaseXiAn.projectCode}}
+                                    </button>
+                                    <button mat-mini-fab color = "warn" *jhiHasAnyAuthority="'ROLE_ADMIN'"
+                                        (click) = "deassociateWithDiseaseXiAn(diseaseXiAn.id, node.id)">
+                                        <fa-icon [icon] = "'times'"></fa-icon>
+                                    </button>
+                                </mat-card>
+
+                            </mat-nav-list>
+                            <mat-nav-list *ngFor="let qarobot of node.qarobots">
+                                    <mat-card matRipple>
+                                        <fa-icon [icon]="'question'" style="color: yellow"></fa-icon>{{node.name}}
+                                        <a  [routerLink]="['/q-arobot', qarobot.id, 'view']">{{qarobot.question}}</a>
+                                            <fa-icon [icon]="'chevron-right'"></fa-icon>
+                                            <button mat-raised-button style="background-color: cornsilk" disabled><span
+                                                    style="color: cadetblue">{{qarobot.qaSubsidiary}}</span> -
+                                            </button>
+                                            <button mat-mini-fab color = "warn" *jhiHasAnyAuthority="'ROLE_ADMIN'"
+                                        (click) = "deassociateWithDiseaseXiAn(qarobot.id, node.id)">
+                                        <fa-icon [icon] = "'times'"></fa-icon>
+                                    </button>
+                                        </mat-card>
+                                </mat-nav-list>
+                            <hr>
+                        </div>
                 </div>
                 <ul [class.example-tree-invisible]="!treeControl.isExpanded(node)">
                     <ng-container matTreeNodeOutlet></ng-container>

@@ -1,11 +1,8 @@
+import { DiseaseXiAnDeleteDialogComponent, QArobotDeleteDialogComponent } from './disease-map/disease-map.component';
 import { RouterModule } from '@angular/router';
 import { DiseaseMapAssociateQArobotComponent } from './disease-map-associate-q-arobot/disease-branch-map-associate-q-arobot.component';
 import { DiseaseMapAssociateDiseaseXiAnComponent } from './disease-map-associate-disease-xi-an/disease-branch-map-associate-disease-xi-an.component';
 import { JhipsterElasticsearchSampleApplicationSharedModule } from './../shared/shared.module';
-import { JhipsterElasticsearchSampleApplicationSharedCommonModule } from './../shared/shared-common.module';
-// import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CommonModule } from '@angular/common';
 import { DiseaseBranchComponent, DiseaseBranchDeleteModalComponent } from './disease-branch/disease-branch.component';
 import { DiseaseMapComponent, DiseaseMapActionBottomSheetComponent, DiseaseBranchActionBottomSheetComponent, DiseaseBranchCreateDiseaseMapDialogComponent, DiseaseMapAssociateDialogComponent, DiseaseMapDeleteDialogComponent } from './disease-map/disease-map.component';
 import { DiseaseBranchCreateComponent } from './disease-branch-create/disease-branch-create.component';
@@ -17,7 +14,6 @@ import { JhiLanguageService } from 'ng-jhipster';
 import { JhiLanguageHelper } from 'app/core';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-// import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/compiler/src/core';
 
 @NgModule({
     imports: [
@@ -40,6 +36,8 @@ import { ReactiveFormsModule } from '@angular/forms';
         , DiseaseBranchCreateDiseaseMapDialogComponent
         , DiseaseMapAssociateDialogComponent
         , DiseaseMapDeleteDialogComponent
+        , DiseaseXiAnDeleteDialogComponent
+        , QArobotDeleteDialogComponent
     ],
     entryComponents: [
         DiseaseBranchDeleteModalComponent
@@ -48,6 +46,7 @@ import { ReactiveFormsModule } from '@angular/forms';
         , DiseaseBranchCreateDiseaseMapDialogComponent
         , DiseaseMapAssociateDialogComponent
         , DiseaseMapDeleteDialogComponent
+        , DiseaseXiAnDeleteDialogComponent
     ],
     providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }],
     // schemas: [CUSTOM_ELEMENTS_SCHEMA]

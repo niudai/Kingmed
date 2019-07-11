@@ -5,7 +5,7 @@ import { SERVER_API_URL } from 'app/app.constants';
 import { Observable } from 'rxjs';
 import { IFile } from 'app/shared/model/file.model';
 import { map } from 'rxjs/operators';
-import { DiseaseMap } from 'app/shared/model/disease-map.model';
+import { DiseaseMap, IDiseaseMap } from 'app/shared/model/disease-map.model';
 
 @Injectable({
     providedIn: 'root'
@@ -63,6 +63,14 @@ export class DiseaseMapService {
 
     deleteDiseaseMap(diseaseMapId: number) {
         return this.http.delete<any>(`${this.diseaseMapUrl}/delete-disease-map/${diseaseMapId}`, {observe: 'response'});
+    }
+
+    modifyDiseaseMap(diseaseMap: IDiseaseMap) {
+        return this.http.put<any>(`${this.diseaseMapUrl}/modify-disease-map`, diseaseMap, { observe: 'response'});
+    }
+
+    modifyDiseaseBranch(diseaseBranch: IDiseaseBranch) {
+        return this.http.put<any>(`${this.diseaseMapUrl}/modify-disease-branch`, diseaseBranch, {observe: 'response'});
     }
 
 }
