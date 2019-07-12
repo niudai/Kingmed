@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { NgZorroAntdModule, NZ_I18N, NZ_ICONS, en_US } from 'ng-zorro-antd';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -10,12 +9,11 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CdkTableModule } from '@angular/cdk/table';
 import { CdkTreeModule } from '@angular/cdk/tree';
 import { MatButtonModule, MatTreeModule, MatCardModule, MatIconModule, MatListModule, MatBottomSheetModule, MatDialogModule, MatInputModule, MatMenuModule, MatTooltipModule, MatSlideToggleModule, MatGridListModule, MatExpansionModule, MatRippleModule, MatTableModule, MatPaginatorModule } from '@angular/material';
-import {DragDropModule} from '@angular/cdk/drag-drop';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 @NgModule({
     imports: [
         NgbModule.forRoot(), InfiniteScrollModule, CookieModule.forRoot(), FontAwesomeModule],
     exports: [
-        NgZorroAntdModule,
         FormsModule
         , CommonModule
         , NgbModule
@@ -41,8 +39,6 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
         // MatStepperModule,
         // MatDividerModule,
         MatExpansionModule,
-        MatGridListModule,
-        MatIconModule,
         MatInputModule,
         MatListModule,
         MatMenuModule,
@@ -62,7 +58,6 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
         MatTableModule,
         // MatTabsModule,
         // MatToolbarModule,
-        MatTooltipModule,
         MatTreeModule,
         // PortalModule,
         // ScrollingModule,

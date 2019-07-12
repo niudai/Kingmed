@@ -1,5 +1,3 @@
-import { UserService } from './core/user/user.service';
-import { NZ_I18N, NZ_ICONS } from 'ng-zorro-antd';
 import { HomeComponent } from './home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -24,7 +22,6 @@ import { JhipsterElasticsearchSampleApplicationServiceModule } from './service/s
 import * as moment from 'moment';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ActiveMenuDirective, ErrorComponent } from './layouts';
-// import { ServiceComponent } from './service/service.component';
 
 @NgModule({
     imports: [

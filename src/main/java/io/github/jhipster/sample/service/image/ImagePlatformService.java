@@ -13,6 +13,8 @@ import java.util.stream.Stream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.util.StreamUtils;
@@ -93,8 +95,8 @@ public class ImagePlatformService {
     /**
      * Load All ImagePlatforms as a list.
      */
-    public List<ImagePlatform> loadAll() {
-        return imagePlatformRepository.findAll();
+    public Page<ImagePlatform> loadAll(Pageable pageable) {
+        return imagePlatformRepository.findAll(pageable);
 
     }
 

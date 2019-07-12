@@ -13,6 +13,8 @@ import java.util.stream.Stream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.util.StreamUtils;
@@ -92,11 +94,10 @@ public class ImageSuppliesService {
     }
 
     /**
-     * Load All ImageSuppliess as a list.
+     * Load All ImageSuppliess as a Page.
      */
-    public List<ImageSupplies> loadAll() {
-        return imageSuppliesRepository.findAll();
-
+    public Page<ImageSupplies> loadAll(Pageable pageable) {
+        return imageSuppliesRepository.findAll(pageable);
     }
 
     public void delete(Long id) {

@@ -12,6 +12,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -38,6 +40,7 @@ import io.github.jhipster.sample.service.image.ImagePlatformService;
 import io.github.jhipster.sample.service.image.ImageService;
 import io.github.jhipster.sample.service.image.ImageSuppliesService;
 import io.github.jhipster.sample.web.rest.errors.StorageFileNotFoundException;
+import io.github.jhipster.sample.web.rest.util.PaginationUtil;
 
 /**
  * ImageUploadController
@@ -118,8 +121,11 @@ public class ImageUploadController {
      * @return
      */
     @GetMapping("/images/application")
-    public List<ImageApplication> listUploadedApplications() {
-        return imageApplicationService.loadAll();
+    public ResponseEntity<List<ImageApplication>> listUploadedApplications(Pageable pageable) {
+        log.debug("REST request to get a page of ImageApplications");
+        Page<ImageApplication> page = imageApplicationService.loadAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "api/images/application");
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
     /*********************************** Supplies Files Method Mapping ************************** */
@@ -173,8 +179,11 @@ public class ImageUploadController {
      * @return
      */
     @GetMapping("/images/supplies")
-    public List<ImageSupplies> listUploadedSuppliess() {
-        return imageSuppliesService.loadAll();
+    public ResponseEntity<List<ImageSupplies>> listUploadedSuppliess(Pageable pageable) {
+        log.debug("REST request to get a page of ImageSupplies");
+        Page<ImageSupplies> page = imageSuppliesService.loadAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "api/images/supplies");
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
         /*********************************** Platform Files Method Mapping ************************** */
@@ -228,8 +237,11 @@ public class ImageUploadController {
      * @return
      */
     @GetMapping("/images/platform")
-    public List<ImagePlatform> listUploadedPlatforms() {
-        return imagePlatformService.loadAll();
+    public ResponseEntity<List<ImagePlatform>> listUploadedPlatforms(Pageable pageable) {
+        log.debug("REST request to get a page of ImageSupplies");
+        Page<ImagePlatform> page = imagePlatformService.loadAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "api/images/supplies");
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
     /************************************* Plain Images Upload Mapping *******************************************/

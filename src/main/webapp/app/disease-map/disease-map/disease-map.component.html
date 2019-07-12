@@ -20,6 +20,9 @@
                     <br>
                     <mat-nav-list *ngFor="let diseaseXiAn of node.diseaseXiAns">
                         <mat-card matRipple>
+                            <button mat-raised-button style="background-color: cornsilk" disabled><span
+                                    style="color: cadetblue">{{diseaseXiAn.id}}</span>
+                            </button>
                             <fa-icon [icon]="'book-medical'" style="color: darkturquoise"></fa-icon>
                             <a [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'view']">{{diseaseXiAn.name}}</a>
                             <fa-icon [icon]="'chevron-right'"></fa-icon>
@@ -63,6 +66,9 @@
                     <br>
                     <mat-nav-list *ngFor="let diseaseXiAn of node.diseaseXiAns">
                         <mat-card matRipple>
+                            <button mat-raised-button style="background-color: cornsilk" disabled><span
+                                    style="color: cadetblue">{{diseaseXiAn.id}}</span>
+                            </button>
                             <fa-icon [icon]="'book-medical'" style="color: darkturquoise"></fa-icon>
                             <a [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'view']">{{diseaseXiAn.name}}</a>
                             <fa-icon [icon]="'chevron-right'"></fa-icon>

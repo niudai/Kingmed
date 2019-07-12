@@ -3,6 +3,7 @@ import { SERVER_API_URL } from 'app/app.constants';
 
 import { Component, OnInit } from '@angular/core';
 import { IFile } from 'app/shared/model/file.model';
+import { PageEvent } from '@angular/material';
 
 @Component({
   selector: 'jhi-service-application',
@@ -15,8 +16,11 @@ export class ServiceApplicationComponent implements OnInit {
     reverse: boolean;
     filter: string;
     applications: IFile[];
+    pageEvent: PageEvent;
 
     constructor(public service: ServiceApplicationService) {}
+
+
 
     ngOnInit() {
         this.service.loadAll().subscribe(res => this.applications = res.body);

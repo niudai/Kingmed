@@ -4,6 +4,7 @@ import { SERVER_API_URL } from 'app/app.constants';
 import { Observable } from 'rxjs';
 import { IFile } from 'app/shared/model/file.model';
 import { map } from 'rxjs/operators';
+import { createRequestOption } from 'app/shared';
 
 @Injectable({
     providedIn: 'root'
@@ -39,8 +40,9 @@ export class ServiceApplicationService {
             }));
     }
 
-    loadAll(): Observable<HttpResponse<IFile[]>> {
-        return this.http.get<IFile[]>(this.applicationUrl, { observe: 'response' });
+    loadAll(req?: any): Observable<HttpResponse<IFile[]>> {
+        const options = createRequestOption(req);
+        return this.http.get<IFile[]>(this.applicationUrl, { params: options, observe: 'response' });
     }
 
     delete(id: number): Observable<HttpResponse<any>> {

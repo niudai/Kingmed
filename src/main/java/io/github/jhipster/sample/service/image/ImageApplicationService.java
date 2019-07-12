@@ -10,9 +10,17 @@ import java.util.Base64;
 import java.util.List;
 import java.util.stream.Stream;
 
+import javax.transaction.Transactional;
+
+import org.apache.lucene.util.fst.PairOutputs.Pair;
+import org.hibernate.annotations.common.util.impl.LoggerFactory;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.util.StreamUtils;
@@ -27,6 +35,7 @@ import io.github.jhipster.sample.service.StorageService;
 import io.github.jhipster.sample.web.rest.ImageUploadController;
 import io.github.jhipster.sample.web.rest.errors.StorageException;
 import io.github.jhipster.sample.web.rest.errors.StorageFileNotFoundException;
+import io.github.jhipster.sample.web.rest.util.PaginationUtil;
 import io.jsonwebtoken.io.IOException;
 
 /**
@@ -34,6 +43,8 @@ import io.jsonwebtoken.io.IOException;
  */
 @Service
 public class ImageApplicationService {
+
+    private final Logger log = org.slf4j.LoggerFactory.getLogger(ImageApplicationService.class);
 
     private final Path rootLocation;
 
@@ -93,9 +104,10 @@ public class ImageApplicationService {
     /**
      * Load All ImageApplications as a list.
      */
-    public List<ImageApplication> loadAll() {
-        return imageApplicationRepository.findAll();
-
+    @Transactional
+    public Page<ImageApplication> loadAll(Pageable pageable) {
+        Page<ImageApplication> page = imageApplicationRepository.findAll(pageable);
+        return page;
     }
 
     public void delete(Long id) {
