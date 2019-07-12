@@ -31,6 +31,7 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 import io.github.jhipster.sample.config.StorageProperties;
 import io.github.jhipster.sample.domain.ImageApplication;
 import io.github.jhipster.sample.repository.ImageApplicationRepository;
+import io.github.jhipster.sample.repository.search.ImageApplicationSearchRepository;
 import io.github.jhipster.sample.service.StorageService;
 import io.github.jhipster.sample.web.rest.ImageUploadController;
 import io.github.jhipster.sample.web.rest.errors.StorageException;
@@ -50,13 +51,19 @@ public class ImageApplicationService {
 
     private final ImageApplicationRepository imageApplicationRepository;
 
+    private ImageApplicationSearchRepository imageApplicationSearchRepository;
+
     @Autowired
-    public ImageApplicationService(StorageProperties properties
-        , ImageApplicationRepository imageApplicationRepository) {
+    public ImageApplicationService(
+        StorageProperties properties,
+        ImageApplicationRepository imageApplicationRepository,
+        ImageApplicationSearchRepository imageApplicationSearchRepository) {
+        this.imageApplicationSearchRepository = imageApplicationSearchRepository;
         this.imageApplicationRepository = imageApplicationRepository;
         this.rootLocation = Paths.get(properties.getImageApplicationLocation());
     }
 
+    @Transactional
     public Long store(MultipartFile file, String name) {
         ImageApplication image = new ImageApplication();
 
@@ -87,6 +94,7 @@ public class ImageApplicationService {
         catch (IOException e) {
             throw new StorageException("Failed to store file " + filename, e);
         }
+        imageApplicationSearchRepository.save(image);
         return imageApplicationRepository.save(image).getId();
     }
 
@@ -95,10 +103,12 @@ public class ImageApplicationService {
      * @param id
      * @param name
      */
+    @Transactional
     public void update(Long id, String name) {
         ImageApplication imageApplication = imageApplicationRepository.findById(id).get();
         imageApplication.name = name;
         imageApplicationRepository.save(imageApplication);
+        imageApplicationSearchRepository.save(imageApplication);
     }
 
     /**
@@ -110,6 +120,13 @@ public class ImageApplicationService {
         return page;
     }
 
+
+    public void reindex() {
+        imageApplicationSearchRepository.deleteAll();
+        imageApplicationSearchRepository.saveAll(imageApplicationSearchRepository.findAll());
+    }
+
+    @Transactional
     public void delete(Long id) {
         try {
             FileSystemUtils.deleteRecursively(
@@ -119,6 +136,7 @@ public class ImageApplicationService {
             e.printStackTrace();
         }
         imageApplicationRepository.deleteById(id);
+        imageApplicationSearchRepository.deleteById(id);
     }
 
     public Resource loadAsResource(Long id) {

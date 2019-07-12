@@ -40,10 +40,12 @@ export class ServiceApplicationService {
             }));
     }
 
-    loadAll(req?: any): Observable<HttpResponse<IFile[]>> {
+    load(req?: any): Observable<HttpResponse<IFile[]>> {
         const options = createRequestOption(req);
         return this.http.get<IFile[]>(this.applicationUrl, { params: options, observe: 'response' });
     }
+
+    search()
 
     delete(id: number): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.applicationUrl}/${id}`);

@@ -25,6 +25,7 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 import io.github.jhipster.sample.config.StorageProperties;
 import io.github.jhipster.sample.domain.ImageSupplies;
 import io.github.jhipster.sample.repository.ImageSuppliesRepository;
+import io.github.jhipster.sample.repository.search.ImageSuppliesSearchRepository;
 import io.github.jhipster.sample.repository.ImageSuppliesRepository;
 import io.github.jhipster.sample.service.StorageService;
 import io.github.jhipster.sample.web.rest.ImageUploadController;
@@ -42,9 +43,12 @@ public class ImageSuppliesService {
 
     private final ImageSuppliesRepository imageSuppliesRepository;
 
+    private final ImageSuppliesSearchRepository imageSuppliesSearchRepository;
+
     @Autowired
     public ImageSuppliesService(StorageProperties properties
         , ImageSuppliesRepository imageSuppliesRepository) {
+        this.imageSuppliesSearchRepository = imageSuppliesSearchRepository;
         this.imageSuppliesRepository = imageSuppliesRepository;
         this.rootLocation = Paths.get(properties.getImageSuppliesLocation());
     }
@@ -79,6 +83,7 @@ public class ImageSuppliesService {
         catch (IOException e) {
             throw new StorageException("Failed to store file " + filename, e);
         }
+        imageSuppliesSearchRepository.save(image);
         return imageSuppliesRepository.save(image).getId();
     }
 
@@ -90,7 +95,13 @@ public class ImageSuppliesService {
     public void update(Long id, String name) {
         ImageSupplies imageSupplies = imageSuppliesRepository.findById(id).get();
         imageSupplies.name = name;
+        imageSuppliesSearchRepository.save(imageSupplies);
         imageSuppliesRepository.save(imageSupplies);
+    }
+
+    public void reindex() {
+        imageSuppliesSearchRepository.deleteAll();
+        imageSuppliesSearchRepository.saveAll(imageSuppliesRepository.findAll());
     }
 
     /**
@@ -108,6 +119,7 @@ public class ImageSuppliesService {
         } catch (java.io.IOException e) {
             e.printStackTrace();
         }
+        imageSuppliesSearchRepository.deleteById(id);
         imageSuppliesRepository.deleteById(id);
     }
 

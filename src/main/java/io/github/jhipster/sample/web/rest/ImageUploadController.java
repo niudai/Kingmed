@@ -128,6 +128,17 @@ public class ImageUploadController {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
+    /**
+     * GET /images/application : reindex all applications
+     * @return
+     */
+    @GetMapping("/images/application/reindex")
+    public ResponseEntity<Void> reindexApplications() {
+        log.debug("REST request to reindex ImageApplications");
+        imageApplicationService.reindex();;
+        return ResponseEntity.ok().build();
+    }
+
     /*********************************** Supplies Files Method Mapping ************************** */
 
      /**
@@ -186,6 +197,17 @@ public class ImageUploadController {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
+    /**
+     * GET /images/supplies : reindex all suppliess
+     * @return
+     */
+    @GetMapping("/images/supplies/reindex")
+    public ResponseEntity<Void> reindexSuppliess() {
+        log.debug("REST request to reindex ImageSuppliess");
+        imageSuppliesService.reindex();
+        return ResponseEntity.ok().build();
+    }
+
         /*********************************** Platform Files Method Mapping ************************** */
 
      /**
@@ -242,6 +264,17 @@ public class ImageUploadController {
         Page<ImagePlatform> page = imagePlatformService.loadAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "api/images/supplies");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
+     * GET /images/platform : reindex all platforms
+     * @return
+     */
+    @GetMapping("/images/platform/reindex")
+    public ResponseEntity<Void> reindexPlatforms() {
+        log.debug("REST request to reindex ImagePlatforms");
+        imagePlatformService.reindex();;
+        return ResponseEntity.ok().build();
     }
 
     /************************************* Plain Images Upload Mapping *******************************************/

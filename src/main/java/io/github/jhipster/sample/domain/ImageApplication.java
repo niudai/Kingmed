@@ -14,6 +14,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.ManyToAny;
+import org.springframework.data.elasticsearch.annotations.Document;
 
 /**
  * Image in Service Platform
@@ -21,6 +22,7 @@ import org.hibernate.annotations.ManyToAny;
  */
 @Entity
 @Table(name = "image_application")
+@Document(indexName = "imageapplication")
 public class ImageApplication {
 
     @Id

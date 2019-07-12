@@ -13,12 +13,15 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.springframework.data.elasticsearch.annotations.Document;
+
 /**
  * Image in Supplies
  * Image object storing it's filename and path
  */
 @Entity
 @Table(name = "image_supplies")
+@Document(indexName = "imagesupplies")
 public class ImageSupplies {
 
     @Id

@@ -25,6 +25,7 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 import io.github.jhipster.sample.config.StorageProperties;
 import io.github.jhipster.sample.domain.ImagePlatform;
 import io.github.jhipster.sample.repository.ImagePlatformRepository;
+import io.github.jhipster.sample.repository.search.ImagePlatformSearchRepository;
 import io.github.jhipster.sample.service.StorageService;
 import io.github.jhipster.sample.web.rest.ImageUploadController;
 import io.github.jhipster.sample.web.rest.errors.StorageException;
@@ -39,11 +40,16 @@ public class ImagePlatformService {
 
     private final Path rootLocation;
 
+    private final ImagePlatformSearchRepository imagePlatformSearchRepository;
+
     private final ImagePlatformRepository imagePlatformRepository;
 
     @Autowired
-    public ImagePlatformService(StorageProperties properties
-        , ImagePlatformRepository imagePlatformRepository) {
+    public ImagePlatformService(
+        StorageProperties properties,
+        ImagePlatformRepository imagePlatformRepository,
+        ImagePlatformSearchRepository imagePlatformSearchRepository) {
+        this.imagePlatformSearchRepository = imagePlatformSearchRepository;
         this.imagePlatformRepository = imagePlatformRepository;
         this.rootLocation = Paths.get(properties.getImagePlatformLocation());
     }
@@ -78,6 +84,7 @@ public class ImagePlatformService {
         catch (IOException e) {
             throw new StorageException("Failed to store file " + filename, e);
         }
+        imagePlatformSearchRepository.save(image);
         return imagePlatformRepository.save(image).getId();
     }
 
@@ -90,6 +97,7 @@ public class ImagePlatformService {
         ImagePlatform imagePlatform = imagePlatformRepository.findById(id).get();
         imagePlatform.name = name;
         imagePlatformRepository.save(imagePlatform);
+        imagePlatformSearchRepository.save(imagePlatform);
     }
 
     /**
@@ -98,6 +106,11 @@ public class ImagePlatformService {
     public Page<ImagePlatform> loadAll(Pageable pageable) {
         return imagePlatformRepository.findAll(pageable);
 
+    }
+
+    public void reindex() {
+        imagePlatformSearchRepository.deleteAll();
+        imagePlatformSearchRepository.saveAll(imagePlatformSearchRepository.findAll());
     }
 
     public void delete(Long id) {
@@ -109,6 +122,7 @@ public class ImagePlatformService {
             e.printStackTrace();
         }
         imagePlatformRepository.deleteById(id);
+        imagePlatformSearchRepository.deleteById(id);
     }
 
     public Resource loadAsResource(Long id) {

@@ -8,12 +8,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.data.elasticsearch.annotations.Document;
+
 /**
  * Image in Service Platform
  * Image object storing it's filename and path
  */
 @Entity
 @Table(name = "image_platform")
+@Document(indexName = "imageplatform")
 public class ImagePlatform {
 
     @Id
