@@ -56,7 +56,8 @@ import {
     faWindowClose,
     faArrowRight,
     faAngleRight,
-    faChevronRight
+    faChevronRight,
+    faAngleDown
 } from '@fortawesome/free-solid-svg-icons';
 import { literalArr } from '@angular/compiler/src/output/output_ast';
 
@@ -112,5 +113,6 @@ library.add(faWindowClose);
 library.add(faArrowRight);
 library.add(faAngleRight);
 library.add(faChevronRight);
+library.add(faAngleDown);
 
 // jhipster-needle-add-element-to-vendor - JHipster will add new menu items here

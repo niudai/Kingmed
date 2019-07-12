@@ -24,16 +24,17 @@
                                 jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.projectCode">Project
                                 Code</span><span> : {{diseaseXiAn.projectCode}}</span>
                         </mat-list-item>
-                        <div *jhiHideIfNull="currentChargeCode">
-                                <mat-list-item>
-                                        <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
-                                            jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.chargeCode">Charge
-                                            Code</span><span> :</span>
-                                    </mat-list-item>
-                                    <mat-card>
-                                        <p> {{ currentChargeCode }}</p>
-                                    </mat-card>
-                        </div>
+                        <mat-list-item *jhiHideIfNull="currentChargeCode">
+                                <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
+                                    jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.chargeCode">Charge
+                                    Code</span><span> :</span>
+                            </mat-list-item>
+                            <mat-card>
+                                <p> {{ currentChargeCode }}</p>
+                            </mat-card>
+                        <!-- <div *jhiHideIfNull="currentChargeCode">
+
+                        </div> -->
                         <div *jhiHideIfNull="currentPrice">
                                 <mat-list-item>
                                         <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span

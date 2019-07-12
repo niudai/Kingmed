@@ -43,7 +43,7 @@
             <ng-container matColumnDef="nameMobile">
                 <th mat-header-cell *matHeaderCellDef> 项目名 </th>
                 <td mat-cell *matCellDef="let diseaseXiAn">
-                    <mat-card matRipple>
+                    <mat-card matRipple style = "margin: 0; padding: 1%">
                         <a [routerLink]="[diseaseXiAn.id, 'view' ]">{{diseaseXiAn.name}}
                             - <strong>{{diseaseXiAn.subsidiary}}</strong>
                             <button mat-fab color="warn" *ngIf="!diseaseXiAn.activated">停用</button>
@@ -78,7 +78,7 @@
                 </td>
             </ng-container>
 
-            <!-- Position Column -->
+            <!-- PRICE Column -->
             <ng-container matColumnDef="price">
                 <th mat-header-cell *matHeaderCellDef> 价格 </th>
                 <td mat-cell *matCellDef="let element">

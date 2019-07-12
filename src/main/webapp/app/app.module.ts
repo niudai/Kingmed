@@ -1,3 +1,5 @@
+import { UserService } from './core/user/user.service';
+import { NZ_I18N, NZ_ICONS } from 'ng-zorro-antd';
 import { HomeComponent } from './home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -17,16 +19,11 @@ import { NotificationInterceptor } from './blocks/interceptor/notification.inter
 import { JhipsterElasticsearchSampleApplicationSharedModule } from 'app/shared';
 import { JhipsterElasticsearchSampleApplicationCoreModule } from 'app/core';
 import { JhipsterElasticsearchSampleApplicationAppRoutingModule } from './app-routing.module';
-import { JhipsterElasticsearchSampleApplicationHomeModule } from './home/home.module';
-import { JhipsterElasticsearchSampleApplicationAccountModule } from './account/account.module';
 import { JhipsterElasticsearchSampleApplicationEntityModule } from './entities/entity.module';
 import { JhipsterElasticsearchSampleApplicationServiceModule } from './service/service.module';
 import * as moment from 'moment';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ActiveMenuDirective, ErrorComponent } from './layouts';
-import { DiseaseBranchComponent } from './disease-map/disease-branch/disease-branch.component';
-import { DiseaseMapModule } from './disease-map/disease-map.module';
-import { DiseaseMapComponent } from './disease-map/disease-map/disease-map.component';
 // import { ServiceComponent } from './service/service.component';
 
 @NgModule({
@@ -43,10 +40,7 @@ import { DiseaseMapComponent } from './disease-map/disease-map/disease-map.compo
         }),
         JhipsterElasticsearchSampleApplicationSharedModule.forRoot(),
         JhipsterElasticsearchSampleApplicationCoreModule,
-        // JhipsterElasticsearchSampleApplicationHomeModule,
         JhipsterElasticsearchSampleApplicationServiceModule,
-        // JhipsterElasticsearchSampleApplicationAccountModule,
-        // jhipster-needle-angular-add-module JHipster will add new module here
         JhipsterElasticsearchSampleApplicationEntityModule,
         JhipsterElasticsearchSampleApplicationAppRoutingModule,
     ],

@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { NgZorroAntdModule, NZ_I18N, NZ_ICONS, en_US } from 'ng-zorro-antd';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -14,6 +15,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     imports: [
         NgbModule.forRoot(), InfiniteScrollModule, CookieModule.forRoot(), FontAwesomeModule],
     exports: [
+        NgZorroAntdModule,
         FormsModule
         , CommonModule
         , NgbModule

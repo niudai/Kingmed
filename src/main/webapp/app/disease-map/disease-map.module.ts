@@ -14,6 +14,9 @@ import { JhiLanguageService } from 'ng-jhipster';
 import { JhiLanguageHelper } from 'app/core';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NZ_ICONS } from 'ng-zorro-antd';
+import { Icon, IconDefinition } from '@fortawesome/fontawesome-svg-core';
+import * as AllIcons from '@ant-design/icons-angular/icons';
 
 @NgModule({
     imports: [
@@ -48,9 +51,10 @@ import { ReactiveFormsModule } from '@angular/forms';
         , DiseaseMapDeleteDialogComponent
         , DiseaseXiAnDeleteDialogComponent
     ],
-    providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }],
-    // schemas: [CUSTOM_ELEMENTS_SCHEMA]
-})
+    providers: [
+        { provide: JhiLanguageService, useClass: JhiLanguageService }// schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    ]
+    })
 export class DiseaseMapModule {
     constructor(private languageService: JhiLanguageService, private languageHelper: JhiLanguageHelper) {
         this.languageHelper.language.subscribe((languageKey: string) => {

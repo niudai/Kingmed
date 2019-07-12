@@ -12,6 +12,7 @@ import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
     selector: '[jhiHideIfNull]'
 })
 export class HideIfNullDirective {
+    private hasView = false;
 
     constructor(
         private templateRef: TemplateRef<any>,
@@ -20,10 +21,16 @@ export class HideIfNullDirective {
 
     @Input()
     set jhiHideIfNull(value: string) {
-        if (!value || value === '' || value === '/' ) {
+        if (this.condition(value) && this.hasView) {
             this.viewContainerRef.clear();
-        } else {
+            this.hasView = false;
+        } else if (!this.hasView && !this.condition(value)) {
             this.viewContainerRef.createEmbeddedView(this.templateRef);
+            this.hasView = true;
         }
+    }
+
+    condition(value: string): boolean {
+        return (!value || value === '' || value === '/');
     }
 }

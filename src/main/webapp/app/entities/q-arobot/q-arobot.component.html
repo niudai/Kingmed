@@ -46,7 +46,7 @@
             <ng-container matColumnDef="questionMobile">
                 <th mat-header-cell *matHeaderCellDef> 问题 </th>
                 <td mat-cell *matCellDef="let qArobot">
-                    <mat-card style="margin: 5px;" matRipple>
+                    <mat-card matRipple style = "margin: 0; padding: 1%">
                         <a [routerLink]="[qArobot.id, 'view' ]">{{qArobot.question}}
                             - <strong>{{qArobot.qaSubsidiary}}</strong>
                         </a>

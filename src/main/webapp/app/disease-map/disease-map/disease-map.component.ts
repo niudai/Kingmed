@@ -210,9 +210,11 @@ export class DiseaseBranchActionBottomSheetComponent {
     }
 
     createDiseaseMap(): void {
-        const dialogRef = this.dialog.open(DiseaseMap, {
+        const dialogRef = this.dialog.open(DiseaseMapAssociateDialogComponent, {
             data: {
-
+                input: true,
+                title: '添加子地图',
+                description: '输入子地图名:'
             }
         });
         dialogRef.afterClosed().subscribe(result => {
