@@ -1,3 +1,4 @@
+import { HttpResponse } from '@angular/common/http';
 import { ServiceApplicationService } from './service-application.service';
 import { SERVER_API_URL } from 'app/app.constants';
 
@@ -6,16 +7,16 @@ import { IFile } from 'app/shared/model/file.model';
 import { PageEvent } from '@angular/material';
 
 @Component({
-  selector: 'jhi-service-application',
-  templateUrl: './service-application.component.html',
-  styleUrls: ['./service-application.component.css']
+    selector: 'jhi-service-application',
+    templateUrl: './service-application.component.html',
+    styleUrls: ['./service-application.component.css']
 })
 export class ServiceApplicationComponent implements OnInit {
-    PC_COL: string[] =  ['ID', 'namePC', 'price', 'projectConcourse', 'applications', 'suppliess',
-    'qarobot'];
+    PC_COL: string[] = ['ID', 'namePC', 'price', 'projectConcourse', 'applications', 'suppliess',
+        'qarobot'];
     MOBILE_COL: string[] = ['nameMobile', 'projectConcourse'];
     displayedColumns: string[];
-
+    totalItems: number;
     orderProp: string;
     reverse: boolean;
     filter: string;
@@ -24,7 +25,7 @@ export class ServiceApplicationComponent implements OnInit {
     currentAccount: any;
     currentSearch: string;
 
-    constructor(public service: ServiceApplicationService) {}
+    constructor(public service: ServiceApplicationService) { }
 
     @HostListener('window:resize', ['$event'])
     onResize(event) {
@@ -42,14 +43,37 @@ export class ServiceApplicationComponent implements OnInit {
         }
     }
 
-    loadAll() {
+    load() {
         if (this.currentSearch) {
-            this.service.
+            this.service.search(
+                {
+                    query: this.currentSearch,
+                    page: this.pageEvent && this.pageEvent.pageIndex ? this.pageEvent : 0,
+                    size: this.pageEvent && this.pageEvent.pageSize ? this.pageEvent.pageSize : 10
+                }
+            ).subscribe((res: HttpResponse<IFile[]>) => this.loadSuccessHandler(res));
+        } else {
+            this.service.load(
+                {
+                    page: this.pageEvent && this.pageEvent.pageIndex ? this.pageEvent : 0,
+                    size: this.pageEvent && this.pageEvent.pageSize ? this.pageEvent.pageSize : 10
+                }
+            ).subscribe((res: HttpResponse<IFile[]>) => this.loadSuccessHandler(res));
         }
     }
 
+    loadSuccessHandler(res: HttpResponse<IFile[]>) {
+        this.applications = res.body;
+        this.totalItems = +res.headers.get('X-Total-Count');
+    }
+
+    paginate($event: PageEvent) {
+        this.pageEvent = $event;
+        this.load();
+    }
+
     ngOnInit() {
-        this.service.loadAll().subscribe(res => this.applications = res.body);
+        this.load();
     }
 
     previousState() {

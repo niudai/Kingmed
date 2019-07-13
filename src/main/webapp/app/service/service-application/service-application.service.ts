@@ -13,7 +13,7 @@ export class ServiceApplicationService {
 
     // url for applications
     public applicationUrl = SERVER_API_URL + 'api/images/application';
-    
+    public applicationSearchUrl = SERVER_API_URL + 'api/images/_search/application';
 
     constructor(protected http: HttpClient) { }
 
@@ -26,7 +26,6 @@ export class ServiceApplicationService {
                 reportProgress: true,
                 observe: 'events'
             }).pipe(map(event => {
-
                 switch (event.type) {
 
                     case HttpEventType.UploadProgress:
@@ -46,7 +45,10 @@ export class ServiceApplicationService {
         return this.http.get<IFile[]>(this.applicationUrl, { params: options, observe: 'response' });
     }
 
-    search(req? any): Observable<HttpResponse></HttpResponse>
+    search(req?: any): Observable<HttpResponse<IFile[]>> {
+        const options = createRequestOption(req);
+        return this.http.get<IFile[]>(this.applicationSearchUrl, { params: options, observe: 'response'});
+    }
 
     delete(id: number): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.applicationUrl}/${id}`);

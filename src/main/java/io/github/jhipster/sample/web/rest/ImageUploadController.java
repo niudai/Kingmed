@@ -299,7 +299,7 @@ public class ImageUploadController {
         Page<ImagePlatform> page = imagePlatformService.search(pageable, query);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "api/images/platform");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
-    }
+}
 
     /************************************* Plain Images Upload Mapping *******************************************/
 
