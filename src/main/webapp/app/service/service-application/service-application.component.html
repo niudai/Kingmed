@@ -5,54 +5,60 @@
                         <div class="input-group w-100 mt-3">
                             <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch"
                                 name="currentSearch"
-                                placeholder="{{ 'jhipsterElasticsearchSampleApplicationApp.qArobot.home.search' | translate }}">
-                            <!-- <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
-                                            <fa-icon [icon]="'trash-alt'"></fa-icon>
-                                        </button>                    -->
-                            <button mat-raised-button class="input-group-append" color="warn" (click)="loadAll()">
+                                placeholder="搜索申请单">
+                            <button mat-raised-button class="input-group-append" color="warn" (click)="load()">
                                 <fa-icon [icon]="'search'"></fa-icon>
                             </button>
-        
+
                         </div>
                     </form>
                     <div>
                         <button *jhiHasAnyAuthority="'ROLE_ADMIN'" mat-raised-button color="accent" id="jh-create-entity"
-                            class="float-right jh-create-entity create-q-arobot" [routerLink]="['/q-arobot/new']">
+                            class="float-right jh-create-entity create-q-arobot" [routerLink]="['create']">
                             <fa-icon [icon]="'plus'"></fa-icon>
                             <span class="hidden-sm-down">
                                上传新申请单
                             </span>
                         </button>
                     </div>
-        
+
                 </mat-card>
-        
+
             </div>
             <br />
             <div *ngIf="applications">
-                <table mat-table [dataSource]="applications" class="mat-elevation-z8">
-        
+                <table style = "width: 100%" mat-table [dataSource]="applications" class="mat-elevation-z8">
+
                     <!--- Note that these columns can be defined in any order.
                                           The actual rendered columns are set as a property on the row definition" -->
-        
+
                     <!-- ID Column -->
                     <ng-container matColumnDef="ID">
                         <th mat-header-cell *matHeaderCellDef> ID </th>
                         <td mat-cell *matCellDef="let element"> {{element.id}} </td>
                     </ng-container>
-        
+
                     <!-- Name Column -->
                     <ng-container matColumnDef="name">
                         <th mat-header-cell *matHeaderCellDef> 申请单 </th>
                         <td mat-cell *matCellDef="let element">
-                            <mat-card matRipple style = "margin: 0; padding: 1%">
+                            <mat-card matRipple>
                                 <a [href] = "[service.applicationUrl + '/' + element.id]">{{element.name}}
                                 </a>
                                 <br>
                             </mat-card>
                         </td>
                     </ng-container>
-        
+
+                    <!-- View Column -->
+                    <ng-container matColumnDef="view">
+                        <th mat-header-cell *matHeaderCellDef> 预览 </th>
+                        <td mat-cell *matCellDef="let element">
+                                <button mat-mini-fab [routerLink]="['view', element.id]"><fa-icon [icon] = "'eye'"></fa-icon></button>
+                                <br>
+                        </td>
+                    </ng-container>
+
                     <!-- Edit Column -->
                     <ng-container matColumnDef="edit">
                         <th mat-header-cell *matHeaderCellDef> 编辑 </th>
@@ -65,7 +71,7 @@
                             </div>
                         </td>
                     </ng-container>
-        
+
                     <!-- Delete Column -->
                     <ng-container matColumnDef="delete">
                         <th mat-header-cell *matHeaderCellDef> 删除 </th>
@@ -78,7 +84,7 @@
                             </div>
                         </td>
                     </ng-container>
-        
+
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>

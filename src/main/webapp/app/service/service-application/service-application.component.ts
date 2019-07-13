@@ -12,9 +12,8 @@ import { PageEvent } from '@angular/material';
     styleUrls: ['./service-application.component.css']
 })
 export class ServiceApplicationComponent implements OnInit {
-    PC_COL: string[] = ['ID', 'namePC', 'price', 'projectConcourse', 'applications', 'suppliess',
-        'qarobot'];
-    MOBILE_COL: string[] = ['nameMobile', 'projectConcourse'];
+    PC_COL: string[] = ['ID', 'name', 'view', 'edit', 'delete'];
+    MOBILE_COL: string[] = ['ID', 'name'];
     displayedColumns: string[];
     totalItems: number;
     orderProp: string;
@@ -48,14 +47,14 @@ export class ServiceApplicationComponent implements OnInit {
             this.service.search(
                 {
                     query: this.currentSearch,
-                    page: this.pageEvent && this.pageEvent.pageIndex ? this.pageEvent : 0,
+                    page: this.pageEvent && this.pageEvent.pageIndex ? this.pageEvent.pageIndex : 0,
                     size: this.pageEvent && this.pageEvent.pageSize ? this.pageEvent.pageSize : 10
                 }
             ).subscribe((res: HttpResponse<IFile[]>) => this.loadSuccessHandler(res));
         } else {
             this.service.load(
                 {
-                    page: this.pageEvent && this.pageEvent.pageIndex ? this.pageEvent : 0,
+                    page: this.pageEvent && this.pageEvent.pageIndex ? this.pageEvent.pageIndex : 0,
                     size: this.pageEvent && this.pageEvent.pageSize ? this.pageEvent.pageSize : 10
                 }
             ).subscribe((res: HttpResponse<IFile[]>) => this.loadSuccessHandler(res));
@@ -74,6 +73,7 @@ export class ServiceApplicationComponent implements OnInit {
 
     ngOnInit() {
         this.load();
+        this.displayedColumns = this.PC_COL;
     }
 
     previousState() {

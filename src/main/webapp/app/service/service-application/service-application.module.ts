@@ -1,3 +1,4 @@
+import { MatPaginatorIntl } from '@angular/material';
 import { JhiLanguageHelper } from 'app/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -10,6 +11,7 @@ import { ServiceApplicationUpdateComponent } from './service-application-name/se
 import { ServiceApplicationDeleteComponent } from './service-application-delete/service-application-delete.component';
 import { ServiceApplicationCreateComponent } from './service-application-create/service-application-create.component';
 import { ServiceApplicationViewComponent } from './service-application-view/service-application-view.component';
+import { Paginator } from 'app/shared/paginator/paginator';
 
 @NgModule (
     {
@@ -23,7 +25,8 @@ import { ServiceApplicationViewComponent } from './service-application-view/serv
             ServiceApplicationCreateComponent,
             ServiceApplicationViewComponent
         ],
-        providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }],
+        providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService },
+            { provide: MatPaginatorIntl, useClass: Paginator}],
         schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }
 )

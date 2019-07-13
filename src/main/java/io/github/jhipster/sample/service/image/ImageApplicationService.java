@@ -132,7 +132,7 @@ public class ImageApplicationService {
     @Transactional
     public void reindex() {
         imageApplicationSearchRepository.deleteAll();
-        imageApplicationSearchRepository.saveAll(imageApplicationSearchRepository.findAll());
+        imageApplicationSearchRepository.saveAll(imageApplicationRepository.findAll());
     }
 
     @Transactional

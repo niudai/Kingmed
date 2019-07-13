@@ -119,7 +119,7 @@ public class ImagePlatformService {
 
     public void reindex() {
         imagePlatformSearchRepository.deleteAll();
-        imagePlatformSearchRepository.saveAll(imagePlatformSearchRepository.findAll());
+        imagePlatformSearchRepository.saveAll(imagePlatformRepository.findAll());
     }
 
     public void delete(Long id) {
