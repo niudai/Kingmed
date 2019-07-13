@@ -10,6 +10,9 @@ import java.util.Base64;
 import java.util.List;
 import java.util.stream.Stream;
 
+import javax.transaction.Transactional;
+
+import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -46,8 +49,11 @@ public class ImageSuppliesService {
     private final ImageSuppliesSearchRepository imageSuppliesSearchRepository;
 
     @Autowired
-    public ImageSuppliesService(StorageProperties properties
-        , ImageSuppliesRepository imageSuppliesRepository) {
+    public ImageSuppliesService(
+        StorageProperties properties,
+        ImageSuppliesRepository imageSuppliesRepository,
+        ImageSuppliesSearchRepository imageSuppliesSearchRepository
+        ) {
         this.imageSuppliesSearchRepository = imageSuppliesSearchRepository;
         this.imageSuppliesRepository = imageSuppliesRepository;
         this.rootLocation = Paths.get(properties.getImageSuppliesLocation());
@@ -97,6 +103,12 @@ public class ImageSuppliesService {
         imageSupplies.name = name;
         imageSuppliesSearchRepository.save(imageSupplies);
         imageSuppliesRepository.save(imageSupplies);
+    }
+
+    @Transactional
+    public Page<ImageSupplies> search(Pageable pageable, String query) {
+        Page<ImageSupplies> page = imageSuppliesSearchRepository.search(QueryBuilders.queryStringQuery(query), pageable);
+        return page;
     }
 
     public void reindex() {

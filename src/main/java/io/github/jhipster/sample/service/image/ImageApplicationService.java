@@ -13,6 +13,9 @@ import java.util.stream.Stream;
 import javax.transaction.Transactional;
 
 import org.apache.lucene.util.fst.PairOutputs.Pair;
+import org.elasticsearch.index.query.QueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.QueryStringQueryBuilder;
 import org.hibernate.annotations.common.util.impl.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -120,7 +123,13 @@ public class ImageApplicationService {
         return page;
     }
 
+    @Transactional
+    public Page<ImageApplication> search(Pageable pageable, String query) {
+        Page<ImageApplication> page = imageApplicationSearchRepository.search(QueryBuilders.queryStringQuery(query), pageable);
+        return page;
+    }
 
+    @Transactional
     public void reindex() {
         imageApplicationSearchRepository.deleteAll();
         imageApplicationSearchRepository.saveAll(imageApplicationSearchRepository.findAll());

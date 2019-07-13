@@ -128,6 +128,14 @@ public class ImageUploadController {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
+    @GetMapping("/images/_search/application")
+    public ResponseEntity<List<ImageApplication>> searchApplications(@RequestParam String query, Pageable pageable) {
+        log.debug("REST request to get a page of ImageApplications");
+        Page<ImageApplication> page = imageApplicationService.search(pageable, query);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "api/images/application");
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
     /**
      * GET /images/application : reindex all applications
      * @return
@@ -193,6 +201,14 @@ public class ImageUploadController {
     public ResponseEntity<List<ImageSupplies>> listUploadedSuppliess(Pageable pageable) {
         log.debug("REST request to get a page of ImageSupplies");
         Page<ImageSupplies> page = imageSuppliesService.loadAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "api/images/supplies");
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    @GetMapping("/images/_search/supplies")
+    public ResponseEntity<List<ImageSupplies>> searchSuppliess(@RequestParam String query, Pageable pageable) {
+        log.debug("REST request to get a page of ImageSupplies");
+        Page<ImageSupplies> page = imageSuppliesService.search(pageable, query);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "api/images/supplies");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
@@ -275,6 +291,14 @@ public class ImageUploadController {
         log.debug("REST request to reindex ImagePlatforms");
         imagePlatformService.reindex();;
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/images/_search/platform")
+    public ResponseEntity<List<ImagePlatform>> searchPlatforms(@RequestParam String query, Pageable pageable) {
+        log.debug("REST request to get a page of ImageSupplies");
+        Page<ImagePlatform> page = imagePlatformService.search(pageable, query);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "api/images/platform");
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
     /************************************* Plain Images Upload Mapping *******************************************/

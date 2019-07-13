@@ -13,6 +13,7 @@ export class ServiceApplicationService {
 
     // url for applications
     public applicationUrl = SERVER_API_URL + 'api/images/application';
+    
 
     constructor(protected http: HttpClient) { }
 
@@ -45,7 +46,7 @@ export class ServiceApplicationService {
         return this.http.get<IFile[]>(this.applicationUrl, { params: options, observe: 'response' });
     }
 
-    search()
+    search(req? any): Observable<HttpResponse></HttpResponse>
 
     delete(id: number): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.applicationUrl}/${id}`);

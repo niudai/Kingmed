@@ -10,6 +10,9 @@ import java.util.Base64;
 import java.util.List;
 import java.util.stream.Stream;
 
+import javax.transaction.Transactional;
+
+import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -98,6 +101,12 @@ public class ImagePlatformService {
         imagePlatform.name = name;
         imagePlatformRepository.save(imagePlatform);
         imagePlatformSearchRepository.save(imagePlatform);
+    }
+
+    @Transactional
+    public Page<ImagePlatform> search(Pageable pageable, String query) {
+        Page<ImagePlatform> page = imagePlatformSearchRepository.search(QueryBuilders.queryStringQuery(query), pageable);
+        return page;
     }
 
     /**
