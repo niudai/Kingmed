@@ -29,6 +29,10 @@ const LAZY_ROUTE = [
         path: 'account',
         loadChildren: './account/account.module#JhipsterElasticsearchSampleApplicationAccountModule'
     },
+    {
+        path: 'robot',
+        loadChildren: './robot/robot.module#JhiRobotModule'
+    }
 ];
 
 @NgModule({
