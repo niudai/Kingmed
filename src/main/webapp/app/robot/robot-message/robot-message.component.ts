@@ -1,6 +1,8 @@
 import { IRobotMessage, RobotMessage } from './../../shared/model/robot-message.model';
 import { RobotService } from './../robot.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, NgZone } from '@angular/core';
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+import { take } from 'rxjs/operators';
 
 @Component({
     selector: 'jhi-robot-message',
@@ -8,15 +10,28 @@ import { Component, OnInit } from '@angular/core';
     styles: []
 })
 export class RobotMessageComponent implements OnInit {
+    massage: string;
     massageBody: IRobotMessage;
     req: any;
-    constructor(protected robotService: RobotService) { }
+
+    @ViewChild('autosize', { static: false }) autosize: CdkTextareaAutosize;
+
+    constructor(
+        protected robotService: RobotService,
+        protected _ngZone: NgZone
+    ) { }
+
+    triggerResize() {
+        // Wait for changes to be applied, then trigger textarea resize.
+        this._ngZone.onStable.pipe(take(1))
+            .subscribe(() => this.autosize.resizeToFitContent(true));
+    }
 
     ngOnInit() {
         this.massageBody = new RobotMessage(
             'text',
             {
-                'content': '测试信息'
+                'content': ''
             }
         );
         this.req = {

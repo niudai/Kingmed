@@ -1,6 +1,21 @@
-<p>
-  robot-message works!
-</p>
-<button (click)="send()">
-   发送
+<mat-card>
+    <mat-card-header>
+        <div mat-card-avatar
+            style="background-image: url('../../../content/images/kingmedMiniIcon.png')
+                    ; background-size: cover"
+            ></div>
+        <mat-card-title>
+             金域机器人<fa-icon [icon] = "'robot'"
+             style="color: darkcyan; margin: 5px"></fa-icon>
+        </mat-card-title>
+        <mat-card-subtitle>一键群发</mat-card-subtitle>
+    </mat-card-header>
+</mat-card>
+<mat-form-field style="width: 90%; margin: 5%">
+    <mat-label>输入您想发送的公告:</mat-label>
+    <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"
+        [(ngModel)]="ma"></textarea>
+</mat-form-field>
+<button (click)="send()" mat-raised-button color="accent">
+    发送
 </button>
