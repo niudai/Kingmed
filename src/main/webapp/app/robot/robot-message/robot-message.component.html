@@ -11,11 +11,52 @@
         <mat-card-subtitle>一键群发</mat-card-subtitle>
     </mat-card-header>
 </mat-card>
-<mat-form-field style="width: 90%; margin: 5%">
-    <mat-label>输入您想发送的公告:</mat-label>
-    <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"
-        [(ngModel)]="ma"></textarea>
-</mat-form-field>
-<button (click)="send()" mat-raised-button color="accent">
-    发送
-</button>
+<mat-toolbar>
+        <button mat-raised-button
+            style = "margin: 5%"
+            (click) = "setMsgType('text')">
+            发送文本
+        </button>
+        <button mat-raised-button
+            (click) = "setMsgType('card')">
+            发送卡片
+        </button>
+</mat-toolbar>
+<div [ngSwitch]="messageType">
+    <div *ngSwitchCase="'text'">
+            <mat-form-field style="width: 90%; margin: 5%">
+                    <mat-label>输入您想发送的公告:</mat-label>
+                    <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"
+                        [(ngModel)]="message">
+                    </textarea>
+            </mat-form-field>
+            <button (click)="send()" mat-raised-button color="accent">
+                    发送
+            </button>
+    </div>
+    <div *ngSwitchCase="'card'">
+            <mat-form-field class="example-full-width" style = "width: 100%">
+                    <input matInput placeholder="标题" value="标题" [(ngModel)]="title" >
+                </mat-form-field>
+                <br>
+                <mat-form-field class="example-full-width" style = "width: 100%">
+                    <input matInput placeholder="描述" value="描述" [(ngModel)]="description">
+                </mat-form-field>
+                <br>
+                <mat-form-field class="example-full-width" style = "width: 100%">
+                        <input matInput placeholder="图片地址" value="图片地址" [(ngModel)]="picurl">
+                </mat-form-field>
+                <br>
+                <mat-form-field class="example-full-width" style = "width: 100%">
+                        <input matInput placeholder="链接地址" value="链接地址" [(ngModel)]="url">
+                </mat-form-field>
+                <br>
+                <button (click)="sendCard()" mat-raised-button color="accent">
+                        发送
+                </button>
+    </div>
+
+</div>
+
+
+

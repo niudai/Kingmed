@@ -1,3 +1,4 @@
+import { AccountService } from 'app/core/auth/account.service';
 import { Route, Router } from '@angular/router';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
@@ -9,13 +10,14 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 export class NavigationBackComponent implements OnInit, OnDestroy {
     alerts: any[];
 
-    constructor(protected route: Router) {}
+    constructor(
+        protected route: Router    ) {}
 
     ngOnInit() {
     }
 
-    setClasses(alert) {
-    }
+    // setClasses(alert) {
+    // }
 
     ngOnDestroy() {
     }
@@ -26,5 +28,9 @@ export class NavigationBackComponent implements OnInit, OnDestroy {
 
     goHome() {
         this.route.navigate(['']);
+    }
+
+    goRobot() {
+        this.route.navigate(['robot']);
     }
 }

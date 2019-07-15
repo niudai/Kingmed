@@ -1,3 +1,4 @@
+import { AccountService } from 'app/core/auth/account.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRouteSnapshot, NavigationEnd, NavigationError } from '@angular/router';
 
@@ -9,9 +10,12 @@ import { JhiLanguageHelper } from 'app/core';
     styleUrls: ['main.component.css']
 })
 export class JhiMainComponent implements OnInit {
-    constructor(private jhiLanguageHelper: JhiLanguageHelper, private router: Router) {}
+    constructor(private jhiLanguageHelper: JhiLanguageHelper
+        , private router: Router) {}
 
-    private getPageTitle(routeSnapshot: ActivatedRouteSnapshot) {
+    private getPageTitle(
+        routeSnapshot: ActivatedRouteSnapshot
+        ) {
         let title: string =
             routeSnapshot.data && routeSnapshot.data['pageTitle']
                 ? routeSnapshot.data['pageTitle']

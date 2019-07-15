@@ -1,3 +1,4 @@
+import { UserRouteAccessService } from './core/auth/user-route-access-service';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { errorRoute, navbarRoute } from './layouts';
@@ -31,7 +32,12 @@ const LAZY_ROUTE = [
     },
     {
         path: 'robot',
-        loadChildren: './robot/robot.module#JhiRobotModule'
+        loadChildren: './robot/robot.module#JhiRobotModule',
+        data: {
+            authorities: ['ROLE_ADMIN'],
+            pageTitle: 'global.menu.robot'
+        },
+        canActivate: [UserRouteAccessService]
     }
 ];
 

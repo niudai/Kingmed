@@ -9,7 +9,6 @@ import { WXROBOT_URL } from 'app/app.constants';
 })
 export class RobotService {
 
-
     constructor(protected http: HttpClient) {
 
     }

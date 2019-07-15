@@ -3,12 +3,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import './vendor.ts';
 
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Ng2Webstorage } from 'ngx-webstorage';
-import { NgJhipsterModule } from 'ng-jhipster';
+import { NgJhipsterModule, JhiLanguageService } from 'ng-jhipster';
 
 import { AuthInterceptor } from './blocks/interceptor/auth.interceptor';
 import { AuthExpiredInterceptor } from './blocks/interceptor/auth-expired.interceptor';
@@ -22,6 +22,7 @@ import { JhipsterElasticsearchSampleApplicationServiceModule } from './service/s
 import * as moment from 'moment';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ActiveMenuDirective, ErrorComponent } from './layouts';
+import { NavigationBackComponent } from './shared/navigation/navigation-back.component';
 
 @NgModule({
     imports: [
@@ -42,7 +43,7 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
         JhipsterElasticsearchSampleApplicationAppRoutingModule,
     ],
     declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent
-        , HomeComponent],
+        , HomeComponent, NavigationBackComponent],
     providers: [
         {
             provide: HTTP_INTERCEPTORS,
@@ -63,9 +64,14 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
             provide: HTTP_INTERCEPTORS,
             useClass: NotificationInterceptor,
             multi: true
+        },
+        {
+            provide: JhiLanguageService,
+            useClass: JhiLanguageService
         }
     ],
-    bootstrap: [JhiMainComponent]
+    bootstrap: [JhiMainComponent],
+
 })
 export class JhipsterElasticsearchSampleApplicationAppModule {
     constructor(private dpConfig: NgbDatepickerConfig) {
