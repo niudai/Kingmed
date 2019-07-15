@@ -39,6 +39,13 @@ public class DiseaseBranch implements Serializable {
     @JoinColumn(name = "disease_branch_id")
     private List<DiseaseMap> diseaseMaps = new ArrayList<DiseaseMap>();
 
+    @Size(max = 50)
+    @Column(name = "subsidiary", length = 50)
+    private String subsidiary = "待添加";
+
+    @Size(max = 250)
+    @Column(name = "description", length = 250)
+    private String description = "待添加";
 
     public DiseaseBranch() {
     }
@@ -104,12 +111,31 @@ public class DiseaseBranch implements Serializable {
         return Objects.hash(id, name, diseaseMaps);
     }
 
+
+    public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
+
+    public String getSubsidiary() {
+        return subsidiary;
+    }
+
+    public void setSubsidiary(String subsidiary) {
+        this.subsidiary = subsidiary;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public String toString() {
-        return "{" +
-            " id='" + getId() + "'" +
-            ", name='" + getName() + "'" +
-            "}";
+        return "DiseaseBranch [description=" + description + ", diseaseMaps=" + diseaseMaps + ", id=" + id + ", name="
+                + name + ", subsidiary=" + subsidiary + "]";
     }
 
 }

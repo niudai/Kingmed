@@ -120,8 +120,14 @@ public class DiseaseMapService {
      */
     @Transactional
     public void modifyDiseaseBranch(DiseaseBranch diseaseBranch) {
-        diseaseBranchRepository
-            .findById(diseaseBranch.getId()).get().setName(diseaseBranch.getName());
+        DiseaseBranch _diseaseBranch = diseaseBranchRepository
+            .findById(diseaseBranch.getId()).get();
+        if (diseaseBranch.getDiseaseMaps() == null) {
+            diseaseBranch.setDiseaseMaps(_diseaseBranch.getDiseaseMaps());
+            diseaseBranchRepository.save(diseaseBranch);
+        } else {
+            diseaseBranchRepository.save(diseaseBranch);
+        }
     }
 
     /**

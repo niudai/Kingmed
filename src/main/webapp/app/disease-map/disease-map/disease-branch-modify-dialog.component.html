@@ -1,0 +1,20 @@
+<div mat-dialog-content>
+        <h1 mat-dialog-title>编辑地图</h1>
+        <form (ngSubmit) = "submit()">
+                <mat-form-field class="example-full-width">
+                        <input matInput [(ngModel)]="diseaseBranch.name" placeholder="地图名" [value]="diseaseBranch.name">
+                      </mat-form-field>
+                      <br>
+                      <mat-form-field class="example-full-width">
+                            <input matInput [(ngModel)]="diseaseBranch.subsidiary" placeholder="子公司" [value]="diseaseBranch.name">
+                          </mat-form-field>
+                          <br>
+                          <mat-form-field class="example-full-width">
+                                <input matInput [(ngModel)]="diseaseBranch.description" placeholder="描述" [value]="diseaseBranch.description">
+                    </mat-form-field>
+                    <br>
+                <button (click)="onNoClick()" mat-raised-button>取消</button>
+                <button type = "submit" mat-raised-button color = "accent">保存</button>
+        </form>
+
+</div>

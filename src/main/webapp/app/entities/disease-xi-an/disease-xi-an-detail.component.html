@@ -26,8 +26,8 @@
                                     Code</span><span> : </span>
                             </mat-list-item>
                             <mat-card>
-                                    <p> {{ diseaseXiAn.projectCode }}</p>
-                                </mat-card>
+                                <p> {{ diseaseXiAn.projectCode }}</p>
+                            </mat-card>
                         </div>
 
                         <div *jhiHideIfNull="currentChargeCode">
@@ -37,26 +37,24 @@
                                     Code</span><span> :</span>
                             </mat-list-item>
                             <mat-card>
-                                    <p> {{ currentChargeCode }}</p>
+                                <p> {{ currentChargeCode }}</p>
                             </mat-card>
-
                         </div>
-
                         <!-- <div *jhiHideIfNull="currentChargeCode">
 
                         </div> -->
                         <div *jhiHideIfNull="currentPrice">
-                            <mat-list-item>
-                                <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
-                                    jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.tollStandard">Toll
-                                    Standard</span><span> : </span>
-                            </mat-list-item>
-                            <mat-card>
-                                <p> {{ currentPrice }}</p>
-                            </mat-card>
+                            <div *jhiHasAnyAuthority="'ROLE_USER'">
+                                <mat-list-item>
+                                    <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
+                                        jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.tollStandard">Toll
+                                        Standard</span><span> : </span>
+                                </mat-list-item>
+                                <mat-card>
+                                    <p> {{ currentPrice }}</p>
+                                </mat-card>
+                            </div>
                         </div>
-
-
                     </mat-list>
                 </mat-expansion-panel>
 

@@ -230,19 +230,9 @@ export class DiseaseBranchActionBottomSheetComponent {
     }
 
     modifyDiseaseBranch(): void {
-        const dialogRef = this.dialog.open(DiseaseMapAssociateDialogComponent, {
+        const dialogRef = this.dialog.open(DiseaseBranchModifyDialogComponent, {
             data: {
-                input: true,
-                title: '更改地图名',
-                description: '输入新的地图名:'
-            }
-        });
-        dialogRef.afterClosed().subscribe(result => {
-            if (result !== undefined) {
-                this.data.diseaseBranch.name = result;
-                this.diseaseMapService
-                    .modifyDiseaseBranch(this.data.diseaseBranch).subscribe();
-                console.log('The dialog was closed');
+                diseaseBranch: this.data.diseaseBranch
             }
         });
     }
@@ -308,6 +298,40 @@ export class DiseaseMapAssociateDialogComponent implements OnInit {
     }
 
     ngOnInit(): void {
+    }
+
+    onNoClick(): void {
+        this.dialogRef.close();
+    }
+
+    previousState() {
+        window.history.back();
+    }
+
+}
+
+@Component({
+    selector: 'jhi-disease-branch-modify-dialog',
+    templateUrl: './disease-branch-modify-dialog.component.html',
+})
+export class DiseaseBranchModifyDialogComponent implements OnInit {
+
+    diseaseBranch: IDiseaseBranch;
+
+    constructor(
+        public dialogRef: MatDialogRef<DiseaseBranchModifyDialogComponent>,
+        @Inject(MAT_DIALOG_DATA) public data
+        , protected diseaseMapService: DiseaseMapService) {
+    }
+
+    ngOnInit(): void {
+        this.diseaseBranch = this.data.diseaseBranch;
+    }
+
+    submit() {
+        this.diseaseMapService
+            .modifyDiseaseBranch(this.diseaseBranch).subscribe(any => this.onNoClick());
+        console.log('The dialog was closed');
     }
 
     onNoClick(): void {

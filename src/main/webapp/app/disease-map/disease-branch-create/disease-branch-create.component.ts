@@ -14,7 +14,6 @@ export class DiseaseBranchCreateComponent implements OnInit {
 
     ngOnInit() {
         this.diseaseBranch = new DiseaseBranch();
-        this.diseaseBranch.name = 'Test';
     }
 
     submit() {

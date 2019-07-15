@@ -157,7 +157,7 @@ public class UserResource {
      * @return a string list of the all of the roles
      */
     @GetMapping("/users/authorities")
-    @PreAuthorize("hasRole(\"" + AuthoritiesConstants.ADMIN + "\")")
+    // @PreAuthorize("hasRole(\"" + AuthoritiesConstants.ADMIN + "\")")
     public List<String> getAuthorities() {
         return userService.getAuthorities();
     }

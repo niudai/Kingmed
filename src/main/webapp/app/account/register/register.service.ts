@@ -11,4 +11,8 @@ export class Register {
     save(account: any): Observable<any> {
         return this.http.post(SERVER_API_URL + 'api/register', account);
     }
+
+    authorities(): Observable<string[]> {
+        return this.http.get<string[]>(SERVER_API_URL + 'api/users/authorities');
+    }
 }

@@ -25,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 /**
@@ -122,9 +123,13 @@ public class UserService {
         newUser.setActivated(false);
         // new user gets registration key
         newUser.setActivationKey(RandomUtil.generateActivationKey());
-        Set<Authority> authorities = new HashSet<>();
-        authorityRepository.findById(AuthoritiesConstants.USER).ifPresent(authorities::add);
-        newUser.setAuthorities(authorities);
+        if (userDTO.getAuthorities() == null) {
+            Set<Authority> authorities = new HashSet<>();
+            authorityRepository.findById(AuthoritiesConstants.USER).ifPresent(authorities::add);
+            newUser.setAuthorities(authorities);
+        } else {
+            newUser.setAuthorities(userDTO.getAuthorities().stream().map(a -> authorityRepository.findById(a).get()).collect(Collectors.toSet()));
+        }
         userRepository.save(newUser);
         userSearchRepository.save(newUser);
         this.clearUserCaches(newUser);

@@ -1,4 +1,4 @@
-import { DiseaseXiAnDeleteDialogComponent, QArobotDeleteDialogComponent } from './disease-map/disease-map.component';
+import { DiseaseXiAnDeleteDialogComponent, QArobotDeleteDialogComponent, DiseaseBranchModifyDialogComponent } from './disease-map/disease-map.component';
 import { RouterModule } from '@angular/router';
 import { DiseaseMapAssociateQArobotComponent } from './disease-map-associate-q-arobot/disease-branch-map-associate-q-arobot.component';
 import { DiseaseMapAssociateDiseaseXiAnComponent } from './disease-map-associate-disease-xi-an/disease-branch-map-associate-disease-xi-an.component';
@@ -38,6 +38,7 @@ import { ReactiveFormsModule } from '@angular/forms';
         , DiseaseMapDeleteDialogComponent
         , DiseaseXiAnDeleteDialogComponent
         , QArobotDeleteDialogComponent
+        , DiseaseBranchModifyDialogComponent
     ],
     entryComponents: [
         DiseaseBranchDeleteModalComponent
@@ -47,6 +48,7 @@ import { ReactiveFormsModule } from '@angular/forms';
         , DiseaseMapAssociateDialogComponent
         , DiseaseMapDeleteDialogComponent
         , DiseaseXiAnDeleteDialogComponent
+        , DiseaseBranchModifyDialogComponent
     ],
     providers: [
         { provide: JhiLanguageService, useClass: JhiLanguageService }// schemas: [CUSTOM_ELEMENTS_SCHEMA]
