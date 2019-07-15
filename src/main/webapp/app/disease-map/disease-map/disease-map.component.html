@@ -13,13 +13,13 @@
         <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
             <li class="mat-tree-node">
                 <div>
-                    <!-- <fa-icon [icon]="'chevron-right'" class="expandable-button"></fa-icon> -->
+                    <fa-icon [icon]="'chevron-right'" class="expandable-button"></fa-icon>
                     <span>{{node.name}}</span>
                     <button *jhiHasAnyAuthority="'ROLE_ADMIN'" mat-mini-fab color="primary"
                         (click)="openMapBottomSheet(node)" class="add">+</button>
                     <br>
                     <mat-nav-list *ngFor="let diseaseXiAn of node.diseaseXiAns">
-                        <mat-card matRipple>
+                        <mat-card matRipple style = "margin: 5px">
                             <button mat-raised-button style="background-color: cornsilk" disabled><span
                                     style="color: cadetblue">{{diseaseXiAn.id}}</span>
                             </button>
@@ -37,7 +37,7 @@
                         </mat-card>
                     </mat-nav-list>
                     <mat-nav-list *ngFor="let qarobot of node.qarobots">
-                        <mat-card matRipple>
+                        <mat-card matRipple style = "width: 100%">
                             <fa-icon [icon]="'question'" style="color: yellow"></fa-icon>{{node.name}}
                             <a [routerLink]="['/q-arobot', qarobot.id, 'view']">{{qarobot.question}}</a>
                             <fa-icon [icon]="'chevron-right'"></fa-icon>
