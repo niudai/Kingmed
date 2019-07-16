@@ -17,6 +17,7 @@ import { timingSafeEqual } from 'crypto';
 })
 export class DiseaseMapComponent implements OnInit {
     public diseaseMaps: IDiseaseMap[];
+    public previousDataSources = new Array<IDiseaseMap[]>();
     public diseaseBranch: IDiseaseBranch;
     public id: number;
     public windowWidth: number;
@@ -81,6 +82,23 @@ export class DiseaseMapComponent implements OnInit {
     fetchDiseaseMap() {
         this.diseaseMapService.getAllDiseaseMap(this.id)
             .subscribe(diseaseMaps => this.dataSource.data = diseaseMaps);
+    }
+
+    /**
+     * Zoom in
+     */
+    changeTreeControl(node: DiseaseMap) {
+        this.previousDataSources.push(this.dataSource.data);
+        this.dataSource.data = node.diseaseMaps;
+    }
+
+    /**
+     * Zoom out
+     */
+    previousTreeControl() {
+        if (this.previousDataSources.length > 0) {
+            this.dataSource.data = this.previousDataSources.pop();
+        }
     }
 
     ngOnInit() {
@@ -386,7 +404,7 @@ export class DiseaseXiAnDeleteDialogComponent implements OnInit {
     diseaseMap: IDiseaseMap;
 
     constructor(
-        public dialogRef: MatDialogRef<DiseaseMapDeleteDialogComponent>,
+        public dialogRef: MatDialogRef<DiseaseXiAnDeleteDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data
         , protected diseaseMapService: DiseaseMapService) {
     }
@@ -429,7 +447,7 @@ export class QArobotDeleteDialogComponent implements OnInit {
 
     confirmDelete() {
         this.diseaseMapService
-            .deassociateWithQArobot(this.data.qArobotId, this.data.diseaseXiAnId).subscribe(any => this.onNoClick());
+            .deassociateWithQArobot(this.data.diseaseMapId, this.data.qArobotId).subscribe(any => this.onNoClick());
         console.log('The dialog was closed');
     }
 

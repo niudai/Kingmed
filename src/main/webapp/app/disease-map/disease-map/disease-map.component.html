@@ -1,7 +1,7 @@
 <mat-card>{{diseaseBranch.name}}
     <button mat-mini-fab color="primary" *jhiHasAnyAuthority="'ROLE_ADMIN'" (click)="openBranchBottomSheet()"
         class="add">+</button>
-    <button mat-raised-button (click)="previousState()" class="nav-back">
+    <button mat-raised-button (click)="previousTreeControl()" class="nav-back">
         <fa-icon [icon]="'arrow-left'"></fa-icon>
     </button>
 </mat-card>
@@ -11,11 +11,10 @@
     <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="example-tree">
         <!-- This is the tree node template for leaf nodes -->
         <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
-            <li class="mat-tree-node" style = "padding-bottom: 5px">
+            <li style = "padding-bottom: 5px">
                     <fa-icon [icon]="'circle'" class="expandable-button"></fa-icon>
                     <button *jhiHasAnyAuthority="'ROLE_ADMIN'" mat-mini-fab color="primary"
                         (click)="openMapBottomSheet(node)" class="add">+</button>
-                    <br>
                     <mat-expansion-panel style = "margin: 5px">
                             <mat-expansion-panel-header>
                               <mat-panel-title>
@@ -53,7 +52,7 @@
                                                     style="color: cadetblue">{{qarobot.qaSubsidiary}}</span> -
                                             </button>
                                             <button mat-mini-fab color="warn" *jhiHasAnyAuthority="'ROLE_ADMIN'"
-                                                (click)="deassociateWithDiseaseXiAn(qarobot.id, node.id)">
+                                                (click)="deassociateWithQArobot(qarobot.id, node.id)">
                                                 <fa-icon [icon]="'times'"></fa-icon>
                                             </button>
                                         </mat-card>
@@ -65,11 +64,18 @@
 
         <!-- This is the tree node template for expandable nodes -->
         <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
-            <li class="mat-tree-node" style = "padding-bottom: 7px">
-                    <fa-icon matTreeNodeToggle [icon]="treeControl.isExpanded(node) ? 'angle-down' : 'chevron-right'"></fa-icon>
-                    <button *jhiHasAnyAuthority="'ROLE_ADMIN'" mat-mini-fab color="primary"
-                        (click)="openMapBottomSheet(node)" class="add">+</button>
-                    <mat-expansion-panel *ngIf="!treeControl.isExpanded(node)">
+            <li style = "padding-bottom: 7px">
+                    <span style = "display: inline">
+                            <button *jhiHasAnyAuthority="'ROLE_ADMIN'" mat-mini-fab color="primary"
+                            (click)="openMapBottomSheet(node)" class="add">+</button>
+                    </span>
+                    <span style = "display: inline">
+                            <button *jhiHasAnyAuthority="'ROLE_ADMIN'" mat-mini-fab color="accent"
+                            (click)="changeTreeControl(node)" class="arrow-right">
+                                <fa-icon [icon] = "'arrow-right'"></fa-icon>
+                            </button>
+                    </span>
+                    <mat-expansion-panel style = "margin: 5px">
                             <mat-expansion-panel-header>
                               <mat-panel-title>
                                     <span>{{node.name}}</span>
@@ -77,7 +83,7 @@
                             </mat-expansion-panel-header>
 
                             <mat-nav-list *ngFor="let diseaseXiAn of node.diseaseXiAns">
-                                    <mat-card matRipple>
+                                    <mat-card matRipple style = "max-width: 500px">
                                         <button mat-raised-button style="background-color: cornsilk" disabled><span
                                                 style="color: cadetblue">{{diseaseXiAn.id}}</span>
                                         </button>
@@ -106,7 +112,7 @@
                                                     style="color: cadetblue">{{qarobot.qaSubsidiary}}</span> -
                                             </button>
                                             <button mat-mini-fab color="warn" *jhiHasAnyAuthority="'ROLE_ADMIN'"
-                                                (click)="deassociateWithDiseaseXiAn(qarobot.id, node.id)">
+                                                (click)="deassociateWithQArobot(qarobot.id, node.id)">
                                                 <fa-icon [icon]="'times'"></fa-icon>
                                             </button>
                                         </mat-card>

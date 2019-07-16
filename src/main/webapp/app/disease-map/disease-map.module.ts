@@ -49,6 +49,7 @@ import { ReactiveFormsModule } from '@angular/forms';
         , DiseaseMapDeleteDialogComponent
         , DiseaseXiAnDeleteDialogComponent
         , DiseaseBranchModifyDialogComponent
+        , QArobotDeleteDialogComponent
     ],
     providers: [
         { provide: JhiLanguageService, useClass: JhiLanguageService }// schemas: [CUSTOM_ELEMENTS_SCHEMA]

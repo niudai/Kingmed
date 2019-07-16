@@ -103,7 +103,7 @@ public class DiseaseBranch implements Serializable {
             return false;
         }
         DiseaseBranch diseaseBranch = (DiseaseBranch) o;
-        return Objects.equals(id, diseaseBranch.id) && Objects.equals(name, diseaseBranch.name) && Objects.equals(diseaseMaps, diseaseBranch.diseaseMaps);
+        return Objects.equals(id, diseaseBranch.id) && Objects.equals(name, diseaseBranch.name);
     }
 
     @Override
@@ -134,7 +134,7 @@ public class DiseaseBranch implements Serializable {
 
     @Override
     public String toString() {
-        return "DiseaseBranch [description=" + description + ", diseaseMaps=" + diseaseMaps + ", id=" + id + ", name="
+        return "DiseaseBranch [description=" + description + ", id=" + id + ", name="
                 + name + ", subsidiary=" + subsidiary + "]";
     }
 

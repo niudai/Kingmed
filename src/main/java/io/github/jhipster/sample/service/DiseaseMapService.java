@@ -79,7 +79,7 @@ public class DiseaseMapService {
      * @param diseaseBranchId
      * @return
      */
-    @Transactional
+    @org.springframework.transaction.annotation.Transactional
     public List<DiseaseMap> getAllDiseaseMap(Long diseaseBranchId) {
         List<DiseaseMap> diseaseMaps =  diseaseBranchRepository.findById(diseaseBranchId).get().getDiseaseMaps();
         diseaseMaps.size();
