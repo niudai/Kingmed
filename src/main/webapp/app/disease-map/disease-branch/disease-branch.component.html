@@ -16,6 +16,7 @@
                         <mat-card-actions>
                           <button mat-raised-button color="accent" [routerLink]="['view-disease-map', diseaseBranch.id]">进入</button>
                           <button mat-raised-button color="warn" (click)="open(diseaseBranch)" *jhiHasAnyAuthority="'ROLE_ADMIN'">删除</button>
+                          <button mat-raised-button style = "background-color: bisque" [routerLink]="['modify-disease-branch', diseaseBranch.id]" *jhiHasAnyAuthority="'ROLE_ADMIN'">编辑</button>
                         </mat-card-actions>
                       </mat-card>
             <!-- <div class="card-body">

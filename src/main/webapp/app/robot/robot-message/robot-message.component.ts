@@ -49,8 +49,8 @@ export class RobotMessageComponent implements OnInit {
             content: ''
         };
         this.messageBody.markdown.content = this.message;
-        // this.messageBody.markdown.content = this.message;
-        this.send();
+        this.robotService.postMessage(this.messageBody, this.req)
+            .subscribe();
     }
 
     sendCard() {
@@ -79,14 +79,18 @@ export class RobotMessageComponent implements OnInit {
         };
     }
 
-    send() {
+    sendText() {
         this.messageBody.msgtype = 'text';
         this.messageBody.text = {
             content: ''
         };
         this.messageBody.text.content = this.message;
+        this.send();
+    }
+
+    send() {
         this.robotService.postMessage(this.messageBody, this.req)
-            .subscribe();
+        .subscribe();
     }
 
 }

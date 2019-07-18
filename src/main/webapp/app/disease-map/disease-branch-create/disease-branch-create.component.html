@@ -6,11 +6,14 @@
                 <jhi-alert-error></jhi-alert-error>
                 <div class="form-group">
                     <label>地图名</label>
-                    <input type="text" class="form-control" id="id" name="id" [(ngModel)]="diseaseBranch.name" />
+                    <input type="text" class="form-control" id="id" name="diseaseBranch.name" [(ngModel)]="diseaseBranch.name"
+                        [placeholder]="diseaseBranch.name" />
                     <label>子公司</label>
-                    <input type="text" class="form-control" id="id" name="id" [(ngModel)]="diseaseBranch.subsidiary" />
+                    <input type="text" class="form-control" id="id" name="diseaseBranch.subsidiary" [(ngModel)]="diseaseBranch.subsidiary"
+                         [placeholder]="diseaseBranch.subsidiary" />
                     <label>描述</label>
-                    <input type="text" class="form-control" id="id" name="id" [(ngModel)]="diseaseBranch.description" />
+                    <input type="text" class="form-control" id="id" name="diseaseBranch.description" [(ngModel)]="diseaseBranch.description"
+                        [placeholder]="diseaseBranch.description" />
 
                 </div>
             </div>

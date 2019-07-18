@@ -335,6 +335,7 @@ export class DiseaseMapAssociateDialogComponent implements OnInit {
 export class DiseaseBranchModifyDialogComponent implements OnInit {
 
     diseaseBranch: IDiseaseBranch;
+    title: string;
 
     constructor(
         public dialogRef: MatDialogRef<DiseaseBranchModifyDialogComponent>,

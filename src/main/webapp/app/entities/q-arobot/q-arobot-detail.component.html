@@ -112,6 +112,12 @@
                 class="btn btn-primary">
                 <fa-icon [icon]="'times'"></fa-icon>&nbsp;<span> 删除</span>
             </button>
+            <button  [routerLink]="['/q-arobot', qArobot.id, 'disease']" *jhiHasAnyAuthority="'ROLE_ADMIN'" type="button" mat-raised-button replaceUrl="true"
+            queryParamsHandling="merge"
+                class="btn btn-primary">
+                <fa-icon [icon]="'book-medical'"></fa-icon>&nbsp;<span> 相关项目 </span>
+            </button>
+
         </div>
     </div>
 </div>
