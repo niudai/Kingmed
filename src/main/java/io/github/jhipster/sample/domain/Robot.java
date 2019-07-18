@@ -20,8 +20,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
  * Robot which stores webhook url.
  */
 @Entity
-@Table(name = "price")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@Table(name = "robot")
 public class Robot implements Serializable {
     private static final long serialVersionUID = 2L;
 
@@ -37,104 +36,74 @@ public class Robot implements Serializable {
     @Column(name = "robot_name", length = 30)
     private String robotName;
 
-
-
-
-    public Prices() {
-    }
-
-
-    public Prices(Long id, String tollStandard, String reportingTime, String chargeCode) {
-        this.id = id;
-        this.tollStandard = tollStandard;
-        this.reportingTime = reportingTime;
-        this.chargeCode = chargeCode;
-    }
-
-    public String getSubsidiary() {
-        return this.subsidiary;
-    }
-
-    public void setSubsidiary(String subsidiary) {
-        this.subsidiary = subsidiary;
+    public static long getSerialversionuid() {
+        return serialVersionUID;
     }
 
     public Long getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public String getTollStandard() {
-        return this.tollStandard;
+    public String getWebhookUrl() {
+        return webhookUrl;
     }
 
-    public void setTollStandard(String tollStandard) {
-        this.tollStandard = tollStandard;
+    public void setWebhookUrl(String webhookUrl) {
+        this.webhookUrl = webhookUrl;
     }
 
-    public String getReportingTime() {
-        return this.reportingTime;
+    public String getRobotName() {
+        return robotName;
     }
 
-    public void setReportingTime(String reportingTime) {
-        this.reportingTime = reportingTime;
-    }
-
-    public String getChargeCode() {
-        return this.chargeCode;
-    }
-
-    public void setChargeCode(String chargeCode) {
-        this.chargeCode = chargeCode;
-    }
-
-    public Prices id(Long id) {
-        this.id = id;
-        return this;
-    }
-
-    public Prices tollStandard(String tollStandard) {
-        this.tollStandard = tollStandard;
-        return this;
-    }
-
-    public Prices reportingTime(String reportingTime) {
-        this.reportingTime = reportingTime;
-        return this;
-    }
-
-    public Prices chargeCode(String chargeCode) {
-        this.chargeCode = chargeCode;
-        return this;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == this)
-            return true;
-        if (!(o instanceof Prices)) {
-            return false;
-        }
-        Prices prices = (Prices) o;
-        return Objects.equals(id, prices.id) && Objects.equals(tollStandard, prices.tollStandard) && Objects.equals(reportingTime, prices.reportingTime) && Objects.equals(chargeCode, prices.chargeCode);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(getId());
+    public void setRobotName(String robotName) {
+        this.robotName = robotName;
     }
 
     @Override
     public String toString() {
-        return "{" +
-            " id='" + getId() + "'" +
-            ", tollStandard='" + getTollStandard() + "'" +
-            ", reportingTime='" + getReportingTime() + "'" +
-            ", chargeCode='" + getChargeCode() + "'" +
-            "}";
+        return "Robot [id=" + id + ", robotName=" + robotName + ", webhookUrl=" + webhookUrl + "]";
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        result = prime * result + ((robotName == null) ? 0 : robotName.hashCode());
+        result = prime * result + ((webhookUrl == null) ? 0 : webhookUrl.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Robot other = (Robot) obj;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        if (robotName == null) {
+            if (other.robotName != null)
+                return false;
+        } else if (!robotName.equals(other.robotName))
+            return false;
+        if (webhookUrl == null) {
+            if (other.webhookUrl != null)
+                return false;
+        } else if (!webhookUrl.equals(other.webhookUrl))
+            return false;
+        return true;
     }
 
 }

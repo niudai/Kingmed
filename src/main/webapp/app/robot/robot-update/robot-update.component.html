@@ -1,0 +1,13 @@
+<form class="example-form" (ngSubmit)="save()">
+    <p>{{robot.robotName}}</p>
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="机器人名称" [(ngModel)]="robot.robotName">
+    </mat-form-field>
+    <br>
+    <mat-form-field class="example-full-width">
+        <textarea matInput placeholder="机器人WebhookUrl" [(ngModel)]="robot.webhookUrl" cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"></textarea>
+    </mat-form-field>
+    <br>
+    <button mat-raised-button type="submit">提交</button>
+</form>

@@ -8,10 +8,12 @@ import { JhiLanguageService } from 'ng-jhipster';
 import { MatPaginatorIntl } from '@angular/material';
 import { Paginator } from 'app/shared/paginator/paginator';
 import { JhiLanguageHelper } from 'app/core';
+import { RobotUpdateComponent } from './robot-update/robot-update.component';
 
 @NgModule({
     declarations: [
-        RobotMessageComponent
+        RobotMessageComponent,
+        RobotUpdateComponent
     ],
     imports: [
         JhipsterElasticsearchSampleApplicationSharedModule, RouterModule.forChild(ROBOT_ROUTE)

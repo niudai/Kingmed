@@ -38,6 +38,7 @@
     <include file="config/liquibase/changelog/add_default_value_to_activated.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/2019-07-15_authority_load.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/2019-07-15-add_column_disease_map.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/2019-07-18-create-table-robot.xml" relativeToChangelogFile="false"/>
 
 
 </databaseChangeLog>

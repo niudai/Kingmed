@@ -18,8 +18,15 @@
             发送文本
         </button>
         <button mat-raised-button
+            style = "margin: 5%"
             (click) = "setMsgType('card')">
             发送卡片
+        </button>
+        <button mat-raised-button
+            style = "margin: 5%"
+            color = "accent"
+            [routerLink] = "'create'">
+            注册机器人
         </button>
 </mat-toolbar>
 <div [ngSwitch]="messageType">
