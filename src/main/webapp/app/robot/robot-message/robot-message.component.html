@@ -29,6 +29,15 @@
             注册机器人
         </button>
 </mat-toolbar>
+<p>{{robots[0].robotName}}</p>
+<mat-selection-list #selectedRobots (selectionChange)="onSelectionChange($event)">
+        <mat-list-option *ngFor="let robot of robots">
+          {{robot.robotName}}
+        </mat-list-option>
+</mat-selection-list>
+<p *ngFor="let robot of selectedRobots.selectedOptions.selected." >
+    {{robot.robotName}}
+</p>
 <div [ngSwitch]="messageType">
     <div *ngSwitchCase="'text'">
             <mat-form-field style="width: 90%; margin: 5%">

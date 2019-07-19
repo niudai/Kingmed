@@ -1,5 +1,3 @@
-<form class="example-form" (ngSubmit)="save()">
-    <p>{{robot.robotName}}</p>
     <mat-form-field class="example-full-width">
         <input matInput placeholder="机器人名称" [(ngModel)]="robot.robotName">
     </mat-form-field>
@@ -9,5 +7,4 @@
             #autosize="cdkTextareaAutosize"></textarea>
     </mat-form-field>
     <br>
-    <button mat-raised-button type="submit">提交</button>
-</form>
+    <button mat-raised-button type="submit" (click) = "save()">提交</button>

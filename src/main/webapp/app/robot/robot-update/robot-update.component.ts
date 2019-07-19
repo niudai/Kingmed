@@ -34,6 +34,7 @@ export class RobotUpdateComponent implements OnInit {
         } else {
             this.robotService.update(this.robot).subscribe();
         }
+        window.history.back();
     }
 
     onRobotFetchSuccess(robot: IRobot) {

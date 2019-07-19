@@ -1,8 +1,12 @@
+import { IRobot } from 'app/shared/model/robot.model';
+import { IRobot } from './../../shared/model/robot.model';
+import { HttpResponse } from '@angular/common/http';
 import { IRobotMessage, RobotMessage } from './../../shared/model/robot-message.model';
 import { RobotService } from './../robot.service';
 import { Component, OnInit, ViewChild, NgZone } from '@angular/core';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { take } from 'rxjs/operators';
+import { MatSelectionListChange } from '@angular/material';
 
 @Component({
     selector: 'jhi-robot-message',
@@ -10,6 +14,8 @@ import { take } from 'rxjs/operators';
     styles: []
 })
 export class RobotMessageComponent implements OnInit {
+    public robots: IRobot[];
+    public selectedRobots: IRobot[];
     public message: string;
     public title: string;
     public description: string;
@@ -26,6 +32,10 @@ export class RobotMessageComponent implements OnInit {
         protected robotService: RobotService,
         protected _ngZone: NgZone
     ) { }
+
+    onSelectionChange(selectionList: MatSelectionListChange) {
+        const selectedRobots = selectionList.source;
+    }
 
     triggerResize() {
         // Wait for changes to be applied, then trigger textarea resize.
@@ -74,9 +84,18 @@ export class RobotMessageComponent implements OnInit {
 
     ngOnInit() {
         this.messageBody = new RobotMessage();
-        this.req = {
-            key: 'a40d73df-6591-4eea-96a1-8fbe387d5aeb'
-        };
+        this.fetchRobot();
+    }
+
+    fetchRobot() {
+        this.robotService.query(
+            {
+                size: 20,
+                page: 0
+            }
+        ).subscribe( (res: HttpResponse<IRobot[]>) => {
+            this.robots = res.body;
+        });
     }
 
     sendText() {
@@ -89,6 +108,12 @@ export class RobotMessageComponent implements OnInit {
     }
 
     send() {
+        // var _robot: any;
+        // for (_robot in robots) {
+        //     this.req = {
+        //         key: _robot.
+        //     };
+        // }
         this.robotService.postMessage(this.messageBody, this.req)
         .subscribe();
     }
