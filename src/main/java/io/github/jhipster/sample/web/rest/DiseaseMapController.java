@@ -2,9 +2,15 @@ package io.github.jhipster.sample.web.rest;
 
 import io.github.jhipster.sample.domain.DiseaseBranch;
 import io.github.jhipster.sample.domain.DiseaseMap;
+import io.github.jhipster.sample.repository.search.UserSearchRepository;
 import io.github.jhipster.sample.service.DiseaseMapService;
+import io.github.jhipster.sample.web.rest.util.PaginationUtil;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,8 +49,10 @@ public class DiseaseMapController {
      * @return disease branches as a list
      */
     @GetMapping("/get-all-disease-branch")
-    public ResponseEntity<List<DiseaseBranch>> getAllDiseaseBranch() {
-        return ResponseEntity.ok().body(diseaseMapService.getAllDiseaseBranch());
+    public ResponseEntity<List<DiseaseBranch>> getAllDiseaseBranch(Pageable pageable) {
+        Page<DiseaseBranch> page = diseaseMapService.getAllDiseaseBranch(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "api/disease-map/get-all-disease-branch");
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
     @GetMapping("/get-disease-branch/{diseaseBranchId}")
@@ -156,6 +164,14 @@ public class DiseaseMapController {
     @PostMapping("/attach-disease-map-to-disease-map/{diseaseMapId}")
      public void attachDiseaseMapToDiseaseMap(@Valid @RequestBody DiseaseMap newDiseaseMap, @PathVariable Long diseaseMapId) {
         diseaseMapService.attachDiseaseMapToDiseaseMap(newDiseaseMap, diseaseMapId);
+    }
+
+    @GetMapping("/_search")
+    public ResponseEntity<List<DiseaseBranch>> search(@RequestParam String query, Pageable pageable) {
+        log.debug("REST request to search for a page of Users for query {}", query);
+        Page<DiseaseBranch> page = diseaseMapService.searchDiseaseBranch(query, pageable);
+        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/disease-map/_search");
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
 }

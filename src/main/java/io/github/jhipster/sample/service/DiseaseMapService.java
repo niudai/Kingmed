@@ -5,8 +5,14 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.elasticsearch.index.query.QueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.QueryStringQueryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import io.github.jhipster.sample.domain.DiseaseBranch;
 import io.github.jhipster.sample.domain.DiseaseMap;
@@ -20,6 +26,8 @@ import io.github.jhipster.sample.repository.DiseaseXiAnRepository;
 import io.github.jhipster.sample.repository.ImageApplicationRepository;
 import io.github.jhipster.sample.repository.ImageSuppliesRepository;
 import io.github.jhipster.sample.repository.QArobotRepository;
+import io.github.jhipster.sample.repository.search.DiseaseBranchSearchRepository;
+import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * DiseaseMapService used to associate disease map with diseasexian and qarobot.
@@ -35,13 +43,16 @@ public class DiseaseMapService {
     private final QArobotRepository qArobotRepository;
     private final DiseaseMapRepository diseaseMapRepository;
     private final DiseaseBranchRepository diseaseBranchRepository;
+    private final DiseaseBranchSearchRepository diseaseBranchSearchRepository;
 
     @Autowired
     public DiseaseMapService(
         DiseaseMapRepository diseaseMapRepository,
         DiseaseBranchRepository diseaseBranchRepository,
-        DiseaseXiAnRepository diseaseXiAnRepository
-        , QArobotRepository qArobotRepository) {
+        DiseaseXiAnRepository diseaseXiAnRepository,
+        DiseaseBranchSearchRepository diseaseBranchSearchRepository,
+        QArobotRepository qArobotRepository) {
+        this.diseaseBranchSearchRepository = diseaseBranchSearchRepository;
         this.diseaseXiAnRepository = diseaseXiAnRepository;
         this.diseaseMapRepository = diseaseMapRepository;
         this.qArobotRepository = qArobotRepository;
@@ -62,8 +73,9 @@ public class DiseaseMapService {
      * get All disease branch.
      * @return
      */
-    public List<DiseaseBranch> getAllDiseaseBranch() {
-        return diseaseBranchRepository.findAll();
+    public Page<DiseaseBranch> getAllDiseaseBranch(Pageable pageable) {
+        Page<DiseaseBranch> page =  diseaseBranchRepository.findAll(pageable);
+        return page;
     }
 
     /**
@@ -196,6 +208,13 @@ public class DiseaseMapService {
     @Transactional
     public void attachDiseaseMapToDiseaseMap(DiseaseMap newDiseaseMap, Long diseaseMapId) {
         diseaseMapRepository.findById(diseaseMapId).get().getDiseaseMaps().add(newDiseaseMap);
+    }
+
+    @Transactional
+    public Page<DiseaseBranch> searchDiseaseBranch(String query, Pageable pageable) {
+        // Page<DiseaseBranch> page = diseaseBranchSearchRepository.search(QueryBuilders.queryStringQuery(query), pageable);
+        Page<DiseaseBranch> page = diseaseBranchSearchRepository.search(QueryBuilders.queryStringQuery(query), pageable);
+        return page;
     }
 
 }

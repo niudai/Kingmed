@@ -125,6 +125,7 @@ public class ImageApplicationService {
 
     @Transactional
     public Page<ImageApplication> search(Pageable pageable, String query) {
+        // Page<ImageApplication> page = imageApplicationSearchRepository.search(QueryBuilders.queryStringQuery(query), pageable);
         Page<ImageApplication> page = imageApplicationSearchRepository.search(QueryBuilders.queryStringQuery(query), pageable);
         return page;
     }
