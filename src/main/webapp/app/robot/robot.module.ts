@@ -1,4 +1,4 @@
-import { RobotMessageComponent } from './robot-message/robot-message.component';
+import { RobotMessageComponent, RobotMessageDeleteDialogComponent } from './robot-message/robot-message.component';
 import { ROBOT_ROUTE } from './robot.route';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -13,10 +13,14 @@ import { RobotUpdateComponent } from './robot-update/robot-update.component';
 @NgModule({
     declarations: [
         RobotMessageComponent,
-        RobotUpdateComponent
+        RobotUpdateComponent,
+        RobotMessageDeleteDialogComponent
     ],
     imports: [
         JhipsterElasticsearchSampleApplicationSharedModule, RouterModule.forChild(ROBOT_ROUTE)
+    ],
+    entryComponents: [
+        RobotMessageDeleteDialogComponent
     ],
     providers: [
         { provide: JhiLanguageService, useClass: JhiLanguageService },

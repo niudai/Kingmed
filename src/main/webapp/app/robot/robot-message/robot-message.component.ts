@@ -1,12 +1,11 @@
-import { IRobot } from 'app/shared/model/robot.model';
 import { IRobot } from './../../shared/model/robot.model';
 import { HttpResponse } from '@angular/common/http';
 import { IRobotMessage, RobotMessage } from './../../shared/model/robot-message.model';
 import { RobotService } from './../robot.service';
-import { Component, OnInit, ViewChild, NgZone } from '@angular/core';
+import { Component, OnInit, ViewChild, NgZone, Inject } from '@angular/core';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { take } from 'rxjs/operators';
-import { MatSelectionListChange } from '@angular/material';
+import { MatSelectionListChange, MatListOption, MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 
 @Component({
     selector: 'jhi-robot-message',
@@ -14,6 +13,7 @@ import { MatSelectionListChange } from '@angular/material';
     styles: []
 })
 export class RobotMessageComponent implements OnInit {
+    s: String;
     public robots: IRobot[];
     public selectedRobots: IRobot[];
     public message: string;
@@ -30,11 +30,15 @@ export class RobotMessageComponent implements OnInit {
 
     constructor(
         protected robotService: RobotService,
-        protected _ngZone: NgZone
+        protected _ngZone: NgZone,
+        protected dialog: MatDialog
     ) { }
 
     onSelectionChange(selectionList: MatSelectionListChange) {
-        const selectedRobots = selectionList.source;
+        // this.selectedRobots[0] = selectionList.source.selectedOptions.selected[0].value;
+        this.selectedRobots = selectionList.source.selectedOptions.selected.map(
+            (any: MatListOption) => any.value
+        );
     }
 
     triggerResize() {
@@ -93,7 +97,7 @@ export class RobotMessageComponent implements OnInit {
                 size: 20,
                 page: 0
             }
-        ).subscribe( (res: HttpResponse<IRobot[]>) => {
+        ).subscribe((res: HttpResponse<IRobot[]>) => {
             this.robots = res.body;
         });
     }
@@ -108,14 +112,42 @@ export class RobotMessageComponent implements OnInit {
     }
 
     send() {
-        // var _robot: any;
-        // for (_robot in robots) {
-        //     this.req = {
-        //         key: _robot.
-        //     };
-        // }
-        this.robotService.postMessage(this.messageBody, this.req)
-        .subscribe();
+        for (const robot of this.selectedRobots) {
+            this.robotService.postMessage(this.messageBody, robot.webhookUrl)
+                .subscribe();
+        }
+    }
+
+    delete(_id: number) {
+        const dialogRef = this.dialog.open(RobotMessageDeleteDialogComponent, {
+            width: '250px',
+            data: {id: _id}
+          });
+          dialogRef.afterClosed().subscribe(result => {
+            console.log('The dialog was closed');
+          });
+    }
+
+}
+
+@Component({
+    selector: 'jhi-robot-message-delete-dialog',
+    templateUrl: './robot-message-delete-dialog.component.html',
+})
+export class RobotMessageDeleteDialogComponent {
+
+    constructor(
+        public dialogRef: MatDialogRef<RobotMessageDeleteDialogComponent>,
+        @Inject(MAT_DIALOG_DATA) public data,
+        protected robotService: RobotService) { }
+
+    confirmDelete() {
+        this.robotService.delete(this.data.id).subscribe();
+        this.onNoClick();
+    }
+
+    onNoClick(): void {
+        this.dialogRef.close();
     }
 
 }

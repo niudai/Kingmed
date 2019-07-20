@@ -19,12 +19,12 @@ export class RobotService {
 
     }
 
-    postMessage(body: IRobotMessage, para?: any) {
+    postMessage(body: IRobotMessage, url: string) {
         const _headers = new HttpHeaders({
             'Content-Type':  'application/x-www-form-urlencoded'
         });
-        const option = createRequestOption(para);
-        return this.http.post<any>(WXROBOT_URL, body, { headers: _headers,  params: option, observe: 'response'});
+        // const option = createRequestOption(para);
+        return this.http.post<any>(url, body, { headers: _headers, observe: 'response'});
     }
 
     create(label: IRobot): Observable<KinResponseEntity> {

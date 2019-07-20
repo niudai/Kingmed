@@ -1,10 +1,37 @@
-    <mat-form-field class="example-full-width">
-        <input matInput placeholder="机器人名称" [(ngModel)]="robot.robotName">
-    </mat-form-field>
-    <br>
-    <mat-form-field class="example-full-width">
-        <textarea matInput placeholder="机器人WebhookUrl" [(ngModel)]="robot.webhookUrl" cdkTextareaAutosize
-            #autosize="cdkTextareaAutosize"></textarea>
-    </mat-form-field>
-    <br>
-    <button mat-raised-button type="submit" (click) = "save()">提交</button>
+
+    <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                管理已注册的机器人
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <mat-card *ngFor="let robot of robots">
+                {{robot.robotName}}
+                <button mat-mini-fab (click)="delete(robot.id)">
+                    <fa-icon [icon] = "'times'"></fa-icon>
+                </button>
+            </mat-card>
+
+          </mat-expansion-panel>
+
+    <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      注册新机器人
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+
+                  <mat-form-field class="example-full-width">
+                        <input matInput placeholder="机器人名称" [(ngModel)]="robot.robotName">
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field class="example-full-width">
+                        <textarea matInput placeholder="机器人WebhookUrl" [(ngModel)]="robot.webhookUrl" cdkTextareaAutosize
+                            #autosize="cdkTextareaAutosize"></textarea>
+                    </mat-form-field>
+                    <br>
+                    <button mat-raised-button type="submit" (click) = "save()">提交</button>
+
+                </mat-expansion-panel>
+
