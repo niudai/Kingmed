@@ -1,3 +1,4 @@
+import { MatPaginatorIntl } from '@angular/material';
 import { DiseaseXiAnDeleteDialogComponent, QArobotDeleteDialogComponent, DiseaseBranchModifyDialogComponent } from './disease-map/disease-map.component';
 import { RouterModule } from '@angular/router';
 import { DiseaseMapAssociateQArobotComponent } from './disease-map-associate-q-arobot/disease-branch-map-associate-q-arobot.component';
@@ -12,8 +13,9 @@ import { DiseaseBranchCreateDiseaseMapComponent } from './disease-branch-create-
 import { SERIVCE_ROUTE } from './disease-map.route';
 import { JhiLanguageService } from 'ng-jhipster';
 import { JhiLanguageHelper } from 'app/core';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { Paginator } from 'app/shared/paginator/paginator';
 
 @NgModule({
     imports: [
@@ -52,9 +54,11 @@ import { ReactiveFormsModule } from '@angular/forms';
         , QArobotDeleteDialogComponent
     ],
     providers: [
-        { provide: JhiLanguageService, useClass: JhiLanguageService }// schemas: [CUSTOM_ELEMENTS_SCHEMA]
-    ]
-    })
+        { provide: JhiLanguageService, useClass: JhiLanguageService }]
+        // { provide: MatPaginatorIntl, useClass: Paginator}], // schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    // schemas: [CUSTOM_ELEMENTS_SCHEMA]
+})
+
 export class DiseaseMapModule {
     constructor(private languageService: JhiLanguageService, private languageHelper: JhiLanguageHelper) {
         this.languageHelper.language.subscribe((languageKey: string) => {

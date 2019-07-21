@@ -1,8 +1,10 @@
+import { PageEvent } from '@angular/material';
 import { IDiseaseBranch } from './../../shared/model/disease-branch.model';
 import { DiseaseMapService } from './../disease-map.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router, ActivatedRoute } from '@angular/router';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
     selector: 'jhi-disease-branch',
@@ -10,6 +12,10 @@ import { Router, ActivatedRoute } from '@angular/router';
     styleUrls: ['./disease-branch.component.css']
 })
 export class DiseaseBranchComponent implements OnInit {
+    DEFAULT_PAGESIZE = 8;
+    protected totalItems: number;
+    currentSearch: string;
+    pageEvent: PageEvent;
 
     public diseaseBranches: IDiseaseBranch[];
 
@@ -18,9 +24,37 @@ export class DiseaseBranchComponent implements OnInit {
         , protected router: Router
         , protected route: ActivatedRoute) { }
 
+    load() {
+        if (this.currentSearch) {
+            this.diseaseMapService.searchDiseaseBranch(
+                {
+                    query: this.currentSearch,
+                    page: this.pageEvent && this.pageEvent.pageIndex ? this.pageEvent.pageIndex : 0,
+                    size: this.pageEvent && this.pageEvent.pageSize ? this.pageEvent.pageSize : this.DEFAULT_PAGESIZE
+                }
+            ).subscribe((res: HttpResponse<IDiseaseBranch[]>) => this.loadSuccessHandler(res));
+        } else {
+            this.diseaseMapService.getAllDiseaseBranch(
+                {
+                    page: this.pageEvent && this.pageEvent.pageIndex ? this.pageEvent.pageIndex : 0,
+                    size: this.pageEvent && this.pageEvent.pageSize ? this.pageEvent.pageSize : this.DEFAULT_PAGESIZE
+                }
+            ).subscribe((res: HttpResponse<IDiseaseBranch[]>) => this.loadSuccessHandler(res));
+        }
+    }
+
+    paginate($event: PageEvent) {
+        this.pageEvent = $event;
+        this.load();
+    }
+
+    loadSuccessHandler(res: HttpResponse<IDiseaseBranch[]>) {
+        this.diseaseBranches = res.body;
+        this.totalItems = +res.headers.get('X-Total-Count');
+    }
+
     ngOnInit() {
-        this.diseaseMapService.getAllDiseaseBranch()
-        .subscribe(res => this.diseaseBranches = res);
+        this.load();
     }
 
     open(diseaseBranch: IDiseaseBranch) {
@@ -32,16 +66,10 @@ export class DiseaseBranchComponent implements OnInit {
         modalRef.componentInstance.name = diseaseBranch.name;
         modalRef.result.then(
             result => {
-                this.diseaseMapService.getAllDiseaseBranch()
-                    .subscribe(res => this.diseaseBranches = res);
-                this.router.navigate(['./'], { relativeTo: this.route });
-                this.router.navigate(['/']);
+                this.load();
             },
             reason => {
-                this.diseaseMapService.getAllDiseaseBranch()
-                    .subscribe(res => this.diseaseBranches = res);
-                this.router.navigate(['./'], { relativeTo: this.route });
-                // this.router.navigate(['/']);
+                this.load();
             }
         );
     }
@@ -64,6 +92,10 @@ export class DiseaseBranchDeleteModalComponent {
     confirmDelete() {
         this.diseaseMapService.deattachDiseaseBranch(this.id)
             .subscribe(any => this.activeModal.dismiss(true));
+    }
+
+    cancel() {
+        this.activeModal.close();
     }
 
     previousState() {

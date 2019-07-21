@@ -1,4 +1,4 @@
-import { MatPaginator, MatPaginatorIntl } from '@angular/material';
+import { MatPaginatorIntl } from '@angular/material';
 
 export class Paginator extends MatPaginatorIntl {
   constructor() {

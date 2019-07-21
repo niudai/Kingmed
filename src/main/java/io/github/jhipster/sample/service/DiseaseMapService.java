@@ -67,6 +67,7 @@ public class DiseaseMapService {
     @Transactional
     public void attachDiseaseBranch(DiseaseBranch newDiseaseBranch) {
         diseaseBranchRepository.save(newDiseaseBranch);
+        diseaseBranchSearchRepository.save(newDiseaseBranch);
     }
 
     /**
@@ -105,6 +106,7 @@ public class DiseaseMapService {
     @Transactional
     public void deattachDiseaseBranch(Long diseaseBranchId) {
         diseaseBranchRepository.deleteById(diseaseBranchId);
+        diseaseBranchSearchRepository.deleteById(diseaseBranchId);
     }
 
     /**
@@ -136,10 +138,9 @@ public class DiseaseMapService {
             .findById(diseaseBranch.getId()).get();
         if (diseaseBranch.getDiseaseMaps() == null) {
             diseaseBranch.setDiseaseMaps(_diseaseBranch.getDiseaseMaps());
-            diseaseBranchRepository.save(diseaseBranch);
-        } else {
-            diseaseBranchRepository.save(diseaseBranch);
         }
+        diseaseBranchRepository.save(diseaseBranch);
+        diseaseBranchSearchRepository.save(diseaseBranch);
     }
 
     /**
@@ -215,6 +216,12 @@ public class DiseaseMapService {
         // Page<DiseaseBranch> page = diseaseBranchSearchRepository.search(QueryBuilders.queryStringQuery(query), pageable);
         Page<DiseaseBranch> page = diseaseBranchSearchRepository.search(QueryBuilders.queryStringQuery(query), pageable);
         return page;
+    }
+
+    @Transactional
+    public void reindexDiseaseBranch() {
+        diseaseBranchSearchRepository.deleteAll();
+        diseaseBranchSearchRepository.saveAll(diseaseBranchRepository.findAll());
     }
 
 }

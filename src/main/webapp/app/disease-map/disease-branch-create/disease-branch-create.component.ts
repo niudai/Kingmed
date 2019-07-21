@@ -18,7 +18,7 @@ export class DiseaseBranchCreateComponent implements OnInit {
         if (this.route.snapshot.paramMap.get('diseaseBranchId')) {
             const id = +this.route.snapshot.paramMap.get('diseaseBranchId');
             this.diseaseMapService.getDiseaseBranch(id)
-                .subscribe(diseaseBranch => this.diseaseBranch = diseaseBranch);
+                .subscribe(diseaseBranch => this.diseaseBranch = diseaseBranch.body);
         } else {
             this.diseaseBranch = new DiseaseBranch();
         }

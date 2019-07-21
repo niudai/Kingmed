@@ -6,6 +6,10 @@ import { Observable } from 'rxjs';
 import { IFile } from 'app/shared/model/file.model';
 import { map } from 'rxjs/operators';
 import { DiseaseMap, IDiseaseMap } from 'app/shared/model/disease-map.model';
+import { createRequestOption } from 'app/shared';
+
+type BranchResponseType = HttpResponse<DiseaseBranch>;
+type BranchResponseArrayType = HttpResponse<DiseaseBranch[]>;
 
 @Injectable({
     providedIn: 'root'
@@ -21,12 +25,13 @@ export class DiseaseMapService {
         return this.http.post<any>(`${this.diseaseMapUrl}/attach-disease-branch`, diseaseBranch, { observe: 'body' });
     }
 
-    getAllDiseaseBranch() {
-        return this.http.get<DiseaseBranch[]>(`${this.diseaseMapUrl}/get-all-disease-branch`, { observe: 'body'});
+    getAllDiseaseBranch(req: any): Observable<BranchResponseArrayType> {
+        const _params = createRequestOption(req);
+        return this.http.get<IDiseaseBranch[]>(`${this.diseaseMapUrl}/get-all-disease-branch`, { params:  _params, observe: 'response'});
     }
 
-    getDiseaseBranch(diseaseBranchId: number) {
-        return this.http.get<DiseaseBranch>(`${this.diseaseMapUrl}/get-disease-branch/${diseaseBranchId}`, { observe: 'body'});
+    getDiseaseBranch(diseaseBranchId: number): Observable<BranchResponseType> {
+        return this.http.get<IDiseaseBranch>(`${this.diseaseMapUrl}/get-disease-branch/${diseaseBranchId}`, { observe: 'response'});
     }
 
     getAllDiseaseMap(diseaseBranchId: number) {
@@ -71,6 +76,11 @@ export class DiseaseMapService {
 
     modifyDiseaseBranch(diseaseBranch: IDiseaseBranch) {
         return this.http.put<any>(`${this.diseaseMapUrl}/modify-disease-branch`, diseaseBranch, {observe: 'response'});
+    }
+
+    searchDiseaseBranch(req: any): Observable<BranchResponseArrayType> {
+        const _params = createRequestOption(req);
+        return this.http.get<IDiseaseBranch[]>(`${this.diseaseMapUrl}/_search`, { params: _params, observe: 'response' });
     }
 
 }

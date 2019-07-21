@@ -1,5 +1,30 @@
 <div class="container col-12">
-    <button mat-raised-button color="primary" *jhiHasAnyAuthority="'ROLE_ADMIN'" [routerLink]="'attach-disease-branch'">创建一份新地图</button>
+    <!-- <button mat-raised-button color="primary" *jhiHasAnyAuthority="'ROLE_ADMIN'" [routerLink]="'attach-disease-branch'">创建一份新地图</button> -->
+    <div class="row">
+            <mat-card class="col-sm-12">
+                <form name="searchForm" class="form-inline col-sm-6">
+                    <div class="input-group w-100 mt-3">
+                        <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch"
+                            name="currentSearch"
+                            placeholder="搜索疾病地图">
+                        <button mat-raised-button class="input-group-append" color="warn" (click)="load()">
+                            <fa-icon [icon]="'search'"></fa-icon>
+                        </button>
+                    </div>
+                </form>
+                <div>
+                    <button *jhiHasAnyAuthority="'ROLE_ADMIN'" mat-raised-button color="accent" id="jh-create-entity"
+                        class="float-right jh-create-entity create-q-arobot" [routerLink]="'attach-disease-branch'">
+                        <fa-icon [icon]="'plus'"></fa-icon>
+                        <span class="hidden-sm-down">
+                            创建一份新地图
+                        </span>
+                    </button>
+                </div>
+
+            </mat-card>
+
+        </div>
     <div class="row">
         <div *ngFor="let diseaseBranch of diseaseBranches" class="card col-sm-3">
                 <mat-card class="example-card">
@@ -26,6 +51,9 @@
             </div> -->
         </div>
     </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="DEFAULT_PAGESIZE" [length]="totalItems" showFirstLastButtons
+        (page)="paginate($event)">
+    </mat-paginator>
 </div>
 
 

@@ -174,4 +174,11 @@ public class DiseaseMapController {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
+    @GetMapping("/reindex")
+    public ResponseEntity<Void> reindexDiseaseBranch() {
+        log.debug("REST request to search for a page of Users for query {}");
+        diseaseMapService.reindexDiseaseBranch();
+        return ResponseEntity.ok().build();
+    }
+
 }

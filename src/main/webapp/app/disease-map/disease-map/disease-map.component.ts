@@ -107,7 +107,7 @@ export class DiseaseMapComponent implements OnInit {
         this.diseaseMapService.getAllDiseaseMap(this.id)
             .subscribe(diseaseMaps => this.dataSource.data = diseaseMaps);
         this.diseaseMapService.getDiseaseBranch(this.id)
-            .subscribe(diseaseBranch => this.diseaseBranch = diseaseBranch);
+            .subscribe(diseaseBranch => this.diseaseBranch = diseaseBranch.body);
     }
 
     previousState() {
