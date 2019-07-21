@@ -292,6 +292,9 @@
             <button mat-raised-button color="primary" [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'suppliess']">
                 <fa-icon [icon]="'magic'"></fa-icon>&nbsp;<span>耗材图片</span>
             </button>
+            <button mat-raised-button style = "background-color: aquamarine" [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'diseases']">
+                <fa-icon [icon]="'book-medical'"></fa-icon>&nbsp;<span>相关项目</span>
+            </button>
             <hr>
             <button mat-raised-button *jhiHasAnyAuthority="'ROLE_ADMIN'"
                 [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'edit']">

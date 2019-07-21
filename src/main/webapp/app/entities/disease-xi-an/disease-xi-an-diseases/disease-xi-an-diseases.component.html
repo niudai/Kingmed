@@ -1,0 +1,27 @@
+<div class="row justify-content-center">
+    <mat-expansion-panel style = "width: 95%">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <fa-icon [icon]="'book-medical'"></fa-icon>
+                相关项目
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+                <mat-card matRipple *ngFor="let disease of diseases">
+                    <button mat-raised-button style="background-color: cornsilk" disabled><span
+                            style="color: cadetblue">{{disease.id}}</span>
+                    </button>
+                    <fa-icon [icon]="'book-medical'" style="color: darkturquoise"></fa-icon>
+                    <a [routerLink]="['/disease-xi-an', disease.id, 'view']">{{disease.name}}</a>
+                    <fa-icon [icon]="'chevron-right'"></fa-icon>
+                    <button mat-raised-button style="background-color: cornsilk" disabled><span
+                            style="color: cadetblue">{{disease.subsidiary}}</span> -
+                        {{disease.projectCode}}
+                    </button>
+                    <button mat-mini-fab color="warn" *jhiHasAnyAuthority="'ROLE_ADMIN'"
+                        (click)="deassociateWithDiseaseXiAn(id, disease.id)">
+                        <fa-icon [icon]="'times'"></fa-icon>
+                    </button>
+                </mat-card>
+    </mat-expansion-panel>
+</div>
+<button mat-raised-button (click)="associateWithDiseaseXiAn()" [color]="'accent'" *jhiHasAnyAuthority="'ROLE_ADMIN'">关联新项目</button>

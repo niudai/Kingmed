@@ -61,6 +61,22 @@ export class DiseaseXiAnService {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }
 
+    ////////////// Disease Xi An //////////////////////
+
+    getDiseases(id: number): Observable<HttpResponse<IQArobot[]>> {
+        return this.http.get<IDiseaseXiAn[]>(`${this.resourceUrl}/diseases-of-disease/${id}`, { observe: 'response'});
+    }
+
+    associateWithDisease(ownId: number, reversedId: number) {
+        return this.http.get<any>(`${this.resourceUrl}/associate-with-disease/${ownId}/${reversedId}`, { observe: 'response'});
+    }
+
+    deassociateWithDisease(ownId: number, reversedId: number) {
+        if (ownId !== reversedId) {
+            return this.http.get<any>(`${this.resourceUrl}/deassociate-with-disease/${ownId}/${reversedId}`, { observe: 'response'});
+        }
+    }
+
     ////////////// QArobot ////////////////////////
 
     getQArobot(id: number): Observable<HttpResponse<IQArobot[]>> {

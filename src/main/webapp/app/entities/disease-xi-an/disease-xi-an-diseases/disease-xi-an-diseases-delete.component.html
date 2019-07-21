@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>{{data.title}}</h1>
+<div mat-dialog-content>
+  <p><span class = "text-primary">{{data.description}}</span></p>
+  <mat-form-field *ngIf="data.input">
+    <input matInput [(ngModel)]="data.id">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">取消</button>
+  <button mat-button  (click)="confirmDelete()" cdkFocusInitial>确定</button>
+</div>

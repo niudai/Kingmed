@@ -29,6 +29,7 @@ import { IPriceXiAn } from 'app/shared/model/price-xi-an.model';
 import { DiseaseXiAnPricesComponent } from './disease-xi-an-prices/disease-xi-an-prices.component';
 import { DiseaseXiAnPricesUpdateComponent } from './disease-xi-an-prices-update/disease-xi-an-prices-update.component';
 import { DiseaseXiAnQarobotsComponent } from './disease-xi-an-qarobots/disease-xi-an-qarobots.component';
+import { DiseaseXiAnDiseasesComponent } from './disease-xi-an-diseases/disease-xi-an-diseases.component';
 @Injectable({ providedIn: 'root' })
 export class DiseaseXiAnResolve implements Resolve<IDiseaseXiAn> {
     constructor(private service: DiseaseXiAnService) {}
@@ -136,6 +137,16 @@ export const diseaseXiAnRoute: Routes = [
             pageTitle: 'jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.home.title'
         },
         canActivate: [UserRouteAccessService]
+    },
+    {
+        path: ':id/diseases',
+        component: DiseaseXiAnDiseasesComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+
     },
     {
         path: ':id/applications',
