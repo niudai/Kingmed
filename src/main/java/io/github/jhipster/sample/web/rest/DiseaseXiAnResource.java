@@ -132,6 +132,46 @@ public class DiseaseXiAnResource {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
+    /******************************* Many To Many relationship between disease and disease **************/
+
+    /**
+     * Associate a disease xi an with a disease xi an
+     * @param ownId
+     * @param inversedId
+     * @return ok 200
+     */
+    @GetMapping("/disease-xi-ans/associate-with-disease/{ownId}/{inversedId}")
+    public ResponseEntity<Void> associateWithDiseaseXiAn(@PathVariable Long ownId
+        , @PathVariable Long inversedId) {
+
+        diseaseXiAnService.associateWithDiseaseXiAn(ownId, inversedId);
+        return ResponseEntity.ok().build();
+    }
+
+    /**
+     * De associate a disease with a disease xi an
+     * @param diseaseId
+     * @param qarobotId
+     * @return ok 200
+     */
+    @GetMapping("/disease-xi-ans/deassociate-with-disease/{diseaseId}/{qarobotId}")
+    public ResponseEntity<Void> deassociateWithDiseaseXiAn(@PathVariable Long diseaseId
+        , @PathVariable Long qarobotId) {
+
+        diseaseXiAnService.deassociateWithDiseaseXiAn(diseaseId, qarobotId);
+        return ResponseEntity.ok().build();
+    }
+
+    /**
+     * get associated diseasexian of disease
+     * @param id id of disease
+     * @return ok 200
+     */
+    @GetMapping("/disease-xi-ans/diseases-of-disease/{id}")
+    public ResponseEntity<Collection<DiseaseXiAn>> getDiseaseXiAnsOfDisease(@PathVariable Long id) {
+        return ResponseEntity.ok().body(diseaseXiAnService.findDiseaseXiAnsOfDiseaseXiAn(id));
+    }
+
     /******************************* Many To Many relationship between disease and application **************/
 
     /**

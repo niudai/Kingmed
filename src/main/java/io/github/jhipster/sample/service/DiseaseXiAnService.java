@@ -1,10 +1,12 @@
 package io.github.jhipster.sample.service;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import io.github.jhipster.sample.domain.DiseaseXiAn;
@@ -40,6 +42,12 @@ public class DiseaseXiAnService {
         this.diseaseXiAnRepository = diseaseXiAnRepository;
         this.qArobotRepository = qArobotRepository;
     }
+
+    // @Transactional
+    // public List<DiseaseXiAn> findSimilarDiseaseXiAn(DiseaseXiAn diseaseXiAn, Pageable pageable) {
+    //     diseaseXiAnRepository.f
+    //     return diseaseXiAnSearchRepository.searchSimilar(entity, fields, pageable)
+    // }
 
     /********************* QArobot ***********/
     @Transactional
@@ -118,5 +126,26 @@ public class DiseaseXiAnService {
         DiseaseXiAn diseaseXiAn = diseaseXiAnRepository.findById(id).get();
         diseaseXiAn.getSuppliess().size();
         return diseaseXiAn.getSuppliess();
+    }
+
+    /********************* DiseaseXiAn ***********/
+    @Transactional
+    public Collection<DiseaseXiAn> findDiseaseXiAnsOfDiseaseXiAn(Long id) {
+        DiseaseXiAn diseaseXiAn = diseaseXiAnRepository.findById(id).get();
+        diseaseXiAn.getDiseaseXiAns().size();
+        return diseaseXiAn.getDiseaseXiAns();
+    }
+
+    @Transactional
+    public void associateWithDiseaseXiAn(Long ownId, Long reversedId) {
+        DiseaseXiAn ownDiseaseXiAn = diseaseXiAnRepository.findById(ownId).get();
+        DiseaseXiAn reversedDiseaseXiAn = diseaseXiAnRepository.findById(reversedId).get();
+        ownDiseaseXiAn.getDiseaseXiAns().add(reversedDiseaseXiAn);
+    }
+
+    @Transactional
+    public void deassociateWithDiseaseXiAn(Long ownId, Long reversedId) {
+        DiseaseXiAn diseaseXiAn = diseaseXiAnRepository.findById(ownId).get();
+        diseaseXiAn.getDiseaseXiAns().remove(diseaseXiAnRepository.findById(reversedId).get());
     }
 }
