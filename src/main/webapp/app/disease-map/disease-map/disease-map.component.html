@@ -1,4 +1,4 @@
-<mat-card>{{diseaseBranch.name}}
+<mat-card *ngIf="diseaseBranch">{{diseaseBranch.name}}
     <button mat-mini-fab color="primary" *jhiHasAnyAuthority="'ROLE_ADMIN'" (click)="openBranchBottomSheet()"
         class="add">+</button>
     <button mat-raised-button (click)="previousTreeControl()" class="nav-back">
