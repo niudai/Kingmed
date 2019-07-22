@@ -21,6 +21,7 @@ import java.util.Set;
 @Entity
 @Table(name = "disease_map")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@Document(indexName = "diseasemap")
 public class DiseaseMap implements Serializable {
 
     private static final long serialVersionUID = 1L;

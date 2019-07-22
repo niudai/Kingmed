@@ -48,11 +48,21 @@ public class DiseaseMapController {
      * get all disease branches.
      * @return disease branches as a list
      */
-    @GetMapping("/get-all-disease-branch")
-    public ResponseEntity<List<DiseaseBranch>> getAllDiseaseBranch(Pageable pageable) {
-        Page<DiseaseBranch> page = diseaseMapService.getAllDiseaseBranch(pageable);
+    @GetMapping("/get-all-disease-branch-pageable")
+    public ResponseEntity<List<DiseaseBranch>> getAllDiseaseBranchPageable(Pageable pageable) {
+        Page<DiseaseBranch> page = diseaseMapService.getAllDiseaseBranchP(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "api/disease-map/get-all-disease-branch");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
+     * get all disease branches.
+     * @return disease branches as a list
+     */
+    @GetMapping("/get-all-disease-branch")
+    public ResponseEntity<List<DiseaseBranch>> getAllDiseaseBranch() {
+        List<DiseaseBranch> page = diseaseMapService.getAllDiseaseBranch();
+        return ResponseEntity.ok().body(page);
     }
 
     @GetMapping("/get-disease-branch/{diseaseBranchId}")
@@ -166,18 +176,33 @@ public class DiseaseMapController {
         diseaseMapService.attachDiseaseMapToDiseaseMap(newDiseaseMap, diseaseMapId);
     }
 
-    @GetMapping("/_search")
-    public ResponseEntity<List<DiseaseBranch>> search(@RequestParam String query, Pageable pageable) {
-        log.debug("REST request to search for a page of Users for query {}", query);
+    @GetMapping("/_search-disease-branch")
+    public ResponseEntity<List<DiseaseBranch>> searchBranch(@RequestParam String query, Pageable pageable) {
+        log.debug("REST request to search for a page of Branch for query {}", query);
         Page<DiseaseBranch> page = diseaseMapService.searchDiseaseBranch(query, pageable);
-        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/disease-map/_search");
+        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/disease-map/_search-disease-branch");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
-    @GetMapping("/reindex")
+    @GetMapping("/_search-disease-map")
+    public ResponseEntity<List<DiseaseMap>> searchMap(@RequestParam String query, Pageable pageable) {
+        log.debug("REST request to search for a page of Map for query {}", query);
+        Page<DiseaseMap> page = diseaseMapService.searchDiseaseMap(query, pageable);
+        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/disease-map/_search-disease-map");
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    @GetMapping("/reindex-disease-branch")
     public ResponseEntity<Void> reindexDiseaseBranch() {
-        log.debug("REST request to search for a page of Users for query {}");
+        log.debug("REST request to search for a page of DisaseBranch for query {}");
         diseaseMapService.reindexDiseaseBranch();
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/reindex-disease-map")
+    public ResponseEntity<Void> reindexDiseaseMap() {
+        log.debug("REST request to search for a page of DiseaseMap for query {}");
+        diseaseMapService.reindexDiseaseMap();
         return ResponseEntity.ok().build();
     }
 

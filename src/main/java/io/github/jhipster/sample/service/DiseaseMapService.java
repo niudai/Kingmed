@@ -27,6 +27,8 @@ import io.github.jhipster.sample.repository.ImageApplicationRepository;
 import io.github.jhipster.sample.repository.ImageSuppliesRepository;
 import io.github.jhipster.sample.repository.QArobotRepository;
 import io.github.jhipster.sample.repository.search.DiseaseBranchSearchRepository;
+import io.github.jhipster.sample.repository.search.DiseaseMapSearchRepository;
+
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
@@ -44,14 +46,16 @@ public class DiseaseMapService {
     private final DiseaseMapRepository diseaseMapRepository;
     private final DiseaseBranchRepository diseaseBranchRepository;
     private final DiseaseBranchSearchRepository diseaseBranchSearchRepository;
-
+    private final DiseaseMapSearchRepository diseaseMapSearchRepository;
     @Autowired
     public DiseaseMapService(
         DiseaseMapRepository diseaseMapRepository,
         DiseaseBranchRepository diseaseBranchRepository,
         DiseaseXiAnRepository diseaseXiAnRepository,
         DiseaseBranchSearchRepository diseaseBranchSearchRepository,
+        DiseaseMapSearchRepository diseaseMapSearchRepository,
         QArobotRepository qArobotRepository) {
+        this.diseaseMapSearchRepository = diseaseMapSearchRepository;
         this.diseaseBranchSearchRepository = diseaseBranchSearchRepository;
         this.diseaseXiAnRepository = diseaseXiAnRepository;
         this.diseaseMapRepository = diseaseMapRepository;
@@ -74,8 +78,17 @@ public class DiseaseMapService {
      * get All disease branch.
      * @return
      */
-    public Page<DiseaseBranch> getAllDiseaseBranch(Pageable pageable) {
+    public Page<DiseaseBranch> getAllDiseaseBranchPageable(Pageable pageable) {
         Page<DiseaseBranch> page =  diseaseBranchRepository.findAll(pageable);
+        return page;
+    }
+
+    /**
+     * get All disease branch.
+     * @return
+     */
+    public List<DiseaseBranch> getAllDiseaseBranch() {
+        List<DiseaseBranch> page =  diseaseBranchRepository.findAll();
         return page;
     }
 
@@ -219,9 +232,22 @@ public class DiseaseMapService {
     }
 
     @Transactional
+    public Page<DiseaseMap> searchDiseaseMap(String query, Pageable pageable) {
+        // Page<DiseaseBranch> page = diseaseBranchSearchRepository.search(QueryBuilders.queryStringQuery(query), pageable);
+        Page<DiseaseMap> page = diseaseMapSearchRepository.search(QueryBuilders.queryStringQuery(query), pageable);
+        return page;
+    }
+
+    @Transactional
     public void reindexDiseaseBranch() {
         diseaseBranchSearchRepository.deleteAll();
         diseaseBranchSearchRepository.saveAll(diseaseBranchRepository.findAll());
+    }
+
+    @Transactional
+    public void reindexDiseaseMap() {
+        diseaseMapSearchRepository.deleteAll();
+        diseaseMapSearchRepository.saveAll(diseaseMapRepository.findAll());
     }
 
 }
