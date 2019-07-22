@@ -168,7 +168,7 @@ public class DiseaseXiAnResource {
      * @return ok 200
      */
     @GetMapping("/disease-xi-ans/diseases-of-disease/{id}")
-    public ResponseEntity<Collection<DiseaseXiAn>> getDiseaseXiAnsOfDisease(@PathVariable Long id) {
+    public ResponseEntity<List<DiseaseXiAn>> getDiseaseXiAnsOfDisease(@PathVariable Long id) {
         return ResponseEntity.ok().body(diseaseXiAnService.findDiseaseXiAnsOfDiseaseXiAn(id));
     }
 

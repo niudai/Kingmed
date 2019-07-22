@@ -47,10 +47,9 @@ public class DiseaseXiAn implements Serializable {
         , inverseJoinColumns = @JoinColumn(name = "related_disease_xi_an_id", referencedColumnName = "id"))
     private Set<DiseaseXiAn> diseaseXiAns = new HashSet<>();
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(name = "disease_xi_an_disease_xi_an"
-        , joinColumns = @JoinColumn(name = "disease_xi_an_id", referencedColumnName = "id")
-        , inverseJoinColumns = @JoinColumn(name = "related_disease_xi_an_id", referencedColumnName = "id"))
+    @ManyToMany(mappedBy = "qarobots"
+        , fetch = FetchType.LAZY
+        , cascade = CascadeType.PERSIST)
     private Set<DiseaseXiAn> reversedDiseaseXiAns = new HashSet<>();
 
     @ManyToMany(cascade = CascadeType.PERSIST)
@@ -519,5 +518,13 @@ public class DiseaseXiAn implements Serializable {
 
     public void setDiseaseXiAns(Set<DiseaseXiAn> diseaseXiAns) {
         this.diseaseXiAns = diseaseXiAns;
+    }
+
+    public Set<DiseaseXiAn> getReversedDiseaseXiAns() {
+        return reversedDiseaseXiAns;
+    }
+
+    public void setReversedDiseaseXiAns(Set<DiseaseXiAn> reversedDiseaseXiAns) {
+        this.reversedDiseaseXiAns = reversedDiseaseXiAns;
     }
 }

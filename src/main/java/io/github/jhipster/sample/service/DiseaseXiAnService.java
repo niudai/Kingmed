@@ -1,9 +1,13 @@
 package io.github.jhipster.sample.service;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import javax.transaction.Transactional;
+
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -130,10 +134,11 @@ public class DiseaseXiAnService {
 
     /********************* DiseaseXiAn ***********/
     @Transactional
-    public Collection<DiseaseXiAn> findDiseaseXiAnsOfDiseaseXiAn(Long id) {
+    public List<DiseaseXiAn> findDiseaseXiAnsOfDiseaseXiAn(Long id) {
         DiseaseXiAn diseaseXiAn = diseaseXiAnRepository.findById(id).get();
         diseaseXiAn.getDiseaseXiAns().size();
-        return diseaseXiAn.getDiseaseXiAns();
+        diseaseXiAn.getReversedDiseaseXiAns().size();
+        return Lists.newArrayList(Iterables.concat(diseaseXiAn.getDiseaseXiAns(), diseaseXiAn.getReversedDiseaseXiAns()));
     }
 
     @Transactional
