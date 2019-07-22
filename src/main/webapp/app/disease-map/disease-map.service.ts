@@ -80,7 +80,12 @@ export class DiseaseMapService {
 
     searchDiseaseBranch(req: any): Observable<BranchResponseArrayType> {
         const _params = createRequestOption(req);
-        return this.http.get<IDiseaseBranch[]>(`${this.diseaseMapUrl}/_search`, { params: _params, observe: 'response' });
+        return this.http.get<IDiseaseBranch[]>(`${this.diseaseMapUrl}/_search-disease-branch`, { params: _params, observe: 'response' });
+    }
+
+    searchDiseaseMap(req: any): Observable<BranchResponseArrayType> {
+        const _params = createRequestOption(req);
+        return this.http.get<IDiseaseBranch[]>(`${this.diseaseMapUrl}/_search-disease-branch`, { params: _params, observe: 'response' });
     }
 
 }

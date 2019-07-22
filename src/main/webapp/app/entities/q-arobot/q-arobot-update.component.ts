@@ -1,4 +1,4 @@
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
@@ -7,7 +7,7 @@ import { filter, map } from 'rxjs/operators';
 import { IQArobot } from 'app/shared/model/q-arobot.model';
 import { QArobotService } from './q-arobot.service';
 import { QArobotDeleteDialogComponent } from '.';
-
+import { SNACKBAR_DURATION, SAVE_SUCCESSFUL, SAVE_FAILED } from 'app/app.constants';
 @Component({
     selector: 'jhi-q-arobot-update',
     templateUrl: './q-arobot-update.component.html'
@@ -18,7 +18,8 @@ export class QArobotUpdateComponent implements OnInit {
 
     constructor(protected qArobotService: QArobotService
         , protected activatedRoute: ActivatedRoute
-        , protected dialog: MatDialog) {}
+        , protected dialog: MatDialog
+        , protected sackBar: MatSnackBar) {}
 
     ngOnInit() {
         this.isSaving = false;
@@ -47,9 +48,11 @@ export class QArobotUpdateComponent implements OnInit {
     protected onSaveSuccess() {
         this.isSaving = false;
         this.previousState();
+        this.sackBar.open(SAVE_SUCCESSFUL, null, { duration: SNACKBAR_DURATION});
     }
 
     protected onSaveError() {
         this.isSaving = false;
+        this.sackBar.open(SAVE_FAILED, null, { duration: SNACKBAR_DURATION});
     }
 }

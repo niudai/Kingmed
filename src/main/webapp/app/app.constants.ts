@@ -7,3 +7,6 @@ export const DEBUG_INFO_ENABLED: boolean = !!process.env.DEBUG_INFO_ENABLED;
 export const SERVER_API_URL = process.env.SERVER_API_URL;
 export const BUILD_TIMESTAMP = process.env.BUILD_TIMESTAMP;
 export const WXROBOT_URL = 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send';
+export const SNACKBAR_DURATION = 1000;
+export const SAVE_SUCCESSFUL = '保存成功';
+export const SAVE_FAILED = '保存失败';

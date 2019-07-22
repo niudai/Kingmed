@@ -50,7 +50,7 @@ public class DiseaseMapController {
      */
     @GetMapping("/get-all-disease-branch-pageable")
     public ResponseEntity<List<DiseaseBranch>> getAllDiseaseBranchPageable(Pageable pageable) {
-        Page<DiseaseBranch> page = diseaseMapService.getAllDiseaseBranchP(pageable);
+        Page<DiseaseBranch> page = diseaseMapService.getAllDiseaseBranchPageable(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "api/disease-map/get-all-disease-branch");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }

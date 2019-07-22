@@ -5,7 +5,8 @@ import { RobotService } from './../robot.service';
 import { Component, OnInit, ViewChild, NgZone, Inject } from '@angular/core';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { take } from 'rxjs/operators';
-import { MatSelectionListChange, MatListOption, MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
+import { MatSelectionListChange, MatListOption, MatDialogRef, MAT_DIALOG_DATA, MatDialog, MatSnackBar } from '@angular/material';
+import { SNACKBAR_DURATION, SAVE_SUCCESSFUL } from 'app/app.constants';
 
 @Component({
     selector: 'jhi-robot-message',
@@ -13,6 +14,8 @@ import { MatSelectionListChange, MatListOption, MatDialogRef, MAT_DIALOG_DATA, M
     styles: []
 })
 export class RobotMessageComponent implements OnInit {
+    sendSuccessMessage = '发送成功';
+    sendFailedMessage =  '发送失败';
     s: String;
     public robots: IRobot[];
     public selectedRobots: IRobot[];
@@ -26,12 +29,31 @@ export class RobotMessageComponent implements OnInit {
     public messageType: string;
     req: any;
 
+    robotObserver = {
+        next: x => {
+            this.snackBar.open(
+                this.sendSuccessMessage, null, { duration: SNACKBAR_DURATION }
+            );
+          },
+        error: err => {
+              this.snackBar.open(
+                  this.sendSuccessMessage, null, { duration: SNACKBAR_DURATION }
+              );
+        },
+        complete: () => {
+            this.snackBar.open(
+                this.sendSuccessMessage, null, { duration: SNACKBAR_DURATION }
+            );
+          }
+    };
+
     @ViewChild('autosize', { static: false }) autosize: CdkTextareaAutosize;
 
     constructor(
         protected robotService: RobotService,
         protected _ngZone: NgZone,
-        protected dialog: MatDialog
+        protected dialog: MatDialog,
+        protected snackBar: MatSnackBar
     ) { }
 
     onSelectionChange(selectionList: MatSelectionListChange) {
@@ -112,9 +134,10 @@ export class RobotMessageComponent implements OnInit {
     }
 
     send() {
+
         for (const robot of this.selectedRobots) {
             this.robotService.postMessage(this.messageBody, robot.webhookUrl)
-                .subscribe();
+                .subscribe(this.robotObserver);
         }
     }
 

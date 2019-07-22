@@ -34,9 +34,6 @@
                 {{robot.robotName}}
             </mat-list-option>
 </mat-selection-list>
-<p *ngFor="let robot of selectedRobots">
-    {{robot.robotName}}
-</p>
 <div [ngSwitch]="messageType">
     <div *ngSwitchCase="'text'">
             <mat-form-field style="width: 90%; margin: 5%">
