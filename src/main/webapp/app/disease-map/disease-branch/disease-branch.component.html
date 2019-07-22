@@ -39,7 +39,7 @@
                                 </p>
                         </mat-card-content>
                         <mat-card-actions>
-                          <button mat-raised-button color="accent" [routerLink]="['view-disease-map', diseaseBranch.id]">进入</button>
+                          <button mat-raised-button color="accent" [routerLink]="['view-disease-branch', diseaseBranch.id]">进入</button>
                           <button mat-raised-button color="warn" (click)="open(diseaseBranch)" *jhiHasAnyAuthority="'ROLE_ADMIN'">删除</button>
                           <button mat-raised-button style = "background-color: bisque" [routerLink]="['modify-disease-branch', diseaseBranch.id]" *jhiHasAnyAuthority="'ROLE_ADMIN'">编辑</button>
                         </mat-card-actions>
@@ -49,6 +49,17 @@
                 <a href="#" class="btn btn-success" [routerLink]="['view-disease-map', diseaseBranch.id]"><fa-icon [icon]="'arrow-right'"></fa-icon>进入</a>
                 <button class="btn btn-danger" *jhiHasAnyAuthority="'ROLE_ADMIN'" (click)="open(diseaseBranch)"><fa-icon [icon]="'times'"></fa-icon>删除</button>
             </div> -->
+        </div>
+        <div *ngFor="let diseaseMap of diseaseMaps" class="card col-sm-3">
+            <mat-card class="example-card">
+                    <mat-card-header>
+                      <div mat-card-avatar class="example-header-image"></div>
+                      <mat-card-title>{{diseaseMap.name}}</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-actions>
+                      <button mat-raised-button color="accent" [routerLink]="['view-disease-map', diseaseMap.id]">进入</button>
+                    </mat-card-actions>
+                  </mat-card>
         </div>
     </div>
     <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="DEFAULT_PAGESIZE" [length]="totalItems" showFirstLastButtons

@@ -17,9 +17,10 @@ import { timingSafeEqual } from 'crypto';
 })
 export class DiseaseMapComponent implements OnInit {
     public diseaseMaps: IDiseaseMap[];
+    public diseaseMap: IDiseaseMap;
     public previousDataSources = new Array<IDiseaseMap[]>();
     public diseaseBranch: IDiseaseBranch;
-    public id: number;
+    public diseaseBranchId: number;
     public windowWidth: number;
     public dataSource = new MatTreeNestedDataSource<IDiseaseMap>();
     public treeControl = new NestedTreeControl<IDiseaseMap>
@@ -80,7 +81,7 @@ export class DiseaseMapComponent implements OnInit {
     }
 
     fetchDiseaseMap() {
-        this.diseaseMapService.getAllDiseaseMap(this.id)
+        this.diseaseMapService.getAllDiseaseMap(this.diseaseBranchId)
             .subscribe(diseaseMaps => this.dataSource.data = diseaseMaps);
     }
 
@@ -103,11 +104,17 @@ export class DiseaseMapComponent implements OnInit {
 
     ngOnInit() {
         this.windowWidth = window.innerWidth;
-        this.id = +this.route.snapshot.paramMap.get('diseaseBranchId');
-        this.diseaseMapService.getAllDiseaseMap(this.id)
-            .subscribe(diseaseMaps => this.dataSource.data = diseaseMaps);
-        this.diseaseMapService.getDiseaseBranch(this.id)
+        const diseaseBranchId = +this.route.snapshot.paramMap.get('diseaseBranchId');
+        const diseaseMapId = +this.route.snapshot.paramMap.get('diseaseMapId');
+        if (diseaseBranchId) {
+            this.diseaseMapService.getDiseaseBranch(diseaseBranchId)
             .subscribe(diseaseBranch => this.diseaseBranch = diseaseBranch.body);
+            this.diseaseMapService.getAllDiseaseMap(diseaseBranchId)
+            .subscribe(diseaseMaps => this.dataSource.data = diseaseMaps);
+        } else if (diseaseMapId) {
+            this.diseaseMapService.getDiseaseMap(diseaseMapId)
+            .subscribe(diseaseMap => this.dataSource.data = [diseaseMap.body]);
+        }
     }
 
     previousState() {

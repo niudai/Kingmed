@@ -10,6 +10,7 @@ import { createRequestOption } from 'app/shared';
 
 type BranchResponseType = HttpResponse<DiseaseBranch>;
 type BranchResponseArrayType = HttpResponse<DiseaseBranch[]>;
+type MapResponseArrayType = HttpResponse<DiseaseMap[]>;
 
 @Injectable({
     providedIn: 'root'
@@ -32,6 +33,10 @@ export class DiseaseMapService {
 
     getDiseaseBranch(diseaseBranchId: number): Observable<BranchResponseType> {
         return this.http.get<IDiseaseBranch>(`${this.diseaseMapUrl}/get-disease-branch/${diseaseBranchId}`, { observe: 'response'});
+    }
+
+    getDiseaseMap(diseaseMapId: number): Observable<BranchResponseType> {
+        return this.http.get<IDiseaseMap>(`${this.diseaseMapUrl}/get-disease-map/${diseaseMapId}`, { observe: 'response'});
     }
 
     getAllDiseaseMap(diseaseBranchId: number) {
@@ -83,9 +88,9 @@ export class DiseaseMapService {
         return this.http.get<IDiseaseBranch[]>(`${this.diseaseMapUrl}/_search-disease-branch`, { params: _params, observe: 'response' });
     }
 
-    searchDiseaseMap(req: any): Observable<BranchResponseArrayType> {
+    searchDiseaseMap(req: any): Observable<MapResponseArrayType> {
         const _params = createRequestOption(req);
-        return this.http.get<IDiseaseBranch[]>(`${this.diseaseMapUrl}/_search-disease-branch`, { params: _params, observe: 'response' });
+        return this.http.get<IDiseaseMap[]>(`${this.diseaseMapUrl}/_search-disease-map`, { params: _params, observe: 'response' });
     }
 
 }

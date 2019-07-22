@@ -70,6 +70,11 @@ public class DiseaseMapController {
         return ResponseEntity.ok().body(diseaseMapService.getDiseaseBranch(diseaseBranchId));
     }
 
+    @GetMapping("/get-disease-map/{diseaseMapId}")
+    public ResponseEntity<DiseaseMap> getDiseaseMap(@PathVariable Long diseaseMapId) {
+        return ResponseEntity.ok().body(diseaseMapService.getDiseaseMap(diseaseMapId));
+    }
+
     /**
      * get all disease maps in a disease branch
      * @param diseaseBranchId

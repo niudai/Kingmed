@@ -5,6 +5,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpResponse } from '@angular/common/http';
+import { IDiseaseMap } from 'app/shared/model/disease-map.model';
 
 @Component({
     selector: 'jhi-disease-branch',
@@ -18,6 +19,7 @@ export class DiseaseBranchComponent implements OnInit {
     pageEvent: PageEvent;
 
     public diseaseBranches: IDiseaseBranch[];
+    public diseaseMaps: IDiseaseMap[];
 
     constructor(protected diseaseMapService: DiseaseMapService
         , protected modalService: NgbModal
@@ -32,14 +34,21 @@ export class DiseaseBranchComponent implements OnInit {
                     page: this.pageEvent && this.pageEvent.pageIndex ? this.pageEvent.pageIndex : 0,
                     size: this.pageEvent && this.pageEvent.pageSize ? this.pageEvent.pageSize : this.DEFAULT_PAGESIZE
                 }
-            ).subscribe((res: HttpResponse<IDiseaseBranch[]>) => this.loadSuccessHandler(res));
+            ).subscribe((res: HttpResponse<IDiseaseBranch[]>) => this.branchLoadSuccessHandler(res));
+            this.diseaseMapService.searchDiseaseMap(
+                {
+                    query: this.currentSearch,
+                    page: this.pageEvent && this.pageEvent.pageIndex ? this.pageEvent.pageIndex : 0,
+                    size: this.pageEvent && this.pageEvent.pageSize ? this.pageEvent.pageSize : this.DEFAULT_PAGESIZE
+                }
+            ).subscribe((res: HttpResponse<IDiseaseMap[]>) => this.mapLoadSuccessHandler(res));
         } else {
             this.diseaseMapService.getAllDiseaseBranch(
                 {
                     page: this.pageEvent && this.pageEvent.pageIndex ? this.pageEvent.pageIndex : 0,
                     size: this.pageEvent && this.pageEvent.pageSize ? this.pageEvent.pageSize : this.DEFAULT_PAGESIZE
                 }
-            ).subscribe((res: HttpResponse<IDiseaseBranch[]>) => this.loadSuccessHandler(res));
+            ).subscribe((res: HttpResponse<IDiseaseBranch[]>) => this.branchLoadSuccessHandler(res));
         }
     }
 
@@ -48,8 +57,13 @@ export class DiseaseBranchComponent implements OnInit {
         this.load();
     }
 
-    loadSuccessHandler(res: HttpResponse<IDiseaseBranch[]>) {
+    branchLoadSuccessHandler(res: HttpResponse<IDiseaseBranch[]>) {
         this.diseaseBranches = res.body;
+        this.totalItems = +res.headers.get('X-Total-Count');
+    }
+
+    mapLoadSuccessHandler(res: HttpResponse<IDiseaseMap[]>) {
+        this.diseaseMaps = res.body;
         this.totalItems = +res.headers.get('X-Total-Count');
     }
 

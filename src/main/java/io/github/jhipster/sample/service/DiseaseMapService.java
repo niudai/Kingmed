@@ -101,6 +101,14 @@ public class DiseaseMapService {
     }
 
     /**
+     * get disease map.
+     * @return
+     */
+    public DiseaseMap getDiseaseMap(Long diseaseMapId) {
+        return diseaseMapRepository.findById(diseaseMapId).get();
+    }
+
+    /**
      * get all disease maps in a disease branch
      * @param diseaseBranchId
      * @return
