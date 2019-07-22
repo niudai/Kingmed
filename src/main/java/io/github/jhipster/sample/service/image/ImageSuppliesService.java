@@ -12,6 +12,8 @@ import java.util.stream.Stream;
 
 import javax.transaction.Transactional;
 
+import com.google.common.collect.Lists;
+
 import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -106,9 +108,9 @@ public class ImageSuppliesService {
     }
 
     @Transactional
-    public Page<ImageSupplies> search(Pageable pageable, String query) {
-        Page<ImageSupplies> page = imageSuppliesSearchRepository.search(QueryBuilders.queryStringQuery(query), pageable);
-        return page;
+    public List<ImageSupplies> search(String query) {
+        List<ImageSupplies> list = Lists.newArrayList(imageSuppliesSearchRepository.search(QueryBuilders.queryStringQuery(query)));
+        return list;
     }
 
     public void reindex() {
@@ -121,6 +123,13 @@ public class ImageSuppliesService {
      */
     public Page<ImageSupplies> loadAll(Pageable pageable) {
         return imageSuppliesRepository.findAll(pageable);
+    }
+
+    /**
+     * Load All ImageSuppliess as a Page.
+     */
+    public List<ImageSupplies> loadAll() {
+        return imageSuppliesRepository.findAll();
     }
 
     public void delete(Long id) {

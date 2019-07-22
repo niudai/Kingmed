@@ -12,6 +12,8 @@ import java.util.stream.Stream;
 
 import javax.transaction.Transactional;
 
+import com.google.common.collect.Lists;
+
 import org.apache.lucene.util.fst.PairOutputs.Pair;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -123,11 +125,19 @@ public class ImageApplicationService {
         return page;
     }
 
+    /**
+     * Load All ImageApplications as a list.
+     */
     @Transactional
-    public Page<ImageApplication> search(Pageable pageable, String query) {
+    public List<ImageApplication> loadAll() {
+        return  imageApplicationRepository.findAll();
+    }
+
+    @Transactional
+    public List<ImageApplication> search(String query) {
         // Page<ImageApplication> page = imageApplicationSearchRepository.search(QueryBuilders.queryStringQuery(query), pageable);
-        Page<ImageApplication> page = imageApplicationSearchRepository.search(QueryBuilders.queryStringQuery(query), pageable);
-        return page;
+        List<ImageApplication> list = Lists.newArrayList(imageApplicationSearchRepository.search(QueryBuilders.queryStringQuery(query)));
+        return list;
     }
 
     @Transactional

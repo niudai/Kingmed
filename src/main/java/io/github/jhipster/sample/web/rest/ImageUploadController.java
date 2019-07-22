@@ -112,20 +112,30 @@ public class ImageUploadController {
      * GET /images/application : get all applications
      * @return
      */
-    @GetMapping("/images/application")
-    public ResponseEntity<List<ImageApplication>> listUploadedApplications(Pageable pageable) {
+    @GetMapping("/images/application-pageable")
+    public ResponseEntity<List<ImageApplication>> listUploadedPageableApplications(Pageable pageable) {
         log.debug("REST request to get a page of ImageApplications");
         Page<ImageApplication> page = imageApplicationService.loadAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "api/images/application");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
-    @GetMapping("/images/_search/application")
-    public ResponseEntity<List<ImageApplication>> searchApplications(@RequestParam String query, Pageable pageable) {
+    /**
+     * GET /images/application : get all applications
+     * @return
+     */
+    @GetMapping("/images/application")
+    public ResponseEntity<List<ImageApplication>> listUploadedApplications(Pageable pageable) {
         log.debug("REST request to get a page of ImageApplications");
-        Page<ImageApplication> page = imageApplicationService.search(pageable, query);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "api/images/application");
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
+        List<ImageApplication> result = imageApplicationService.loadAll();
+        return ResponseEntity.ok().body(result);
+    }
+
+    @GetMapping("/images/_search/application")
+    public ResponseEntity<List<ImageApplication>> searchApplications(@RequestParam String query) {
+        log.debug("REST request to get a page of ImageApplications");
+        List<ImageApplication> list = imageApplicationService.search(query);
+        return ResponseEntity.ok().body(list);
     }
 
     /**
@@ -189,20 +199,30 @@ public class ImageUploadController {
      * GET /images/supplies : get all suppliess
      * @return
      */
-    @GetMapping("/images/supplies")
-    public ResponseEntity<List<ImageSupplies>> listUploadedSuppliess(Pageable pageable) {
+    @GetMapping("/images/supplies-pageable")
+    public ResponseEntity<List<ImageSupplies>> listUploadedPageableSuppliess(Pageable pageable) {
         log.debug("REST request to get a page of ImageSupplies");
         Page<ImageSupplies> page = imageSuppliesService.loadAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "api/images/supplies");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
+    /**
+     * GET /images/supplies : get all suppliess
+     * @return
+     */
+    @GetMapping("/images/supplies")
+    public ResponseEntity<List<ImageSupplies>> listUploadedSuppliess() {
+        log.debug("REST request to get a page of ImageSupplies");
+        List<ImageSupplies> result = imageSuppliesService.loadAll();
+        return ResponseEntity.ok().body(result);
+    }
+
     @GetMapping("/images/_search/supplies")
     public ResponseEntity<List<ImageSupplies>> searchSuppliess(@RequestParam String query, Pageable pageable) {
         log.debug("REST request to get a page of ImageSupplies");
-        Page<ImageSupplies> page = imageSuppliesService.search(pageable, query);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "api/images/supplies");
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
+        List<ImageSupplies> list = imageSuppliesService.search(query);
+        return ResponseEntity.ok().body(list);
     }
 
     /**

@@ -48,6 +48,12 @@ public class DiseaseXiAn implements Serializable {
     private Set<DiseaseXiAn> diseaseXiAns = new HashSet<>();
 
     @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(name = "disease_xi_an_disease_xi_an"
+        , joinColumns = @JoinColumn(name = "disease_xi_an_id", referencedColumnName = "id")
+        , inverseJoinColumns = @JoinColumn(name = "related_disease_xi_an_id", referencedColumnName = "id"))
+    private Set<DiseaseXiAn> reversedDiseaseXiAns = new HashSet<>();
+
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "disease_xi_an_image_application"
         , joinColumns = @JoinColumn(name = "disease_xi_an_id", referencedColumnName = "id")
         , inverseJoinColumns = @JoinColumn(name = "image_application_id", referencedColumnName = "id"))

@@ -13,7 +13,7 @@ import { HttpResponse } from '@angular/common/http';
 })
 export class DiseaseBranchComponent implements OnInit {
     DEFAULT_PAGESIZE = 8;
-    protected totalItems: number;
+    totalItems: number;
     currentSearch: string;
     pageEvent: PageEvent;
 
