@@ -47,7 +47,7 @@ public class DiseaseXiAn implements Serializable {
         , inverseJoinColumns = @JoinColumn(name = "related_disease_xi_an_id", referencedColumnName = "id"))
     private Set<DiseaseXiAn> diseaseXiAns = new HashSet<>();
 
-    @ManyToMany(mappedBy = "qarobots"
+    @ManyToMany(mappedBy = "diseaseXiAns"
         , fetch = FetchType.LAZY
         , cascade = CascadeType.PERSIST)
     private Set<DiseaseXiAn> reversedDiseaseXiAns = new HashSet<>();
