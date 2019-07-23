@@ -81,8 +81,17 @@ export class DiseaseMapComponent implements OnInit {
     }
 
     fetchDiseaseMap() {
-        this.diseaseMapService.getAllDiseaseMap(this.diseaseBranchId)
+        const diseaseBranchId = +this.route.snapshot.paramMap.get('diseaseBranchId');
+        const diseaseMapId = +this.route.snapshot.paramMap.get('diseaseMapId');
+        if (diseaseBranchId) {
+            this.diseaseMapService.getDiseaseBranch(diseaseBranchId)
+            .subscribe(diseaseBranch => this.diseaseBranch = diseaseBranch.body);
+            this.diseaseMapService.getAllDiseaseMap(diseaseBranchId)
             .subscribe(diseaseMaps => this.dataSource.data = diseaseMaps);
+        } else if (diseaseMapId) {
+            this.diseaseMapService.getDiseaseMap(diseaseMapId)
+            .subscribe(diseaseMap => this.dataSource.data = [diseaseMap.body]);
+        }
     }
 
     /**
@@ -104,17 +113,7 @@ export class DiseaseMapComponent implements OnInit {
 
     ngOnInit() {
         this.windowWidth = window.innerWidth;
-        const diseaseBranchId = +this.route.snapshot.paramMap.get('diseaseBranchId');
-        const diseaseMapId = +this.route.snapshot.paramMap.get('diseaseMapId');
-        if (diseaseBranchId) {
-            this.diseaseMapService.getDiseaseBranch(diseaseBranchId)
-            .subscribe(diseaseBranch => this.diseaseBranch = diseaseBranch.body);
-            this.diseaseMapService.getAllDiseaseMap(diseaseBranchId)
-            .subscribe(diseaseMaps => this.dataSource.data = diseaseMaps);
-        } else if (diseaseMapId) {
-            this.diseaseMapService.getDiseaseMap(diseaseMapId)
-            .subscribe(diseaseMap => this.dataSource.data = [diseaseMap.body]);
-        }
+        this.fetchDiseaseMap();
     }
 
     previousState() {

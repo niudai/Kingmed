@@ -50,6 +50,17 @@ export class DiseaseBranchComponent implements OnInit {
                 }
             ).subscribe((res: HttpResponse<IDiseaseBranch[]>) => this.branchLoadSuccessHandler(res));
         }
+        this.transition();
+    }
+
+    transition() {
+        this.router.navigate(['/disease-map',
+            {
+                search: this.currentSearch,
+                size: this.DEFAULT_PAGESIZE,
+                page: this.pageEvent.pageIndex
+            }
+        ]);
     }
 
     paginate($event: PageEvent) {
@@ -59,7 +70,6 @@ export class DiseaseBranchComponent implements OnInit {
 
     branchLoadSuccessHandler(res: HttpResponse<IDiseaseBranch[]>) {
         this.diseaseBranches = res.body;
-        this.totalItems = +res.headers.get('X-Total-Count');
     }
 
     mapLoadSuccessHandler(res: HttpResponse<IDiseaseMap[]>) {
@@ -68,6 +78,12 @@ export class DiseaseBranchComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.currentSearch = this.route.snapshot && this.route.snapshot.params['search'] ?
+            this.route.snapshot.paramMap.get('search') : '';
+        this.pageEvent = new PageEvent();
+        this.pageEvent.pageIndex = this.route.snapshot && this.route.snapshot.params['page'] ?
+        +this.route.snapshot.paramMap.get('page') : 0;
+        this.pageEvent.pageSize = this.DEFAULT_PAGESIZE;
         this.load();
     }
 

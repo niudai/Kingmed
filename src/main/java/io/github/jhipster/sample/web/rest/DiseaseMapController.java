@@ -184,9 +184,8 @@ public class DiseaseMapController {
     @GetMapping("/_search-disease-branch")
     public ResponseEntity<List<DiseaseBranch>> searchBranch(@RequestParam String query, Pageable pageable) {
         log.debug("REST request to search for a page of Branch for query {}", query);
-        Page<DiseaseBranch> page = diseaseMapService.searchDiseaseBranch(query, pageable);
-        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/disease-map/_search-disease-branch");
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
+        List<DiseaseBranch> page = diseaseMapService.searchDiseaseBranch(query, pageable);
+        return ResponseEntity.ok().body(page);
     }
 
     @GetMapping("/_search-disease-map")

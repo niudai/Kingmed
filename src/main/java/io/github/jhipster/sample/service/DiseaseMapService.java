@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import com.google.common.collect.Lists;
+
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.QueryStringQueryBuilder;
@@ -138,6 +140,7 @@ public class DiseaseMapService {
     @Transactional
     public void attachDiseaseMapToDiseaseBranch(DiseaseMap diseaseMap, Long diseaseBranchId) {
         diseaseBranchRepository.findById(diseaseBranchId).get().getDiseaseMaps().add(diseaseMap);
+        diseaseMapSearchRepository.save(diseaseMap);
     }
 
     /**
@@ -146,7 +149,9 @@ public class DiseaseMapService {
      */
     @Transactional
     public void modifyDiseaseMap(DiseaseMap diseaseMap) {
-        diseaseMapRepository.findById(diseaseMap.getId()).get().setName(diseaseMap.getName());
+        DiseaseMap _diseaseMap = diseaseMapRepository.findById(diseaseMap.getId()).get();
+        _diseaseMap.setName(diseaseMap.getName());
+        diseaseMapSearchRepository.save(_diseaseMap);
     }
 
     /**
@@ -171,6 +176,7 @@ public class DiseaseMapService {
     @Transactional
     public void deleteDiseaseMap(Long diseaseMapId) {
         diseaseMapRepository.deleteById(diseaseMapId);
+        diseaseMapSearchRepository.deleteById(diseaseMapId);
     }
 
 
@@ -230,12 +236,13 @@ public class DiseaseMapService {
     @Transactional
     public void attachDiseaseMapToDiseaseMap(DiseaseMap newDiseaseMap, Long diseaseMapId) {
         diseaseMapRepository.findById(diseaseMapId).get().getDiseaseMaps().add(newDiseaseMap);
+        diseaseMapSearchRepository.save(newDiseaseMap);
     }
 
     @Transactional
-    public Page<DiseaseBranch> searchDiseaseBranch(String query, Pageable pageable) {
+    public List<DiseaseBranch> searchDiseaseBranch(String query, Pageable pageable) {
         // Page<DiseaseBranch> page = diseaseBranchSearchRepository.search(QueryBuilders.queryStringQuery(query), pageable);
-        Page<DiseaseBranch> page = diseaseBranchSearchRepository.search(QueryBuilders.queryStringQuery(query), pageable);
+        List<DiseaseBranch> page =  Lists.newArrayList(diseaseBranchSearchRepository.search(QueryBuilders.queryStringQuery(query)));
         return page;
     }
 
