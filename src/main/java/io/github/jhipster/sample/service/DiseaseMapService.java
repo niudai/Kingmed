@@ -103,6 +103,17 @@ public class DiseaseMapService {
     }
 
     /**
+     * get child disease maps of disease map.
+     * @return
+     */
+    public List<DiseaseMap> getDiseaseMaps(Long diseaseMapId) {
+
+        DiseaseMap diseaseMap =  diseaseMapRepository.findById(diseaseMapId).get();
+        diseaseMap.getDiseaseMaps().size();
+        return diseaseMap.getDiseaseMaps();
+    }
+
+    /**
      * get disease map.
      * @return
      */
@@ -213,7 +224,7 @@ public class DiseaseMapService {
     public void associatedWithQArobot(Long diseaseMapId, Long qArobotId) {
         DiseaseMap diseaseMap = diseaseMapRepository.findById(diseaseMapId).get();
         QArobot qArobot = qArobotRepository.findById(qArobotId).get();
-        diseaseMap.getQArobots().add(qArobot);
+        diseaseMap.getQarobots().add(qArobot);
     }
 
     /**
@@ -225,7 +236,7 @@ public class DiseaseMapService {
     public void deassociatedWithQArobot(Long diseaseMapId, Long qArobotId) {
         DiseaseMap diseaseMap = diseaseMapRepository.findById(diseaseMapId).get();
         QArobot qArobot =  qArobotRepository.findById(qArobotId).get();
-        diseaseMap.getQArobots().remove(qArobot);
+        diseaseMap.getQarobots().remove(qArobot);
     }
 
     /**

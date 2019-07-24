@@ -1,10 +1,164 @@
-curl 'http://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=633a31f6-7f9c-4bc4-97a0-0ec1eefa5898' \
-   -H 'Content-Type: application/json' \
-   -d '
-   {
-        "msgtype": "text",
-        "text": {
-            "content": "hello world"
-        }
-   }'
-https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=a40d73df-6591-4eea-96a1-8fbe387d5aeb
+[
+    {
+        "id": 3,
+        "name": "子地图_2",
+        "diseaseMaps": [
+            {
+                "id": 65,
+                "name": "子地图_2_1",
+                "diseaseMaps": [],
+                "parentDiseaseMap": {
+                    "id": 3,
+                    "name": "子地图_2",
+                    "parentDiseaseMap": null,
+                    "parentDiseaseBranch": {
+                        "id": 1,
+                        "name": "测试地图_1",
+                        "subsidiary": "山西",
+                        "description": "一些描述"
+                    },
+                    "diseaseXiAns": [
+                        {
+                            "id": 1,
+                            "prices": [],
+                            "qarobots": null,
+                            "diseaseXiAns": null,
+                            "reversedDiseaseXiAns": null,
+                            "applications": null,
+                            "suppliess": null,
+                            "subsidiary": "宁夏",
+                            "name": "人乳头瘤病毒(HPV)基因分型检测",
+                            "activated": true,
+                            "projectCode": "ZH00553",
+                            "chargeCode": "250403066*4",
+                            "tollStandard": "400",
+                            "supplement": "宫颈刷出物 ",
+                            "sample": "HPV分型专用耗材",
+                            "tutorial": "采样前3天内不要阴道内用药或冲洗，避免经期采样；采样前一天不能有性生活；同一方向旋转三圈，停留10s；在试管壁上标明患者名称和年龄拧紧瓶盖",
+                            "preservation": "冷藏3周",
+                            "transportation": "冷藏",
+                            "applicationUnitType": "双联申请单",
+                            "applicationRemark": "必须填写采样时间",
+                            "medicalMethod": "反向点杂交",
+                            "projectConcourse": "PCR室",
+                            "hurryDepartment": "标本组客服对接岗",
+                            "reportingTime": "2-3个工作日",
+                            "clinicalApplication": "该检测对人乳头瘤病毒（HPV）的感染情况进行定性检测23种HPV基因型，包括17种高危型（HPV16、18、31、33、35、39、45、51、52、53、56、58、59、66、68、73、82）和6种低危型（6、11、42、43、81、83）。协助诊断宫颈病变及外阴、生殖器HPV感染。",
+                            "series": null,
+                            "subSeries": "妇产",
+                            "remarks": null
+                        }
+                    ],
+                    "qarobots": [
+                        {
+                            "id": 1,
+                            "diseaseXiAns": null,
+                            "diseaseSeries": "遗传与染色体检查",
+                            "projectSeries": "细胞遗传",
+                            "level": "临床应用（2级）",
+                            "questionType": "临床意义",
+                            "question": "外周血染色体核型分析与外周血染色体核型分析（肿瘤）项目有什么区别的？rn",
+                            "answer": "外周血染色体核型分析主要是查染色体病的诊断和染色体异常携带者的检出；外周血染色体核型分析（肿瘤）项目针对的是恶性血液病，是用外周血来做白血病恶性血液病方面的检查，是有适用条件：特殊情况下送检外周血时，必须外周血血象中WBC>12×10的9次方  ，原始幼稚细胞>30%，或者骨髓移植后，患者年龄较大，抽取骨髓风险较大的情况可以送外周血做恶性血液病检查。外周血染色体核型分析（肿瘤）项目与普通外周血项目所使用试剂不一样的，结果和意义也有所差异。rn",
+                            "updateDate": "2018.01",
+                            "submitter": null,
+                            "qaSubsidiary": "南京",
+                            "specialProcess": "否",
+                            "qaClass": "普检"
+                        }
+                    ]
+                },
+                "parentDiseaseBranch": null,
+                "diseaseXiAns": [
+                    {
+                        "id": 5,
+                        "prices": [],
+                        "qarobots": null,
+                        "diseaseXiAns": null,
+                        "reversedDiseaseXiAns": null,
+                        "applications": null,
+                        "suppliess": null,
+                        "subsidiary": "宁夏",
+                        "name": "手术标本检查与诊断/全器官大切片检查与诊断（中标本）",
+                        "activated": true,
+                        "projectCode": "70045",
+                        "chargeCode": "270300010    270800001    ",
+                        "tollStandard": "457",
+                        "supplement": "1、非恶性肿瘤，单个器官（阑尾/胆囊/卵巢/输卵管/前列腺/脾/肾/肾上腺/肺/肝/甲状腺/子宫/子宫颈锥切标本/胎盘/眼球/部分胃/肠/胰腺/脚趾/手指/睾丸/精索）、2、脑肿瘤 3、带骨组织标本 4、子宫内膜 5、活检五个个部位以上",
+                        "sample": "无",
+                        "tutorial": "用10％福尔马林固定至少4-24小时以上。骨头、骨髓及钙化组织需在本室加做脱钙处理，出报告的时间顺延3-5个工作日。",
+                        "preservation": "室温长期",
+                        "transportation": "室温",
+                        "applicationUnitType": "病理申请单",
+                        "applicationRemark": "必须填写医生联系电话",
+                        "medicalMethod": "HE染色",
+                        "projectConcourse": "病理室",
+                        "hurryDepartment": "标本组客服对接岗",
+                        "reportingTime": "3个工作日",
+                        "clinicalApplication": "对临床病变组织、器官的鉴定和分型",
+                        "series": null,
+                        "subSeries": "病理",
+                        "remarks": null
+                    }
+                ],
+                "qarobots": []
+            }
+        ],
+        "parentDiseaseMap": null,
+        "parentDiseaseBranch": {
+            "id": 1,
+            "name": "测试地图_1",
+            "subsidiary": "山西",
+            "description": "一些描述"
+        },
+        "diseaseXiAns": [
+            {
+                "id": 1,
+                "prices": [],
+                "qarobots": null,
+                "diseaseXiAns": null,
+                "reversedDiseaseXiAns": null,
+                "applications": null,
+                "suppliess": null,
+                "subsidiary": "宁夏",
+                "name": "人乳头瘤病毒(HPV)基因分型检测",
+                "activated": true,
+                "projectCode": "ZH00553",
+                "chargeCode": "250403066*4",
+                "tollStandard": "400",
+                "supplement": "宫颈刷出物 ",
+                "sample": "HPV分型专用耗材",
+                "tutorial": "采样前3天内不要阴道内用药或冲洗，避免经期采样；采样前一天不能有性生活；同一方向旋转三圈，停留10s；在试管壁上标明患者名称和年龄拧紧瓶盖",
+                "preservation": "冷藏3周",
+                "transportation": "冷藏",
+                "applicationUnitType": "双联申请单",
+                "applicationRemark": "必须填写采样时间",
+                "medicalMethod": "反向点杂交",
+                "projectConcourse": "PCR室",
+                "hurryDepartment": "标本组客服对接岗",
+                "reportingTime": "2-3个工作日",
+                "clinicalApplication": "该检测对人乳头瘤病毒（HPV）的感染情况进行定性检测23种HPV基因型，包括17种高危型（HPV16、18、31、33、35、39、45、51、52、53、56、58、59、66、68、73、82）和6种低危型（6、11、42、43、81、83）。协助诊断宫颈病变及外阴、生殖器HPV感染。",
+                "series": null,
+                "subSeries": "妇产",
+                "remarks": null
+            }
+        ],
+        "qarobots": [
+            {
+                "id": 1,
+                "diseaseXiAns": null,
+                "diseaseSeries": "遗传与染色体检查",
+                "projectSeries": "细胞遗传",
+                "level": "临床应用（2级）",
+                "questionType": "临床意义",
+                "question": "外周血染色体核型分析与外周血染色体核型分析（肿瘤）项目有什么区别的？rn",
+                "answer": "外周血染色体核型分析主要是查染色体病的诊断和染色体异常携带者的检出；外周血染色体核型分析（肿瘤）项目针对的是恶性血液病，是用外周血来做白血病恶性血液病方面的检查，是有适用条件：特殊情况下送检外周血时，必须外周血血象中WBC>12×10的9次方  ，原始幼稚细胞>30%，或者骨髓移植后，患者年龄较大，抽取骨髓风险较大的情况可以送外周血做恶性血液病检查。外周血染色体核型分析（肿瘤）项目与普通外周血项目所使用试剂不一样的，结果和意义也有所差异。rn",
+                "updateDate": "2018.01",
+                "submitter": null,
+                "qaSubsidiary": "南京",
+                "specialProcess": "否",
+                "qaClass": "普检"
+            }
+        ],
+        "es_metadata_id": "3"
+    }
+]

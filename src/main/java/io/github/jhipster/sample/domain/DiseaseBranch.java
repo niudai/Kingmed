@@ -34,7 +34,9 @@ public class DiseaseBranch implements Serializable {
     @Column(name = "name", length = 50)
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL
+    @OneToMany(
+        // mappedBy = "parentDiseaseBranch",
+        cascade = CascadeType.ALL
         , orphanRemoval = true,
         fetch = FetchType.LAZY)
     @JoinColumn(name = "disease_branch_id")

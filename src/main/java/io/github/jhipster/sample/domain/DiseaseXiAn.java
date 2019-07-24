@@ -6,6 +6,9 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -45,11 +48,13 @@ public class DiseaseXiAn implements Serializable {
     @JoinTable(name = "disease_xi_an_disease_xi_an"
         , joinColumns = @JoinColumn(name = "disease_xi_an_id", referencedColumnName = "id")
         , inverseJoinColumns = @JoinColumn(name = "related_disease_xi_an_id", referencedColumnName = "id"))
+    @JsonIgnoreProperties({"diseaseXiAns", "reversedDiseaseXiAns"})
     private Set<DiseaseXiAn> diseaseXiAns = new HashSet<>();
 
     @ManyToMany(mappedBy = "diseaseXiAns"
         , fetch = FetchType.LAZY
         , cascade = CascadeType.PERSIST)
+    @JsonIgnoreProperties({"diseaseXiAns", "reversedDiseaseXiAns"})
     private Set<DiseaseXiAn> reversedDiseaseXiAns = new HashSet<>();
 
     @ManyToMany(cascade = CascadeType.PERSIST)

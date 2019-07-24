@@ -5,6 +5,13 @@
         <fa-icon [icon]="'arrow-left'"></fa-icon>
     </button>
 </mat-card>
+<mat-card *ngIf="diseaseMap">{{diseaseMap.name}}
+        <!-- <button mat-mini-fab color="primary" *jhiHasAnyAuthority="'ROLE_ADMIN'" (click)="openBranchBottomSheet()"
+            class="add">+</button> -->
+        <button mat-raised-button (click)="previousTreeControl()" class="nav-back">
+            <fa-icon [icon]="'arrow-left'"></fa-icon>
+        </button>
+</mat-card>
 <!-- <button mat-raised-button (click)="openBranchBottomSheet()">Open file</button> -->
 <br>
 <div class="container col-12">

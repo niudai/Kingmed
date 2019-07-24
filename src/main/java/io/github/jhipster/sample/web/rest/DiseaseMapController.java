@@ -70,6 +70,21 @@ public class DiseaseMapController {
         return ResponseEntity.ok().body(diseaseMapService.getDiseaseBranch(diseaseBranchId));
     }
 
+    /**
+     * get child disease maps of disease map specified with diseasMapId
+     * @param diseaseMapId
+     * @return
+     */
+    @GetMapping("/get-disease-map/{diseaseMapId}")
+    public ResponseEntity<List<DiseaseMap>> getDiseaseMaps(@PathVariable Long diseaseMapId) {
+        return ResponseEntity.ok().body(diseaseMapService.getDiseaseMaps(diseaseMapId));
+    }
+
+    /**
+     * get current disease map specified with diseaseMapId
+     * @param diseaseMapId
+     * @return
+     */
     @GetMapping("/get-disease-map/{diseaseMapId}")
     public ResponseEntity<DiseaseMap> getDiseaseMap(@PathVariable Long diseaseMapId) {
         return ResponseEntity.ok().body(diseaseMapService.getDiseaseMap(diseaseMapId));

@@ -80,9 +80,7 @@ export class DiseaseMapComponent implements OnInit {
         dialogRef.afterClosed().subscribe(any => this.fetchDiseaseMap());
     }
 
-    fetchDiseaseMap() {
-        const diseaseBranchId = +this.route.snapshot.paramMap.get('diseaseBranchId');
-        const diseaseMapId = +this.route.snapshot.paramMap.get('diseaseMapId');
+    fetchDiseaseMap(diseaseMapId: number, diseaseBranchId: number) {
         if (diseaseBranchId) {
             this.diseaseMapService.getDiseaseBranch(diseaseBranchId)
             .subscribe(diseaseBranch => this.diseaseBranch = diseaseBranch.body);
@@ -106,14 +104,22 @@ export class DiseaseMapComponent implements OnInit {
      * Zoom out
      */
     previousTreeControl() {
+        // load parent node from stack if stack is not empty
         if (this.previousDataSources.length > 0) {
             this.dataSource.data = this.previousDataSources.pop();
+        } else {
+            // dynamically load parent node from back-end API
+            const diseaseMapId = this.dataSource.data[0].parentDiseaseMap.id;
+            const diseaseBranchId = this.dataSource.data[0].parentDiseaseBranch.id;
+            this.fetchDiseaseMap(diseaseMapId, diseaseBranchId);
         }
     }
 
     ngOnInit() {
         this.windowWidth = window.innerWidth;
-        this.fetchDiseaseMap();
+        const diseaseBranchId = +this.route.snapshot.paramMap.get('diseaseBranchId');
+        const diseaseMapId = +this.route.snapshot.paramMap.get('diseaseMapId');
+        this.fetchDiseaseMap(diseaseMapId, diseaseBranchId);
     }
 
     previousState() {
