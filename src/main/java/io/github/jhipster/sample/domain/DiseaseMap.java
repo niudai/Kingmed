@@ -9,11 +9,8 @@ import javax.validation.constraints.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.data.elasticsearch.annotations.Field;
-import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -38,6 +35,14 @@ public class DiseaseMap implements Serializable {
     @Size(max = 50)
     @Column(name = "name", length = 50)
     private String name;
+
+    @Size(max = 50)
+    @Column(name = "subsidiary", length = 50)
+    private String subsidiary = "待添加";
+
+    @Size(max = 250)
+    @Column(name = "description", length = 250)
+    private String description = "待添加";
 
     @OneToMany(
         cascade = CascadeType.ALL,
@@ -199,6 +204,22 @@ public class DiseaseMap implements Serializable {
 
     public void setQarobots(Set<QArobot> qarobots) {
         this.qarobots = qarobots;
+    }
+
+    public String getSubsidiary() {
+        return subsidiary;
+    }
+
+    public void setSubsidiary(String subsidiary) {
+        this.subsidiary = subsidiary;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
 }

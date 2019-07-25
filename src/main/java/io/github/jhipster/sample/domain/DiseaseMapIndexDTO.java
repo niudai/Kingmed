@@ -6,26 +6,15 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.data.elasticsearch.annotations.Field;
-import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 /**
  * Disease Map is used to contain mutiple diseases and qarobot, and could contain
  * subDisease map.
  */
-@Entity
-@Table(name = "disease_map_index")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "DiseaseMapIndexDTOindex")
 public class DiseaseMapIndexDTO implements Serializable {
 
@@ -111,8 +100,23 @@ public class DiseaseMapIndexDTO implements Serializable {
         return "{" +
             " id='" + getId() + "'" +
             ", name='" + getName() + "'" +
-            ", qArobots='" + getQarobots() + "'" +
             "}";
+    }
+
+    public String getSubsidiary() {
+        return subsidiary;
+    }
+
+    public void setSubsidiary(String subsidiary) {
+        this.subsidiary = subsidiary;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
 }
