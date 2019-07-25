@@ -1,5 +1,10 @@
 package io.github.jhipster.sample.web.rest;
 
+import java.util.List;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.github.jhipster.sample.domain.DiseaseMap;
+import io.github.jhipster.sample.domain.DiseaseMapIndexDTO;
 import io.github.jhipster.sample.repository.DiseaseBranchRepository;
 import io.github.jhipster.sample.repository.DiseaseMapRepository;
 import io.github.jhipster.sample.repository.DiseaseXiAnRepository;
@@ -17,13 +23,13 @@ import io.github.jhipster.sample.repository.ImageSuppliesRepository;
 import io.github.jhipster.sample.repository.QArobotRepository;
 import io.github.jhipster.sample.repository.UserRepository;
 import io.github.jhipster.sample.repository.search.DiseaseBranchSearchRepository;
+import io.github.jhipster.sample.repository.search.DiseaseMapIndexDTOSearchRepository;
 import io.github.jhipster.sample.repository.search.DiseaseMapSearchRepository;
 import io.github.jhipster.sample.repository.search.DiseaseXiAnSearchRepository;
 import io.github.jhipster.sample.repository.search.ImageApplicationSearchRepository;
 import io.github.jhipster.sample.repository.search.ImageSuppliesSearchRepository;
 import io.github.jhipster.sample.repository.search.QArobotSearchRepository;
 import io.github.jhipster.sample.repository.search.UserSearchRepository;
-import io.github.jhipster.web.util.ResponseUtil;
 
 @RestController
 @RequestMapping("/api")
@@ -62,6 +68,9 @@ public class ReindexAllController {
     private DiseaseMapSearchRepository diseaseMapSearchRepository;
 
     @Autowired
+    private DiseaseMapIndexDTOSearchRepository diseaseMapIndexDTOSearchRepository;
+
+    @Autowired
     private DiseaseBranchRepository diseaseBranchRepository;
 
     @Autowired
@@ -94,11 +103,10 @@ public class ReindexAllController {
         diseaseXiAnSearchRepository.deleteAll();
         diseaseXiAnSearchRepository.saveAll(diseaseXiAnRepository.findAll());
 
+        reindexDiseaseMap();
+
         qArobotSearchRepository.deleteAll();
         qArobotSearchRepository.saveAll(qArobotRepository.findAll());
-
-        diseaseMapSearchRepository.deleteAll();
-        diseaseMapSearchRepository.saveAll(diseaseMapRepository.findAll());
 
         diseaseBranchSearchRepository.deleteAll();
         diseaseBranchSearchRepository.saveAll(diseaseBranchRepository.findAll());
@@ -107,6 +115,22 @@ public class ReindexAllController {
         userSearchRepository.saveAll(userRepository.findAll());
 
         return ResponseEntity.ok().build();
+    }
+
+    public void reindexDiseaseMap() {
+        List<DiseaseMap> diseaseMaps = diseaseMapRepository.findAll();
+        for (DiseaseMap diseaseMap: diseaseMaps) {
+            diseaseMapIndexDTOSearchRepository.save(diseaseMapIndexConverter(diseaseMap));
+        }
+    }
+
+    public DiseaseMapIndexDTO diseaseMapIndexConverter(DiseaseMap diseaseMap) {
+        DiseaseMapIndexDTO dto = new DiseaseMapIndexDTO();
+        dto.setId(diseaseMap.getId());
+        dto.setName(diseaseMap.getName());
+        dto.setDescription(diseaseMap.getDescription());
+        dto.setSubsidiary(diseaseMap.getSubsidiary());
+        return dto;
     }
 
 }
