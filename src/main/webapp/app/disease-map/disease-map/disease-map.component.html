@@ -1,14 +1,14 @@
 <mat-card *ngIf="diseaseBranch">{{diseaseBranch.name}}
     <button mat-mini-fab color="primary" *jhiHasAnyAuthority="'ROLE_ADMIN'" (click)="openBranchBottomSheet()"
         class="add">+</button>
-    <button mat-raised-button (click)="previousTreeControl()" class="nav-back">
+    <button mat-raised-button (click)="goUpTreeControl()" class="nav-back">
         <fa-icon [icon]="'arrow-left'"></fa-icon>
     </button>
 </mat-card>
 <mat-card *ngIf="diseaseMap">{{diseaseMap.name}}
         <!-- <button mat-mini-fab color="primary" *jhiHasAnyAuthority="'ROLE_ADMIN'" (click)="openBranchBottomSheet()"
             class="add">+</button> -->
-        <button mat-raised-button (click)="previousTreeControl()" class="nav-back">
+        <button mat-raised-button (click)="goUpTreeControl()" class="nav-back">
             <fa-icon [icon]="'arrow-left'"></fa-icon>
         </button>
 </mat-card>
@@ -73,7 +73,7 @@
             <li style = "padding-bottom: 5px; width: 90%">
                     <mat-expansion-panel style = "margin: 5px;">
                             <button mat-mini-fab color="accent"
-                            (click)="changeTreeControl(node)" class="arrow-right">
+                            (click)="goUpTreeControl(node)" class="arrow-right">
                                 <fa-icon [icon] = "'arrow-right'"></fa-icon>
                            </button>
                             <mat-expansion-panel-header>

@@ -32,41 +32,37 @@ public class DiseaseXiAn implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(cascade = CascadeType.ALL
-        , orphanRemoval = true,
-        fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "disease_xi_an_id")
     private List<PriceXiAn> prices = new ArrayList<PriceXiAn>();
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(name = "disease_xi_an_q_arobot"
-        , joinColumns = @JoinColumn(name = "disease_xi_an_id", referencedColumnName = "id")
-        , inverseJoinColumns = @JoinColumn(name = "q_arobot_id", referencedColumnName = "id"))
+    @ManyToMany(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST })
+    @JoinTable(name = "disease_xi_an_q_arobot", joinColumns = @JoinColumn(name = "disease_xi_an_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "q_arobot_id", referencedColumnName = "id"))
     private Set<QArobot> qarobots = new HashSet<>();
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(name = "disease_xi_an_disease_xi_an"
-        , joinColumns = @JoinColumn(name = "disease_xi_an_id", referencedColumnName = "id")
-        , inverseJoinColumns = @JoinColumn(name = "related_disease_xi_an_id", referencedColumnName = "id"))
-    @JsonIgnoreProperties({"diseaseXiAns", "reversedDiseaseXiAns"})
+    @ManyToMany(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST })
+    @JoinTable(name = "disease_xi_an_disease_xi_an", joinColumns = @JoinColumn(name = "disease_xi_an_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "related_disease_xi_an_id", referencedColumnName = "id"))
+    @JsonIgnoreProperties({ "diseaseXiAns", "reversedDiseaseXiAns" })
     private Set<DiseaseXiAn> diseaseXiAns = new HashSet<>();
 
-    @ManyToMany(mappedBy = "diseaseXiAns"
-        , fetch = FetchType.LAZY
-        , cascade = CascadeType.PERSIST)
-    @JsonIgnoreProperties({"diseaseXiAns", "reversedDiseaseXiAns"})
+    @ManyToMany(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST })
+    @JoinTable(name = "disease_xi_an_disease_xi_an", joinColumns = @JoinColumn(name = "related_disease_xi_an_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "disease_xi_an_id", referencedColumnName = "id"))
+    @JsonIgnoreProperties({ "diseaseXiAns", "reversedDiseaseXiAns" })
     private Set<DiseaseXiAn> reversedDiseaseXiAns = new HashSet<>();
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(name = "disease_xi_an_image_application"
+    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.DETACH, CascadeType.MERGE,
+            CascadeType.REFRESH, CascadeType.PERSIST })
+    @JoinTable(name = "disease_map_disease_xi_an"
         , joinColumns = @JoinColumn(name = "disease_xi_an_id", referencedColumnName = "id")
-        , inverseJoinColumns = @JoinColumn(name = "image_application_id", referencedColumnName = "id"))
+        , inverseJoinColumns = @JoinColumn(name = "disease_map_id", referencedColumnName = "id"))
+    private Set<DiseaseMap> diseaseMaps = new HashSet<>();
+
+    @ManyToMany(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST })
+    @JoinTable(name = "disease_xi_an_image_application", joinColumns = @JoinColumn(name = "disease_xi_an_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "image_application_id", referencedColumnName = "id"))
     private Set<ImageApplication> applications = new HashSet<>();
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(name = "disease_xi_an_image_supplies"
-        , joinColumns = @JoinColumn(name = "disease_xi_an_id", referencedColumnName = "id")
-        , inverseJoinColumns = @JoinColumn(name = "image_supplies_id", referencedColumnName = "id"))
+    @ManyToMany(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST })
+    @JoinTable(name = "disease_xi_an_image_supplies", joinColumns = @JoinColumn(name = "disease_xi_an_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "image_supplies_id", referencedColumnName = "id"))
     private Set<ImageSupplies> suppliess = new HashSet<>();
 
     public Set<ImageSupplies> getSuppliess() {
@@ -76,7 +72,6 @@ public class DiseaseXiAn implements Serializable {
     public void setSuppliess(Set<ImageSupplies> suppliess) {
         this.suppliess = suppliess;
     }
-
 
     public Set<ImageApplication> getApplications() {
         return this.applications;
@@ -178,7 +173,8 @@ public class DiseaseXiAn implements Serializable {
     @Column(name = "remarks", length = 2000)
     private String remarks;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    // jhipster-needle-entity-add-field - JHipster will add fields here, do not
+    // remove
     public Long getId() {
         return id;
     }
@@ -459,21 +455,110 @@ public class DiseaseXiAn implements Serializable {
     public void setRemarks(String remarks) {
         this.remarks = remarks;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and
+    // setters here, do not remove
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
+    public boolean equals(Object obj) {
+        if (this == obj)
             return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
+        if (obj == null)
             return false;
-        }
-        DiseaseXiAn diseaseXiAn = (DiseaseXiAn) o;
-        if (diseaseXiAn.getId() == null || getId() == null) {
+        if (getClass() != obj.getClass())
             return false;
+        DiseaseXiAn other = (DiseaseXiAn) obj;
+        if (activated != other.activated)
+            return false;
+        if (applicationRemark == null) {
+            if (other.applicationRemark != null)
+                return false;
+        } else if (!applicationRemark.equals(other.applicationRemark))
+            return false;
+        if (applicationUnitType == null) {
+            if (other.applicationUnitType != null)
+                return false;
+        } else if (!applicationUnitType.equals(other.applicationUnitType))
+            return false;
+        if (applications == null) {
+            if (other.applications != null)
+                return false;
+        } else if (!applications.equals(other.applications))
+            return false;
+        if (chargeCode == null) {
+            if (other.chargeCode != null)
+                return false;
+        } else if (!chargeCode.equals(other.chargeCode))
+            return false;
+        if (clinicalApplication == null) {
+            if (other.clinicalApplication != null)
+                return false;
+        } else if (!clinicalApplication.equals(other.clinicalApplication))
+            return false;
+        if (hurryDepartment == null) {
+            if (other.hurryDepartment != null)
+                return false;
+        } else if (!hurryDepartment.equals(other.hurryDepartment))
+            return false;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        if (medicalMethod == null) {
+            if (other.medicalMethod != null)
+                return false;
+        } else if (!medicalMethod.equals(other.medicalMethod))
+            return false;
+        if (name == null) {
+            if (other.name != null)
+                return false;
+        } else if (!name.equals(other.name))
+            return false;
+        if (preservation == null) {
+            if (other.preservation != null)
+                return false;
+        } else if (!preservation.equals(other.preservation))
+            return false;
+        if (projectCode == null) {
+            if (other.projectCode != null)
+                return false;
+        } else if (!projectCode.equals(other.projectCode))
+            return false;
+        if (projectConcourse == null) {
+            if (other.projectConcourse != null)
+                return false;
+        } else if (!projectConcourse.equals(other.projectConcourse))
+            return false;
+        if (remarks == null) {
+            if (other.remarks != null)
+                return false;
+        } else if (!remarks.equals(other.remarks))
+            return false;
+        if (reportingTime == null) {
+            if (other.reportingTime != null)
+                return false;
+        } else if (!reportingTime.equals(other.reportingTime))
+            return false;
+        if (sample == null) {
+            if (other.sample != null)
+                return false;
+        } else if (!sample.equals(other.sample))
+            return false;
+        if (series == null) {
+            if (other.series != null)
+                return false;
+        } else if (!series.equals(other.series))
+            return false;
+        if (subSeries == null) {
+            if (other.subSeries != null)
+                return false;
+        } else if (!subSeries.equals(other.subSeries))
+            return false;
+        if (subsidiary == null) {
+            if (other.subsidiary != null)
+                return false;
         }
-        return Objects.equals(getId(), diseaseXiAn.getId());
+        return true;
     }
 
     @Override
@@ -483,30 +568,7 @@ public class DiseaseXiAn implements Serializable {
 
     @Override
     public String toString() {
-        return "DiseaseXiAn{" +
-            "id=" + getId() +
-            ", subsidiary='" + getSubsidiary() + "'" +
-            // ", prices='" + getPrices() + "'" +
-            ", name='" + getName() + "'" +
-            ", projectCode='" + getProjectCode() + "'" +
-            ", chargeCode='" + getChargeCode() + "'" +
-            ", tollStandard='" + getTollStandard() + "'" +
-            ", supplement='" + getSupplement() + "'" +
-            ", sample='" + getSample() + "'" +
-            ", tutorial='" + getTutorial() + "'" +
-            ", preservation='" + getPreservation() + "'" +
-            ", transportation='" + getTransportation() + "'" +
-            ", applicationUnitType='" + getApplicationUnitType() + "'" +
-            ", applicationRemark='" + getApplicationRemark() + "'" +
-            ", medicalMethod='" + getMedicalMethod() + "'" +
-            ", projectConcourse='" + getProjectConcourse() + "'" +
-            ", hurryDepartment='" + getHurryDepartment() + "'" +
-            ", reportingTime='" + getReportingTime() + "'" +
-            ", clinicalApplication='" + getClinicalApplication() + "'" +
-            ", series='" + getSeries() + "'" +
-            ", subSeries='" + getSubSeries() + "'" +
-            ", remarks='" + getRemarks() + "'" +
-            "}";
+        return "DiseaseXiAn [activated=" + activated + ", name=" + name + ", preservation=" + preservation + "]";
     }
 
     public boolean isActivated() {
@@ -531,5 +593,13 @@ public class DiseaseXiAn implements Serializable {
 
     public void setReversedDiseaseXiAns(Set<DiseaseXiAn> reversedDiseaseXiAns) {
         this.reversedDiseaseXiAns = reversedDiseaseXiAns;
+    }
+
+    public Set<DiseaseMap> getDiseaseMaps() {
+        return diseaseMaps;
+    }
+
+    public void setDiseaseMaps(Set<DiseaseMap> diseaseMaps) {
+        this.diseaseMaps = diseaseMaps;
     }
 }

@@ -27,10 +27,25 @@ public class QArobot implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToMany(mappedBy = "qarobots"
-        , fetch = FetchType.LAZY
-        , cascade = CascadeType.PERSIST)
+    @ManyToMany(fetch = FetchType.LAZY
+        , cascade = { CascadeType.DETACH,                 CascadeType.MERGE,                 CascadeType.REFRESH,                 CascadeType.PERSIST})
+    @JoinTable(name = "disease_xi_an_q_arobot"
+        , joinColumns = @JoinColumn(name = "q_arobot_id", referencedColumnName = "id")
+        , inverseJoinColumns = @JoinColumn(name = "disease_xi_an_id", referencedColumnName = "id"))
     private Set<DiseaseXiAn> diseaseXiAns = new HashSet<>();
+
+    @ManyToMany(cascade = {
+        CascadeType.DETACH,
+        CascadeType.MERGE,
+        CascadeType.REFRESH,
+        CascadeType.PERSIST
+    })
+    @JoinTable(name = "disease_map_q_arobot"
+    , joinColumns = @JoinColumn(name = "q_arobot_id", referencedColumnName = "id")
+    , inverseJoinColumns = @JoinColumn(name = "disease_map_id", referencedColumnName = "id"))
+    private Set<QArobot> diseaseMaps = new HashSet<>();
+
+
 
     public Set<DiseaseXiAn> getDiseaseXiAns() {
         return this.diseaseXiAns;
@@ -273,5 +288,13 @@ public class QArobot implements Serializable {
             ", specialProcess='" + getSpecialProcess() + "'" +
             ", qaClass='" + getQaClass() + "'" +
             "}";
+    }
+
+    public Set<QArobot> getDiseaseMaps() {
+        return diseaseMaps;
+    }
+
+    public void setDiseaseMaps(Set<QArobot> diseaseMaps) {
+        this.diseaseMaps = diseaseMaps;
     }
 }

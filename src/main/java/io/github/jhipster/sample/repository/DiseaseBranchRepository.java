@@ -17,5 +17,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DiseaseBranchRepository extends JpaRepository<DiseaseBranch, Long> {
     @EntityGraph(attributePaths = "diseaseMaps")
-    Optional<DiseaseMap> findOneWithDiseaseMapsById(Long id);
+    Optional<DiseaseBranch> findOneWithDiseaseMapsById(Long id);
 }

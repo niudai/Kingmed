@@ -75,7 +75,7 @@ public class DiseaseMapController {
      * @param diseaseMapId
      * @return
      */
-    @GetMapping("/get-disease-map/{diseaseMapId}")
+    @GetMapping("/get-disease-maps/{diseaseMapId}")
     public ResponseEntity<List<DiseaseMap>> getDiseaseMaps(@PathVariable Long diseaseMapId) {
         return ResponseEntity.ok().body(diseaseMapService.getDiseaseMaps(diseaseMapId));
     }

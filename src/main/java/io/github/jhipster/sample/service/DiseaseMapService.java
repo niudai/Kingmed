@@ -106,6 +106,7 @@ public class DiseaseMapService {
      * get child disease maps of disease map.
      * @return
      */
+    @Transactional
     public List<DiseaseMap> getDiseaseMaps(Long diseaseMapId) {
 
         DiseaseMap diseaseMap =  diseaseMapRepository.findById(diseaseMapId).get();
@@ -128,8 +129,9 @@ public class DiseaseMapService {
      */
     @org.springframework.transaction.annotation.Transactional
     public List<DiseaseMap> getAllDiseaseMap(Long diseaseBranchId) {
-        List<DiseaseMap> diseaseMaps =  diseaseBranchRepository.findById(diseaseBranchId).get().getDiseaseMaps();
-        diseaseMaps.size();
+
+        List<DiseaseMap> diseaseMaps =  diseaseBranchRepository.findOneWithDiseaseMapsById(diseaseBranchId).get().getDiseaseMaps();
+
         return diseaseMaps;
     }
 

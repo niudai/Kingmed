@@ -8,9 +8,10 @@ import { map } from 'rxjs/operators';
 import { DiseaseMap, IDiseaseMap } from 'app/shared/model/disease-map.model';
 import { createRequestOption } from 'app/shared';
 
-type BranchResponseType = HttpResponse<DiseaseBranch>;
-type BranchResponseArrayType = HttpResponse<DiseaseBranch[]>;
-type MapResponseArrayType = HttpResponse<DiseaseMap[]>;
+type BranchResponseType = HttpResponse<IDiseaseBranch>;
+type BranchResponseArrayType = HttpResponse<IDiseaseBranch[]>;
+type MapResponseType = HttpResponse<IDiseaseMap>;
+type MapResponseArrayType = HttpResponse<IDiseaseMap[]>;
 
 @Injectable({
     providedIn: 'root'
@@ -35,16 +36,28 @@ export class DiseaseMapService {
         return this.http.get<IDiseaseBranch>(`${this.diseaseMapUrl}/get-disease-branch/${diseaseBranchId}`, { observe: 'response'});
     }
 
-    getDiseaseMap(diseaseMapId: number): Observable<BranchResponseType> {
+    getDiseaseMap(diseaseMapId: number): Observable<MapResponseType> {
         return this.http.get<IDiseaseMap>(`${this.diseaseMapUrl}/get-disease-map/${diseaseMapId}`, { observe: 'response'});
     }
 
+    /**
+     * get child disease maps of disease mp.
+     * @param diseaseMapId diseaseMapId
+     */
+    getDiseaseMaps(diseaseMapId: number): Observable<MapResponseArrayType> {
+        return this.http.get<IDiseaseMap[]>(`${this.diseaseMapUrl}/get-disease-map/${diseaseMapId}`, { observe: 'response' });
+    }
+
+    /**
+     * Get all children disease map of diseae branch.
+     * @param diseaseBranchId
+     */
     getAllDiseaseMap(diseaseBranchId: number) {
-        return this.http.get<DiseaseMap[]>(`${this.diseaseMapUrl}/get-all-disease-map/${diseaseBranchId}`, { observe: 'body'});
+        return this.http.get<IDiseaseMap[]>(`${this.diseaseMapUrl}/get-all-disease-map/${diseaseBranchId}`, { observe: 'body'});
     }
 
     deattachDiseaseBranch(diseaseBranchId: number) {
-        return this.http.delete<DiseaseMap[]>(`${this.diseaseMapUrl}/deattach-disease-branch/${diseaseBranchId}`, { observe: 'body'});
+        return this.http.delete<IDiseaseMap[]>(`${this.diseaseMapUrl}/deattach-disease-branch/${diseaseBranchId}`, { observe: 'body'});
     }
 
     attachDiseaseMapToDiseaseBranch(diseaseMap: DiseaseMap, diseaseBranchId: number) {
