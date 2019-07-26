@@ -43,7 +43,7 @@ export class DiseaseMapComponent implements OnInit {
                 data: { diseaseMap: map },
             });
         matBottomSheetRef.afterDismissed()
-            .subscribe(any => this.fetchDiseaseMap(this.diseaseMap.id, this.diseaseBranch.id));
+            .subscribe(any => this.fetchDiseaseMap(this.diseaseMap, this.diseaseBranch));
         // window.history.back();
     }
 
@@ -53,49 +53,58 @@ export class DiseaseMapComponent implements OnInit {
                 data: { diseaseBranch: this.diseaseBranch },
             });
         matBottomSheetRef.afterDismissed()
-            .subscribe(any => this.fetchDiseaseMap(this.diseaseMap.id, this.diseaseBranch.id));
+            .subscribe(any => this.fetchDiseaseMap(this.diseaseMap, this.diseaseBranch));
         // window.history.back();
     }
 
     deassociateWithDiseaseXiAn(diseaseXiAnId: number, diseaseMapId: number): void {
-        const dialogRef = this.dialog.open(DiseaseXiAnDeleteDialogComponent , {data: {
-            input: false,
-            title: '取消关联',
-            description: '确定取消该关联?',
-            diseaseXiAnId,
-            diseaseMapId
-        }});
-        dialogRef.afterClosed().subscribe(any => this.fetchDiseaseMap(this.diseaseMap.id, this.diseaseBranch.id));
+        const dialogRef = this.dialog.open(DiseaseXiAnDeleteDialogComponent, {
+            data: {
+                input: false,
+                title: '取消关联',
+                description: '确定取消该关联?',
+                diseaseXiAnId,
+                diseaseMapId
+            }
+        });
+        dialogRef.afterClosed()
+            .subscribe(
+                any => this.fetchDiseaseMap(this.diseaseMap, this.diseaseBranch)
+            );
     }
 
     deassociateWithQArobot(qArobotId: number, diseaseMapId: number): void {
-        const dialogRef = this.dialog.open(QArobotDeleteDialogComponent , {data: {
-            input: false,
-            title: '取消关联',
-            description: '确定取消该关联?',
-            qArobotId,
-            diseaseMapId
-        }});
+        const dialogRef = this.dialog.open(QArobotDeleteDialogComponent, {
+            data: {
+                input: false,
+                title: '取消关联',
+                description: '确定取消该关联?',
+                qArobotId,
+                diseaseMapId
+            }
+        });
         dialogRef.afterClosed().subscribe(
-            any => this.fetchDiseaseMap(this.diseaseMap.id, this.diseaseBranch.id)
+            any => this.fetchDiseaseMap(this.diseaseMap, this.diseaseBranch)
         );
     }
 
-    fetchDiseaseMap(diseaseMapId: number, diseaseBranchId: number) {
-        if (diseaseMapId) {
+    fetchDiseaseMap(diseaseMap: IDiseaseMap, diseaseBranch: IDiseaseBranch) {
+        // load current disease branch and its children.
+        if (diseaseMap) {
             // load current disease map and its children to show .
-            this.diseaseMapService.getDiseaseMap(diseaseMapId)
-            .subscribe(diseaseMap =>  {
-                this.diseaseMap = diseaseMap.body;
-                this.dataSource.data = diseaseMap.body.diseaseMaps;
-            });
-        } else if (diseaseBranchId) {
+            this.diseaseMapService.getDiseaseMap(diseaseMap.id)
+                .subscribe(map => {
+                    this.diseaseMap = map.body;
+                    this.dataSource.data = map.body.diseaseMaps;
+                });
+        } else if (diseaseBranch) {
             // load current disease branch and its children.
-            this.diseaseMapService.getDiseaseBranchEagerly(diseaseBranchId)
-            .subscribe(diseaseBranch => {
-                this.diseaseBranch = diseaseBranch.body;
-                this.dataSource.data = diseaseBranch.body.diseaseMaps;
-            });
+            this.diseaseMapService.getDiseaseBranchEagerly(diseaseBranch.id)
+                .subscribe(branch => {
+                    this.diseaseBranch = branch.body;
+                    this.diseaseMap = null;
+                    this.dataSource.data = branch.body.diseaseMaps;
+                });
         }
     }
 
@@ -152,7 +161,23 @@ export class DiseaseMapComponent implements OnInit {
         this.windowWidth = window.innerWidth;
         const diseaseBranchId = +this.route.snapshot.paramMap.get('diseaseBranchId');
         const diseaseMapId = +this.route.snapshot.paramMap.get('diseaseMapId');
-        this.fetchDiseaseMap(diseaseMapId, diseaseBranchId);
+        // load current disease branch and its children.
+        if (diseaseMapId) {
+            // load current disease map and its children to show .
+            this.diseaseMapService.getDiseaseMap(diseaseMapId)
+                .subscribe(map => {
+                    this.diseaseMap = map.body;
+                    this.dataSource.data = map.body.diseaseMaps;
+                });
+        } else if (diseaseBranchId) {
+            // load current disease branch and its children.
+            this.diseaseMapService.getDiseaseBranchEagerly(diseaseBranchId)
+                .subscribe(branch => {
+                    this.diseaseBranch = branch.body;
+                    this.diseaseMap = null;
+                    this.dataSource.data = branch.body.diseaseMaps;
+                });
+        }
     }
 
     previousState() {

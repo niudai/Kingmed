@@ -72,6 +72,9 @@
 
                     <a [routerLink]="[diseaseXiAn.id, 'view' ]">{{diseaseXiAn.name}}
                         - <strong>{{diseaseXiAn.subsidiary}}</strong>
+                        <span *jhiHasAnyAuthority="'ROLE_ADMIN'">
+
+                        </span>
                         <button mat-fab color="warn" *ngIf="!diseaseXiAn.activated">停用</button>
                         <!-- <button mat-raised-button color="warn" *ngIf="diseaseXiAn.activated">运行</button> -->
                     </a>
