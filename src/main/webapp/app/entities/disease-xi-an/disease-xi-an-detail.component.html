@@ -272,7 +272,7 @@
                 </table>
             </div>
 
-            <mat-slide-toggle (toggleChange)="activateDiseaseXiAn()" [checked]="diseaseXiAn.activated"
+            <mat-slide-toggle *jhiHasAnyAuthority="'ROLE_ADMIN'" (toggleChange)="activateDiseaseXiAn()" [checked]="diseaseXiAn.activated"
                 [jhiTranslate]="">{{activatedToggleLabel}}</mat-slide-toggle>
             <hr>
             <!-- toggle between several companies -->
