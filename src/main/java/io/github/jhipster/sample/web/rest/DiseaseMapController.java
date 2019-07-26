@@ -71,6 +71,11 @@ public class DiseaseMapController {
         return ResponseEntity.ok().body(diseaseMapService.getDiseaseBranch(diseaseBranchId));
     }
 
+    @GetMapping("/get-disease-branch-eagerly/{diseaseBranchId}")
+    public ResponseEntity<DiseaseBranch> getDiseaseBranchEagerly(@PathVariable Long diseaseBranchId) {
+        return ResponseEntity.ok().body(diseaseMapService.getDiseaseBranchEagerly(diseaseBranchId));
+    }
+
     /**
      * get child disease maps of disease map specified with diseasMapId
      * @param diseaseMapId

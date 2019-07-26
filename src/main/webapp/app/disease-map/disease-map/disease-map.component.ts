@@ -87,14 +87,8 @@ export class DiseaseMapComponent implements OnInit {
             this.diseaseMapService.getDiseaseMap(diseaseMapId)
             .subscribe(diseaseMap =>  {
                 this.diseaseMap = diseaseMap.body;
+                this.dataSource.data = diseaseMap.body.diseaseMaps;
             });
-            // load children
-            this.diseaseMapService.getDiseaseMaps(diseaseMapId)
-            .subscribe(
-                diseaseMaps => {
-                     this.dataSource.data = diseaseMaps.body;
-                }
-            );
         } else if (diseaseBranchId) {
             // load current disease branch and its children.
             this.diseaseMapService.getDiseaseBranch(diseaseBranchId)
@@ -208,7 +202,8 @@ export class DiseaseMapActionBottomSheetComponent {
         dialogRef.afterClosed().subscribe(result => {
             if (result !== undefined) {
                 this.diseaseMapService
-                    .associateWithDiseaseXiAn(this.data.diseaseMap.id, result).subscribe();
+                    .associateWithDiseaseXiAn(this.data.diseaseMap.id, result).subscribe(
+                    );
                 console.log('The dialog was closed');
             }
         });

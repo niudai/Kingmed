@@ -109,6 +109,17 @@ public class DiseaseMapService {
     }
 
     /**
+     * get disease branch.
+     * @return
+     */
+    @Transactional
+    public DiseaseBranch getDiseaseBranchEagerly(Long diseaseBranchId) {
+        DiseaseBranch diseaseBranch = diseaseBranchRepository.findById(diseaseBranchId).get();
+        diseaseBranch.getDiseaseMaps().size();
+        return diseaseBranch;
+    }
+
+    /**
      * get child disease maps of disease map.
      * @return
      */

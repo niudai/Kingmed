@@ -1,5 +1,6 @@
 package io.github.jhipster.sample.domain;
 
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -47,6 +48,7 @@ public class DiseaseMap implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JsonIgnoreProperties("parentDiseaseMap")
     @JoinColumn(name = "disease_map_id")
+    @BatchSize(size = 5)
     private List<DiseaseMap> diseaseMaps;
 
     @ManyToOne
@@ -61,11 +63,13 @@ public class DiseaseMap implements Serializable {
     @ManyToMany(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH,
             CascadeType.PERSIST }, fetch = FetchType.EAGER)
     @JoinTable(name = "disease_map_q_arobot", joinColumns = @JoinColumn(name = "disease_map_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "q_arobot_id", referencedColumnName = "id"))
+    @BatchSize(size = 5)
     private Set<QArobot> qarobots = new HashSet<>();
 
     @ManyToMany(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH,
             CascadeType.PERSIST }, fetch = FetchType.EAGER)
     @JoinTable(name = "disease_map_disease_xi_an", joinColumns = @JoinColumn(name = "disease_map_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "disease_xi_an_id", referencedColumnName = "id"))
+    @BatchSize(size = 5)
     private Set<DiseaseXiAn> diseaseXiAns = new HashSet<>();
 
     public DiseaseMap() {

@@ -1,5 +1,6 @@
 package io.github.jhipster.sample.domain;
 
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -43,6 +44,7 @@ public class DiseaseBranch implements Serializable {
         fetch = FetchType.LAZY)
     @JoinColumn(name = "disease_branch_id")
     @JsonIgnoreProperties("parentDiseaseBranch")
+    @BatchSize(size = 5)
     private List<DiseaseMap> diseaseMaps = new ArrayList<DiseaseMap>();
 
     @Size(max = 50)
