@@ -147,8 +147,11 @@ public class DiseaseMapService {
      */
     @Transactional
     public void deattachDiseaseBranch(Long diseaseBranchId) {
-        diseaseBranchRepository.deleteById(diseaseBranchId);
+        DiseaseBranch diseaseBranch = diseaseBranchRepository.findById(diseaseBranchId).get();
         diseaseBranchSearchRepository.deleteById(diseaseBranchId);
+        for (DiseaseMap map: diseaseBranch.getDiseaseMaps()) {
+            diseaseMapIndexDTOSearchRepository.deleteById(map.getId());
+        }
     }
 
     /**
@@ -158,19 +161,19 @@ public class DiseaseMapService {
      */
     @Transactional
     public void attachDiseaseMapToDiseaseBranch(DiseaseMap diseaseMap, Long diseaseBranchId) {
-        diseaseBranchRepository.findById(diseaseBranchId).get().getDiseaseMaps().add(diseaseMap);
-        diseaseMapSearchRepository.save(diseaseMap);
+        DiseaseMap map = diseaseMapRepository.save(diseaseMap);
+        diseaseBranchRepository.findById(diseaseBranchId).get().getDiseaseMaps().add(map);
+        diseaseMapIndexDTOSearchRepository.save(diseaseMapIndexConverter(map));
     }
 
     /**
      * Put Disease Map what already exists in database to modify some content.
      * @param diseaseMap
      */
-    @Transactional
     public void modifyDiseaseMap(DiseaseMap diseaseMap) {
-        DiseaseMap _diseaseMap = diseaseMapRepository.findById(diseaseMap.getId()).get();
-        _diseaseMap.setName(diseaseMap.getName());
-        diseaseMapSearchRepository.save(_diseaseMap);
+        DiseaseMap newMap = modifyDiseaseMap(diseaseMapRepository.findById(diseaseMap.getId()).get(), diseaseMap);
+        diseaseMapIndexDTOSearchRepository.save(diseaseMapIndexConverter(newMap));
+        diseaseMapRepository.save(newMap);
     }
 
     /**
@@ -179,13 +182,10 @@ public class DiseaseMapService {
      */
     @Transactional
     public void modifyDiseaseBranch(DiseaseBranch diseaseBranch) {
-        DiseaseBranch _diseaseBranch = diseaseBranchRepository
-            .findById(diseaseBranch.getId()).get();
-        if (diseaseBranch.getDiseaseMaps() == null) {
-            diseaseBranch.setDiseaseMaps(_diseaseBranch.getDiseaseMaps());
-        }
-        diseaseBranchRepository.save(diseaseBranch);
-        diseaseBranchSearchRepository.save(diseaseBranch);
+        DiseaseBranch newBranch = modifyDiseaseBranch(diseaseBranchRepository
+            .findById(diseaseBranch.getId()).get(), diseaseBranch);
+        diseaseBranchRepository.save(newBranch);
+        diseaseBranchSearchRepository.save(newBranch);
     }
 
     /**
@@ -195,7 +195,7 @@ public class DiseaseMapService {
     @Transactional
     public void deleteDiseaseMap(Long diseaseMapId) {
         diseaseMapRepository.deleteById(diseaseMapId);
-        diseaseMapSearchRepository.deleteById(diseaseMapId);
+        diseaseMapIndexDTOSearchRepository.deleteById(diseaseMapId);
     }
 
 
@@ -254,8 +254,9 @@ public class DiseaseMapService {
      */
     @Transactional
     public void attachDiseaseMapToDiseaseMap(DiseaseMap newDiseaseMap, Long diseaseMapId) {
-        diseaseMapRepository.findById(diseaseMapId).get().getDiseaseMaps().add(newDiseaseMap);
-        diseaseMapSearchRepository.save(newDiseaseMap);
+        DiseaseMap newMap = diseaseMapRepository.save(newDiseaseMap);
+        diseaseMapRepository.findById(diseaseMapId).get().getDiseaseMaps().add(newMap);
+        diseaseMapIndexDTOSearchRepository.save(diseaseMapIndexConverter(newMap));
     }
 
     @Transactional
@@ -283,6 +284,22 @@ public class DiseaseMapService {
         for (DiseaseMap diseaseMap: diseaseMaps) {
             diseaseMapIndexDTOSearchRepository.save(diseaseMapIndexConverter(diseaseMap));
         }
+    }
+
+    private DiseaseMap modifyDiseaseMap(DiseaseMap oldMap, DiseaseMap newMap) {
+        oldMap.setDescription(newMap.getDescription());
+        oldMap.setId(newMap.getId());
+        oldMap.setName(newMap.getName());
+        oldMap.setSubsidiary(newMap.getName());
+        return oldMap;
+    }
+
+    private DiseaseBranch modifyDiseaseBranch(DiseaseBranch oldBranch, DiseaseBranch newBranch) {
+        oldBranch.setDescription(newBranch.getDescription());
+        oldBranch.setId(newBranch.getId());
+        oldBranch.setName(newBranch.getName());
+        oldBranch.setSubsidiary(newBranch.getName());
+        return oldBranch;
     }
 
     public DiseaseMapIndexDTO diseaseMapIndexConverter(DiseaseMap diseaseMap) {

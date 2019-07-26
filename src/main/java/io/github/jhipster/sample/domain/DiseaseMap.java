@@ -17,8 +17,8 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
- * Disease Map is used to contain mutiple diseases and qarobot, and could contain
- * subDisease map.
+ * Disease Map is used to contain mutiple diseases and qarobot, and could
+ * contain subDisease map.
  */
 @Entity
 @Table(name = "disease_map")
@@ -44,10 +44,7 @@ public class DiseaseMap implements Serializable {
     @Column(name = "description", length = 250)
     private String description = "待添加";
 
-    @OneToMany(
-        cascade = CascadeType.ALL,
-        orphanRemoval = true,
-        fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JsonIgnoreProperties("parentDiseaseMap")
     @JoinColumn(name = "disease_map_id")
     private List<DiseaseMap> diseaseMaps;
@@ -61,25 +58,14 @@ public class DiseaseMap implements Serializable {
     @JoinColumn(name = "disease_branch_id")
     private DiseaseBranch parentDiseaseBranch;
 
-    @ManyToMany(cascade = {
-            CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.REFRESH,
-            CascadeType.PERSIST
-        },
-        fetch = FetchType.EAGER)
-    @JoinTable(name = "disease_map_q_arobot"
-        , joinColumns = @JoinColumn(name = "disease_map_id", referencedColumnName = "id")
-        , inverseJoinColumns = @JoinColumn(name = "q_arobot_id", referencedColumnName = "id"))
+    @ManyToMany(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH,
+            CascadeType.PERSIST }, fetch = FetchType.EAGER)
+    @JoinTable(name = "disease_map_q_arobot", joinColumns = @JoinColumn(name = "disease_map_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "q_arobot_id", referencedColumnName = "id"))
     private Set<QArobot> qarobots = new HashSet<>();
 
-    @ManyToMany(
-        cascade = { CascadeType.DETACH, CascadeType.MERGE,
-            CascadeType.REFRESH, CascadeType.PERSIST },
-        fetch = FetchType.EAGER)
-    @JoinTable(name = "disease_map_disease_xi_an"
-        , joinColumns = @JoinColumn(name = "disease_map_id", referencedColumnName = "id")
-        , inverseJoinColumns = @JoinColumn(name = "disease_xi_an_id", referencedColumnName = "id"))
+    @ManyToMany(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH,
+            CascadeType.PERSIST }, fetch = FetchType.EAGER)
+    @JoinTable(name = "disease_map_disease_xi_an", joinColumns = @JoinColumn(name = "disease_map_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "disease_xi_an_id", referencedColumnName = "id"))
     private Set<DiseaseXiAn> diseaseXiAns = new HashSet<>();
 
     public DiseaseMap() {
@@ -108,7 +94,6 @@ public class DiseaseMap implements Serializable {
     public void setDiseaseMaps(List<DiseaseMap> diseaseMaps) {
         this.diseaseMaps = diseaseMaps;
     }
-
 
     public Set<DiseaseXiAn> getDiseaseXiAns() {
         return this.diseaseXiAns;
@@ -178,15 +163,10 @@ public class DiseaseMap implements Serializable {
         return true;
     }
 
-
     @Override
     public String toString() {
-        return "{" +
-            " id='" + getId() + "'" +
-            ", name='" + getName() + "'" +
-            ", qArobots='" + getQarobots() + "'" +
-            ", diseaseXiAns='" + getDiseaseXiAns() + "'" +
-            "}";
+        return "{" + " id='" + getId() + "'" + ", name='" + getName() + "'" + ", qArobots='" + getQarobots() + "'"
+                + ", diseaseXiAns='" + getDiseaseXiAns() + "'" + "}";
     }
 
     public DiseaseBranch getParentDiseaseBranch() {
