@@ -36,6 +36,10 @@ export class DiseaseMapService {
         return this.http.get<IDiseaseBranch>(`${this.diseaseMapUrl}/get-disease-branch/${diseaseBranchId}`, { observe: 'response'});
     }
 
+    getDiseaseBranchEagerly(diseaseBranchId: number): Observable<BranchResponseType> {
+        return this.http.get<IDiseaseBranch>(`${this.diseaseMapUrl}/get-disease-branch-eagerly/${diseaseBranchId}`, { observe: 'response'});
+    }
+
     getDiseaseMap(diseaseMapId: number): Observable<MapResponseType> {
         return this.http.get<IDiseaseMap>(`${this.diseaseMapUrl}/get-disease-map/${diseaseMapId}`, { observe: 'response'});
     }

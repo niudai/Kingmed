@@ -91,15 +91,11 @@ export class DiseaseMapComponent implements OnInit {
             });
         } else if (diseaseBranchId) {
             // load current disease branch and its children.
-            this.diseaseMapService.getDiseaseBranch(diseaseBranchId)
+            this.diseaseMapService.getDiseaseBranchEagerly(diseaseBranchId)
             .subscribe(diseaseBranch => {
                 this.diseaseBranch = diseaseBranch.body;
+                this.dataSource.data = diseaseBranch.body.diseaseMaps;
             });
-            this.diseaseMapService.getAllDiseaseMap(diseaseBranchId)
-            .subscribe(diseaseMaps => {
-                    this.dataSource.data = diseaseMaps;
-                }
-            );
         }
     }
 
@@ -121,31 +117,35 @@ export class DiseaseMapComponent implements OnInit {
         if (this.previousDataSources.length > 0) {
             this.diseaseMap = this.previousDiseaseTitle.pop();
             this.dataSource.data = this.previousDataSources.pop();
+        } else {
+            // if child of disease map is not loaded, load chilren map,
+            // connect the current node with it's children, and change the
+            // datasource
+            if (node.parentDiseaseBranch) {
+                // if parentDiseaseBranch exists, give root diseasebranch value,
+                // and set disease map to null
+                this.diseaseBranch = node.parentDiseaseBranch;
+                // fetch root disease branch eagerly and set this.diseaseBranch to the root branch
+                this.diseaseMapService.getDiseaseBranchEagerly(this.diseaseBranch.id).subscribe(
+                    res => {
+                        this.diseaseMap = null;
+                        this.diseaseBranch = res.body;
+                        this.dataSource.data = res.body.diseaseMaps;
+                    }
+                );
+            } else if (node.parentDiseaseMap) {
+                // if parentDiseaseMap exists, give root diseaseMap value
+                // set disease branch to null
+                this.diseaseMap = node.parentDiseaseMap;
+                // fetch diseaseMap eagerly.
+                this.diseaseMapService.getDiseaseMap(this.diseaseMap.id).subscribe(
+                    res => {
+                        this.diseaseMap = res.body;
+                        this.dataSource.data = res.body.diseaseMaps;
+                    }
+                );
+            }
         }
-        // else {
-        //     // if child of disease map is not loaded, load chilren map,
-        //     // connect the current node with it's children, and change the
-        //     // datasource
-        //     if (node.parentDiseaseBranch) {
-        //         // if parentDiseaseBranch exists, give root diseasebranch value,
-        //         // and set disease map to null
-        //         this.diseaseBranch = node.parentDiseaseBranch;
-        //         this.diseaseMap = null;
-        //         // fetch all children of root disease branch to show children list.
-        //         this.diseaseMapService.getAllDiseaseMap(this.diseaseBranch.id).subscribe(
-        //             res => this.dataSource.data = res
-        //         );
-        //     } else if (node.parentDiseaseMap) {
-        //         // if parentDiseaseMap exists, give root diseaseMap value
-        //         // set disease branch to null
-        //         this.diseaseMap = node.parentDiseaseMap;
-        //         this.diseaseBranch = null;
-        //         // fetch all children of root disease map to show children list
-        //         this.diseaseMapService.getDiseaseMaps(this.diseaseMap.id).subscribe(
-        //             res => this.dataSource.data = res.body
-        //         );
-        //     }
-        // }
     }
 
     ngOnInit() {

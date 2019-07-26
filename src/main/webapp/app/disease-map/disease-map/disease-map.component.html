@@ -1,19 +1,41 @@
 <mat-card *ngIf="!diseaseMap">{{diseaseBranch.name}}
     <button mat-mini-fab color="primary" *jhiHasAnyAuthority="'ROLE_ADMIN'" (click)="openBranchBottomSheet()"
         class="add">+</button>
-    <button *ngIf = "previousDataSources.length > 0" mat-raised-button (click)="goUpTreeControl()" class="nav-back">
-        <fa-icon [icon]="'arrow-left'"></fa-icon>
-    </button>
 </mat-card>
 <mat-card *ngIf="diseaseMap">{{diseaseMap.name}}
         <!-- <button mat-mini-fab color="primary" *jhiHasAnyAuthority="'ROLE_ADMIN'" (click)="openBranchBottomSheet()"
             class="add">+</button> -->
-        <button *ngIf = "previousDataSources.length > 0" mat-raised-button (click)="goUpTreeControl()" class="nav-back">
+        <button *ngIf = "previousDataSources.length > 0 || !diseaseBranch" mat-raised-button (click)="goUpTreeControl(diseaseMap)" class="nav-back">
             <fa-icon [icon]="'arrow-left'"></fa-icon>
         </button>
 </mat-card>
+<mat-toolbar>
+    <button mat-raised-button disabled="true"
+        style = "background-color: rgb(241, 238, 189); color: rgb(23, 24, 24)"
+    >{{diseaseBranch.name}}</button>
+    <span *ngFor="let map of previousDiseaseTitle">
+        <span *ngIf="map">
+                <fa-icon [icon] = "'arrow-right'"></fa-icon>
+                <button mat-raised-button disabled="true"
+                    style = "background-color: rgb(241, 238, 189); color: rgb(23, 24, 24)"
+                >
+                        {{map.name}}
+                </button>
+        </span>
+
+    </span>
+
+    <span *ngIf = "diseaseMap">
+            <fa-icon [icon] = "'arrow-right'"></fa-icon>
+            <button mat-raised-button disabled="true"
+                style = "background-color: rgb(241, 238, 189); color: rgb(23, 24, 24)"
+            >
+                    {{diseaseMap.name}}
+            </button>
+    </span>
+</mat-toolbar>
 <!-- <button mat-raised-button (click)="openBranchBottomSheet()">Open file</button> -->
-<br>
+<hr>
 <div class="container col-12">
     <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
         <!-- This is the tree node template for leaf nodes -->
