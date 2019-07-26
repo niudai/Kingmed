@@ -43,6 +43,7 @@ export class DiseaseBranchComponent implements OnInit {
                 }
             ).subscribe((res: HttpResponse<IDiseaseMap[]>) => this.mapLoadSuccessHandler(res));
         } else {
+            this.diseaseMaps = null;
             this.diseaseMapService.getAllDiseaseBranch(
                 {
                     page: this.pageEvent && this.pageEvent.pageIndex ? this.pageEvent.pageIndex : 0,

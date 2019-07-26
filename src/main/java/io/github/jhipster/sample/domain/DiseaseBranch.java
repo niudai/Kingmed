@@ -6,6 +6,8 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -40,6 +42,7 @@ public class DiseaseBranch implements Serializable {
         , orphanRemoval = true,
         fetch = FetchType.LAZY)
     @JoinColumn(name = "disease_branch_id")
+    @JsonIgnoreProperties("parentDiseaseBranch")
     private List<DiseaseMap> diseaseMaps = new ArrayList<DiseaseMap>();
 
     @Size(max = 50)

@@ -45,7 +45,7 @@ export class DiseaseMapService {
      * @param diseaseMapId diseaseMapId
      */
     getDiseaseMaps(diseaseMapId: number): Observable<MapResponseArrayType> {
-        return this.http.get<IDiseaseMap[]>(`${this.diseaseMapUrl}/get-disease-map/${diseaseMapId}`, { observe: 'response' });
+        return this.http.get<IDiseaseMap[]>(`${this.diseaseMapUrl}/get-disease-maps/${diseaseMapId}`, { observe: 'response' });
     }
 
     /**
