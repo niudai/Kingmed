@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import io.github.jhipster.sample.domain.DiseaseBranch;
 import io.github.jhipster.sample.domain.DiseaseMap;
+import io.github.jhipster.sample.domain.DiseaseMapIndexDTO;
 import io.github.jhipster.sample.domain.DiseaseXiAn;
 import io.github.jhipster.sample.domain.ImageApplication;
 import io.github.jhipster.sample.domain.ImageSupplies;
@@ -29,6 +30,7 @@ import io.github.jhipster.sample.repository.ImageApplicationRepository;
 import io.github.jhipster.sample.repository.ImageSuppliesRepository;
 import io.github.jhipster.sample.repository.QArobotRepository;
 import io.github.jhipster.sample.repository.search.DiseaseBranchSearchRepository;
+import io.github.jhipster.sample.repository.search.DiseaseMapIndexDTOSearchRepository;
 import io.github.jhipster.sample.repository.search.DiseaseMapSearchRepository;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
@@ -49,14 +51,18 @@ public class DiseaseMapService {
     private final DiseaseBranchRepository diseaseBranchRepository;
     private final DiseaseBranchSearchRepository diseaseBranchSearchRepository;
     private final DiseaseMapSearchRepository diseaseMapSearchRepository;
+    private final DiseaseMapIndexDTOSearchRepository diseaseMapIndexDTOSearchRepository;
+
     @Autowired
     public DiseaseMapService(
         DiseaseMapRepository diseaseMapRepository,
         DiseaseBranchRepository diseaseBranchRepository,
         DiseaseXiAnRepository diseaseXiAnRepository,
         DiseaseBranchSearchRepository diseaseBranchSearchRepository,
+        DiseaseMapIndexDTOSearchRepository diseaseMapIndexDTOSearchRepository,
         DiseaseMapSearchRepository diseaseMapSearchRepository,
         QArobotRepository qArobotRepository) {
+        this.diseaseMapIndexDTOSearchRepository = diseaseMapIndexDTOSearchRepository;
         this.diseaseMapSearchRepository = diseaseMapSearchRepository;
         this.diseaseBranchSearchRepository = diseaseBranchSearchRepository;
         this.diseaseXiAnRepository = diseaseXiAnRepository;
@@ -260,9 +266,9 @@ public class DiseaseMapService {
     }
 
     @Transactional
-    public Page<DiseaseMap> searchDiseaseMap(String query, Pageable pageable) {
+    public Page<DiseaseMapIndexDTO> searchDiseaseMap(String query, Pageable pageable) {
         // Page<DiseaseBranch> page = diseaseBranchSearchRepository.search(QueryBuilders.queryStringQuery(query), pageable);
-        Page<DiseaseMap> page = diseaseMapSearchRepository.search(QueryBuilders.queryStringQuery(query), pageable);
+        Page<DiseaseMapIndexDTO> page = diseaseMapIndexDTOSearchRepository.search(QueryBuilders.queryStringQuery(query), pageable);
         return page;
     }
 
@@ -272,10 +278,20 @@ public class DiseaseMapService {
         diseaseBranchSearchRepository.saveAll(diseaseBranchRepository.findAll());
     }
 
-    @Transactional
     public void reindexDiseaseMap() {
-        diseaseMapSearchRepository.deleteAll();
-        diseaseMapSearchRepository.saveAll(diseaseMapRepository.findAll());
+        List<DiseaseMap> diseaseMaps = diseaseMapRepository.findAll();
+        for (DiseaseMap diseaseMap: diseaseMaps) {
+            diseaseMapIndexDTOSearchRepository.save(diseaseMapIndexConverter(diseaseMap));
+        }
+    }
+
+    public DiseaseMapIndexDTO diseaseMapIndexConverter(DiseaseMap diseaseMap) {
+        DiseaseMapIndexDTO dto = new DiseaseMapIndexDTO();
+        dto.setId(diseaseMap.getId());
+        dto.setName(diseaseMap.getName());
+        dto.setDescription(diseaseMap.getDescription());
+        dto.setSubsidiary(diseaseMap.getSubsidiary());
+        return dto;
     }
 
 }

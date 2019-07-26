@@ -15,7 +15,7 @@ import java.util.Objects;
  * Disease Map is used to contain mutiple diseases and qarobot, and could contain
  * subDisease map.
  */
-@Document(indexName = "DiseaseMapIndexDTOindex")
+@Document(indexName = "diseasemapindexdto")
 public class DiseaseMapIndexDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;

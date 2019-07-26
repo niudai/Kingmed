@@ -2,6 +2,7 @@ package io.github.jhipster.sample.web.rest;
 
 import io.github.jhipster.sample.domain.DiseaseBranch;
 import io.github.jhipster.sample.domain.DiseaseMap;
+import io.github.jhipster.sample.domain.DiseaseMapIndexDTO;
 import io.github.jhipster.sample.repository.search.UserSearchRepository;
 import io.github.jhipster.sample.service.DiseaseMapService;
 import io.github.jhipster.sample.web.rest.util.PaginationUtil;
@@ -204,9 +205,9 @@ public class DiseaseMapController {
     }
 
     @GetMapping("/_search-disease-map")
-    public ResponseEntity<List<DiseaseMap>> searchMap(@RequestParam String query, Pageable pageable) {
+    public ResponseEntity<List<DiseaseMapIndexDTO>> searchMap(@RequestParam String query, Pageable pageable) {
         log.debug("REST request to search for a page of Map for query {}", query);
-        Page<DiseaseMap> page = diseaseMapService.searchDiseaseMap(query, pageable);
+        Page<DiseaseMapIndexDTO> page = diseaseMapService.searchDiseaseMap(query, pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/disease-map/_search-disease-map");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }

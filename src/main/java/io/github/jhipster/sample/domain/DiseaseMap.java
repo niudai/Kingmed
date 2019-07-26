@@ -55,7 +55,6 @@ public class DiseaseMap implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties("diseaseMaps")
     @JoinColumn(name = "disease_map_id")
-    // @JsonIgnoreProperties("diseaseMaps")
     private DiseaseMap parentDiseaseMap;
 
     @ManyToOne

@@ -5,6 +5,8 @@ export interface IDiseaseMap {
     id?: number;
     name?: string;
     diseaseMaps?: IDiseaseMap[];
+    subsidiary?: string;
+    description?: string;
     parentDiseaseMap?: IDiseaseMap;
     parentDiseaseBranch?: IDiseaseBranch;
     qarobots?: IQArobot[];
@@ -16,6 +18,8 @@ export class DiseaseMap implements IDiseaseMap {
         public id?: number,
         public name?: string,
         public diseaseMaps?: IDiseaseMap[],
+        public subsidiary?: string,
+        public description?: string,
         public parentDiseaseMap?: IDiseaseMap,
         public parentDiseaseBranch?: IDiseaseBranch,
         public qarobots?: IQArobot[],
