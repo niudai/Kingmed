@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
@@ -6,32 +6,29 @@ import { JhiEventManager } from 'ng-jhipster';
 
 import { IDiseaseXiAn } from 'app/shared/model/disease-xi-an.model';
 import { DiseaseXiAnService } from './disease-xi-an.service';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { DiseaseXiAnMatDeleteDialogComponent } from '.';
 
 @Component({
     selector: 'jhi-disease-xi-an-delete-dialog',
     templateUrl: './disease-xi-an-delete-dialog.component.html'
 })
 export class DiseaseXiAnDeleteDialogComponent {
-    diseaseXiAn: IDiseaseXiAn;
 
     constructor(
-        protected diseaseXiAnService: DiseaseXiAnService,
-        public activeModal: NgbActiveModal,
-        protected eventManager: JhiEventManager
-    ) {}
+        public dialogRef: MatDialogRef<DiseaseXiAnMatDeleteDialogComponent>,
+        @Inject(MAT_DIALOG_DATA) public data,
+        protected service: DiseaseXiAnService,
+        protected router: Router) {}
 
-    clear() {
-        this.activeModal.dismiss('cancel');
+    onNoClick(): void {
+        this.dialogRef.close();
     }
 
-    confirmDelete(id: number) {
-        this.diseaseXiAnService.delete(id).subscribe(response => {
-            this.eventManager.broadcast({
-                name: 'diseaseXiAnListModification',
-                content: 'Deleted an diseaseXiAn'
-            });
-            this.activeModal.dismiss(true);
-        });
+    confirmDelete(): void {
+        this.service.delete(this.data.diseaseXiAn.id).subscribe(
+            any => this.dialogRef.close()
+        );
     }
 }
 

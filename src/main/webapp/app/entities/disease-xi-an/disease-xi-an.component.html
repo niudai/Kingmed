@@ -169,6 +169,10 @@
                             queryParamsHandling="merge" style="background-color: rgb(243, 26, 26);">
                             <fa-icon [icon]="'times'"></fa-icon>
                         </button>
+                        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" mat-mini-fab type="submit"
+                            (click)="openDialog(element)" style="background-color: rgb(243, 26, 26);">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                        </button>
                     </div>
                 </td>
             </ng-container>

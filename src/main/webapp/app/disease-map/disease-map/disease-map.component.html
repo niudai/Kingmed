@@ -39,8 +39,13 @@
         </mat-card-content>
     </mat-card>
 <mat-toolbar>
-    <button mat-raised-button disabled="true"
-        style="background-color: rgb(241, 238, 189); color: rgb(23, 24, 24)">{{diseaseBranch.name}}</button>
+    <span *ngIf="diseaseBranch || diseaseMap.parentDiseaseBranch">
+            <button mat-raised-button disabled="true" *ngIf="diseaseBranch"
+            style="background-color: rgb(241, 238, 189); color: rgb(23, 24, 24)">{{diseaseBranch.name}}</button>
+            <button mat-raised-button disabled="true" *ngIf="!diseaseBranch && diseaseMap.parentDiseaseBranch"
+            style="background-color: rgb(241, 238, 189); color: rgb(23, 24, 24)">{{diseaseMap.parentDiseaseBranch.name}}</button>
+    </span>
+
     <span *ngFor="let map of previousDiseaseTitle">
         <span *ngIf="map">
             <fa-icon [icon]="'arrow-right'"></fa-icon>

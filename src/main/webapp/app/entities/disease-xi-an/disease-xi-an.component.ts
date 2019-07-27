@@ -1,3 +1,4 @@
+import { NgbModal, NgbModalModule, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Component, OnInit, OnDestroy, HostListener, Inject } from '@angular/core';
 import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -11,7 +12,7 @@ import { AccountService } from 'app/core';
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { DiseaseXiAnService } from './disease-xi-an.service';
 import { PageEvent, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { DiseaseMapService as DiseaseXiAnService } from 'app/disease-map/disease-map.service';
+import { DiseaseXiAnDeleteDialogComponent } from 'app/disease-map/disease-map/disease-map.component';
 
 @Component({
     selector: 'jhi-disease-xi-an',
@@ -39,6 +40,7 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
     previousPage: any;
     reverse: any;
     pageEvent: PageEvent;
+    protected ngbModalRef: NgbModalRef;
     constructor(
         protected diseaseXiAnService: DiseaseXiAnService,
         protected parseLinks: JhiParseLinks,
@@ -47,7 +49,9 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
         protected activatedRoute: ActivatedRoute,
         protected router: Router,
         protected eventManager: JhiEventManager,
-        protected matDialog: MatDialog
+        protected matDialog: MatDialog,
+        protected modalService: NgbModal,
+        protected dialog: MatDialog
     ) {
     }
 
@@ -153,6 +157,18 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
         this.loadAll(0);
     }
 
+    openDialog(disease: IDiseaseXiAn): void {
+        const dialogRef = this.dialog.open(DiseaseXiAnMatDeleteDialogComponent, {
+          width: '250px',
+          data: {diseaseXiAn: this.diseaseXiAns[0]}
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+        //   console.log('The dialog was closed');
+            this.loadAll(this.page);
+        });
+    }
+
     ngOnInit() {
         if (this.accountService.hasAnyAuthority(['ROLE_ADMIN'])) {
             this.PC_COL.push('edit');
@@ -189,10 +205,6 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
         return item.id;
     }
 
-    openDeleteDialog() {
-        const dialogRef = this.matDialog.open()
-    }
-
     registerChangeInDiseaseXiAns() {
         this.eventSubscriber = this.eventManager.subscribe('diseaseXiAnListModification', response => this.loadAll(this.pageEvent.pageIndex));
     }
@@ -218,31 +230,23 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
 
 @Component({
     selector: 'jhi-disease-xi-an-delete-dialog',
-    templateUrl: './disease-xi-an-delete-dialog.component.html',
+    templateUrl: './disease-xi-an-delete-dialog.component.html'
 })
-export class DiseaseXiAnDeleteDialogComponent implements OnInit {
+export class DiseaseXiAnMatDeleteDialogComponent {
 
     constructor(
-        public dialogRef: MatDialogRef<DiseaseXiAnDeleteDialogComponent>,
-        @Inject(MAT_DIALOG_DATA) public data
-        , protected service: DiseaseXiAnService) {
-    }
-
-    ngOnInit(): void {
-    }
-
-    confirmDelete() {
-        this.service
-            .delete(this.data.diseaseXiAn.id).subscribe(any => this.onNoClick());
-        console.log('The dialog was closed');
-    }
+        public dialogRef: MatDialogRef<DiseaseXiAnMatDeleteDialogComponent>,
+        @Inject(MAT_DIALOG_DATA) public data,
+        protected service: DiseaseXiAnService,
+        protected router: Router) {}
 
     onNoClick(): void {
         this.dialogRef.close();
     }
 
-    previousState() {
-        window.history.back();
+    confirmDelete(): void {
+        this.service.delete(this.data.diseaseXiAn.id).subscribe(
+            any => this.dialogRef.close()
+        );
     }
-
 }

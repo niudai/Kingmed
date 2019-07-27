@@ -13,6 +13,7 @@ import {
     DiseaseXiAnDeleteDialogComponent,
     diseaseXiAnRoute,
     diseaseXiAnPopupRoute,
+    DiseaseXiAnMatDeleteDialogComponent,
 } from './';
 import { DiseaseXiAnPricesComponent } from './disease-xi-an-prices/disease-xi-an-prices.component';
 import { DiseaseXiAnPricesDeleteComponent } from './disease-xi-an-prices-delete/disease-xi-an-prices-delete.component';
@@ -54,7 +55,8 @@ const ENTITY_STATES = [...diseaseXiAnRoute, ...diseaseXiAnPopupRoute];
         DiseaseXiAnDiseasesComponent,
         DiseaseDeleteDialogComponent,
         DiseaseAssociateDialogComponent,
-        DiseaseXiAnDeleteDialogComponent
+        DiseaseXiAnDeleteDialogComponent,
+        DiseaseXiAnMatDeleteDialogComponent
     ],
     entryComponents: [
         DiseaseXiAnComponent,
@@ -63,7 +65,8 @@ const ENTITY_STATES = [...diseaseXiAnRoute, ...diseaseXiAnPopupRoute];
         DiseaseXiAnDeletePopupComponent,
         DiseaseDeleteDialogComponent,
         DiseaseAssociateDialogComponent,
-        DiseaseXiAnDeleteDialogComponent
+        DiseaseXiAnDeleteDialogComponent,
+        DiseaseXiAnMatDeleteDialogComponent
     ],
     providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }
      , {provide: MatPaginatorIntl, useClass: Paginator}],
