@@ -1,0 +1,29 @@
+<h1 mat-dialog-title>编辑地图</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+        <input matInput
+            [(ngModel)]="data.result.name"
+             placeholder="地图名"
+             [value] = "data.result.name"
+        >
+  </mat-form-field>
+  <mat-form-field>
+        <input matInput
+            [(ngModel)]="data.result.subsidiary"
+            placeholder="子公司"
+            [value] = "data.result.subsidiary"
+        >
+  </mat-form-field>
+  <mat-form-field>
+        <input matInput
+            [(ngModel)]="data.result.description"
+            placeholder="描述"
+            [value] = "data.result.description"
+        >
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">取消</button>
+  <button mat-button  [mat-dialog-close]="data.result" cdkFocusInitial>确定</button>
+</div>
+

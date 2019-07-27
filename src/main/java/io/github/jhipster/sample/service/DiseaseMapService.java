@@ -136,7 +136,9 @@ public class DiseaseMapService {
      * @return
      */
     public DiseaseMap getDiseaseMap(Long diseaseMapId) {
-        return diseaseMapRepository.findById(diseaseMapId).get();
+        DiseaseMap map =  diseaseMapRepository.findById(diseaseMapId).get();
+        map.getDiseaseMaps();
+        return map;
     }
 
     /**
@@ -181,10 +183,10 @@ public class DiseaseMapService {
      * Put Disease Map what already exists in database to modify some content.
      * @param diseaseMap
      */
+    @Transactional
     public void modifyDiseaseMap(DiseaseMap diseaseMap) {
         DiseaseMap newMap = modifyDiseaseMap(diseaseMapRepository.findById(diseaseMap.getId()).get(), diseaseMap);
         diseaseMapIndexDTOSearchRepository.save(diseaseMapIndexConverter(newMap));
-        diseaseMapRepository.save(newMap);
     }
 
     /**
@@ -195,7 +197,6 @@ public class DiseaseMapService {
     public void modifyDiseaseBranch(DiseaseBranch diseaseBranch) {
         DiseaseBranch newBranch = modifyDiseaseBranch(diseaseBranchRepository
             .findById(diseaseBranch.getId()).get(), diseaseBranch);
-        diseaseBranchRepository.save(newBranch);
         diseaseBranchSearchRepository.save(newBranch);
     }
 
@@ -301,7 +302,7 @@ public class DiseaseMapService {
         oldMap.setDescription(newMap.getDescription());
         oldMap.setId(newMap.getId());
         oldMap.setName(newMap.getName());
-        oldMap.setSubsidiary(newMap.getName());
+        oldMap.setSubsidiary(newMap.getSubsidiary());
         return oldMap;
     }
 
@@ -309,7 +310,7 @@ public class DiseaseMapService {
         oldBranch.setDescription(newBranch.getDescription());
         oldBranch.setId(newBranch.getId());
         oldBranch.setName(newBranch.getName());
-        oldBranch.setSubsidiary(newBranch.getName());
+        oldBranch.setSubsidiary(newBranch.getSubsidiary());
         return oldBranch;
     }
 

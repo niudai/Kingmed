@@ -53,7 +53,8 @@ const ENTITY_STATES = [...diseaseXiAnRoute, ...diseaseXiAnPopupRoute];
         DiseaseXiAnSuppliessUpdateComponent,
         DiseaseXiAnDiseasesComponent,
         DiseaseDeleteDialogComponent,
-        DiseaseAssociateDialogComponent
+        DiseaseAssociateDialogComponent,
+        DiseaseXiAnDeleteDialogComponent
     ],
     entryComponents: [
         DiseaseXiAnComponent,
@@ -61,7 +62,8 @@ const ENTITY_STATES = [...diseaseXiAnRoute, ...diseaseXiAnPopupRoute];
         DiseaseXiAnDeleteDialogComponent,
         DiseaseXiAnDeletePopupComponent,
         DiseaseDeleteDialogComponent,
-        DiseaseAssociateDialogComponent
+        DiseaseAssociateDialogComponent,
+        DiseaseXiAnDeleteDialogComponent
     ],
     providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }
      , {provide: MatPaginatorIntl, useClass: Paginator}],

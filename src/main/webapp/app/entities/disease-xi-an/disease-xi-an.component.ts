@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener, Inject } from '@angular/core';
 import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -10,7 +10,8 @@ import { AccountService } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { DiseaseXiAnService } from './disease-xi-an.service';
-import { PageEvent } from '@angular/material';
+import { PageEvent, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { DiseaseMapService as DiseaseXiAnService } from 'app/disease-map/disease-map.service';
 
 @Component({
     selector: 'jhi-disease-xi-an',
@@ -46,6 +47,7 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
         protected activatedRoute: ActivatedRoute,
         protected router: Router,
         protected eventManager: JhiEventManager,
+        protected matDialog: MatDialog
     ) {
     }
 
@@ -187,6 +189,10 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
         return item.id;
     }
 
+    openDeleteDialog() {
+        const dialogRef = this.matDialog.open()
+    }
+
     registerChangeInDiseaseXiAns() {
         this.eventSubscriber = this.eventManager.subscribe('diseaseXiAnListModification', response => this.loadAll(this.pageEvent.pageIndex));
     }
@@ -208,4 +214,35 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
     protected onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
     }
+}
+
+@Component({
+    selector: 'jhi-disease-xi-an-delete-dialog',
+    templateUrl: './disease-xi-an-delete-dialog.component.html',
+})
+export class DiseaseXiAnDeleteDialogComponent implements OnInit {
+
+    constructor(
+        public dialogRef: MatDialogRef<DiseaseXiAnDeleteDialogComponent>,
+        @Inject(MAT_DIALOG_DATA) public data
+        , protected service: DiseaseXiAnService) {
+    }
+
+    ngOnInit(): void {
+    }
+
+    confirmDelete() {
+        this.service
+            .delete(this.data.diseaseXiAn.id).subscribe(any => this.onNoClick());
+        console.log('The dialog was closed');
+    }
+
+    onNoClick(): void {
+        this.dialogRef.close();
+    }
+
+    previousState() {
+        window.history.back();
+    }
+
 }

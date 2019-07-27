@@ -235,21 +235,31 @@ export class DiseaseMapActionBottomSheetComponent {
     }
 
     modifyDiseaseMap(): void {
-        const dialogRef = this.dialog.open(DiseaseMapAssociateDialogComponent, {
+        const dialogRef = this.dialog.open(DiseaseMapModifyDialogComponent, {
             data: {
-                input: true,
-                title: '更改地图名称',
-                description: '输入要更改的名称:',
+                result: this.data.diseaseMap
             }
         });
         dialogRef.afterClosed().subscribe(result => {
             if (result !== undefined) {
-                this.data.diseaseMap.name = result;
+                // this.data.diseaseMap.name = result;
+
                 this.diseaseMapService
-                    .modifyDiseaseMap(this.data.diseaseMap).subscribe();
+                    .modifyDiseaseMap(this.diseaseMapProxyConverter(result)).subscribe();
+                // this.diseaseMapService
+                //     .modifyDiseaseMap(result).subscribe();
                 console.log('The dialog was closed');
             }
         });
+    }
+
+    private diseaseMapProxyConverter(map: IDiseaseMap): IDiseaseMap {
+        const _map = new DiseaseMap();
+        _map.id = map.id;
+        _map.description = map.description;
+        _map.name = map.name;
+        _map.subsidiary = map.subsidiary;
+        return _map;
     }
 
     associateWithQArobot(): void {
@@ -377,6 +387,33 @@ export interface AssociateDialog {
     templateUrl: './disease-map-associate-dialog.component.html',
 })
 export class DiseaseMapAssociateDialogComponent implements OnInit {
+
+    diseaseMap: IDiseaseMap;
+
+    constructor(
+        public dialogRef: MatDialogRef<DiseaseMapAssociateDialogComponent>,
+        @Inject(MAT_DIALOG_DATA) public data
+        , protected diseaseMapService: DiseaseMapService) {
+    }
+
+    ngOnInit(): void {
+    }
+
+    onNoClick(): void {
+        this.dialogRef.close();
+    }
+
+    previousState() {
+        window.history.back();
+    }
+
+}
+
+@Component({
+    selector: 'jhi-disease-map-modify-dialog',
+    templateUrl: './disease-map-modify-dialog.component.html',
+})
+export class DiseaseMapModifyDialogComponent implements OnInit {
 
     diseaseMap: IDiseaseMap;
 

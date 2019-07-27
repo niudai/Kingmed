@@ -1,5 +1,5 @@
 import { MatPaginatorIntl } from '@angular/material';
-import { DiseaseXiAnDeleteDialogComponent, QArobotDeleteDialogComponent, DiseaseBranchModifyDialogComponent } from './disease-map/disease-map.component';
+import { DiseaseXiAnDeleteDialogComponent, QArobotDeleteDialogComponent, DiseaseBranchModifyDialogComponent, DiseaseMapModifyDialogComponent } from './disease-map/disease-map.component';
 import { RouterModule } from '@angular/router';
 import { DiseaseMapAssociateQArobotComponent } from './disease-map-associate-q-arobot/disease-branch-map-associate-q-arobot.component';
 import { DiseaseMapAssociateDiseaseXiAnComponent } from './disease-map-associate-disease-xi-an/disease-branch-map-associate-disease-xi-an.component';
@@ -41,6 +41,7 @@ import { Paginator } from 'app/shared/paginator/paginator';
         , DiseaseXiAnDeleteDialogComponent
         , QArobotDeleteDialogComponent
         , DiseaseBranchModifyDialogComponent
+        , DiseaseMapModifyDialogComponent
     ],
     entryComponents: [
         DiseaseBranchDeleteModalComponent
@@ -52,6 +53,7 @@ import { Paginator } from 'app/shared/paginator/paginator';
         , DiseaseXiAnDeleteDialogComponent
         , DiseaseBranchModifyDialogComponent
         , QArobotDeleteDialogComponent
+        , DiseaseMapModifyDialogComponent
     ],
     providers: [
         { provide: JhiLanguageService, useClass: JhiLanguageService }]
