@@ -71,7 +71,7 @@
         <!-- This is the tree node template for leaf nodes -->
         <mat-tree-node *matTreeNodeDef="let node">
             <li style="padding-bottom: 5px; width: 90%">
-                <mat-expansion-panel style="margin: 5px;">
+                <mat-expansion-panel style="margin: 5px;" (click) = "loadMapEagerly(node)">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
                             <span>{{node.name}}</span>
@@ -121,7 +121,7 @@
         <!-- This is the tree node template for expandable nodes -->
         <mat-tree-node *matTreeNodeDef="let node; when: hasChild" style="display: flex">
             <li style="padding-bottom: 5px; width: 90%">
-                <mat-expansion-panel style="margin: 5px;">
+                <mat-expansion-panel style="margin: 5px;" (click) = "loadMapEagerly(node)">
                     <button mat-mini-fab color="accent" (click)="goDownTreeControl(node)" class="arrow-right">
                         <fa-icon [icon]="'arrow-right'"></fa-icon>
                     </button>

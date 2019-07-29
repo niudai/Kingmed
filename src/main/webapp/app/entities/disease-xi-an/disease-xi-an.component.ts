@@ -174,6 +174,10 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
             this.PC_COL.push('edit');
             this.PC_COL.push('delete');
         }
+        if (this.accountService.hasAnyAuthority(['ROLE_DOCTOR'])) {
+            this.PC_COL = this.PC_COL.filter(any => any !== 'projectConcourse');
+            this.MOBILE_COL = this.MOBILE_COL.filter(any => any !== 'projectConcourse');
+        }
         this.columnToggle();
         this.itemsPerPage = ITEMS_PER_PAGE;
         // this.routeData = this.activatedRoute.data.subscribe(data => {

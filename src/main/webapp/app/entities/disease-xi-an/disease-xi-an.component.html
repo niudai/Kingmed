@@ -165,11 +165,6 @@
                 <td mat-cell *matCellDef="let element">
                     <div class="btn-group flex-btn-group-container">
                         <button *jhiHasAnyAuthority="'ROLE_ADMIN'" mat-mini-fab type="submit"
-                            [routerLink]="[{ outlets: { popup: element.id + '/delete' } }]" replaceUrl="true"
-                            queryParamsHandling="merge" style="background-color: rgb(243, 26, 26);">
-                            <fa-icon [icon]="'times'"></fa-icon>
-                        </button>
-                        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" mat-mini-fab type="submit"
                             (click)="openDialog(element)" style="background-color: rgb(243, 26, 26);">
                             <fa-icon [icon]="'times'"></fa-icon>
                         </button>

@@ -45,6 +45,14 @@ export class DiseaseMapService {
     }
 
     /**
+     * Get disease map eagerly with diseases and qarobots
+     * @param diseaseMapId
+     */
+    getDiseaseMapEagerly(diseaseMapId: number): Observable<MapResponseType> {
+        return this.http.get<IDiseaseMap>(`${this.diseaseMapUrl}/get-disease-map-eagerly/${diseaseMapId}`, { observe: 'response'});
+    }
+
+    /**
      * get child disease maps of disease mp.
      * @param diseaseMapId diseaseMapId
      */

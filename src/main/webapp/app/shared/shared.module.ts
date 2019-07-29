@@ -10,6 +10,7 @@ import {
 } from './';
 import { NavigationBackComponent } from './navigation/navigation-back.component';
 import { HideIfNullDirective } from './pipe/hide-if-null.directive';
+import { HideIfHasAnyAuthorityDirective } from './pipe/hide-if-has-any-authority.directive';
 @NgModule({
     imports: [
         JhipsterElasticsearchSampleApplicationSharedCommonModule,
@@ -19,6 +20,7 @@ import { HideIfNullDirective } from './pipe/hide-if-null.directive';
         JhiLoginModalComponent,
         HasAnyAuthorityDirective,
         HideIfNullDirective,
+        HideIfHasAnyAuthorityDirective
     ],
     providers: [{ provide: NgbDateAdapter, useClass: NgbDateMomentAdapter }],
     entryComponents: [JhiLoginModalComponent],
@@ -28,6 +30,7 @@ import { HideIfNullDirective } from './pipe/hide-if-null.directive';
         JhiLoginModalComponent,
         HasAnyAuthorityDirective,
         HideIfNullDirective,
+        HideIfHasAnyAuthorityDirective
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

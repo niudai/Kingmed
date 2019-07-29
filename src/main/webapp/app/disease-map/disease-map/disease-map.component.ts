@@ -180,6 +180,15 @@ export class DiseaseMapComponent implements OnInit {
         }
     }
 
+    loadMapEagerly(map: IDiseaseMap) {
+        this.diseaseMapService.getDiseaseMapEagerly(
+            map.id
+        ).subscribe(res => {
+            map.diseaseXiAns = res.body.diseaseXiAns;
+            map.qarobots = res.body.qarobots;
+        });
+    }
+
     previousState() {
         this.router.navigate(['../../'], { relativeTo: this.route });
     }

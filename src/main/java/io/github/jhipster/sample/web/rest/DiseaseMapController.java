@@ -97,6 +97,16 @@ public class DiseaseMapController {
     }
 
     /**
+     * get current disease map eagerly with disease and qarobot specified with diseaseMapId
+     * @param diseaseMapId
+     * @return
+     */
+    @GetMapping("/get-disease-map-eagerly/{diseaseMapId}")
+    public ResponseEntity<DiseaseMap> getDiseaseMapEagerly(@PathVariable Long diseaseMapId) {
+        return ResponseEntity.ok().body(diseaseMapService.getDiseaseMapEagerly(diseaseMapId));
+    }
+
+    /**
      * get all disease maps in a disease branch
      * @param diseaseBranchId
      * @return

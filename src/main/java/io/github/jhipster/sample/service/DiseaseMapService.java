@@ -116,6 +116,9 @@ public class DiseaseMapService {
     public DiseaseBranch getDiseaseBranchEagerly(Long diseaseBranchId) {
         DiseaseBranch diseaseBranch = diseaseBranchRepository.findById(diseaseBranchId).get();
         diseaseBranch.getDiseaseMaps().size();
+        for (DiseaseMap map: diseaseBranch.getDiseaseMaps()) {
+            map.getDiseaseMaps().size();
+        }
         return diseaseBranch;
     }
 
@@ -135,9 +138,18 @@ public class DiseaseMapService {
      * get disease map.
      * @return
      */
+    @Transactional
     public DiseaseMap getDiseaseMap(Long diseaseMapId) {
         DiseaseMap map =  diseaseMapRepository.findById(diseaseMapId).get();
-        map.getDiseaseMaps();
+        map.getDiseaseMaps().size();
+        return map;
+    }
+
+    @Transactional
+    public DiseaseMap getDiseaseMapEagerly(Long diseaseMapId) {
+        DiseaseMap map =  diseaseMapRepository.findById(diseaseMapId).get();
+        map.getDiseaseXiAns().size();
+        map.getQarobots().size();
         return map;
     }
 
