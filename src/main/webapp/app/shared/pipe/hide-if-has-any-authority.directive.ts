@@ -21,6 +21,9 @@ export class HideIfHasAnyAuthorityDirective {
         this.authorities = typeof value === 'string' ? [value] : value;
         if (this.accountService.hasAnyAuthority(this.authorities) && this.hasView) {
             this.viewContainerRef.clear();
+        } else {
+            this.viewContainerRef.createEmbeddedView(this.templateRef);
+            this.hasView = true;
         }
     }
 
