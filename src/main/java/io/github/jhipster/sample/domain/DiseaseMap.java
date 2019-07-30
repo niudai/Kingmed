@@ -45,7 +45,7 @@ public class DiseaseMap implements Serializable {
     @Column(name = "description", length = 250)
     private String description = "待添加";
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JsonIgnoreProperties("parentDiseaseMap")
     @JoinColumn(name = "disease_map_id")
     @BatchSize(size = 5)

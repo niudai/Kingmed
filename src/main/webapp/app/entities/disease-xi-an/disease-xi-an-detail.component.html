@@ -207,9 +207,6 @@
                         </mat-list-item>
                     </div>
 
-
-
-
                 </mat-expansion-panel>
                 <mat-expansion-panel>
                     <mat-expansion-panel-header>
@@ -254,7 +251,7 @@
 
                     </mat-list>
                 </mat-expansion-panel>
-                <div *jhiHideIfHasAnyAuthority="'ROLE_DOCTOR'">
+                <div *jhiHasAnyAuthority="'ROLE_ADMIN'">
                         <mat-expansion-panel *jhiHideIfNull="diseaseXiAn.remarks">
                                 <mat-expansion-panel-header>
                                     备注

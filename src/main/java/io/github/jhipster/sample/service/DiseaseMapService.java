@@ -3,6 +3,8 @@ package io.github.jhipster.sample.service;
 import java.util.Collection;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.transaction.Transactional;
 
 import com.google.common.collect.Lists;
@@ -52,6 +54,7 @@ public class DiseaseMapService {
     private final DiseaseBranchSearchRepository diseaseBranchSearchRepository;
     private final DiseaseMapSearchRepository diseaseMapSearchRepository;
     private final DiseaseMapIndexDTOSearchRepository diseaseMapIndexDTOSearchRepository;
+    private final EntityManagerFactory entityManagerFactory;
 
     @Autowired
     public DiseaseMapService(
@@ -61,7 +64,8 @@ public class DiseaseMapService {
         DiseaseBranchSearchRepository diseaseBranchSearchRepository,
         DiseaseMapIndexDTOSearchRepository diseaseMapIndexDTOSearchRepository,
         DiseaseMapSearchRepository diseaseMapSearchRepository,
-        QArobotRepository qArobotRepository) {
+        QArobotRepository qArobotRepository,
+        EntityManagerFactory entityManagerFactory) {
         this.diseaseMapIndexDTOSearchRepository = diseaseMapIndexDTOSearchRepository;
         this.diseaseMapSearchRepository = diseaseMapSearchRepository;
         this.diseaseBranchSearchRepository = diseaseBranchSearchRepository;
@@ -69,6 +73,7 @@ public class DiseaseMapService {
         this.diseaseMapRepository = diseaseMapRepository;
         this.qArobotRepository = qArobotRepository;
         this.diseaseBranchRepository = diseaseBranchRepository;
+        this.entityManagerFactory = entityManagerFactory;
     }
 
     /**
@@ -128,7 +133,6 @@ public class DiseaseMapService {
      */
     @Transactional
     public List<DiseaseMap> getDiseaseMaps(Long diseaseMapId) {
-
         DiseaseMap diseaseMap =  diseaseMapRepository.findById(diseaseMapId).get();
         diseaseMap.getDiseaseMaps().size();
         return diseaseMap.getDiseaseMaps();
@@ -138,11 +142,13 @@ public class DiseaseMapService {
      * get disease map.
      * @return
      */
-    @Transactional
+    // @Transactional
     public DiseaseMap getDiseaseMap(Long diseaseMapId) {
         DiseaseMap map =  diseaseMapRepository.findById(diseaseMapId).get();
-        map.getDiseaseMaps().size();
+        map.setDiseaseXiAns(null);
+        map.setQarobots(null);
         return map;
+
     }
 
     @Transactional
@@ -150,7 +156,10 @@ public class DiseaseMapService {
         DiseaseMap map =  diseaseMapRepository.findById(diseaseMapId).get();
         map.getDiseaseXiAns().size();
         map.getQarobots().size();
-        return map;
+        DiseaseMap dto = new DiseaseMap();
+        dto.setDiseaseXiAns(map.getDiseaseXiAns());
+        dto.setQarobots(map.getQarobots());
+        return dto;
     }
 
     /**
