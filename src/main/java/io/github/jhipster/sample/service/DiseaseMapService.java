@@ -24,6 +24,7 @@ import io.github.jhipster.sample.domain.DiseaseMapIndexDTO;
 import io.github.jhipster.sample.domain.DiseaseXiAn;
 import io.github.jhipster.sample.domain.ImageApplication;
 import io.github.jhipster.sample.domain.ImageSupplies;
+import io.github.jhipster.sample.domain.LinkCard;
 import io.github.jhipster.sample.domain.QArobot;
 import io.github.jhipster.sample.repository.DiseaseBranchRepository;
 import io.github.jhipster.sample.repository.DiseaseMapRepository;
@@ -290,6 +291,46 @@ public class DiseaseMapService {
         DiseaseMap newMap = diseaseMapRepository.save(newDiseaseMap);
         diseaseMapRepository.findById(diseaseMapId).get().getDiseaseMaps().add(newMap);
         diseaseMapIndexDTOSearchRepository.save(diseaseMapIndexConverter(newMap));
+    }
+
+    /**
+     * attach link card to a disease map.
+     * @param linkcard
+     * @param diseaseMapId
+     */
+    @Transactional
+    public void attachLinkCardToDiseaseMap(LinkCard linkcard, Long diseaseMapId) {
+        diseaseMapRepository.findById(diseaseMapId).get().getLinkCards().add(linkcard);
+    }
+
+    /**
+     * attach link card to a disease map.
+     * @param linkcard
+     * @param diseaseMapId
+     */
+    @Transactional
+    public void deattachLinkCardToDiseaseMap(LinkCard linkcard, Long diseaseMapId) {
+        diseaseMapRepository.findById(diseaseMapId).get().getLinkCards().remove(linkcard);
+    }
+
+    /**
+     * attach link card to a disease branch
+     * @param linkcard
+     * @param diseaseBranchId
+     */
+    @Transactional
+    public void attachLinkCardToDiseaseBranch(LinkCard linkcard, Long diseaseBranchId) {
+        diseaseBranchRepository.findById(diseaseBranchId).get().getLinkCards().add(linkcard);
+    }
+
+    /**
+     * deattach link card to a disease branch
+     * @param linkcard
+     * @param diseaseBranchId
+     */
+    @Transactional
+    public void deattachLinkCardToDiseaseBranch(LinkCard linkcard, Long diseaseBranchId) {
+        diseaseBranchRepository.findById(diseaseBranchId).get().getLinkCards().remove(linkcard);
     }
 
     @Transactional

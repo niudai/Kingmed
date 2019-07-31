@@ -606,4 +606,12 @@ public class DiseaseXiAn implements Serializable {
     public void setDiseaseMaps(Set<DiseaseMap> diseaseMaps) {
         this.diseaseMaps = diseaseMaps;
     }
+
+    public List<LinkCard> getLinkCards() {
+        return linkCards;
+    }
+
+    public void setLinkCards(List<LinkCard> linkCards) {
+        this.linkCards = linkCards;
+    }
 }

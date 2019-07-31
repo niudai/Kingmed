@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import io.github.jhipster.sample.domain.DiseaseXiAn;
 import io.github.jhipster.sample.domain.ImageApplication;
 import io.github.jhipster.sample.domain.ImageSupplies;
+import io.github.jhipster.sample.domain.LinkCard;
 import io.github.jhipster.sample.domain.QArobot;
 import io.github.jhipster.sample.repository.DiseaseXiAnRepository;
 import io.github.jhipster.sample.repository.ImageApplicationRepository;
@@ -131,6 +132,29 @@ public class DiseaseXiAnService {
         diseaseXiAn.getSuppliess().size();
         return diseaseXiAn.getSuppliess();
     }
+
+    /***************************************** LinkCard **************************/
+
+    /**
+     * deattach link card to a disease branch
+     * @param linkcard
+     * @param diseaseXiAnId
+     */
+    @Transactional
+    public void deattachLinkCardToDiseaseXiAn(LinkCard linkcard, Long diseaseXiAnId) {
+        diseaseXiAnRepository.findById(diseaseXiAnId).get().getLinkCards().remove(linkcard);
+    }
+
+    /**
+     * deattach link card to a disease branch
+     * @param linkcard
+     * @param diseaseXiAnId
+     */
+    @Transactional
+    public void attachLinkCardToDiseaseXiAn(LinkCard linkcard, Long diseaseXiAnId) {
+        diseaseXiAnRepository.findById(diseaseXiAnId).get().getLinkCards().add(linkcard);
+    }
+
 
     /********************* DiseaseXiAn ***********/
     @Transactional

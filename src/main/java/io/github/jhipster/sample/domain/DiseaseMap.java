@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -55,7 +56,7 @@ public class DiseaseMap implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @BatchSize(size = 5)
     @JoinColumn(name = "disease_map_id")
-    private List<LinkCard> linkCards;
+    private List<LinkCard> linkCards = new ArrayList<LinkCard>();
 
     @ManyToOne
     @JsonIgnoreProperties("diseaseMaps")

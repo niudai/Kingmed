@@ -3,6 +3,7 @@ package io.github.jhipster.sample.web.rest;
 import io.github.jhipster.sample.domain.DiseaseXiAn;
 import io.github.jhipster.sample.domain.ImageApplication;
 import io.github.jhipster.sample.domain.ImageSupplies;
+import io.github.jhipster.sample.domain.LinkCard;
 import io.github.jhipster.sample.domain.PriceXiAn;
 import io.github.jhipster.sample.domain.QArobot;
 import io.github.jhipster.sample.repository.DiseaseXiAnRepository;
@@ -417,6 +418,20 @@ public class DiseaseXiAnResource {
         Page<DiseaseXiAn> page = diseaseXiAnSearchRepository.search(queryStringQuery(query), pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/disease-xi-ans");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /******************************* One To Many relationship between disease xi an and linkCard  */
+
+    @PostMapping("/disease-xi-ans/attach-link-card/{diseaseXiAnId}")
+    public ResponseEntity<Void> attachLinkCard(@Valid @RequestBody LinkCard linkCard, @RequestParam Long diseaseXiAnId) {
+        diseaseXiAnService.attachLinkCardToDiseaseXiAn(linkCard, diseaseXiAnId);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/disease-xi-ans/deattach-link-card/{diseaseXiAnId}")
+    public ResponseEntity<Void> deattachLinkCard(@Valid @RequestBody LinkCard linkCard, @RequestParam Long diseaseXiAnId) {
+        diseaseXiAnService.deattachLinkCardToDiseaseXiAn(linkCard, diseaseXiAnId);
+        return ResponseEntity.ok().build();
     }
 
 }

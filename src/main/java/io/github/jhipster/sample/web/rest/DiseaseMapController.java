@@ -3,6 +3,7 @@ package io.github.jhipster.sample.web.rest;
 import io.github.jhipster.sample.domain.DiseaseBranch;
 import io.github.jhipster.sample.domain.DiseaseMap;
 import io.github.jhipster.sample.domain.DiseaseMapIndexDTO;
+import io.github.jhipster.sample.domain.LinkCard;
 import io.github.jhipster.sample.repository.search.UserSearchRepository;
 import io.github.jhipster.sample.service.DiseaseMapService;
 import io.github.jhipster.sample.web.rest.util.PaginationUtil;
@@ -76,6 +77,8 @@ public class DiseaseMapController {
         return ResponseEntity.ok().body(diseaseMapService.getDiseaseBranchEagerly(diseaseBranchId));
     }
 
+
+
     /**
      * get child disease maps of disease map specified with diseasMapId
      * @param diseaseMapId
@@ -136,6 +139,46 @@ public class DiseaseMapController {
     @PostMapping("/attach-disease-map-to-disease-branch/{diseaseBranchId}")
     public void attachDiseaseMapToDiseaseBranch(@Valid @RequestBody DiseaseMap diseaseMap, @PathVariable Long diseaseBranchId) {
         diseaseMapService.attachDiseaseMapToDiseaseBranch(diseaseMap, diseaseBranchId);
+    }
+
+    /**
+     * attach disease map to disease branch
+     * @param linkCard
+     * @param diseaseBranchId
+     */
+    @PostMapping("/attach-link-card-to-disease-branch/{diseaseBranchId}")
+    public void attachLinkCardToDiseaseBranch(@Valid @RequestBody LinkCard linkCard, @PathVariable Long diseaseBranchId) {
+        diseaseMapService.attachLinkCardToDiseaseBranch(linkCard, diseaseBranchId);
+    }
+
+    /**
+     * attach disease map to disease branch
+     * @param linkCard
+     * @param diseaseBranchId
+     */
+    @PostMapping("/deattach-link-card-to-disease-branch/{diseaseBranchId}")
+    public void deattachLinkCardToDiseaseBranch(@Valid @RequestBody LinkCard linkCard, @PathVariable Long diseaseBranchId) {
+        diseaseMapService.deattachLinkCardToDiseaseBranch(linkCard, diseaseBranchId);
+    }
+
+    /**
+     * attach disease map to disease branch
+     * @param linkCard
+     * @param diseaseMapId
+     */
+    @PostMapping("/attach-link-card-to-disease-map/{diseaseMapId}")
+    public void attachLinkCardToDiseaseMap(@Valid @RequestBody LinkCard linkCard, @PathVariable Long diseaseMapId) {
+        diseaseMapService.attachLinkCardToDiseaseMap(linkCard, diseaseMapId);
+    }
+
+    /**
+     * attach disease map to disease branch
+     * @param linkCard
+     * @param diseaseMapId
+     */
+    @PostMapping("/deattach-link-card-to-disease-map/{diseaseMapId}")
+    public void deattachLinkCardToDiseaseMap(@Valid @RequestBody LinkCard linkCard, @PathVariable Long diseaseMapId) {
+        diseaseMapService.deattachLinkCardToDiseaseMap(linkCard, diseaseMapId);
     }
 
     /**
