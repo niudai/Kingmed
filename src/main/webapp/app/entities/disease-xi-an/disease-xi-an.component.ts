@@ -160,7 +160,7 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
     openDialog(disease: IDiseaseXiAn): void {
         const dialogRef = this.dialog.open(DiseaseXiAnMatDeleteDialogComponent, {
           width: '250px',
-          data: {diseaseXiAn: this.diseaseXiAns[0]}
+          data: {diseaseXiAn: disease}
         });
 
         dialogRef.afterClosed().subscribe(result => {
