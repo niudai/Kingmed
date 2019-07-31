@@ -36,6 +36,10 @@ public class DiseaseXiAn implements Serializable {
     @JoinColumn(name = "disease_xi_an_id")
     private List<PriceXiAn> prices = new ArrayList<PriceXiAn>();
 
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @JoinColumn(name = "disease_xi_an_id")
+    private List<LinkCard> linkCards = new ArrayList<LinkCard>();
+
     @ManyToMany(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST })
     @JoinTable(name = "disease_xi_an_q_arobot", joinColumns = @JoinColumn(name = "disease_xi_an_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "q_arobot_id", referencedColumnName = "id"))
     private Set<QArobot> qarobots = new HashSet<>();

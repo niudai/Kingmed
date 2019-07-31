@@ -47,6 +47,11 @@ public class DiseaseBranch implements Serializable {
     @BatchSize(size = 5)
     private List<DiseaseMap> diseaseMaps = new ArrayList<DiseaseMap>();
 
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @BatchSize(size = 5)
+    @JoinColumn(name = "disease_branch_id")
+    private List<LinkCard> linkCards;
+
     @Size(max = 50)
     @Column(name = "subsidiary", length = 50)
     private String subsidiary = "待添加";

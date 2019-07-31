@@ -51,6 +51,12 @@ public class DiseaseMap implements Serializable {
     @BatchSize(size = 5)
     private List<DiseaseMap> diseaseMaps;
 
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @BatchSize(size = 5)
+    @JoinColumn(name = "disease_map_id")
+    private List<LinkCard> linkCards;
+
     @ManyToOne
     @JsonIgnoreProperties("diseaseMaps")
     @JoinColumn(name = "disease_map_id")
@@ -203,6 +209,14 @@ public class DiseaseMap implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<LinkCard> getLinkCards() {
+        return linkCards;
+    }
+
+    public void setLinkCards(List<LinkCard> linkCards) {
+        this.linkCards = linkCards;
     }
 
 }

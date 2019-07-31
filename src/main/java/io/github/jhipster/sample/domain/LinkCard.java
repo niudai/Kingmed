@@ -32,7 +32,6 @@ public class LinkCard implements Serializable {
     @Column(name = "article_url", nullable = true)
     private String articleUrl;
 
-
     public LinkCard() {
     }
 
