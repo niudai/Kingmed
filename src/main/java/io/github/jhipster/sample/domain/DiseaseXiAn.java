@@ -38,7 +38,7 @@ public class DiseaseXiAn implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "disease_xi_an_id")
-    private List<LinkCard> linkCards = new ArrayList<LinkCard>();
+    private Set<LinkCard> linkCards = new HashSet<LinkCard>();
 
     @ManyToMany(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST })
     @JoinTable(name = "disease_xi_an_q_arobot", joinColumns = @JoinColumn(name = "disease_xi_an_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "q_arobot_id", referencedColumnName = "id"))
@@ -607,11 +607,11 @@ public class DiseaseXiAn implements Serializable {
         this.diseaseMaps = diseaseMaps;
     }
 
-    public List<LinkCard> getLinkCards() {
+    public Set<LinkCard> getLinkCards() {
         return linkCards;
     }
 
-    public void setLinkCards(List<LinkCard> linkCards) {
+    public void setLinkCards(Set<LinkCard> linkCards) {
         this.linkCards = linkCards;
     }
 }

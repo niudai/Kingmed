@@ -150,9 +150,10 @@ public class DiseaseXiAnService {
      * @param linkcard
      * @param diseaseXiAnId
      */
-    @Transactional
     public void attachLinkCardToDiseaseXiAn(LinkCard linkcard, Long diseaseXiAnId) {
-        diseaseXiAnRepository.findById(diseaseXiAnId).get().getLinkCards().add(linkcard);
+        DiseaseXiAn diseaseXiAn = diseaseXiAnRepository.findById(diseaseXiAnId).get();
+        diseaseXiAn.getLinkCards().add(linkcard);
+        diseaseXiAnRepository.save(diseaseXiAn);
     }
 
 

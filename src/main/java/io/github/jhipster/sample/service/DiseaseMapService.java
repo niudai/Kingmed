@@ -3,7 +3,6 @@ package io.github.jhipster.sample.service;
 import java.util.Collection;
 import java.util.List;
 
-import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.transaction.Transactional;
 
@@ -298,9 +297,10 @@ public class DiseaseMapService {
      * @param linkcard
      * @param diseaseMapId
      */
-    @Transactional
     public void attachLinkCardToDiseaseMap(LinkCard linkcard, Long diseaseMapId) {
-        diseaseMapRepository.findById(diseaseMapId).get().getLinkCards().add(linkcard);
+       DiseaseMap diseaseMap =  diseaseMapRepository.findById(diseaseMapId).get();
+       diseaseMap.getLinkCards().add(linkcard);
+       diseaseMapRepository.save(diseaseMap);
     }
 
     /**
@@ -318,9 +318,10 @@ public class DiseaseMapService {
      * @param linkcard
      * @param diseaseBranchId
      */
-    @Transactional
     public void attachLinkCardToDiseaseBranch(LinkCard linkcard, Long diseaseBranchId) {
-        diseaseBranchRepository.findById(diseaseBranchId).get().getLinkCards().add(linkcard);
+        DiseaseBranch diseaseBranch = diseaseBranchRepository.findById(diseaseBranchId).get();
+        diseaseBranch.getLinkCards().add(linkcard);
+        diseaseBranchRepository.save(diseaseBranch);
     }
 
     /**

@@ -1,3 +1,4 @@
+import { ILinkCard } from './link-card.model';
 import { IPriceXiAn } from './price-xi-an.model';
 import { IFile } from './file.model';
 export interface IDiseaseXiAn {
@@ -5,6 +6,7 @@ export interface IDiseaseXiAn {
     subsidiary?: string;
     name?: string;
     activated?: boolean;
+    linkCards?: ILinkCard[];
     applications?: IFile[];
     suppliess?: IFile[];
     prices?: IPriceXiAn[];
@@ -26,6 +28,7 @@ export interface IDiseaseXiAn {
     series?: string;
     subSeries?: string;
     remarks?: string;
+
 }
 
 export class DiseaseXiAn implements IDiseaseXiAn {
@@ -35,6 +38,7 @@ export class DiseaseXiAn implements IDiseaseXiAn {
         public name?: string,
         public activated?: boolean,
         public prices?: IPriceXiAn[],
+        public linkCards?: ILinkCard[],
         public projectCode?: string,
         public chargeCode?: string,
         public tollStandard?: string,

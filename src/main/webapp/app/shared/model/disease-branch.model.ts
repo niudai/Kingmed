@@ -1,8 +1,11 @@
+import { ILinkCard } from './link-card.model';
+
 export interface IDiseaseBranch {
     id?: number;
     name?: string;
     subsidiary?: string;
     description?: string;
+    linkCards?: ILinkCard[];
     diseaseMaps?: IDiseaseBranch[];
 }
 
@@ -12,6 +15,7 @@ export class DiseaseBranch implements IDiseaseBranch {
         public name?: string,
         public subsidiary?: string,
         public description?: string,
+        public linkCards?: ILinkCard[],
         public diseaseMaps?: IDiseaseBranch[]
     ) {}
 }
