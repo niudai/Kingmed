@@ -1,3 +1,5 @@
+import { DiseaseBranchDeleteLinkDialogComponent } from './../disease-branch-create/disease-branch-delete-link-dialog/disease-branch-delete-link-dialog.component';
+import { DiseaseBranchCreateLinkDialogComponent } from './../disease-branch-create/disease-branch-create-link-dialog/disease-branch-create-link-dialog.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DiseaseMapService } from './../disease-map.service';
 import { IDiseaseMap, DiseaseMap } from 'app/shared/model/disease-map.model';
@@ -7,6 +9,8 @@ import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource, MatBottomSheet, MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA, MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { relative } from 'path';
 import { timingSafeEqual } from 'crypto';
+import { ILinkCard, LinkCard } from 'app/shared/model/link-card.model';
+import { DiseaseMapDeleteLinkDialogComponent } from '../disease-map-create/disease-map-delete-link-dialog/disease-map-delete-link-dialog.component';
 
 @Component({
     selector: 'jhi-disease-map',
@@ -157,6 +161,68 @@ export class DiseaseMapComponent implements OnInit {
         }
     }
 
+    deleteLinkToMap(link: ILinkCard): void {
+        const dialogRef = this.dialog.open(DiseaseMapDeleteLinkDialogComponent, {
+            width: '250px',
+            data: {
+                diseaseMap: this.diseaseMap,
+                linkCard: link
+            }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            this.fetchDiseaseMap(this.diseaseMap, this.diseaseBranch);
+        });
+    }
+
+    deleteLinkToBranch(link: ILinkCard): void {
+        const dialogRef = this.dialog.open(DiseaseBranchDeleteLinkDialogComponent, {
+            width: '250px',
+            data: {
+                diseaseBranch: this.diseaseBranch,
+                linkCard: link
+            }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            this.fetchDiseaseMap(this.diseaseMap, this.diseaseBranch);
+        });
+    }
+
+    createLinkToBranch(link: ILinkCard): void {
+        const dialogRef = this.dialog.open(DiseaseBranchCreateLinkDialogComponent, {
+            width: '250px',
+            data: {
+                linkCard: link ? link : new LinkCard()
+            }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            //   console.log('The dialog was closed');
+            this.diseaseMapService.addLinkToBranch(result, this.diseaseBranch).subscribe(any => {
+                    this.fetchDiseaseMap(this.diseaseMap, this.diseaseBranch);
+                }
+            );
+        });
+    }
+
+    createLinkToMap(link: ILinkCard): void {
+        const dialogRef = this.dialog.open(DiseaseBranchCreateLinkDialogComponent, {
+            width: '250px',
+            data: {
+                linkCard: link ? link : new LinkCard()
+            }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            //   console.log('The dialog was closed');
+            this.diseaseMapService.addLinkToMap(result, this.diseaseMap).subscribe(any => {
+                this.fetchDiseaseMap(this.diseaseMap, this.diseaseBranch);
+                }
+            );
+        });
+    }
+
     ngOnInit() {
         this.windowWidth = window.innerWidth;
         const diseaseBranchId = +this.route.snapshot.paramMap.get('diseaseBranchId');
@@ -262,6 +328,36 @@ export class DiseaseMapActionBottomSheetComponent {
         });
     }
 
+    createLink(link: ILinkCard): void {
+        const dialogRef = this.dialog.open(DiseaseBranchCreateLinkDialogComponent, {
+            width: '250px',
+            data: {
+                linkCard: link ? link : new LinkCard()
+            }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            //   console.log('The dialog was closed');
+            this.diseaseMapService.addLinkToMap(result, this.data.diseaseMap).subscribe(any => {
+                }
+            );
+        });
+    }
+
+    deleteLink(link: ILinkCard): void {
+        const dialogRef = this.dialog.open(DiseaseBranchDeleteLinkDialogComponent, {
+            width: '250px',
+            data: {
+                diseaseMap: this.data.diseaseMap,
+                linkCard: link
+            }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            //   console.log('The dialog was closed');
+        });
+    }
+
     private diseaseMapProxyConverter(map: IDiseaseMap): IDiseaseMap {
         const _map = new DiseaseMap();
         _map.id = map.id;
@@ -334,6 +430,36 @@ export class DiseaseBranchActionBottomSheetComponent {
                 console.log('The dialog was closed');
                 this.animal = result;
             }
+        });
+    }
+
+    createLink(link: ILinkCard): void {
+        const dialogRef = this.dialog.open(DiseaseBranchCreateLinkDialogComponent, {
+            width: '250px',
+            data: {
+                linkCard: link ? link : new LinkCard()
+            }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            //   console.log('The dialog was closed');
+            this.diseaseMapService.addLinkToBranch(result, this.data.diseaseBranch).subscribe(any => {
+                }
+            );
+        });
+    }
+
+    deleteLink(link: ILinkCard): void {
+        const dialogRef = this.dialog.open(DiseaseBranchDeleteLinkDialogComponent, {
+            width: '250px',
+            data: {
+                diseaseBranch: this.data.diseaseBranch,
+                linkCard: link
+            }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            //   console.log('The dialog was closed');
         });
     }
 

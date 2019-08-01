@@ -2,10 +2,12 @@ import { DiseaseXiAnService } from 'app/entities/disease-xi-an/disease-xi-an.ser
 import { ActivateComponent } from './../../account/activate/activate.component';
 import { PriceXiAn } from './../../shared/model/price-xi-an.model';
 import { Price } from './../../shared/model/price.model';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, Inject } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { IDiseaseXiAn } from 'app/shared/model/disease-xi-an.model';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
+import { ILinkCard, LinkCard } from 'app/shared/model/link-card.model';
 
 @Component({
     selector: 'jhi-disease-xi-an-detail',
@@ -27,8 +29,12 @@ export class DiseaseXiAnDetailComponent implements OnInit {
     currentReportingTime: string;
     currentSubseries: string;
 
-    constructor(protected activatedRoute: ActivatedRoute
-        , protected diseaseXiAnService: DiseaseXiAnService) {}
+    constructor(
+        protected activatedRoute: ActivatedRoute
+        , protected diseaseXiAnService: DiseaseXiAnService
+        , protected dialog: MatDialog
+
+    ) { }
 
     projectAndPriceIsOpenToggle() {
         this.projectAndPriceIsOpen = !this.projectAndPriceIsOpen;
@@ -73,6 +79,44 @@ export class DiseaseXiAnDetailComponent implements OnInit {
         this.currentSubseries = this.currentSubseries;
     }
 
+    openDeleteDialog(link: ILinkCard): void {
+        const dialogRef = this.dialog.open(ArticleMatDeleteDialogComponent, {
+            width: '250px',
+            data: {
+                diseaseXiAn: this.diseaseXiAn,
+                linkCard: link
+            }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            //   console.log('The dialog was closed');
+            this.fetchDiseaseXiAn();
+        });
+    }
+
+    openCreateDialog(link: ILinkCard): void {
+        const dialogRef = this.dialog.open(ArticleMatCreateDialogComponent, {
+            width: '250px',
+            data: {
+                linkCard: link ? link : new LinkCard()
+            }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            //   console.log('The dialog was closed');
+            this.diseaseXiAnService.addArticle(result, this.diseaseXiAn.id).subscribe(any => {
+                    this.fetchDiseaseXiAn();
+                }
+            );
+        });
+    }
+
+    fetchDiseaseXiAn() {
+        this.diseaseXiAnService.find(this.diseaseXiAn.id).subscribe(
+            res => this.diseaseXiAn = res.body
+        );
+    }
+
     public currentToggle(price: PriceXiAn): void {
         this.currentPrice = price.tollStandard;
         this.currentChargeCode = price.chargeCode;
@@ -89,6 +133,49 @@ export class DiseaseXiAnDetailComponent implements OnInit {
 
     previousState() {
         window.history.back();
+    }
+
+}
+
+@Component({
+    selector: 'jhi-article-delete-dialog',
+    templateUrl: './article-delete-dialog.component.html'
+})
+export class ArticleMatDeleteDialogComponent {
+
+    constructor(
+        public dialogRef: MatDialogRef<ArticleMatDeleteDialogComponent>,
+        @Inject(MAT_DIALOG_DATA) public data,
+        protected service: DiseaseXiAnService,
+        protected router: Router) { }
+
+    onNoClick(): void {
+        this.dialogRef.close();
+    }
+
+    confirmDelete(): void {
+        this.service.deleteArticle(this.data.linkCard, 3).subscribe(
+            any => this.dialogRef.close()
+        );
+    }
+}
+
+@Component({
+    selector: 'jhi-article-create-dialog',
+    templateUrl: './article-create-dialog.component.html'
+})
+export class ArticleMatCreateDialogComponent implements OnInit {
+
+    constructor(
+        public dialogRef: MatDialogRef<ArticleMatDeleteDialogComponent>,
+        @Inject(MAT_DIALOG_DATA) public data,
+        protected router: Router) { }
+
+    ngOnInit(): void {
+    }
+
+    onNoClick(): void {
+        this.dialogRef.close();
     }
 
 }

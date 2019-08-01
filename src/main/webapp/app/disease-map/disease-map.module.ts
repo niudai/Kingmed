@@ -16,6 +16,9 @@ import { JhiLanguageHelper } from 'app/core';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Paginator } from 'app/shared/paginator/paginator';
+import { DiseaseBranchCreateLinkDialogComponent } from './disease-branch-create/disease-branch-create-link-dialog/disease-branch-create-link-dialog.component';
+import { DiseaseBranchDeleteLinkDialogComponent } from './disease-branch-create/disease-branch-delete-link-dialog/disease-branch-delete-link-dialog.component';
+import { DiseaseMapDeleteLinkDialogComponent } from './disease-map-create/disease-map-delete-link-dialog/disease-map-delete-link-dialog.component';
 
 @NgModule({
     imports: [
@@ -42,6 +45,9 @@ import { Paginator } from 'app/shared/paginator/paginator';
         , QArobotDeleteDialogComponent
         , DiseaseBranchModifyDialogComponent
         , DiseaseMapModifyDialogComponent
+        , DiseaseBranchCreateLinkDialogComponent
+        , DiseaseBranchDeleteLinkDialogComponent
+        , DiseaseMapDeleteLinkDialogComponent
     ],
     entryComponents: [
         DiseaseBranchDeleteModalComponent
@@ -54,6 +60,9 @@ import { Paginator } from 'app/shared/paginator/paginator';
         , DiseaseBranchModifyDialogComponent
         , QArobotDeleteDialogComponent
         , DiseaseMapModifyDialogComponent
+        , DiseaseBranchCreateLinkDialogComponent
+        , DiseaseBranchDeleteLinkDialogComponent
+        , DiseaseMapDeleteLinkDialogComponent
     ],
     providers: [
         { provide: JhiLanguageService, useClass: JhiLanguageService }]

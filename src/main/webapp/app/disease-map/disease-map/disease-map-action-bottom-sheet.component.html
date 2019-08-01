@@ -15,6 +15,10 @@
             <span mat-line>编辑地图</span>
         </a>
 
+        <a  mat-list-item (click) = "createLink()">
+            <span mat-line>添加文章链接</span>
+        </a>
+
         <a  mat-list-item (click)="deleteDiseaseMap()">
                 <span mat-line>删除<span class = "text-primary">{{data.diseaseMap.name}}</span></span>
         </a>

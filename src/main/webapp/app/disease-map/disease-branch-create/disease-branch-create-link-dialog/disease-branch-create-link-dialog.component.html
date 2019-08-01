@@ -1,0 +1,35 @@
+<h1 mat-dialog-title>创建新链接</h1>
+<div mat-dialog-content>
+        <mat-form-field>
+              <input matInput
+                  [(ngModel)]="data.linkCard.articleName"
+                   placeholder="文章名"
+                   [value] = "data.linkCard.articleName"
+              >
+        </mat-form-field>
+        <mat-form-field>
+              <input matInput
+                  [(ngModel)]="data.linkCard.subTitle"
+                  placeholder="子标题"
+                  [value] = "data.linkCard.subTitle"
+              >
+        </mat-form-field>
+        <mat-form-field>
+              <input matInput
+                  [(ngModel)]="data.linkCard.articleUrl"
+                  placeholder="文章链接"
+                  [value] = "data.linkCard.articleUrl"
+              >
+        </mat-form-field>
+        <mat-form-field>
+                <input matInput
+                    [(ngModel)]="data.linkCard.imageUrl"
+                    placeholder="图片链接"
+                    [value] = "data.linkCard.imageUrl"
+                >
+          </mat-form-field>
+      </div>
+<div mat-dialog-actions>
+        <button mat-button (click)="onNoClick()">取消</button>
+        <button mat-button  [mat-dialog-close]="data.linkCard" cdkFocusInitial>确定</button>
+</div>

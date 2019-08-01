@@ -50,7 +50,7 @@ public class DiseaseBranch implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @BatchSize(size = 5)
     @JoinColumn(name = "disease_branch_id")
-    private List<LinkCard> linkCards = new ArrayList<LinkCard>();
+    private Set<LinkCard> linkCards = new HashSet<LinkCard>();
 
     @Size(max = 50)
     @Column(name = "subsidiary", length = 50)
@@ -151,11 +151,11 @@ public class DiseaseBranch implements Serializable {
                 + name + ", subsidiary=" + subsidiary + "]";
     }
 
-    public List<LinkCard> getLinkCards() {
+    public Set<LinkCard> getLinkCards() {
         return linkCards;
     }
 
-    public void setLinkCards(List<LinkCard> linkCards) {
+    public void setLinkCards(Set<LinkCard> linkCards) {
         this.linkCards = linkCards;
     }
 

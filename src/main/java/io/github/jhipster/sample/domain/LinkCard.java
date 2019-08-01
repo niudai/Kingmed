@@ -25,6 +25,12 @@ public class LinkCard implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "article_name", nullable = true)
+    private String articleName;
+
+    @Column(name = "sub_title", nullable = true)
+    private String subTitle;
+
     @Column(name = "image_url", nullable = true)
     private String imageUrl;
 
@@ -87,6 +93,22 @@ public class LinkCard implements Serializable {
         } else if (!id.equals(other.id))
             return false;
         return true;
+    }
+
+    public String getArticleName() {
+        return articleName;
+    }
+
+    public void setArticleName(String articleName) {
+        this.articleName = articleName;
+    }
+
+    public String getSubTitle() {
+        return subTitle;
+    }
+
+    public void setSubTitle(String subTitle) {
+        this.subTitle = subTitle;
     }
 
 }

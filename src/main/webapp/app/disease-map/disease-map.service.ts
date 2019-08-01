@@ -1,3 +1,4 @@
+import { ILinkCard } from './../shared/model/link-card.model';
 import { IDiseaseBranch, DiseaseBranch } from './../shared/model/disease-branch.model';
 import { HttpClient, HttpResponse, HttpParams, HttpEventType } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -66,6 +67,22 @@ export class DiseaseMapService {
      */
     getAllDiseaseMap(diseaseBranchId: number) {
         return this.http.get<IDiseaseMap[]>(`${this.diseaseMapUrl}/get-all-disease-map/${diseaseBranchId}`, { observe: 'body'});
+    }
+
+    addLinkToMap(link: ILinkCard, _map: IDiseaseMap) {
+        return this.http.post<any>(`${this.diseaseMapUrl}/attach-link-card-to-disease-map/${_map.id}`, link);
+    }
+
+    deleteLinkToMap(link: ILinkCard, _map: IDiseaseMap) {
+        return this.http.post<any>(`${this.diseaseMapUrl}/deattach-link-card-to-disease-map/${_map.id}`, link);
+    }
+
+    addLinkToBranch(link: ILinkCard, branch: IDiseaseBranch) {
+        return this.http.post<any>(`${this.diseaseMapUrl}/attach-link-card-to-disease-branch/${branch.id}`, link);
+    }
+
+    deleteLinkToBranch(link: ILinkCard, branch: IDiseaseBranch) {
+        return this.http.post<any>(`${this.diseaseMapUrl}/deattach-link-card-to-disease-branch/${branch.id}`, link);
     }
 
     deattachDiseaseBranch(diseaseBranchId: number) {

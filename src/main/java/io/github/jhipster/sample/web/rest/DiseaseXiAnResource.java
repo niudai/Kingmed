@@ -423,13 +423,13 @@ public class DiseaseXiAnResource {
     /******************************* One To Many relationship between disease xi an and linkCard  */
 
     @PostMapping("/disease-xi-ans/attach-link-card/{diseaseXiAnId}")
-    public ResponseEntity<Void> attachLinkCard(@Valid @RequestBody LinkCard linkCard, @RequestParam Long diseaseXiAnId) {
+    public ResponseEntity<Void> attachLinkCard(@Valid @RequestBody LinkCard linkCard, @PathVariable Long diseaseXiAnId) {
         diseaseXiAnService.attachLinkCardToDiseaseXiAn(linkCard, diseaseXiAnId);
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("/disease-xi-ans/deattach-link-card/{diseaseXiAnId}")
-    public ResponseEntity<Void> deattachLinkCard(@Valid @RequestBody LinkCard linkCard, @RequestParam Long diseaseXiAnId) {
+    public ResponseEntity<Void> deattachLinkCard(@Valid @RequestBody LinkCard linkCard, @PathVariable Long diseaseXiAnId) {
         diseaseXiAnService.deattachLinkCardToDiseaseXiAn(linkCard, diseaseXiAnId);
         return ResponseEntity.ok().build();
     }

@@ -3,6 +3,7 @@ package io.github.jhipster.sample.service;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -21,6 +22,7 @@ import io.github.jhipster.sample.domain.QArobot;
 import io.github.jhipster.sample.repository.DiseaseXiAnRepository;
 import io.github.jhipster.sample.repository.ImageApplicationRepository;
 import io.github.jhipster.sample.repository.ImageSuppliesRepository;
+import io.github.jhipster.sample.repository.LinkCardRepository;
 import io.github.jhipster.sample.repository.QArobotRepository;
 import io.github.jhipster.sample.repository.search.DiseaseXiAnSearchRepository;
 
@@ -34,18 +36,21 @@ public class DiseaseXiAnService {
     private final QArobotRepository qArobotRepository;
     private final ImageApplicationRepository imageApplicationRepository;
     private final ImageSuppliesRepository imageSuppliesRepository;
+    private final LinkCardRepository linkCardRepository;
 
     @Autowired
     public DiseaseXiAnService(DiseaseXiAnRepository diseaseXiAnRepository
         , DiseaseXiAnSearchRepository diseaseXiAnSearchRepository
         , QArobotRepository qArobotRepository
         , ImageApplicationRepository imageApplicationRepository
-        , ImageSuppliesRepository imageSuppliesRepository) {
+        , ImageSuppliesRepository imageSuppliesRepository
+        , LinkCardRepository linkCardRepository) {
         this.diseaseXiAnSearchRepository = diseaseXiAnSearchRepository;
         this.imageSuppliesRepository = imageSuppliesRepository;
         this.imageApplicationRepository = imageApplicationRepository;
         this.diseaseXiAnRepository = diseaseXiAnRepository;
         this.qArobotRepository = qArobotRepository;
+        this.linkCardRepository = linkCardRepository;
     }
 
     // @Transactional
@@ -152,8 +157,13 @@ public class DiseaseXiAnService {
      */
     public void attachLinkCardToDiseaseXiAn(LinkCard linkcard, Long diseaseXiAnId) {
         DiseaseXiAn diseaseXiAn = diseaseXiAnRepository.findById(diseaseXiAnId).get();
-        diseaseXiAn.getLinkCards().add(linkcard);
-        diseaseXiAnRepository.save(diseaseXiAn);
+        Set<LinkCard> links = diseaseXiAn.getLinkCards();
+       if (links.contains(linkcard)) {
+           linkCardRepository.save(linkcard);
+       } else {
+            diseaseXiAn.getLinkCards().add(linkcard);
+            diseaseXiAnRepository.save(diseaseXiAn);
+       }
     }
 
 

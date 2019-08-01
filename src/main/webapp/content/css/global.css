@@ -150,6 +150,14 @@ Custom alerts for notification
     top: 55px;
 }
 
+.kingmed-profile {
+    background-image: url('../images/kingmedMiniIcon.png');
+    background-size: cover;
+}
+
+.mat-card-image {
+}
+
 .alerts .toast.bottom {
     bottom: 55px;
 }

@@ -1,231 +1,262 @@
-<!-- <mat-card *ngIf="!diseaseMap">
-    {{diseaseBranch.name}}
-    <button mat-mini-fab color="primary" *jhiHasAnyAuthority="'ROLE_ADMIN'" (click)="openBranchBottomSheet()"
-        class="add">+</button>
-</mat-card> -->
+<div class="row">
+    <div class="col-sm-8">
+        <mat-card class="example-card" *ngIf="!diseaseMap">
+            <mat-card-header>
+                <mat-card-title>{{diseaseBranch.name}}<button mat-mini-fab color="primary"
+                        *jhiHasAnyAuthority="'ROLE_ADMIN'" (click)="openBranchBottomSheet()" class="add">+</button>
+                </mat-card-title>
+                <mat-card-subtitle>{{diseaseBranch.subsidiary}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <p>
+                    {{diseaseBranch.description}}
+                </p>
+            </mat-card-content>
+        </mat-card>
 
-<mat-card class="example-card" *ngIf="!diseaseMap">
-    <mat-card-header>
-        <mat-card-title>{{diseaseBranch.name}}<button mat-mini-fab color="primary" *jhiHasAnyAuthority="'ROLE_ADMIN'"
-                (click)="openBranchBottomSheet()" class="add">+</button></mat-card-title>
-        <mat-card-subtitle>{{diseaseBranch.subsidiary}}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-        <p>
-            {{diseaseBranch.description}}
-        </p>
-    </mat-card-content>
-</mat-card>
-
-<!-- <mat-card *ngIf="diseaseMap">{{diseaseMap.name}}
-    <button mat-mini-fab color="primary" *jhiHasAnyAuthority="'ROLE_ADMIN'" (click)="openBranchBottomSheet()"
-            class="add">+</button>
-    <button *ngIf="previousDataSources.length > 0 || !diseaseBranch" mat-raised-button
-        (click)="goUpTreeControl(diseaseMap)" class="nav-back">
-        <fa-icon [icon]="'arrow-left'"></fa-icon>
-    </button>
-</mat-card> -->
-<mat-card *ngIf="diseaseMap">
-                {{diseaseMap.name}}
+        <mat-card *ngIf="diseaseMap">
+            {{diseaseMap.name}}
             <button *ngIf="previousDataSources.length > 0 || !diseaseBranch" mat-raised-button
-                    (click)="goUpTreeControl(diseaseMap)" class="nav-back">
-                    <fa-icon [icon]="'arrow-left'"></fa-icon>
+                (click)="goUpTreeControl(diseaseMap)" class="nav-back">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>
             </button>
             <mat-card-subtitle>{{diseaseMap.subsidiary}}</mat-card-subtitle>
-        <mat-card-content>
-            <p>
-                {{diseaseMap.description}}
-            </p>
-        </mat-card-content>
-    </mat-card>
+            <mat-card-content>
+                <p>
+                    {{diseaseMap.description}}
+                </p>
+            </mat-card-content>
+        </mat-card>
 
-<mat-toolbar>
-    <span *ngIf="diseaseBranch || diseaseMap.parentDiseaseBranch">
-            <button mat-raised-button disabled="true" *ngIf="diseaseBranch"
-            style="background-color: rgb(241, 238, 189); color: rgb(23, 24, 24)">{{diseaseBranch.name}}</button>
-            <button mat-raised-button disabled="true" *ngIf="!diseaseBranch && diseaseMap.parentDiseaseBranch"
-            style="background-color: rgb(241, 238, 189); color: rgb(23, 24, 24)">{{diseaseMap.parentDiseaseBranch.name}}</button>
-    </span>
+        <mat-toolbar>
+            <span *ngIf="diseaseBranch || diseaseMap.parentDiseaseBranch">
+                <button mat-raised-button disabled="true" *ngIf="diseaseBranch"
+                    style="background-color: rgb(241, 238, 189); color: rgb(23, 24, 24)">{{diseaseBranch.name}}</button>
+                <button mat-raised-button disabled="true" *ngIf="!diseaseBranch && diseaseMap.parentDiseaseBranch"
+                    style="background-color: rgb(241, 238, 189); color: rgb(23, 24, 24)">{{diseaseMap.parentDiseaseBranch.name}}</button>
+            </span>
 
-    <span *ngFor="let map of previousDiseaseTitle">
-        <span *ngIf="map">
-            <fa-icon [icon]="'arrow-right'"></fa-icon>
-            <button mat-raised-button disabled="true"
-                style="background-color: rgb(241, 238, 189); color: rgb(23, 24, 24)">
-                {{map.name}}
-            </button>
-        </span>
+            <span *ngFor="let map of previousDiseaseTitle">
+                <span *ngIf="map">
+                    <fa-icon [icon]="'arrow-right'"></fa-icon>
+                    <button mat-raised-button disabled="true"
+                        style="background-color: rgb(241, 238, 189); color: rgb(23, 24, 24)">
+                        {{map.name}}
+                    </button>
+                </span>
 
-    </span>
+            </span>
 
-    <span *ngIf="diseaseMap">
-        <fa-icon [icon]="'arrow-right'"></fa-icon>
-        <button mat-raised-button disabled="true" style="background-color: rgb(241, 238, 189); color: rgb(23, 24, 24)">
-            {{diseaseMap.name}}
-        </button>
-    </span>
-</mat-toolbar>
-<!-- <button mat-raised-button (click)="openBranchBottomSheet()">Open file</button> -->
-<hr>
-
-<div  *ngIf="diseaseMap">
-        <mat-expansion-panel (click) = "loadMapEagerly(diseaseMap)">
-                <mat-expansion-panel-header>
-                  <mat-panel-title>
+            <span *ngIf="diseaseMap">
+                <fa-icon [icon]="'arrow-right'"></fa-icon>
+                <button mat-raised-button disabled="true"
+                    style="background-color: rgb(241, 238, 189); color: rgb(23, 24, 24)">
                     {{diseaseMap.name}}
-                  </mat-panel-title>
+                </button>
+            </span>
+        </mat-toolbar>
+        <!-- <button mat-raised-button (click)="openBranchBottomSheet()">Open file</button> -->
+        <hr>
+
+
+        <div *ngIf="diseaseMap">
+            <mat-expansion-panel (click)="loadMapEagerly(diseaseMap)">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        {{diseaseMap.name}}
+                    </mat-panel-title>
                 </mat-expansion-panel-header>
                 <mat-nav-list *ngFor="let diseaseXiAn of diseaseMap.diseaseXiAns">
-                        <mat-card matRipple>
-                            <button mat-raised-button style="background-color: cornsilk" disabled><span
-                                    style="color: cadetblue">{{diseaseXiAn.id}}</span>
-                            </button>
-                            <fa-icon [icon]="'book-medical'" style="color: darkturquoise"></fa-icon>
-                            <a [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'view']">{{diseaseXiAn.name}}</a>
-                            <fa-icon [icon]="'chevron-right'"></fa-icon>
-                            <button mat-raised-button style="background-color: cornsilk" disabled><span
-                                    style="color: cadetblue">{{diseaseXiAn.subsidiary}}</span> -
-                                {{diseaseXiAn.projectCode}}
-                            </button>
-                            <button mat-mini-fab color="warn" *jhiHasAnyAuthority="'ROLE_ADMIN'"
-                                (click)="deassociateWithDiseaseXiAn(diseaseXiAn.id, diseaseXiAn.id)">
-                                <fa-icon [icon]="'times'"></fa-icon>
-                            </button>
-                        </mat-card>
-                    </mat-nav-list>
-                    <mat-nav-list *ngFor="let qarobot of diseaseMap.qarobots">
-                        <mat-card matRipple>
-                            <button mat-raised-button style="background-color: cornsilk" disabled><span
-                                    style="color: cadetblue">{{qarobot.id}}</span>
-                            </button>
-                            <fa-icon [icon]="'question'" style="color: yellow"></fa-icon>{{diseaseMap.name}}
-                            <a [routerLink]="['/q-arobot', qarobot.id, 'view']">{{qarobot.question}}</a>
-                            <fa-icon [icon]="'chevron-right'"></fa-icon>
-                            <button mat-raised-button style="background-color: cornsilk" disabled><span
-                                    style="color: cadetblue">{{qarobot.qaSubsidiary}}</span> -
-                            </button>
-                            <button mat-mini-fab color="warn" *jhiHasAnyAuthority="'ROLE_ADMIN'"
-                                (click)="deassociateWithQArobot(qarobot.id, diseaseMap.id)">
-                                <fa-icon [icon]="'times'"></fa-icon>
-                            </button>
-                        </mat-card>
-                    </mat-nav-list>
+                    <mat-card matRipple>
+                        <button mat-raised-button style="background-color: cornsilk" disabled><span
+                                style="color: cadetblue">{{diseaseXiAn.id}}</span>
+                        </button>
+                        <fa-icon [icon]="'book-medical'" style="color: darkturquoise"></fa-icon>
+                        <a [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'view']">{{diseaseXiAn.name}}</a>
+                        <fa-icon [icon]="'chevron-right'"></fa-icon>
+                        <button mat-raised-button style="background-color: cornsilk" disabled><span
+                                style="color: cadetblue">{{diseaseXiAn.subsidiary}}</span> -
+                            {{diseaseXiAn.projectCode}}
+                        </button>
+                        <button mat-mini-fab color="warn" *jhiHasAnyAuthority="'ROLE_ADMIN'"
+                            (click)="deassociateWithDiseaseXiAn(diseaseXiAn.id, diseaseXiAn.id)">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                        </button>
+                    </mat-card>
+                </mat-nav-list>
+                <mat-nav-list *ngFor="let qarobot of diseaseMap.qarobots">
+                    <mat-card matRipple>
+                        <button mat-raised-button style="background-color: cornsilk" disabled><span
+                                style="color: cadetblue">{{qarobot.id}}</span>
+                        </button>
+                        <fa-icon [icon]="'question'" style="color: yellow"></fa-icon>{{diseaseMap.name}}
+                        <a [routerLink]="['/q-arobot', qarobot.id, 'view']">{{qarobot.question}}</a>
+                        <fa-icon [icon]="'chevron-right'"></fa-icon>
+                        <button mat-raised-button style="background-color: cornsilk" disabled><span
+                                style="color: cadetblue">{{qarobot.qaSubsidiary}}</span> -
+                        </button>
+                        <button mat-mini-fab color="warn" *jhiHasAnyAuthority="'ROLE_ADMIN'"
+                            (click)="deassociateWithQArobot(qarobot.id, diseaseMap.id)">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                        </button>
+                    </mat-card>
+                </mat-nav-list>
 
-        </mat-expansion-panel>
-        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" mat-mini-fab color="primary" (click)="openMapBottomSheet(diseaseMap)"
-                class="add" style="display: inline-block">+</button>
+            </mat-expansion-panel>
+            <button *jhiHasAnyAuthority="'ROLE_ADMIN'" mat-mini-fab color="primary"
+                (click)="openMapBottomSheet(diseaseMap)" class="add" style="display: inline-block">+</button>
 
-        <hr>
-</div>
+            <hr>
+        </div>
 
 
-<div class="container col-12">
-    <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
-        <!-- This is the tree node template for leaf nodes -->
-        <mat-tree-node *matTreeNodeDef="let node">
-            <li style="padding-bottom: 5px; width: 90%">
-                <mat-expansion-panel style="margin: 5px;" (click) = "loadMapEagerly(node)">
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            <span>{{node.name}}</span>
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <mat-nav-list *ngFor="let diseaseXiAn of node.diseaseXiAns">
-                        <mat-card matRipple>
-                            <button mat-raised-button style="background-color: cornsilk" disabled><span
-                                    style="color: cadetblue">{{diseaseXiAn.id}}</span>
-                            </button>
-                            <fa-icon [icon]="'book-medical'" style="color: darkturquoise"></fa-icon>
-                            <a [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'view']">{{diseaseXiAn.name}}</a>
-                            <fa-icon [icon]="'chevron-right'"></fa-icon>
-                            <button mat-raised-button style="background-color: cornsilk" disabled><span
-                                    style="color: cadetblue">{{diseaseXiAn.subsidiary}}</span> -
-                                {{diseaseXiAn.projectCode}}
-                            </button>
-                            <button mat-mini-fab color="warn" *jhiHasAnyAuthority="'ROLE_ADMIN'"
-                                (click)="deassociateWithDiseaseXiAn(diseaseXiAn.id, node.id)">
-                                <fa-icon [icon]="'times'"></fa-icon>
-                            </button>
-                        </mat-card>
-                    </mat-nav-list>
-                    <mat-nav-list *ngFor="let qarobot of node.qarobots">
-                        <mat-card matRipple>
-                            <button mat-raised-button style="background-color: cornsilk" disabled><span
-                                    style="color: cadetblue">{{qarobot.id}}</span>
-                            </button>
-                            <fa-icon [icon]="'question'" style="color: yellow"></fa-icon>{{node.name}}
-                            <a [routerLink]="['/q-arobot', qarobot.id, 'view']">{{qarobot.question}}</a>
-                            <fa-icon [icon]="'chevron-right'"></fa-icon>
-                            <button mat-raised-button style="background-color: cornsilk" disabled><span
-                                    style="color: cadetblue">{{qarobot.qaSubsidiary}}</span> -
-                            </button>
-                            <button mat-mini-fab color="warn" *jhiHasAnyAuthority="'ROLE_ADMIN'"
-                                (click)="deassociateWithQArobot(qarobot.id, node.id)">
-                                <fa-icon [icon]="'times'"></fa-icon>
-                            </button>
-                        </mat-card>
-                    </mat-nav-list>
-                </mat-expansion-panel>
-            </li>
-            <button *jhiHasAnyAuthority="'ROLE_ADMIN'" mat-mini-fab color="primary" (click)="openMapBottomSheet(node)"
-                class="add" style="display: inline-block">+</button>
-        </mat-tree-node>
+        <div class="container col-12">
+            <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+                <!-- This is the tree node template for leaf nodes -->
+                <mat-tree-node *matTreeNodeDef="let node">
+                    <li style="padding-bottom: 5px; width: 90%">
+                        <mat-expansion-panel style="margin: 5px;" (click)="loadMapEagerly(node)">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    <span>{{node.name}}</span>
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <mat-nav-list *ngFor="let diseaseXiAn of node.diseaseXiAns">
+                                <mat-card matRipple>
+                                    <button mat-raised-button style="background-color: cornsilk" disabled><span
+                                            style="color: cadetblue">{{diseaseXiAn.id}}</span>
+                                    </button>
+                                    <fa-icon [icon]="'book-medical'" style="color: darkturquoise"></fa-icon>
+                                    <a
+                                        [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'view']">{{diseaseXiAn.name}}</a>
+                                    <fa-icon [icon]="'chevron-right'"></fa-icon>
+                                    <button mat-raised-button style="background-color: cornsilk" disabled><span
+                                            style="color: cadetblue">{{diseaseXiAn.subsidiary}}</span> -
+                                        {{diseaseXiAn.projectCode}}
+                                    </button>
+                                    <button mat-mini-fab color="warn" *jhiHasAnyAuthority="'ROLE_ADMIN'"
+                                        (click)="deassociateWithDiseaseXiAn(diseaseXiAn.id, node.id)">
+                                        <fa-icon [icon]="'times'"></fa-icon>
+                                    </button>
+                                </mat-card>
+                            </mat-nav-list>
+                            <mat-nav-list *ngFor="let qarobot of node.qarobots">
+                                <mat-card matRipple>
+                                    <button mat-raised-button style="background-color: cornsilk" disabled><span
+                                            style="color: cadetblue">{{qarobot.id}}</span>
+                                    </button>
+                                    <fa-icon [icon]="'question'" style="color: yellow"></fa-icon>{{node.name}}
+                                    <a [routerLink]="['/q-arobot', qarobot.id, 'view']">{{qarobot.question}}</a>
+                                    <fa-icon [icon]="'chevron-right'"></fa-icon>
+                                    <button mat-raised-button style="background-color: cornsilk" disabled><span
+                                            style="color: cadetblue">{{qarobot.qaSubsidiary}}</span> -
+                                    </button>
+                                    <button mat-mini-fab color="warn" *jhiHasAnyAuthority="'ROLE_ADMIN'"
+                                        (click)="deassociateWithQArobot(qarobot.id, node.id)">
+                                        <fa-icon [icon]="'times'"></fa-icon>
+                                    </button>
+                                </mat-card>
+                            </mat-nav-list>
+                        </mat-expansion-panel>
+                    </li>
+                    <button *jhiHasAnyAuthority="'ROLE_ADMIN'" mat-mini-fab color="primary"
+                        (click)="openMapBottomSheet(node)" class="add" style="display: inline-block">+</button>
+                </mat-tree-node>
 
-        <!-- This is the tree node template for expandable nodes -->
-        <mat-tree-node *matTreeNodeDef="let node; when: hasChild" style="display: flex">
-            <li style="padding-bottom: 5px; width: 90%">
-                <mat-expansion-panel style="margin: 5px;" (click) = "loadMapEagerly(node)">
-                    <button mat-mini-fab color="accent" (click)="goDownTreeControl(node)" class="arrow-right">
-                        <fa-icon [icon]="'arrow-right'"></fa-icon>
-                    </button>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            <span>{{node.name}}</span>
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
+                <!-- This is the tree node template for expandable nodes -->
+                <mat-tree-node *matTreeNodeDef="let node; when: hasChild" style="display: flex">
+                    <li style="padding-bottom: 5px; width: 90%">
+                        <mat-expansion-panel style="margin: 5px;" (click)="loadMapEagerly(node)">
+                            <button mat-mini-fab color="accent" (click)="goDownTreeControl(node)" class="arrow-right">
+                                <fa-icon [icon]="'arrow-right'"></fa-icon>
+                            </button>
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    <span>{{node.name}}</span>
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
 
-                    <mat-nav-list *ngFor="let diseaseXiAn of node.diseaseXiAns">
-                        <mat-card matRipple>
-                            <button mat-raised-button style="background-color: cornsilk" disabled><span
-                                    style="color: cadetblue">{{diseaseXiAn.id}}</span>
-                            </button>
-                            <fa-icon [icon]="'book-medical'" style="color: darkturquoise"></fa-icon>
-                            <a [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'view']">{{diseaseXiAn.name}}</a>
-                            <fa-icon [icon]="'chevron-right'"></fa-icon>
-                            <button mat-raised-button style="background-color: cornsilk" disabled><span
-                                    style="color: cadetblue">{{diseaseXiAn.subsidiary}}</span> -
-                                {{diseaseXiAn.projectCode}}
-                            </button>
-                            <button mat-mini-fab color="warn" *jhiHasAnyAuthority="'ROLE_ADMIN'"
-                                (click)="deassociateWithDiseaseXiAn(diseaseXiAn.id, node.id)">
-                                <fa-icon [icon]="'times'"></fa-icon>
-                            </button>
-                        </mat-card>
-                    </mat-nav-list>
-                    <mat-nav-list *ngFor="let qarobot of node.qarobots">
-                        <mat-card matRipple>
-                            <button mat-raised-button style="background-color: cornsilk" disabled><span
-                                    style="color: cadetblue">{{qarobot.id}}</span>
-                            </button>
-                            <fa-icon [icon]="'question'" style="color: yellow"></fa-icon>{{node.name}}
-                            <a [routerLink]="['/q-arobot', qarobot.id, 'view']">{{qarobot.question}}</a>
-                            <fa-icon [icon]="'chevron-right'"></fa-icon>
-                            <button mat-raised-button style="background-color: cornsilk" disabled><span
-                                    style="color: cadetblue">{{qarobot.qaSubsidiary}}</span> -
-                            </button>
-                            <button mat-mini-fab color="warn" *jhiHasAnyAuthority="'ROLE_ADMIN'"
-                                (click)="deassociateWithQArobot(qarobot.id, node.id)">
-                                <fa-icon [icon]="'times'"></fa-icon>
-                            </button>
-                        </mat-card>
-                    </mat-nav-list>
-                </mat-expansion-panel>
-                <!-- <ul [class.example-tree-invisible]="!treeControl.isExpanded(node)">
-                    <ng-container matTreeNodeOutlet></ng-container>
-                </ul> -->
-            </li>
-            <button *jhiHasAnyAuthority="'ROLE_ADMIN'" mat-mini-fab color="primary" (click)="openMapBottomSheet(node)"
-                class="add" style="display: inline-block">+</button>
-        </mat-tree-node>
-    </mat-tree>
+                            <mat-nav-list *ngFor="let diseaseXiAn of node.diseaseXiAns">
+                                <mat-card matRipple>
+                                    <button mat-raised-button style="background-color: cornsilk" disabled><span
+                                            style="color: cadetblue">{{diseaseXiAn.id}}</span>
+                                    </button>
+                                    <fa-icon [icon]="'book-medical'" style="color: darkturquoise"></fa-icon>
+                                    <a
+                                        [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'view']">{{diseaseXiAn.name}}</a>
+                                    <fa-icon [icon]="'chevron-right'"></fa-icon>
+                                    <button mat-raised-button style="background-color: cornsilk" disabled><span
+                                            style="color: cadetblue">{{diseaseXiAn.subsidiary}}</span> -
+                                        {{diseaseXiAn.projectCode}}
+                                    </button>
+                                    <button mat-mini-fab color="warn" *jhiHasAnyAuthority="'ROLE_ADMIN'"
+                                        (click)="deassociateWithDiseaseXiAn(diseaseXiAn.id, node.id)">
+                                        <fa-icon [icon]="'times'"></fa-icon>
+                                    </button>
+                                </mat-card>
+                            </mat-nav-list>
+                            <mat-nav-list *ngFor="let qarobot of node.qarobots">
+                                <mat-card matRipple>
+                                    <button mat-raised-button style="background-color: cornsilk" disabled><span
+                                            style="color: cadetblue">{{qarobot.id}}</span>
+                                    </button>
+                                    <fa-icon [icon]="'question'" style="color: yellow"></fa-icon>{{node.name}}
+                                    <a [routerLink]="['/q-arobot', qarobot.id, 'view']">{{qarobot.question}}</a>
+                                    <fa-icon [icon]="'chevron-right'"></fa-icon>
+                                    <button mat-raised-button style="background-color: cornsilk" disabled><span
+                                            style="color: cadetblue">{{qarobot.qaSubsidiary}}</span> -
+                                    </button>
+                                    <button mat-mini-fab color="warn" *jhiHasAnyAuthority="'ROLE_ADMIN'"
+                                        (click)="deassociateWithQArobot(qarobot.id, node.id)">
+                                        <fa-icon [icon]="'times'"></fa-icon>
+                                    </button>
+                                </mat-card>
+                            </mat-nav-list>
+                        </mat-expansion-panel>
+                        <!-- <ul [class.example-tree-invisible]="!treeControl.isExpanded(node)">
+                                    <ng-container matTreeNodeOutlet></ng-container>
+                                </ul> -->
+                    </li>
+                    <button *jhiHasAnyAuthority="'ROLE_ADMIN'" mat-mini-fab color="primary"
+                        (click)="openMapBottomSheet(node)" class="add" style="display: inline-block">+</button>
+                </mat-tree-node>
+            </mat-tree>
+        </div>
+    </div>
+    <div class = "col-sm-3" *ngIf = "!diseaseMap && diseaseBranch">
+        <div *ngFor = "let link of diseaseBranch.linkCards">
+                <mat-card class="example-card">
+                        <mat-card-header>
+                          <div mat-card-avatar class="kingmed-profile"></div>
+                          <mat-card-title>{{link.articleName}}</mat-card-title>
+                          <mat-card-subtitle>{{link.subTitle}}</mat-card-subtitle>
+                        </mat-card-header>
+                        <a [href]="link.articleUrl">
+                             <img mat-card-image [src]="link.imageUrl" alt="Photo of a Shiba Inu">
+                        </a>
+                        <mat-card-actions>
+                          <button mat-button (click)="deleteLinkToBranch(link)">删除</button>
+                          <button mat-button (click) = "createLinkToBranch(link)">编辑</button>
+                        </mat-card-actions>
+                      </mat-card>
+        </div>
+    </div>
+    <div class = "col-sm-3" *ngIf = "diseaseMap">
+            <div *ngFor = "let link of diseaseMap.linkCards">
+                    <mat-card class="example-card">
+                            <mat-card-header>
+                              <div mat-card-avatar class="kingmed-profile"></div>
+                              <mat-card-title>{{link.articleName}}</mat-card-title>
+                              <mat-card-subtitle>{{link.subTitle}}</mat-card-subtitle>
+                            </mat-card-header>
+                            <a [href]="link.articleUrl">
+                                 <img mat-card-image [src]="link.imageUrl" alt="Photo of a Shiba Inu">
+                            </a>
+                            <mat-card-actions>
+                              <button mat-button (click)="deleteLinkToMap(link)">删除</button>
+                              <button mat-button (click) = "createLinkToMap(link)">编辑</button>
+                            </mat-card-actions>
+                          </mat-card>
+            </div>
+    </div>
 </div>

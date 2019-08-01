@@ -56,7 +56,7 @@ public class DiseaseMap implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @BatchSize(size = 5)
     @JoinColumn(name = "disease_map_id")
-    private List<LinkCard> linkCards = new ArrayList<LinkCard>();
+    private Set<LinkCard> linkCards = new HashSet<LinkCard>();
 
     @ManyToOne
     @JsonIgnoreProperties("diseaseMaps")
@@ -212,11 +212,11 @@ public class DiseaseMap implements Serializable {
         this.description = description;
     }
 
-    public List<LinkCard> getLinkCards() {
+    public Set<LinkCard> getLinkCards() {
         return linkCards;
     }
 
-    public void setLinkCards(List<LinkCard> linkCards) {
+    public void setLinkCards(Set<LinkCard> linkCards) {
         this.linkCards = linkCards;
     }
 

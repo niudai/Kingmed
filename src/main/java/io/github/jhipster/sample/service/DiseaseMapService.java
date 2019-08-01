@@ -2,6 +2,7 @@ package io.github.jhipster.sample.service;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManagerFactory;
 import javax.transaction.Transactional;
@@ -30,6 +31,7 @@ import io.github.jhipster.sample.repository.DiseaseMapRepository;
 import io.github.jhipster.sample.repository.DiseaseXiAnRepository;
 import io.github.jhipster.sample.repository.ImageApplicationRepository;
 import io.github.jhipster.sample.repository.ImageSuppliesRepository;
+import io.github.jhipster.sample.repository.LinkCardRepository;
 import io.github.jhipster.sample.repository.QArobotRepository;
 import io.github.jhipster.sample.repository.search.DiseaseBranchSearchRepository;
 import io.github.jhipster.sample.repository.search.DiseaseMapIndexDTOSearchRepository;
@@ -55,6 +57,7 @@ public class DiseaseMapService {
     private final DiseaseMapSearchRepository diseaseMapSearchRepository;
     private final DiseaseMapIndexDTOSearchRepository diseaseMapIndexDTOSearchRepository;
     private final EntityManagerFactory entityManagerFactory;
+    private final LinkCardRepository linkCardRepository;
 
     @Autowired
     public DiseaseMapService(
@@ -65,7 +68,8 @@ public class DiseaseMapService {
         DiseaseMapIndexDTOSearchRepository diseaseMapIndexDTOSearchRepository,
         DiseaseMapSearchRepository diseaseMapSearchRepository,
         QArobotRepository qArobotRepository,
-        EntityManagerFactory entityManagerFactory) {
+        EntityManagerFactory entityManagerFactory,
+        LinkCardRepository linkCardRepository) {
         this.diseaseMapIndexDTOSearchRepository = diseaseMapIndexDTOSearchRepository;
         this.diseaseMapSearchRepository = diseaseMapSearchRepository;
         this.diseaseBranchSearchRepository = diseaseBranchSearchRepository;
@@ -74,6 +78,7 @@ public class DiseaseMapService {
         this.qArobotRepository = qArobotRepository;
         this.diseaseBranchRepository = diseaseBranchRepository;
         this.entityManagerFactory = entityManagerFactory;
+        this.linkCardRepository = linkCardRepository;
     }
 
     /**
@@ -299,8 +304,13 @@ public class DiseaseMapService {
      */
     public void attachLinkCardToDiseaseMap(LinkCard linkcard, Long diseaseMapId) {
        DiseaseMap diseaseMap =  diseaseMapRepository.findById(diseaseMapId).get();
-       diseaseMap.getLinkCards().add(linkcard);
-       diseaseMapRepository.save(diseaseMap);
+       Set<LinkCard> links = diseaseMap.getLinkCards();
+       if (links.contains(linkcard)) {
+           linkCardRepository.save(linkcard);
+       } else {
+            diseaseMap.getLinkCards().add(linkcard);
+            diseaseMapRepository.save(diseaseMap);
+       }
     }
 
     /**
@@ -320,8 +330,13 @@ public class DiseaseMapService {
      */
     public void attachLinkCardToDiseaseBranch(LinkCard linkcard, Long diseaseBranchId) {
         DiseaseBranch diseaseBranch = diseaseBranchRepository.findById(diseaseBranchId).get();
-        diseaseBranch.getLinkCards().add(linkcard);
-        diseaseBranchRepository.save(diseaseBranch);
+        Set<LinkCard> links = diseaseBranch.getLinkCards();
+       if (links.contains(linkcard)) {
+           linkCardRepository.save(linkcard);
+       } else {
+            diseaseBranch.getLinkCards().add(linkcard);
+            diseaseBranchRepository.save(diseaseBranch);
+       }
     }
 
     /**

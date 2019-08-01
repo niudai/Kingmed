@@ -9,6 +9,7 @@ import { createRequestOption } from 'app/shared';
 import { IDiseaseXiAn } from 'app/shared/model/disease-xi-an.model';
 import { IPriceXiAn } from 'app/shared/model/price-xi-an.model';
 import { IFile } from 'app/shared/model/file.model';
+import { LinkCard } from 'app/shared/model/link-card.model';
 
 type EntityResponseType = HttpResponse<IDiseaseXiAn>;
 type EntityArrayResponseType = HttpResponse<IDiseaseXiAn[]>;
@@ -117,6 +118,16 @@ export class DiseaseXiAnService {
 
     deassociateWithSupplies(diseaseId: number, suppliesId: number): Observable<HttpResponse<any>> {
         return this.http.get<any>(`${this.resourceUrl}/deassociateWithSupplies/${diseaseId}/${suppliesId}`);
+    }
+
+    ////////////////// Article //////////////////////////////
+
+    deleteArticle(link: LinkCard, id: number) {
+        return this.http.post<any>(`${this.resourceUrl}/deattach-link-card/${id}`, link);
+    }
+
+    addArticle(link: LinkCard, id: number) {
+        return this.http.post<any>(`${this.resourceUrl}/attach-link-card/${id}`, link);
     }
 
     search(req?: any): Observable<EntityArrayResponseType> {

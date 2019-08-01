@@ -1,11 +1,14 @@
 <mat-nav-list>
-        <a  mat-list-item (click)="createDiseaseMap()">
-          <span mat-line>为<span class = "text-primary">{{data.diseaseBranch.name}}</span>添加一级子地图</span>
-        </a>
-        <!-- <a  mat-list-item (click)="modifyDiseaseBranch()">
+    <a mat-list-item (click)="createDiseaseMap()">
+        <span mat-line>为<span class="text-primary">{{data.diseaseBranch.name}}</span>添加一级子地图</span>
+    </a>
+    <!-- <a  mat-list-item (click)="modifyDiseaseBranch()">
                 <span mat-line>编辑</span>
             </a> -->
-        <a  mat-list-item (click)="openLink($event)">
-          <span mat-line>关闭</span>
-        </a>
+    <a mat-list-item (click)="createLink()">
+        <span mat-line>添加文章链接</span>
+    </a>
+    <a mat-list-item (click)="openLink($event)">
+        <span mat-line>关闭</span>
+    </a>
 </mat-nav-list>
