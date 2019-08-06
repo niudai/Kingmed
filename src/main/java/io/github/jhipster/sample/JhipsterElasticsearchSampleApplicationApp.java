@@ -13,6 +13,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.core.env.Environment;
+import org.springframework.web.servlet.config.annotation.AsyncSupportConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.annotation.PostConstruct;
 import java.net.InetAddress;
@@ -22,7 +24,7 @@ import java.util.Collection;
 
 @SpringBootApplication
 @EnableConfigurationProperties({LiquibaseProperties.class, ApplicationProperties.class, StorageProperties.class})
-public class JhipsterElasticsearchSampleApplicationApp {
+public class JhipsterElasticsearchSampleApplicationApp implements WebMvcConfigurer {
 
     private static final Logger log = LoggerFactory.getLogger(JhipsterElasticsearchSampleApplicationApp.class);
 
@@ -50,6 +52,10 @@ public class JhipsterElasticsearchSampleApplicationApp {
             log.error("You have misconfigured your application! It should not " +
                 "run with both the 'dev' and 'cloud' profiles at the same time.");
         }
+    }
+
+    public void configureAsyncSupport(AsyncSupportConfigurer configurer) {
+        configurer.setDefaultTimeout(30000);
     }
 
     /**

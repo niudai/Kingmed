@@ -4,6 +4,7 @@ import io.github.jhipster.config.JHipsterConstants;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -67,6 +68,7 @@ public class LoggingAspect {
                 joinPoint.getSignature().getName(), e.getCause() != null? e.getCause() : "NULL");
         }
     }
+
 
     /**
      * Advice that logs when a method is entered and exited.

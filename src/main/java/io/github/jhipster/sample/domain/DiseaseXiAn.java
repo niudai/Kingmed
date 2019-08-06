@@ -69,6 +69,14 @@ public class DiseaseXiAn implements Serializable {
     @JoinTable(name = "disease_xi_an_image_supplies", joinColumns = @JoinColumn(name = "disease_xi_an_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "image_supplies_id", referencedColumnName = "id"))
     private Set<ImageSupplies> suppliess = new HashSet<>();
 
+    @ManyToMany(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST })
+    @JoinTable(
+        name = "disease_xi_an_user",
+        joinColumns = @JoinColumn(name = "disease_xi_an_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id")
+    )
+    private Set<User> users = new HashSet<>();
+
     public Set<ImageSupplies> getSuppliess() {
         return this.suppliess;
     }

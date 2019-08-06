@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Disease Map
+    -->
+    <changeSet id="2018-08-06-01" author="niudai">
+        <!-- Create table for many to many relationship of disease_map with q_arobot -->
+
+        <createTable tableName="disease_xi_an_user">
+            <column name="disease_xi_an_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <!-- Add primary key and foreign key -->
+
+        <addPrimaryKey columnNames="disease_xi_an_id, user_id" tableName="disease_xi_an_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="disease_xi_an_id"
+                                 baseTableName="disease_xi_an_user"
+                                 constraintName="fk_disease_xi_an_user_disease_xi_an_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="disease_xi_an"/>
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="disease_xi_an_user"
+                                 constraintName="fk_disease_xi_an_user_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+    </changeSet>
+</databaseChangeLog>
