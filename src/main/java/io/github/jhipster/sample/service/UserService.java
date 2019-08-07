@@ -2,8 +2,10 @@ package io.github.jhipster.sample.service;
 
 import io.github.jhipster.sample.config.Constants;
 import io.github.jhipster.sample.domain.Authority;
+import io.github.jhipster.sample.domain.DiseaseXiAn;
 import io.github.jhipster.sample.domain.User;
 import io.github.jhipster.sample.repository.AuthorityRepository;
+import io.github.jhipster.sample.repository.DiseaseXiAnRepository;
 import io.github.jhipster.sample.repository.UserRepository;
 import io.github.jhipster.sample.repository.search.UserSearchRepository;
 import io.github.jhipster.sample.security.AuthoritiesConstants;
@@ -39,6 +41,8 @@ public class UserService {
 
     private final UserRepository userRepository;
 
+    private final DiseaseXiAnRepository diseaseXiAnRepository;
+
     private final PasswordEncoder passwordEncoder;
 
     private final UserSearchRepository userSearchRepository;
@@ -47,8 +51,14 @@ public class UserService {
 
     private final CacheManager cacheManager;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, CacheManager cacheManager
-        , UserSearchRepository userSearchRepository) {
+    public UserService(
+        UserRepository userRepository,
+        PasswordEncoder passwordEncoder,
+        AuthorityRepository authorityRepository,
+        CacheManager cacheManager,
+        UserSearchRepository userSearchRepository,
+        DiseaseXiAnRepository diseaseXiAnRepository) {
+        this.diseaseXiAnRepository = diseaseXiAnRepository;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.userSearchRepository = userSearchRepository;
@@ -135,6 +145,10 @@ public class UserService {
         this.clearUserCaches(newUser);
         log.debug("Created Information for User: {}", newUser);
         return newUser;
+    }
+
+    public Page<DiseaseXiAn> getDiseases(String login, Pageable pageable) {
+       return diseaseXiAnRepository.findByUsersLogin(login, pageable);
     }
 
     private boolean removeNonActivatedUser(User existingUser){

@@ -101,6 +101,8 @@ public class User extends AbstractAuditingEntity implements Serializable {
         inverseJoinColumns = @JoinColumn(name = "disease_xi_an_id", referencedColumnName = "id"),
         joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id")
     )
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @BatchSize(size = 10)
     private Set<DiseaseXiAn> diseaseXiAns = new HashSet<>();
 
     public Long getId() {
@@ -238,5 +240,13 @@ public class User extends AbstractAuditingEntity implements Serializable {
             ", langKey='" + langKey + '\'' +
             ", activationKey='" + activationKey + '\'' +
             "}";
+    }
+
+    public Set<DiseaseXiAn> getDiseaseXiAns() {
+        return diseaseXiAns;
+    }
+
+    public void setDiseaseXiAns(Set<DiseaseXiAn> diseaseXiAns) {
+        this.diseaseXiAns = diseaseXiAns;
     }
 }

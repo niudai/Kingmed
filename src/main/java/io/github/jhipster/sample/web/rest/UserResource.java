@@ -1,6 +1,7 @@
 package io.github.jhipster.sample.web.rest;
 
 import io.github.jhipster.sample.config.Constants;
+import io.github.jhipster.sample.domain.DiseaseXiAn;
 import io.github.jhipster.sample.domain.User;
 import io.github.jhipster.sample.repository.UserRepository;
 import io.github.jhipster.sample.repository.search.UserSearchRepository;
@@ -188,6 +189,19 @@ public class UserResource {
         return ResponseUtil.wrapOrNotFound(
             userService.getUserWithAuthoritiesByLogin(login)
                 .map(UserDTO::new));
+    }
+
+    /**
+     * GET /users/:login : get the "login" user.
+     *
+     * @param login the login of the user to find
+     * @return the ResponseEntity with status 200 (OK) and with body the "login" user, or with status 404 (Not Found)
+     */
+    @GetMapping("/users/{login:" + Constants.LOGIN_REGEX + "}" + "/diseases")
+    public ResponseEntity<List<DiseaseXiAn>> getUserDiseases(@PathVariable String login, Pageable pageable) {
+        Page<DiseaseXiAn> diseases = userService.getDiseases(login, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(diseases, "users/{login}/diseases");
+        return ResponseEntity.ok().headers(headers).body(diseases.getContent());
     }
 
     /**
