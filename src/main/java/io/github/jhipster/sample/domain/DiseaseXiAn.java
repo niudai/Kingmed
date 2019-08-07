@@ -479,97 +479,12 @@ public class DiseaseXiAn implements Serializable {
         if (getClass() != obj.getClass())
             return false;
         DiseaseXiAn other = (DiseaseXiAn) obj;
-        if (activated != other.activated)
-            return false;
-        if (applicationRemark == null) {
-            if (other.applicationRemark != null)
-                return false;
-        } else if (!applicationRemark.equals(other.applicationRemark))
-            return false;
-        if (applicationUnitType == null) {
-            if (other.applicationUnitType != null)
-                return false;
-        } else if (!applicationUnitType.equals(other.applicationUnitType))
-            return false;
-        if (applications == null) {
-            if (other.applications != null)
-                return false;
-        } else if (!applications.equals(other.applications))
-            return false;
-        if (chargeCode == null) {
-            if (other.chargeCode != null)
-                return false;
-        } else if (!chargeCode.equals(other.chargeCode))
-            return false;
-        if (clinicalApplication == null) {
-            if (other.clinicalApplication != null)
-                return false;
-        } else if (!clinicalApplication.equals(other.clinicalApplication))
-            return false;
-        if (hurryDepartment == null) {
-            if (other.hurryDepartment != null)
-                return false;
-        } else if (!hurryDepartment.equals(other.hurryDepartment))
-            return false;
         if (id == null) {
             if (other.id != null)
                 return false;
         } else if (!id.equals(other.id))
             return false;
-        if (medicalMethod == null) {
-            if (other.medicalMethod != null)
-                return false;
-        } else if (!medicalMethod.equals(other.medicalMethod))
-            return false;
-        if (name == null) {
-            if (other.name != null)
-                return false;
-        } else if (!name.equals(other.name))
-            return false;
-        if (preservation == null) {
-            if (other.preservation != null)
-                return false;
-        } else if (!preservation.equals(other.preservation))
-            return false;
-        if (projectCode == null) {
-            if (other.projectCode != null)
-                return false;
-        } else if (!projectCode.equals(other.projectCode))
-            return false;
-        if (projectConcourse == null) {
-            if (other.projectConcourse != null)
-                return false;
-        } else if (!projectConcourse.equals(other.projectConcourse))
-            return false;
-        if (remarks == null) {
-            if (other.remarks != null)
-                return false;
-        } else if (!remarks.equals(other.remarks))
-            return false;
-        if (reportingTime == null) {
-            if (other.reportingTime != null)
-                return false;
-        } else if (!reportingTime.equals(other.reportingTime))
-            return false;
-        if (sample == null) {
-            if (other.sample != null)
-                return false;
-        } else if (!sample.equals(other.sample))
-            return false;
-        if (series == null) {
-            if (other.series != null)
-                return false;
-        } else if (!series.equals(other.series))
-            return false;
-        if (subSeries == null) {
-            if (other.subSeries != null)
-                return false;
-        } else if (!subSeries.equals(other.subSeries))
-            return false;
-        if (subsidiary == null) {
-            if (other.subsidiary != null)
-                return false;
-        }
+
         return true;
     }
 

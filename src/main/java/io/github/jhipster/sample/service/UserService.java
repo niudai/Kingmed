@@ -151,6 +151,20 @@ public class UserService {
        return diseaseXiAnRepository.findByUsersLogin(login, pageable);
     }
 
+    @Transactional
+    public void postDiseases(String login, DiseaseXiAn diseaseXiAn) {
+        User user = userRepository.findOneByLogin(login).get();
+        diseaseXiAnRepository.save(diseaseXiAn);
+        user.getDiseaseXiAns().add(diseaseXiAn);
+    }
+
+    @Transactional
+    public void deleteDiseases(String login, DiseaseXiAn diseaseXiAn) {
+        User user = userRepository.findOneByLogin(login).get();
+        diseaseXiAnRepository.save(diseaseXiAn);
+        user.getDiseaseXiAns().remove(diseaseXiAn);
+    }
+
     private boolean removeNonActivatedUser(User existingUser){
         if (existingUser.getActivated()) {
              return false;

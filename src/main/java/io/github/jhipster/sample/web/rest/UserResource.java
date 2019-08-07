@@ -205,6 +205,18 @@ public class UserResource {
     }
 
     /**
+     * POST /users/:login : post new disease to user.
+     *
+     * @param login the login of the user to find
+     * @return the ResponseEntity with status 200 (OK) and with body the "login" user, or with status 404 (Not Found)
+     */
+    @PostMapping("/users/{login:" + Constants.LOGIN_REGEX + "}" + "/diseases")
+    public ResponseEntity<List<DiseaseXiAn>> postUserDiseases(@PathVariable String login, @Valid @RequestBody DiseaseXiAn disease) {
+        userService.postDiseases(login, disease);
+        return ResponseEntity.ok().build();
+    }
+
+    /**
      * DELETE /users/:login : delete the "login" User.
      *
      * @param login the login of the user to delete
