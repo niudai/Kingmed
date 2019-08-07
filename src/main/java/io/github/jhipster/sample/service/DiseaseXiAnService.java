@@ -19,11 +19,13 @@ import io.github.jhipster.sample.domain.ImageApplication;
 import io.github.jhipster.sample.domain.ImageSupplies;
 import io.github.jhipster.sample.domain.LinkCard;
 import io.github.jhipster.sample.domain.QArobot;
+import io.github.jhipster.sample.domain.User;
 import io.github.jhipster.sample.repository.DiseaseXiAnRepository;
 import io.github.jhipster.sample.repository.ImageApplicationRepository;
 import io.github.jhipster.sample.repository.ImageSuppliesRepository;
 import io.github.jhipster.sample.repository.LinkCardRepository;
 import io.github.jhipster.sample.repository.QArobotRepository;
+import io.github.jhipster.sample.repository.UserRepository;
 import io.github.jhipster.sample.repository.search.DiseaseXiAnSearchRepository;
 
 /**
@@ -36,6 +38,7 @@ public class DiseaseXiAnService {
     private final QArobotRepository qArobotRepository;
     private final ImageApplicationRepository imageApplicationRepository;
     private final ImageSuppliesRepository imageSuppliesRepository;
+    private final UserRepository userRepository;
     private final LinkCardRepository linkCardRepository;
 
     @Autowired
@@ -44,7 +47,9 @@ public class DiseaseXiAnService {
         , QArobotRepository qArobotRepository
         , ImageApplicationRepository imageApplicationRepository
         , ImageSuppliesRepository imageSuppliesRepository
-        , LinkCardRepository linkCardRepository) {
+        , LinkCardRepository linkCardRepository
+        , UserRepository userRepository) {
+        this.userRepository = userRepository;
         this.diseaseXiAnSearchRepository = diseaseXiAnSearchRepository;
         this.imageSuppliesRepository = imageSuppliesRepository;
         this.imageApplicationRepository = imageApplicationRepository;
@@ -188,4 +193,11 @@ public class DiseaseXiAnService {
         DiseaseXiAn diseaseXiAn = diseaseXiAnRepository.findById(ownId).get();
         diseaseXiAn.getDiseaseXiAns().remove(diseaseXiAnRepository.findById(reversedId).get());
     }
+
+    /********************* User ***********/
+    @Transactional
+    public List<User> getUsers(Long diseaseId) {
+        return userRepository.findAllByDiseaseXiAnsId(diseaseId);
+    }
+
 }

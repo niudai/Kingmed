@@ -14,5 +14,5 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("unused")
 @Repository
 public interface DiseaseXiAnRepository extends JpaRepository<DiseaseXiAn, Long> {
-    Page<DiseaseXiAn> findByUsersLogin(String login, Pageable pageable);
+    Page<DiseaseXiAn> findAllByUsersLogin(String login, Pageable pageable);
 }

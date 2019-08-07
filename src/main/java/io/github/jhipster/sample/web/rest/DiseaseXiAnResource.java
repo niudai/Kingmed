@@ -6,6 +6,7 @@ import io.github.jhipster.sample.domain.ImageSupplies;
 import io.github.jhipster.sample.domain.LinkCard;
 import io.github.jhipster.sample.domain.PriceXiAn;
 import io.github.jhipster.sample.domain.QArobot;
+import io.github.jhipster.sample.domain.User;
 import io.github.jhipster.sample.repository.DiseaseXiAnRepository;
 import io.github.jhipster.sample.repository.PriceXiAnRepository;
 import io.github.jhipster.sample.repository.search.DiseaseXiAnSearchRepository;
@@ -131,6 +132,13 @@ public class DiseaseXiAnResource {
         Page<DiseaseXiAn> page = diseaseXiAnRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/disease-xi-ans");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /******************************** Many To Many between disease and user ****************************/
+
+    @GetMapping("/disease-xi-ans/{diseaseXiAnId}/users")
+    public ResponseEntity<List<User>> getUsers(Long diseaseXiAnId) {
+        return ResponseEntity.ok().body(diseaseXiAnService.getUsers(diseaseXiAnId));
     }
 
     /******************************* Many To Many relationship between disease and disease **************/

@@ -1,5 +1,6 @@
 package io.github.jhipster.sample.repository;
 
+import io.github.jhipster.sample.domain.DiseaseXiAn;
 import io.github.jhipster.sample.domain.User;
 
 import org.springframework.cache.annotation.Cacheable;
@@ -34,6 +35,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @EntityGraph(attributePaths = "authorities")
     Optional<User> findOneWithAuthoritiesById(Long id);
+
+    List<User> findAllByDiseaseXiAnsId(Long id);
 
     @EntityGraph(attributePaths = "authorities")
     @Cacheable(cacheNames = USERS_BY_LOGIN_CACHE)

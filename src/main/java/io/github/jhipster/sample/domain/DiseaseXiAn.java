@@ -537,4 +537,12 @@ public class DiseaseXiAn implements Serializable {
     public void setLinkCards(Set<LinkCard> linkCards) {
         this.linkCards = linkCards;
     }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
 }
