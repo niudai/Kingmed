@@ -4,14 +4,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.hibernate.annotations.ManyToAny;
 import org.springframework.data.elasticsearch.annotations.Document;
@@ -29,9 +22,15 @@ public class ImageApplication {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
-    @ManyToMany(mappedBy = "applications"
-        , fetch = FetchType.LAZY
-        , cascade = CascadeType.PERSIST)
+    public String name = "未命名";
+
+    public String path = " Default Path ";
+
+    @ManyToMany
+    @JoinTable(
+        name = "disease_xi_an_image_application",
+        inverseJoinColumns = @JoinColumn(name = "disease_xi_an_id", referencedColumnName = "id"),
+        joinColumns = @JoinColumn(name = "image_application_id", referencedColumnName = "id"))
     private Set<DiseaseXiAn> diseaseXiAns = new HashSet<>();
 
     public Set<DiseaseXiAn> getDiseaseXiAns() {
@@ -41,10 +40,6 @@ public class ImageApplication {
     public void setDiseaseXiAns(Set<DiseaseXiAn> diseaseXiAns) {
         this.diseaseXiAns = diseaseXiAns;
     }
-
-    public String name = "未命名";
-
-    public String path = " Default Path ";
 
     public ImageApplication() {
     }
@@ -117,6 +112,13 @@ public class ImageApplication {
             ", name='" + getName() + "'" +
             ", path='" + getPath() + "'" +
             "}";
+    }
+
+    public ImageApplication update(ImageApplication imageApplication) {
+        this.id = imageApplication.id;
+        this.name = imageApplication.name;
+        this.path = imageApplication.path;
+        return this;
     }
 
 }
