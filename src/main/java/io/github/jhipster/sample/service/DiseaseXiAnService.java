@@ -64,6 +64,14 @@ public class DiseaseXiAnService {
     //     return diseaseXiAnSearchRepository.searchSimilar(entity, fields, pageable)
     // }
 
+    /******************** Itself ************************/
+
+    @Transactional
+    public DiseaseXiAn updateDiseaseXiAn(DiseaseXiAn disease) {
+        DiseaseXiAn result = diseaseXiAnRepository.findById(disease.getId()).get().update(disease);
+        return result;
+    }
+
     /********************* QArobot ***********/
     @Transactional
     public Collection<QArobot> findQArobotsOfDiseaseXiAn(Long id) {

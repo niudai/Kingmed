@@ -113,7 +113,7 @@ public class DiseaseXiAnResource {
         if (diseaseXiAn.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        DiseaseXiAn result = diseaseXiAnRepository.save(diseaseXiAn);
+        DiseaseXiAn result = diseaseXiAnService.updateDiseaseXiAn(diseaseXiAn);
         diseaseXiAnSearchRepository.save(result);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, diseaseXiAn.getId().toString()))
