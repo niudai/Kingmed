@@ -20,6 +20,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -86,12 +87,13 @@ public class QArobotResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/q-arobots")
+    @Transactional
     public ResponseEntity<QArobot> updateQArobot(@Valid @RequestBody QArobot qArobot) throws URISyntaxException {
         log.debug("REST request to update QArobot : {}", qArobot);
         if (qArobot.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        QArobot result = qArobotRepository.save(qArobot);
+        QArobot result = qArobotRepository.findById(qArobot.getId()).get().update(qArobot);
         qArobotSearchRepository.save(result);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, qArobot.getId().toString()))
