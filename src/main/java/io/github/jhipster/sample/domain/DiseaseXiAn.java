@@ -6,7 +6,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import org.springframework.data.elasticsearch.annotations.Document;
@@ -28,9 +27,7 @@ public class DiseaseXiAn implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    /************************************************ One-to-Many Or Many-to-Many Asso */
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "disease_xi_an_id")
@@ -100,6 +97,10 @@ public class DiseaseXiAn implements Serializable {
     public void setQarobots(Set<QArobot> qarobots) {
         this.qarobots = qarobots;
     }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Size(max = 50)
     @Column(name = "subsidiary", length = 50)
@@ -544,5 +545,30 @@ public class DiseaseXiAn implements Serializable {
 
     public void setUsers(Set<User> users) {
         this.users = users;
+    }
+
+    public DiseaseXiAn update(DiseaseXiAn diseaseXiAn) {
+        this.id = diseaseXiAn.id;
+        this.subsidiary = diseaseXiAn.subsidiary;
+        this.name = diseaseXiAn.name;
+        this.activated = diseaseXiAn.activated;
+        this.projectCode = diseaseXiAn.projectCode;
+        this.chargeCode = diseaseXiAn.chargeCode;
+        this.tollStandard = diseaseXiAn.tollStandard;
+        this.supplement = diseaseXiAn.supplement;
+        this.sample = diseaseXiAn.sample;
+        this.tutorial = diseaseXiAn.tutorial;
+        this.preservation = diseaseXiAn.preservation;
+        this.transportation = diseaseXiAn.transportation;
+        this.applicationRemark = diseaseXiAn.applicationRemark;
+        this.medicalMethod = diseaseXiAn.medicalMethod;
+        this.projectConcourse = diseaseXiAn.projectConcourse;
+        this.hurryDepartment = diseaseXiAn.hurryDepartment;
+        this.reportingTime = diseaseXiAn.reportingTime;
+        this.clinicalApplication = diseaseXiAn.clinicalApplication;
+        this.series = diseaseXiAn.series;
+        this.subSeries = diseaseXiAn.subSeries;
+        this.remarks = diseaseXiAn.remarks;
+        return this;
     }
 }

@@ -148,14 +148,13 @@ public class UserService {
     }
 
     public Page<DiseaseXiAn> getDiseases(String login, Pageable pageable) {
-       return diseaseXiAnRepository.findByUsersLogin(login, pageable);
+       return diseaseXiAnRepository.findAllByUsersLogin(login, pageable);
     }
 
     @Transactional
     public void postDiseases(String login, DiseaseXiAn diseaseXiAn) {
         User user = userRepository.findOneByLogin(login).get();
-        diseaseXiAnRepository.save(diseaseXiAn);
-        user.getDiseaseXiAns().add(diseaseXiAn);
+        user.getDiseaseXiAns().add(diseaseXiAnRepository.save(diseaseXiAn));
     }
 
     @Transactional
