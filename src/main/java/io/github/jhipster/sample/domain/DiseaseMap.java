@@ -67,14 +67,10 @@ public class DiseaseMap implements Serializable {
     @JoinColumn(name = "disease_branch_id")
     private DiseaseBranch parentDiseaseBranch;
 
-    @ManyToMany(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH,
-            CascadeType.PERSIST }, fetch = FetchType.LAZY)
     @JoinTable(name = "disease_map_q_arobot", joinColumns = @JoinColumn(name = "disease_map_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "q_arobot_id", referencedColumnName = "id"))
     @BatchSize(size = 5)
     private Set<QArobot> qarobots = new HashSet<>();
 
-    @ManyToMany(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH,
-            CascadeType.PERSIST }, fetch = FetchType.LAZY)
     @JoinTable(name = "disease_map_disease_xi_an", joinColumns = @JoinColumn(name = "disease_map_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "disease_xi_an_id", referencedColumnName = "id"))
     @BatchSize(size = 5)
     private Set<DiseaseXiAn> diseaseXiAns = new HashSet<>();

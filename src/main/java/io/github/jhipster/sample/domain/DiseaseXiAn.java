@@ -41,36 +41,35 @@ public class DiseaseXiAn implements Serializable {
     @BatchSize(size = 10)
     private Set<LinkCard> linkCards = new HashSet<LinkCard>();
 
-    @ManyToMany(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST })
+    @ManyToMany
     @JoinTable(name = "disease_xi_an_q_arobot", joinColumns = @JoinColumn(name = "disease_xi_an_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "q_arobot_id", referencedColumnName = "id"))
     private Set<QArobot> qarobots = new HashSet<>();
 
-    @ManyToMany(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST })
+    @ManyToMany
     @JoinTable(name = "disease_xi_an_disease_xi_an", joinColumns = @JoinColumn(name = "disease_xi_an_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "related_disease_xi_an_id", referencedColumnName = "id"))
     @JsonIgnoreProperties({ "diseaseXiAns", "reversedDiseaseXiAns" })
     private Set<DiseaseXiAn> diseaseXiAns = new HashSet<>();
 
-    @ManyToMany(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST })
+    @ManyToMany
     @JoinTable(name = "disease_xi_an_disease_xi_an", joinColumns = @JoinColumn(name = "related_disease_xi_an_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "disease_xi_an_id", referencedColumnName = "id"))
     @JsonIgnoreProperties({ "diseaseXiAns", "reversedDiseaseXiAns" })
     private Set<DiseaseXiAn> reversedDiseaseXiAns = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.DETACH, CascadeType.MERGE,
-            CascadeType.REFRESH, CascadeType.PERSIST })
+    @ManyToMany
     @JoinTable(name = "disease_map_disease_xi_an"
         , joinColumns = @JoinColumn(name = "disease_xi_an_id", referencedColumnName = "id")
         , inverseJoinColumns = @JoinColumn(name = "disease_map_id", referencedColumnName = "id"))
     private Set<DiseaseMap> diseaseMaps = new HashSet<>();
 
-    @ManyToMany(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST })
+    @ManyToMany
     @JoinTable(name = "disease_xi_an_image_application", joinColumns = @JoinColumn(name = "disease_xi_an_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "image_application_id", referencedColumnName = "id"))
     private Set<ImageApplication> applications = new HashSet<>();
 
-    @ManyToMany(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST })
+    @ManyToMany
     @JoinTable(name = "disease_xi_an_image_supplies", joinColumns = @JoinColumn(name = "disease_xi_an_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "image_supplies_id", referencedColumnName = "id"))
     private Set<ImageSupplies> suppliess = new HashSet<>();
 
-    @ManyToMany(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST })
+    @ManyToMany
     @JoinTable(
         name = "disease_xi_an_user",
         joinColumns = @JoinColumn(name = "disease_xi_an_id", referencedColumnName = "id"),

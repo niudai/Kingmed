@@ -27,19 +27,13 @@ public class QArobot implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToMany(fetch = FetchType.LAZY
-        , cascade = { CascadeType.DETACH,                 CascadeType.MERGE,                 CascadeType.REFRESH,                 CascadeType.PERSIST})
+    @ManyToMany
     @JoinTable(name = "disease_xi_an_q_arobot"
         , joinColumns = @JoinColumn(name = "q_arobot_id", referencedColumnName = "id")
         , inverseJoinColumns = @JoinColumn(name = "disease_xi_an_id", referencedColumnName = "id"))
     private Set<DiseaseXiAn> diseaseXiAns = new HashSet<>();
 
-    @ManyToMany(cascade = {
-        CascadeType.DETACH,
-        CascadeType.MERGE,
-        CascadeType.REFRESH,
-        CascadeType.PERSIST
-    })
+    @ManyToMany
     @JoinTable(name = "disease_map_q_arobot"
     , joinColumns = @JoinColumn(name = "q_arobot_id", referencedColumnName = "id")
     , inverseJoinColumns = @JoinColumn(name = "disease_map_id", referencedColumnName = "id"))
