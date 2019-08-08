@@ -298,5 +298,19 @@ public class QArobot implements Serializable {
         this.diseaseMaps = diseaseMaps;
     }
 
-    public
+    public QArobot update(QArobot qa) {
+        this.id = qa.id;
+        this.diseaseSeries = qa.diseaseSeries;
+        this.projectSeries = qa.projectSeries;
+        this.level = qa.level;
+        this.questionType = qa.questionType;
+        this.question = qa.question;
+        this.answer = qa.answer;
+        this.updateDate = qa.updateDate;
+        this.submitter = qa.submitter;
+        this.qaSubsidiary = qa.qaSubsidiary;
+        this.specialProcess = qa.specialProcess;
+        this.qaClass = qa.qaClass;
+        return this;
+    }
 }
