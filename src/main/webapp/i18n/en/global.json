@@ -35,7 +35,8 @@
                 "sessions": "会话",
                 "login": "登入",
                 "logout": "登出",
-                "register": "注册"
+                "register": "注册",
+                "my-disease": "我的项目"
             },
             "admin": {
                 "main": "管理",

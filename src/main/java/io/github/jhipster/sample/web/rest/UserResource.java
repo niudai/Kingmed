@@ -222,9 +222,9 @@ public class UserResource {
      * @param login the login of the user to find
      * @return the ResponseEntity with status 200 (OK) or with status 404 (Not Found)
      */
-    @DeleteMapping("/users/{login:" + Constants.LOGIN_REGEX + "}" + "/diseases")
-    public ResponseEntity<Void> deleteUserDiseases(@PathVariable String login, @Valid @RequestBody DiseaseXiAn disease) {
-        userService.deleteDiseases(login, disease);
+    @DeleteMapping("/users/{login:" + Constants.LOGIN_REGEX + "}" + "/diseases/{diseaseId}")
+    public ResponseEntity<Void> deleteUserDiseases(@PathVariable String login, @PathVariable Long diseaseId, @Valid @RequestBody DiseaseXiAn disease) {
+        userService.deleteDiseases(login, diseaseId);
         return ResponseEntity.ok().build();
     }
 

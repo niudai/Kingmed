@@ -15,6 +15,7 @@ import {
 } from './';
 import { JhiLanguageService } from 'ng-jhipster';
 import { JhiLanguageHelper } from 'app/core';
+import { MyDiseaseComponent } from './my-disease/my-disease/my-disease.component';
 
 @NgModule({
     imports: [JhipsterElasticsearchSampleApplicationSharedModule, RouterModule.forChild(accountState)],
@@ -25,7 +26,8 @@ import { JhiLanguageHelper } from 'app/core';
         PasswordStrengthBarComponent,
         PasswordResetInitComponent,
         PasswordResetFinishComponent,
-        SettingsComponent
+        SettingsComponent,
+        MyDiseaseComponent
     ],
     providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

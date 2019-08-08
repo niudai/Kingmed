@@ -158,10 +158,9 @@ public class UserService {
     }
 
     @Transactional
-    public void deleteDiseases(String login, DiseaseXiAn diseaseXiAn) {
+    public void deleteDiseases(String login, Long diseaseXiAnId) {
         User user = userRepository.findOneByLogin(login).get();
-        diseaseXiAnRepository.save(diseaseXiAn);
-        user.getDiseaseXiAns().remove(diseaseXiAn);
+        diseaseXiAnRepository.deleteById(diseaseXiAnId);
     }
 
     private boolean removeNonActivatedUser(User existingUser){

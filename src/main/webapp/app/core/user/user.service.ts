@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
 import { IUser } from './user.model';
+import { IDiseaseXiAn } from 'app/shared/model/disease-xi-an.model';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -41,5 +42,20 @@ export class UserService {
 
     authorities(): Observable<string[]> {
         return this.http.get<string[]>(SERVER_API_URL + 'api/users/authorities');
+    }
+
+    getDiseases(login: string, req?: any): Observable<HttpResponse<IDiseaseXiAn[]>> {
+        const options = createRequestOption(req);
+        return this.http.get<IDiseaseXiAn[]>(`${this.resourceUrl}/${login}/diseases`, { params: options, observe: 'response'});
+    }
+
+    postDiseases(login: string, disease: IDiseaseXiAn, req?: any): Observable<HttpResponse<IDiseaseXiAn[]>> {
+        const options = createRequestOption(req);
+        return this.http.post<IDiseaseXiAn[]>(`${this.resourceUrl}/${login}/diseases`, disease, { params: options, observe: 'response'});
+    }
+
+    deleteDiseases(login: string, disease: IDiseaseXiAn, req?: any): Observable<HttpResponse<IDiseaseXiAn[]>> {
+        const options = createRequestOption(req);
+        return this.http.delete<IDiseaseXiAn[]>(`${this.resourceUrl}/${login}/diseases`, { params: options, observe: 'response'});
     }
 }
