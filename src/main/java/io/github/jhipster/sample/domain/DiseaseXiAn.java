@@ -1,5 +1,6 @@
 package io.github.jhipster.sample.domain;
 
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -31,10 +32,13 @@ public class DiseaseXiAn implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "disease_xi_an_id")
+    @BatchSize(size = 10)
     private List<PriceXiAn> prices = new ArrayList<PriceXiAn>();
+
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "disease_xi_an_id")
+    @BatchSize(size = 10)
     private Set<LinkCard> linkCards = new HashSet<LinkCard>();
 
     @ManyToMany(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST })
