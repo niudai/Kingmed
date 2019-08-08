@@ -297,4 +297,6 @@ public class QArobot implements Serializable {
     public void setDiseaseMaps(Set<QArobot> diseaseMaps) {
         this.diseaseMaps = diseaseMaps;
     }
+
+    public
 }

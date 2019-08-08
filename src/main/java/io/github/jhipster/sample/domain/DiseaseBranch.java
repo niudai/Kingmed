@@ -159,4 +159,12 @@ public class DiseaseBranch implements Serializable {
         this.linkCards = linkCards;
     }
 
+    public DiseaseBranch update(DiseaseBranch diseaseBranch) {
+        this.id = diseaseBranch.id;
+        this.name = diseaseBranch.name;
+        this.subsidiary = diseaseBranch.subsidiary;
+        this.description = diseaseBranch.description;
+        return this;
+    }
+
 }
