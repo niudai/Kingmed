@@ -4,14 +4,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 
@@ -32,9 +25,11 @@ public class ImageSupplies {
 
     public String path = " Default Path ";
 
-    @ManyToMany(mappedBy = "suppliess"
-    , fetch = FetchType.LAZY
-    , cascade = CascadeType.PERSIST)
+    @ManyToMany
+    @JoinTable(
+        name = "disease_xi_an_image_supplies",
+        inverseJoinColumns = @JoinColumn(name = "disease_xi_an_id", referencedColumnName = "id"),
+        joinColumns = @JoinColumn(name = "image_supplies_id", referencedColumnName = "id"))
     private Set<DiseaseXiAn> diseaseXiAns = new HashSet<>();
 
     public ImageSupplies() {
@@ -110,6 +105,13 @@ public class ImageSupplies {
             ", name='" + getName() + "'" +
             ", path='" + getPath() + "'" +
             "}";
+    }
+
+    public ImageSupplies update(ImageSupplies imageSupplies) {
+        this.id = imageSupplies.id;
+        this.name = imageSupplies.name;
+        this.path = imageSupplies.path;
+        return this;
     }
 
 }
