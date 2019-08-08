@@ -220,4 +220,12 @@ public class DiseaseMap implements Serializable {
         this.linkCards = linkCards;
     }
 
+    public DiseaseMap update(DiseaseMap diseaseMap) {
+        this.id = diseaseMap.id;
+        this.name = diseaseMap.name;
+        this.subsidiary = diseaseMap.subsidiary;
+        this.description = diseaseMap.description;
+        return this;
+    }
+
 }
