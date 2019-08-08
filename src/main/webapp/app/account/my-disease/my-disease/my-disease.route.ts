@@ -2,7 +2,6 @@ import { UserRouteAccessService } from './../../../core/auth/user-route-access-s
 import { Routes } from '@angular/router';
 import { MyDiseaseComponent } from './my-disease.component';
 
-
 export const myDiseaseRoute: Routes = [
     {
         path: 'my-disease',
@@ -14,4 +13,3 @@ export const myDiseaseRoute: Routes = [
         canActivate: [UserRouteAccessService]
     }
 ]
-

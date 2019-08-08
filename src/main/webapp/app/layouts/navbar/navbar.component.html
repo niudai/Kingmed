@@ -10,7 +10,7 @@
             </h1>
         </div>
     <div>
-        
+
     </div>
     <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed"
         [ngSwitch]="isAuthenticated()">
@@ -212,6 +212,13 @@
                             (click)="collapseNavbar()">
                             <fa-icon icon="user-plus" fixedWidth="true"></fa-icon>
                             <span>注册</span>
+                        </a>
+                    </li>
+                    <li *ngSwitchCase="true">
+                        <a class="dropdown-item" routerLink="account/my-disease" routerLinkActive="active"
+                            (click)="collapseNavbar()">
+                            <fa-icon icon="book-medical" fixedWidth="true"></fa-icon>
+                            <span>我的项目</span>
                         </a>
                     </li>
                 </ul>
