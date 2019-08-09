@@ -10,8 +10,9 @@ const ACCOUNT_ROUTES = [
     passwordResetInitRoute,
     registerRoute,
     settingsRoute,
+    myDiseaseRoute
 ];
 
 export const accountState: Routes = [
     ...ACCOUNT_ROUTES,
-].concat(myDiseaseRoute);
+];

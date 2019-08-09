@@ -1,9 +1,8 @@
-import { NgbModal, NgbModalModule, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Component, OnInit, OnDestroy, HostListener, Inject } from '@angular/core';
 import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
 import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
 import { IDiseaseXiAn } from 'app/shared/model/disease-xi-an.model';
@@ -12,7 +11,6 @@ import { AccountService } from 'app/core';
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { DiseaseXiAnService } from './disease-xi-an.service';
 import { PageEvent, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { DiseaseXiAnDeleteDialogComponent } from 'app/disease-map/disease-map/disease-map.component';
 
 @Component({
     selector: 'jhi-disease-xi-an',
