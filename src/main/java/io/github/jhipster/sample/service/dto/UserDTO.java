@@ -61,6 +61,14 @@ public class UserDTO {
 
     private Instant lastModifiedDate;
 
+    private String phoneNumber;
+
+    private String workAddress;
+
+    private String workType;
+
+    private String selfIntro;
+
     private Set<String> authorities;
 
     public UserDTO() {
@@ -80,6 +88,10 @@ public class UserDTO {
         this.createdDate = user.getCreatedDate();
         this.lastModifiedBy = user.getLastModifiedBy();
         this.lastModifiedDate = user.getLastModifiedDate();
+        this.phoneNumber = user.getPhoneNumber();
+        this.workAddress = user.getWorkAddress();
+        this.workType = user.getWorkType();
+        this.selfIntro = user.getSelfIntro();
         this.authorities = user.getAuthorities().stream()
             .map(Authority::getName)
             .collect(Collectors.toSet());
@@ -205,5 +217,37 @@ public class UserDTO {
             ", lastModifiedDate=" + lastModifiedDate +
             ", authorities=" + authorities +
             "}";
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getWorkAddress() {
+        return workAddress;
+    }
+
+    public void setWorkAddress(String workAddress) {
+        this.workAddress = workAddress;
+    }
+
+    public String getWorkType() {
+        return workType;
+    }
+
+    public void setWorkType(String workType) {
+        this.workType = workType;
+    }
+
+    public String getSelfIntro() {
+        return selfIntro;
+    }
+
+    public void setSelfIntro(String selfIntro) {
+        this.selfIntro = selfIntro;
     }
 }

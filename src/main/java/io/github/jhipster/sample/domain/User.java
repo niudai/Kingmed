@@ -1,12 +1,15 @@
 package io.github.jhipster.sample.domain;
 
 import io.github.jhipster.sample.config.Constants;
+import io.github.jhipster.sample.service.dto.UserDTO;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import javax.validation.constraints.Email;
 
 import javax.persistence.*;
@@ -121,7 +124,19 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @BatchSize(size = 10)
     private Set<DiseaseXiAn> diseaseXiAns = new HashSet<>();
 
-
+    public User update(UserDTO dto) {
+        this.login = dto.getLogin().toLowerCase();
+        this.firstName = dto.getFirstName();
+        this.email = dto.getEmail();
+        this.imageUrl = dto.getImageUrl();
+        this.activated = dto.isActivated();
+        this.langKey = dto.getLangKey();
+        this.phoneNumber = dto.getPhoneNumber();
+        this.workAddress = dto.getWorkAddress();
+        this.workType = dto.getWorkType();
+        this.selfIntro = dto.getSelfIntro();
+        return this;
+    }
 
     public Long getId() {
         return id;
