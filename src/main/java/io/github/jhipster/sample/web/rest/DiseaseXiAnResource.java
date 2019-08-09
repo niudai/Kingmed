@@ -136,7 +136,7 @@ public class DiseaseXiAnResource {
     /******************************** Many To Many between disease and user ****************************/
 
     @GetMapping("/disease-xi-ans/{diseaseXiAnId}/users")
-    public ResponseEntity<List<User>> getUsers(Long diseaseXiAnId) {
+    public ResponseEntity<List<User>> getUsers(@PathVariable Long diseaseXiAnId) {
         return ResponseEntity.ok().body(diseaseXiAnService.getUsers(diseaseXiAnId));
     }
 

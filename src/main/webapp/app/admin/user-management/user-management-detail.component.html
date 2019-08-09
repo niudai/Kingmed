@@ -1,5 +1,34 @@
 <div class="row justify-content-center">
-    <div class="col-8">
+        <div class = "col-sm-12">
+                <mat-card class="example-card">
+                    <mat-card-header>
+                      <div mat-card-avatar class="kingmed-profile"></div>
+                      <mat-card-title>{{user.firstName}}
+                        <span *ngFor="let authority of user.authorities">
+                            <span class="badge badge-info">{{authority}}</span>
+                        </span>
+                      </mat-card-title>
+                      <mat-card-subtitle>{{user.email}}</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+                    </mat-card-content>
+                  </mat-card>
+                  <mat-list>
+                        <mat-list-item>
+                          <fa-icon [icon]="'phone'"></fa-icon>
+                          <h4 mat-line>联系电话</h4>
+                          <p mat-line>18324748963</p>
+                        </mat-list-item>
+                        <mat-divider></mat-divider>
+                        <mat-list-item>
+                          <fa-icon [icon] = "'building'"></fa-icon>
+                          <h4 mat-line>部门</h4>
+                          <p mat-line>西安</p>
+                        </mat-list-item>
+                      </mat-list>
+            </div>
+
+    <!-- <div class="col-8">
         <div *ngIf="user">
             <h2>
                 <span jhiTranslate="userManagement.detail.title">User</span> [<b>{{user.login}}</b>]
@@ -45,5 +74,5 @@
                 <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
             </button>
         </div>
-    </div>
+    </div> -->
 </div>

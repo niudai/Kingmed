@@ -1,3 +1,4 @@
+import { Account } from 'app/core/user/account.model';
 import { DiseaseXiAnService } from 'app/entities/disease-xi-an/disease-xi-an.service';
 import { ActivateComponent } from './../../account/activate/activate.component';
 import { PriceXiAn } from './../../shared/model/price-xi-an.model';
@@ -23,17 +24,16 @@ export class DiseaseXiAnDetailComponent implements OnInit {
     remarkIsOpen: boolean;
     clinicalApplicationIsOpen: boolean; // 临床应用
     diseaseXiAn: IDiseaseXiAn;
-
+    users: Account[];
     currentPrice: string;
     currentChargeCode: string;
     currentReportingTime: string;
     currentSubseries: string;
 
     constructor(
-        protected activatedRoute: ActivatedRoute
-        , protected diseaseXiAnService: DiseaseXiAnService
-        , protected dialog: MatDialog
-
+        protected activatedRoute: ActivatedRoute,
+        protected diseaseXiAnService: DiseaseXiAnService,
+        protected dialog: MatDialog,
     ) { }
 
     projectAndPriceIsOpenToggle() {
@@ -71,6 +71,8 @@ export class DiseaseXiAnDetailComponent implements OnInit {
         this.projectAndPriceIsOpen = true;
         this.activatedRoute.data.subscribe(({ diseaseXiAn }) => {
             this.diseaseXiAn = diseaseXiAn;
+            this.diseaseXiAnService.getUsers(this.diseaseXiAn.id)
+                .subscribe( res => this.users = res.body);
         });
         this.activatedToggleLabel = this.diseaseXiAn.activated ? '运行' : '已停用';
         this.currentChargeCode = this.diseaseXiAn.chargeCode;

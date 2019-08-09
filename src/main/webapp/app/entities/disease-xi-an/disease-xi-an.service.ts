@@ -1,3 +1,4 @@
+import { Account } from 'app/core/user/account.model';
 import { IQArobot } from './../../shared/model/q-arobot.model';
 import { QArobot } from 'app/shared/model/q-arobot.model';
 import { Injectable } from '@angular/core';
@@ -133,5 +134,11 @@ export class DiseaseXiAnService {
     search(req?: any): Observable<EntityArrayResponseType> {
         const options = createRequestOption(req);
         return this.http.get<IDiseaseXiAn[]>(this.resourceSearchUrl, { params: options, observe: 'response' });
+    }
+
+    /////////////////////////// Users ////////////////////////////
+
+    getUsers(diseaseId: number) {
+        return this.http.get<Account[]>(`${this.resourceUrl}/${diseaseId}/users`, { observe: 'response' });
     }
 }

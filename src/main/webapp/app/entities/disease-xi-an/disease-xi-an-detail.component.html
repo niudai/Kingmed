@@ -4,6 +4,16 @@
             <mat-card>
                 <fa-icon class="icon-2" [icon]="'book-medical'"></fa-icon>
                 <span>{{diseaseXiAn.name}} - <span class="text-primary">{{diseaseXiAn.subsidiary}}</span> </span>
+                <br>
+                <fa-icon [icon] = "'user-tie'"
+                    style = "color: cadetblue"
+                ></fa-icon>
+                <button style="
+                    margin: 5px;"
+                    *ngFor="let user of users"
+                    mat-stroked-button [routerLink]="['/admin/user-management', user.login, 'view']"
+                >{{user.firstName}}</button>
+
             </mat-card>
             <hr>
             <mat-accordion>
