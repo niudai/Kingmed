@@ -223,7 +223,7 @@ public class UserResource {
      * @return the ResponseEntity with status 200 (OK) or with status 404 (Not Found)
      */
     @DeleteMapping("/users/{login:" + Constants.LOGIN_REGEX + "}" + "/diseases/{diseaseId}")
-    public ResponseEntity<Void> deleteUserDiseases(@PathVariable String login, @PathVariable Long diseaseId, @Valid @RequestBody DiseaseXiAn disease) {
+    public ResponseEntity<Void> deleteUserDiseases(@PathVariable String login, @PathVariable Long diseaseId) {
         userService.deleteDiseases(login, diseaseId);
         return ResponseEntity.ok().build();
     }

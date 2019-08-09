@@ -6,6 +6,7 @@ import '../content/css/vendor.css';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
+    faUserCog,
     faUser,
     faSort,
     faSortUp,
@@ -116,4 +117,5 @@ library.add(faAngleRight);
 library.add(faChevronRight);
 library.add(faAngleDown);
 library.add(faRobot);
+library.add(faUserCog);
 // jhipster-needle-add-element-to-vendor - JHipster will add new menu items here

@@ -54,7 +54,7 @@ export class UserService {
         return this.http.post<IDiseaseXiAn[]>(`${this.resourceUrl}/${login}/diseases`, disease, { params: options, observe: 'response'});
     }
 
-    deleteDiseases(login: string, diseaseId: number, req?: any): Observable<HttpResponse<IDiseaseXiAn[]>> {
-        return this.http.delete<IDiseaseXiAn[]>(`${this.resourceUrl}/${login}/diseases/${diseaseId}`, { observe: 'response'});
+    deleteDiseases(login: string, disease: IDiseaseXiAn): Observable<HttpResponse<IDiseaseXiAn[]>> {
+        return this.http.delete<IDiseaseXiAn[]>(`${this.resourceUrl}/${login}/diseases/${disease}`, { observe: 'response'});
     }
 }

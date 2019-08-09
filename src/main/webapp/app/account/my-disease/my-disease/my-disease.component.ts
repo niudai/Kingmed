@@ -11,12 +11,13 @@ import { AccountService, UserService } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { PageEvent, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MyDiseaseDeleteDialogComponent } from '../my-disease-delete-dialog/my-disease-delete-dialog.component';
 // import { DiseaseXiAnMatDeleteDialogComponent } from 'app/entities/disease-xi-an';
 
 @Component({
     selector: 'jhi-my-disease',
     templateUrl: './my-disease.component.html',
-    styles: []
+    styleUrls: ['./my-disease.component.css']
 })
 export class MyDiseaseComponent implements OnInit {
     PC_COL: string[] = ['ID', 'namePC', 'price', 'projectConcourse', 'applications', 'suppliess',
@@ -112,17 +113,20 @@ export class MyDiseaseComponent implements OnInit {
         this.loadAll();
     }
 
-    // openDialog(disease: IDiseaseXiAn): void {
-    //     const dialogRef = this.dialog.open(DiseaseXiAnMatDeleteDialogComponent, {
-    //         width: '250px',
-    //         data: { diseaseXiAn: disease }
-    //     });
+    openDialog(disease: IDiseaseXiAn): void {
+        const dialogRef = this.dialog.open(MyDiseaseDeleteDialogComponent, {
+            width: '250px',
+            data: {
+                account: this.currentAccount,
+                diseaseXiAn: disease
+             }
+        });
 
-    //     dialogRef.afterClosed().subscribe(result => {
-    //         //   console.log('The dialog was closed');
-    //         this.loadAll();
-    //     });
-    // }
+        dialogRef.afterClosed().subscribe(result => {
+            //   console.log('The dialog was closed');
+            this.loadAll();
+        });
+    }
 
     ngOnInit() {
         if (this.accountService.hasAnyAuthority(['ROLE_ADMIN'])) {

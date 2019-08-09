@@ -154,7 +154,11 @@ public class UserService {
     @Transactional
     public void postDiseases(String login, DiseaseXiAn diseaseXiAn) {
         User user = userRepository.findOneByLogin(login).get();
-        user.getDiseaseXiAns().add(diseaseXiAnRepository.findById(diseaseXiAn.getId()).get());
+        if (diseaseXiAn.getId() == null) {
+            user.getDiseaseXiAns().add(diseaseXiAnRepository.save(diseaseXiAn));
+        } else {
+            user.getDiseaseXiAns().add(diseaseXiAnRepository.findById(diseaseXiAn.getId()).get());
+        }
     }
 
     @Transactional
