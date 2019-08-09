@@ -91,8 +91,7 @@ public class DiseaseXiAnResource {
         if (diseaseXiAn.getId() != null) {
             throw new BadRequestAlertException("A new diseaseXiAn cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        DiseaseXiAn result = diseaseXiAnRepository.save(diseaseXiAn);
-        diseaseXiAnSearchRepository.save(result);
+        DiseaseXiAn result = diseaseXiAnService.postDiseaseXiAn(diseaseXiAn);
         return ResponseEntity.created(new URI("/api/disease-xi-ans/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);

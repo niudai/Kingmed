@@ -17,6 +17,7 @@ import { JhiLanguageService } from 'ng-jhipster';
 import { JhiLanguageHelper } from 'app/core';
 import { MyDiseaseComponent } from './my-disease/my-disease/my-disease.component';
 import { MyDiseaseDeleteDialogComponent } from './my-disease/my-disease-delete-dialog/my-disease-delete-dialog.component';
+import { MyDiseaseCreateComponent } from './my-disease/my-disease-create/my-disease-create.component';
 
 @NgModule({
     imports: [JhipsterElasticsearchSampleApplicationSharedModule, RouterModule.forChild(accountState)],
@@ -29,7 +30,8 @@ import { MyDiseaseDeleteDialogComponent } from './my-disease/my-disease-delete-d
         PasswordResetFinishComponent,
         SettingsComponent,
         MyDiseaseComponent,
-        MyDiseaseDeleteDialogComponent
+        MyDiseaseDeleteDialogComponent,
+        MyDiseaseCreateComponent
     ],
     entryComponents: [
         MyDiseaseDeleteDialogComponent

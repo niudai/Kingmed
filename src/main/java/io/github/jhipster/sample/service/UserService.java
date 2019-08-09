@@ -51,19 +51,24 @@ public class UserService {
 
     private final CacheManager cacheManager;
 
+    private final DiseaseXiAnService diseaseXiAnService;
+
     public UserService(
         UserRepository userRepository,
         PasswordEncoder passwordEncoder,
         AuthorityRepository authorityRepository,
         CacheManager cacheManager,
         UserSearchRepository userSearchRepository,
-        DiseaseXiAnRepository diseaseXiAnRepository) {
+        DiseaseXiAnRepository diseaseXiAnRepository,
+        DiseaseXiAnService diseaseXiAnService
+        ) {
         this.diseaseXiAnRepository = diseaseXiAnRepository;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.userSearchRepository = userSearchRepository;
         this.authorityRepository = authorityRepository;
         this.cacheManager = cacheManager;
+        this.diseaseXiAnService = diseaseXiAnService;
     }
 
     public Optional<User> activateRegistration(String key) {
@@ -155,7 +160,8 @@ public class UserService {
     public void postDiseases(String login, DiseaseXiAn diseaseXiAn) {
         User user = userRepository.findOneByLogin(login).get();
         if (diseaseXiAn.getId() == null) {
-            user.getDiseaseXiAns().add(diseaseXiAnRepository.save(diseaseXiAn));
+            DiseaseXiAn result = diseaseXiAnService.postDiseaseXiAn(diseaseXiAn);
+            user.getDiseaseXiAns().add(result);
         } else {
             user.getDiseaseXiAns().add(diseaseXiAnRepository.findById(diseaseXiAn.getId()).get());
         }

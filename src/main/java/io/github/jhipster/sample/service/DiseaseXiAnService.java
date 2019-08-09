@@ -72,6 +72,11 @@ public class DiseaseXiAnService {
         return result;
     }
 
+    @Transactional
+    public DiseaseXiAn postDiseaseXiAn(DiseaseXiAn disease) {
+        return diseaseXiAnSearchRepository.save(diseaseXiAnRepository.save(disease));
+    }
+
     /********************* QArobot ***********/
     @Transactional
     public Collection<QArobot> findQArobotsOfDiseaseXiAn(Long id) {

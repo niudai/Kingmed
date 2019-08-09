@@ -23,7 +23,7 @@
             </form> -->
             <div>
                 <button mat-raised-button color="accent" *jhiHasAnyAuthority="'ROLE_ADMIN'" id="jh-create-entity"
-                    class="float-right jh-create-entity create-disease-xi-an" [routerLink]="['/disease-xi-an/new']">
+                    class="float-right jh-create-entity create-disease-xi-an" [routerLink]="['create']">
                     <fa-icon [icon]="'plus'"></fa-icon>
                     <span class="hidden-sm-down"
                         jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.home.createLabel">
