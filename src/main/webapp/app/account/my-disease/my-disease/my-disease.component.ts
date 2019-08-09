@@ -23,9 +23,8 @@ export class MyDiseaseComponent implements OnInit {
         'qarobot'];
     MOBILE_COL: string[] = ['nameMobile', 'projectConcourse'];
     displayedColumns: string[];
-    account: Account;
     windowWidth = 1000;
-    currentAccount: any;
+    currentAccount: Account;
     diseaseXiAns: IDiseaseXiAn[];
     error: any;
     success: any;
@@ -34,7 +33,6 @@ export class MyDiseaseComponent implements OnInit {
     routeData: any;
     links: any;
     totalItems: any;
-    itemsPerPage: any;
     predicate: any;
     previousPage: any;
     reverse: any;
@@ -47,7 +45,6 @@ export class MyDiseaseComponent implements OnInit {
         protected accountService: AccountService,
         protected activatedRoute: ActivatedRoute,
         protected router: Router,
-        protected eventManager: JhiEventManager,
         protected matDialog: MatDialog,
         protected modalService: NgbModal,
         protected dialog: MatDialog
@@ -73,10 +70,9 @@ export class MyDiseaseComponent implements OnInit {
     loadAll() {
         this.transition();
         this.userService
-            .getDiseases(this.account.login, {
-                page: this.pageEvent ? this.pageEvent.pageIndex : 0,
-                query: this.currentSearch,
-                size: this.pageEvent ? this.pageEvent.pageSize : 10,
+            .getDiseases(this.currentAccount.login, {
+                page: this.pageEvent && this.pageEvent.pageIndex ? this.pageEvent.pageIndex : 0,
+                size: this.pageEvent && this.pageEvent.pageSize ? this.pageEvent.pageSize : ITEMS_PER_PAGE,
                 // sort: this.sort()
             })
             .subscribe(
@@ -101,30 +97,17 @@ export class MyDiseaseComponent implements OnInit {
     }
 
     transition() {
-        this.router.navigate(['/disease-xi-an',
+        this.router.navigate(['/account/my-disease',
             {
-                search: this.currentSearch,
-                size: this.pageEvent.pageSize ? this.pageEvent.pageSize : this.itemsPerPage,
+                // search: this.currentSearch,
+                size: this.pageEvent.pageSize ? this.pageEvent.pageSize : ITEMS_PER_PAGE,
                 page: this.pageEvent.pageIndex ? this.pageEvent.pageIndex : 0
             }
         ]);
     }
 
-    clear() {
+    search() {
         this.pageEvent.pageIndex = 0;
-        this.currentSearch = '';
-        this.diseaseXiAns = null;
-        this.router.navigate([
-            '/disease-xi-an',
-            {
-                page: this.pageEvent.pageIndex
-            }
-        ]);
-    }
-
-    search(query: string) {
-        this.pageEvent.pageIndex = 0;
-        this.currentSearch = query;
         this.transition();
         this.loadAll();
     }
@@ -151,39 +134,20 @@ export class MyDiseaseComponent implements OnInit {
             this.MOBILE_COL = this.MOBILE_COL.filter(any => any !== 'projectConcourse');
         }
         this.columnToggle();
-        this.itemsPerPage = ITEMS_PER_PAGE;
         this.pageEvent = new PageEvent();
-        this.pageEvent.pageIndex =
-            this.currentSearch =
-            this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['search']
-                ? this.activatedRoute.snapshot.params['search']
-                : '';
-        this.pageEvent.pageIndex =
-            this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['page']
-                ? this.activatedRoute.snapshot.params['page']
-                : 0;
-        this.loadAll();
         this.accountService.identity().then(account => {
             this.currentAccount = account;
+            this.loadAll();
         });
-        // this.registerChangeInDiseaseXiAns();
+        // this.pageEvent.pageIndex =
+        //     this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['page']
+        //         ? this.activatedRoute.snapshot.params['page']
+        //         : 0;
     }
 
     trackId(index: number, item: IDiseaseXiAn) {
         return item.id;
     }
-
-    registerChangeInDiseaseXiAns() {
-        this.eventSubscriber = this.eventManager.subscribe('diseaseXiAnListModification', response => this.loadAll());
-    }
-
-    // sort() {
-    //     const result = [this.predicate + ',' + (this.reverse ? 'asc' : 'desc')];
-    //     if (this.predicate !== 'id') {
-    //         result.push('id');
-    //     }
-    //     return result;
-    // }
 
     protected paginateDiseaseXiAns(data: IDiseaseXiAn[], headers: HttpHeaders) {
         this.links = this.parseLinks.parse(headers.get('link'));
