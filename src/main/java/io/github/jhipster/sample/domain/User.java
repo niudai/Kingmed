@@ -85,6 +85,22 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(name = "reset_date")
     private Instant resetDate = null;
 
+    @Size(max = 30)
+    @Column(name = "phone_number", length = 30)
+    private String phoneNumber;
+
+    @Size(max = 100)
+    @Column(name = "work_address", length = 100)
+    private String workAddress;
+
+    @Size(max = 100)
+    @Column(name = "work_type", length = 100)
+    private String workType;
+
+    @Size(max = 500)
+    @Column(name = "self_intro", length = 500)
+    private String selfIntro;
+
     @JsonIgnore
     @ManyToMany
     @JoinTable(
@@ -104,6 +120,8 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @BatchSize(size = 10)
     private Set<DiseaseXiAn> diseaseXiAns = new HashSet<>();
+
+
 
     public Long getId() {
         return id;
@@ -248,5 +266,37 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     public void setDiseaseXiAns(Set<DiseaseXiAn> diseaseXiAns) {
         this.diseaseXiAns = diseaseXiAns;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getWorkAddress() {
+        return workAddress;
+    }
+
+    public void setWorkAddress(String workAddress) {
+        this.workAddress = workAddress;
+    }
+
+    public String getWorkType() {
+        return workType;
+    }
+
+    public void setWorkType(String workType) {
+        this.workType = workType;
+    }
+
+    public String getSelfIntro() {
+        return selfIntro;
+    }
+
+    public void setSelfIntro(String selfIntro) {
+        this.selfIntro = selfIntro;
     }
 }
