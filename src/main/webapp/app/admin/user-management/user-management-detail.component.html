@@ -8,24 +8,44 @@
                             <span class="badge badge-info">{{authority}}</span>
                         </span>
                       </mat-card-title>
-                      <mat-card-subtitle>{{user.email}}</mat-card-subtitle>
+                      <mat-card-subtitle>{{user.selfIntro}}</mat-card-subtitle>
                     </mat-card-header>
                     <mat-card-content>
                     </mat-card-content>
                   </mat-card>
                   <mat-list>
                         <mat-list-item>
-                          <fa-icon [icon]="'phone'"></fa-icon>
-                          <h4 mat-line>联系电话</h4>
+                          <h4 mat-line>
+                              联系电话
+                              <fa-icon [icon]="'phone'"></fa-icon>
+                          </h4>
                           <p mat-line>{{user.phoneNumber}}</p>
+                        </mat-list-item>
+                        <mat-list-item>
+                                <h4 mat-line>
+                                    邮箱
+                                    <fa-icon icon="envelope"></fa-icon>
+                                </h4>
+                                <p mat-line>{{user.email}}</p>
                         </mat-list-item>
                         <mat-divider></mat-divider>
                         <mat-list-item>
-                          <fa-icon [icon] = "'building'"></fa-icon>
-                          <h4 mat-line>部门</h4>
+                          <h4 mat-line>
+                              部门
+                              <fa-icon [icon]="'building'"></fa-icon>
+                          </h4>
                           <p mat-line>{{user.workAddress}}</p>
                         </mat-list-item>
+                        <mat-list-item>
+                                <h4 mat-line>
+                                    职位
+                                    <fa-icon [icon]="'user-tie'"></fa-icon>
+                                </h4>
+                                <p mat-line>{{user.workType}}</p>
+                        </mat-list-item>
                       </mat-list>
+                      <mat-divider></mat-divider>
+
             </div>
 
     <!-- <div class="col-8">
