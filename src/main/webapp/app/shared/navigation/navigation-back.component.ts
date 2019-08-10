@@ -1,6 +1,13 @@
 import { JhiLanguageHelper, AccountService, LoginModalService, LoginService } from 'app/core';
 import { Route, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { MethodCall } from '@angular/compiler';
+
+export interface INavButton {
+    color?: string;
+    font?: string;
+    routerLink: string;
+}
 
 @Component({
     selector: 'jhi-navigation-back',
@@ -9,6 +16,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavigationBackComponent implements OnInit {
     alerts: any[];
+    navButtons: INavButton[];
+    navBottomBarWidthPercent = 95;
 
     constructor(
         private route: Router,
@@ -16,7 +25,15 @@ export class NavigationBackComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        // this.accountService.authenticate(false);
+        this.navButtons = [
+            { color: 'white', font: 'home', routerLink: '/'  },
+            { color: 'white', font: 'user-circle', routerLink: '/account/my-disease'}
+        ];
+        if (this.accountService.hasAuthority('ROLE_ADMIN')) {
+            this.navButtons.push(
+                { color: 'white', font: 'robot', routerLink: 'robot'},
+            );
+        }
     }
 
     // setClasses(alert) {

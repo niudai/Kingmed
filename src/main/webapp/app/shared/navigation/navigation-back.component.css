@@ -1,9 +1,11 @@
 .floating {
-    /* width: 60px; */
+    width: 90%;
+    margin: 0 auto;
     position: fixed;
+    margin-left: 5%;
+    margin-right: 5%;
     bottom: 4px;
-    right: 4px;
-    background-color: rgb(241, 239, 119);
+    /* background-color: rgb(241, 239, 119); */
 }
 
 .floating:active {
@@ -13,6 +15,13 @@
 }
 
 .nav-button {
+    background-color: transparent;
     margin: 0;
     padding: 0;
+    margin-bottom: 0;
+    padding: 0;
+}
+
+fa-icon {
+    color: black;
 }

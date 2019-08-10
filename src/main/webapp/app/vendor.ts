@@ -67,7 +67,8 @@ import {
     faAddressCard,
     faEnvelope,
     faUserNurse,
-    faUserSecret
+    faUserSecret,
+    faUserCircle
 } from '@fortawesome/free-solid-svg-icons';
 import { literalArr } from '@angular/compiler/src/output/output_ast';
 
@@ -134,4 +135,5 @@ library.add(faUserTie);
 library.add(faEnvelope);
 library.add(faUserNurse);
 library.add(faUserSecret);
+library.add(faUserCircle);
 // jhipster-needle-add-element-to-vendor - JHipster will add new menu items here

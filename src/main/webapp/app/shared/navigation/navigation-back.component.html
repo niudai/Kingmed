@@ -1,15 +1,24 @@
+<div class="floating" cdkDrag>
+    <!-- <button mat-mini-fab class="nav-button" style="
+            margin: auto;
+            display:block;
+            margin-bottom: 0;
+            padding: 0;
+            max-width: 15px;
+            max-height: 15px
+        ">
+    </button> -->
 
-<mat-card class="floating" cdkDrag>
-    <button mat-raised-button class="nav-button" (click)="goRobot()"
-        style = "background-color: rgb(31, 78, 4)">
-        <fa-icon [icon] = "'robot'" style = "color: aliceblue"></fa-icon>
+    <button mat-raised-button class="nav-button"
+        [style.width]="[navBottomBarWidthPercent/(navButtons.length+1) + '%']"
+        *ngFor="let navButton of navButtons" [routerLink]="navButton.routerLink">
+        <fa-icon [icon]="navButton.font"></fa-icon>
     </button>
-    <br>
-    <button mat-raised-button class="nav-button" (click)="previousState()">
-        <fa-icon [icon]="'arrow-left'"></fa-icon>
+    <button
+        mat-raised-button
+        (click)="previousState()" class="nav-button"
+        [style.width]="[navBottomBarWidthPercent/(navButtons.length+1) + '%']"
+        >
+            <fa-icon [icon]="'arrow-left'"></fa-icon>
     </button>
-    <br>
-    <button mat-raised-button class="nav-button" color="primary" (click)="goHome()">
-        <fa-icon [icon]="'home'"></fa-icon>
-    </button>
-</mat-card>
+</div>
