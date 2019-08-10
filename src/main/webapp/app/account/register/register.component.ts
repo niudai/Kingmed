@@ -4,12 +4,13 @@ import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { JhiLanguageService } from 'ng-jhipster';
 
 import { EMAIL_ALREADY_USED_TYPE, LOGIN_ALREADY_USED_TYPE } from 'app/shared';
-import { LoginModalService } from 'app/core';
+import { LoginModalService, IUser } from 'app/core';
 import { Register } from './register.service';
 
 @Component({
     selector: 'jhi-register',
-    templateUrl: './register.component.html'
+    templateUrl: './register.component.html',
+    styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit, AfterViewInit {
     confirmPassword: string;
@@ -17,7 +18,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     error: string;
     errorEmailExists: string;
     errorUserExists: string;
-    registerAccount: any;
+    registerAccount: IUser;
     success: boolean;
     modalRef: NgbModalRef;
     authorities: String[];

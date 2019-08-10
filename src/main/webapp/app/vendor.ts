@@ -62,12 +62,16 @@ import {
     faAngleDown,
     faRobot,
     faBuilding,
-    faUserTie
+    faUserTie,
+    faKey,
+    faAddressCard,
 } from '@fortawesome/free-solid-svg-icons';
 import { literalArr } from '@angular/compiler/src/output/output_ast';
 
 // Adds the SVG icon to the library so you can use it in your page
 library.add(faBuilding);
+library.add(faAddressCard);
+library.add(faKey);
 library.add(faUser);
 library.add(faSort);
 library.add(faSortUp);
