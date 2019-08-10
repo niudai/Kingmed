@@ -7,12 +7,23 @@ import { EMAIL_ALREADY_USED_TYPE, LOGIN_ALREADY_USED_TYPE } from 'app/shared';
 import { LoginModalService, IUser } from 'app/core';
 import { Register } from './register.service';
 
+export interface Identity {
+    value: string;
+    viewValue: string;
+    fontValue: string;
+}
 @Component({
     selector: 'jhi-register',
     templateUrl: './register.component.html',
     styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit, AfterViewInit {
+    identities: Identity[] = [
+        { value: 'doctor', viewValue: '医生', fontValue: 'user-nurse' },
+        { value: 'dataAdmin', viewValue: '项目管理员', fontValue: 'user-secret'},
+        { value: 'admin', viewValue: '公司管理层', fontValue: 'user-tie'}
+    ];
+    selectedIdentity: Identity;
     confirmPassword: string;
     doNotMatch: string;
     error: string;
@@ -50,6 +61,13 @@ export class RegisterComponent implements OnInit, AfterViewInit {
             this.error = null;
             this.errorUserExists = null;
             this.errorEmailExists = null;
+            if (this.selectedIdentity.value === 'doctor') {
+                this.registerAccount.authorities = ['ROLE_USER', 'ROLE_DOCTOR'];
+            } else if (this.selectedIdentity.value === 'admin') {
+                this.registerAccount.authorities = ['ROLE_USER'];
+            } else if (this.selectedIdentity.value === 'dataAdmin') {
+                this.registerAccount.authorities = ['ROLE_ADMIN', 'ROLE_USER'];
+            }
             this.languageService.getCurrent().then(key => {
                 this.registerAccount.langKey = key;
                 this.registerService.save(this.registerAccount).subscribe(

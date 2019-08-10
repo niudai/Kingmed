@@ -10,8 +10,11 @@ import { JhiLanguageHelper } from 'app/core';
     styleUrls: ['main.component.css']
 })
 export class JhiMainComponent implements OnInit {
-    constructor(private jhiLanguageHelper: JhiLanguageHelper
-        , private router: Router) {}
+
+    constructor(
+        private jhiLanguageHelper: JhiLanguageHelper,
+        private router: Router,
+        ) {}
 
     private getPageTitle(
         routeSnapshot: ActivatedRouteSnapshot
@@ -36,4 +39,8 @@ export class JhiMainComponent implements OnInit {
             }
         });
     }
+
+    // isAuthenticated(): boolean {
+    //     this.accountService.authenticate();
+    // }
 }

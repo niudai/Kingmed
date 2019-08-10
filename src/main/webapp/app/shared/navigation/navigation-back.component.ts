@@ -1,26 +1,26 @@
-import { AccountService } from 'app/core/auth/account.service';
+import { JhiLanguageHelper, AccountService, LoginModalService, LoginService } from 'app/core';
 import { Route, Router } from '@angular/router';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
     selector: 'jhi-navigation-back',
     templateUrl: './navigation-back.component.html',
     styleUrls: ['./navigation-back.component.css']
 })
-export class NavigationBackComponent implements OnInit, OnDestroy {
+export class NavigationBackComponent implements OnInit {
     alerts: any[];
 
     constructor(
-        protected route: Router    ) {}
+        private route: Router,
+        private accountService: AccountService
+    ) {}
 
     ngOnInit() {
+        // this.accountService.authenticate(false);
     }
 
     // setClasses(alert) {
     // }
-
-    ngOnDestroy() {
-    }
 
     previousState() {
         window.history.back();

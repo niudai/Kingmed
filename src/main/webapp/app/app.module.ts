@@ -15,7 +15,7 @@ import { AuthExpiredInterceptor } from './blocks/interceptor/auth-expired.interc
 import { ErrorHandlerInterceptor } from './blocks/interceptor/errorhandler.interceptor';
 import { NotificationInterceptor } from './blocks/interceptor/notification.interceptor';
 import { JhipsterElasticsearchSampleApplicationSharedModule } from 'app/shared';
-import { JhipsterElasticsearchSampleApplicationCoreModule } from 'app/core';
+import { JhipsterElasticsearchSampleApplicationCoreModule, AccountService } from 'app/core';
 import { JhipsterElasticsearchSampleApplicationAppRoutingModule } from './app-routing.module';
 import { JhipsterElasticsearchSampleApplicationEntityModule } from './entities/entity.module';
 import { JhipsterElasticsearchSampleApplicationServiceModule } from './service/service.module';
@@ -68,6 +68,10 @@ import { NavigationBackComponent } from './shared/navigation/navigation-back.com
         {
             provide: JhiLanguageService,
             useClass: JhiLanguageService
+        },
+        {
+            provide: AccountService,
+            useClass: AccountService
         }
     ],
     bootstrap: [JhiMainComponent],
