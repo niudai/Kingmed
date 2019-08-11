@@ -1,5 +1,4 @@
 import { IUser } from './../../core/user/user.model';
-import { Account as IUser } from './../../core/user/account.model';
 import { Component, OnInit } from '@angular/core';
 import { JhiLanguageService } from 'ng-jhipster';
 

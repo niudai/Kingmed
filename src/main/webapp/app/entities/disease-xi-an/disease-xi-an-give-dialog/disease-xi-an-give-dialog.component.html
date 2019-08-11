@@ -1,0 +1,11 @@
+<!-- <h1 mat-dialog-title>Hi {{data.qArobot}}</h1> -->
+<div mat-dialog-content>
+        <p>输入要指派的用户名:</p>
+        <mat-form-field>
+          <input matInput [(ngModel)]="login">
+        </mat-form-field>
+      </div>
+      <div mat-dialog-actions>
+        <button mat-button (click)="onNoClick()">取消</button>
+        <button mat-button (click)="give()" cdkFocusInitial>确定</button>
+      </div>

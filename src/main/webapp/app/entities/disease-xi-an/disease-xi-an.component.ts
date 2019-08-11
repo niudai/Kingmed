@@ -11,6 +11,7 @@ import { AccountService } from 'app/core';
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { DiseaseXiAnService } from './disease-xi-an.service';
 import { PageEvent, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { DiseaseXiAnGiveDialogComponent } from './disease-xi-an-give-dialog/disease-xi-an-give-dialog.component';
 
 @Component({
     selector: 'jhi-disease-xi-an',
@@ -19,7 +20,7 @@ import { PageEvent, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/ma
 })
 export class DiseaseXiAnComponent implements OnInit, OnDestroy {
     PC_COL: string[] =  ['ID', 'namePC', 'price', 'projectConcourse', 'applications', 'suppliess',
-    'qarobot'];
+    'qarobot', 'give'];
     MOBILE_COL: string[] = ['nameMobile', 'projectConcourse'];
     displayedColumns: string[];
     windowWidth = 1000;
@@ -155,8 +156,20 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
         this.loadAll(0);
     }
 
-    openDialog(disease: IDiseaseXiAn): void {
+    openDeleteDialog(disease: IDiseaseXiAn): void {
         const dialogRef = this.dialog.open(DiseaseXiAnMatDeleteDialogComponent, {
+          width: '250px',
+          data: {diseaseXiAn: disease}
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+        //   console.log('The dialog was closed');
+            this.loadAll(this.page);
+        });
+    }
+
+    openGiveDialog(disease: IDiseaseXiAn): void {
+        const dialogRef = this.dialog.open(DiseaseXiAnGiveDialogComponent, {
           width: '250px',
           data: {diseaseXiAn: disease}
         });

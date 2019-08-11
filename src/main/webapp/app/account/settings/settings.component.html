@@ -77,7 +77,7 @@
             <div class="register-form" *ngIf="!success">
                     <mat-list>
                         <h3 mat-subheader>
-                            <fa-icon icon="settingsAccount-cog"></fa-icon>
+                            <fa-icon icon="user-cog"></fa-icon>
                             账号信息
                         </h3>
                         <div class = "register-list">
@@ -108,7 +108,7 @@
                                 </mat-list-item>
                                 <mat-list-item>
                                     <mat-form-field>
-                                        <input matInput [(ngModel)]="settingsAccount.p" placeholder="联系电话"
+                                        <input matInput [(ngModel)]="settingsAccount.phoneNumber" placeholder="联系电话"
                                             [value]="settingsAccount.phoneNumber">
                                     </mat-form-field>
                                 </mat-list-item>
@@ -131,7 +131,7 @@
                                     </mat-form-field>
                                 </mat-list-item>
                     </div>
-                    <h3 mat-subheader>
+                    <!-- <h3 mat-subheader>
                         <fa-icon icon="key"></fa-icon>
                         密码
                     </h3>
@@ -148,10 +148,9 @@
                                                 [value]="confirmPassword">
                                         </mat-form-field>
                                     </mat-list-item>
-                        </div>
+                        </div> -->
                     </mat-list>
-                    <button mat-stroked-button (click)="save()">注册</button>
-
+                    <button mat-stroked-button (click)="save()">保存</button>
                 </div>
         </div>
     </div>
