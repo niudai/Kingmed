@@ -8,6 +8,13 @@
                         [icon] = "'user-cog'"
                         [routerLink]="'/account/settings'"
                     ></fa-icon>
+                    <span
+                        [style.margin-left]="'20px'"
+                        [style.cursor]="'pointer'"
+                        [routerLink]="['/admin/user-management', currentAccount.login, 'view']">
+                        详细资料
+                        <fa-icon icon="chevron-right"></fa-icon>
+                    </span>
                 </mat-card-title>
                 <mat-card-subtitle>{{currentAccount.email}}</mat-card-subtitle>
               </mat-card-header>

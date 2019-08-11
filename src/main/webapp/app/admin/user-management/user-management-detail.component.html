@@ -7,6 +7,14 @@
                         <span *ngFor="let authority of user.authorities">
                             <span class="badge badge-info">{{authority}}</span>
                         </span>
+                        <br>
+                        <span
+                            [style.margin-left]="'10px'"
+                            [style.cursor]="'pointer'"
+                            [routerLink]="['/admin/user-management', user.login, 'edit']">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            编辑
+                        </span>
                       </mat-card-title>
                       <mat-card-subtitle>{{user.selfIntro}}</mat-card-subtitle>
                     </mat-card-header>

@@ -1,0 +1,14 @@
+mat-form-field {
+    width: 100%;
+}
+
+.register-form {
+    margin: 0 auto;
+    margin-top: 5px;
+    width: 100%;
+    max-width: 800px;
+}
+
+.register-list {
+    margin-left: 10px;
+}
