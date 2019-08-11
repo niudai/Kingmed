@@ -29,7 +29,7 @@ export class NavigationBackComponent implements OnInit {
             { color: 'white', font: 'home', routerLink: '/'  },
             { color: 'white', font: 'user-circle', routerLink: '/account/my-disease'}
         ];
-        if (this.accountService.hasAuthority('ROLE_ADMIN')) {
+        if (this.accountService.hasAnyAuthority(['ROLE_ADMIN'])) {
             this.navButtons.push(
                 { color: 'white', font: 'robot', routerLink: 'robot'},
             );
