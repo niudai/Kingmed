@@ -1,7 +1,6 @@
 <div>
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <h2 jhiTranslate="global.title" [translateValues]="{username: settingsAccount.login}" *ngIf="settingsAccount">User settings for [<b>{{settingsAccount.login}}</b>]</h2>
 
             <div class="alert alert-success" *ngIf="success" jhiTranslate="settings.messages.success">
                 <strong jhiTranslate="settings.saved">setting saved</strong>
@@ -9,7 +8,7 @@
 
             <jhi-alert-error></jhi-alert-error>
 
-            <form name="form" role="form" (ngSubmit)="save()" #settingsForm="ngForm" *ngIf="settingsAccount" novalidate>
+            <!-- <form name="form" role="form" (ngSubmit)="save()" #settingsForm="ngForm" *ngIf="settingsAccount" novalidate>
 
                 <div class="form-group">
                     <label class="form-control-label" for="firstName" jhiTranslate="settings.form.firstname">First Name</label>
@@ -72,14 +71,88 @@
                         </small>
                     </div>
                 </div>
-                <!-- <div class="form-group" *ngIf="languages && languages.length > 0">
-                    <label for="langKey" jhiTranslate="settings.form.language">Language</label>
-                    <select class="form-control" id="langKey" name="langKey" [(ngModel)]="settingsAccount.langKey">
-                        <option *ngFor="let language of languages" [value]="language">{{language | findLanguageFromKey}}</option>
-                    </select>
-                </div> -->
                 <button type="submit" [disabled]="settingsForm.form.invalid" class="btn btn-primary" jhiTranslate="settings.form.button">Save</button>
-            </form>
+            </form> -->
+
+            <div class="register-form" *ngIf="!success">
+                    <mat-list>
+                        <h3 mat-subheader>
+                            <fa-icon icon="settingsAccount-cog"></fa-icon>
+                            账号信息
+                        </h3>
+                        <div class = "register-list">
+                                    <!-- <mat-list-item>
+                                        <mat-form-field>
+                                            <input matInput [(ngModel)]="settingsAccount.login" placeholder="用户名"
+                                                [value]="settingsAccount.login">
+                                        </mat-form-field>
+                                    </mat-list-item> -->
+                                    <mat-list-item>
+                                        <mat-form-field>
+                                            <input matInput type="email" [(ngModel)]="settingsAccount.email" placeholder="邮箱"
+                                                [value]="settingsAccount.email">
+                                        </mat-form-field>
+                                    </mat-list-item>
+
+                        </div>
+                        <h3 mat-subheader>
+                            <fa-icon icon="address-card"></fa-icon>
+                            个人信息
+                        </h3>
+                        <div class = "register-list">
+                                <mat-list-item>
+                                    <mat-form-field>
+                                        <input matInput [(ngModel)]="settingsAccount.firstName" placeholder="姓名"
+                                            [value]="settingsAccount.firstName">
+                                    </mat-form-field>
+                                </mat-list-item>
+                                <mat-list-item>
+                                    <mat-form-field>
+                                        <input matInput [(ngModel)]="settingsAccount.p" placeholder="联系电话"
+                                            [value]="settingsAccount.phoneNumber">
+                                    </mat-form-field>
+                                </mat-list-item>
+                                <mat-list-item>
+                                    <mat-form-field>
+                                        <input matInput [(ngModel)]="settingsAccount.workAddress" placeholder="工作部门"
+                                            [value]="settingsAccount.workAddress">
+                                    </mat-form-field>
+                                </mat-list-item>
+                                <mat-list-item>
+                                    <mat-form-field>
+                                        <input matInput [(ngModel)]="settingsAccount.workType" placeholder="职位"
+                                            [value]="settingsAccount.workType">
+                                    </mat-form-field>
+                                </mat-list-item>
+                                <mat-list-item>
+                                    <mat-form-field>
+                                        <input matInput [(ngModel)]="settingsAccount.selfIntro" placeholder="个人简介"
+                                            [value]="settingsAccount.selfIntro">
+                                    </mat-form-field>
+                                </mat-list-item>
+                    </div>
+                    <h3 mat-subheader>
+                        <fa-icon icon="key"></fa-icon>
+                        密码
+                    </h3>
+                        <div class = "register-list">
+                                    <mat-list-item>
+                                        <mat-form-field>
+                                            <input matInput type="password" [(ngModel)]="settingsAccount.password" placeholder="密码"
+                                                [value]="settingsAccount.password">
+                                        </mat-form-field>
+                                    </mat-list-item>
+                                    <mat-list-item>
+                                        <mat-form-field>
+                                            <input matInput type="password" [(ngModel)]="confirmPassword" placeholder="确认密码"
+                                                [value]="confirmPassword">
+                                        </mat-form-field>
+                                    </mat-list-item>
+                        </div>
+                    </mat-list>
+                    <button mat-stroked-button (click)="save()">注册</button>
+
+                </div>
         </div>
     </div>
 

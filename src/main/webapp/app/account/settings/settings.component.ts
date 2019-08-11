@@ -1,16 +1,28 @@
+import { IUser } from './../../core/user/user.model';
+import { Account as IUser } from './../../core/user/account.model';
 import { Component, OnInit } from '@angular/core';
 import { JhiLanguageService } from 'ng-jhipster';
 
 import { AccountService, JhiLanguageHelper } from 'app/core';
+import { Identity } from '../register/register.component';
 
 @Component({
     selector: 'jhi-settings',
-    templateUrl: './settings.component.html'
+    templateUrl: './settings.component.html',
+    styleUrls: ['./settings.component.css']
 })
 export class SettingsComponent implements OnInit {
-    error: string;
-    success: string;
-    settingsAccount: any;
+    identities: Identity[] = [
+        { value: 'doctor', viewValue: '医生', fontValue: 'user-nurse' },
+        { value: 'dataAdmin', viewValue: '项目管理员', fontValue: 'user-secret'},
+        { value: 'admin', viewValue: '公司管理层', fontValue: 'user-tie'}
+    ];
+    passwordMatch = true;
+    error = false;
+    success = false;
+    selectedIdentity: Identity;
+    confirmPassword: string;
+    settingsAccount: IUser;
     languages: any[];
 
     constructor(
@@ -21,7 +33,7 @@ export class SettingsComponent implements OnInit {
 
     ngOnInit() {
         this.accountService.identity().then(account => {
-            this.settingsAccount = this.copyAccount(account);
+            this.settingsAccount = account;
         });
         this.languageHelper.getAll().then(languages => {
             this.languages = languages;
@@ -32,9 +44,9 @@ export class SettingsComponent implements OnInit {
         this.accountService.save(this.settingsAccount).subscribe(
             () => {
                 this.error = null;
-                this.success = 'OK';
+                this.success = true;
                 this.accountService.identity(true).then(account => {
-                    this.settingsAccount = this.copyAccount(account);
+                    this.settingsAccount = account;
                 });
                 this.languageService.getCurrent().then(current => {
                     if (this.settingsAccount.langKey !== current) {
@@ -43,21 +55,9 @@ export class SettingsComponent implements OnInit {
                 });
             },
             () => {
-                this.success = null;
-                this.error = 'ERROR';
+                this.success = false;
+                this.error = true;
             }
         );
-    }
-
-    copyAccount(account) {
-        return {
-            activated: account.activated,
-            email: account.email,
-            firstName: account.firstName,
-            langKey: account.langKey,
-            lastName: account.lastName,
-            login: account.login,
-            imageUrl: account.imageUrl
-        };
     }
 }
