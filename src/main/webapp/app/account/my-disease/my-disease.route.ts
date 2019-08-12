@@ -3,7 +3,7 @@ import { Routes, Route } from '@angular/router';
 import { MyDiseaseComponent } from './my-disease/my-disease.component';
 import { MyDiseaseCreateComponent } from './my-disease-create/my-disease-create.component';
 
-export const myDiseaseRoute: Routes = [
+export const myDiseaseRoute: Route[] = [
     {
         path: 'my-disease',
         component: MyDiseaseComponent,

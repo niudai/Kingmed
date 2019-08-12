@@ -8,6 +8,7 @@ import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -27,6 +28,8 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 @RestController
 @RequestMapping("/api")
 public class BankAccountResource {
+
+    LocalContainerEntityManagerFactoryBean
 
     private final Logger log = LoggerFactory.getLogger(BankAccountResource.class);
 

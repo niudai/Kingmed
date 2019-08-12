@@ -13,5 +13,5 @@ const ACCOUNT_ROUTES = [
 ];
 
 export const accountState: Routes = [
-    ...ACCOUNT_ROUTES,
-].concat(myDiseaseRoute);
+    ...ACCOUNT_ROUTES, ...myDiseaseRoute
+];
