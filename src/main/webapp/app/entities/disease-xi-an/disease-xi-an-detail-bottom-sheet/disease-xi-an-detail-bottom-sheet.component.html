@@ -1,0 +1,56 @@
+<mat-nav-list>
+
+    <a mat-list-item [routerLink]="['/disease-xi-an', data.diseaseXiAn.id, 'prices']">
+        <span mat-line>
+            <fa-icon [icon]="'dollar-sign'"></fa-icon>
+            价格详情
+        </span>
+    </a>
+
+    <a mat-list-item [routerLink]="['/disease-xi-an', data.diseaseXiAn.id, 'qarobots']">
+        <span mat-line>
+            <fa-icon [icon]="'question'"></fa-icon>
+            相关问题
+        </span>
+    </a>
+
+    <a mat-list-item [routerLink]="['/disease-xi-an', data.diseaseXiAn.id, 'applications']">
+        <span mat-line>
+            <fa-icon [icon]="'file-alt'"></fa-icon>
+            申请单
+        </span>
+    </a>
+
+    <a mat-list-item [routerLink]="['/disease-xi-an', data.diseaseXiAn.id, 'suppliess']">
+        <span mat-line>
+            <fa-icon [icon]="'magic'"></fa-icon>
+            耗材图片
+        </span>
+    </a>
+
+    <a mat-list-item [routerLink]="['/disease-xi-an', data.diseaseXiAn.id, 'diseases']">
+        <span mat-line>
+            <fa-icon [icon]="'book-medical'"></fa-icon>
+            相关项目
+        </span>
+    </a>
+
+    <a mat-list-item (click)="openDeleteDialog()">
+        <span mat-line>
+            <fa-icon [icon]="'times'"></fa-icon>
+            删除<span class="text-primary">{{data.diseaseXiAn.name}}</span>
+        </span>
+    </a>
+    <a mat-list-item (click)="openGiveDialog()">
+        <span mat-line>
+            <fa-icon [icon]="'hand-point-right'"></fa-icon>
+            指派
+        </span>
+    </a>
+    <a mat-list-item [routerLink]="['/disease-xi-an', data.diseaseXiAn.id, 'edit']">
+        <span mat-line>
+            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+            编辑
+        </span>
+    </a>
+</mat-nav-list>

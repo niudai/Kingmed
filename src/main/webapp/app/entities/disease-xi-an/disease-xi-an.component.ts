@@ -10,8 +10,9 @@ import { AccountService } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { DiseaseXiAnService } from './disease-xi-an.service';
-import { PageEvent, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { PageEvent, MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatBottomSheet } from '@angular/material';
 import { DiseaseXiAnGiveDialogComponent } from './disease-xi-an-give-dialog/disease-xi-an-give-dialog.component';
+import { DiseaseXiAnDetailBottomSheetComponent } from './disease-xi-an-detail-bottom-sheet/disease-xi-an-detail-bottom-sheet.component';
 
 @Component({
     selector: 'jhi-disease-xi-an',
@@ -21,7 +22,7 @@ import { DiseaseXiAnGiveDialogComponent } from './disease-xi-an-give-dialog/dise
 export class DiseaseXiAnComponent implements OnInit, OnDestroy {
     PC_COL: string[] =  ['ID', 'namePC', 'price', 'projectConcourse', 'applications', 'suppliess',
     'qarobot', 'give'];
-    MOBILE_COL: string[] = ['nameMobile', 'projectConcourse'];
+    MOBILE_COL: string[] = ['nameMobile', 'projectConcourse', 'plusButton'];
     displayedColumns: string[];
     windowWidth = 1000;
     currentAccount: any;
@@ -50,7 +51,8 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
         protected eventManager: JhiEventManager,
         protected matDialog: MatDialog,
         protected modalService: NgbModal,
-        protected dialog: MatDialog
+        protected dialog: MatDialog,
+        private _bottomSheet: MatBottomSheet
     ) {
     }
 
@@ -87,16 +89,6 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
         } else {
             this.diseaseXiAns = null;
         }
-        // this.diseaseXiAnService
-        //     .query({
-        //         page: this.page - 1,
-        //         size: this.itemsPerPage,
-        //         sort: this.sort()
-        //     })
-        //     .subscribe(
-        //         (res: HttpResponse<IDiseaseXiAn[]>) => this.paginateDiseaseXiAns(res.body, res.headers),
-        //         (res: HttpErrorResponse) => this.onError(res.message)
-        //     );
     }
 
     loadPage(page: number) {
@@ -175,6 +167,17 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
         });
 
         dialogRef.afterClosed().subscribe(result => {
+        //   console.log('The dialog was closed');
+            this.loadAll(this.page);
+        });
+    }
+
+    openDetailBottomSheet(disease: IDiseaseXiAn): void {
+        const bottomSheetRef = this._bottomSheet.open(DiseaseXiAnDetailBottomSheetComponent, {
+          data: {diseaseXiAn: disease}
+        });
+
+        bottomSheetRef.afterDismissed().subscribe(result => {
         //   console.log('The dialog was closed');
             this.loadAll(this.page);
         });

@@ -53,13 +53,16 @@
                         </a>
                         <br>
                         <div>
-                            <button [routerLink]="[diseaseXiAn.id, 'qarobots']" mat-mini-fab color="accent">
+                            <!-- <button [routerLink]="[diseaseXiAn.id, 'qarobots']" mat-mini-fab color="accent">
                                 <fa-icon [icon]="'question'"></fa-icon>
                                 <span class="d-none d-md-inline"></span>
                             </button>
                             <button [routerLink]="[diseaseXiAn.id, 'prices']" mat-mini-fab color="primary">
                                 <fa-icon class="dollar-sign" [icon]="'dollar-sign'"></fa-icon>
                                 <span class="d-none d-md-inline"></span>
+                            </button> -->
+                            <button (click)="openDetailBottomSheet(diseaseXiAn)" mat-mini-fab color="accent">
+                                <fa-icon [icon]="'plus'"></fa-icon>
                             </button>
                         </div>
                     </mat-card>
@@ -85,6 +88,19 @@
 
             <!-- PRICE Column -->
             <ng-container matColumnDef="price">
+                <th mat-header-cell *matHeaderCellDef> 价格 </th>
+                <td mat-cell *matCellDef="let element">
+                    <div class="btn-group flex-btn-group-container">
+                        <button [routerLink]="[element.id, 'prices']" mat-mini-fab color="primary">
+                            <fa-icon [icon]="'dollar-sign'"></fa-icon>
+                            <span class="d-none d-md-inline"></span>
+                        </button>
+                    </div>
+                </td>
+            </ng-container>
+
+            <!-- PlusButton Column -->
+            <ng-container matColumnDef="plusButton">
                 <th mat-header-cell *matHeaderCellDef> 价格 </th>
                 <td mat-cell *matCellDef="let element">
                     <div class="btn-group flex-btn-group-container">
@@ -181,7 +197,7 @@
                 <td mat-cell *matCellDef="let element">
                     <div class="btn-group flex-btn-group-container">
                         <button *jhiHasAnyAuthority="'ROLE_ADMIN'" mat-mini-fab type="submit"
-                            (click)="openGiveDialog(element)" style="background-color: rgb(243, 26, 26);">
+                            (click)="openDeleteDialog(element)" style="background-color: rgb(243, 26, 26);">
                             <fa-icon [icon]="'times'"></fa-icon>
                         </button>
                     </div>

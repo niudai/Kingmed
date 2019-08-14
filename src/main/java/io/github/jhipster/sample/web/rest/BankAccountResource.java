@@ -29,8 +29,6 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 @RequestMapping("/api")
 public class BankAccountResource {
 
-    LocalContainerEntityManagerFactoryBean
-
     private final Logger log = LoggerFactory.getLogger(BankAccountResource.class);
 
     private static final String ENTITY_NAME = "bankAccount";
