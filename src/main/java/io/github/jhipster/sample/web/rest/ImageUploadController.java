@@ -67,12 +67,15 @@ public class ImageUploadController {
      /**
      * GET /images/:filename get image with name :filename.
      */
-    @GetMapping("/images/application/{id}")
-    public ResponseEntity<Resource> serveApplication(@PathVariable Long id) {
+    @GetMapping("/images/application/{path}")
+    public ResponseEntity<Resource> serveApplication(@PathVariable String path) {
 
-        Resource file = imageApplicationService.loadAsResource(id);
+
+
+        Resource file = imageApplicationService.loadAsResource(path);
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
+                .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + file.getFilename() + "\"")
+                .header(HttpHeaders.CONTENT_TYPE, "application/pdf")
                 .body(file);
     }
 
@@ -159,7 +162,8 @@ public class ImageUploadController {
 
         Resource file = imageSuppliesService.loadAsResource(id);
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
+                .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + file.getFilename() + "\"")
+                .header(HttpHeaders.CONTENT_TYPE, "application/pdf")
                 .body(file);
     }
 
@@ -245,8 +249,10 @@ public class ImageUploadController {
     public ResponseEntity<Resource> servePlatform(@PathVariable Long id) {
 
         Resource file = imagePlatformService.loadAsResource(id);
+
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
+                .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + file.getFilename() + "\"")
+                .header(HttpHeaders.CONTENT_TYPE, "application/pdf")
                 .body(file);
     }
 
@@ -335,7 +341,8 @@ public class ImageUploadController {
 
         Resource file = storageService.loadAsResource(filename);
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
+                .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + file.getFilename() + "\"")
+                .header(HttpHeaders.CONTENT_TYPE, "application/pdf")
                 .body(file);
     }
 

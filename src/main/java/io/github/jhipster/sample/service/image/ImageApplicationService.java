@@ -13,6 +13,7 @@ import java.util.stream.Stream;
 import javax.transaction.Transactional;
 
 import com.google.common.collect.Lists;
+import com.google.common.net.HttpHeaders;
 
 import org.apache.lucene.util.fst.PairOutputs.Pair;
 import org.elasticsearch.index.query.QueryBuilder;
@@ -26,6 +27,7 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.ResponseEntity.BodyBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.util.StreamUtils;
@@ -41,6 +43,7 @@ import io.github.jhipster.sample.service.StorageService;
 import io.github.jhipster.sample.web.rest.ImageUploadController;
 import io.github.jhipster.sample.web.rest.errors.StorageException;
 import io.github.jhipster.sample.web.rest.errors.StorageFileNotFoundException;
+import io.github.jhipster.sample.web.rest.util.MediaUtil;
 import io.github.jhipster.sample.web.rest.util.PaginationUtil;
 import io.jsonwebtoken.io.IOException;
 
@@ -159,22 +162,22 @@ public class ImageApplicationService {
         imageApplicationSearchRepository.deleteById(id);
     }
 
-    public Resource loadAsResource(Long id) {
-        ImageApplication image = imageApplicationRepository.findById(id).get();
+    public ResponseEntity<Resource> loadAsResource(String path) {
+        ImageApplication application = imageApplicationRepository.findOneByPath(path).get();
         try {
-            Path file = rootLocation.resolve(image.getPath());
+            Path file = rootLocation.resolve(application.getPath());
             Resource resource = new UrlResource(file.toUri());
             if (resource.exists() || resource.isReadable()) {
-                return resource;
+                return ResponseEntity.ok().headers(MediaUtil.genearteMediaHeaders(application)).body(resource);
             }
             else {
                 throw new StorageFileNotFoundException(
-                        "Could not read file: " + image.getPath());
+                        "Could not read file: " + application.getPath());
 
             }
         }
         catch (MalformedURLException e) {
-            throw new StorageFileNotFoundException("Could not read file: " + image.getPath(), e);
+            throw new StorageFileNotFoundException("Could not read file: " + application.getPath(), e);
         }
     }
 

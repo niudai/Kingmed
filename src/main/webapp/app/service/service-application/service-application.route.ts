@@ -44,7 +44,7 @@ export const serviceApplictionRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'view/:id',
+        path: 'view/:path',
         component: ServiceApplicationViewComponent,
         data: {
             authorities: ['ROLE_USER'],

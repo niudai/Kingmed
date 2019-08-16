@@ -18,6 +18,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.util.StreamUtils;
@@ -33,6 +34,7 @@ import io.github.jhipster.sample.service.StorageService;
 import io.github.jhipster.sample.web.rest.ImageUploadController;
 import io.github.jhipster.sample.web.rest.errors.StorageException;
 import io.github.jhipster.sample.web.rest.errors.StorageFileNotFoundException;
+import io.github.jhipster.sample.web.rest.util.MediaUtil;
 import io.jsonwebtoken.io.IOException;
 
 /**
@@ -134,13 +136,13 @@ public class ImagePlatformService {
         imagePlatformSearchRepository.deleteById(id);
     }
 
-    public Resource loadAsResource(Long id) {
+    public ResponseEntity<Resource> loadAsResource(Long id) {
         ImagePlatform image = imagePlatformRepository.findById(id).get();
         try {
             Path file = rootLocation.resolve(image.getPath());
             Resource resource = new UrlResource(file.toUri());
             if (resource.exists() || resource.isReadable()) {
-                return resource;
+                return ResponseEntity.ok().headers(MediaUtil.genearteMediaHeaders(image)).body(resource);
             }
             else {
                 throw new StorageFileNotFoundException(

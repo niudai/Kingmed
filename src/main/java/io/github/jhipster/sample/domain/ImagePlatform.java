@@ -10,6 +10,8 @@ import javax.persistence.Table;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 
+import io.github.jhipster.sample.domain.abstractDomain.MediaFile;
+
 /**
  * Image in Service Platform
  * Image object storing it's filename and path
@@ -17,7 +19,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 @Entity
 @Table(name = "image_platform")
 @Document(indexName = "imageplatform")
-public class ImagePlatform {
+public class ImagePlatform implements MediaFile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

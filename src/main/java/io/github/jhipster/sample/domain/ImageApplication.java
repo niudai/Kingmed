@@ -9,6 +9,8 @@ import javax.persistence.*;
 import org.hibernate.annotations.ManyToAny;
 import org.springframework.data.elasticsearch.annotations.Document;
 
+import io.github.jhipster.sample.domain.abstractDomain.MediaFile;
+
 /**
  * Image in Service Platform
  * Image object storing it's filename and path
@@ -16,7 +18,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 @Entity
 @Table(name = "image_application")
 @Document(indexName = "imageapplication")
-public class ImageApplication {
+public class ImageApplication implements MediaFile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
