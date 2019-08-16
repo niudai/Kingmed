@@ -6,7 +6,7 @@
                     <a [href] = "[applicationUrl + '/' + path]">下载</a>
                 </button>
 </div>
-<embed [src] = "[applicationUrl + '/' + path]" type="application/pdf"  width="800px" height="2100px" />
+<iframe [src] = "[applicationUrl + '/' + path] | safe" width="800px" height="2100px"></iframe>
 <img [src] = "[applicationUrl + '/' + path]" class = "application col-sm-12">
 <div class = "alert alert-warning">
         <strong>pdf文件无法预览!</strong>

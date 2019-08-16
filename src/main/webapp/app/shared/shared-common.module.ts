@@ -7,11 +7,12 @@ import {
     JhiAlertErrorComponent
 } from './';
 import { TrimPipe } from './pipe/trim.pipe';
+import { SafePipe } from './pipe/safe.pipe';
 
 @NgModule({
     imports: [JhipsterElasticsearchSampleApplicationSharedLibsModule],
-    declarations: [FindLanguageFromKeyPipe, JhiAlertComponent, JhiAlertErrorComponent, TrimPipe],
+    declarations: [FindLanguageFromKeyPipe, JhiAlertComponent, JhiAlertErrorComponent, TrimPipe, SafePipe],
     exports: [JhipsterElasticsearchSampleApplicationSharedLibsModule, FindLanguageFromKeyPipe, JhiAlertComponent, JhiAlertErrorComponent
-        , TrimPipe]
+        , TrimPipe, SafePipe]
 })
 export class JhipsterElasticsearchSampleApplicationSharedCommonModule {}

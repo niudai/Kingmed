@@ -19,7 +19,7 @@ export class ServiceApplicationViewComponent implements OnInit {
     }
 
     downLoad() {
-        this.router.navigate([this.applicationUrl, this.name]);
+        this.router.navigate([this.applicationUrl, this.path]);
     }
 
     previousState() {
