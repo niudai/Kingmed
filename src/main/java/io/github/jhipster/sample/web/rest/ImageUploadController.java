@@ -69,14 +69,7 @@ public class ImageUploadController {
      */
     @GetMapping("/images/application/{path}")
     public ResponseEntity<Resource> serveApplication(@PathVariable String path) {
-
-
-
-        Resource file = imageApplicationService.loadAsResource(path);
-        return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + file.getFilename() + "\"")
-                .header(HttpHeaders.CONTENT_TYPE, "application/pdf")
-                .body(file);
+        return imageApplicationService.loadAsResource(path);
     }
 
      /**
@@ -159,12 +152,7 @@ public class ImageUploadController {
      */
     @GetMapping("/images/supplies/{id}")
     public ResponseEntity<Resource> serveSupplies(@PathVariable Long id) {
-
-        Resource file = imageSuppliesService.loadAsResource(id);
-        return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + file.getFilename() + "\"")
-                .header(HttpHeaders.CONTENT_TYPE, "application/pdf")
-                .body(file);
+        return imageSuppliesService.loadAsResource(id);
     }
 
      /**
@@ -247,13 +235,7 @@ public class ImageUploadController {
      */
     @GetMapping("/images/platform/{id}")
     public ResponseEntity<Resource> servePlatform(@PathVariable Long id) {
-
-        Resource file = imagePlatformService.loadAsResource(id);
-
-        return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + file.getFilename() + "\"")
-                .header(HttpHeaders.CONTENT_TYPE, "application/pdf")
-                .body(file);
+        return imagePlatformService.loadAsResource(id);
     }
 
      /**
@@ -342,7 +324,7 @@ public class ImageUploadController {
         Resource file = storageService.loadAsResource(filename);
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + file.getFilename() + "\"")
-                .header(HttpHeaders.CONTENT_TYPE, "application/pdf")
+                // .header(HttpHeaders.CONTENT_TYPE, "application/pdf")
                 .body(file);
     }
 
