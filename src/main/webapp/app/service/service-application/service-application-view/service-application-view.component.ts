@@ -10,12 +10,15 @@ import { SERVER_API_URL } from 'app/app.constants';
 export class ServiceApplicationViewComponent implements OnInit {
     public applicationUrl = SERVER_API_URL + 'api/images/application';
     public path: string;
+    public isPdf;
 
     constructor(protected route: ActivatedRoute,
         protected router: Router) { }
 
     ngOnInit() {
         this.path = this.route.snapshot.paramMap.get('path');
+        this.path.substring(this.path.indexOf('.') + 1) === 'pdf'
+             ? this.isPdf = true : this.isPdf = false;
     }
 
     downLoad() {
