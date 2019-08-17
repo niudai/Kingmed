@@ -73,9 +73,8 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
     }
 
     loadAll(pageIndex: number) {
-        if (this.currentSearch) {
-            this.diseaseXiAnService
-                .search({
+        // if (this.currentSearch) {
+            this.diseaseXiAnService.query ({
                     page: pageIndex,
                     query: this.currentSearch,
                     size: this.pageEvent ? this.pageEvent.pageSize : 10,
@@ -86,9 +85,9 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
                     (res: HttpErrorResponse) => this.onError(res.message)
                 );
             return;
-        } else {
-            this.diseaseXiAns = null;
-        }
+        // } else {
+        //     this.diseaseXiAns = null;
+        // }
     }
 
     loadPage(page: number) {
@@ -132,9 +131,9 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
     }
 
     search(query: string) {
-        if (!query) {
-            return this.clear();
-        }
+        // if (!query) {
+        //     return this.clear();
+        // }
         this.page = 0;
         this.currentSearch = query;
         this.router.navigate([
@@ -194,12 +193,6 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
         }
         this.columnToggle();
         this.itemsPerPage = ITEMS_PER_PAGE;
-        // this.routeData = this.activatedRoute.data.subscribe(data => {
-        //     this.page = data.pagingParams.page;
-        //     this.previousPage = data.pagingParams.page;
-        //     this.reverse = data.pagingParams.ascending;
-        //     this.predicate = data.pagingParams.predicate;
-        // });
         this.currentSearch =
             this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['search']
                 ? this.activatedRoute.snapshot.params['search']
