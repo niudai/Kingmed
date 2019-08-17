@@ -38,7 +38,7 @@ public class ElasticsearchConfiguration {
     public ElasticsearchOperations elasticsearchTemplate(final JestClient jestClient,
                                                          final ElasticsearchConverter elasticsearchConverter,
                                                          final SimpleElasticsearchMappingContext simpleElasticsearchMappingContext,
-                                                         EntityMapper mapper) {
+                                                         EntityMapper mapper) throws InterruptedException {
         return new JestElasticsearchTemplate(
             jestClient,
             elasticsearchConverter,

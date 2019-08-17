@@ -20,6 +20,12 @@ logging:
         io.github.jhipster.sample: DEBUG
 
 spring:
+    elasticsearch:
+        jest:
+            connection-timeout: 100s
+            read-timeout: 100m
+            multi-threaded: false
+
     servlet:
         multipart:
             file-size-threshold: 100MB
@@ -124,7 +130,7 @@ jhipster:
     mail: # specific JHipster mail property, for standard properties see MailProperties
         # from: jhipsterElasticsearchSampleApplication@localhost
         from: kingmed01@outlook.com
-        base-url: http://xiaodaicoding
+        base-url: http://localhost
     metrics:
         logs: # Reports metrics in the logs
             enabled: false
@@ -135,6 +141,7 @@ jhipster:
             host: localhost
             port: 5000
             queue-size: 512
+
 
 
 

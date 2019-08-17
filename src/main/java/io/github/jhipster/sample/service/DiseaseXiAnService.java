@@ -5,12 +5,22 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Root;
+import javax.persistence.metamodel.EntityType;
+import javax.persistence.metamodel.Metamodel;
 import javax.transaction.Transactional;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -40,6 +50,7 @@ public class DiseaseXiAnService {
     private final ImageSuppliesRepository imageSuppliesRepository;
     private final UserRepository userRepository;
     private final LinkCardRepository linkCardRepository;
+    private final EntityManager entityManager;
 
     @Autowired
     public DiseaseXiAnService(DiseaseXiAnRepository diseaseXiAnRepository
@@ -48,7 +59,9 @@ public class DiseaseXiAnService {
         , ImageApplicationRepository imageApplicationRepository
         , ImageSuppliesRepository imageSuppliesRepository
         , LinkCardRepository linkCardRepository
-        , UserRepository userRepository) {
+        , UserRepository userRepository
+        , EntityManager entityManager) {
+        this.entityManager = entityManager;
         this.userRepository = userRepository;
         this.diseaseXiAnSearchRepository = diseaseXiAnSearchRepository;
         this.imageSuppliesRepository = imageSuppliesRepository;
@@ -212,5 +225,42 @@ public class DiseaseXiAnService {
     public List<User> getUsers(Long diseaseId) {
         return userRepository.findAllByDiseaseXiAnsId(diseaseId);
     }
+
+    /********************** Search *****************/
+    public Page<DiseaseXiAn> searchDiseases(
+        Pageable pageable,
+        String subsidiary,
+        String projectConcourse,
+        String query) {
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<DiseaseXiAn> diseaseQuery = cb.createQuery(DiseaseXiAn.class);
+        CriteriaQuery<Long> countQuery = cb.createQuery(Long.class);
+        Root<DiseaseXiAn> disease = diseaseQuery.from(DiseaseXiAn.class);
+        Root<DiseaseXiAn> count = countQuery.from(DiseaseXiAn.class);
+        diseaseQuery.select(disease);
+        countQuery.select(cb.count(count));
+        if (subsidiary != null) {
+            diseaseQuery.where(cb.equal(disease.get("subsidiary"), subsidiary));
+            countQuery.where(cb.equal(disease.get("subsidiary"), subsidiary));
+        }
+        if (projectConcourse != null) {
+            diseaseQuery.where(cb.equal(disease.get("projectConcourse"), projectConcourse));
+            countQuery.where(cb.equal(disease.get("projectConcourse"), projectConcourse));
+        }
+        if (query != null) {
+            diseaseQuery.where(cb.like(disease.get("name"), "%" + query + "%"));
+            countQuery.where(cb.like(disease.get("name"), "%" + query + "%"));
+        }
+        TypedQuery<DiseaseXiAn> typedDiseaseQuery = entityManager.createQuery(diseaseQuery);
+        typedDiseaseQuery.setFirstResult((int)pageable.getOffset());
+        typedDiseaseQuery.setMaxResults((int)pageable.getPageSize());
+        TypedQuery<Long> typedCountQuery = entityManager.createQuery(countQuery);
+        List<DiseaseXiAn> allDis = typedDiseaseQuery.getResultList();
+        Long totalItems = typedCountQuery.getSingleResult();
+        Page<DiseaseXiAn> resultPage = new PageImpl<>(allDis, pageable, totalItems);
+        return resultPage;
+    }
+
+
 
 }

@@ -126,11 +126,18 @@ public class DiseaseXiAnResource {
      * @return the ResponseEntity with status 200 (OK) and the list of diseaseXiAns in body
      */
     @GetMapping("/disease-xi-ans")
-    public ResponseEntity<List<DiseaseXiAn>> getAllDiseaseXiAns(Pageable pageable) {
+    public ResponseEntity<List<DiseaseXiAn>> getAllDiseaseXiAns(
+        Pageable pageable,
+        @RequestParam(required = false) String subsidiary,
+        @RequestParam(required = false) String projectConcourse,
+        @RequestParam(required = false) String query
+        ) {
+        Page<DiseaseXiAn> result = diseaseXiAnService.searchDiseases(pageable, subsidiary, projectConcourse, query);
         log.debug("REST request to get a page of DiseaseXiAns");
-        Page<DiseaseXiAn> page = diseaseXiAnRepository.findAll(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/disease-xi-ans");
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
+        // Page<DiseaseXiAn> page = diseaseXiAnRepository.findAll(pageable);
+
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(result, "/api/disease-xi-ans");
+        return ResponseEntity.ok().headers(headers).body(result.getContent());
     }
 
     /******************************** Many To Many between disease and user ****************************/
