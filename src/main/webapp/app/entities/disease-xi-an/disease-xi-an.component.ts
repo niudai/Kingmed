@@ -1,4 +1,4 @@
-import { ISubsidiary } from './../../shared/model/subsidiary.model';
+import { ISubsidiary as string, Subsidiary } from './../../shared/model/subsidiary.model';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Component, OnInit, OnDestroy, HostListener, Inject } from '@angular/core';
 import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
@@ -21,15 +21,16 @@ import { DiseaseXiAnDetailBottomSheetComponent } from './disease-xi-an-detail-bo
     styleUrls: ['./disease-xi-an.component.css']
 })
 export class DiseaseXiAnComponent implements OnInit, OnDestroy {
-    PC_COL: string[] =  ['ID', 'namePC', 'price', 'projectConcourse', 'applications', 'suppliess',
-    'qarobot', 'give'];
+    PC_COL: string[] = ['ID', 'namePC', 'price', 'projectConcourse', 'applications', 'suppliess',
+        'qarobot', 'give'];
     MOBILE_COL: string[] = ['nameMobile', 'projectConcourse', 'plusButton'];
     displayedColumns: string[];
+    NO_SPECIFIED = '不限定';
     windowWidth = 1000;
     currentAccount: any;
     diseaseXiAns: IDiseaseXiAn[];
-    subsidiaries: ISubsidiary[];
-    selectedSub: ISubsidiary;
+    subsidiaries: string[];
+    selectedSub: string;
     error: any;
     success: any;
     eventSubscriber: Subscription;
@@ -75,26 +76,29 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
         }
     }
 
-    loadAll(pageIndex: number) {
+    loadAll() {
         this.diseaseXiAnService.getAllSubsidiary().subscribe(
-            res => this.subsidiaries = res
+            res => {
+                this.subsidiaries = res.map(sub => sub.name);
+                this.subsidiaries.push(this.NO_SPECIFIED);
+            }
         );
 
         // if (this.currentSearch) {
-            this.diseaseXiAnService.query ({
-                    page: pageIndex,
-                    query: this.currentSearch,
-                    subsidiary: '宁夏',
-                    // subsidiary: this.selectedSub ? this.selectedSub.name : null,
-                    projectConcourse: null,
-                    size: this.pageEvent ? this.pageEvent.pageSize : 10,
-                    // sort: this.sort()
-                })
-                .subscribe(
-                    (res: HttpResponse<IDiseaseXiAn[]>) => this.paginateDiseaseXiAns(res.body, res.headers),
-                    (res: HttpErrorResponse) => this.onError(res.message)
-                );
-            return;
+        this.diseaseXiAnService.query({
+            page: this.pageEvent.pageIndex ? this.pageEvent.pageIndex : 0,
+            query: this.currentSearch,
+            subsidiary: this.selectedSub === this.NO_SPECIFIED ? null : this.selectedSub,
+            // subsidiary: this.selectedSub ? this.selectedSub.name : null,
+            // projectConcourse: null,
+            size: this.pageEvent ? this.pageEvent.pageSize : 10,
+            // sort: this.sort()
+        })
+            .subscribe(
+                (res: HttpResponse<IDiseaseXiAn[]>) => this.paginateDiseaseXiAns(res.body, res.headers),
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+        return;
         // } else {
         //     this.diseaseXiAns = null;
         // }
@@ -103,28 +107,25 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
     loadPage(page: number) {
         if (page !== this.previousPage) {
             this.previousPage = page;
-            this.transition(page);
+            this.transition();
         }
     }
 
     loadDiseases($event: PageEvent) {
-        // if ($event.pageIndex !== this.previousPage) {'
-            this.page = $event.pageIndex;
-            this.pageEvent = $event;
-            this.previousPage = $event.pageIndex;
-            this.transition($event.pageIndex);
-        // }
+        this.pageEvent = $event;
+        this.transition();
     }
 
-    transition(pageIndex: number) {
+    transition() {
         this.router.navigate(['/disease-xi-an',
             {
                 search: this.currentSearch,
                 size: this.itemsPerPage,
-                page: pageIndex,
+                page: this.pageEvent.pageIndex ? this.pageEvent.pageIndex : 0,
+                subsidiary: this.selectedSub
             }
-            ]);
-        this.loadAll(pageIndex);
+        ]);
+        this.loadAll();
     }
 
     clear() {
@@ -146,49 +147,42 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
         // }
         this.page = 0;
         this.currentSearch = query;
-        this.router.navigate([
-            '/disease-xi-an',
-            {
-                search: this.currentSearch,
-                page: this.page,
-                // sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
-            }
-        ]);
-        this.loadAll(0);
+        this.transition();
+        this.loadAll();
     }
 
     openDeleteDialog(disease: IDiseaseXiAn): void {
         const dialogRef = this.dialog.open(DiseaseXiAnMatDeleteDialogComponent, {
-          width: '250px',
-          data: {diseaseXiAn: disease}
+            width: '250px',
+            data: { diseaseXiAn: disease }
         });
 
         dialogRef.afterClosed().subscribe(result => {
-        //   console.log('The dialog was closed');
-            this.loadAll(this.page);
+            //   console.log('The dialog was closed');
+            this.loadAll();
         });
     }
 
     openGiveDialog(disease: IDiseaseXiAn): void {
         const dialogRef = this.dialog.open(DiseaseXiAnGiveDialogComponent, {
-          width: '250px',
-          data: {diseaseXiAn: disease}
+            width: '250px',
+            data: { diseaseXiAn: disease }
         });
 
         dialogRef.afterClosed().subscribe(result => {
-        //   console.log('The dialog was closed');
-            this.loadAll(this.page);
+            //   console.log('The dialog was closed');
+            this.loadAll();
         });
     }
 
     openDetailBottomSheet(disease: IDiseaseXiAn): void {
         const bottomSheetRef = this._bottomSheet.open(DiseaseXiAnDetailBottomSheetComponent, {
-          data: {diseaseXiAn: disease}
+            data: { diseaseXiAn: disease }
         });
 
         bottomSheetRef.afterDismissed().subscribe(result => {
-        //   console.log('The dialog was closed');
-            this.loadAll(this.page);
+            //   console.log('The dialog was closed');
+            this.loadAll();
         });
     }
 
@@ -209,13 +203,18 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
                 : '';
         this.page =
             this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['page']
-            ? this.activatedRoute.snapshot.params['page']
+                ? this.activatedRoute.snapshot.params['page']
                 : '';
-        this.loadAll(this.page);
+        this.selectedSub =
+            this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['subsidiary']
+                ? this.activatedRoute.snapshot.params['subsidiary']
+                : this.NO_SPECIFIED;
+        this.pageEvent = new PageEvent();
+        this.pageEvent.pageIndex = 0;
+        this.loadAll();
         this.accountService.identity().then(account => {
             this.currentAccount = account;
         });
-        this.registerChangeInDiseaseXiAns();
     }
 
     ngOnDestroy() {
@@ -224,10 +223,6 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
 
     trackId(index: number, item: IDiseaseXiAn) {
         return item.id;
-    }
-
-    registerChangeInDiseaseXiAns() {
-        this.eventSubscriber = this.eventManager.subscribe('diseaseXiAnListModification', response => this.loadAll(this.pageEvent.pageIndex));
     }
 
     // sort() {
@@ -259,7 +254,7 @@ export class DiseaseXiAnMatDeleteDialogComponent {
         public dialogRef: MatDialogRef<DiseaseXiAnMatDeleteDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data,
         protected service: DiseaseXiAnService,
-        protected router: Router) {}
+        protected router: Router) { }
 
     onNoClick(): void {
         this.dialogRef.close();

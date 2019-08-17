@@ -12,12 +12,9 @@
                 </div>
                 <mat-form-field>
                     <mat-label>子公司</mat-label>
-                    <mat-select [(value)]="selectedSub">
-                        <mat-option [value]="null">
-                            不限定
-                        </mat-option>
+                    <mat-select [(value)]="selectedSub" (selectionChange)="transition()">
                       <mat-option *ngFor="let sub of subsidiaries" [value]="sub">
-                        {{sub.name}}
+                        {{sub}}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
