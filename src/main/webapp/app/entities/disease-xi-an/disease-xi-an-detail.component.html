@@ -4,6 +4,7 @@
             <mat-card>
                 <fa-icon class="icon-2" [icon]="'book-medical'"></fa-icon>
                 <span>{{diseaseXiAn.name}} - <span class="text-primary">{{diseaseXiAn.subsidiary}}</span> </span>
+                <button mat-stroked-button disabled="true">{{diseaseXiAn.id}}</button>
                 <br>
                 <fa-icon [icon]="'user-tie'" style="color: cadetblue"></fa-icon>
                 <button style="
@@ -11,18 +12,12 @@
                     [routerLink]="['/admin/user-management', user.login, 'view']">{{user.firstName}}</button>
             </mat-card>
             <hr>
-            <mat-expansion-panel >
+            <mat-expansion-panel>
                 <mat-expansion-panel-header>
                     项目开展与收费
                 </mat-expansion-panel-header>
 
                 <mat-list>
-                    <mat-list-item>
-                        <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
-                            jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.id">Project
-                            Code</span><span> : {{diseaseXiAn.id}}</span>
-                    </mat-list-item>
-
                     <div *jhiHideIfNull="diseaseXiAn.projectCode">
                         <mat-list-item>
                             <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
@@ -168,47 +163,58 @@
                 <mat-expansion-panel-header>
                     TAT相关
                 </mat-expansion-panel-header>
-                <div *jhiHideIfNull="diseaseXiAn.medicalMethod">
-                    <mat-list-item>
-                        <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
-                            jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.medicalMethod">Medical
-                            Method: </span>
-                        <span>: </span>
-                        <span>{{diseaseXiAn.medicalMethod}}</span>
-                    </mat-list-item>
-                </div>
-                <div *jhiHideIfHasAnyAuthority="'ROLE_DOCTOR'">
-                    <div *jhiHideIfNull="diseaseXiAn.projectConcourse">
+                <mat-list>
+                    <div *jhiHideIfNull="diseaseXiAn.medicalMethod">
                         <mat-list-item>
                             <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
-                                jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.projectConcourse">Project
-                                Concourse: </span>
+                                jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.medicalMethod">Medical
+                                Method: </span>
                             <span>: </span>
-
                         </mat-list-item>
                         <mat-card>
-                            <p><span>{{diseaseXiAn.projectConcourse}}</span></p>
+                            <p><span>{{diseaseXiAn.medicalMethod}}</span></p>
                         </mat-card>
                     </div>
-                </div>
-                <div *jhiHideIfHasAnyAuthority="'ROLE_DOCTOR'">
-                    <div *jhiHideIfNull="diseaseXiAn.hurryDepartment">
+                    <div *jhiHideIfHasAnyAuthority="'ROLE_DOCTOR'">
+                        <div *jhiHideIfNull="diseaseXiAn.projectConcourse">
+                            <mat-list-item>
+                                <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
+                                    jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.projectConcourse">Project
+                                    Concourse: </span>
+                                <span>: </span>
+
+                            </mat-list-item>
+                            <mat-card>
+                                <p><span>{{diseaseXiAn.projectConcourse}}</span></p>
+                            </mat-card>
+                        </div>
+                    </div>
+                    <div *jhiHideIfHasAnyAuthority="'ROLE_DOCTOR'">
+                        <div *jhiHideIfNull="diseaseXiAn.hurryDepartment">
+                            <mat-list-item>
+                                <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
+                                    jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.hurryDepartment">Hurry
+                                    Department: </span>
+                                <span>: </span>
+                            </mat-list-item>
+                            <mat-card>
+                                <p><span>{{diseaseXiAn.hurryDepartment}}</span></p>
+                            </mat-card>
+                        </div>
+                    </div>
+                    <div *jhiHideIfNull="currentReportingTime">
                         <mat-list-item>
                             <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
-                                jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.hurryDepartment">Hurry
-                                Department: </span>
-                            <span>: </span>
-                            <span>{{diseaseXiAn.hurryDepartment}}</span>
+                                jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.reportingTime">Reporting
+                                Time</span><span> :</span>
                         </mat-list-item>
+                        <mat-card>
+                            <p><span>{{currentReportingTime}}</span></p>
+                        </mat-card>
                     </div>
-                </div>
-                <div *jhiHideIfNull="currentReportingTime">
-                    <mat-list-item>
-                        <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
-                            jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.reportingTime">Reporting
-                            Time</span><span> : {{currentReportingTime}}</span>
-                    </mat-list-item>
-                </div>
+
+                </mat-list>
+
 
             </mat-expansion-panel>
             <mat-expansion-panel>

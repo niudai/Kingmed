@@ -5,13 +5,10 @@ body {
     background-color: #54bdbd;
 }
 
-mat-expansion-panel {
-    background-color: rgb(248, 232, 232);
+mat-list-item {
+    background-color: rgb(245, 245, 245);
 }
 
-mat-card {
-    background-color: rgb(252, 241, 241);
-}
 
 body,
 h1,
@@ -163,8 +160,6 @@ Custom alerts for notification
     background-size: cover;
 }
 
-.mat-card-image {
-}
 
 .alerts .toast.bottom {
     bottom: 55px;
