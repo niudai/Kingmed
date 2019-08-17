@@ -1,3 +1,4 @@
+import { ISubsidiary } from './../../shared/model/subsidiary.model';
 import { Account } from 'app/core/user/account.model';
 import { IQArobot } from './../../shared/model/q-arobot.model';
 import { QArobot } from 'app/shared/model/q-arobot.model';
@@ -18,9 +19,14 @@ type EntityArrayResponseType = HttpResponse<IDiseaseXiAn[]>;
 @Injectable({ providedIn: 'root' })
 export class DiseaseXiAnService {
     public resourceUrl = SERVER_API_URL + 'api/disease-xi-ans';
+    public subsidiaryUrl = SERVER_API_URL + 'api/subsidiaries';
     public resourceSearchUrl = SERVER_API_URL + 'api/_search/disease-xi-ans';
 
     constructor(protected http: HttpClient) {}
+
+    getAllSubsidiary() {
+        return this.http.get<ISubsidiary[]>(this.subsidiaryUrl);
+    }
 
     create(diseaseXiAn: IDiseaseXiAn): Observable<EntityResponseType> {
         return this.http.post<IDiseaseXiAn>(this.resourceUrl, diseaseXiAn, { observe: 'response' });

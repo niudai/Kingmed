@@ -1,3 +1,4 @@
+import { ISubsidiary } from './../../shared/model/subsidiary.model';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Component, OnInit, OnDestroy, HostListener, Inject } from '@angular/core';
 import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
@@ -27,6 +28,8 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
     windowWidth = 1000;
     currentAccount: any;
     diseaseXiAns: IDiseaseXiAn[];
+    subsidiaries: ISubsidiary[];
+    selectedSub: ISubsidiary;
     error: any;
     success: any;
     eventSubscriber: Subscription;
@@ -73,10 +76,17 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
     }
 
     loadAll(pageIndex: number) {
+        this.diseaseXiAnService.getAllSubsidiary().subscribe(
+            res => this.subsidiaries = res
+        );
+
         // if (this.currentSearch) {
             this.diseaseXiAnService.query ({
                     page: pageIndex,
                     query: this.currentSearch,
+                    subsidiary: '宁夏',
+                    // subsidiary: this.selectedSub ? this.selectedSub.name : null,
+                    projectConcourse: null,
                     size: this.pageEvent ? this.pageEvent.pageSize : 10,
                     // sort: this.sort()
                 })

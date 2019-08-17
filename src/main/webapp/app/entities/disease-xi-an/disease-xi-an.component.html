@@ -10,6 +10,17 @@
                         <fa-icon [icon]="'search'"></fa-icon>
                     </button>
                 </div>
+                <mat-form-field>
+                    <mat-label>子公司</mat-label>
+                    <mat-select [(value)]="selectedSub">
+                        <mat-option [value]="null">
+                            不限定
+                        </mat-option>
+                      <mat-option *ngFor="let sub of subsidiaries" [value]="sub">
+                        {{sub.name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
             </form>
             <div>
                 <button mat-raised-button color="accent" *jhiHasAnyAuthority="'ROLE_ADMIN'" id="jh-create-entity"
@@ -24,7 +35,6 @@
         </mat-card>
 
     </div>
-
 
     <br />
     <div *ngIf="diseaseXiAns">

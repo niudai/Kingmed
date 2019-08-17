@@ -1,5 +1,6 @@
 package io.github.jhipster.sample.service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -10,6 +11,7 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.persistence.metamodel.EntityType;
 import javax.persistence.metamodel.Metamodel;
@@ -237,20 +239,27 @@ public class DiseaseXiAnService {
         CriteriaQuery<Long> countQuery = cb.createQuery(Long.class);
         Root<DiseaseXiAn> disease = diseaseQuery.from(DiseaseXiAn.class);
         Root<DiseaseXiAn> count = countQuery.from(DiseaseXiAn.class);
+        List<Predicate> restrictions = new ArrayList<Predicate>();
         diseaseQuery.select(disease);
         countQuery.select(cb.count(count));
-        if (subsidiary != null) {
-            diseaseQuery.where(cb.equal(disease.get("subsidiary"), subsidiary));
-            countQuery.where(cb.equal(disease.get("subsidiary"), subsidiary));
+        if (subsidiary != null && subsidiary.length() > 0) {
+            restrictions.add(cb.equal(disease.get("subsidiary"), subsidiary));
+            // diseaseQuery = diseaseQuery.where(cb.equal(disease.get("subsidiary"), subsidiary));
+            // countQuery = countQuery.where(cb.equal(disease.get("subsidiary"), subsidiary));
         }
-        if (projectConcourse != null) {
-            diseaseQuery.where(cb.equal(disease.get("projectConcourse"), projectConcourse));
-            countQuery.where(cb.equal(disease.get("projectConcourse"), projectConcourse));
+        if (projectConcourse != null && projectConcourse.length() > 0) {
+            restrictions.add(cb.equal(disease.get("projectConcourse"), projectConcourse));
+            // diseaseQuery = diseaseQuery.where(cb.equal(disease.get("projectConcourse"), projectConcourse));
+            // countQuery = countQuery.where(cb.equal(disease.get("projectConcourse"), projectConcourse));
         }
-        if (query != null) {
-            diseaseQuery.where(cb.like(disease.get("name"), "%" + query + "%"));
-            countQuery.where(cb.like(disease.get("name"), "%" + query + "%"));
+        if (query != null && query.length() > 0) {
+            restrictions.add(cb.like(disease.get("name"), "%" + query + "%"));
+            // diseaseQuery = diseaseQuery.where(cb.like(disease.get("name"), "%" + query + "%"));
+            // countQuery = countQuery.where(cb.like(disease.get("name"), "%" + query + "%"));
         }
+        Predicate finalPredicate = cb.and(restrictions.toArray(new Predicate[restrictions.size()]));
+        diseaseQuery.where(finalPredicate);
+        countQuery.where(finalPredicate);
         TypedQuery<DiseaseXiAn> typedDiseaseQuery = entityManager.createQuery(diseaseQuery);
         typedDiseaseQuery.setFirstResult((int)pageable.getOffset());
         typedDiseaseQuery.setMaxResults((int)pageable.getPageSize());
