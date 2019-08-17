@@ -12,7 +12,7 @@ import { PageEvent } from '@angular/material';
     styleUrls: ['./service-application.component.css']
 })
 export class ServiceApplicationComponent implements OnInit {
-    PC_COL: string[] = ['ID', 'name', 'view', 'edit', 'delete'];
+    PC_COL: string[] = ['ID', 'name', 'edit', 'delete'];
     MOBILE_COL: string[] = ['ID', 'name'];
     displayedColumns: string[];
     totalItems: number;

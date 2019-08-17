@@ -30,7 +30,7 @@
                         <tbody>
                         <tr *ngFor="let supplies of (suppliess | pureFilter: filter: 'name' | orderBy: orderProp: reverse)">
                             <td *jhiHasAnyAuthority="'ROLE_ADMIN'">{{supplies.id}}</td>
-                            <td><a [href] = "[service.suppliesUrl + '/' + supplies.id]">{{supplies.name}}</a>
+                            <td>{{supplies.name}}
                             </td>
                             <!-- <td><img class = "supplies" [src] = "[service.suppliesUrl + '/' + supplies.id]"></td> -->
                             <td>

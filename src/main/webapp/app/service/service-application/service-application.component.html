@@ -43,7 +43,7 @@
                         <th mat-header-cell *matHeaderCellDef> 申请单 </th>
                         <td mat-cell *matCellDef="let element">
                             <mat-card matRipple>
-                                <a [href] = "[service.applicationUrl + '/' + element.path]">{{element.name}}
+                                <a [href] = "[service.applicationUrl + '/' + element.path]" target="_blank">{{element.name}}
                                 </a>
                                 <br>
                             </mat-card>
@@ -51,13 +51,13 @@
                     </ng-container>
 
                     <!-- View Column -->
-                    <ng-container matColumnDef="view">
+                    <!-- <ng-container matColumnDef="view">
                         <th mat-header-cell *matHeaderCellDef> 预览 </th>
                         <td mat-cell *matCellDef="let element">
                                 <button mat-mini-fab [routerLink]="['view', element.path]"><fa-icon [icon] = "'eye'"></fa-icon></button>
                                 <br>
                         </td>
-                    </ng-container>
+                    </ng-container> -->
 
                     <!-- Edit Column -->
                     <ng-container matColumnDef="edit">
