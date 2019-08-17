@@ -23,7 +23,7 @@ import { DiseaseXiAnDetailBottomSheetComponent } from './disease-xi-an-detail-bo
 export class DiseaseXiAnComponent implements OnInit, OnDestroy {
     PC_COL: string[] = ['ID', 'namePC', 'price', 'projectConcourse', 'applications', 'suppliess',
         'qarobot', 'give'];
-    MOBILE_COL: string[] = ['nameMobile', 'projectConcourse', 'plusButton'];
+    MOBILE_COL: string[] = ['nameMobile', 'projectConcourse'];
     displayedColumns: string[];
     NO_SPECIFIED = '不限定';
     windowWidth = 1000;
@@ -77,46 +77,6 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
     }
 
     loadAll() {
-        this.diseaseXiAnService.getAllSubsidiary().subscribe(
-            res => {
-                this.subsidiaries = res.map(sub => sub.name);
-                this.subsidiaries.push(this.NO_SPECIFIED);
-            }
-        );
-
-        // if (this.currentSearch) {
-        this.diseaseXiAnService.query({
-            page: this.pageEvent.pageIndex ? this.pageEvent.pageIndex : 0,
-            query: this.currentSearch,
-            subsidiary: this.selectedSub === this.NO_SPECIFIED ? null : this.selectedSub,
-            // subsidiary: this.selectedSub ? this.selectedSub.name : null,
-            // projectConcourse: null,
-            size: this.pageEvent ? this.pageEvent.pageSize : 10,
-            // sort: this.sort()
-        })
-            .subscribe(
-                (res: HttpResponse<IDiseaseXiAn[]>) => this.paginateDiseaseXiAns(res.body, res.headers),
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
-        return;
-        // } else {
-        //     this.diseaseXiAns = null;
-        // }
-    }
-
-    loadPage(page: number) {
-        if (page !== this.previousPage) {
-            this.previousPage = page;
-            this.transition();
-        }
-    }
-
-    loadDiseases($event: PageEvent) {
-        this.pageEvent = $event;
-        this.transition();
-    }
-
-    transition() {
         this.router.navigate(['/disease-xi-an',
             {
                 search: this.currentSearch,
@@ -125,29 +85,44 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
                 subsidiary: this.selectedSub
             }
         ]);
+
+        this.diseaseXiAnService.getAllSubsidiary().subscribe(
+            res => {
+                this.subsidiaries = res.map(sub => sub.name);
+                this.subsidiaries.push(this.NO_SPECIFIED);
+            }
+        );
+
+        this.diseaseXiAnService.query({
+            page: this.pageEvent.pageIndex,
+            query: this.currentSearch ? this.currentSearch : '',
+            subsidiary: this.selectedSub === this.NO_SPECIFIED ? '' : this.selectedSub,
+            // subsidiary: this.selectedSub ? this.selectedSub.name : null,
+            // projectConcourse: null,
+            size: this.pageEvent.pageSize,
+            // sort: this.sort()
+        })
+            .subscribe(
+                (res: HttpResponse<IDiseaseXiAn[]>) => this.paginateDiseaseXiAns(res.body, res.headers),
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+        return;
+    }
+
+    loadPage(page: number) {
+        if (page !== this.previousPage) {
+            this.previousPage = page;
+            this.loadAll();
+        }
+    }
+
+    loadDiseases($event: PageEvent) {
+        this.pageEvent = $event;
         this.loadAll();
     }
 
-    clear() {
+    search() {
         this.page = 0;
-        this.currentSearch = '';
-        this.diseaseXiAns = null;
-        this.router.navigate([
-            '/disease-xi-an',
-            {
-                page: this.page,
-                // sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
-            }
-        ]);
-    }
-
-    search(query: string) {
-        // if (!query) {
-        //     return this.clear();
-        // }
-        this.page = 0;
-        this.currentSearch = query;
-        this.transition();
         this.loadAll();
     }
 
@@ -201,24 +176,20 @@ export class DiseaseXiAnComponent implements OnInit, OnDestroy {
             this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['search']
                 ? this.activatedRoute.snapshot.params['search']
                 : '';
-        this.page =
-            this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['page']
-                ? this.activatedRoute.snapshot.params['page']
-                : '';
         this.selectedSub =
             this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['subsidiary']
                 ? this.activatedRoute.snapshot.params['subsidiary']
                 : this.NO_SPECIFIED;
         this.pageEvent = new PageEvent();
-        this.pageEvent.pageIndex = 0;
+        this.pageEvent.pageIndex =
+            this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['page']
+                ? +this.activatedRoute.snapshot.params['page']
+                : 0;
+        this.pageEvent.pageSize = ITEMS_PER_PAGE;
         this.loadAll();
         this.accountService.identity().then(account => {
             this.currentAccount = account;
         });
-    }
-
-    ngOnDestroy() {
-        this.eventManager.destroy(this.eventSubscriber);
     }
 
     trackId(index: number, item: IDiseaseXiAn) {

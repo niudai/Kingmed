@@ -5,6 +5,14 @@ body {
     background-color: #54bdbd;
 }
 
+mat-expansion-panel {
+    background-color: rgb(248, 232, 232);
+}
+
+mat-card {
+    background-color: rgb(252, 241, 241);
+}
+
 body,
 h1,
 h2,

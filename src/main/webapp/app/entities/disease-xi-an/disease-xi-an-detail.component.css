@@ -3,6 +3,10 @@ dt {
     margin: 5px;
 }
 
+mat-list-item {
+    background-color: rgb(245, 245, 245);
+}
+
 .subItem {
     font-size: 20px;
     margin: 3px;
