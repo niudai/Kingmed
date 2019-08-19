@@ -24,7 +24,7 @@ import java.util.Set;
 @Table(name = "disease_xi_an")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "diseasexian")
-public class DiseaseXiAn implements Serializable {
+public class DiseaseXiAn extends  implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

@@ -20,7 +20,7 @@ import { DiseaseXiAnDetailBottomSheetComponent } from './disease-xi-an-detail-bo
     templateUrl: './disease-xi-an.component.html',
     styleUrls: ['./disease-xi-an.component.css']
 })
-export class DiseaseXiAnComponent implements OnInit, OnDestroy {
+export class DiseaseXiAnComponent implements OnInit {
     PC_COL: string[] = ['ID', 'namePC', 'price', 'projectConcourse', 'applications', 'suppliess',
         'qarobot', 'give'];
     MOBILE_COL: string[] = ['nameMobile', 'projectConcourse'];
