@@ -13,9 +13,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import io.github.jhipster.sample.service.dto.ProjectNotificatonDTO;
+
 @Entity
 @Table(name = "project_notification")
-public class ProjectNotificaton {
+public class ProjectNotification {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,6 +38,14 @@ public class ProjectNotificaton {
     @ManyToOne
     @JoinColumn(name = "disease_xi_an_id")
     private DiseaseXiAn diseaseXiAn;
+
+    public ProjectNotification(DiseaseXiAn diseaseXiAn, ProjectNotificatonDTO dto){
+        this.diseaseXiAn = diseaseXiAn;
+        this.description = dto.getDescription();
+        this.type = dto.getType();
+        this.subsidiary = dto.getSubsidiary();
+        this.createdDate = Instant.now();
+    }
 
     public NotificationType getType() {
         return type;
