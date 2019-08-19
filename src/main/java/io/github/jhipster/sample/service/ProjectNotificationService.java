@@ -46,7 +46,7 @@ public class ProjectNotificationService {
 
     @Transactional
     public List<ProjectNotification> findAllNotificationSortByCreateTime () {
-        return notificationRepository.findAllSortByCreatedDate();
+        return notificationRepository.findByOrderByCreatedDateDesc();
     }
 
 }

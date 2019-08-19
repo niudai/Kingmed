@@ -42,20 +42,20 @@
                 <constraints nullable="false" />
             </column>
 
-            <addForeignKeyConstraint baseColumnNames="subsidiary_name"
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+        </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="subsidiary_name"
                                  baseTableName="project_notification"
                                  constraintName="fk_subsidiary_name"
                                  referencedColumnNames="name"
                                  referencedTableName="jhi_subsidiary"/>
 
-            <addForeignKeyConstraint baseColumnNames="disease_xi_an_id"
+        <addForeignKeyConstraint baseColumnNames="disease_xi_an_id"
                                  baseTableName="project_notification"
                                  constraintName="fk_disease_xi_an"
                                  referencedColumnNames="id"
                                  referencedTableName="disease_xi_an"/>
-
-            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
-        </createTable>
 
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->

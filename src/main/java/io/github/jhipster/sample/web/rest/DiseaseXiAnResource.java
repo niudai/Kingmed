@@ -12,6 +12,8 @@ import io.github.jhipster.sample.repository.PriceXiAnRepository;
 import io.github.jhipster.sample.repository.search.DiseaseXiAnSearchRepository;
 import io.github.jhipster.sample.service.DiseaseMapService;
 import io.github.jhipster.sample.service.DiseaseXiAnService;
+import io.github.jhipster.sample.service.ProjectNotificationService;
+import io.github.jhipster.sample.service.dto.ProjectNotificatonDTO;
 import io.github.jhipster.sample.web.rest.errors.BadRequestAlertException;
 import io.github.jhipster.sample.web.rest.util.HeaderUtil;
 import io.github.jhipster.sample.web.rest.util.PaginationUtil;
@@ -55,10 +57,15 @@ public class DiseaseXiAnResource {
 
     private final DiseaseXiAnService diseaseXiAnService;
 
+    private final ProjectNotificationService notificationService;
+
+
     public DiseaseXiAnResource(DiseaseXiAnRepository diseaseXiAnRepository
         , DiseaseXiAnSearchRepository diseaseXiAnSearchRepository
         , PriceXiAnRepository priceXiAnRepository
-        , DiseaseXiAnService diseaseXiAnService) {
+        , DiseaseXiAnService diseaseXiAnService
+        , ProjectNotificationService notificationService) {
+        this.notificationService = notificationService;
         this.diseaseXiAnRepository = diseaseXiAnRepository;
         this.diseaseXiAnSearchRepository = diseaseXiAnSearchRepository;
         this.priceRepository = priceXiAnRepository;
@@ -107,12 +114,19 @@ public class DiseaseXiAnResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/disease-xi-ans")
-    public ResponseEntity<DiseaseXiAn> updateDiseaseXiAn(@Valid @RequestBody DiseaseXiAn diseaseXiAn) throws URISyntaxException {
+    public ResponseEntity<DiseaseXiAn> updateDiseaseXiAn(
+        @Valid @RequestBody DiseaseXiAn diseaseXiAn,
+        @RequestParam Boolean ifGenerate,
+        ProjectNotificatonDTO dto
+        ) throws URISyntaxException {
         log.debug("REST request to update DiseaseXiAn : {}", diseaseXiAn);
         if (diseaseXiAn.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         DiseaseXiAn result = diseaseXiAnService.updateDiseaseXiAn(diseaseXiAn);
+        if (ifGenerate) {
+            notificationService.generateNotification(result, dto);
+        }
         diseaseXiAnSearchRepository.save(result);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, diseaseXiAn.getId().toString()))

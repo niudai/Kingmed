@@ -30,6 +30,7 @@ import io.github.jhipster.sample.domain.DiseaseXiAn;
 import io.github.jhipster.sample.domain.ImageApplication;
 import io.github.jhipster.sample.domain.ImageSupplies;
 import io.github.jhipster.sample.domain.LinkCard;
+import io.github.jhipster.sample.domain.ProjectNotification;
 import io.github.jhipster.sample.domain.QArobot;
 import io.github.jhipster.sample.domain.User;
 import io.github.jhipster.sample.repository.DiseaseXiAnRepository;
@@ -62,6 +63,7 @@ public class DiseaseXiAnService {
         , ImageSuppliesRepository imageSuppliesRepository
         , LinkCardRepository linkCardRepository
         , UserRepository userRepository
+
         , EntityManager entityManager) {
         this.entityManager = entityManager;
         this.userRepository = userRepository;

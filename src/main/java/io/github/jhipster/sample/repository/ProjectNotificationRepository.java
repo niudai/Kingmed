@@ -16,8 +16,8 @@ import io.github.jhipster.sample.domain.ProjectNotification;
 @Repository
 public interface ProjectNotificationRepository extends JpaRepository<ProjectNotification, Long> {
 
-    public List<ProjectNotification> findAllSortByCreatedDate();
+    public List<ProjectNotification> findByOrderByCreatedDateDesc();
 
-    public Page<ProjectNotification> findAllSortByCreatedDate(Pageable page);
+    public Page<ProjectNotification> findByOrderByCreatedDateDesc(Pageable page);
 
 }
