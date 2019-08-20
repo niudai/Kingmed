@@ -12,7 +12,7 @@ const ERROR_ROUTES = [...errorRoute];
 const HOME_ROUTE = [
     {
         path: '',
-        redirectTo: '/home',
+        redirectTo: '/disease-xi-an',
         pathMatch: 'full'
     },
     {
