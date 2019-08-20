@@ -5,6 +5,33 @@ Navbar
     color: #54bdbd;
 }
 
+/* nav {
+    position: fixed;
+    bottom: 40px;
+} */
+
+mat-toolbar button {
+    background-color: transparent;
+    min-width: 90px;
+}
+
+mat-toolbar button:hover {
+    background-color: gainsboro;
+}
+
+mat-toolbar button:visited {
+    background-color: rgb(117, 138, 36);
+}
+
+mat-toolbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    overflow-x: auto;
+}
+
 .nav-link:hover {
     color: #336b6b;
 }

@@ -13,7 +13,7 @@ export class JhiMainComponent implements OnInit {
 
     constructor(
         private jhiLanguageHelper: JhiLanguageHelper,
-        private router: Router,
+        public router: Router,
         ) {}
 
     private getPageTitle(

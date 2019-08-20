@@ -2,7 +2,7 @@ import { ISubsidiary as string, Subsidiary } from './../../shared/model/subsidia
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Component, OnInit, OnDestroy, HostListener, Inject } from '@angular/core';
 import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, UrlSegment } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
@@ -85,7 +85,6 @@ export class DiseaseXiAnComponent implements OnInit {
                 subsidiary: this.selectedSub
             }
         ]);
-
         this.diseaseXiAnService.getAllSubsidiary().subscribe(
             res => {
                 this.subsidiaries = res.map(sub => sub.name);
