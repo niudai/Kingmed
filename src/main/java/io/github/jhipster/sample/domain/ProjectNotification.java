@@ -47,6 +47,7 @@ public class ProjectNotification {
         this.createdDate = Instant.now();
     }
 
+
     public NotificationType getType() {
         return type;
     }
@@ -85,6 +86,14 @@ public class ProjectNotification {
 
     public void setDiseaseXiAn(DiseaseXiAn diseaseXiAn) {
         this.diseaseXiAn = diseaseXiAn;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
 }
