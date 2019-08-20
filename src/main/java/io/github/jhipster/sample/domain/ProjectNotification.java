@@ -47,6 +47,10 @@ public class ProjectNotification {
         this.createdDate = Instant.now();
     }
 
+    public ProjectNotification() {
+
+    }
+
 
     public NotificationType getType() {
         return type;

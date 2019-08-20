@@ -1,7 +1,6 @@
 package io.github.jhipster.sample.web.rest;
 import io.github.jhipster.sample.domain.ProjectNotification;
 import io.github.jhipster.sample.repository.ProjectNotificationRepository;
-import io.github.jhipster.sample.repository.search.ProjectNotificationSearchRepository;
 import io.github.jhipster.sample.web.rest.errors.BadRequestAlertException;
 import io.github.jhipster.sample.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;

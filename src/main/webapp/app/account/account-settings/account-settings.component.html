@@ -1,4 +1,35 @@
-<div style = "margin: 0 auto">
-
-
+<div style="margin: 0 auto">
+    <mat-card>
+        <mat-nav-list [ngSwitch]="isAuthenticated()">
+            <div *ngSwitchCase="true">
+                <mat-list-item [routerLink]="'/account/settings'">
+                    <p mat-line>
+                        <fa-icon [icon]="'user-cog'"></fa-icon>
+                        修改个人信息
+                    </p>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item [routerLink]="'/account/password'">
+                    <p mat-line>
+                        <fa-icon [icon]="'key'"></fa-icon>
+                        修改密码
+                    </p>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item (click)="logout()">
+                    <p mat-line>
+                        <fa-icon [icon]="'sign-out-alt'"></fa-icon>
+                        注销
+                    </p>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+            </div>
+            <mat-list-item (click)="login()" *ngSwitchCase="false">
+                <p mat-line>
+                    <fa-icon [icon]="'sign-in-alt'"></fa-icon>
+                    登陆
+                </p>
+            </mat-list-item>
+        </mat-nav-list>
+    </mat-card>
 </div>

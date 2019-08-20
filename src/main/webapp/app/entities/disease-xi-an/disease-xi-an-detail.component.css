@@ -9,6 +9,10 @@ dt {
     font-weight: 400;
 }
 
+mat-list-item {
+    background-color: rgb(245, 245, 245);
+}
+
 dl {
     list-style-type: disc;
 }
