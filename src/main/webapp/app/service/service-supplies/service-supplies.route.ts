@@ -11,7 +11,7 @@ export const serviceSuppliesRoute: Routes = [
         path: '',
         component: ServiceSuppliesComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: [],
             pageTitle: 'service.supplies'
         },
         canActivate: [UserRouteAccessService]
@@ -47,7 +47,7 @@ export const serviceSuppliesRoute: Routes = [
         path: 'view/:id',
         component: ServiceSuppliesViewComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: [],
             pageTitle: 'service.supplies'
         },
         canActivate: [UserRouteAccessService]

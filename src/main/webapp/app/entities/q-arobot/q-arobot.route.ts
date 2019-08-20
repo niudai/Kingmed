@@ -56,7 +56,7 @@ export const qArobotRoute: Routes = [
             pagingParams: JhiResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: [],
             defaultSort: 'id,asc',
             pageTitle: 'jhipsterElasticsearchSampleApplicationApp.qArobot.home.title'
         },
@@ -69,7 +69,7 @@ export const qArobotRoute: Routes = [
             qArobot: QArobotResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: [],
             pageTitle: 'jhipsterElasticsearchSampleApplicationApp.qArobot.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -81,7 +81,7 @@ export const qArobotRoute: Routes = [
             diseaseXiAns: DiseaseXiAnResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: [],
             pageTitle: 'jhipsterElasticsearchSampleApplicationApp.qArobot.home.title'
         },
         canActivate: [UserRouteAccessService]

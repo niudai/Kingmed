@@ -28,7 +28,7 @@ import { UserRouteAccessService } from 'app/core';
                 path: 'service',
                 component: ServiceComponent,
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: [],
                     pageTitle: 'jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.home.title'
                 },
                 canActivate: [UserRouteAccessService]

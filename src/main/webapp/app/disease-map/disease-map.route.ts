@@ -10,7 +10,7 @@ export const SERIVCE_ROUTE: Routes = [
         path: '',
         component: DiseaseBranchComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: [],
             pageTitle: 'global.menu.entities.diseaseMap'
         },
         canActivate: [UserRouteAccessService]
@@ -37,7 +37,7 @@ export const SERIVCE_ROUTE: Routes = [
         path: 'view-disease-branch/:diseaseBranchId',
         component: DiseaseMapComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: [],
             pageTitle: 'global.menu.entities.diseaseMap'
         },
         canActivate: [UserRouteAccessService]
@@ -46,7 +46,7 @@ export const SERIVCE_ROUTE: Routes = [
         path: 'view-disease-map/:diseaseMapId',
         component: DiseaseMapComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: [],
             pageTitle: 'global.menu.entities.diseaseMap'
         },
         canActivate: [UserRouteAccessService]

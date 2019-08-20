@@ -85,7 +85,7 @@ export const diseaseXiAnRoute: Routes = [
             pagingParams: JhiResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: [],
             defaultSort: 'id,asc',
             pageTitle: 'jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.home.title'
         },
@@ -98,7 +98,7 @@ export const diseaseXiAnRoute: Routes = [
             diseaseXiAn: DiseaseXiAnResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: [],
             pageTitle: 'jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -133,7 +133,7 @@ export const diseaseXiAnRoute: Routes = [
         //     diseaseXiAn: DiseaseXiAnResolve
         // },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: [],
             pageTitle: 'jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -142,7 +142,7 @@ export const diseaseXiAnRoute: Routes = [
         path: ':id/diseases',
         component: DiseaseXiAnDiseasesComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: [],
             pageTitle: 'jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.home.title'
         },
         canActivate: [UserRouteAccessService]

@@ -7,7 +7,7 @@ export const servicePlatformRoute: Routes = [
         path: '',
         component: ServicePlatformComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: [],
             pageTitle: 'service.platform'
         },
         canActivate: [UserRouteAccessService]
