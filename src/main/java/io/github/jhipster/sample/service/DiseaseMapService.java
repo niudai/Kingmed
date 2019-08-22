@@ -41,11 +41,11 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * DiseaseMapService used to associate disease map with diseasexian and qarobot.
- * It can also used to create new disease map and associate the newly created disease
- * map with the parent disease map.
+ * It can also used to create new disease map and associate the newly created
+ * disease map with the parent disease map.
  *
- * Another job is to mount new disease branch and delete disease branch. attach new
- * disease map to disease branch.
+ * Another job is to mount new disease branch and delete disease branch. attach
+ * new disease map to disease branch.
  */
 @Service
 public class DiseaseMapService {
@@ -60,16 +60,11 @@ public class DiseaseMapService {
     private final LinkCardRepository linkCardRepository;
 
     @Autowired
-    public DiseaseMapService(
-        DiseaseMapRepository diseaseMapRepository,
-        DiseaseBranchRepository diseaseBranchRepository,
-        DiseaseXiAnRepository diseaseXiAnRepository,
-        DiseaseBranchSearchRepository diseaseBranchSearchRepository,
-        DiseaseMapIndexDTOSearchRepository diseaseMapIndexDTOSearchRepository,
-        DiseaseMapSearchRepository diseaseMapSearchRepository,
-        QArobotRepository qArobotRepository,
-        EntityManagerFactory entityManagerFactory,
-        LinkCardRepository linkCardRepository) {
+    public DiseaseMapService(DiseaseMapRepository diseaseMapRepository, DiseaseBranchRepository diseaseBranchRepository,
+            DiseaseXiAnRepository diseaseXiAnRepository, DiseaseBranchSearchRepository diseaseBranchSearchRepository,
+            DiseaseMapIndexDTOSearchRepository diseaseMapIndexDTOSearchRepository,
+            DiseaseMapSearchRepository diseaseMapSearchRepository, QArobotRepository qArobotRepository,
+            EntityManagerFactory entityManagerFactory, LinkCardRepository linkCardRepository) {
         this.diseaseMapIndexDTOSearchRepository = diseaseMapIndexDTOSearchRepository;
         this.diseaseMapSearchRepository = diseaseMapSearchRepository;
         this.diseaseBranchSearchRepository = diseaseBranchSearchRepository;
@@ -83,6 +78,7 @@ public class DiseaseMapService {
 
     /**
      * Attach new disease branch.
+     * 
      * @param newDiseaseBranch
      * @param diseaseBranchId
      */
@@ -94,24 +90,27 @@ public class DiseaseMapService {
 
     /**
      * get All disease branch.
+     * 
      * @return
      */
     public Page<DiseaseBranch> getAllDiseaseBranchPageable(Pageable pageable) {
-        Page<DiseaseBranch> page =  diseaseBranchRepository.findAll(pageable);
+        Page<DiseaseBranch> page = diseaseBranchRepository.findAll(pageable);
         return page;
     }
 
     /**
      * get All disease branch.
+     * 
      * @return
      */
     public List<DiseaseBranch> getAllDiseaseBranch() {
-        List<DiseaseBranch> page =  diseaseBranchRepository.findAll();
+        List<DiseaseBranch> page = diseaseBranchRepository.findAll();
         return page;
     }
 
     /**
      * get disease branch.
+     * 
      * @return
      */
     public DiseaseBranch getDiseaseBranch(Long diseaseBranchId) {
@@ -120,13 +119,14 @@ public class DiseaseMapService {
 
     /**
      * get disease branch.
+     * 
      * @return
      */
     @Transactional
     public DiseaseBranch getDiseaseBranchEagerly(Long diseaseBranchId) {
         DiseaseBranch diseaseBranch = diseaseBranchRepository.findById(diseaseBranchId).get();
         diseaseBranch.getDiseaseMaps().size();
-        for (DiseaseMap map: diseaseBranch.getDiseaseMaps()) {
+        for (DiseaseMap map : diseaseBranch.getDiseaseMaps()) {
             map.getDiseaseMaps().size();
         }
         return diseaseBranch;
@@ -134,22 +134,24 @@ public class DiseaseMapService {
 
     /**
      * get child disease maps of disease map.
+     * 
      * @return
      */
     @Transactional
     public List<DiseaseMap> getDiseaseMaps(Long diseaseMapId) {
-        DiseaseMap diseaseMap =  diseaseMapRepository.findById(diseaseMapId).get();
+        DiseaseMap diseaseMap = diseaseMapRepository.findById(diseaseMapId).get();
         diseaseMap.getDiseaseMaps().size();
         return diseaseMap.getDiseaseMaps();
     }
 
     /**
      * get disease map.
+     * 
      * @return
      */
     // @Transactional
     public DiseaseMap getDiseaseMap(Long diseaseMapId) {
-        DiseaseMap map =  diseaseMapRepository.findById(diseaseMapId).get();
+        DiseaseMap map = diseaseMapRepository.findById(diseaseMapId).get();
         map.setDiseaseXiAns(null);
         map.setQarobots(null);
         return map;
@@ -158,7 +160,7 @@ public class DiseaseMapService {
 
     @Transactional
     public DiseaseMap getDiseaseMapEagerly(Long diseaseMapId) {
-        DiseaseMap map =  diseaseMapRepository.findById(diseaseMapId).get();
+        DiseaseMap map = diseaseMapRepository.findById(diseaseMapId).get();
         map.getDiseaseXiAns().size();
         map.getQarobots().size();
         DiseaseMap dto = new DiseaseMap();
@@ -169,32 +171,36 @@ public class DiseaseMapService {
 
     /**
      * get all disease maps in a disease branch
+     * 
      * @param diseaseBranchId
      * @return
      */
     @org.springframework.transaction.annotation.Transactional
     public List<DiseaseMap> getAllDiseaseMap(Long diseaseBranchId) {
 
-        List<DiseaseMap> diseaseMaps =  diseaseBranchRepository.findOneWithDiseaseMapsById(diseaseBranchId).get().getDiseaseMaps();
+        List<DiseaseMap> diseaseMaps = diseaseBranchRepository.findOneWithDiseaseMapsById(diseaseBranchId).get()
+                .getDiseaseMaps();
 
         return diseaseMaps;
     }
 
     /**
      * Deattach disease branch
+     * 
      * @param diseaseBranchId
      */
     @Transactional
     public void deattachDiseaseBranch(Long diseaseBranchId) {
         DiseaseBranch diseaseBranch = diseaseBranchRepository.findById(diseaseBranchId).get();
         diseaseBranchSearchRepository.deleteById(diseaseBranchId);
-        for (DiseaseMap map: diseaseBranch.getDiseaseMaps()) {
+        for (DiseaseMap map : diseaseBranch.getDiseaseMaps()) {
             diseaseMapIndexDTOSearchRepository.deleteById(map.getId());
         }
     }
 
     /**
      * Add new disease map to disease branch specified with diseaseBranchId.
+     * 
      * @param diseaseMap
      * @param diseaseBranchId
      */
@@ -207,6 +213,7 @@ public class DiseaseMapService {
 
     /**
      * Put Disease Map what already exists in database to modify some content.
+     * 
      * @param diseaseMap
      */
     @Transactional
@@ -217,17 +224,20 @@ public class DiseaseMapService {
 
     /**
      * Modify disease Branch
+     * 
      * @param diseaseMap
      */
     @Transactional
     public void modifyDiseaseBranch(DiseaseBranch diseaseBranch) {
-        DiseaseBranch newBranch = modifyDiseaseBranch(diseaseBranchRepository
-            .findById(diseaseBranch.getId()).get(), diseaseBranch);
+        DiseaseBranch newBranch = modifyDiseaseBranch(diseaseBranchRepository.findById(diseaseBranch.getId()).get(),
+                diseaseBranch);
         diseaseBranchSearchRepository.save(newBranch);
     }
 
     /**
-     * delete a disease map. all sub disease map related to this map would be deleted.
+     * delete a disease map. all sub disease map related to this map would be
+     * deleted.
+     * 
      * @param diseaseMapId
      */
     @Transactional
@@ -236,9 +246,9 @@ public class DiseaseMapService {
         diseaseMapIndexDTOSearchRepository.deleteById(diseaseMapId);
     }
 
-
     /**
      * associate diseaseMap with a diseaseXiAn
+     * 
      * @param diseaseMapId
      * @param diseaseXiAnId
      */
@@ -251,6 +261,7 @@ public class DiseaseMapService {
 
     /**
      * deassociate diseaseMap with a diseaseXiAn
+     * 
      * @param diseaseMapId
      * @param diseaseXiAnId
      */
@@ -263,6 +274,7 @@ public class DiseaseMapService {
 
     /**
      * associate diseaseMap with QArobot.
+     * 
      * @param diseaseMapId
      * @param qArobotId
      */
@@ -275,18 +287,20 @@ public class DiseaseMapService {
 
     /**
      * deassociate diseaseMap with QArobot.
+     * 
      * @param diseaseMapId
      * @param qArobotId
      */
     @Transactional
     public void deassociatedWithQArobot(Long diseaseMapId, Long qArobotId) {
         DiseaseMap diseaseMap = diseaseMapRepository.findById(diseaseMapId).get();
-        QArobot qArobot =  qArobotRepository.findById(qArobotId).get();
+        QArobot qArobot = qArobotRepository.findById(qArobotId).get();
         diseaseMap.getQarobots().remove(qArobot);
     }
 
     /**
      * attach disease map to a disease map.
+     * 
      * @param newDiseaseMap
      * @param diseaseMapId
      */
@@ -299,22 +313,24 @@ public class DiseaseMapService {
 
     /**
      * attach link card to a disease map.
+     * 
      * @param linkcard
      * @param diseaseMapId
      */
     public void attachLinkCardToDiseaseMap(LinkCard linkcard, Long diseaseMapId) {
-       DiseaseMap diseaseMap =  diseaseMapRepository.findById(diseaseMapId).get();
-       Set<LinkCard> links = diseaseMap.getLinkCards();
-       if (links.contains(linkcard)) {
-           linkCardRepository.save(linkcard);
-       } else {
+        DiseaseMap diseaseMap = diseaseMapRepository.findById(diseaseMapId).get();
+        Set<LinkCard> links = diseaseMap.getLinkCards();
+        if (links.contains(linkcard)) {
+            linkCardRepository.save(linkcard);
+        } else {
             diseaseMap.getLinkCards().add(linkcard);
             diseaseMapRepository.save(diseaseMap);
-       }
+        }
     }
 
     /**
      * attach link card to a disease map.
+     * 
      * @param linkcard
      * @param diseaseMapId
      */
@@ -325,22 +341,24 @@ public class DiseaseMapService {
 
     /**
      * attach link card to a disease branch
+     * 
      * @param linkcard
      * @param diseaseBranchId
      */
     public void attachLinkCardToDiseaseBranch(LinkCard linkcard, Long diseaseBranchId) {
         DiseaseBranch diseaseBranch = diseaseBranchRepository.findById(diseaseBranchId).get();
         Set<LinkCard> links = diseaseBranch.getLinkCards();
-       if (links.contains(linkcard)) {
-           linkCardRepository.save(linkcard);
-       } else {
+        if (links.contains(linkcard)) {
+            linkCardRepository.save(linkcard);
+        } else {
             diseaseBranch.getLinkCards().add(linkcard);
             diseaseBranchRepository.save(diseaseBranch);
-       }
+        }
     }
 
     /**
      * deattach link card to a disease branch
+     * 
      * @param linkcard
      * @param diseaseBranchId
      */
@@ -351,15 +369,21 @@ public class DiseaseMapService {
 
     @Transactional
     public List<DiseaseBranch> searchDiseaseBranch(String query, Pageable pageable) {
-        // Page<DiseaseBranch> page = diseaseBranchSearchRepository.search(QueryBuilders.queryStringQuery(query), pageable);
-        List<DiseaseBranch> page =  Lists.newArrayList(diseaseBranchSearchRepository.search(QueryBuilders.queryStringQuery(query)));
+        // Page<DiseaseBranch> page =
+        // diseaseBranchSearchRepository.search(QueryBuilders.queryStringQuery(query),
+        // pageable);
+        List<DiseaseBranch> page = Lists
+                .newArrayList(diseaseBranchSearchRepository.search(QueryBuilders.queryStringQuery(query)));
         return page;
     }
 
     @Transactional
     public Page<DiseaseMapIndexDTO> searchDiseaseMap(String query, Pageable pageable) {
-        // Page<DiseaseBranch> page = diseaseBranchSearchRepository.search(QueryBuilders.queryStringQuery(query), pageable);
-        Page<DiseaseMapIndexDTO> page = diseaseMapIndexDTOSearchRepository.search(QueryBuilders.queryStringQuery(query), pageable);
+        // Page<DiseaseBranch> page =
+        // diseaseBranchSearchRepository.search(QueryBuilders.queryStringQuery(query),
+        // pageable);
+        Page<DiseaseMapIndexDTO> page = diseaseMapIndexDTOSearchRepository.search(QueryBuilders.queryStringQuery(query),
+                pageable);
         return page;
     }
 
@@ -371,7 +395,7 @@ public class DiseaseMapService {
 
     public void reindexDiseaseMap() {
         List<DiseaseMap> diseaseMaps = diseaseMapRepository.findAll();
-        for (DiseaseMap diseaseMap: diseaseMaps) {
+        for (DiseaseMap diseaseMap : diseaseMaps) {
             diseaseMapIndexDTOSearchRepository.save(diseaseMapIndexConverter(diseaseMap));
         }
     }

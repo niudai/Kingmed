@@ -261,7 +261,7 @@
             <optional>true</optional>
         </dependency>
         <!-- Spring Data Jest dependencies for Elasticsearch -->
-        <dependency>
+        <!-- <dependency>
             <groupId>com.github.vanroy</groupId>
             <artifactId>spring-boot-starter-data-jest</artifactId>
             <exclusions>
@@ -270,7 +270,7 @@
                     <artifactId>commons-logging</artifactId>
                 </exclusion>
             </exclusions>
-        </dependency>
+        </dependency> -->
         <!-- log4j needed to create embedded elasticsearch instance -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>

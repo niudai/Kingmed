@@ -74,9 +74,11 @@ spring:
         open-in-view: true
     data:
         elasticsearch:
-            properties:
-                path:
-                    home: target/elasticsearch
+            cluster-nodes: localhost:9300
+            cluster-name: docker-cluster
+            # properties:
+            #     path:
+            #         home: target/elasticsearch
     liquibase:
         contexts: dev
     mail:

@@ -147,3 +147,9 @@ Desktop.ini
 # ESLint
 ######################
 .eslintcache
+
+###################
+# Other stuff
+###################
+elasticsearch-7.3.0-amd64.deb
+

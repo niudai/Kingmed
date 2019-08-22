@@ -256,6 +256,7 @@ public class DiseaseXiAnService {
         }
         if (query != null && query.length() > 0) {
             restrictions.add(cb.like(disease.get("name"), "%" + query + "%"));
+            restrictions.
             // diseaseQuery = diseaseQuery.where(cb.like(disease.get("name"), "%" + query + "%"));
             // countQuery = countQuery.where(cb.like(disease.get("name"), "%" + query + "%"));
         }
@@ -270,6 +271,10 @@ public class DiseaseXiAnService {
         Long totalItems = typedCountQuery.getSingleResult();
         Page<DiseaseXiAn> resultPage = new PageImpl<>(allDis, pageable, totalItems);
         return resultPage;
+    }
+
+    public ArrayList<String> QueryKeywordParser(String query) {
+        query.
     }
 
 
