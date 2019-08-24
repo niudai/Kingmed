@@ -14,9 +14,9 @@ import io.github.jhipster.sample.domain.Operation;
 import io.github.jhipster.sample.repository.BankAccountRepository;
 import io.github.jhipster.sample.repository.LabelRepository;
 import io.github.jhipster.sample.repository.OperationRepository;
-import io.github.jhipster.sample.repository.search.BankAccountSearchRepository;
-import io.github.jhipster.sample.repository.search.LabelSearchRepository;
-import io.github.jhipster.sample.repository.search.OperationSearchRepository;
+import io.github.jhipster.sample.search.BankAccountSearchRepository;
+import io.github.jhipster.sample.search.LabelSearchRepository;
+import io.github.jhipster.sample.search.OperationSearchRepository;
 
 /**
  * ElasticSearchReindex

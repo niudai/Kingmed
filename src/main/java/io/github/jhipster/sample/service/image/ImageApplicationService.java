@@ -6,20 +6,18 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.Base64;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 
-import com.google.common.collect.Lists;
-import com.google.common.net.HttpHeaders;
-
-import org.apache.lucene.util.fst.PairOutputs.Pair;
-import org.elasticsearch.index.query.QueryBuilder;
-import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.index.query.QueryStringQueryBuilder;
-import org.hibernate.annotations.common.util.impl.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -27,24 +25,19 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.ResponseEntity.BodyBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
-import org.springframework.util.StreamUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 import io.github.jhipster.sample.config.StorageProperties;
 import io.github.jhipster.sample.domain.ImageApplication;
 import io.github.jhipster.sample.repository.ImageApplicationRepository;
-import io.github.jhipster.sample.repository.search.ImageApplicationSearchRepository;
-import io.github.jhipster.sample.service.StorageService;
-import io.github.jhipster.sample.web.rest.ImageUploadController;
 import io.github.jhipster.sample.web.rest.errors.StorageException;
 import io.github.jhipster.sample.web.rest.errors.StorageFileNotFoundException;
+import io.github.jhipster.sample.web.rest.searchdto.MediaTypeSearchDTO;
 import io.github.jhipster.sample.web.rest.util.MediaUtil;
-import io.github.jhipster.sample.web.rest.util.PaginationUtil;
+import io.github.jhipster.sample.web.rest.util.SearchUtil;
 import io.jsonwebtoken.io.IOException;
 
 /**
@@ -59,14 +52,14 @@ public class ImageApplicationService {
 
     private final ImageApplicationRepository imageApplicationRepository;
 
-    private ImageApplicationSearchRepository imageApplicationSearchRepository;
+    private EntityManager entityManager;
 
     @Autowired
     public ImageApplicationService(
         StorageProperties properties,
         ImageApplicationRepository imageApplicationRepository,
-        ImageApplicationSearchRepository imageApplicationSearchRepository) {
-        this.imageApplicationSearchRepository = imageApplicationSearchRepository;
+        EntityManager entityManager) {
+        this.entityManager = entityManager;
         this.imageApplicationRepository = imageApplicationRepository;
         this.rootLocation = Paths.get(properties.getImageApplicationLocation());
     }
@@ -102,7 +95,6 @@ public class ImageApplicationService {
         catch (IOException e) {
             throw new StorageException("Failed to store file " + filename, e);
         }
-        imageApplicationSearchRepository.save(image);
         return imageApplicationRepository.save(image).getId();
     }
 
@@ -116,7 +108,6 @@ public class ImageApplicationService {
         ImageApplication imageApplication = imageApplicationRepository.findById(id).get();
         imageApplication.name = name;
         imageApplicationRepository.save(imageApplication);
-        imageApplicationSearchRepository.save(imageApplication);
     }
 
     /**
@@ -137,17 +128,36 @@ public class ImageApplicationService {
     }
 
     @Transactional
-    public List<ImageApplication> search(String query) {
-        // Page<ImageApplication> page = imageApplicationSearchRepository.search(QueryBuilders.queryStringQuery(query), pageable);
-        List<ImageApplication> list = Lists.newArrayList(imageApplicationSearchRepository.search(QueryBuilders.queryStringQuery(query)));
-        return list;
+    public List<ImageApplication> search(MediaTypeSearchDTO searchDTO) {
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<ImageApplication> imageQuery = cb.createQuery(ImageApplication.class);
+        Root<ImageApplication> image = imageQuery.from(ImageApplication.class);
+
+        List<Predicate> restrictions = new ArrayList<Predicate>();
+        imageQuery.select(image);
+
+        String query = searchDTO.getQuery();
+        if (query != null && query.length() > 0) {
+            restrictions.clear();
+            restrictions.addAll(SearchUtil.queryKeywordParser(query).stream().map(
+                keyword -> cb.like(image.get("question"), "%" + keyword + "%")
+                ).collect(Collectors.toList()));
+            restrictions.add(cb.like(image.get("question"), "%" + query + "%"));
+        }
+
+        Predicate queryPredicate = 
+            restrictions.size() > 0 ? 
+                cb.or(restrictions.toArray(new Predicate[restrictions.size()])) : cb.and();
+        
+        imageQuery.where(queryPredicate);
+
+        // get images satisfied with criterias
+        TypedQuery<ImageApplication> typedDiseaseQuery = entityManager.createQuery(imageQuery);
+        List<ImageApplication> allDis = typedDiseaseQuery.getResultList();
+
+        return allDis;
     }
 
-    @Transactional
-    public void reindex() {
-        imageApplicationSearchRepository.deleteAll();
-        imageApplicationSearchRepository.saveAll(imageApplicationRepository.findAll());
-    }
 
     @Transactional
     public void delete(Long id) {
@@ -159,7 +169,6 @@ public class ImageApplicationService {
             e.printStackTrace();
         }
         imageApplicationRepository.deleteById(id);
-        imageApplicationSearchRepository.deleteById(id);
     }
 
     public ResponseEntity<Resource> loadAsResource(String path) {

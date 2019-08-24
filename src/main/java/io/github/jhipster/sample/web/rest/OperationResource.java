@@ -4,7 +4,7 @@ import io.github.jhipster.sample.domain.BankAccount;
 import io.github.jhipster.sample.domain.Operation;
 import io.github.jhipster.sample.repository.BankAccountRepository;
 import io.github.jhipster.sample.repository.OperationRepository;
-import io.github.jhipster.sample.repository.search.OperationSearchRepository;
+import io.github.jhipster.sample.search.OperationSearchRepository;
 import io.github.jhipster.sample.web.rest.errors.BadRequestAlertException;
 import io.github.jhipster.sample.web.rest.util.HeaderUtil;
 import io.github.jhipster.sample.web.rest.util.PaginationUtil;

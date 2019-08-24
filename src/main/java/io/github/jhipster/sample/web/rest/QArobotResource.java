@@ -4,10 +4,12 @@ import io.github.jhipster.sample.domain.DiseaseXiAn;
 import io.github.jhipster.sample.domain.QArobot;
 import io.github.jhipster.sample.repository.DiseaseXiAnRepository;
 import io.github.jhipster.sample.repository.QArobotRepository;
-import io.github.jhipster.sample.repository.search.QArobotSearchRepository;
+import io.github.jhipster.sample.search.QArobotSearchRepository;
 import io.github.jhipster.sample.service.DiseaseMapService;
 import io.github.jhipster.sample.service.DiseaseXiAnService;
+import io.github.jhipster.sample.service.QArobotService;
 import io.github.jhipster.sample.web.rest.errors.BadRequestAlertException;
+import io.github.jhipster.sample.web.rest.searchdto.QarobotSearchDTO;
 import io.github.jhipster.sample.web.rest.util.HeaderUtil;
 import io.github.jhipster.sample.web.rest.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -27,8 +29,6 @@ import java.net.URISyntaxException;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -49,12 +49,16 @@ public class QArobotResource {
 
     private final DiseaseXiAnService diseaseXiAnService;
 
+    private final QArobotService qArobotService;
+
     public QArobotResource(QArobotRepository qArobotRepository
         , QArobotSearchRepository qArobotSearchRepository
-        , DiseaseXiAnService diseaseXiAnService) {
+        , DiseaseXiAnService diseaseXiAnService
+        , QArobotService qarobotService) {
         this.qArobotRepository = qArobotRepository;
         this.qArobotSearchRepository = qArobotSearchRepository;
         this.diseaseXiAnService = diseaseXiAnService;
+        this.qArobotService = qarobotService;
     }
 
     /**
@@ -172,10 +176,10 @@ public class QArobotResource {
      * @return the result of the search
      */
     @GetMapping("/_search/q-arobots")
-    public ResponseEntity<List<QArobot>> searchQArobots(@RequestParam String query, Pageable pageable) {
-        log.debug("REST request to search for a page of QArobots for query {}", query);
-        Page<QArobot> page = qArobotSearchRepository.search(queryStringQuery(query), pageable);
-        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/q-arobots");
+    public ResponseEntity<List<QArobot>> searchQArobots(QarobotSearchDTO dto, Pageable pageable) {
+        log.debug("REST request to search for a page of QArobots for query {}", dto);
+        Page<QArobot> page = qArobotService.searchQArobot(dto, pageable);
+        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(dto.getQuery(), page, "/api/_search/q-arobots");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 

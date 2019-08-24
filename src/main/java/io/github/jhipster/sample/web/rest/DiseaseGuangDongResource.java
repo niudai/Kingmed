@@ -4,7 +4,7 @@ import io.github.jhipster.sample.domain.Prices;
 import io.github.jhipster.sample.repository.DiseaseBranchRepository;
 import io.github.jhipster.sample.repository.DiseaseGuangDongRepository;
 import io.github.jhipster.sample.repository.PriceRepository;
-import io.github.jhipster.sample.repository.search.DiseaseGuangDongSearchRepository;
+import io.github.jhipster.sample.search.DiseaseGuangDongSearchRepository;
 import io.github.jhipster.sample.web.rest.errors.BadRequestAlertException;
 import io.github.jhipster.sample.web.rest.util.HeaderUtil;
 import io.github.jhipster.sample.web.rest.util.PaginationUtil;

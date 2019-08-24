@@ -17,20 +17,15 @@ export class ServicePlatformComponent implements OnInit {
    // url for plain images.
    public resourceUrl = SERVER_API_URL + 'api/images';
 
-   // url for applications
-   public applicationUrl = SERVER_API_URL + 'api/images/application';
-
    fileForm: FormGroup;
 
    file: any;
-   applications: IFile[];
    images: IImage[];
    nameOfImages: string[];
 
    constructor(protected http: HttpClient,
            private formBuilder: FormBuilder) {
        this.getImages();
-       this.getApplications();
    }
 
    delete(filename: string): Observable<HttpResponse<any>> {
@@ -41,21 +36,11 @@ export class ServicePlatformComponent implements OnInit {
        return this.http.post<any>(`${this.resourceUrl}`, file);
    }
 
-   applicationUpload(file: any): Observable<HttpResponse<any>> {
-       return this.http.post<any>(`${this.applicationUrl}`, file);
-   }
 
    // get all plain images path and name
    getImages(): Observable<HttpResponse<IImage[]>> {
        this.http.get<IImage[]>(this.resourceUrl)
            .subscribe(res => this.images = res);
-       return;
-   }
-
-   // get all applications name and path
-   getApplications(): Observable<HttpResponse<IFile[]>> {
-       this.http.get<IFile[]>(this.applicationUrl)
-           .subscribe(res => this.applications = res);
        return;
    }
 
@@ -80,13 +65,6 @@ export class ServicePlatformComponent implements OnInit {
        );
    }
 
-   onApplicationSubmit() {
-       const formData = new FormData();
-       formData.append('image', this.fileForm.get('image').value);
-       this.applicationUpload(formData).subscribe(
-           any => this.getImages()
-       );
-   }
 
    ngOnInit() {
        this.fileForm = this.formBuilder.group({

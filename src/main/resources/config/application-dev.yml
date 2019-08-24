@@ -13,17 +13,23 @@
 # http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 # ===================================================================
 
+debug: true
+trace: true
+
 logging:
     level:
-        ROOT: DEBUG
+        ROOT: INFO
         io.github.jhipster: DEBUG
         io.github.jhipster.sample: DEBUG
+        io.searchbox.client: INFO
+
+    file: dev1.log
 
 spring:
     elasticsearch:
         jest:
-            connection-timeout: 100s
-            read-timeout: 100m
+            connection-timeout: 100000000s
+            read-timeout: 1000s
             multi-threaded: false
 
     servlet:
@@ -74,11 +80,11 @@ spring:
         open-in-view: true
     data:
         elasticsearch:
-            cluster-nodes: localhost:9300
-            cluster-name: docker-cluster
-            # properties:
-            #     path:
-            #         home: target/elasticsearch
+            # cluster-nodes: localhost:9300
+            # cluster-name: docker-cluster
+            properties:
+                path:
+                    home: target/elasticsearch
     liquibase:
         contexts: dev
     mail:

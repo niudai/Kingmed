@@ -32,6 +32,7 @@ import io.github.jhipster.sample.service.image.ImagePlatformService;
 import io.github.jhipster.sample.service.image.ImageService;
 import io.github.jhipster.sample.service.image.ImageSuppliesService;
 import io.github.jhipster.sample.web.rest.errors.StorageFileNotFoundException;
+import io.github.jhipster.sample.web.rest.searchdto.MediaTypeSearchDTO;
 import io.github.jhipster.sample.web.rest.util.PaginationUtil;
 
 /**
@@ -128,21 +129,10 @@ public class ImageUploadController {
     }
 
     @GetMapping("/images/_search/application")
-    public ResponseEntity<List<ImageApplication>> searchApplications(@RequestParam String query) {
+    public ResponseEntity<List<ImageApplication>> searchApplications(MediaTypeSearchDTO dto) {
         log.debug("REST request to get a page of ImageApplications");
-        List<ImageApplication> list = imageApplicationService.search(query);
+        List<ImageApplication> list = imageApplicationService.search(dto);
         return ResponseEntity.ok().body(list);
-    }
-
-    /**
-     * GET /images/application : reindex all applications
-     * @return
-     */
-    @GetMapping("/images/application/reindex")
-    public ResponseEntity<Void> reindexApplications() {
-        log.debug("REST request to reindex ImageApplications");
-        imageApplicationService.reindex();;
-        return ResponseEntity.ok().build();
     }
 
     /*********************************** Supplies Files Method Mapping ************************** */
@@ -211,22 +201,13 @@ public class ImageUploadController {
     }
 
     @GetMapping("/images/_search/supplies")
-    public ResponseEntity<List<ImageSupplies>> searchSuppliess(@RequestParam String query, Pageable pageable) {
+    public ResponseEntity<List<ImageSupplies>> searchSuppliess(MediaTypeSearchDTO dto, Pageable pageable) {
         log.debug("REST request to get a page of ImageSupplies");
-        List<ImageSupplies> list = imageSuppliesService.search(query);
-        return ResponseEntity.ok().body(list);
+        Page<ImageSupplies> list = imageSuppliesService.search(dto, pageable);
+        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(dto.getQuery(), list, "/images/_search/supplies");
+        return ResponseEntity.ok().headers(headers).body(list.getContent());
     }
 
-    /**
-     * GET /images/supplies : reindex all suppliess
-     * @return
-     */
-    @GetMapping("/images/supplies/reindex")
-    public ResponseEntity<Void> reindexSuppliess() {
-        log.debug("REST request to reindex ImageSuppliess");
-        imageSuppliesService.reindex();
-        return ResponseEntity.ok().build();
-    }
 
         /*********************************** Platform Files Method Mapping ************************** */
 
@@ -281,26 +262,7 @@ public class ImageUploadController {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "api/images/supplies");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
-
-    /**
-     * GET /images/platform : reindex all platforms
-     * @return
-     */
-    @GetMapping("/images/platform/reindex")
-    public ResponseEntity<Void> reindexPlatforms() {
-        log.debug("REST request to reindex ImagePlatforms");
-        imagePlatformService.reindex();;
-        return ResponseEntity.ok().build();
-    }
-
-    @GetMapping("/images/_search/platform")
-    public ResponseEntity<List<ImagePlatform>> searchPlatforms(@RequestParam String query, Pageable pageable) {
-        log.debug("REST request to get a page of ImageSupplies");
-        Page<ImagePlatform> page = imagePlatformService.search(pageable, query);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "api/images/platform");
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
-}
-
+    
     /************************************* Plain Images Upload Mapping *******************************************/
 
 

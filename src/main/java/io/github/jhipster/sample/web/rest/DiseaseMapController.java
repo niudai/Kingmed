@@ -4,7 +4,7 @@ import io.github.jhipster.sample.domain.DiseaseBranch;
 import io.github.jhipster.sample.domain.DiseaseMap;
 import io.github.jhipster.sample.domain.DiseaseMapIndexDTO;
 import io.github.jhipster.sample.domain.LinkCard;
-import io.github.jhipster.sample.repository.search.UserSearchRepository;
+import io.github.jhipster.sample.search.UserSearchRepository;
 import io.github.jhipster.sample.service.DiseaseMapService;
 import io.github.jhipster.sample.web.rest.util.PaginationUtil;
 

@@ -1,72 +1,88 @@
-// package io.github.jhipster.sample.config;
+package io.github.jhipster.sample.config;
 
-// import com.fasterxml.jackson.databind.DeserializationFeature;
-// import com.fasterxml.jackson.databind.ObjectMapper;
-// import com.fasterxml.jackson.databind.SerializationFeature;
-// import com.github.vanroy.springdata.jest.JestElasticsearchTemplate;
-// import com.github.vanroy.springdata.jest.mapper.DefaultJestResultsMapper;
-// import io.searchbox.client.JestClient;
-// import org.springframework.boot.autoconfigure.data.elasticsearch.ElasticsearchProperties;
-// import org.springframework.boot.context.properties.EnableConfigurationProperties;
-// import org.springframework.context.annotation.Bean;
-// import org.springframework.context.annotation.Configuration;
-// import org.springframework.context.annotation.Primary;
-// import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
-// import org.springframework.data.elasticsearch.core.EntityMapper;
-// import org.springframework.data.elasticsearch.core.convert.ElasticsearchConverter;
-// import org.springframework.data.elasticsearch.core.mapping.SimpleElasticsearchMappingContext;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.github.vanroy.springdata.jest.JestElasticsearchTemplate;
+import com.github.vanroy.springdata.jest.mapper.DefaultJestResultsMapper;
+import io.searchbox.client.JestClient;
+import io.searchbox.client.JestClientFactory;
+import io.searchbox.client.config.HttpClientConfig;
 
-// import java.io.IOException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.data.elasticsearch.ElasticsearchProperties;
+import org.springframework.boot.autoconfigure.elasticsearch.jest.JestProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
+import org.springframework.data.elasticsearch.core.EntityMapper;
+import org.springframework.data.elasticsearch.core.convert.ElasticsearchConverter;
+import org.springframework.data.elasticsearch.core.mapping.SimpleElasticsearchMappingContext;
 
-// @Configuration
-// @EnableConfigurationProperties(ElasticsearchProperties.class)
-// public class ElasticsearchConfiguration {
+import java.io.IOException;
 
-//     private ObjectMapper mapper;
+@Configuration
+@EnableConfigurationProperties(ElasticsearchProperties.class)
+@AutoConfigureAfter(JestClient.class)
+public class ElasticsearchConfiguration {
 
-//     public ElasticsearchConfiguration(ObjectMapper mapper) {
-//         this.mapper = mapper;
-//     }
+    Logger logger = LoggerFactory.getLogger(ElasticsearchConfiguration.class);
 
-//     @Bean
-//     public EntityMapper getEntityMapper() {
-//         return new CustomEntityMapper(mapper);
-//     }
+    @Autowired
+    JestClient jestClient;
 
-//     @Bean
-//     @Primary
-//     public ElasticsearchOperations elasticsearchTemplate(final JestClient jestClient,
-//                                                          final ElasticsearchConverter elasticsearchConverter,
-//                                                          final SimpleElasticsearchMappingContext simpleElasticsearchMappingContext,
-//                                                          EntityMapper mapper) throws InterruptedException {
-//         return new JestElasticsearchTemplate(
-//             jestClient,
-//             elasticsearchConverter,
-//             new DefaultJestResultsMapper(simpleElasticsearchMappingContext, mapper));
-//     }
+    JestClientFactory jestClientFactory = new JestClientFactory();
 
-//     public class CustomEntityMapper implements EntityMapper {
+    private ObjectMapper mapper;
 
-//         private ObjectMapper objectMapper;
+    public ElasticsearchConfiguration(ObjectMapper mapper, JestProperties properties) {
+        this.mapper = mapper;
+    }
 
-//         public CustomEntityMapper(ObjectMapper objectMapper) {
-//             this.objectMapper = objectMapper;
-//             objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-//             objectMapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
-//             objectMapper.configure(SerializationFeature.WRITE_DATE_TIMESTAMPS_AS_NANOSECONDS, true);
-//             objectMapper.configure(SerializationFeature.INDENT_OUTPUT, false);
-//             objectMapper.configure(DeserializationFeature.READ_DATE_TIMESTAMPS_AS_NANOSECONDS, true);
-//         }
+    @Bean
+    public EntityMapper getEntityMapper() {
+        return new CustomEntityMapper(mapper);
+    }
 
-//         @Override
-//         public String mapToString(Object object) throws IOException {
-//             return objectMapper.writeValueAsString(object);
-//         }
+    @Bean
+    @Primary
+    public ElasticsearchOperations elasticsearchTemplate(final JestClient jestClient,
+                                                         final ElasticsearchConverter elasticsearchConverter,
+                                                         final SimpleElasticsearchMappingContext simpleElasticsearchMappingContext,
+                                                         EntityMapper mapper) throws InterruptedException {
+        return new JestElasticsearchTemplate(
+            jestClient,
+            elasticsearchConverter,
+            new DefaultJestResultsMapper(simpleElasticsearchMappingContext, mapper));
+    }
 
-//         @Override
-//         public <T> T mapToObject(String source, Class<T> clazz) throws IOException {
-//             return objectMapper.readValue(source, clazz);
-//         }
-//     }
+    public class CustomEntityMapper implements EntityMapper {
 
-// }
+        private ObjectMapper objectMapper;
+
+        public CustomEntityMapper(ObjectMapper objectMapper) {
+            this.objectMapper = objectMapper;
+            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+            objectMapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
+            objectMapper.configure(SerializationFeature.WRITE_DATE_TIMESTAMPS_AS_NANOSECONDS, true);
+            objectMapper.configure(SerializationFeature.INDENT_OUTPUT, false);
+            objectMapper.configure(DeserializationFeature.READ_DATE_TIMESTAMPS_AS_NANOSECONDS, true);
+        }
+
+        @Override
+        public String mapToString(Object object) throws IOException {
+            return objectMapper.writeValueAsString(object);
+        }
+
+        @Override
+        public <T> T mapToObject(String source, Class<T> clazz) throws IOException {
+            return objectMapper.readValue(source, clazz);
+        }
+    }
+
+}

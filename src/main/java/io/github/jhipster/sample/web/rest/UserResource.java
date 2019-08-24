@@ -4,7 +4,7 @@ import io.github.jhipster.sample.config.Constants;
 import io.github.jhipster.sample.domain.DiseaseXiAn;
 import io.github.jhipster.sample.domain.User;
 import io.github.jhipster.sample.repository.UserRepository;
-import io.github.jhipster.sample.repository.search.UserSearchRepository;
+import io.github.jhipster.sample.search.UserSearchRepository;
 import io.github.jhipster.sample.security.AuthoritiesConstants;
 import io.github.jhipster.sample.service.MailService;
 import io.github.jhipster.sample.service.UserService;
@@ -72,7 +72,7 @@ public class UserResource {
 
     private final MailService mailService;
 
-    private final UserSearchRepository userSearchRepository;
+    private final io.github.jhipster.sample.search.UserSearchRepository userSearchRepository;
 
     public UserResource(UserService userService, UserRepository userRepository, MailService mailService
         , UserSearchRepository userSearchRepository) {

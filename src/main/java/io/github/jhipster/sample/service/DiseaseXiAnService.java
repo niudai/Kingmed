@@ -1,10 +1,12 @@
 package io.github.jhipster.sample.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -25,12 +27,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
 import io.github.jhipster.sample.domain.DiseaseXiAn;
 import io.github.jhipster.sample.domain.ImageApplication;
 import io.github.jhipster.sample.domain.ImageSupplies;
 import io.github.jhipster.sample.domain.LinkCard;
-import io.github.jhipster.sample.domain.ProjectNotification;
 import io.github.jhipster.sample.domain.QArobot;
 import io.github.jhipster.sample.domain.User;
 import io.github.jhipster.sample.repository.DiseaseXiAnRepository;
@@ -39,8 +39,9 @@ import io.github.jhipster.sample.repository.ImageSuppliesRepository;
 import io.github.jhipster.sample.repository.LinkCardRepository;
 import io.github.jhipster.sample.repository.QArobotRepository;
 import io.github.jhipster.sample.repository.UserRepository;
-import io.github.jhipster.sample.repository.search.DiseaseXiAnSearchRepository;
-
+import io.github.jhipster.sample.search.DiseaseXiAnSearchRepository;
+import io.github.jhipster.sample.web.rest.searchdto.DiseaseXiAnSearchDTO;
+import static io.github.jhipster.sample.web.rest.util.SearchUtil.*;
 /**
  * DiseaseXiAnService
  */
@@ -232,10 +233,7 @@ public class DiseaseXiAnService {
 
     /********************** Search *****************/
     public Page<DiseaseXiAn> searchDiseases(
-        Pageable pageable,
-        String subsidiary,
-        String projectConcourse,
-        String query) {
+        DiseaseXiAnSearchDTO searchDTO, Pageable pageable) {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<DiseaseXiAn> diseaseQuery = cb.createQuery(DiseaseXiAn.class);
         CriteriaQuery<Long> countQuery = cb.createQuery(Long.class);
@@ -244,39 +242,47 @@ public class DiseaseXiAnService {
         List<Predicate> restrictions = new ArrayList<Predicate>();
         diseaseQuery.select(disease);
         countQuery.select(cb.count(count));
+
+        String subsidiary = searchDTO.getSubsidiary();
+        String projectConcourse = searchDTO.getProjectConcourse();
+        String query = searchDTO.getQuery();
+
+        // restrictions for properties
         if (subsidiary != null && subsidiary.length() > 0) {
             restrictions.add(cb.equal(disease.get("subsidiary"), subsidiary));
-            // diseaseQuery = diseaseQuery.where(cb.equal(disease.get("subsidiary"), subsidiary));
-            // countQuery = countQuery.where(cb.equal(disease.get("subsidiary"), subsidiary));
         }
         if (projectConcourse != null && projectConcourse.length() > 0) {
             restrictions.add(cb.equal(disease.get("projectConcourse"), projectConcourse));
-            // diseaseQuery = diseaseQuery.where(cb.equal(disease.get("projectConcourse"), projectConcourse));
-            // countQuery = countQuery.where(cb.equal(disease.get("projectConcourse"), projectConcourse));
         }
+        Predicate termPredicate = cb.and(restrictions.toArray(new Predicate[restrictions.size()]));
+        // restrictions for query string
         if (query != null && query.length() > 0) {
+            restrictions.clear();
+            restrictions.addAll(queryKeywordParser(query).stream().map(
+                keyword -> cb.like(disease.get("name"), "%" + keyword + "%")
+                ).collect(Collectors.toList()));
             restrictions.add(cb.like(disease.get("name"), "%" + query + "%"));
-            restrictions.
-            // diseaseQuery = diseaseQuery.where(cb.like(disease.get("name"), "%" + query + "%"));
-            // countQuery = countQuery.where(cb.like(disease.get("name"), "%" + query + "%"));
         }
-        Predicate finalPredicate = cb.and(restrictions.toArray(new Predicate[restrictions.size()]));
+        Predicate queryPredicate = restrictions.size() > 0 ? cb.or(restrictions.toArray(new Predicate[restrictions.size()])) :
+            cb.and();
+        // create final Predicate with term and query predicate
+        Predicate finalPredicate = cb.and(termPredicate, queryPredicate);
         diseaseQuery.where(finalPredicate);
         countQuery.where(finalPredicate);
+
+        // get diseases satisfied with criterias
         TypedQuery<DiseaseXiAn> typedDiseaseQuery = entityManager.createQuery(diseaseQuery);
         typedDiseaseQuery.setFirstResult((int)pageable.getOffset());
         typedDiseaseQuery.setMaxResults((int)pageable.getPageSize());
-        TypedQuery<Long> typedCountQuery = entityManager.createQuery(countQuery);
         List<DiseaseXiAn> allDis = typedDiseaseQuery.getResultList();
+
+        // get totalItems number with criterias
+        TypedQuery<Long> typedCountQuery = entityManager.createQuery(countQuery);
         Long totalItems = typedCountQuery.getSingleResult();
+
+        // create a page in terms of the count and content
         Page<DiseaseXiAn> resultPage = new PageImpl<>(allDis, pageable, totalItems);
         return resultPage;
     }
-
-    public ArrayList<String> QueryKeywordParser(String query) {
-        query.
-    }
-
-
 
 }

@@ -1,7 +1,7 @@
 package io.github.jhipster.sample.web.rest;
 import io.github.jhipster.sample.domain.BankAccount;
 import io.github.jhipster.sample.repository.BankAccountRepository;
-import io.github.jhipster.sample.repository.search.BankAccountSearchRepository;
+import io.github.jhipster.sample.search.BankAccountSearchRepository;
 import io.github.jhipster.sample.web.rest.errors.BadRequestAlertException;
 import io.github.jhipster.sample.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;

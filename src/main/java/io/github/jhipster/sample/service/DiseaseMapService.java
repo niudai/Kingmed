@@ -33,9 +33,9 @@ import io.github.jhipster.sample.repository.ImageApplicationRepository;
 import io.github.jhipster.sample.repository.ImageSuppliesRepository;
 import io.github.jhipster.sample.repository.LinkCardRepository;
 import io.github.jhipster.sample.repository.QArobotRepository;
-import io.github.jhipster.sample.repository.search.DiseaseBranchSearchRepository;
-import io.github.jhipster.sample.repository.search.DiseaseMapIndexDTOSearchRepository;
-import io.github.jhipster.sample.repository.search.DiseaseMapSearchRepository;
+import io.github.jhipster.sample.search.DiseaseBranchSearchRepository;
+import io.github.jhipster.sample.search.DiseaseMapIndexDTOSearchRepository;
+import io.github.jhipster.sample.search.DiseaseMapSearchRepository;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -78,7 +78,7 @@ public class DiseaseMapService {
 
     /**
      * Attach new disease branch.
-     * 
+     *
      * @param newDiseaseBranch
      * @param diseaseBranchId
      */
@@ -90,7 +90,7 @@ public class DiseaseMapService {
 
     /**
      * get All disease branch.
-     * 
+     *
      * @return
      */
     public Page<DiseaseBranch> getAllDiseaseBranchPageable(Pageable pageable) {
@@ -100,7 +100,7 @@ public class DiseaseMapService {
 
     /**
      * get All disease branch.
-     * 
+     *
      * @return
      */
     public List<DiseaseBranch> getAllDiseaseBranch() {
@@ -110,7 +110,7 @@ public class DiseaseMapService {
 
     /**
      * get disease branch.
-     * 
+     *
      * @return
      */
     public DiseaseBranch getDiseaseBranch(Long diseaseBranchId) {
@@ -119,7 +119,7 @@ public class DiseaseMapService {
 
     /**
      * get disease branch.
-     * 
+     *
      * @return
      */
     @Transactional
@@ -134,7 +134,7 @@ public class DiseaseMapService {
 
     /**
      * get child disease maps of disease map.
-     * 
+     *
      * @return
      */
     @Transactional
@@ -146,7 +146,7 @@ public class DiseaseMapService {
 
     /**
      * get disease map.
-     * 
+     *
      * @return
      */
     // @Transactional
@@ -171,7 +171,7 @@ public class DiseaseMapService {
 
     /**
      * get all disease maps in a disease branch
-     * 
+     *
      * @param diseaseBranchId
      * @return
      */
@@ -186,7 +186,7 @@ public class DiseaseMapService {
 
     /**
      * Deattach disease branch
-     * 
+     *
      * @param diseaseBranchId
      */
     @Transactional
@@ -200,7 +200,7 @@ public class DiseaseMapService {
 
     /**
      * Add new disease map to disease branch specified with diseaseBranchId.
-     * 
+     *
      * @param diseaseMap
      * @param diseaseBranchId
      */
@@ -213,7 +213,7 @@ public class DiseaseMapService {
 
     /**
      * Put Disease Map what already exists in database to modify some content.
-     * 
+     *
      * @param diseaseMap
      */
     @Transactional
@@ -224,7 +224,7 @@ public class DiseaseMapService {
 
     /**
      * Modify disease Branch
-     * 
+     *
      * @param diseaseMap
      */
     @Transactional
@@ -237,7 +237,7 @@ public class DiseaseMapService {
     /**
      * delete a disease map. all sub disease map related to this map would be
      * deleted.
-     * 
+     *
      * @param diseaseMapId
      */
     @Transactional
@@ -248,7 +248,7 @@ public class DiseaseMapService {
 
     /**
      * associate diseaseMap with a diseaseXiAn
-     * 
+     *
      * @param diseaseMapId
      * @param diseaseXiAnId
      */
@@ -261,7 +261,7 @@ public class DiseaseMapService {
 
     /**
      * deassociate diseaseMap with a diseaseXiAn
-     * 
+     *
      * @param diseaseMapId
      * @param diseaseXiAnId
      */
@@ -274,7 +274,7 @@ public class DiseaseMapService {
 
     /**
      * associate diseaseMap with QArobot.
-     * 
+     *
      * @param diseaseMapId
      * @param qArobotId
      */
@@ -287,7 +287,7 @@ public class DiseaseMapService {
 
     /**
      * deassociate diseaseMap with QArobot.
-     * 
+     *
      * @param diseaseMapId
      * @param qArobotId
      */
@@ -300,7 +300,7 @@ public class DiseaseMapService {
 
     /**
      * attach disease map to a disease map.
-     * 
+     *
      * @param newDiseaseMap
      * @param diseaseMapId
      */
@@ -313,7 +313,7 @@ public class DiseaseMapService {
 
     /**
      * attach link card to a disease map.
-     * 
+     *
      * @param linkcard
      * @param diseaseMapId
      */
@@ -330,7 +330,7 @@ public class DiseaseMapService {
 
     /**
      * attach link card to a disease map.
-     * 
+     *
      * @param linkcard
      * @param diseaseMapId
      */
@@ -341,7 +341,7 @@ public class DiseaseMapService {
 
     /**
      * attach link card to a disease branch
-     * 
+     *
      * @param linkcard
      * @param diseaseBranchId
      */
@@ -358,7 +358,7 @@ public class DiseaseMapService {
 
     /**
      * deattach link card to a disease branch
-     * 
+     *
      * @param linkcard
      * @param diseaseBranchId
      */

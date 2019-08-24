@@ -9,12 +9,13 @@ import io.github.jhipster.sample.domain.QArobot;
 import io.github.jhipster.sample.domain.User;
 import io.github.jhipster.sample.repository.DiseaseXiAnRepository;
 import io.github.jhipster.sample.repository.PriceXiAnRepository;
-import io.github.jhipster.sample.repository.search.DiseaseXiAnSearchRepository;
+import io.github.jhipster.sample.search.DiseaseXiAnSearchRepository;
 import io.github.jhipster.sample.service.DiseaseMapService;
 import io.github.jhipster.sample.service.DiseaseXiAnService;
 import io.github.jhipster.sample.service.ProjectNotificationService;
 import io.github.jhipster.sample.service.dto.ProjectNotificatonDTO;
 import io.github.jhipster.sample.web.rest.errors.BadRequestAlertException;
+import io.github.jhipster.sample.web.rest.searchdto.DiseaseXiAnSearchDTO;
 import io.github.jhipster.sample.web.rest.util.HeaderUtil;
 import io.github.jhipster.sample.web.rest.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -141,13 +142,10 @@ public class DiseaseXiAnResource {
      */
     @GetMapping("/disease-xi-ans")
     public ResponseEntity<List<DiseaseXiAn>> getAllDiseaseXiAns(
-        Pageable pageable,
-        @RequestParam(required = false) String subsidiary,
-        @RequestParam(required = false) String projectConcourse,
-        @RequestParam(required = false) String query
+        DiseaseXiAnSearchDTO searchDTO, Pageable page
         ) {
-        Page<DiseaseXiAn> result = diseaseXiAnService.searchDiseases(pageable, subsidiary, projectConcourse, query);
-        log.debug("REST request to get a page of DiseaseXiAns");
+        Page<DiseaseXiAn> result = diseaseXiAnService.searchDiseases(searchDTO, page);
+        log.debug("REST request to get a page of DiseaseXiAns with query: {}", searchDTO);
         // Page<DiseaseXiAn> page = diseaseXiAnRepository.findAll(pageable);
 
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(result, "/api/disease-xi-ans");

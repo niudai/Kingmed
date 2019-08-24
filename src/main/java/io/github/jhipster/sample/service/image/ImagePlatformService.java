@@ -6,13 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.Base64;
-import java.util.List;
-import java.util.stream.Stream;
 
-import javax.transaction.Transactional;
-
-import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -21,17 +15,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
-import org.springframework.util.StreamUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 import io.github.jhipster.sample.config.StorageProperties;
 import io.github.jhipster.sample.domain.ImagePlatform;
 import io.github.jhipster.sample.repository.ImagePlatformRepository;
-import io.github.jhipster.sample.repository.search.ImagePlatformSearchRepository;
-import io.github.jhipster.sample.service.StorageService;
-import io.github.jhipster.sample.web.rest.ImageUploadController;
 import io.github.jhipster.sample.web.rest.errors.StorageException;
 import io.github.jhipster.sample.web.rest.errors.StorageFileNotFoundException;
 import io.github.jhipster.sample.web.rest.util.MediaUtil;
@@ -45,16 +34,13 @@ public class ImagePlatformService {
 
     private final Path rootLocation;
 
-    private final ImagePlatformSearchRepository imagePlatformSearchRepository;
 
     private final ImagePlatformRepository imagePlatformRepository;
 
     @Autowired
     public ImagePlatformService(
         StorageProperties properties,
-        ImagePlatformRepository imagePlatformRepository,
-        ImagePlatformSearchRepository imagePlatformSearchRepository) {
-        this.imagePlatformSearchRepository = imagePlatformSearchRepository;
+        ImagePlatformRepository imagePlatformRepository) {
         this.imagePlatformRepository = imagePlatformRepository;
         this.rootLocation = Paths.get(properties.getImagePlatformLocation());
     }
@@ -89,7 +75,6 @@ public class ImagePlatformService {
         catch (IOException e) {
             throw new StorageException("Failed to store file " + filename, e);
         }
-        imagePlatformSearchRepository.save(image);
         return imagePlatformRepository.save(image).getId();
     }
 
@@ -102,13 +87,6 @@ public class ImagePlatformService {
         ImagePlatform imagePlatform = imagePlatformRepository.findById(id).get();
         imagePlatform.name = name;
         imagePlatformRepository.save(imagePlatform);
-        imagePlatformSearchRepository.save(imagePlatform);
-    }
-
-    @Transactional
-    public Page<ImagePlatform> search(Pageable pageable, String query) {
-        Page<ImagePlatform> page = imagePlatformSearchRepository.search(QueryBuilders.queryStringQuery(query), pageable);
-        return page;
     }
 
     /**
@@ -117,11 +95,6 @@ public class ImagePlatformService {
     public Page<ImagePlatform> loadAll(Pageable pageable) {
         return imagePlatformRepository.findAll(pageable);
 
-    }
-
-    public void reindex() {
-        imagePlatformSearchRepository.deleteAll();
-        imagePlatformSearchRepository.saveAll(imagePlatformRepository.findAll());
     }
 
     public void delete(Long id) {
@@ -133,7 +106,6 @@ public class ImagePlatformService {
             e.printStackTrace();
         }
         imagePlatformRepository.deleteById(id);
-        imagePlatformSearchRepository.deleteById(id);
     }
 
     public ResponseEntity<Resource> loadAsResource(Long id) {

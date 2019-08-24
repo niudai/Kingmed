@@ -20,7 +20,7 @@ import java.sql.SQLException;
 @EnableJpaRepositories("io.github.jhipster.sample.repository")
 @EnableJpaAuditing(auditorAwareRef = "springSecurityAuditorAware")
 @EnableTransactionManagement
-@EnableElasticsearchRepositories("io.github.jhipster.sample.repository.search")
+@EnableElasticsearchRepositories("io.github.jhipster.sample.search")
 public class DatabaseConfiguration {
 
     private final Logger log = LoggerFactory.getLogger(DatabaseConfiguration.class);
@@ -44,7 +44,7 @@ public class DatabaseConfiguration {
         log.debug("H2 database is available on port {}", port);
         return H2ConfigurationHelper.createServer(port);
     }
-	
+
     private String getValidPortForH2() {
         int port = Integer.parseInt(env.getProperty("server.port"));
         if (port < 10000) {

@@ -1,7 +1,7 @@
 package io.github.jhipster.sample.web.rest;
 import io.github.jhipster.sample.domain.Label;
 import io.github.jhipster.sample.repository.LabelRepository;
-import io.github.jhipster.sample.repository.search.LabelSearchRepository;
+import io.github.jhipster.sample.search.LabelSearchRepository;
 import io.github.jhipster.sample.web.rest.errors.BadRequestAlertException;
 import io.github.jhipster.sample.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;

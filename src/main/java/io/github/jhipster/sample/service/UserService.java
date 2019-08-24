@@ -7,7 +7,7 @@ import io.github.jhipster.sample.domain.User;
 import io.github.jhipster.sample.repository.AuthorityRepository;
 import io.github.jhipster.sample.repository.DiseaseXiAnRepository;
 import io.github.jhipster.sample.repository.UserRepository;
-import io.github.jhipster.sample.repository.search.UserSearchRepository;
+import io.github.jhipster.sample.search.UserSearchRepository;
 import io.github.jhipster.sample.security.AuthoritiesConstants;
 import io.github.jhipster.sample.security.SecurityUtils;
 import io.github.jhipster.sample.service.dto.UserDTO;
