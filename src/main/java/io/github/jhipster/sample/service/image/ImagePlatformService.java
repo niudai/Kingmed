@@ -21,8 +21,6 @@ import org.springframework.web.multipart.MultipartFile;
 import io.github.jhipster.sample.config.StorageProperties;
 import io.github.jhipster.sample.domain.ImagePlatform;
 import io.github.jhipster.sample.repository.ImagePlatformRepository;
-import io.github.jhipster.sample.web.rest.errors.StorageException;
-import io.github.jhipster.sample.web.rest.errors.StorageFileNotFoundException;
 import io.github.jhipster.sample.web.rest.util.MediaUtil;
 import io.jsonwebtoken.io.IOException;
 
@@ -45,7 +43,7 @@ public class ImagePlatformService {
         this.rootLocation = Paths.get(properties.getImagePlatformLocation());
     }
 
-    public Long store(MultipartFile file, String name) {
+    public Long store(MultipartFile file, String name) throws java.lang.Exception {
         ImagePlatform image = new ImagePlatform();
 
         String filename = StringUtils.cleanPath(file.getOriginalFilename());
@@ -57,11 +55,11 @@ public class ImagePlatformService {
         image.setName(name);
         try {
             if (file.isEmpty()) {
-                throw new StorageException("Failed to store empty file " + filename);
+                throw new Exception("Failed to store empty file " + filename);
             }
             if (filename.contains("..")) {
                 // This is a security check
-                throw new StorageException(
+                throw new Exception(
                         "Cannot store file with relative path outside current directory "
                                 + filename);
             }
@@ -69,11 +67,11 @@ public class ImagePlatformService {
                 Files.copy(inputStream, this.rootLocation.resolve(image.getPath()),
                     StandardCopyOption.REPLACE_EXISTING);
             } catch (java.io.IOException e) {
-                throw new StorageException("Failed to store file" + filename, e);
+                throw new Exception("Failed to store file" + filename, e);
             }
         }
         catch (IOException e) {
-            throw new StorageException("Failed to store file " + filename, e);
+            throw new Exception("Failed to store file " + filename, e);
         }
         return imagePlatformRepository.save(image).getId();
     }
@@ -108,7 +106,7 @@ public class ImagePlatformService {
         imagePlatformRepository.deleteById(id);
     }
 
-    public ResponseEntity<Resource> loadAsResource(Long id) {
+    public ResponseEntity<Resource> loadAsResource(Long id) throws java.lang.Exception {
         ImagePlatform image = imagePlatformRepository.findById(id).get();
         try {
             Path file = rootLocation.resolve(image.getPath());
@@ -117,13 +115,13 @@ public class ImagePlatformService {
                 return ResponseEntity.ok().headers(MediaUtil.genearteMediaHeaders(image)).body(resource);
             }
             else {
-                throw new StorageFileNotFoundException(
+                throw new Exception(
                         "Could not read file: " + image.getPath());
 
             }
         }
         catch (MalformedURLException e) {
-            throw new StorageFileNotFoundException("Could not read file: " + image.getPath(), e);
+            throw new Exception("Could not read file: " + image.getPath(), e);
         }
     }
 
@@ -131,11 +129,11 @@ public class ImagePlatformService {
         FileSystemUtils.deleteRecursively(rootLocation.toFile());
     }
 
-    public void init() {
+    public void init() throws java.lang.Exception {
         try {
             Files.createDirectories(rootLocation);
         } catch (java.io.IOException e) {
-            throw new StorageException("Could not initialize storage", e);
+            throw new Exception("Could not initialize storage", e);
         }
     }
 }

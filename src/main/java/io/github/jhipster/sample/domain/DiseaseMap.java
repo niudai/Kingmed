@@ -1,22 +1,31 @@
 package io.github.jhipster.sample.domain;
 
-import org.hibernate.annotations.BatchSize;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import javax.persistence.*;
-import javax.validation.constraints.*;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import org.springframework.data.elasticsearch.annotations.Document;
-
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * Disease Map is used to contain mutiple diseases and qarobot, and could
@@ -25,7 +34,6 @@ import java.util.Set;
 @Entity
 @Table(name = "disease_map")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Document(indexName = "diseasemap")
 public class DiseaseMap implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -216,6 +224,15 @@ public class DiseaseMap implements Serializable {
 
     public void setLinkCards(Set<LinkCard> linkCards) {
         this.linkCards = linkCards;
+    }
+
+    public DiseaseMapIndexDTO toIndexDTO() {
+        DiseaseMapIndexDTO dto = new DiseaseMapIndexDTO();
+        dto.setDescription(this.description);
+        dto.setId(this.id);
+        dto.setName(this.name);
+        dto.setSubsidiary(this.subsidiary);
+        return dto;
     }
 
     public DiseaseMap update(DiseaseMap diseaseMap) {

@@ -2,17 +2,17 @@ package io.github.jhipster.sample.config;
 
 import java.time.Duration;
 
-import org.ehcache.config.builders.*;
+import org.ehcache.config.builders.CacheConfigurationBuilder;
+import org.ehcache.config.builders.ExpiryPolicyBuilder;
+import org.ehcache.config.builders.ResourcePoolsBuilder;
 import org.ehcache.jsr107.Eh107Configuration;
-
-import io.github.jhipster.config.jcache.BeanClassLoaderAwareJCacheRegionFactory;
-import io.github.jhipster.config.JHipsterProperties;
-
 import org.springframework.boot.autoconfigure.cache.JCacheManagerCustomizer;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import io.github.jhipster.config.JHipsterProperties;
+import io.github.jhipster.config.jcache.BeanClassLoaderAwareJCacheRegionFactory;
 
 @Configuration
 @EnableCaching
@@ -41,13 +41,6 @@ public class CacheConfiguration {
             cm.createCache(io.github.jhipster.sample.domain.Authority.class.getName(), jcacheConfiguration);
             cm.createCache(io.github.jhipster.sample.domain.User.class.getName() + ".authorities", jcacheConfiguration);
             cm.createCache(io.github.jhipster.sample.domain.User.class.getName() + ".diseaseXiAns", jcacheConfiguration);
-            cm.createCache(io.github.jhipster.sample.domain.BankAccount.class.getName(), jcacheConfiguration);
-            cm.createCache(io.github.jhipster.sample.domain.BankAccount.class.getName() + ".operations", jcacheConfiguration);
-            cm.createCache(io.github.jhipster.sample.domain.Label.class.getName(), jcacheConfiguration);
-            cm.createCache(io.github.jhipster.sample.domain.Label.class.getName() + ".operations", jcacheConfiguration);
-            cm.createCache(io.github.jhipster.sample.domain.Operation.class.getName(), jcacheConfiguration);
-            cm.createCache(io.github.jhipster.sample.domain.Operation.class.getName() + ".labels", jcacheConfiguration);
-            cm.createCache(io.github.jhipster.sample.domain.DiseaseGuangDong.class.getName(), jcacheConfiguration);
             cm.createCache(io.github.jhipster.sample.domain.QArobot.class.getName(), jcacheConfiguration);
             cm.createCache(io.github.jhipster.sample.domain.Prices.class.getName(), jcacheConfiguration);
             cm.createCache(io.github.jhipster.sample.domain.DiseaseXiAn.class.getName(), jcacheConfiguration);

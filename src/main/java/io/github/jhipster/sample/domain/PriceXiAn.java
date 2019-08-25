@@ -14,7 +14,6 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.springframework.data.elasticsearch.annotations.Document;
 
 /**
  * PriceXiAn
@@ -22,7 +21,6 @@ import org.springframework.data.elasticsearch.annotations.Document;
 @Entity
 @Table(name = "price_xi_an")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Document(indexName = "pricexian")
 public class PriceXiAn implements Serializable {
     private static final long serialVersionUID = 2L;
 

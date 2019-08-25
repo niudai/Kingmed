@@ -1,6 +1,7 @@
 package io.github.jhipster.sample.web.rest;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -67,9 +68,11 @@ public class ImageUploadController {
 
      /**
      * GET /images/:filename get image with name :filename.
+     * 
+     * @throws MalformedURLException
      */
     @GetMapping("/images/application/{path}")
-    public ResponseEntity<Resource> serveApplication(@PathVariable String path) {
+    public ResponseEntity<Resource> serveApplication(@PathVariable String path) throws MalformedURLException {
         return imageApplicationService.loadAsResource(path);
     }
 
@@ -213,9 +216,11 @@ public class ImageUploadController {
 
      /**
      * GET /images/:filename get image with name :filename.
+     * 
+     * @throws Exception
      */
     @GetMapping("/images/platform/{id}")
-    public ResponseEntity<Resource> servePlatform(@PathVariable Long id) {
+    public ResponseEntity<Resource> servePlatform(@PathVariable Long id) throws Exception {
         return imagePlatformService.loadAsResource(id);
     }
 
@@ -242,11 +247,14 @@ public class ImageUploadController {
 
     /**
      * POST /api/images/ : upload a new image
+     * 
      * @param image to be uploaded which is multipart file
      * @return responsebody with 200.
+     * @throws Exception
      */
     @PostMapping("/images/platform")
-    public ResponseEntity<Resource> handlePlatformUpload(@RequestParam("image") MultipartFile file, @RequestParam("name") String name) {
+    public ResponseEntity<Resource> handlePlatformUpload(@RequestParam("image") MultipartFile file,
+            @RequestParam("name") String name) throws Exception {
         imagePlatformService.store(file, name);
         return ResponseEntity.ok().build();
     }
@@ -262,9 +270,8 @@ public class ImageUploadController {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "api/images/supplies");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
-    
-    /************************************* Plain Images Upload Mapping *******************************************/
 
+    /************************************* Plain Images Upload Mapping *******************************************/
 
     /**
      * DELETE /images/:filename delete image with name :filename.

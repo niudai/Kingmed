@@ -1,14 +1,18 @@
 package io.github.jhipster.sample.domain;
 
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import javax.persistence.*;
-import javax.validation.constraints.*;
-
-import org.springframework.data.elasticsearch.annotations.Document;
-import java.io.Serializable;
 
 /**
  * A Label.
@@ -16,7 +20,6 @@ import java.io.Serializable;
 @Entity
 @Table(name = "link_card")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Document(indexName = "linkcard")
 public class LinkCard implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -1,5 +1,6 @@
 package io.github.jhipster.sample.service.image;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
@@ -18,7 +19,6 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -34,19 +34,15 @@ import io.github.jhipster.sample.config.StorageProperties;
 import io.github.jhipster.sample.domain.ImageApplication;
 import io.github.jhipster.sample.repository.ImageApplicationRepository;
 import io.github.jhipster.sample.web.rest.errors.StorageException;
-import io.github.jhipster.sample.web.rest.errors.StorageFileNotFoundException;
 import io.github.jhipster.sample.web.rest.searchdto.MediaTypeSearchDTO;
 import io.github.jhipster.sample.web.rest.util.MediaUtil;
 import io.github.jhipster.sample.web.rest.util.SearchUtil;
-import io.jsonwebtoken.io.IOException;
 
 /**
  * Service for application files.
  */
 @Service
 public class ImageApplicationService {
-
-    private final Logger log = org.slf4j.LoggerFactory.getLogger(ImageApplicationService.class);
 
     private final Path rootLocation;
 
@@ -55,51 +51,42 @@ public class ImageApplicationService {
     private EntityManager entityManager;
 
     @Autowired
-    public ImageApplicationService(
-        StorageProperties properties,
-        ImageApplicationRepository imageApplicationRepository,
-        EntityManager entityManager) {
+    public ImageApplicationService(StorageProperties properties, ImageApplicationRepository imageApplicationRepository,
+            EntityManager entityManager) {
         this.entityManager = entityManager;
         this.imageApplicationRepository = imageApplicationRepository;
         this.rootLocation = Paths.get(properties.getImageApplicationLocation());
     }
 
     @Transactional
-    public Long store(MultipartFile file, String name) {
+    public Long store(MultipartFile file, String name) throws StorageException {
         ImageApplication image = new ImageApplication();
 
         String filename = StringUtils.cleanPath(file.getOriginalFilename());
         int dot = filename.lastIndexOf('.');
-		String extension = (dot == -1) ? "" : filename.substring(dot + 1);
+        String extension = (dot == -1) ? "" : filename.substring(dot + 1);
         Long generatedId = imageApplicationRepository.save(image).getId();
-        image.setPath(
-            generatedId.toString() + '.' + extension);
+        image.setPath(generatedId.toString() + '.' + extension);
         image.setName(name);
-        try {
-            if (file.isEmpty()) {
-                throw new StorageException("Failed to store empty file " + filename);
-            }
-            if (filename.contains("..")) {
-                // This is a security check
-                throw new StorageException(
-                        "Cannot store file with relative path outside current directory "
-                                + filename);
-            }
-            try (InputStream inputStream = file.getInputStream()) {
-                Files.copy(inputStream, this.rootLocation.resolve(image.getPath()),
-                    StandardCopyOption.REPLACE_EXISTING);
-            } catch (java.io.IOException e) {
-                throw new StorageException("Failed to store file" + filename, e);
-            }
+        if (file.isEmpty()) {
+            throw new StorageException("Failed to store empty file " + filename);
         }
-        catch (IOException e) {
-            throw new StorageException("Failed to store file " + filename, e);
+        if (filename.contains("..")) {
+            // This is a security check
+            throw new StorageException("Cannot store file with relative path outside current directory " + filename);
         }
+        try (InputStream inputStream = file.getInputStream()) {
+            Files.copy(inputStream, this.rootLocation.resolve(image.getPath()), StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            throw new StorageException("Failed to store file" + filename, e);
+        }
+
         return imageApplicationRepository.save(image).getId();
     }
 
     /**
      * Method to rename an application.
+     * 
      * @param id
      * @param name
      */
@@ -124,7 +111,7 @@ public class ImageApplicationService {
      */
     @Transactional
     public List<ImageApplication> loadAll() {
-        return  imageApplicationRepository.findAll();
+        return imageApplicationRepository.findAll();
     }
 
     @Transactional
@@ -139,16 +126,15 @@ public class ImageApplicationService {
         String query = searchDTO.getQuery();
         if (query != null && query.length() > 0) {
             restrictions.clear();
-            restrictions.addAll(SearchUtil.queryKeywordParser(query).stream().map(
-                keyword -> cb.like(image.get("question"), "%" + keyword + "%")
-                ).collect(Collectors.toList()));
-            restrictions.add(cb.like(image.get("question"), "%" + query + "%"));
+            restrictions.addAll(SearchUtil.queryKeywordParser(query).stream()
+                    .map(keyword -> cb.like(image.get("name"), "%" + keyword + "%")).collect(Collectors.toList()));
+            restrictions.add(cb.like(image.get("name"), "%" + query + "%"));
         }
 
-        Predicate queryPredicate = 
-            restrictions.size() > 0 ? 
-                cb.or(restrictions.toArray(new Predicate[restrictions.size()])) : cb.and();
-        
+        Predicate queryPredicate = restrictions.size() > 0
+                ? cb.or(restrictions.toArray(new Predicate[restrictions.size()]))
+                : cb.and();
+
         imageQuery.where(queryPredicate);
 
         // get images satisfied with criterias
@@ -158,46 +144,39 @@ public class ImageApplicationService {
         return allDis;
     }
 
-
     @Transactional
     public void delete(Long id) {
         try {
-            FileSystemUtils.deleteRecursively(
-                rootLocation.resolve(
-                    imageApplicationRepository.findById(id).get().getPath()));
-        } catch (java.io.IOException e) {
+            FileSystemUtils
+                    .deleteRecursively(rootLocation.resolve(imageApplicationRepository.findById(id).get().getPath()));
+        } catch (IOException e) {
             e.printStackTrace();
         }
         imageApplicationRepository.deleteById(id);
     }
 
-    public ResponseEntity<Resource> loadAsResource(String path) {
+    public ResponseEntity<Resource> loadAsResource(String path) throws MalformedURLException {
         ImageApplication application = imageApplicationRepository.findOneByPath(path).get();
-        try {
-            Path file = rootLocation.resolve(application.getPath());
-            Resource resource = new UrlResource(file.toUri());
+        Path file = rootLocation.resolve(application.getPath());
+        Resource resource;
+            resource = new UrlResource(file.toUri());
             if (resource.exists() || resource.isReadable()) {
                 return ResponseEntity.ok().headers(MediaUtil.genearteMediaHeaders(application)).body(resource);
             }
             else {
-                throw new StorageFileNotFoundException(
-                        "Could not read file: " + application.getPath());
-
+                throw new StorageException(
+                        "Could not read file: ");
             }
-        }
-        catch (MalformedURLException e) {
-            throw new StorageFileNotFoundException("Could not read file: " + application.getPath(), e);
-        }
     }
 
     public void deleteAll() {
         FileSystemUtils.deleteRecursively(rootLocation.toFile());
     }
 
-    public void init() {
+    public void init() throws StorageException {
         try {
             Files.createDirectories(rootLocation);
-        } catch (java.io.IOException e) {
+        } catch (IOException e) {
             throw new StorageException("Could not initialize storage", e);
         }
     }

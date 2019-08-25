@@ -8,8 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.springframework.data.elasticsearch.annotations.Document;
-
 import io.github.jhipster.sample.domain.abstractDomain.MediaFile;
 
 /**
@@ -18,7 +16,6 @@ import io.github.jhipster.sample.domain.abstractDomain.MediaFile;
  */
 @Entity
 @Table(name = "image_platform")
-@Document(indexName = "imageplatform")
 public class ImagePlatform implements MediaFile {
 
     @Id

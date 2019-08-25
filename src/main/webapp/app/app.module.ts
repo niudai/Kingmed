@@ -23,6 +23,7 @@ import * as moment from 'moment';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ActiveMenuDirective, ErrorComponent } from './layouts';
 import { NavigationBackComponent } from './shared/navigation/navigation-back.component';
+import { FloatingActionBtnComponent } from './layouts/navbar/floating-action-btn/floating-action-btn.component';
 
 @NgModule({
     imports: [
@@ -43,7 +44,7 @@ import { NavigationBackComponent } from './shared/navigation/navigation-back.com
         JhipsterElasticsearchSampleApplicationAppRoutingModule,
     ],
     declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent
-        , HomeComponent, NavigationBackComponent],
+        , HomeComponent, NavigationBackComponent, FloatingActionBtnComponent],
     providers: [
         {
             provide: HTTP_INTERCEPTORS,

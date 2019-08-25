@@ -4,10 +4,14 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import javax.persistence.*;
-
-import org.hibernate.annotations.ManyToAny;
-import org.springframework.data.elasticsearch.annotations.Document;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 import io.github.jhipster.sample.domain.abstractDomain.MediaFile;
 
@@ -17,7 +21,6 @@ import io.github.jhipster.sample.domain.abstractDomain.MediaFile;
  */
 @Entity
 @Table(name = "image_application")
-@Document(indexName = "imageapplication")
 public class ImageApplication implements MediaFile {
 
     @Id

@@ -5,6 +5,7 @@ import '../content/css/vendor.css';
 // Imports all fontawesome core and solid icons
 
 import { library } from '@fortawesome/fontawesome-svg-core';
+
 import {
     faHandPointRight,
     faPhone,
@@ -12,6 +13,7 @@ import {
     faUser,
     faSort,
     faSortUp,
+    faComments,
     faSortDown,
     faSync,
     faEye,
@@ -60,6 +62,7 @@ import {
     faArrowRight,
     faAngleRight,
     faChevronRight,
+    faChevronUp,
     faAngleDown,
     faRobot,
     faBuilding,
@@ -72,8 +75,10 @@ import {
     faUserCircle,
     faMapSigns
 } from '@fortawesome/free-solid-svg-icons';
-import { literalArr } from '@angular/compiler/src/output/output_ast';
 
+import {
+    faWeixin
+} from '@fortawesome/free-brands-svg-icons'
 // Adds the SVG icon to the library so you can use it in your page
 library.add(faBuilding);
 library.add(faAddressCard);
@@ -83,12 +88,14 @@ library.add(faSort);
 library.add(faSortUp);
 library.add(faSortDown);
 library.add(faSync);
+library.add(faComments);
 library.add(faEye);
 library.add(faBan);
 library.add(faTimes);
 library.add(faArrowLeft);
 library.add(faSave);
 library.add(faPlus);
+library.add(faChevronUp)
 library.add(faPencilAlt);
 library.add(faBars);
 library.add(faHome);

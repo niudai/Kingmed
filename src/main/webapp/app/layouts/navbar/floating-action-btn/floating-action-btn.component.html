@@ -1,0 +1,13 @@
+<div class="toolbar-container show visible">
+  <a title="返回顶部" class="top" href="#">
+    <fa-icon [icon]="'chevron-up'" size="lg" [spin]="true"></fa-icon>
+  </a>
+  <a title="意见反馈" class="comment" href="/feedback"><fa-icon [icon]="'comments'"></fa-icon></a>
+  <a title="扫一扫关注教务处微信公众号" class="wechat" [spin]="true" (c)>
+    <fa-icon [icon]="faWeixin"></fa-icon>
+    <img 
+      src="https://www.teach.ustc.edu.cn/wp-content/themes/teach2015/assets/img/wechat-qrcode-2216b97f36.png"
+      [style.max-width]="[widthOfQRCode + 'px']"
+    >
+  </a>
+</div>

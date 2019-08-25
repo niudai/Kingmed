@@ -1,9 +1,9 @@
 package io.github.jhipster.sample.service;
 
+import static io.github.jhipster.sample.web.rest.util.SearchUtil.queryKeywordParser;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -12,11 +12,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import javax.persistence.metamodel.EntityType;
-import javax.persistence.metamodel.Metamodel;
 import javax.transaction.Transactional;
 
 import com.google.common.collect.Iterables;
@@ -27,6 +24,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
 import io.github.jhipster.sample.domain.DiseaseXiAn;
 import io.github.jhipster.sample.domain.ImageApplication;
 import io.github.jhipster.sample.domain.ImageSupplies;
@@ -39,16 +37,13 @@ import io.github.jhipster.sample.repository.ImageSuppliesRepository;
 import io.github.jhipster.sample.repository.LinkCardRepository;
 import io.github.jhipster.sample.repository.QArobotRepository;
 import io.github.jhipster.sample.repository.UserRepository;
-import io.github.jhipster.sample.search.DiseaseXiAnSearchRepository;
 import io.github.jhipster.sample.web.rest.searchdto.DiseaseXiAnSearchDTO;
-import static io.github.jhipster.sample.web.rest.util.SearchUtil.*;
 /**
  * DiseaseXiAnService
  */
 @Service
 public class DiseaseXiAnService {
     private final DiseaseXiAnRepository diseaseXiAnRepository;
-    private final DiseaseXiAnSearchRepository diseaseXiAnSearchRepository;
     private final QArobotRepository qArobotRepository;
     private final ImageApplicationRepository imageApplicationRepository;
     private final ImageSuppliesRepository imageSuppliesRepository;
@@ -58,7 +53,6 @@ public class DiseaseXiAnService {
 
     @Autowired
     public DiseaseXiAnService(DiseaseXiAnRepository diseaseXiAnRepository
-        , DiseaseXiAnSearchRepository diseaseXiAnSearchRepository
         , QArobotRepository qArobotRepository
         , ImageApplicationRepository imageApplicationRepository
         , ImageSuppliesRepository imageSuppliesRepository
@@ -68,19 +62,12 @@ public class DiseaseXiAnService {
         , EntityManager entityManager) {
         this.entityManager = entityManager;
         this.userRepository = userRepository;
-        this.diseaseXiAnSearchRepository = diseaseXiAnSearchRepository;
         this.imageSuppliesRepository = imageSuppliesRepository;
         this.imageApplicationRepository = imageApplicationRepository;
         this.diseaseXiAnRepository = diseaseXiAnRepository;
         this.qArobotRepository = qArobotRepository;
         this.linkCardRepository = linkCardRepository;
     }
-
-    // @Transactional
-    // public List<DiseaseXiAn> findSimilarDiseaseXiAn(DiseaseXiAn diseaseXiAn, Pageable pageable) {
-    //     diseaseXiAnRepository.f
-    //     return diseaseXiAnSearchRepository.searchSimilar(entity, fields, pageable)
-    // }
 
     /******************** Itself ************************/
 
@@ -92,7 +79,7 @@ public class DiseaseXiAnService {
 
     @Transactional
     public DiseaseXiAn postDiseaseXiAn(DiseaseXiAn disease) {
-        return diseaseXiAnSearchRepository.save(diseaseXiAnRepository.save(disease));
+        return diseaseXiAnRepository.save(disease);
     }
 
     /********************* QArobot ***********/
@@ -107,7 +94,6 @@ public class DiseaseXiAnService {
     public void activateDiseaseXiAn(Long id, Boolean activated) {
         DiseaseXiAn diseaseXiAn = diseaseXiAnRepository.findById(id).get();
         diseaseXiAn.setActivated(activated);
-        diseaseXiAnSearchRepository.save(diseaseXiAn);
     }
 
     @Transactional

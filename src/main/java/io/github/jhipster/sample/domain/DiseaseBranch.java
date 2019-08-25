@@ -9,7 +9,6 @@ import javax.validation.constraints.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -24,7 +23,6 @@ import java.util.Set;
 @Entity
 @Table(name = "disease_branch")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Document(indexName = "diseasebranch")
 public class DiseaseBranch implements Serializable {
 
     private static final long serialVersionUID = 1L;

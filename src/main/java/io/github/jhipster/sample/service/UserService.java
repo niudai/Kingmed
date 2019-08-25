@@ -1,5 +1,33 @@
 package io.github.jhipster.sample.service;
 
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.cache.CacheManager;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import io.github.jhipster.sample.config.Constants;
 import io.github.jhipster.sample.domain.Authority;
 import io.github.jhipster.sample.domain.DiseaseXiAn;
@@ -7,28 +35,15 @@ import io.github.jhipster.sample.domain.User;
 import io.github.jhipster.sample.repository.AuthorityRepository;
 import io.github.jhipster.sample.repository.DiseaseXiAnRepository;
 import io.github.jhipster.sample.repository.UserRepository;
-import io.github.jhipster.sample.search.UserSearchRepository;
 import io.github.jhipster.sample.security.AuthoritiesConstants;
 import io.github.jhipster.sample.security.SecurityUtils;
 import io.github.jhipster.sample.service.dto.UserDTO;
 import io.github.jhipster.sample.service.util.RandomUtil;
-import io.github.jhipster.sample.web.rest.errors.*;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.cache.CacheManager;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
-import java.util.*;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
+import io.github.jhipster.sample.web.rest.errors.EmailAlreadyUsedException;
+import io.github.jhipster.sample.web.rest.errors.InvalidPasswordException;
+import io.github.jhipster.sample.web.rest.errors.LoginAlreadyUsedException;
+import io.github.jhipster.sample.web.rest.searchdto.UserSearchDTO;
+import io.github.jhipster.sample.web.rest.util.SearchUtil;
 
 /**
  * Service class for managing users.
@@ -45,27 +60,22 @@ public class UserService {
 
     private final PasswordEncoder passwordEncoder;
 
-    private final UserSearchRepository userSearchRepository;
-
     private final AuthorityRepository authorityRepository;
 
     private final CacheManager cacheManager;
 
     private final DiseaseXiAnService diseaseXiAnService;
 
-    public UserService(
-        UserRepository userRepository,
-        PasswordEncoder passwordEncoder,
-        AuthorityRepository authorityRepository,
-        CacheManager cacheManager,
-        UserSearchRepository userSearchRepository,
-        DiseaseXiAnRepository diseaseXiAnRepository,
-        DiseaseXiAnService diseaseXiAnService
-        ) {
+    private final EntityManager entityManager;
+
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder,
+            AuthorityRepository authorityRepository, CacheManager cacheManager,
+            DiseaseXiAnRepository diseaseXiAnRepository,
+            DiseaseXiAnService diseaseXiAnService, EntityManager entityManager) {
+        this.entityManager = entityManager;
         this.diseaseXiAnRepository = diseaseXiAnRepository;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
-        this.userSearchRepository = userSearchRepository;
         this.authorityRepository = authorityRepository;
         this.cacheManager = cacheManager;
         this.diseaseXiAnService = diseaseXiAnService;
@@ -73,40 +83,35 @@ public class UserService {
 
     public Optional<User> activateRegistration(String key) {
         log.debug("Activating user for activation key {}", key);
-        return userRepository.findOneByActivationKey(key)
-            .map(user -> {
-                // activate given user for the registration key.
-                user.setActivated(true);
-                user.setActivationKey(null);
-                userSearchRepository.save(user);
-                this.clearUserCaches(user);
-                log.debug("Activated user: {}", user);
-                return user;
-            });
+        return userRepository.findOneByActivationKey(key).map(user -> {
+            // activate given user for the registration key.
+            user.setActivated(true);
+            user.setActivationKey(null);
+            this.clearUserCaches(user);
+            log.debug("Activated user: {}", user);
+            return user;
+        });
     }
 
     public Optional<User> completePasswordReset(String newPassword, String key) {
         log.debug("Reset user password for reset key {}", key);
         return userRepository.findOneByResetKey(key)
-            .filter(user -> user.getResetDate().isAfter(Instant.now().minusSeconds(86400)))
-            .map(user -> {
-                user.setPassword(passwordEncoder.encode(newPassword));
-                user.setResetKey(null);
-                user.setResetDate(null);
-                this.clearUserCaches(user);
-                return user;
-            });
+                .filter(user -> user.getResetDate().isAfter(Instant.now().minusSeconds(86400))).map(user -> {
+                    user.setPassword(passwordEncoder.encode(newPassword));
+                    user.setResetKey(null);
+                    user.setResetDate(null);
+                    this.clearUserCaches(user);
+                    return user;
+                });
     }
 
     public Optional<User> requestPasswordReset(String mail) {
-        return userRepository.findOneByEmailIgnoreCase(mail)
-            .filter(User::getActivated)
-            .map(user -> {
-                user.setResetKey(RandomUtil.generateResetKey());
-                user.setResetDate(Instant.now());
-                this.clearUserCaches(user);
-                return user;
-            });
+        return userRepository.findOneByEmailIgnoreCase(mail).filter(User::getActivated).map(user -> {
+            user.setResetKey(RandomUtil.generateResetKey());
+            user.setResetDate(Instant.now());
+            this.clearUserCaches(user);
+            return user;
+        });
     }
 
     public User registerUser(UserDTO userDTO, String password) {
@@ -133,17 +138,17 @@ public class UserService {
             authorityRepository.findById(AuthoritiesConstants.USER).ifPresent(authorities::add);
             newUser.setAuthorities(authorities);
         } else {
-            newUser.setAuthorities(userDTO.getAuthorities().stream().map(a -> authorityRepository.findById(a).get()).collect(Collectors.toSet()));
+            newUser.setAuthorities(userDTO.getAuthorities().stream().map(a -> authorityRepository.findById(a).get())
+                    .collect(Collectors.toSet()));
         }
         userRepository.save(newUser);
-        userSearchRepository.save(newUser);
         this.clearUserCaches(newUser);
         log.debug("Created Information for User: {}", newUser);
         return newUser;
     }
 
     public Page<DiseaseXiAn> getDiseases(String login, Pageable pageable) {
-       return diseaseXiAnRepository.findAllByUsersLogin(login, pageable);
+        return diseaseXiAnRepository.findAllByUsersLogin(login, pageable);
     }
 
     @Transactional
@@ -159,13 +164,12 @@ public class UserService {
 
     @Transactional
     public void deleteDiseases(String login, Long diseaseXiAnId) {
-        User user = userRepository.findOneByLogin(login).get();
         diseaseXiAnRepository.deleteById(diseaseXiAnId);
     }
 
-    private boolean removeNonActivatedUser(User existingUser){
+    private boolean removeNonActivatedUser(User existingUser) {
         if (existingUser.getActivated()) {
-             return false;
+            return false;
         }
         userRepository.delete(existingUser);
         userRepository.flush();
@@ -191,42 +195,36 @@ public class UserService {
         user.setResetDate(Instant.now());
         user.setActivated(true);
         if (userDTO.getAuthorities() != null) {
-            Set<Authority> authorities = userDTO.getAuthorities().stream()
-                .map(authorityRepository::findById)
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .collect(Collectors.toSet());
+            Set<Authority> authorities = userDTO.getAuthorities().stream().map(authorityRepository::findById)
+                    .filter(Optional::isPresent).map(Optional::get).collect(Collectors.toSet());
             user.setAuthorities(authorities);
         }
         userRepository.save(user);
-        userSearchRepository.save(user);
         this.clearUserCaches(user);
         log.debug("Created Information for User: {}", user);
         return user;
     }
 
     /**
-     * Update basic information (first name, last name, email, language) for the current user.
+     * Update basic information (first name, last name, email, language) for the
+     * current user.
      *
      * @param firstName first name of user
-     * @param lastName last name of user
-     * @param email email id of user
-     * @param langKey language key
-     * @param imageUrl image URL of user
+     * @param lastName  last name of user
+     * @param email     email id of user
+     * @param langKey   language key
+     * @param imageUrl  image URL of user
      */
     public void updateUser(String firstName, String lastName, String email, String langKey, String imageUrl) {
-        SecurityUtils.getCurrentUserLogin()
-            .flatMap(userRepository::findOneByLogin)
-            .ifPresent(user -> {
-                user.setFirstName(firstName);
-                user.setLastName(lastName);
-                user.setEmail(email.toLowerCase());
-                user.setLangKey(langKey);
-                user.setImageUrl(imageUrl);
-                userSearchRepository.save(user);
-                this.clearUserCaches(user);
-                log.debug("Changed Information for User: {}", user);
-            });
+        SecurityUtils.getCurrentUserLogin().flatMap(userRepository::findOneByLogin).ifPresent(user -> {
+            user.setFirstName(firstName);
+            user.setLastName(lastName);
+            user.setEmail(email.toLowerCase());
+            user.setLangKey(langKey);
+            user.setImageUrl(imageUrl);
+            this.clearUserCaches(user);
+            log.debug("Changed Information for User: {}", user);
+        });
     }
 
     /**
@@ -236,50 +234,39 @@ public class UserService {
      * @return updated user
      */
     public Optional<UserDTO> updateUser(UserDTO userDTO) {
-        return Optional.of(userRepository
-            .findById(userDTO.getId()))
-            .filter(Optional::isPresent)
-            .map(Optional::get)
-            .map(user -> {
-                this.clearUserCaches(user);
-                user.update(userDTO);
-                Set<Authority> managedAuthorities = user.getAuthorities();
-                managedAuthorities.clear();
-                userDTO.getAuthorities().stream()
-                    .map(authorityRepository::findById)
-                    .filter(Optional::isPresent)
-                    .map(Optional::get)
-                    .forEach(managedAuthorities::add);
-                userSearchRepository.save(user);
-                this.clearUserCaches(user);
-                log.debug("Changed Information for User: {}", user);
-                return user;
-            })
-            .map(UserDTO::new);
+        return Optional.of(userRepository.findById(userDTO.getId())).filter(Optional::isPresent).map(Optional::get)
+                .map(user -> {
+                    this.clearUserCaches(user);
+                    user.update(userDTO);
+                    Set<Authority> managedAuthorities = user.getAuthorities();
+                    managedAuthorities.clear();
+                    userDTO.getAuthorities().stream().map(authorityRepository::findById).filter(Optional::isPresent)
+                            .map(Optional::get).forEach(managedAuthorities::add);
+                    this.clearUserCaches(user);
+                    log.debug("Changed Information for User: {}", user);
+                    return user;
+                }).map(UserDTO::new);
     }
 
     public void deleteUser(String login) {
         userRepository.findOneByLogin(login).ifPresent(user -> {
             userRepository.delete(user);
-            userSearchRepository.delete(user);
             this.clearUserCaches(user);
             log.debug("Deleted User: {}", user);
         });
     }
 
     public void changePassword(String currentClearTextPassword, String newPassword) {
-        SecurityUtils.getCurrentUserLogin()
-            .flatMap(userRepository::findOneByLogin)
-            .ifPresent(user -> {
-                String currentEncryptedPassword = user.getPassword();
-                if (!passwordEncoder.matches(currentClearTextPassword, currentEncryptedPassword)) {
-                    throw new InvalidPasswordException();
-                }
-                String encryptedPassword = passwordEncoder.encode(newPassword);
-                user.setPassword(encryptedPassword);
-                this.clearUserCaches(user);
-                log.debug("Changed password for User: {}", user);
-            });
+        SecurityUtils.getCurrentUserLogin().flatMap(userRepository::findOneByLogin).ifPresent(user -> {
+            String currentEncryptedPassword = user.getPassword();
+            if (!passwordEncoder.matches(currentClearTextPassword, currentEncryptedPassword)) {
+                throw new InvalidPasswordException();
+            }
+            String encryptedPassword = passwordEncoder.encode(newPassword);
+            user.setPassword(encryptedPassword);
+            this.clearUserCaches(user);
+            log.debug("Changed password for User: {}", user);
+        });
     }
 
     @Transactional(readOnly = true)
@@ -309,14 +296,68 @@ public class UserService {
      */
     @Scheduled(cron = "0 0 1 * * ?")
     public void removeNotActivatedUsers() {
-        userRepository
-            .findAllByActivatedIsFalseAndCreatedDateBefore(Instant.now().minus(3, ChronoUnit.DAYS))
-            .forEach(user -> {
-                log.debug("Deleting not activated user {}", user.getLogin());
-                userRepository.delete(user);
-                userSearchRepository.delete(user);
-                this.clearUserCaches(user);
-            });
+        userRepository.findAllByActivatedIsFalseAndCreatedDateBefore(Instant.now().minus(3, ChronoUnit.DAYS))
+                .forEach(user -> {
+                    log.debug("Deleting not activated user {}", user.getLogin());
+                    userRepository.delete(user);
+                    this.clearUserCaches(user);
+                });
+    }
+
+    public Page<User> search(UserSearchDTO searchDTO, Pageable pageable) {
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<User> imageQuery = cb.createQuery(User.class);
+        CriteriaQuery<Long> countQuery = cb.createQuery(Long.class);
+        Root<User> image = imageQuery.from(User.class);
+        Root<User> count = countQuery.from(User.class);
+
+        List<Predicate> restrictions = new ArrayList<Predicate>();
+        imageQuery.select(image);
+        countQuery.select(cb.count(count));
+
+        String email = searchDTO.getEmail();
+        String login = searchDTO.getLogin();
+        String name = searchDTO.getFirstName();
+
+        if (email != null && email.length() > 0) {
+            restrictions.clear();
+            restrictions.addAll(SearchUtil.queryKeywordParser(email).stream()
+                    .map(keyword -> cb.like(image.get("email"), "%" + keyword + "%")).collect(Collectors.toList()));
+            restrictions.add(cb.like(image.get("email"), "%" + email + "%"));
+        }
+
+        if (login != null && login.length() > 0) {
+            restrictions.clear();
+            restrictions.addAll(SearchUtil.queryKeywordParser(login).stream()
+                    .map(keyword -> cb.like(image.get("login"), "%" + keyword + "%")).collect(Collectors.toList()));
+            restrictions.add(cb.like(image.get("login"), "%" + login + "%"));
+        }
+
+        if (name != null && name.length() > 0) {
+            restrictions.clear();
+            restrictions.addAll(SearchUtil.queryKeywordParser(name).stream()
+                    .map(keyword -> cb.like(image.get("firstName"), "%" + keyword + "%")).collect(Collectors.toList()));
+            restrictions.add(cb.like(image.get("firstName"), "%" + name + "%"));
+        }
+
+        Predicate queryPredicate = cb.and(restrictions.toArray(new Predicate[restrictions.size()]));
+
+        imageQuery.where(queryPredicate);
+
+        // get images satisfied with criterias
+        TypedQuery<User> typedDiseaseQuery = entityManager.createQuery(imageQuery);
+        typedDiseaseQuery.setFirstResult((int) pageable.getOffset());
+        typedDiseaseQuery.setMaxResults((int) pageable.getPageSize());
+
+        // get totalItems number with criterias
+        TypedQuery<Long> typedCountQuery = entityManager.createQuery(countQuery);
+        Long totalItems = typedCountQuery.getSingleResult();
+
+        List<User> allDis = typedDiseaseQuery.getResultList();
+
+        Page<User> resultPage = new PageImpl<>(allDis, pageable, totalItems);
+
+        return resultPage;
     }
 
     /**

@@ -1,5 +1,29 @@
 package io.github.jhipster.sample.web.rest;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
+
+import javax.validation.Valid;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import io.github.jhipster.sample.domain.DiseaseXiAn;
 import io.github.jhipster.sample.domain.ImageApplication;
 import io.github.jhipster.sample.domain.ImageSupplies;
@@ -9,8 +33,6 @@ import io.github.jhipster.sample.domain.QArobot;
 import io.github.jhipster.sample.domain.User;
 import io.github.jhipster.sample.repository.DiseaseXiAnRepository;
 import io.github.jhipster.sample.repository.PriceXiAnRepository;
-import io.github.jhipster.sample.search.DiseaseXiAnSearchRepository;
-import io.github.jhipster.sample.service.DiseaseMapService;
 import io.github.jhipster.sample.service.DiseaseXiAnService;
 import io.github.jhipster.sample.service.ProjectNotificationService;
 import io.github.jhipster.sample.service.dto.ProjectNotificatonDTO;
@@ -19,25 +41,6 @@ import io.github.jhipster.sample.web.rest.searchdto.DiseaseXiAnSearchDTO;
 import io.github.jhipster.sample.web.rest.util.HeaderUtil;
 import io.github.jhipster.sample.web.rest.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing DiseaseXiAn.
@@ -52,7 +55,6 @@ public class DiseaseXiAnResource {
 
     private final DiseaseXiAnRepository diseaseXiAnRepository;
 
-    private final DiseaseXiAnSearchRepository diseaseXiAnSearchRepository;
 
     private final PriceXiAnRepository priceRepository;
 
@@ -61,14 +63,13 @@ public class DiseaseXiAnResource {
     private final ProjectNotificationService notificationService;
 
 
-    public DiseaseXiAnResource(DiseaseXiAnRepository diseaseXiAnRepository
-        , DiseaseXiAnSearchRepository diseaseXiAnSearchRepository
+    public DiseaseXiAnResource(
+        DiseaseXiAnRepository diseaseXiAnRepository
         , PriceXiAnRepository priceXiAnRepository
         , DiseaseXiAnService diseaseXiAnService
         , ProjectNotificationService notificationService) {
         this.notificationService = notificationService;
         this.diseaseXiAnRepository = diseaseXiAnRepository;
-        this.diseaseXiAnSearchRepository = diseaseXiAnSearchRepository;
         this.priceRepository = priceXiAnRepository;
         this.diseaseXiAnService = diseaseXiAnService;
     }
@@ -128,7 +129,6 @@ public class DiseaseXiAnResource {
         if (ifGenerate) {
             notificationService.generateNotification(result, dto);
         }
-        diseaseXiAnSearchRepository.save(result);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, diseaseXiAn.getId().toString()))
             .body(result);
@@ -349,17 +349,6 @@ public class DiseaseXiAnResource {
         return ResponseUtil.wrapOrNotFound(diseaseXiAn);
     }
 
-    /**
-     * Request /disease-xi-ans-reindex : reindex the diseaseGuangDong
-     *
-     */
-    @GetMapping("/disease-xi-ans-reindex")
-    public void reindexDiseaseXiAn() {
-        log.debug("REST request to reindex DiseaseXiAn");
-        diseaseXiAnSearchRepository.deleteAll();
-        List<DiseaseXiAn> diseaseXiAns = diseaseXiAnRepository.findAll();
-        diseaseXiAnSearchRepository.saveAll(diseaseXiAns);
-    }
 
     /**
      * Request /disease-xi-ans/getPrice/{id} : get price with a specified id.
@@ -386,7 +375,6 @@ public class DiseaseXiAnResource {
         DiseaseXiAn disease = diseaseXiAnRepository.findById(id).get();
         disease.getPrices().add(price);
         diseaseXiAnRepository.save(disease);
-        diseaseXiAnSearchRepository.save(disease);
         return ResponseEntity.ok().build();
     }
 
@@ -426,24 +414,7 @@ public class DiseaseXiAnResource {
     public ResponseEntity<Void> deleteDiseaseXiAn(@PathVariable Long id) {
         log.debug("REST request to delete DiseaseXiAn : {}", id);
         diseaseXiAnRepository.deleteById(id);
-        diseaseXiAnSearchRepository.deleteById(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
-    }
-
-    /**
-     * SEARCH  /_search/disease-xi-ans?query=:query : search for the diseaseXiAn corresponding
-     * to the query.
-     *
-     * @param query the query of the diseaseXiAn search
-     * @param pageable the pagination information
-     * @return the result of the search
-     */
-    @GetMapping("/_search/disease-xi-ans")
-    public ResponseEntity<List<DiseaseXiAn>> searchDiseaseXiAns(@RequestParam String query, Pageable pageable) {
-        log.debug("REST request to search for a page of DiseaseXiAns for query {}", query);
-        Page<DiseaseXiAn> page = diseaseXiAnSearchRepository.search(queryStringQuery(query), pageable);
-        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/disease-xi-ans");
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
     /******************************* One To Many relationship between disease xi an and linkCard  */

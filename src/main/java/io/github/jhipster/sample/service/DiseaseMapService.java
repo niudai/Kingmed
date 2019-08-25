@@ -1,43 +1,37 @@
 package io.github.jhipster.sample.service;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
-import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 
-import com.google.common.collect.Lists;
-
-import org.elasticsearch.index.query.QueryBuilder;
-import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.index.query.QueryStringQueryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import io.github.jhipster.sample.domain.DiseaseBranch;
 import io.github.jhipster.sample.domain.DiseaseMap;
 import io.github.jhipster.sample.domain.DiseaseMapIndexDTO;
 import io.github.jhipster.sample.domain.DiseaseXiAn;
-import io.github.jhipster.sample.domain.ImageApplication;
-import io.github.jhipster.sample.domain.ImageSupplies;
 import io.github.jhipster.sample.domain.LinkCard;
 import io.github.jhipster.sample.domain.QArobot;
 import io.github.jhipster.sample.repository.DiseaseBranchRepository;
 import io.github.jhipster.sample.repository.DiseaseMapRepository;
 import io.github.jhipster.sample.repository.DiseaseXiAnRepository;
-import io.github.jhipster.sample.repository.ImageApplicationRepository;
-import io.github.jhipster.sample.repository.ImageSuppliesRepository;
 import io.github.jhipster.sample.repository.LinkCardRepository;
 import io.github.jhipster.sample.repository.QArobotRepository;
-import io.github.jhipster.sample.search.DiseaseBranchSearchRepository;
-import io.github.jhipster.sample.search.DiseaseMapIndexDTOSearchRepository;
-import io.github.jhipster.sample.search.DiseaseMapSearchRepository;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import io.github.jhipster.sample.web.rest.searchdto.DiseaseMapSearchDTO;
+import io.github.jhipster.sample.web.rest.util.SearchUtil;
 
 /**
  * DiseaseMapService used to associate disease map with diseasexian and qarobot.
@@ -53,27 +47,22 @@ public class DiseaseMapService {
     private final QArobotRepository qArobotRepository;
     private final DiseaseMapRepository diseaseMapRepository;
     private final DiseaseBranchRepository diseaseBranchRepository;
-    private final DiseaseBranchSearchRepository diseaseBranchSearchRepository;
-    private final DiseaseMapSearchRepository diseaseMapSearchRepository;
-    private final DiseaseMapIndexDTOSearchRepository diseaseMapIndexDTOSearchRepository;
-    private final EntityManagerFactory entityManagerFactory;
     private final LinkCardRepository linkCardRepository;
-
+    private final EntityManager entityManager;
     @Autowired
-    public DiseaseMapService(DiseaseMapRepository diseaseMapRepository, DiseaseBranchRepository diseaseBranchRepository,
-            DiseaseXiAnRepository diseaseXiAnRepository, DiseaseBranchSearchRepository diseaseBranchSearchRepository,
-            DiseaseMapIndexDTOSearchRepository diseaseMapIndexDTOSearchRepository,
-            DiseaseMapSearchRepository diseaseMapSearchRepository, QArobotRepository qArobotRepository,
-            EntityManagerFactory entityManagerFactory, LinkCardRepository linkCardRepository) {
-        this.diseaseMapIndexDTOSearchRepository = diseaseMapIndexDTOSearchRepository;
-        this.diseaseMapSearchRepository = diseaseMapSearchRepository;
-        this.diseaseBranchSearchRepository = diseaseBranchSearchRepository;
+    public DiseaseMapService(
+        DiseaseMapRepository diseaseMapRepository,
+        DiseaseBranchRepository diseaseBranchRepository,
+        DiseaseXiAnRepository diseaseXiAnRepository,
+        QArobotRepository qArobotRepository,
+        LinkCardRepository linkCardRepository,
+        EntityManager entityManager) {
         this.diseaseXiAnRepository = diseaseXiAnRepository;
         this.diseaseMapRepository = diseaseMapRepository;
         this.qArobotRepository = qArobotRepository;
         this.diseaseBranchRepository = diseaseBranchRepository;
-        this.entityManagerFactory = entityManagerFactory;
         this.linkCardRepository = linkCardRepository;
+        this.entityManager = entityManager;
     }
 
     /**
@@ -85,7 +74,6 @@ public class DiseaseMapService {
     @Transactional
     public void attachDiseaseBranch(DiseaseBranch newDiseaseBranch) {
         diseaseBranchRepository.save(newDiseaseBranch);
-        diseaseBranchSearchRepository.save(newDiseaseBranch);
     }
 
     /**
@@ -191,11 +179,7 @@ public class DiseaseMapService {
      */
     @Transactional
     public void deattachDiseaseBranch(Long diseaseBranchId) {
-        DiseaseBranch diseaseBranch = diseaseBranchRepository.findById(diseaseBranchId).get();
-        diseaseBranchSearchRepository.deleteById(diseaseBranchId);
-        for (DiseaseMap map : diseaseBranch.getDiseaseMaps()) {
-            diseaseMapIndexDTOSearchRepository.deleteById(map.getId());
-        }
+        diseaseBranchRepository.deleteById(diseaseBranchId);
     }
 
     /**
@@ -208,7 +192,6 @@ public class DiseaseMapService {
     public void attachDiseaseMapToDiseaseBranch(DiseaseMap diseaseMap, Long diseaseBranchId) {
         DiseaseMap map = diseaseMapRepository.save(diseaseMap);
         diseaseBranchRepository.findById(diseaseBranchId).get().getDiseaseMaps().add(map);
-        diseaseMapIndexDTOSearchRepository.save(diseaseMapIndexConverter(map));
     }
 
     /**
@@ -218,8 +201,7 @@ public class DiseaseMapService {
      */
     @Transactional
     public void modifyDiseaseMap(DiseaseMap diseaseMap) {
-        DiseaseMap newMap = modifyDiseaseMap(diseaseMapRepository.findById(diseaseMap.getId()).get(), diseaseMap);
-        diseaseMapIndexDTOSearchRepository.save(diseaseMapIndexConverter(newMap));
+        modifyDiseaseMap(diseaseMapRepository.findById(diseaseMap.getId()).get(), diseaseMap);
     }
 
     /**
@@ -229,9 +211,8 @@ public class DiseaseMapService {
      */
     @Transactional
     public void modifyDiseaseBranch(DiseaseBranch diseaseBranch) {
-        DiseaseBranch newBranch = modifyDiseaseBranch(diseaseBranchRepository.findById(diseaseBranch.getId()).get(),
+        modifyDiseaseBranch(diseaseBranchRepository.findById(diseaseBranch.getId()).get(),
                 diseaseBranch);
-        diseaseBranchSearchRepository.save(newBranch);
     }
 
     /**
@@ -243,7 +224,6 @@ public class DiseaseMapService {
     @Transactional
     public void deleteDiseaseMap(Long diseaseMapId) {
         diseaseMapRepository.deleteById(diseaseMapId);
-        diseaseMapIndexDTOSearchRepository.deleteById(diseaseMapId);
     }
 
     /**
@@ -308,7 +288,6 @@ public class DiseaseMapService {
     public void attachDiseaseMapToDiseaseMap(DiseaseMap newDiseaseMap, Long diseaseMapId) {
         DiseaseMap newMap = diseaseMapRepository.save(newDiseaseMap);
         diseaseMapRepository.findById(diseaseMapId).get().getDiseaseMaps().add(newMap);
-        diseaseMapIndexDTOSearchRepository.save(diseaseMapIndexConverter(newMap));
     }
 
     /**
@@ -368,36 +347,89 @@ public class DiseaseMapService {
     }
 
     @Transactional
-    public List<DiseaseBranch> searchDiseaseBranch(String query, Pageable pageable) {
-        // Page<DiseaseBranch> page =
-        // diseaseBranchSearchRepository.search(QueryBuilders.queryStringQuery(query),
-        // pageable);
-        List<DiseaseBranch> page = Lists
-                .newArrayList(diseaseBranchSearchRepository.search(QueryBuilders.queryStringQuery(query)));
-        return page;
-    }
+    public Page<DiseaseBranch> searchDiseaseBranch(DiseaseMapSearchDTO searchDTO, Pageable pageable) {
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<DiseaseBranch> qarobotQuery = cb.createQuery(DiseaseBranch.class);
+        CriteriaQuery<Long> countQuery = cb.createQuery(Long.class);
+        Root<DiseaseBranch> qarobot = qarobotQuery.from(DiseaseBranch.class);
+        Root<DiseaseBranch> count = countQuery.from(DiseaseBranch.class);
 
-    @Transactional
-    public Page<DiseaseMapIndexDTO> searchDiseaseMap(String query, Pageable pageable) {
-        // Page<DiseaseBranch> page =
-        // diseaseBranchSearchRepository.search(QueryBuilders.queryStringQuery(query),
-        // pageable);
-        Page<DiseaseMapIndexDTO> page = diseaseMapIndexDTOSearchRepository.search(QueryBuilders.queryStringQuery(query),
-                pageable);
-        return page;
-    }
+        List<Predicate> restrictions = new ArrayList<Predicate>();
+        qarobotQuery.select(qarobot);
+        countQuery.select(cb.count(count));
 
-    @Transactional
-    public void reindexDiseaseBranch() {
-        diseaseBranchSearchRepository.deleteAll();
-        diseaseBranchSearchRepository.saveAll(diseaseBranchRepository.findAll());
-    }
-
-    public void reindexDiseaseMap() {
-        List<DiseaseMap> diseaseMaps = diseaseMapRepository.findAll();
-        for (DiseaseMap diseaseMap : diseaseMaps) {
-            diseaseMapIndexDTOSearchRepository.save(diseaseMapIndexConverter(diseaseMap));
+        String query = searchDTO.getName();
+        if (query != null && query.length() > 0) {
+            restrictions.clear();
+            restrictions.addAll(SearchUtil.queryKeywordParser(query).stream().map(
+                keyword -> cb.like(qarobot.get("name"), "%" + keyword + "%")
+                ).collect(Collectors.toList()));
+            restrictions.add(cb.like(qarobot.get("name"), "%" + query + "%"));
         }
+
+        Predicate queryPredicate = 
+            restrictions.size() > 0 ? 
+                cb.or(restrictions.toArray(new Predicate[restrictions.size()])) : cb.and();
+        
+        qarobotQuery.where(queryPredicate);
+
+        // get qarobots satisfied with criterias
+        TypedQuery<DiseaseBranch> typedDiseaseQuery = entityManager.createQuery(qarobotQuery);
+        // typedDiseaseQuery.setFirstResult((int)pageable.getOffset());
+        // typedDiseaseQuery.setMaxResults((int)pageable.getPageSize());
+        List<DiseaseBranch> allDis = typedDiseaseQuery.getResultList();
+
+        // get totalItems number with criterias
+        TypedQuery<Long> typedCountQuery = entityManager.createQuery(countQuery);
+        Long totalItems = typedCountQuery.getSingleResult();
+
+        // create a page in terms of the count and content
+        Page<DiseaseBranch> resultPage = new PageImpl<>(allDis, pageable, totalItems);
+
+        return resultPage;
+    }
+
+    @Transactional
+    public Page<DiseaseMapIndexDTO> searchDiseaseMap(DiseaseMapSearchDTO searchDTO, Pageable pageable) {
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<DiseaseMap> qarobotQuery = cb.createQuery(DiseaseMap.class);
+        CriteriaQuery<Long> countQuery = cb.createQuery(Long.class);
+        Root<DiseaseMap> qarobot = qarobotQuery.from(DiseaseMap.class);
+        Root<DiseaseMap> count = countQuery.from(DiseaseMap.class);
+
+        List<Predicate> restrictions = new ArrayList<Predicate>();
+        qarobotQuery.select(qarobot);
+        countQuery.select(cb.count(count));
+
+        String query = searchDTO.getName();
+        if (query != null && query.length() > 0) {
+            restrictions.clear();
+            restrictions.addAll(SearchUtil.queryKeywordParser(query).stream().map(
+                keyword -> cb.like(qarobot.get("name"), "%" + keyword + "%")
+                ).collect(Collectors.toList()));
+            restrictions.add(cb.like(qarobot.get("name"), "%" + query + "%"));
+        }
+
+        Predicate queryPredicate = 
+            restrictions.size() > 0 ? 
+                cb.or(restrictions.toArray(new Predicate[restrictions.size()])) : cb.and();
+        
+        qarobotQuery.where(queryPredicate);
+
+        // get qarobots satisfied with criterias
+        TypedQuery<DiseaseMap> typedDiseaseQuery = entityManager.createQuery(qarobotQuery);
+        typedDiseaseQuery.setFirstResult((int)pageable.getOffset());
+        typedDiseaseQuery.setMaxResults((int)pageable.getPageSize());
+        List<DiseaseMap> allDis = typedDiseaseQuery.getResultList();
+
+        // get totalItems number with criterias
+        TypedQuery<Long> typedCountQuery = entityManager.createQuery(countQuery);
+        Long totalItems = typedCountQuery.getSingleResult();
+
+        // create a page in terms of the count and content
+        Page<DiseaseMapIndexDTO> resultPage = new PageImpl<DiseaseMapIndexDTO>(allDis.stream().map(any -> any.toIndexDTO()).collect(Collectors.toList()), pageable, totalItems);
+
+        return resultPage;
     }
 
     private DiseaseMap modifyDiseaseMap(DiseaseMap oldMap, DiseaseMap newMap) {

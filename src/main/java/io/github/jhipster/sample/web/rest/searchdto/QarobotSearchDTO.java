@@ -1,7 +1,5 @@
 package io.github.jhipster.sample.web.rest.searchdto;
 
-import org.springframework.data.domain.Pageable;
-
 /**
  * QarobotSearchDTO
  */

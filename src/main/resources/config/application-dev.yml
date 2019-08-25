@@ -13,8 +13,8 @@
 # http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 # ===================================================================
 
-debug: true
-trace: true
+# debug: true
+# trace: true
 
 logging:
     level:
@@ -26,12 +26,7 @@ logging:
     file: dev1.log
 
 spring:
-    elasticsearch:
-        jest:
-            connection-timeout: 100000000s
-            read-timeout: 1000s
-            multi-threaded: false
-
+        
     servlet:
         multipart:
             file-size-threshold: 100MB
@@ -79,6 +74,8 @@ spring:
             hibernate.cache.region.factory_class: io.github.jhipster.config.jcache.BeanClassLoaderAwareJCacheRegionFactory
         open-in-view: true
     data:
+        jest:
+            read-timeout: 10000
         elasticsearch:
             # cluster-nodes: localhost:9300
             # cluster-name: docker-cluster

@@ -1,0 +1,32 @@
+
+.toolbar-container {
+    /* width: 70px; */
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: transparent;
+    box-shadow: 0 1px 5px rgba(0,0,0,.3);
+}
+
+.toolbar-container {
+    z-index: 2;
+}
+
+fa-icon {
+    width: 60px;
+    color: black;
+}
+
+
+a {
+    margin: 0 auto;
+    width: 60px;
+    height: 50px;
+    display: block;
+    color: #115d8a;
+    text-decoration: none;
+    -webkit-transition: all .2s ease;
+    transition: all .2s ease;
+}
+
+

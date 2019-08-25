@@ -1,22 +1,12 @@
 package io.github.jhipster.sample.web.rest;
 
-import io.github.jhipster.sample.config.Constants;
-import io.github.jhipster.sample.domain.DiseaseXiAn;
-import io.github.jhipster.sample.domain.User;
-import io.github.jhipster.sample.repository.UserRepository;
-import io.github.jhipster.sample.search.UserSearchRepository;
-import io.github.jhipster.sample.security.AuthoritiesConstants;
-import io.github.jhipster.sample.service.MailService;
-import io.github.jhipster.sample.service.UserService;
-import io.github.jhipster.sample.service.dto.UserDTO;
-import io.github.jhipster.sample.web.rest.errors.BadRequestAlertException;
-import io.github.jhipster.sample.web.rest.errors.EmailAlreadyUsedException;
-import io.github.jhipster.sample.web.rest.errors.LoginAlreadyUsedException;
-import io.github.jhipster.sample.web.rest.util.HeaderUtil;
-import io.github.jhipster.sample.web.rest.util.PaginationUtil;
-import io.github.jhipster.web.util.ResponseUtil;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Optional;
 
-import org.elasticsearch.index.search.MultiMatchQuery.QueryBuilder;
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -25,16 +15,30 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import io.github.jhipster.sample.config.Constants;
+import io.github.jhipster.sample.domain.DiseaseXiAn;
+import io.github.jhipster.sample.domain.User;
+import io.github.jhipster.sample.repository.UserRepository;
+import io.github.jhipster.sample.security.AuthoritiesConstants;
+import io.github.jhipster.sample.service.MailService;
+import io.github.jhipster.sample.service.UserService;
+import io.github.jhipster.sample.service.dto.UserDTO;
+import io.github.jhipster.sample.web.rest.errors.BadRequestAlertException;
+import io.github.jhipster.sample.web.rest.errors.EmailAlreadyUsedException;
+import io.github.jhipster.sample.web.rest.errors.LoginAlreadyUsedException;
+import io.github.jhipster.sample.web.rest.searchdto.UserSearchDTO;
+import io.github.jhipster.sample.web.rest.util.HeaderUtil;
+import io.github.jhipster.sample.web.rest.util.PaginationUtil;
+import io.github.jhipster.web.util.ResponseUtil;
 
 /**
  * REST controller for managing users.
@@ -72,15 +76,10 @@ public class UserResource {
 
     private final MailService mailService;
 
-    private final io.github.jhipster.sample.search.UserSearchRepository userSearchRepository;
-
-    public UserResource(UserService userService, UserRepository userRepository, MailService mailService
-        , UserSearchRepository userSearchRepository) {
-
+    public UserResource(UserService userService, UserRepository userRepository, MailService mailService) {
         this.userService = userService;
         this.userRepository = userRepository;
         this.mailService = mailService;
-        this.userSearchRepository = userSearchRepository;
     }
 
     /**
@@ -165,19 +164,6 @@ public class UserResource {
     }
 
     /**
-     * Request /users/reindex : reindex the users
-     *
-     */
-    @GetMapping("/users/reindex")
-    @PreAuthorize("hasRole(\"" + AuthoritiesConstants.ADMIN + "\")")
-    public void reindexUsers() {
-        log.debug("REST request to reindex DiseaseXiAn");
-        userSearchRepository.deleteAll();
-        List<User> users = userRepository.findAll();
-        userSearchRepository.saveAll(users);
-    }
-
-    /**
      * GET /users/:login : get the "login" user.
      *
      * @param login the login of the user to find
@@ -246,14 +232,17 @@ public class UserResource {
      * SEARCH /_search/users/:query : search for the User corresponding
      * to the query.
      *
-     * @param query the query to search
+     * @param dto the query to search
      * @return the result of the search
      */
     @GetMapping("/_search/users")
-    public ResponseEntity<List<User>> search(@RequestParam String query, Pageable pageable) {
-        log.debug("REST request to search for a page of Users for query {}", query);
-        Page<User> page = userSearchRepository.search(queryStringQuery(query) , pageable);
-        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/users");
+    public ResponseEntity<List<User>> search(UserSearchDTO dto, Pageable pageable) {
+        log.debug("REST request to search for a page of Users for query {}", dto);
+
+
+        Page<User> page = userService.search(dto , pageable);
+
+        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(dto.toString(), page, "/api/_search/users");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 }

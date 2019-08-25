@@ -116,8 +116,8 @@ public class ImageSuppliesService {
         if (query != null && query.length() > 0) {
             restrictions.clear();
             restrictions.addAll(SearchUtil.queryKeywordParser(query).stream()
-                    .map(keyword -> cb.like(image.get("question"), "%" + keyword + "%")).collect(Collectors.toList()));
-            restrictions.add(cb.like(image.get("question"), "%" + query + "%"));
+                    .map(keyword -> cb.like(image.get("name"), "%" + keyword + "%")).collect(Collectors.toList()));
+            restrictions.add(cb.like(image.get("name"), "%" + query + "%"));
         }
 
         Predicate queryPredicate = restrictions.size() > 0

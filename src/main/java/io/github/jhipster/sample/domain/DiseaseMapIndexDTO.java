@@ -1,21 +1,18 @@
 package io.github.jhipster.sample.domain;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import javax.persistence.*;
-import javax.validation.constraints.*;
-
-import org.springframework.data.elasticsearch.annotations.Document;
-
 import java.io.Serializable;
 import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.Size;
 
 /**
  * Disease Map is used to contain mutiple diseases and qarobot, and could contain
  * subDisease map.
  */
-@Document(indexName = "diseasemapindexdto")
 public class DiseaseMapIndexDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;

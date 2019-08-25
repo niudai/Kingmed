@@ -4,9 +4,14 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import javax.persistence.*;
-
-import org.springframework.data.elasticsearch.annotations.Document;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 import io.github.jhipster.sample.domain.abstractDomain.MediaFile;
 
@@ -16,7 +21,6 @@ import io.github.jhipster.sample.domain.abstractDomain.MediaFile;
  */
 @Entity
 @Table(name = "image_supplies")
-@Document(indexName = "imagesupplies")
 public class ImageSupplies implements MediaFile {
 
     @Id
