@@ -13,12 +13,21 @@
 }
 
 fa-icon {
-    width: 60px;
     color: black;
 }
 
+.qrcode {
+    position: absolute;
+    bottom: 0;
+    -webkit-transition: all .4s ease;
+}
 
 a {
+    border-bottom: 1px;
+    border-top: 1px;
+    border-right: 0;
+    border-style: ridge;
+    text-align: center;
     margin: 0 auto;
     width: 60px;
     height: 50px;

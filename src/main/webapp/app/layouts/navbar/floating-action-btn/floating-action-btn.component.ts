@@ -8,8 +8,8 @@ import { faWeixin } from '@fortawesome/free-brands-svg-icons';
 })
 export class FloatingActionBtnComponent implements OnInit {
   faWeixin = faWeixin;
+  QRCODE_WIDTH = 100;
   widthOfQRCode: number;
-
   constructor() { }
 
   ngOnInit() {
@@ -17,7 +17,11 @@ export class FloatingActionBtnComponent implements OnInit {
   }
 
   showWechatQRcode() {
-    this.widthOfQRCode = 50;
+    this.widthOfQRCode = this.QRCODE_WIDTH;
+  }
+
+  hideWechatQRcode() {
+    this.widthOfQRCode = 0;
   }
 
 }
