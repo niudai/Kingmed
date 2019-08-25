@@ -1,10 +1,4 @@
 <mat-toolbar>
-    <!-- <p>{{currentUrl}}</p> -->
-    <!-- <p>{{rootPath}}</p>
-    <p>{{urlSegment.length}}</p>
-    <p *ngFor = "let seg of urlSegment">
-            {{seg.path}}
-    </p> -->
 
     <button mat-flat-button [routerLink]="btn.routerLink" *ngFor="let btn of navButtons"
         [style.background-color]="!btn.isSelected ? 'transparent' : 'gainsboro'">
@@ -21,9 +15,6 @@
         </button>
     </mat-menu>
 
-    <!-- <button mat-flat-button routerLink="/disease-xi-an">集团项目</button>
-    <button mat-flat-button routerLink="/q-arobot">QA小博士</button>
-    <button mat-flat-button routerLink="/service">服务平台</button> -->
     <a href="http://www.kingmed.com.cn/index.aspx">
         <img style="max-height: 40px" src="../../../content/images/kingmedIcon.png" />
     </a>
