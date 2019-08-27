@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>反馈建议</h1>
+<div mat-dialog-content>
+  <p>您的建议是我们的进步源泉：</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.content">
+  </mat-form-field>
+  <p>您的电话：</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.phone">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">取消</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>确认</button>
+</div>

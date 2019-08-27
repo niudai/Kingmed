@@ -1,18 +1,18 @@
 
-<div class="toolbar-container show visible" #fab>
+<div class="toolbar-container show visible" #fab cdkDrag>
   <a title="返回顶部" class="top" href="#">
-    <fa-icon [icon]="'chevron-up'" size="2x"></fa-icon>
+    <fa-icon [icon]="'chevron-up'" size="lg"></fa-icon>
   </a>
   <a title="意见反馈" class="comment" href="/feedback">
-    <fa-icon [icon]="'comments'" size="2x"></fa-icon>
+    <fa-icon [icon]="'comments'" size="lg"></fa-icon>
   </a>
   <a title="扫一扫关注金域微信公众号" class="wechat" (mouseenter)="showWechatQRcode()" (mouseleave)="hideWechatQRcode()">
-    <fa-icon [icon]="faWeixin" [spin]="true" size="2x"></fa-icon>
+    <fa-icon [icon]="faWeixin" [spin]="true" size="lg"></fa-icon>
     <img
       class = "qrcode"
       [style.display] = "'inline'"
       [style.left] = "[-widthOfQRCode + 'px']"
-      src="https://www.teach.ustc.edu.cn/wp-content/themes/teach2015/assets/img/wechat-qrcode-2216b97f36.png"
+      src="../../../../content/images/qrcode.jpg"
       [style.max-width]="[widthOfQRCode + 'px']"
     >
   </a>

@@ -11,13 +11,13 @@ import javax.validation.constraints.Size;
  * Comment
  */
 @Entity
-@Table(name = "comment")
-public class Comment {
+@Table(name = "feedback")
+public class Feedback {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @Size(max = 600)
     private String comment;
 
@@ -59,7 +59,7 @@ public class Comment {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Comment other = (Comment) obj;
+        Feedback other = (Feedback) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
@@ -67,6 +67,5 @@ public class Comment {
             return false;
         return true;
     }
-
     
 }
