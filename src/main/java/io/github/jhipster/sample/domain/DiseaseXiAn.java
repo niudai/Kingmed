@@ -46,6 +46,10 @@ public class DiseaseXiAn  implements Serializable {
     @BatchSize(size = 10)
     private List<PriceXiAn> prices = new ArrayList<PriceXiAn>();
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "disease_xi_an_id")
+    private List<Comment> comments = new ArrayList<Comment>();
+
     @ManyToOne
     @JoinColumn(name = "subsidiary_id")
     private Subsidiary realSubsidiary;
@@ -99,7 +103,7 @@ public class DiseaseXiAn  implements Serializable {
         this.suppliess = suppliess;
     }
 
-
+    
 
     public Set<ImageApplication> getApplications() {
         return this.applications;
@@ -116,6 +120,8 @@ public class DiseaseXiAn  implements Serializable {
     public void setQarobots(Set<QArobot> qarobots) {
         this.qarobots = qarobots;
     }
+
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -597,5 +603,13 @@ public class DiseaseXiAn  implements Serializable {
 
     public void setRealSubsidiary(Subsidiary realSubsidiary) {
         this.realSubsidiary = realSubsidiary;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }
