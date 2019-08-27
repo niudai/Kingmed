@@ -74,14 +74,9 @@ spring:
             hibernate.cache.region.factory_class: io.github.jhipster.config.jcache.BeanClassLoaderAwareJCacheRegionFactory
         open-in-view: true
     data:
-        jest:
-            read-timeout: 10000
-        elasticsearch:
-            # cluster-nodes: localhost:9300
-            # cluster-name: docker-cluster
-            properties:
-                path:
-                    home: target/elasticsearch
+        rest:
+            base-path: /api
+            detection-strategy: ANNOTATED
     liquibase:
         contexts: dev
     mail:
