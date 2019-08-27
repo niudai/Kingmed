@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { faWeixin } from '@fortawesome/free-brands-svg-icons';
-import { MatDialog } from '@angular/material';
-import { FeedbackDialogComponent, FeedbackData } from '../feedback-dialog/feedback-dialog.component';
+import { IFeedback } from 'app/shared/model/feedback.model';
+import { FeedbackDialogComponent } from '../feedback-dialog/feedback-dialog.component';
+import { FeedbackService } from '../feedback-dialog/feedback.service';
 
 @Component({
   selector: 'jhi-floating-action-btn',
@@ -12,8 +14,12 @@ export class FloatingActionBtnComponent implements OnInit {
   faWeixin = faWeixin;
   QRCODE_WIDTH = 100;
   widthOfQRCode: number;
-  feedback: FeedbackData;
-  constructor(private dialog: MatDialog) { }
+  feedback: IFeedback;
+  feedbackSuccessMsg: string = '反馈成功';
+  constructor(
+    private dialog: MatDialog,
+    private service: FeedbackService,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.widthOfQRCode = 0;
@@ -22,12 +28,15 @@ export class FloatingActionBtnComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(FeedbackDialogComponent, {
       width: '600px',
-      data: { content: '', phone: ''}
+      data: { content: '', phone: '' }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       this.feedback = result;
+      this.service.create(this.feedback).subscribe(
+        any => this.snackBar.open(this.feedbackSuccessMsg)
+      )
     });
   }
 

@@ -1,5 +1,6 @@
 package io.github.jhipster.sample.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,6 +21,10 @@ public class Feedback {
 
     @Size(max = 600)
     private String comment;
+
+    @Size(max = 50)
+    @Column(name = "phonenumber")
+    private String phoneNumber;
 
     public Long getId() {
         return id;
@@ -66,6 +71,14 @@ public class Feedback {
         } else if (!id.equals(other.id))
             return false;
         return true;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
     
 }

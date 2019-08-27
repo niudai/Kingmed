@@ -3,7 +3,7 @@
   <a title="返回顶部" class="top" href="#">
     <fa-icon [icon]="'chevron-up'" size="lg"></fa-icon>
   </a>
-  <a title="意见反馈" class="comment" href="/feedback">
+  <a title="意见反馈" class="comment" (click) = "openDialog()" style = "cursor: pointer">
     <fa-icon [icon]="'comments'" size="lg"></fa-icon>
   </a>
   <a title="扫一扫关注金域微信公众号" class="wechat" (mouseenter)="showWechatQRcode()" (mouseleave)="hideWechatQRcode()">
