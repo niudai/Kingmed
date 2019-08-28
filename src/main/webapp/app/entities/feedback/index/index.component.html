@@ -1,17 +1,14 @@
-<mat-expansion-panel *ngFor="let ">
+<mat-expansion-panel *ngFor="let feedback of feedbacks">
     <mat-expansion-panel-header>
-      <mat-panel-title>
-      </mat-panel-title>
-      <mat-panel-description>
-        Type your name and age
-      </mat-panel-description>
+        <mat-panel-title>
+        </mat-panel-title>
+        <mat-panel-description>
+            {{feedback.comment }}
+        </mat-panel-description>
     </mat-expansion-panel-header>
 
-    <mat-form-field>
-      <input matInput placeholder="First name">
-    </mat-form-field>
-
-    <mat-form-field>
-      <input matInput placeholder="Age">
-    </mat-form-field>
-  </mat-expansion-panel>
+    {{feedback.comment}}
+    <div *jhiHideIfNull="feedback.phoneNumber">
+        联系电话：{{feedback.phoneNumber}}
+    </div>
+</mat-expansion-panel>

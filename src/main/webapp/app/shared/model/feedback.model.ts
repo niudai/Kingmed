@@ -3,7 +3,7 @@ export interface IFeedback {
     phoneNumber?: string;
     _links?: {
         self?: string
-    }
+    };
 }
 
 export class Feedback implements IFeedback {
