@@ -3,7 +3,7 @@
         <mat-panel-title>
         </mat-panel-title>
         <mat-panel-description>
-            {{feedback.comment }}
+            {{feedback.comment | trimIfTooLong}}
         </mat-panel-description>
     </mat-expansion-panel-header>
 

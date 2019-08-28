@@ -8,7 +8,7 @@ import { Pipe, PipeTransform } from '@angular/core';
        {{foo | trim}}
  *   ```
  */
-@Pipe({name: 'trim2'})
+@Pipe({name: 'trimIfTooLong'})
 export class TrimIfTooLongPipe implements PipeTransform {
     transform(value: string) {
         if (value.length <= 15) {

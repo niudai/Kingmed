@@ -8,10 +8,10 @@ const routes: Routes = [
   {
     path: '',
     component: IndexComponent,
-    canActivate: [UserRouteAccessService],
-    data: {
-      authorities: ['ROLE_ADMIN']
-    }
+    // canActivate: [UserRouteAccessService],
+    // data: {
+    //   authorities: ['ROLE_ADMIN']
+    // }
   }
 ];
 

@@ -10,11 +10,17 @@ import { IFeedback } from 'app/shared/model/feedback.model';
 export class IndexComponent implements OnInit {
 
   feedbacks: IFeedback[];
+  response: any;
 
   constructor(private service: FeedbackService) { }
 
   ngOnInit() {
-    this.service.query().subscribe(res => this.feedbacks = res._embedded.feedback);
+    console.log('Begin to get feedbacks!');
+    this.service.query().subscribe(res => {
+        // this.feedbacks = res._embedded.feedback;
+        this.feedbacks = res.body._embedded.feedback;
+        console.log(this.feedbacks);
+    });
   }
 
 }
