@@ -12,7 +12,7 @@ export interface FeedbackData {
 @Component({
   selector: 'jhi-feedback-dialog',
   templateUrl: './feedback-dialog.component.html',
-  styles: []
+  styleUrls: ['./feedback-dialog.component.css']
 })
 export class FeedbackDialogComponent {
 

@@ -33,6 +33,10 @@ const appRoutes: Routes = [
     {
         path: 'admin',
         loadChildren: '../admin/admin.module#JhipsterElasticsearchSampleApplicationAdminModule'
+    },
+    {
+        path: 'feedback',
+        loadChildren: './feedback/feedback.module#FeedbackModule'
     }
 ];
 

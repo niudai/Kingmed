@@ -21,7 +21,7 @@ export class FeedbackService {
     find(id: number): Observable<FeedbackResponse> {
         return this.http.get<IFeedback>(`${this.resourceUrl}/id`, { observe: 'response' });
     }
-    query(req?: any): Observable<FeedbackArrayResponse> {
+    query(req?: any): Observable<any> {
         // const options = createRequestOption(req);
         return this.http.get<IFeedback[]>(this.resourceUrl, { observe: 'response' });
     }

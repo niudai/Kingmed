@@ -44,7 +44,7 @@ export class NavbarComponent implements OnInit, OnChanges {
         { routerLink: '/admin/audits', content: '审计' },
         { routerLink: '/admin/logs', content: '日志' },
         { routerLink: '/admin/docs', content: 'API文档' },
-        { routerLink: '/h2-console', content: '数据库' }
+        { routerLink: '/feedback', content: '反馈中心'}
     ];
 
     constructor(

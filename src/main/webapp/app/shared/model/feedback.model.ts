@@ -1,6 +1,9 @@
 export interface IFeedback {
     comment?: string;
     phoneNumber?: string;
+    _links?: {
+        self?: string
+    }
 }
 
 export class Feedback implements IFeedback {
