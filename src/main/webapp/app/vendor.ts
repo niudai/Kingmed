@@ -73,12 +73,11 @@ import {
     faUserNurse,
     faUserSecret,
     faUserCircle,
-    faMapSigns
+    faMapSigns,
+    faBullhorn,
 } from '@fortawesome/free-solid-svg-icons';
 
-import {
-    faWeixin
-} from '@fortawesome/free-brands-svg-icons'
+
 // Adds the SVG icon to the library so you can use it in your page
 library.add(faBuilding);
 library.add(faAddressCard);
@@ -147,4 +146,5 @@ library.add(faUserSecret);
 library.add(faUserCircle);
 library.add(faHandPointRight);
 library.add(faMapSigns);
+library.add(faBullhorn);
 // jhipster-needle-add-element-to-vendor - JHipster will add new menu items here

@@ -34,7 +34,8 @@ export class NavbarComponent implements OnInit, OnChanges {
         { routerLink: 'disease-xi-an', isSelected: false, content: '集团项目', icon: 'book-medical' },
         { routerLink: 'disease-map', isSelected: false, content: '疾病地图', icon: 'map-signs' },
         { routerLink: 'service', isSelected: false, content: '服务平台', icon: 'user-friends' },
-        { routerLink: 'q-arobot', isSelected: false, content: '常见问题', icon: 'question' }
+        { routerLink: 'q-arobot', isSelected: false, content: '常见问题', icon: 'question' },
+        { routerLink: 'notification', isSelected: false, content: '域知项情', icon: 'bullhorn'}
     ];
     adminMenuBtns: NavButton[] = [
         { routerLink: '/admin/user-management', content: '用户管理' },

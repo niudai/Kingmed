@@ -25,6 +25,7 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
 import { NavigationBackComponent } from './shared/navigation/navigation-back.component';
 import { FloatingActionBtnComponent } from './layouts/navbar/floating-action-btn/floating-action-btn.component';
 import { FeedbackDialogComponent } from './layouts/navbar/feedback-dialog/feedback-dialog.component';
+import { NotificationsModule } from './notifications/notifications.module';
 
 @NgModule({
     imports: [
@@ -43,6 +44,7 @@ import { FeedbackDialogComponent } from './layouts/navbar/feedback-dialog/feedba
         JhipsterElasticsearchSampleApplicationServiceModule,
         JhipsterElasticsearchSampleApplicationEntityModule,
         JhipsterElasticsearchSampleApplicationAppRoutingModule,
+        NotificationsModule,
     ],
     entryComponents: [
         FeedbackDialogComponent

@@ -38,6 +38,10 @@ const LAZY_ROUTE = [
             pageTitle: 'global.menu.robot'
         },
         canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'notification',
+        loadChildren: './notifications/notifications.module#NotificationsModule'
     }
 ];
 
