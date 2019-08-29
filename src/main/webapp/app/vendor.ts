@@ -62,6 +62,7 @@ import {
     faArrowRight,
     faAngleRight,
     faChevronRight,
+    faHeartbeat,
     faChevronUp,
     faAngleDown,
     faRobot,
@@ -112,6 +113,7 @@ library.add(faBook);
 library.add(faHdd);
 library.add(faFlag);
 library.add(faWrench);
+library.add(faHeartbeat);
 library.add(faClock);
 library.add(faCloud);
 library.add(faSignOutAlt);

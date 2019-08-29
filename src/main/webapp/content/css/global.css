@@ -5,6 +5,11 @@ body {
     background-color: #54bdbd;
 }
 
+.horizontal-block {
+    display: flex;
+    position: relative;
+    overflow-x: scroll;
+}
 
 body,
 h1,

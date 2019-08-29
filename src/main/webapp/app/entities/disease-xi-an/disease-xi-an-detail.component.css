@@ -3,6 +3,7 @@ dt {
     margin: 5px;
 }
 
+
 .subItem {
     font-size: 20px;
     margin: 3px;
@@ -22,10 +23,45 @@ dd {
     font-size: 18px;
 }
 
-fa-icon {
-    margin-right: 10px;
-    color: white;
+.fa-related {
+    color: orange;
 }
+
+.btn-fa {
+    color: black;
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    height: 20px;
+    width: 100px;
+    margin-top: -10px;
+    margin-right: -50px;
+    padding: 0;
+}
+
+.btn-fa::after {
+    position: absolute;
+    content: '';
+    height: 100%;
+    right: 0;
+    width: 2px;
+    bottom: 15%;
+    top: 15%;
+    background: grey;
+}
+
+/* button of related info under main details */
+.btn-related {
+    position: relative;
+    text-align: center;
+    background-color: rgba(103, 238, 227, 0.582);
+    min-width: 25%;
+    height: 40px;
+    border: none;
+    font-size: 14px;
+}
+
+
 
 .icon-1 {
     color: rgb(250, 253, 72);

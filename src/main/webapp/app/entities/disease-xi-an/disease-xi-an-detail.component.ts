@@ -1,14 +1,18 @@
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Account } from 'app/core/user/account.model';
 import { DiseaseXiAnService } from 'app/entities/disease-xi-an/disease-xi-an.service';
-import { ActivateComponent } from './../../account/activate/activate.component';
-import { PriceXiAn } from './../../shared/model/price-xi-an.model';
-import { Price } from './../../shared/model/price.model';
-import { Component, OnInit, Inject } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-
 import { IDiseaseXiAn } from 'app/shared/model/disease-xi-an.model';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { ILinkCard, LinkCard } from 'app/shared/model/link-card.model';
+import { PriceXiAn } from './../../shared/model/price-xi-an.model';
+
+export interface ButtonInfo {
+    content?: string;
+    faIcon?: string;
+    relativeUrl?: string;
+    color?: string;
+}
 
 @Component({
     selector: 'jhi-disease-xi-an-detail',
@@ -29,7 +33,14 @@ export class DiseaseXiAnDetailComponent implements OnInit {
     currentChargeCode: string;
     currentReportingTime: string;
     currentSubseries: string;
+    buttonInfos: ButtonInfo[] = [
+        { content: '价格详情', faIcon: 'dollar-sign', relativeUrl: 'prices', color: ''},
+        { content: '相关问题', faIcon: 'question', relativeUrl: 'qarobots', color: ''},
+        { content: '申请单', faIcon: 'file-alt', relativeUrl: 'applications', color: ''},
+        { content: '耗材图片', faIcon: 'magic', relativeUrl: 'suppliess', color: ''},
+        { content: '相关项目', faIcon: 'book-medical', relativeUrl: 'diseases', color: ''},
 
+    ]
     constructor(
         protected activatedRoute: ActivatedRoute,
         protected diseaseXiAnService: DiseaseXiAnService,

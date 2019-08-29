@@ -14,6 +14,7 @@
             <hr>
             <mat-expansion-panel>
                 <mat-expansion-panel-header>
+                    <fa-icon icon="book-medical"></fa-icon>
                     项目开展与收费
                 </mat-expansion-panel-header>
 
@@ -65,6 +66,7 @@
 
             <mat-expansion-panel>
                 <mat-expansion-panel-header>
+                    <fa-icon icon="ambulance"></fa-icon>
                     送检要求
                 </mat-expansion-panel-header>
 
@@ -161,6 +163,8 @@
             </mat-expansion-panel>
             <mat-expansion-panel>
                 <mat-expansion-panel-header>
+                    <fa-icon icon="hospital"></fa-icon>
+
                     TAT相关
                 </mat-expansion-panel-header>
                 <mat-list>
@@ -219,6 +223,7 @@
             </mat-expansion-panel>
             <mat-expansion-panel>
                 <mat-expansion-panel-header>
+                    <fa-icon icon="heartbeat"></fa-icon>
                     疾病线相关
                 </mat-expansion-panel-header>
                 <mat-list>
@@ -263,6 +268,8 @@
             <div *jhiHasAnyAuthority="'ROLE_ADMIN'">
                 <mat-expansion-panel *jhiHideIfNull="diseaseXiAn.remarks">
                     <mat-expansion-panel-header>
+                        <fa-icon icon="pencil-alt"></fa-icon>
+
                         备注
                     </mat-expansion-panel-header>
                     <p>
@@ -290,35 +297,25 @@
             <mat-slide-toggle *jhiHasAnyAuthority="'ROLE_ADMIN'" (toggleChange)="activateDiseaseXiAn()"
                 [checked]="diseaseXiAn.activated" [jhiTranslate]="">{{activatedToggleLabel}}</mat-slide-toggle>
             <hr>
-            <!-- toggle between several companies -->
-            <button class="btn" mat-raised-button color="primary" style="background-color: teal"
-                [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'prices']">
-                <fa-icon [icon]="'dollar-sign'"></fa-icon>&nbsp;<span jhiTranslate="entity.project.price">价格详情</span>
-            </button>
+            <div>
+                <!-- toggle between several companies -->
+                <div class="horizontal-block">
+                    <a class="btn-related" *ngFor="let btnInfo of buttonInfos"
+                        [style.background-color]="btnInfo.color"
+                        [routerLink]="['/disease-xi-an', diseaseXiAn.id, btnInfo.relativeUrl]">
+                        <span class = "btn-fa"><fa-icon [icon]="btnInfo.faIcon" class = "fa-related"></fa-icon>&nbsp;{{btnInfo.content}}</span>
+                    </a>
+                </div>
+                <hr>
+                <button mat-raised-button *jhiHasAnyAuthority="'ROLE_ADMIN'"
+                    [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'edit']">
+                    <fa-icon [icon]="'pencil-alt'" style="color: black"></fa-icon>&nbsp;<span>编辑</span>
+                </button>
+                <button mat-raised-button *jhiHasAnyAuthority="'ROLE_ADMIN'" (click)="openCreateDialog(null)">
+                    <fa-icon  [icon]="'pencil-alt'" style="color: black"></fa-icon>&nbsp;<span>新建链接</span>
+                </button>
+            </div>
 
-            <button mat-raised-button color="warn" [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'qarobots']">
-                <fa-icon [icon]="'question'"></fa-icon>&nbsp;<span jhiTranslate="entity.project.qarobot">QA博士</span>
-            </button>
-
-            <button mat-raised-button color="accent" [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'applications']">
-                <fa-icon [icon]="'file-alt'"></fa-icon>&nbsp;<span>申请单</span>
-            </button>
-
-            <button mat-raised-button color="primary" [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'suppliess']">
-                <fa-icon [icon]="'magic'"></fa-icon>&nbsp;<span>耗材图片</span>
-            </button>
-            <button mat-raised-button style="background-color: aquamarine"
-                [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'diseases']">
-                <fa-icon [icon]="'book-medical'"></fa-icon>&nbsp;<span>相关项目</span>
-            </button>
-            <hr>
-            <button mat-raised-button *jhiHasAnyAuthority="'ROLE_ADMIN'"
-                [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'edit']">
-                <fa-icon [icon]="'pencil-alt'" style="color: black"></fa-icon>&nbsp;<span>编辑</span>
-            </button>
-            <button mat-raised-button *jhiHasAnyAuthority="'ROLE_ADMIN'" (click)="openCreateDialog(null)">
-                <fa-icon [icon]="'pencil-alt'" style="color: black"></fa-icon>&nbsp;<span>新建链接</span>
-            </button>
         </div>
 
     </div>
