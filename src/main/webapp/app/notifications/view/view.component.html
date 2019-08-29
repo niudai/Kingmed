@@ -1,3 +1,12 @@
-<p>
-  view works!
-</p>
+<mat-expansion-panel *ngFor="let notification of notifications">
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+        </mat-panel-title>
+        <mat-panel-description>
+            {{notification.title}} - {{notification.subsidiary}}
+            <button mat-flat-button color="primary">{{notification.type}}}</button>
+        </mat-panel-description>
+    </mat-expansion-panel-header>
+    {{notification.description}}
+    <p style="position: absolute; right: 20px;">{{notification.createdDate}}</p>
+</mat-expansion-panel>

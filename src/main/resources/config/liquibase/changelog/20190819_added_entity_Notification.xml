@@ -25,7 +25,9 @@
             <column name="type" type="varchar(50)">
                 <constraints nullable="false" />
             </column>
-
+            <column name="title" type = "varchar(80)">
+                <constraints nullable="false" />
+            </column>
             <column name="subsidiary_name" type="varchar(50)">
                 <constraints nullable="false" />
             </column>

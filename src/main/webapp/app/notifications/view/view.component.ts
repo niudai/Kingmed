@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NotificationService } from '../notifications.service';
+import { INotification } from 'app/shared/model/notification.model';
 
 @Component({
     selector: 'jhi-view',
@@ -7,7 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewComponent implements OnInit {
 
-    constructor() {}
+    notifications: INotification[];
 
-    ngOnInit() {}
+    constructor(private service: NotificationService) {}
+
+    ngOnInit() {
+        this.service.query().subscribe(
+            response => this.notifications = response.body
+        );
+    }
 }

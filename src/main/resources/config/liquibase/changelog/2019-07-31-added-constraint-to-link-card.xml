@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Disease Map
+    -->
+    <changeSet id="2019-7-31-1" author="niudai">
+
+        <!-- Add foreign constraint for one-to-many relationship with disease_map. -->
+        <addForeignKeyConstraint baseColumnNames="disease_map_id"
+                                 baseTableName="link_card"
+                                 constraintName="fk_link_card_disease_map_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="disease_map"/>
+        <!-- Add foreign constraint for one-to-many relationship with disease branch -->
+        <addForeignKeyConstraint baseColumnNames="disease_branch_id"
+                                 baseTableName="link_card"
+                                 constraintName="fk_link_card_disease_branch_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="disease_branch"/>
+        <addForeignKeyConstraint baseColumnNames="disease_xi_an_id"
+                                 baseTableName="link_card"
+                                 constraintName="fk_link_card_disease_xi_an_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="disease_xi_an"/>
+
+
+    </changeSet>
+</databaseChangeLog>

@@ -42,6 +42,9 @@
     <include file="config/liquibase/changelog/2019-07-21-add-disease-xi-an-self-asso.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/2019-7-25-add-column-disease-map.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/2019-07-30-create-table-link-card.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/2019-07-31-add-column-link-card.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/2019-07-31-add-foreign-key-link-card.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/2019-07-31-added-constraint-to-link-card.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/2019-08-06_add_constraint_user_disease.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190809-add-column-to-user.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180817_create_subsidiary_table.xml" relativeToChangelogFile="false"/>

@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import io.github.jhipster.sample.service.dto.ProjectNotificatonDTO;
 
@@ -25,6 +26,9 @@ public class ProjectNotification {
 
     @Enumerated(EnumType.STRING)
     private NotificationType type;
+
+    @Size(max = 80)
+    private String title;
 
     @ManyToOne
     @JoinColumn(name = "subsidiary_name")
