@@ -8,7 +8,8 @@ import { DiseaseXiAnService } from './disease-xi-an.service';
 
 @Component({
     selector: 'jhi-disease-xi-an-update',
-    templateUrl: './disease-xi-an-update.component.html'
+    templateUrl: './disease-xi-an-update.component.html',
+    styleUrls: ['./disease-xi-an-update.component.css']
 })
 export class DiseaseXiAnUpdateComponent implements OnInit {
     diseaseXiAn: IDiseaseXiAn;

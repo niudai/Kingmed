@@ -154,10 +154,10 @@ export class DiseaseXiAnComponent implements OnInit {
             data: { diseaseXiAn: disease }
         });
 
-        bottomSheetRef.afterDismissed().subscribe(result => {
-            //   console.log('The dialog was closed');
-            this.loadAll();
-        });
+        // bottomSheetRef.afterDismissed().subscribe(result => {
+        //     //   console.log('The dialog was closed');
+        //     this.loadAll();
+        // });
     }
 
     ngOnInit() {

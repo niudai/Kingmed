@@ -1,4 +1,160 @@
-<div class="row justify-content-center">
+<div class="register-form" *ngIf="!success">
+    <mat-list>
+        <h3 mat-subheader>
+            <fa-icon icon="user-cog"></fa-icon>
+            项目开展与收费
+        </h3>
+        <div class="register-list">
+            <mat-list-item>
+                <mat-form-field>
+                    <textarea cdkTextareaAutosize matInput [(ngModel)]="diseaseXiAn.name" placeholder="项目名" [value]="diseaseXiAn.name"></textarea>
+                </mat-form-field>
+            </mat-list-item>
+            <mat-list-item>
+                <mat-form-field>
+                    <textarea cdkTextareaAutosize matInput [(ngModel)]="diseaseXiAn.subsidiary" placeholder="子公司"
+                        [value]="diseaseXiAn.subsidiary">
+                </mat-form-field>
+            </mat-list-item>
+            <mat-list-item>
+                <mat-form-field>
+                    <textarea cdkTextareaAutosize matInput [(ngModel)]="diseaseXiAn.projectCode" placeholder="项目代码"
+                        [value]="diseaseXiAn.projectCode">
+                </mat-form-field>
+            </mat-list-item>
+            <mat-list-item>
+                <mat-form-field>
+                    <textarea cdkTextareaAutosize matInput [(ngModel)]="diseaseXiAn.chargeCode" placeholder="物价代码"
+                        [value]="diseaseXiAn.chargeCode">
+                </mat-form-field>
+            </mat-list-item>
+            <mat-list-item>
+                <mat-form-field>
+                    <textarea cdkTextareaAutosize matInput [(ngModel)]="diseaseXiAn.tollStandard" placeholder="物价"
+                        [value]="diseaseXiAn.tollStandard">
+                </mat-form-field>
+            </mat-list-item>
+        </div>
+        <h3 mat-subheader>
+            <fa-icon icon="address-card"></fa-icon>
+            送检要求
+        </h3>
+        <div class="register-list">
+            <mat-list-item>
+                <mat-form-field>
+                    <textarea cdkTextareaAutosize matInput [(ngModel)]="diseaseXiAn.supplement" placeholder="样本与样本量"
+                        [value]="diseaseXiAn.supplement">
+                </mat-form-field>
+            </mat-list-item>
+            <mat-list-item>
+                <mat-form-field>
+                    <textarea cdkTextareaAutosize matInput [(ngModel)]="diseaseXiAn.sample" placeholder="耗材" [value]="diseaseXiAn.sample">
+                </mat-form-field>
+            </mat-list-item>
+            <mat-list-item>
+                <mat-form-field>
+                    <textarea cdkTextareaAutosize matInput [(ngModel)]="diseaseXiAn.tutorial" placeholder="分析前培训
+                            " [value]="diseaseXiAn.tutorial">
+                </mat-form-field>
+            </mat-list-item>
+            <mat-list-item>
+                <mat-form-field>
+                    <textarea cdkTextareaAutosize matInput [(ngModel)]="diseaseXiAn.preservation" placeholder="保存条件与保存时长"
+                        [value]="diseaseXiAn.preservation">
+                </mat-form-field>
+            </mat-list-item>
+            <mat-list-item>
+                <mat-form-field>
+                    <textarea cdkTextareaAutosize matInput [(ngModel)]="diseaseXiAn.transportation" placeholder="运输条件"
+                        [value]="diseaseXiAn.transportation">
+                </mat-form-field>
+            </mat-list-item>
+            <mat-list-item>
+                <mat-form-field>
+                    <textarea cdkTextareaAutosize matInput [(ngModel)]="diseaseXiAn.applicationUnitType" placeholder="申请单"
+                        [value]="diseaseXiAn.applicationUnitType">
+                </mat-form-field>
+            </mat-list-item>
+            <mat-list-item>
+                <mat-form-field>
+                    <textarea cdkTextareaAutosize matInput [(ngModel)]="diseaseXiAn.applicationRemark" placeholder="申请单备注"
+                        [value]="diseaseXiAn.applicationRemark">
+                </mat-form-field>
+            </mat-list-item>
+        </div>
+
+        <h3 mat-subheader>
+            <fa-icon icon="key"></fa-icon>
+            TAT相关
+        </h3>
+        <div class="register-list">
+            <mat-list-item>
+                <mat-form-field>
+                    <textarea cdkTextareaAutosize matInput [(ngModel)]="diseaseXiAn.medicalMethod" placeholder="检测方法"
+                        [value]="diseaseXiAn.medicalMethod">
+                </mat-form-field>
+            </mat-list-item>
+            <mat-list-item>
+                <mat-form-field>
+                    <textarea cdkTextareaAutosize matInput [(ngModel)]="diseaseXiAn.projectConcourse" placeholder="检测科室"
+                        [value]="diseaseXiAn.projectConcourse">
+                </mat-form-field>
+            </mat-list-item>
+            <mat-list-item>
+                <mat-form-field>
+                    <textarea cdkTextareaAutosize matInput [(ngModel)]="diseaseXiAn.hurryDepartment" placeholder="加急结果派单岗位"
+                        [value]="diseaseXiAn.hurryDepartment">
+                </mat-form-field>
+            </mat-list-item>
+            <mat-list-item>
+                <mat-form-field>
+                    <textarea cdkTextareaAutosize matInput [(ngModel)]="diseaseXiAn.reportingTime" placeholder="出结果时间"
+                        [value]="diseaseXiAn.reportingTime">
+                </mat-form-field>
+            </mat-list-item>
+        </div>
+        <h3 mat-subheader>
+            <fa-icon icon="key"></fa-icon>
+            疾病线相关
+        </h3>
+        <div class="register-list">
+            <mat-list-item>
+                <mat-form-field>
+                    <textarea cdkTextareaAutosize matInput [(ngModel)]="diseaseXiAn.clinicalApplication" placeholder="临床应用"
+                        [value]="diseaseXiAn.clinicalApplication">
+                </mat-form-field>
+            </mat-list-item>
+            <mat-list-item>
+                <mat-form-field>
+                    <textarea cdkTextareaAutosize matInput [(ngModel)]="diseaseXiAn.series" placeholder="集团疾病线分类" [value]="diseaseXiAn.series">
+                </mat-form-field>
+            </mat-list-item>
+            <mat-list-item>
+                <mat-form-field>
+                    <textarea cdkTextareaAutosize matInput [(ngModel)]="diseaseXiAn.subSeries" placeholder="子公司系列划分"
+                        [value]="diseaseXiAn.subSeries">
+                </mat-form-field>
+            </mat-list-item>
+        </div>
+        <h3 mat-subheader>
+            <fa-icon icon="key"></fa-icon>
+            备注
+        </h3>
+        <div class="register-list">
+            <mat-list-item>
+                <mat-form-field>
+                    <textarea cdkTextareaAutosize matInput [(ngModel)]="diseaseXiAn.remarks" placeholder="备注" [value]="diseaseXiAn.remarks">
+                </mat-form-field>
+            </mat-list-item>
+        </div>
+    </mat-list>
+    <button mat-stroked-button (click)="save()">保存</button>
+
+</div>
+
+
+
+<!-- <div class="row justify-content-center">
     <div class="col-12">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
             <h2 id="jhi-disease-xi-an-heading"
@@ -116,7 +272,7 @@
                     <textarea rows = "8" type="text" class="form-control" name="remarks" id="field_remarks"
                         [(ngModel)]="diseaseXiAn.remarks" ></textarea>
                 </div>
-            
+
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
@@ -128,4 +284,4 @@
             </div>
         </form>
     </div>
-</div>
+</div> -->
