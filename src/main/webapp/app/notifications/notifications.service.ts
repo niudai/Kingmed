@@ -7,7 +7,9 @@ import { createRequestOption } from 'app/shared';
 
 type NotificationResponse = HttpResponse<INotification>;
 type NotificationArrayResponse = HttpResponse<INotification[]>;
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class NotificationService {
     resourceUrl = SERVER_API_URL + 'api/project-notifications';
     constructor(private http: HttpClient) {}

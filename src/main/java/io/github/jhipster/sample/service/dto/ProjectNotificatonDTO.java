@@ -7,9 +7,12 @@ public class ProjectNotificatonDTO {
 
     private NotificationType type;
 
+    private String title;
+
     private Subsidiary subsidiary;
 
     private String description; // name of notification
+
 
     public NotificationType getType() {
         return type;
@@ -33,6 +36,20 @@ public class ProjectNotificatonDTO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    @Override
+    public String toString() {
+        return "ProjectNotificatonDTO [description=" + description + ", subsidiary=" + subsidiary + ", title=" + title
+                + ", type=" + type + "]";
     }
 
 }

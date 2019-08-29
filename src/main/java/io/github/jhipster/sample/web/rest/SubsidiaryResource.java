@@ -52,9 +52,7 @@ public class SubsidiaryResource {
     @PostMapping("")
     public ResponseEntity<Subsidiary> createSubsidiary(@Valid @RequestBody Subsidiary subsidiary) throws URISyntaxException {
         log.debug("REST request to save Subsidiary : {}", subsidiary);
-        if (subsidiary.getName() != null) {
-            throw new BadRequestAlertException("A new subsidiary cannot already have an ID", ENTITY_NAME, "idexists");
-        } else if (subsidiaryRepository.findByName(subsidiary.getName()).isPresent()) {
+        if (subsidiaryRepository.findByName(subsidiary.getName()).isPresent()) {
             throw new BadRequestAlertException("Subsidiary has already been created", ENTITY_NAME, "exists");
         }
         Subsidiary result = subsidiaryRepository.save(subsidiary);

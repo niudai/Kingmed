@@ -30,6 +30,7 @@ public class ProjectNotification {
     @Size(max = 80)
     private String title;
 
+
     @ManyToOne
     @JoinColumn(name = "subsidiary_name")
     private Subsidiary subsidiary;
@@ -47,6 +48,7 @@ public class ProjectNotification {
         this.diseaseXiAn = diseaseXiAn;
         this.description = dto.getDescription();
         this.type = dto.getType();
+        this.title = dto.getTitle();
         this.subsidiary = dto.getSubsidiary();
         this.createdDate = Instant.now();
     }
@@ -102,6 +104,14 @@ public class ProjectNotification {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
 }

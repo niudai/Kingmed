@@ -95,12 +95,19 @@ public class DiseaseXiAnResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/disease-xi-ans")
-    public ResponseEntity<DiseaseXiAn> createDiseaseXiAn(@Valid @RequestBody DiseaseXiAn diseaseXiAn) throws URISyntaxException {
+    public ResponseEntity<DiseaseXiAn> createDiseaseXiAn(
+        @Valid @RequestBody DiseaseXiAn diseaseXiAn,
+        @RequestParam Boolean ifGenerate,
+        ProjectNotificatonDTO dto
+) throws URISyntaxException {
         log.debug("REST request to save DiseaseXiAn : {}", diseaseXiAn);
         if (diseaseXiAn.getId() != null) {
             throw new BadRequestAlertException("A new diseaseXiAn cannot already have an ID", ENTITY_NAME, "idexists");
         }
         DiseaseXiAn result = diseaseXiAnService.postDiseaseXiAn(diseaseXiAn);
+        if (ifGenerate) {
+            notificationService.generateNotification(result, dto);
+        }
         return ResponseEntity.created(new URI("/api/disease-xi-ans/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
