@@ -26,7 +26,7 @@ logging:
     file: dev1.log
 
 spring:
-        
+
     servlet:
         multipart:
             file-size-threshold: 100MB
@@ -130,7 +130,7 @@ jhipster:
     mail: # specific JHipster mail property, for standard properties see MailProperties
         # from: jhipsterElasticsearchSampleApplication@localhost
         from: kingmed01@outlook.com
-        base-url: http://localhost
+        base-url: http://kingmed.online
     metrics:
         logs: # Reports metrics in the logs
             enabled: false

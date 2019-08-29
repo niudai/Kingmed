@@ -75,11 +75,13 @@ import {
     faUserCircle,
     faMapSigns,
     faBullhorn,
+    faAmbulance
 } from '@fortawesome/free-solid-svg-icons';
 
 
 // Adds the SVG icon to the library so you can use it in your page
 library.add(faBuilding);
+library.add(faAmbulance);
 library.add(faAddressCard);
 library.add(faKey);
 library.add(faUser);
