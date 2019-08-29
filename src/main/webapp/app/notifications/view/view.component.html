@@ -17,7 +17,9 @@
         {{notification.description}}
         <p style="position: absolute; right: 20px;">{{notification.createdDate | date}}</p>
         <mat-card-actions>
-            <button mat-button [routerLink]="['disease-xi-an', notification.diseaseXiAn.id, 'view']">
+            <button mat-button
+            [routerLink]="['/disease-xi-an', notification.diseaseXiAn.id, 'view']"
+            style ="background-color: antiquewhite">
                 {{notification.diseaseXiAn.name | trimIfTooLong}}
             </button>
           </mat-card-actions>
