@@ -3,10 +3,24 @@
         <mat-panel-title>
         </mat-panel-title>
         <mat-panel-description>
-            {{notification.title}} - {{notification.subsidiary}}
-            <button mat-flat-button color="primary">{{notification.type}}}</button>
+            {{notification.title}} -
+            <span style = "color: indianred">{{notification.subsidiary.name}}</span>
+            <mat-chip-list>
+                <mat-chip
+                [style.margin-left]="'20px'"
+                [style.background-color]="btnColor(notification.type)"
+                [style.color]="'white'">{{btnContent(notification.type)}}</mat-chip>
+            </mat-chip-list>
         </mat-panel-description>
     </mat-expansion-panel-header>
-    {{notification.description}}
-    <p style="position: absolute; right: 20px;">{{notification.createdDate}}</p>
+    <mat-card>
+        {{notification.description}}
+        <p style="position: absolute; right: 20px;">{{notification.createdDate | date}}</p>
+        <mat-card-actions>
+            <button mat-button [routerLink]="['disease-xi-an', notification.diseaseXiAn.id, 'view']">
+                {{notification.diseaseXiAn.name | trimIfTooLong}}
+            </button>
+          </mat-card-actions>
+    </mat-card>
+
 </mat-expansion-panel>
