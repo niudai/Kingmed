@@ -10,6 +10,9 @@
                 <button style="
                     margin: 5px;" *ngFor="let user of users" mat-stroked-button
                     [routerLink]="['/admin/user-management', user.login, 'view']">{{user.firstName}}</button>
+                <a class="copy-btn" (click)="copyDetail(diseaseXiAn)">
+                    <fa-icon [size]="'lg'" class="copy-btn" [icon]="'clipboard'"></fa-icon>
+                </a>
             </mat-card>
             <hr>
             <mat-expansion-panel>
@@ -300,10 +303,11 @@
             <div>
                 <!-- toggle between several companies -->
                 <div class="horizontal-block">
-                    <a class="btn-related" *ngFor="let btnInfo of buttonInfos"
-                        [style.background-color]="btnInfo.color"
+                    <a class="btn-related" *ngFor="let btnInfo of buttonInfos" [style.background-color]="btnInfo.color"
                         [routerLink]="['/disease-xi-an', diseaseXiAn.id, btnInfo.relativeUrl]">
-                        <span class = "btn-fa"><fa-icon [icon]="btnInfo.faIcon" class = "fa-related"></fa-icon>&nbsp;{{btnInfo.content}}</span>
+                        <span class="btn-fa">
+                            <fa-icon [icon]="btnInfo.faIcon" class="fa-related"></fa-icon>&nbsp;{{btnInfo.content}}
+                        </span>
                     </a>
                 </div>
                 <hr>
@@ -312,7 +316,7 @@
                     <fa-icon [icon]="'pencil-alt'" style="color: black"></fa-icon>&nbsp;<span>编辑</span>
                 </button>
                 <button mat-raised-button *jhiHasAnyAuthority="'ROLE_ADMIN'" (click)="openCreateDialog(null)">
-                    <fa-icon  [icon]="'pencil-alt'" style="color: black"></fa-icon>&nbsp;<span>新建链接</span>
+                    <fa-icon [icon]="'pencil-alt'" style="color: black"></fa-icon>&nbsp;<span>新建链接</span>
                 </button>
             </div>
 

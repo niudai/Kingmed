@@ -1,9 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Account } from 'app/core/user/account.model';
 import { DiseaseXiAnService } from 'app/entities/disease-xi-an/disease-xi-an.service';
-import { IDiseaseXiAn } from 'app/shared/model/disease-xi-an.model';
+import { IDiseaseXiAn, diseaseXiAnToString } from 'app/shared/model/disease-xi-an.model';
 import { ILinkCard, LinkCard } from 'app/shared/model/link-card.model';
 import { PriceXiAn } from './../../shared/model/price-xi-an.model';
 
@@ -33,6 +33,7 @@ export class DiseaseXiAnDetailComponent implements OnInit {
     currentChargeCode: string;
     currentReportingTime: string;
     currentSubseries: string;
+    stringExp: string;
     buttonInfos: ButtonInfo[] = [
         { content: '价格详情', faIcon: 'dollar-sign', relativeUrl: 'prices', color: ''},
         { content: '相关问题', faIcon: 'question', relativeUrl: 'qarobots', color: ''},
@@ -40,12 +41,43 @@ export class DiseaseXiAnDetailComponent implements OnInit {
         { content: '耗材图片', faIcon: 'magic', relativeUrl: 'suppliess', color: ''},
         { content: '相关项目', faIcon: 'book-medical', relativeUrl: 'diseases', color: ''},
 
-    ]
+    ];
+
     constructor(
         protected activatedRoute: ActivatedRoute,
         protected diseaseXiAnService: DiseaseXiAnService,
         protected dialog: MatDialog,
+        private _snackBar: MatSnackBar
     ) { }
+
+    copyDetail(disease: IDiseaseXiAn) {
+        // const para = document.createElement('textarea');
+        // console.log(diseaseXiAnToString(disease));
+        // para.value = diseaseXiAnToString(disease);
+        // para.style.visibility = 'hidden';
+        // document.body.appendChild(para);
+        // para.focus();
+        // para.select();
+        const textarea = document.createElement('textarea');
+        textarea.style.fontSize = '12pt';
+        textarea.classList.add('cdk-visually-hidden');
+        const t = window.pageYOffset || document.documentElement.scrollTop;
+        textarea.style.top = t + 'px';
+        textarea.setAttribute('readonly', '');
+        textarea.value = this.stringExp;
+        document.body.appendChild(textarea);
+        textarea.select();
+        textarea.setSelectionRange(0, textarea.value.length);
+        // const copyTextarea: HTMLTextAreaElement = document.querySelector('.js-copytextarea');
+        // copyTextarea.focus();
+        // copyTextarea.select();
+        try {
+            this._snackBar.open(document.execCommand('copy') ? '已复制至剪贴板' : '复制失败', '', { duration: 1000} );
+        } catch (err) {
+            console.log('Oops, unable to copy');
+        }
+        document.body.removeChild(textarea);
+    }
 
     projectAndPriceIsOpenToggle() {
         this.projectAndPriceIsOpen = !this.projectAndPriceIsOpen;
@@ -82,6 +114,7 @@ export class DiseaseXiAnDetailComponent implements OnInit {
         this.projectAndPriceIsOpen = true;
         this.activatedRoute.data.subscribe(({ diseaseXiAn }) => {
             this.diseaseXiAn = diseaseXiAn;
+            this.stringExp = diseaseXiAnToString(this.diseaseXiAn);
             this.diseaseXiAnService.getUsers(this.diseaseXiAn.id)
                 .subscribe( res => this.users = res.body);
         });
