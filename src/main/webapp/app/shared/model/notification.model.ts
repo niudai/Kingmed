@@ -10,3 +10,7 @@ export interface INotification {
     createdDate?: Date;
     diseaseXiAn?: IDiseaseXiAn;
 }
+
+export class Notification implements INotification {
+    constructor(private id: )
+}
