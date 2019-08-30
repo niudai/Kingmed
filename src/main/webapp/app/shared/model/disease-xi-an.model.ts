@@ -28,8 +28,6 @@ export interface IDiseaseXiAn {
     series?: string;
     subSeries?: string;
     remarks?: string;
-
-    toString(): string;
 }
 
 export class DiseaseXiAn implements IDiseaseXiAn {

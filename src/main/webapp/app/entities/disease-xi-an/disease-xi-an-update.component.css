@@ -3,6 +3,11 @@ mat-form-field {
     margin: 0 auto;
 }
 
+.ntf-form {
+    transition: all 1s ease;
+    -webkit-transition: all 1s ease;
+}
+
 mat-list-item {
     margin: center;
 }
