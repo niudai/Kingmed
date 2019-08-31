@@ -12,5 +12,13 @@ export interface INotification {
 }
 
 export class Notification implements INotification {
-    constructor(private id: )
+    constructor(
+        public id?: number,
+        public subsidiary?: ISubsidiary,
+        public title?: string,
+        public type?: string,
+        public description?: string,
+        public createdDate?: Date,
+        public diseaseXiAn?: IDiseaseXiAn) {}
+
 }

@@ -3,7 +3,7 @@ import { Account } from 'app/core/user/account.model';
 import { IQArobot } from './../../shared/model/q-arobot.model';
 import { QArobot } from 'app/shared/model/q-arobot.model';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { SERVER_API_URL } from 'app/app.constants';
@@ -28,12 +28,14 @@ export class DiseaseXiAnService {
         return this.http.get<ISubsidiary[]>(this.subsidiaryUrl);
     }
 
-    create(diseaseXiAn: IDiseaseXiAn): Observable<EntityResponseType> {
-        return this.http.post<IDiseaseXiAn>(this.resourceUrl, diseaseXiAn, { observe: 'response' });
+    create(req: any, diseaseXiAn: IDiseaseXiAn): Observable<EntityResponseType> {
+        const options = createRequestOption(req);
+        return this.http.post<IDiseaseXiAn>(this.resourceUrl, diseaseXiAn, { params: options, observe: 'response' });
     }
 
-    update(diseaseXiAn: IDiseaseXiAn): Observable<EntityResponseType> {
-        return this.http.put<IDiseaseXiAn>(this.resourceUrl, diseaseXiAn, { observe: 'response' });
+    update(req: any, diseaseXiAn: IDiseaseXiAn): Observable<EntityResponseType> {
+        const param: HttpParams = createRequestOption(req);
+        return this.http.put<IDiseaseXiAn>(this.resourceUrl, diseaseXiAn, { params: param, observe: 'response' });
     }
 
     find(id: number): Observable<EntityResponseType> {
@@ -65,8 +67,9 @@ export class DiseaseXiAnService {
         return this.http.get<IPriceXiAn>(`${this.resourceUrl}/getPrice/${id}`, { observe: 'response'});
     }
 
-    delete(id: number): Observable<HttpResponse<any>> {
-        return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+    delete(req: any, id: number): Observable<HttpResponse<any>> {
+        const options = createRequestOption(req);
+        return this.http.delete<any>(`${this.resourceUrl}/${id}`, { params: options, observe: 'response' });
     }
 
     ////////////// Disease Xi An //////////////////////
