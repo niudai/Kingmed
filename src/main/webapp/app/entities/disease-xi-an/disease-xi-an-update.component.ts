@@ -1,15 +1,13 @@
+import { HttpErrorResponse, HttpResponse, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
 import { IDiseaseXiAn } from 'app/shared/model/disease-xi-an.model';
+import { INotification, Notification } from 'app/shared/model/notification.model';
+import { INtfType } from 'app/shared/model/ntf-type.model';
+import { ISubsidiary, Subsidiary } from 'app/shared/model/subsidiary.model';
+import { Observable } from 'rxjs';
 import { DiseaseXiAnService } from './disease-xi-an.service';
-import { EventEmitter } from 'protractor';
-import { MatSlideToggleDefaultOptions, MatSlideToggleChange } from '@angular/material';
-import { INotification } from 'app/shared/model/notification.model';
-import { ISubsidiary } from 'app/shared/model/subsidiary.model';
-import { INtfType, NtfType } from 'app/shared/model/ntf-type.model';
+import { createRequestOption } from 'app/shared';
 
 @Component({
     selector: 'jhi-disease-xi-an-update',
@@ -34,6 +32,7 @@ export class DiseaseXiAnUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ diseaseXiAn }) => {
             this.diseaseXiAn = diseaseXiAn;
         });
+        this.ntf = { title: '', description: ''};
         this.diseaseXiAnService.getAllSubsidiary().subscribe(
             res => {
                 this.subsidiaries = res;
@@ -45,7 +44,7 @@ export class DiseaseXiAnUpdateComponent implements OnInit {
             { type: 'UPDATE', chinese: '项目更新'},
             { type: 'DELETE', chinese: '项目删除'},
             { type: 'STOP', chinese: '项目停做'},
-            { type: 'CREATE', chinese: '项目停做'}
+            { type: 'CREATE', chinese: '项目新建'}
         ];
         this.selectedNtfType = this.types[0];
     }
@@ -55,12 +54,18 @@ export class DiseaseXiAnUpdateComponent implements OnInit {
     }
 
     save() {
-        this.ntf = new NtfType();
         this.isSaving = true;
+        const params = {
+            'ifGenerate': this.ifGenerateNtf,
+            'subsidiary.name': this.selectedSub.name,
+            'title': this.ntf.title,
+            'type': this.selectedNtfType.type,
+            'description': this.ntf.description
+        };
         if (this.diseaseXiAn.id !== undefined) {
-            this.subscribeToSaveResponse(this.diseaseXiAnService.update(this.diseaseXiAn));
+            this.subscribeToSaveResponse(this.diseaseXiAnService.update(params, this.diseaseXiAn));
         } else {
-            this.subscribeToSaveResponse(this.diseaseXiAnService.create(this.diseaseXiAn));
+            this.subscribeToSaveResponse(this.diseaseXiAnService.create(params, this.diseaseXiAn));
         }
     }
 
@@ -79,10 +84,5 @@ export class DiseaseXiAnUpdateComponent implements OnInit {
 
     protected generateNtfToggle() {
         this.ifGenerateNtf = ! this.ifGenerateNtf;
-        if (this.ifGenerateNtf) {
-            this.ntf = { };
-        } else {
-            this.ntf = null;
-        }
     }
 }
