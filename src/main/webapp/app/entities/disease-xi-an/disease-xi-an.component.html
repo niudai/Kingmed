@@ -10,7 +10,7 @@
                         <fa-icon [icon]="'search'"></fa-icon>
                     </button>
                 </div>
-                <mat-form-field>
+                <mat-form-field class = "search-restric">
                     <mat-label>子公司</mat-label>
                     <mat-select [(value)]="selectedSub" (selectionChange)="loadAll()">
                       <mat-option *ngFor="let sub of subsidiaries" [value]="sub">
@@ -18,8 +18,17 @@
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
+                  <mat-form-field class = "search-restric">
+                        <mat-label>排序</mat-label>
+                        <mat-select [(value)]="selectedSort" (selectionChange)="loadAll()">
+                          <mat-option *ngFor="let sort of diseaseSorts" [value]="sort">
+                            {{sort.chinese}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
             </form>
-            <div>
+            <div class="col-sm-3">
+
                 <button mat-raised-button color="accent" *jhiHasAnyAuthority="'ROLE_ADMIN'" id="jh-create-entity"
                     class="float-right jh-create-entity create-disease-xi-an" [routerLink]="['/disease-xi-an/new']">
                     <fa-icon [icon]="'plus'"></fa-icon>

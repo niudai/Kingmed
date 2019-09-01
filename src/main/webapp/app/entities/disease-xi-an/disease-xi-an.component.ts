@@ -15,6 +15,7 @@ import { PageEvent, MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatBottomSheet } f
 import { DiseaseXiAnGiveDialogComponent } from './disease-xi-an-give-dialog/disease-xi-an-give-dialog.component';
 import { DiseaseXiAnDetailBottomSheetComponent } from './disease-xi-an-detail-bottom-sheet/disease-xi-an-detail-bottom-sheet.component';
 import { DiseaseXiAnMatDeleteDialogComponent } from '.';
+import { ISort, DiseaseSorts } from 'app/shared/util/disease-util';
 
 @Component({
     selector: 'jhi-disease-xi-an',
@@ -29,6 +30,8 @@ export class DiseaseXiAnComponent implements OnInit {
     NO_SPECIFIED = '不限定';
     windowWidth = 1000;
     currentAccount: any;
+    diseaseSorts: ISort[];
+    selectedSort: ISort;
     diseaseXiAns: IDiseaseXiAn[];
     subsidiaries: string[];
     selectedSub: string;
@@ -83,6 +86,7 @@ export class DiseaseXiAnComponent implements OnInit {
                 search: this.currentSearch,
                 size: this.itemsPerPage,
                 page: this.pageEvent.pageIndex ? this.pageEvent.pageIndex : 0,
+                sort: this.selectedSort.chinese,
                 subsidiary: this.selectedSub
             }
         ]);
@@ -97,10 +101,8 @@ export class DiseaseXiAnComponent implements OnInit {
             page: this.pageEvent.pageIndex,
             query: this.currentSearch ? this.currentSearch : '',
             subsidiary: this.selectedSub === this.NO_SPECIFIED ? '' : this.selectedSub,
-            // subsidiary: this.selectedSub ? this.selectedSub.name : null,
-            // projectConcourse: null,
             size: this.pageEvent.pageSize,
-            // sort: this.sort()
+            sort: this.selectedSort.sort,
         })
             .subscribe(
                 (res: HttpResponse<IDiseaseXiAn[]>) => this.paginateDiseaseXiAns(res.body, res.headers),
@@ -162,6 +164,8 @@ export class DiseaseXiAnComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.diseaseSorts = DiseaseSorts;
+        this.selectedSort = this.diseaseSorts[0];
         if (this.accountService.hasAnyAuthority(['ROLE_ADMIN'])) {
             this.PC_COL.push('edit');
             this.PC_COL.push('delete');
