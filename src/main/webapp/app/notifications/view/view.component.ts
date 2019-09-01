@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NotificationService } from '../notifications.service';
 import { INotification } from 'app/shared/model/notification.model';
+import { MatDialogRef, MatDialog } from '@angular/material';
+import { DeleteComponent } from '../delete/delete.component';
 
 @Component({
     selector: 'jhi-view',
@@ -10,7 +12,9 @@ import { INotification } from 'app/shared/model/notification.model';
 export class ViewComponent implements OnInit {
     notifications: INotification[];
 
-    constructor(private service: NotificationService) {}
+    constructor(
+        private service: NotificationService,
+        private dialog: MatDialog) {}
 
     btnColor(type: string) {
         if (type === 'UPDATE') {
@@ -26,6 +30,17 @@ export class ViewComponent implements OnInit {
         }
     }
 
+    onDelete(ntf: INotification) {
+        const dialogRef = this.dialog.open(DeleteComponent, {
+            width: '500px',
+            data: { ntf }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            //   console.log('The dialog was closed');
+            this.loadAll();
+        });    }
+
     btnContent(type: string): string {
         if (type === 'UPDATE') {
             return '项目更新';
@@ -40,11 +55,15 @@ export class ViewComponent implements OnInit {
         }
     }
 
-    ngOnInit() {
+    loadAll() {
         this.service.query().subscribe(response => {
             this.notifications = response.body;
             console.log('notification fetch finished!!!!');
             console.log(this.notifications);
         });
+    }
+
+    ngOnInit() {
+        this.loadAll();
     }
 }

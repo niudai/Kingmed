@@ -8,6 +8,7 @@ import { ISubsidiary, Subsidiary } from 'app/shared/model/subsidiary.model';
 import { Observable } from 'rxjs';
 import { DiseaseXiAnService } from './disease-xi-an.service';
 import { createRequestOption } from 'app/shared';
+import { NTF_TYPE_FOR_DISEASE } from 'app/shared/util/disease-ntf-util';
 
 @Component({
     selector: 'jhi-disease-xi-an-update',
@@ -40,12 +41,7 @@ export class DiseaseXiAnUpdateComponent implements OnInit {
                 this.selectedSub = this.subsidiaries[0];
             }
         );
-        this.types = [
-            { type: 'UPDATE', chinese: '项目更新'},
-            { type: 'DELETE', chinese: '项目删除'},
-            { type: 'STOP', chinese: '项目停做'},
-            { type: 'CREATE', chinese: '项目新建'}
-        ];
+        this.types = NTF_TYPE_FOR_DISEASE;
         this.selectedNtfType = this.types[0];
     }
 

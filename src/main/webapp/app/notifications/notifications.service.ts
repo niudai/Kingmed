@@ -27,6 +27,6 @@ export class NotificationService {
         return this.http.get<INotification[]>(this.resourceUrl, { params: options, observe: 'response' });
     }
     delete(id: number): Observable<NotificationResponse> {
-        return this.http.delete<any>(`${this.resourceUrl}/id`, { observe: 'response' });
+        return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }
 }

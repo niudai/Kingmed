@@ -404,7 +404,9 @@ public class DiseaseXiAnResource {
      * @return 200 ok.
      */
     @DeleteMapping("/disease-xi-ans/deletePrice/{priceId}")
-    public ResponseEntity<Void> deletePrice(@PathVariable Long priceId) {
+    public ResponseEntity<Void> deletePrice(
+        @PathVariable Long priceId
+        ) {
         log.debug("REST request to delete Price: {}", priceId);
         priceRepository.deleteById(priceId);
         return ResponseEntity.ok().build();
@@ -418,9 +420,16 @@ public class DiseaseXiAnResource {
      * @return the ResponseEntity with status 200 (OK)
      */
     @DeleteMapping("/disease-xi-ans/{id}")
-    public ResponseEntity<Void> deleteDiseaseXiAn(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteDiseaseXiAn(
+        @PathVariable Long id,
+        @RequestParam Boolean ifGenerate,
+        ProjectNotificatonDTO dto
+        ) {
         log.debug("REST request to delete DiseaseXiAn : {}", id);
         diseaseXiAnRepository.deleteById(id);
+        if (ifGenerate) {
+            notificationService.generateNotification(null, dto);
+        }
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 

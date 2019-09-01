@@ -5,6 +5,43 @@
           <!-- <input matInput [(ngModel)]="data.qArobot"> -->
         <!-- </mat-form-field> -->
       </div>
+      <mat-slide-toggle [checked]="ifGenerateNtf" (change)="generateNtfToggle($event)">是否生成通知</mat-slide-toggle>
+        <div class="register-list ntf-form">
+            <div [style.height]="ifGenerateNtf ? 'auto' : '0'" [style.visibility]="ifGenerateNtf ? 'visible' : 'hidden'">
+                <h4 mat-subheader>
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    通知信息
+                </h4>
+
+                <mat-form-field>
+                    <textarea cdkTextareaAutosize matInput [(ngModel)]="ntf.title" placeholder="标题" [value]="ntf.title"></textarea>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <textarea
+                        cdkTextareaAutosize
+                        matInput
+                        [(ngModel)]="ntf.description"
+                        placeholder="通知内容"
+                        [value]="ntf.description"
+                    ></textarea>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>子公司</mat-label>
+                    <mat-select [(value)]="selectedSub">
+                        <mat-option [value]="subsidiary" *ngFor="let subsidiary of subsidiaries">{{ subsidiary.name }} </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>通知类型</mat-label>
+                    <mat-select [(value)]="selectedNtfType">
+                        <mat-option [value]="type" *ngFor="let type of types">{{ type.chinese }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
       <div mat-dialog-actions>
         <button mat-button (click)="onNoClick()">取消</button>
         <button mat-button (click)="confirmDelete()" cdkFocusInitial>确定</button>

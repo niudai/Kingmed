@@ -23,13 +23,13 @@ import { DiseaseXiAnService } from './disease-xi-an.service';
 import { DiseaseXiAnComponent } from './disease-xi-an.component';
 import { DiseaseXiAnDetailComponent } from './disease-xi-an-detail.component';
 import { DiseaseXiAnUpdateComponent } from './disease-xi-an-update.component';
-import { DiseaseXiAnDeletePopupComponent } from './disease-xi-an-delete-dialog.component';
 import { IDiseaseXiAn } from 'app/shared/model/disease-xi-an.model';
 import { IPriceXiAn } from 'app/shared/model/price-xi-an.model';
 import { DiseaseXiAnPricesComponent } from './disease-xi-an-prices/disease-xi-an-prices.component';
 import { DiseaseXiAnPricesUpdateComponent } from './disease-xi-an-prices-update/disease-xi-an-prices-update.component';
 import { DiseaseXiAnQarobotsComponent } from './disease-xi-an-qarobots/disease-xi-an-qarobots.component';
 import { DiseaseXiAnDiseasesComponent } from './disease-xi-an-diseases/disease-xi-an-diseases.component';
+import { DiseaseXiAnMatDeleteDialogComponent } from './disease-xi-an-delete-dialog.component';
 @Injectable({ providedIn: 'root' })
 export class DiseaseXiAnResolve implements Resolve<IDiseaseXiAn> {
     constructor(private service: DiseaseXiAnService) {}
@@ -261,7 +261,7 @@ export const diseaseXiAnRoute: Routes = [
 export const diseaseXiAnPopupRoute: Routes = [
     {
         path: ':id/delete',
-        component: DiseaseXiAnDeletePopupComponent,
+        component: DiseaseXiAnMatDeleteDialogComponent,
         resolve: {
             diseaseXiAn: DiseaseXiAnResolve
         },

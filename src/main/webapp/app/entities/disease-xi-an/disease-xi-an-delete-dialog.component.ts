@@ -1,19 +1,29 @@
-import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit, Inject } from '@angular/core';
+import { Router } from '@angular/router';
 
-import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
 
 import { IDiseaseXiAn } from 'app/shared/model/disease-xi-an.model';
 import { DiseaseXiAnService } from './disease-xi-an.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { DiseaseXiAnMatDeleteDialogComponent } from '.';
+import { INotification } from 'app/shared/model/notification.model';
+import { ISubsidiary } from 'app/shared/model/subsidiary.model';
+import { INtfType } from 'app/shared/model/ntf-type.model';
+import { NTF_TYPE_FOR_DISEASE } from 'app/shared/util/disease-ntf-util';
 
 @Component({
     selector: 'jhi-disease-xi-an-delete-dialog',
     templateUrl: './disease-xi-an-delete-dialog.component.html'
 })
-export class DiseaseXiAnDeleteDialogComponent {
+export class DiseaseXiAnMatDeleteDialogComponent implements OnInit{
+    ntf: INotification;
+    isSaving: boolean;
+    ifGenerateNtf = false;
+    subsidiaries: ISubsidiary[];
+    types: INtfType[];
+    selectedSub: ISubsidiary;
+    selectedNtfType: INtfType;
 
     constructor(
         public dialogRef: MatDialogRef<DiseaseXiAnMatDeleteDialogComponent>,
@@ -21,49 +31,40 @@ export class DiseaseXiAnDeleteDialogComponent {
         protected service: DiseaseXiAnService,
         protected router: Router) {}
 
+        ngOnInit(): void {
+            this.isSaving = false;
+            this.ntf = { title: '', description: ''};
+            this.service.getAllSubsidiary().subscribe(
+                res => {
+                    this.subsidiaries = res;
+                    console.log(this.subsidiaries);
+                    this.selectedSub = this.subsidiaries[0];
+                }
+            );
+            this.types = NTF_TYPE_FOR_DISEASE;
+            this.selectedNtfType = this.types[0];
+        }
+
     onNoClick(): void {
         this.dialogRef.close();
     }
 
+    protected generateNtfToggle() {
+        this.ifGenerateNtf = ! this.ifGenerateNtf;
+    }
+
     confirmDelete(): void {
-        this.service.delete(this.data.diseaseXiAn.id).subscribe(
+        const params = {
+            'ifGenerate': this.ifGenerateNtf,
+            'subsidiary.name': this.selectedSub.name,
+            'title': this.ntf.title,
+            'type': this.selectedNtfType.type,
+            'description': this.ntf.description
+        };
+        this.service.delete(params, this.data.diseaseXiAn.id).subscribe(
             any => this.dialogRef.close()
         );
     }
 }
 
-@Component({
-    selector: 'jhi-disease-xi-an-delete-popup',
-    template: ''
-})
-export class DiseaseXiAnDeletePopupComponent implements OnInit, OnDestroy {
-    protected ngbModalRef: NgbModalRef;
 
-    constructor(protected activatedRoute: ActivatedRoute, protected router: Router, protected modalService: NgbModal) {}
-
-    ngOnInit() {
-        this.activatedRoute.data.subscribe(({ diseaseXiAn }) => {
-            setTimeout(() => {
-                this.ngbModalRef = this.modalService.open(DiseaseXiAnDeleteDialogComponent as Component, {
-                    size: 'lg',
-                    backdrop: 'static'
-                });
-                this.ngbModalRef.componentInstance.diseaseXiAn = diseaseXiAn;
-                this.ngbModalRef.result.then(
-                    result => {
-                        this.router.navigate(['/disease-xi-an', { outlets: { popup: null } }]);
-                        this.ngbModalRef = null;
-                    },
-                    reason => {
-                        this.router.navigate(['/disease-xi-an', { outlets: { popup: null } }]);
-                        this.ngbModalRef = null;
-                    }
-                );
-            }, 0);
-        });
-    }
-
-    ngOnDestroy() {
-        this.ngbModalRef = null;
-    }
-}

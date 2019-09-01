@@ -30,7 +30,6 @@ public class ProjectNotification {
     @Size(max = 80)
     private String title;
 
-
     @ManyToOne
     @JoinColumn(name = "subsidiary_name")
     private Subsidiary subsidiary;
@@ -44,8 +43,11 @@ public class ProjectNotification {
     @JoinColumn(name = "disease_xi_an_id")
     private DiseaseXiAn diseaseXiAn;
 
-    public ProjectNotification(DiseaseXiAn diseaseXiAn, ProjectNotificatonDTO dto){
-        this.diseaseXiAn = diseaseXiAn;
+    public ProjectNotification(DiseaseXiAn diseaseXiAn, ProjectNotificatonDTO dto) {
+        if (diseaseXiAn != null) {
+            this.diseaseXiAn = diseaseXiAn;
+
+        }
         this.description = dto.getDescription();
         this.type = dto.getType();
         this.title = dto.getTitle();
@@ -56,7 +58,6 @@ public class ProjectNotification {
     public ProjectNotification() {
 
     }
-
 
     public NotificationType getType() {
         return type;

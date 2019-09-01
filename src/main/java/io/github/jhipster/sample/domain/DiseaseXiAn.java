@@ -23,6 +23,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import org.hibernate.annotations.BatchSize;
@@ -45,6 +46,10 @@ public class DiseaseXiAn  implements Serializable {
     @JoinColumn(name = "disease_xi_an_id")
     @BatchSize(size = 10)
     private List<PriceXiAn> prices = new ArrayList<PriceXiAn>();
+
+    @OneToMany(cascade =  CascadeType.REMOVE)
+    @JoinColumn(name = "disease_xi_an_id")
+    private List<ProjectNotification> ntfs;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "disease_xi_an_id")
@@ -103,7 +108,7 @@ public class DiseaseXiAn  implements Serializable {
         this.suppliess = suppliess;
     }
 
-    
+
 
     public Set<ImageApplication> getApplications() {
         return this.applications;

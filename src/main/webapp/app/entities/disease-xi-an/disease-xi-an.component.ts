@@ -14,6 +14,7 @@ import { DiseaseXiAnService } from './disease-xi-an.service';
 import { PageEvent, MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatBottomSheet } from '@angular/material';
 import { DiseaseXiAnGiveDialogComponent } from './disease-xi-an-give-dialog/disease-xi-an-give-dialog.component';
 import { DiseaseXiAnDetailBottomSheetComponent } from './disease-xi-an-detail-bottom-sheet/disease-xi-an-detail-bottom-sheet.component';
+import { DiseaseXiAnMatDeleteDialogComponent } from '.';
 
 @Component({
     selector: 'jhi-disease-xi-an',
@@ -127,7 +128,7 @@ export class DiseaseXiAnComponent implements OnInit {
 
     openDeleteDialog(disease: IDiseaseXiAn): void {
         const dialogRef = this.dialog.open(DiseaseXiAnMatDeleteDialogComponent, {
-            width: '250px',
+            width: '500px',
             data: { diseaseXiAn: disease }
         });
 
@@ -214,25 +215,4 @@ export class DiseaseXiAnComponent implements OnInit {
     }
 }
 
-@Component({
-    selector: 'jhi-disease-xi-an-delete-dialog',
-    templateUrl: './disease-xi-an-delete-dialog.component.html'
-})
-export class DiseaseXiAnMatDeleteDialogComponent {
 
-    constructor(
-        public dialogRef: MatDialogRef<DiseaseXiAnMatDeleteDialogComponent>,
-        @Inject(MAT_DIALOG_DATA) public data,
-        protected service: DiseaseXiAnService,
-        protected router: Router) { }
-
-    onNoClick(): void {
-        this.dialogRef.close();
-    }
-
-    confirmDelete(): void {
-        this.service.delete(this.data.diseaseXiAn.id).subscribe(
-            any => this.dialogRef.close()
-        );
-    }
-}
