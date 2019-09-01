@@ -352,8 +352,7 @@ public class DiseaseXiAnResource {
     @GetMapping("/disease-xi-ans/{id}")
     public ResponseEntity<DiseaseXiAn> getDiseaseXiAn(@PathVariable Long id) {
         log.debug("REST request to get DiseaseXiAn : {}", id);
-        Optional<DiseaseXiAn> diseaseXiAn = diseaseXiAnRepository.findById(id);
-        return ResponseUtil.wrapOrNotFound(diseaseXiAn);
+        return ResponseUtil.wrapOrNotFound(diseaseXiAnService.getDiseaseXiAn(id));
     }
 
 

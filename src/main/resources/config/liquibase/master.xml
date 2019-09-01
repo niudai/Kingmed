@@ -51,4 +51,5 @@
     <include file="config/liquibase/changelog/20190819_added_entity_Notification.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190827-create-table-feedback.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190827-create-table-comment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190901_ add_column_disease_xi_an.xml" relativeToChangelogFile="false"/>
 </databaseChangeLog>

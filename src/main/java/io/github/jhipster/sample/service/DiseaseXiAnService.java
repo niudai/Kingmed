@@ -5,6 +5,7 @@ import static io.github.jhipster.sample.web.rest.util.SearchUtil.queryKeywordPar
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -24,6 +25,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import io.github.jhipster.sample.domain.DiseaseXiAn;
 import io.github.jhipster.sample.domain.ImageApplication;
@@ -269,6 +271,13 @@ public class DiseaseXiAnService {
         // create a page in terms of the count and content
         Page<DiseaseXiAn> resultPage = new PageImpl<>(allDis, pageable, totalItems);
         return resultPage;
+    }
+
+    @Transactional
+    public Optional<DiseaseXiAn> getDiseaseXiAn(Long id) {
+        DiseaseXiAn diseaseXiAn = diseaseXiAnRepository.findById(id).get();
+        diseaseXiAn.setViews(diseaseXiAn.getViews() + 1);
+        return Optional.of(diseaseXiAn);
     }
 
 }

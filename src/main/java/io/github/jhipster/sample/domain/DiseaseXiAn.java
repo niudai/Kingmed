@@ -36,7 +36,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @Table(name = "disease_xi_an")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class DiseaseXiAn  implements Serializable {
+public class DiseaseXiAn  extends AbstractViewsEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
