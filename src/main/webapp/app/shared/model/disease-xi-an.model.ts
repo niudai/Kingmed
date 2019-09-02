@@ -1,6 +1,7 @@
 import { ILinkCard } from './link-card.model';
 import { IPriceXiAn } from './price-xi-an.model';
 import { IFile } from './file.model';
+
 export interface IDiseaseXiAn {
     id?: number;
     subsidiary?: string;
@@ -28,20 +29,20 @@ export interface IDiseaseXiAn {
     series?: string;
     subSeries?: string;
     remarks?: string;
-    created_by: string;
-    created_date: Date;
-    last_modified_by: string;
-    last_modified_date: Date;
+    createdBy: string;
+    createdDate: Date;
+    lastModifiedBy: string;
+    lastModifiedDate: Date;
     views: number;
 }
 
 export class DiseaseXiAn implements IDiseaseXiAn {
     applications?: IFile[];
     suppliess?: IFile[];
-    created_by: string;
-    created_date: Date;
-    last_modified_by: string;
-    last_modified_date: Date;
+    createdBy: string;
+    createdDate: Date;
+    lastModifiedBy: string;
+    lastModifiedDate: Date;
     views: number;
     constructor(
         public id?: number,

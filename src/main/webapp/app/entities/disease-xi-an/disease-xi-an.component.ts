@@ -86,10 +86,23 @@ export class DiseaseXiAnComponent implements OnInit {
                 search: this.currentSearch,
                 size: this.itemsPerPage,
                 page: this.pageEvent.pageIndex ? this.pageEvent.pageIndex : 0,
-                sort: this.selectedSort.chinese,
+                sort: this.selectedSort.sort,
                 subsidiary: this.selectedSub
             }
         ]);
+
+        this.diseaseXiAnService.query({
+            page: this.pageEvent.pageIndex,
+            query: this.currentSearch ? this.currentSearch : '',
+            subsidiary: this.selectedSub === this.NO_SPECIFIED ? '' : this.selectedSub,
+            size: this.pageEvent.pageSize,
+            sort: [this.selectedSort.sort],
+        }).subscribe(
+                (res: HttpResponse<IDiseaseXiAn[]>) => this.paginateDiseaseXiAns(res.body, res.headers),
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+        console.log('Diseases fetched');
+
         this.diseaseXiAnService.getAllSubsidiary().subscribe(
             res => {
                 this.subsidiaries = res.map(sub => sub.name);
@@ -97,17 +110,7 @@ export class DiseaseXiAnComponent implements OnInit {
             }
         );
 
-        this.diseaseXiAnService.query({
-            page: this.pageEvent.pageIndex,
-            query: this.currentSearch ? this.currentSearch : '',
-            subsidiary: this.selectedSub === this.NO_SPECIFIED ? '' : this.selectedSub,
-            size: this.pageEvent.pageSize,
-            sort: this.selectedSort.sort,
-        })
-            .subscribe(
-                (res: HttpResponse<IDiseaseXiAn[]>) => this.paginateDiseaseXiAns(res.body, res.headers),
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
+
         return;
     }
 
@@ -218,5 +221,3 @@ export class DiseaseXiAnComponent implements OnInit {
         this.jhiAlertService.error(errorMessage, null, null);
     }
 }
-
-

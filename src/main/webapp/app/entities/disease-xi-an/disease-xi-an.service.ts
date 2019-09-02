@@ -16,6 +16,9 @@ import { LinkCard } from 'app/shared/model/link-card.model';
 type EntityResponseType = HttpResponse<IDiseaseXiAn>;
 type EntityArrayResponseType = HttpResponse<IDiseaseXiAn[]>;
 
+type PriceResponseType = HttpResponse<IPriceXiAn>;
+type PriceArrayResponseType = HttpResponse<IPriceXiAn[]>;
+
 @Injectable({ providedIn: 'root' })
 export class DiseaseXiAnService {
     public resourceUrl = SERVER_API_URL + 'api/disease-xi-ans';
@@ -51,7 +54,7 @@ export class DiseaseXiAnService {
         return this.http.get<IDiseaseXiAn[]>(this.resourceUrl, { params: options, observe: 'response' });
     }
 
-    addNewPrice(id: number, price: IPriceXiAn): Observable<EntityResponseType> {
+    addNewPrice(id: number, price: IPriceXiAn): Observable<PriceResponseType> {
         return this.http.post<IPriceXiAn>(`${this.resourceUrl}/addPrice/${id}`, price, { observe: 'response'});
     }
 
@@ -59,11 +62,11 @@ export class DiseaseXiAnService {
         return this.http.delete<any>(`${this.resourceUrl}/deletePrice/${id}`);
     }
 
-    updatePrice(price: IPriceXiAn): Observable<EntityResponseType> {
+    updatePrice(price: IPriceXiAn): Observable<PriceResponseType> {
         return this.http.put<IPriceXiAn>(`${this.resourceUrl}/updatePrice`, price, { observe: 'response'});
     }
 
-    getPrice(id: number): Observable<EntityResponseType> {
+    getPrice(id: number): Observable<PriceResponseType> {
         return this.http.get<IPriceXiAn>(`${this.resourceUrl}/getPrice/${id}`, { observe: 'response'});
     }
 

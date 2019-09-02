@@ -3,6 +3,7 @@ package io.github.jhipster.sample.service;
 import static io.github.jhipster.sample.web.rest.util.SearchUtil.queryKeywordParser;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -24,6 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -230,6 +232,13 @@ public class DiseaseXiAnService {
         List<Predicate> restrictions = new ArrayList<Predicate>();
         diseaseQuery.select(disease);
         countQuery.select(cb.count(count));
+        List<javax.persistence.criteria.Order> orders = pageable.getSort().stream().map(
+            springSort -> springSort.isDescending() ?
+                    cb.desc(disease.get(springSort.getProperty())) :
+                    cb.asc(disease.get(springSort.getProperty()))
+        ).collect(Collectors.toList());
+
+        diseaseQuery.orderBy(orders.toArray(new javax.persistence.criteria.Order[orders.size()]));
 
         String subsidiary = searchDTO.getSubsidiary();
         String projectConcourse = searchDTO.getProjectConcourse();
@@ -255,6 +264,7 @@ public class DiseaseXiAnService {
             cb.and();
         // create final Predicate with term and query predicate
         Predicate finalPredicate = cb.and(termPredicate, queryPredicate);
+
         diseaseQuery.where(finalPredicate);
         countQuery.where(finalPredicate);
 
@@ -262,6 +272,7 @@ public class DiseaseXiAnService {
         TypedQuery<DiseaseXiAn> typedDiseaseQuery = entityManager.createQuery(diseaseQuery);
         typedDiseaseQuery.setFirstResult((int)pageable.getOffset());
         typedDiseaseQuery.setMaxResults((int)pageable.getPageSize());
+
         List<DiseaseXiAn> allDis = typedDiseaseQuery.getResultList();
 
         // get totalItems number with criterias

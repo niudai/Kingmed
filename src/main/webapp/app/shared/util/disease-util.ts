@@ -4,6 +4,6 @@ export interface ISort {
 }
 
 export const DiseaseSorts: ISort[] = [
-    { sort: 'views', chinese: '浏览量'},
-    { sort: 'last_modified_date', chinese: '更新日期'}
+    { sort: 'views,desc', chinese: '浏览量'},
+    { sort: 'lastModifiedDate,desc', chinese: '更新日期'}
 ];

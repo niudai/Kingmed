@@ -62,10 +62,10 @@ export class QArobotResolve implements Resolve<IQArobot[]> {
 }
 
 @Injectable({ providedIn: 'root' })
-export class PriceResolve implements Resolve<IDiseaseXiAn> {
+export class PriceResolve implements Resolve<IPriceXiAn> {
     constructor(private service: DiseaseXiAnService) {}
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IDiseaseXiAn> {
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IPriceXiAn> {
         const id = route.params['priceId'] ? route.params['priceId'] : null;
         if (id) {
             return this.service.getPrice(id).pipe(
