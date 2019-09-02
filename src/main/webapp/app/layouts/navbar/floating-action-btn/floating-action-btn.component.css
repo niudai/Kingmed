@@ -8,6 +8,11 @@
     box-shadow: 0 1px 5px rgba(0,0,0,.3);
 }
 
+a.top {
+    overflow: hidden;
+    height: 0px;
+}
+
 .toolbar-container {
     z-index: 2;
 }

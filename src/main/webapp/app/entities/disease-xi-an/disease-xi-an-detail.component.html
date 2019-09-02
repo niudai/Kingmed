@@ -8,10 +8,11 @@
                 <span style = "float: right"><span style = "color: orange;">{{diseaseXiAn.views}}</span>人看过</span>
                 <br>
                 <fa-icon [icon]="'user-tie'" style="color: cadetblue"></fa-icon>
+                <span style="font-size: 10px">编辑于 <span>{{diseaseXiAn.lastModifiedDate | date}}</span></span>
                 <button style="
                     margin: 5px;" *ngFor="let user of users" mat-stroked-button
                     [routerLink]="['/admin/user-management', user.login, 'view']">{{user.firstName}}</button>
-                <a class="copy-btn" (click)="copyDetail(diseaseXiAn)">
+                <a class="copy-btn" (click)="copyDetail(diseaseXiAn)" title="复制至粘贴板">
                     <fa-icon [size]="'lg'" class="copy-btn" [icon]="'clipboard'"></fa-icon>
                 </a>
             </mat-card>

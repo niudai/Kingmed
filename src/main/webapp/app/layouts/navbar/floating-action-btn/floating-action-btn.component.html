@@ -1,7 +1,8 @@
 
 <div class="toolbar-container show visible" #fab cdkDrag>
-  <a title="返回顶部" class="top" href="#">
-    <fa-icon [icon]="'chevron-up'" size="lg"></fa-icon>
+  <a title="返回顶部" class="top" (click)="scrollToTop()" [style.height]="topBtnHeight">
+    <fa-icon [icon]="'chevron-up'" size="lg">
+        </fa-icon>
   </a>
   <a title="意见反馈" class="comment" (click) = "openDialog()" style = "cursor: pointer">
     <fa-icon [icon]="'comments'" size="lg"></fa-icon>
