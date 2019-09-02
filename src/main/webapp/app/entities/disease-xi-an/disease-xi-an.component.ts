@@ -109,8 +109,6 @@ export class DiseaseXiAnComponent implements OnInit {
                 this.subsidiaries.push(this.NO_SPECIFIED);
             }
         );
-
-
         return;
     }
 
