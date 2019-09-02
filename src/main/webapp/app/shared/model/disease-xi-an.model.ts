@@ -74,19 +74,17 @@ export class DiseaseXiAn implements IDiseaseXiAn {
 }
 
 export const diseaseXiAnToString = (disease: IDiseaseXiAn) => {
-    const str = '项目名: ' + disease.name + ' \n' +
-        '临床应用: ' + disease.clinicalApplication + ' \n' +
-        '样本与样本量: ' + disease.supplement + ' \n' +
-        '耗材: ' + disease.sample + ' \n' +
-        '分析前培训: ' + disease.tutorial + ' \n' +
-        '保存条件与保存时长: ' + disease.preservation + ' \n' +
-        '申请单: ' + disease.applicationUnitType + ' \n' +
-        '申请单填写注意事项: ' + disease.applicationRemark + ' \n';
-    // if (disease.name) {
-    //     str.concat('项目名: ' + disease.name + '  ');
-    // }
-    // if (disease.clinicalApplication) {
-    //     str.concat('临床应用' + disease.clinicalApplication + '  ');
-    // }
+    const str = '【项目名】: ' + disease.name + ' \n' +
+        '【项目代码】: ' + disease.projectCode + ' \n' +
+        '【物价编码】: ' + disease.chargeCode + ' \n' +
+        '【临床应用】: ' + disease.clinicalApplication + ' \n' +
+        '【样本与样本量】: ' + disease.supplement + ' \n' +
+        '【耗材】: ' + disease.sample + ' \n' +
+        '【分析前培训】: ' + disease.tutorial + ' \n' +
+        '【运输要求】: ' + disease.transportation + ' \n' +
+        '【保存条件与保存时长】: ' + disease.preservation + ' \n' +
+        '【检测方法】: ' + disease.medicalMethod + ' \n' +
+        '【申请单】: ' + disease.applicationUnitType + ' \n' +
+        '【申请单填写注意事项】: ' + disease.applicationRemark + ' \n';
     return str;
 };
