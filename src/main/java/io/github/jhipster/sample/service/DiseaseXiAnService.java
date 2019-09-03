@@ -27,15 +27,18 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Order;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import io.github.jhipster.sample.domain.Comment;
 import io.github.jhipster.sample.domain.DiseaseXiAn;
 import io.github.jhipster.sample.domain.ImageApplication;
 import io.github.jhipster.sample.domain.ImageSupplies;
 import io.github.jhipster.sample.domain.LinkCard;
 import io.github.jhipster.sample.domain.QArobot;
 import io.github.jhipster.sample.domain.User;
+import io.github.jhipster.sample.repository.CommentRepository;
 import io.github.jhipster.sample.repository.DiseaseXiAnRepository;
 import io.github.jhipster.sample.repository.ImageApplicationRepository;
 import io.github.jhipster.sample.repository.ImageSuppliesRepository;
@@ -55,6 +58,7 @@ public class DiseaseXiAnService {
     private final UserRepository userRepository;
     private final LinkCardRepository linkCardRepository;
     private final EntityManager entityManager;
+    private final CommentRepository commentRepository;
 
     @Autowired
     public DiseaseXiAnService(DiseaseXiAnRepository diseaseXiAnRepository
@@ -63,8 +67,8 @@ public class DiseaseXiAnService {
         , ImageSuppliesRepository imageSuppliesRepository
         , LinkCardRepository linkCardRepository
         , UserRepository userRepository
-
-        , EntityManager entityManager) {
+        , EntityManager entityManager
+        , CommentRepository commentRepository) {
         this.entityManager = entityManager;
         this.userRepository = userRepository;
         this.imageSuppliesRepository = imageSuppliesRepository;
@@ -72,6 +76,7 @@ public class DiseaseXiAnService {
         this.diseaseXiAnRepository = diseaseXiAnRepository;
         this.qArobotRepository = qArobotRepository;
         this.linkCardRepository = linkCardRepository;
+        this.commentRepository = commentRepository;
     }
 
     /******************** Itself ************************/
@@ -292,6 +297,51 @@ public class DiseaseXiAnService {
         DiseaseXiAn diseaseXiAn = diseaseXiAnRepository.findById(id).get();
         diseaseXiAn.setViews(diseaseXiAn.getViews() + 1);
         return Optional.of(diseaseXiAn);
+    }
+
+    /***************************** Comments ***********************/
+
+    @Transactional
+    public List<Comment> getComments(Long id) {
+        return this.commentRepository.findAllByDiseaseXiAnId(id);
+    }
+
+    /**
+     * Request /disease-xi-ans/addPrice/{id} : add comment to a diseaseXiAn
+     *
+     * @param comment Price to be added
+     * @param diseaseId    the id of diseaseXiAn
+     * @return ok with 200 status code.
+     */
+    @Transactional
+    public Comment createComment(Comment comment, @PathVariable Long diseaseId) {
+        DiseaseXiAn disease = new DiseaseXiAn();
+        disease.setId(diseaseId);
+        comment.setDiseaseXiAnId(diseaseId);;
+        return commentRepository.save(comment);
+    }
+
+    /**
+     * Request to update a comment
+     *
+     * @param comment the comment to be updated
+     * @param id    the id of comment
+     * @return response entity with comment as its body.
+     */
+    @Transactional
+    public Comment updateComment(Comment comment) {
+        return commentRepository.save(comment);
+    }
+
+    /**
+     * Delete comment
+     *
+     * @param commentId the id of comment to be deleted
+     * @return 200 ok.
+     */
+    @Transactional
+    public void deleteComment(@PathVariable Long commentId) {
+        commentRepository.deleteById(commentId);
     }
 
 }
