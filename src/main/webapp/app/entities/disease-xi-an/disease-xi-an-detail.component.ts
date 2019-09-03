@@ -35,6 +35,8 @@ export class DiseaseXiAnDetailComponent implements OnInit {
     currentReportingTime: string;
     currentSubseries: string;
     stringExp: string;
+    feedbackSuccessMsg = '反馈成功';
+
     buttonInfos: ButtonInfo[] = [
         { content: '价格详情', faIcon: 'dollar-sign', relativeUrl: 'prices', color: ''},
         { content: '相关问题', faIcon: 'question', relativeUrl: 'qarobots', color: ''},
@@ -111,7 +113,7 @@ export class DiseaseXiAnDetailComponent implements OnInit {
             .subscribe();
     }
 
-    openDialog(): void {
+    openCommentDialog(): void {
         const dialogRef = this.dialog.open(FeedbackDialogComponent, {
             width: '600px',
             data: { content: '', phone: '' }
@@ -119,7 +121,7 @@ export class DiseaseXiAnDetailComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe(result => {
             console.log('The dialog was closed');
-            this.service.create(result).subscribe(any => this.snackBar.open(this.feedbackSuccessMsg));
+            this.diseaseXiAnService.createComment(this.diseaseXiAn.id, result).subscribe(any => this._snackBar.open(this.feedbackSuccessMsg));
         });
     }
 

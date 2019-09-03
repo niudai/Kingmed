@@ -47,10 +47,9 @@ import { NotificationsModule } from './notifications/notifications.module';
         NotificationsModule,
     ],
     entryComponents: [
-        FeedbackDialogComponent
     ],
     declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent
-        , HomeComponent, NavigationBackComponent, FloatingActionBtnComponent, FeedbackDialogComponent],
+        , HomeComponent, NavigationBackComponent, FloatingActionBtnComponent],
     providers: [
         {
             provide: HTTP_INTERCEPTORS,

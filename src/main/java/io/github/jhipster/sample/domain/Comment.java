@@ -26,11 +26,6 @@ public class Comment {
     @Size(max = 600)
     private String comment;
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
-    private DiseaseXiAn diseaseXiAn;
-
-    @JsonIgnore
     @Column(name = "disease_xi_an_id")
     private Long diseaseXiAnId;
 
@@ -80,14 +75,6 @@ public class Comment {
         } else if (!id.equals(other.id))
             return false;
         return true;
-    }
-
-    public DiseaseXiAn getDiseaseXiAn() {
-        return diseaseXiAn;
-    }
-
-    public void setDiseaseXiAn(DiseaseXiAn diseaseXiAn) {
-        this.diseaseXiAn = diseaseXiAn;
     }
 
     public Long getDiseaseXiAnId() {

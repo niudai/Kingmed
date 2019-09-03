@@ -10,6 +10,7 @@ import {
 } from './';
 import { HideIfNullDirective } from './pipe/hide-if-null.directive';
 import { HideIfHasAnyAuthorityDirective } from './pipe/hide-if-has-any-authority.directive';
+import { FeedbackDialogComponent } from 'app/layouts/navbar/feedback-dialog/feedback-dialog.component';
 @NgModule({
     imports: [
         JhipsterElasticsearchSampleApplicationSharedCommonModule,
@@ -19,14 +20,19 @@ import { HideIfHasAnyAuthorityDirective } from './pipe/hide-if-has-any-authority
         JhiLoginModalComponent,
         HasAnyAuthorityDirective,
         HideIfNullDirective,
-        HideIfHasAnyAuthorityDirective
+        HideIfHasAnyAuthorityDirective,
+        FeedbackDialogComponent
     ],
     providers: [{ provide: NgbDateAdapter, useClass: NgbDateMomentAdapter }],
-    entryComponents: [JhiLoginModalComponent],
+    entryComponents: [
+        JhiLoginModalComponent,
+        FeedbackDialogComponent
+    ],
     exports: [
         JhipsterElasticsearchSampleApplicationSharedCommonModule,
         JhipsterElasticsearchSampleApplicationSharedLibsModule,
         JhiLoginModalComponent,
+        FeedbackDialogComponent,
         HasAnyAuthorityDirective,
         HideIfNullDirective,
         HideIfHasAnyAuthorityDirective

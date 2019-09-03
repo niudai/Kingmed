@@ -12,12 +12,16 @@ import { IDiseaseXiAn } from 'app/shared/model/disease-xi-an.model';
 import { IPriceXiAn } from 'app/shared/model/price-xi-an.model';
 import { IFile } from 'app/shared/model/file.model';
 import { LinkCard } from 'app/shared/model/link-card.model';
+import { IComment } from 'app/shared/model/comment.model';
 
 type EntityResponseType = HttpResponse<IDiseaseXiAn>;
 type EntityArrayResponseType = HttpResponse<IDiseaseXiAn[]>;
 
 type PriceResponseType = HttpResponse<IPriceXiAn>;
 type PriceArrayResponseType = HttpResponse<IPriceXiAn[]>;
+
+type CommentResponse = HttpResponse<IComment>;
+type CommentArrayResponse = HttpResponse<IComment[]>;
 
 @Injectable({ providedIn: 'root' })
 export class DiseaseXiAnService {
@@ -46,7 +50,7 @@ export class DiseaseXiAnService {
     }
 
     activate(id: number, activated: boolean): Observable<EntityResponseType> {
-        return this.http.put<any>(`${this.resourceUrl}/activate/${id}/${activated}`, { observe: 'response'});
+        return this.http.put<any>(`${this.resourceUrl}/activate/${id}/${activated}`, { observe: 'response' });
     }
 
     query(req?: any): Observable<EntityArrayResponseType> {
@@ -55,7 +59,7 @@ export class DiseaseXiAnService {
     }
 
     addNewPrice(id: number, price: IPriceXiAn): Observable<PriceResponseType> {
-        return this.http.post<IPriceXiAn>(`${this.resourceUrl}/addPrice/${id}`, price, { observe: 'response'});
+        return this.http.post<IPriceXiAn>(`${this.resourceUrl}/addPrice/${id}`, price, { observe: 'response' });
     }
 
     deletePrice(id: number): Observable<EntityResponseType> {
@@ -63,11 +67,11 @@ export class DiseaseXiAnService {
     }
 
     updatePrice(price: IPriceXiAn): Observable<PriceResponseType> {
-        return this.http.put<IPriceXiAn>(`${this.resourceUrl}/updatePrice`, price, { observe: 'response'});
+        return this.http.put<IPriceXiAn>(`${this.resourceUrl}/updatePrice`, price, { observe: 'response' });
     }
 
     getPrice(id: number): Observable<PriceResponseType> {
-        return this.http.get<IPriceXiAn>(`${this.resourceUrl}/getPrice/${id}`, { observe: 'response'});
+        return this.http.get<IPriceXiAn>(`${this.resourceUrl}/getPrice/${id}`, { observe: 'response' });
     }
 
     delete(req: any, id: number): Observable<HttpResponse<any>> {
@@ -78,23 +82,23 @@ export class DiseaseXiAnService {
     ////////////// Disease Xi An //////////////////////
 
     getDiseases(id: number): Observable<HttpResponse<IQArobot[]>> {
-        return this.http.get<IDiseaseXiAn[]>(`${this.resourceUrl}/diseases-of-disease/${id}`, { observe: 'response'});
+        return this.http.get<IDiseaseXiAn[]>(`${this.resourceUrl}/diseases-of-disease/${id}`, { observe: 'response' });
     }
 
     associateWithDisease(ownId: number, reversedId: number) {
-        return this.http.get<any>(`${this.resourceUrl}/associate-with-disease/${ownId}/${reversedId}`, { observe: 'response'});
+        return this.http.get<any>(`${this.resourceUrl}/associate-with-disease/${ownId}/${reversedId}`, { observe: 'response' });
     }
 
     deassociateWithDisease(ownId: number, reversedId: number) {
         if (ownId !== reversedId) {
-            return this.http.get<any>(`${this.resourceUrl}/deassociate-with-disease/${ownId}/${reversedId}`, { observe: 'response'});
+            return this.http.get<any>(`${this.resourceUrl}/deassociate-with-disease/${ownId}/${reversedId}`, { observe: 'response' });
         }
     }
 
     ////////////// QArobot ////////////////////////
 
     getQArobot(id: number): Observable<HttpResponse<IQArobot[]>> {
-        return this.http.get<IFile[]>(`${this.resourceUrl}/getQArobotsOfDisease/${id}`, { observe: 'response'});
+        return this.http.get<IFile[]>(`${this.resourceUrl}/getQArobotsOfDisease/${id}`, { observe: 'response' });
     }
 
     associate(diseaseId: number, qarobotId: number): Observable<HttpResponse<any>> {
@@ -108,7 +112,7 @@ export class DiseaseXiAnService {
     /////////////// Application ///////////////////////
 
     getApplications(id: number): Observable<HttpResponse<IFile[]>> {
-        return this.http.get<IFile[]>(`${this.resourceUrl}/getApplicationsOfDisease/${id}`, { observe: 'response'});
+        return this.http.get<IFile[]>(`${this.resourceUrl}/getApplicationsOfDisease/${id}`, { observe: 'response' });
     }
 
     associateWithApplication(diseaseId: number, applicationId: number): Observable<HttpResponse<any>> {
@@ -122,7 +126,7 @@ export class DiseaseXiAnService {
     ///////////////// Supplies ////////////////////////////
 
     getSuppliess(id: number): Observable<HttpResponse<IFile[]>> {
-        return this.http.get<IFile[]>(`${this.resourceUrl}/getSuppliessOfDisease/${id}`, { observe: 'response'});
+        return this.http.get<IFile[]>(`${this.resourceUrl}/getSuppliessOfDisease/${id}`, { observe: 'response' });
     }
 
     associateWithSupplies(diseaseId: number, suppliesId: number): Observable<HttpResponse<any>> {
@@ -152,5 +156,19 @@ export class DiseaseXiAnService {
 
     getUsers(diseaseId: number) {
         return this.http.get<Account[]>(`${this.resourceUrl}/${diseaseId}/users`, { observe: 'response' });
+    }
+
+    //////////////////////////////// Comments /////////////////////
+    createComment(diseaseId: number, comment: IComment): Observable<CommentResponse> {
+        return this.http.post<IComment>(`this.resourceUrl/${diseaseId}/comments`, comment, { observe: 'response' });
+    }
+    updateComment(diseaseId: number, comment: IComment): Observable<CommentResponse> {
+        return this.http.put<IComment>(`this.resourceUrl/${diseaseId}/comments`, comment, { observe: 'response' });
+    }
+    queryComment(diseaseId: number): Observable<CommentArrayResponse> {
+        return this.http.get<IComment[]>(`this.resourceUrl/${diseaseId}/comments`, { observe: 'response' });
+    }
+    deleteComment(diseaseId: number, commentId: number): Observable<CommentResponse> {
+        return this.http.delete<any>(`this.resourceUrl/${diseaseId}/comments/${commentId}`, { observe: 'response' });
     }
 }

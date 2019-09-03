@@ -322,7 +322,7 @@
                 </button>
                 <hr>
                 <button mat-raised-button *jhiHasAnyAuthority="'ROLE_ADMIN'"
-                    [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'edit']">
+                    (click)= "openCommentDialog()" id = "comment">
                     <fa-icon [icon]="'pencil-alt'" style="color: black"></fa-icon>&nbsp;<span>评论</span>
                 </button>
             </div>
