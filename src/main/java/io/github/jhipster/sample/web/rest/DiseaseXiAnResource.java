@@ -470,10 +470,10 @@ public class DiseaseXiAnResource {
      *********************************************/
 
     @GetMapping("/disease-xi-ans/{id}/comments")
-    public ResponseEntity<Comment> getComments(@PathVariable Long id) {
+    public ResponseEntity<List<Comment>> getComments(@PathVariable Long id) {
         log.debug("REST request to get comment: {}", id);
-
-        return ResponseEntity.ok().body(result);
+        List<Comment> comments = diseaseXiAnService.getComments(id);
+        return ResponseEntity.ok().body(comments);
     }
 
     /**
@@ -484,12 +484,10 @@ public class DiseaseXiAnResource {
      * @return ok with 200 status code.
      */
     @PostMapping("/disease-xi-ans/{id}/comments")
-    public ResponseEntity<Void> createComment(@Valid @RequestBody Comment comment, @PathVariable Long id) {
+    public ResponseEntity<Comment> createComment(@Valid @RequestBody Comment comment, @PathVariable Long id) {
         log.debug("REST request to add new comment: {}", comment);
-        DiseaseXiAn disease = diseaseXiAnRepository.findById(id).get();
-        disease.getPrices().add(comment);
-        diseaseXiAnRepository.save(disease);
-        return ResponseEntity.ok().build();
+        Comment result = diseaseXiAnService.createComment(comment, id);
+        return ResponseEntity.ok().body(result);
     }
 
     /**
@@ -499,10 +497,10 @@ public class DiseaseXiAnResource {
      * @param id    the id of comment
      * @return response entity with comment as its body.
      */
-    @PutMapping("/disease-xi-ans/{id}/comments/{cId}")
+    @PutMapping("/disease-xi-ans/{id}/comments")
     public ResponseEntity<Comment> updateComment(@Valid @RequestBody Comment comment) {
         log.debug("REST request to update comment: {}", comment);
-        Comment result = commentRepository.save(comment);
+        Comment result = diseaseXiAnService.updateComment(comment);
         return ResponseEntity.ok().body(result);
     }
 
@@ -512,10 +510,10 @@ public class DiseaseXiAnResource {
      * @param commentId the id of comment to be deleted
      * @return 200 ok.
      */
-    @DeleteMapping("/disease-xi-ans/{id}/comments/{cId}")
+    @DeleteMapping("/disease-xi-ans/{id}/comments/{commentId}")
     public ResponseEntity<Void> deleteComment(@PathVariable Long commentId) {
         log.debug("REST request to delete Price: {}", commentId);
-        commentRepository.deleteById(commentId);
+        diseaseXiAnService.deleteComment(commentId);
         return ResponseEntity.ok().build();
     }
 }
