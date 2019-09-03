@@ -21,7 +21,7 @@
                   <mat-form-field class = "search-restric">
                         <mat-label>排序</mat-label>
                         <mat-select [(value)]="selectedSort" (selectionChange)="loadAll()">
-                          <mat-option *ngFor="let sort of diseaseSorts" [value]="sort">
+                          <mat-option *ngFor="let sort of diseaseSorts" [value]="sort.sort">
                             {{sort.chinese}}
                           </mat-option>
                         </mat-select>

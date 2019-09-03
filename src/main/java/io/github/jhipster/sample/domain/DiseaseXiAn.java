@@ -589,6 +589,7 @@ public class DiseaseXiAn  extends AbstractViewsEntity implements Serializable {
     }
 
     public DiseaseXiAn update(DiseaseXiAn diseaseXiAn) {
+        this.setLastModifiedDate(diseaseXiAn.getLastModifiedDate());
         this.id = diseaseXiAn.id;
         this.subsidiary = diseaseXiAn.subsidiary;
         this.name = diseaseXiAn.name;

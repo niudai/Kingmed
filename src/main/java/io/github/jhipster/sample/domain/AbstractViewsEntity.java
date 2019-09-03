@@ -21,12 +21,11 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
  * AbstractViewsEntity
  */
 @MappedSuperclass
-@Audited
 // @EntityListeners(AuditingEntityListener.class)
 public class AbstractViewsEntity implements Serializable {
 
     @NotAudited
-    private Long views;
+    private Long views = 0l;
 
     private static final long serialVersionUID = 1L;
 

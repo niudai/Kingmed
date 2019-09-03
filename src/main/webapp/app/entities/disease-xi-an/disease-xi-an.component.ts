@@ -31,7 +31,7 @@ export class DiseaseXiAnComponent implements OnInit {
     windowWidth = 1000;
     currentAccount: any;
     diseaseSorts: ISort[];
-    selectedSort: ISort;
+    selectedSort: string;
     diseaseXiAns: IDiseaseXiAn[];
     subsidiaries: string[];
     selectedSub: string;
@@ -86,7 +86,7 @@ export class DiseaseXiAnComponent implements OnInit {
                 search: this.currentSearch,
                 size: this.itemsPerPage,
                 page: this.pageEvent.pageIndex ? this.pageEvent.pageIndex : 0,
-                sort: this.selectedSort.sort,
+                sort: this.selectedSort,
                 subsidiary: this.selectedSub
             }
         ]);
@@ -96,7 +96,7 @@ export class DiseaseXiAnComponent implements OnInit {
             query: this.currentSearch ? this.currentSearch : '',
             subsidiary: this.selectedSub === this.NO_SPECIFIED ? '' : this.selectedSub,
             size: this.pageEvent.pageSize,
-            sort: [this.selectedSort.sort],
+            sort: [this.selectedSort],
         }).subscribe(
                 (res: HttpResponse<IDiseaseXiAn[]>) => this.paginateDiseaseXiAns(res.body, res.headers),
                 (res: HttpErrorResponse) => this.onError(res.message)
@@ -166,7 +166,6 @@ export class DiseaseXiAnComponent implements OnInit {
 
     ngOnInit() {
         this.diseaseSorts = DiseaseSorts;
-        this.selectedSort = this.diseaseSorts[0];
         if (this.accountService.hasAnyAuthority(['ROLE_ADMIN'])) {
             this.PC_COL.push('edit');
             this.PC_COL.push('delete');
@@ -190,6 +189,8 @@ export class DiseaseXiAnComponent implements OnInit {
             this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['page']
                 ? +this.activatedRoute.snapshot.params['page']
                 : 0;
+        this.selectedSort = this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['sort'] ?
+                 this.activatedRoute.snapshot.params['sort'] : this.diseaseSorts[0].sort;
         this.pageEvent.pageSize = ITEMS_PER_PAGE;
         this.loadAll();
         this.accountService.identity().then(account => {
