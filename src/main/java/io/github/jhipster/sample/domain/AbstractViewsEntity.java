@@ -9,6 +9,8 @@ import javax.persistence.MappedSuperclass;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -19,9 +21,11 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
  * AbstractViewsEntity
  */
 @MappedSuperclass
-@EntityListeners(AuditingEntityListener.class)
+@Audited
+// @EntityListeners(AuditingEntityListener.class)
 public class AbstractViewsEntity implements Serializable {
 
+    @NotAudited
     private Long views;
 
     private static final long serialVersionUID = 1L;

@@ -55,6 +55,7 @@ export class QArobotComponent implements OnInit, OnDestroy {
             this.reverse = data.pagingParams.ascending;
             this.predicate = data.pagingParams.predicate;
         });
+        console.log('params initialized!!!!!!!');
         this.currentSearch =
             this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['search']
                 ? this.activatedRoute.snapshot.params['search']
@@ -90,9 +91,15 @@ export class QArobotComponent implements OnInit, OnDestroy {
     }
 
     loadAll() {
-        this.router.navigate(['/q-arobot', {page: this.pageEvent && this.pageEvent.pageIndex ? this.pageEvent.pageIndex : 0,
+        this.router.navigate(['/q-arobot', {
+            page: this.pageEvent && this.pageEvent.pageIndex ? this.pageEvent.pageIndex : 0,
             size: this.pageEvent && this.pageEvent.pageSize ? this.pageEvent.pageSize : 10,
-            search: this.currentSearch}]);
+            search: this.currentSearch}],
+            { queryParams: {
+                page: this.pageEvent && this.pageEvent.pageIndex ? this.pageEvent.pageIndex : 0,
+                size: this.pageEvent && this.pageEvent.pageSize ? this.pageEvent.pageSize : 10,
+            }}
+        );
         if (this.currentSearch) {
             this.qArobotService
                 .search({

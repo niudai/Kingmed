@@ -23,7 +23,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import org.hibernate.annotations.BatchSize;
@@ -42,31 +41,38 @@ public class DiseaseXiAn  extends AbstractViewsEntity implements Serializable {
 
     /************************************************ One-to-Many Or Many-to-Many Asso */
 
+
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "disease_xi_an_id")
     @BatchSize(size = 10)
     private List<PriceXiAn> prices = new ArrayList<PriceXiAn>();
 
+
     @OneToMany(cascade =  CascadeType.REMOVE)
     @JoinColumn(name = "disease_xi_an_id")
     private List<ProjectNotification> ntfs;
+
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "disease_xi_an_id")
     private List<Comment> comments = new ArrayList<Comment>();
 
+
     @ManyToOne
     @JoinColumn(name = "subsidiary_id")
     private Subsidiary realSubsidiary;
+
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "disease_xi_an_id")
     @BatchSize(size = 10)
     private Set<LinkCard> linkCards = new HashSet<LinkCard>();
 
+
     @ManyToMany
     @JoinTable(name = "disease_xi_an_q_arobot", joinColumns = @JoinColumn(name = "disease_xi_an_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "q_arobot_id", referencedColumnName = "id"))
     private Set<QArobot> qarobots = new HashSet<>();
+
 
     @ManyToMany
     @JoinTable(name = "disease_xi_an_disease_xi_an", joinColumns = @JoinColumn(name = "disease_xi_an_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "related_disease_xi_an_id", referencedColumnName = "id"))
@@ -74,23 +80,28 @@ public class DiseaseXiAn  extends AbstractViewsEntity implements Serializable {
     private Set<DiseaseXiAn> diseaseXiAns = new HashSet<>();
 
     @ManyToMany
+
     @JoinTable(name = "disease_xi_an_disease_xi_an", joinColumns = @JoinColumn(name = "related_disease_xi_an_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "disease_xi_an_id", referencedColumnName = "id"))
     @JsonIgnoreProperties({ "diseaseXiAns", "reversedDiseaseXiAns" })
     private Set<DiseaseXiAn> reversedDiseaseXiAns = new HashSet<>();
 
     @ManyToMany
+
     @JoinTable(name = "disease_map_disease_xi_an"
         , joinColumns = @JoinColumn(name = "disease_xi_an_id", referencedColumnName = "id")
         , inverseJoinColumns = @JoinColumn(name = "disease_map_id", referencedColumnName = "id"))
     private Set<DiseaseMap> diseaseMaps = new HashSet<>();
+
 
     @ManyToMany
     @JoinTable(name = "disease_xi_an_image_application", joinColumns = @JoinColumn(name = "disease_xi_an_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "image_application_id", referencedColumnName = "id"))
     private Set<ImageApplication> applications = new HashSet<>();
 
     @ManyToMany
+
     @JoinTable(name = "disease_xi_an_image_supplies", joinColumns = @JoinColumn(name = "disease_xi_an_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "image_supplies_id", referencedColumnName = "id"))
     private Set<ImageSupplies> suppliess = new HashSet<>();
+
 
     @ManyToMany
     @JoinTable(

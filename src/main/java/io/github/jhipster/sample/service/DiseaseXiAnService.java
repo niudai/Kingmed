@@ -2,6 +2,7 @@ package io.github.jhipster.sample.service;
 
 import static io.github.jhipster.sample.web.rest.util.SearchUtil.queryKeywordParser;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -77,12 +78,14 @@ public class DiseaseXiAnService {
 
     @Transactional
     public DiseaseXiAn updateDiseaseXiAn(DiseaseXiAn disease) {
+        disease.setLastModifiedDate(Instant.now());
         DiseaseXiAn result = diseaseXiAnRepository.findById(disease.getId()).get().update(disease);
         return result;
     }
 
     @Transactional
     public DiseaseXiAn postDiseaseXiAn(DiseaseXiAn disease) {
+        disease.setLastModifiedDate(Instant.now());
         return diseaseXiAnRepository.save(disease);
     }
 
