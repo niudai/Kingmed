@@ -320,11 +320,17 @@
                 <button mat-raised-button *jhiHasAnyAuthority="'ROLE_ADMIN'" (click)="openCreateDialog(null)">
                     <fa-icon [icon]="'pencil-alt'" style="color: black"></fa-icon>&nbsp;<span>新建链接</span>
                 </button>
+                <hr>
+                <button mat-raised-button *jhiHasAnyAuthority="'ROLE_ADMIN'"
+                    [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'edit']">
+                    <fa-icon [icon]="'pencil-alt'" style="color: black"></fa-icon>&nbsp;<span>评论</span>
+                </button>
             </div>
 
         </div>
 
     </div>
+
     <div *ngIf="diseaseXiAn.linkCards" class="col-sm-3">
         <div *ngFor="let link of diseaseXiAn.linkCards">
             <mat-card class="example-card">

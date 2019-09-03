@@ -6,6 +6,7 @@ import { DiseaseXiAnService } from 'app/entities/disease-xi-an/disease-xi-an.ser
 import { IDiseaseXiAn, diseaseXiAnToString } from 'app/shared/model/disease-xi-an.model';
 import { ILinkCard, LinkCard } from 'app/shared/model/link-card.model';
 import { PriceXiAn } from './../../shared/model/price-xi-an.model';
+import { FeedbackDialogComponent } from 'app/layouts/navbar/feedback-dialog/feedback-dialog.component';
 
 export interface ButtonInfo {
     content?: string;
@@ -108,6 +109,18 @@ export class DiseaseXiAnDetailComponent implements OnInit {
         this.activatedToggleLabel = this.diseaseXiAn.activated ? '正常运行' : '暂停运行';
         this.diseaseXiAnService.activate(this.diseaseXiAn.id, this.diseaseXiAn.activated)
             .subscribe();
+    }
+
+    openDialog(): void {
+        const dialogRef = this.dialog.open(FeedbackDialogComponent, {
+            width: '600px',
+            data: { content: '', phone: '' }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            console.log('The dialog was closed');
+            this.service.create(result).subscribe(any => this.snackBar.open(this.feedbackSuccessMsg));
+        });
     }
 
     ngOnInit() {
