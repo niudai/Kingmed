@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.github.jhipster.sample.domain.Comment;
 import io.github.jhipster.sample.domain.DiseaseXiAn;
 import io.github.jhipster.sample.domain.ImageApplication;
 import io.github.jhipster.sample.domain.ImageSupplies;
@@ -31,6 +32,7 @@ import io.github.jhipster.sample.domain.LinkCard;
 import io.github.jhipster.sample.domain.PriceXiAn;
 import io.github.jhipster.sample.domain.QArobot;
 import io.github.jhipster.sample.domain.User;
+import io.github.jhipster.sample.repository.CommentRepository;
 import io.github.jhipster.sample.repository.DiseaseXiAnRepository;
 import io.github.jhipster.sample.repository.PriceXiAnRepository;
 import io.github.jhipster.sample.service.DiseaseXiAnService;
@@ -55,51 +57,54 @@ public class DiseaseXiAnResource {
 
     private final DiseaseXiAnRepository diseaseXiAnRepository;
 
-
     private final PriceXiAnRepository priceRepository;
 
     private final DiseaseXiAnService diseaseXiAnService;
 
     private final ProjectNotificationService notificationService;
 
-
+    private final CommentRepository commentRepository;
     public DiseaseXiAnResource(
-        DiseaseXiAnRepository diseaseXiAnRepository
-        , PriceXiAnRepository priceXiAnRepository
-        , DiseaseXiAnService diseaseXiAnService
-        , ProjectNotificationService notificationService) {
+        DiseaseXiAnRepository diseaseXiAnRepository,
+        PriceXiAnRepository priceXiAnRepository,
+        DiseaseXiAnService diseaseXiAnService,
+        ProjectNotificationService notificationService,
+        CommentRepository commentRepository) {
         this.notificationService = notificationService;
         this.diseaseXiAnRepository = diseaseXiAnRepository;
         this.priceRepository = priceXiAnRepository;
         this.diseaseXiAnService = diseaseXiAnService;
+        this.commentRepository = commentRepository;
     }
 
     /**
-     * PUT  /disease-xi-ans/activate : activate diseaseXiAn.
+     * PUT /disease-xi-ans/activate : activate diseaseXiAn.
      *
      * @param diseaseXiAn the diseaseXiAn to create
-     * @return the ResponseEntity with status 201 (Created) and with body the new diseaseXiAn, or with status 400 (Bad Request) if the diseaseXiAn has already an ID
+     * @return the ResponseEntity with status 201 (Created) and with body the new
+     *         diseaseXiAn, or with status 400 (Bad Request) if the diseaseXiAn has
+     *         already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/disease-xi-ans/activate/{diseaseXiAnId}/{activated}")
-    public ResponseEntity<DiseaseXiAn> activateDiseaseXiAn(@PathVariable Long diseaseXiAnId, @PathVariable Boolean activated) throws URISyntaxException {
+    public ResponseEntity<DiseaseXiAn> activateDiseaseXiAn(@PathVariable Long diseaseXiAnId,
+            @PathVariable Boolean activated) throws URISyntaxException {
         diseaseXiAnService.activateDiseaseXiAn(diseaseXiAnId, activated);
         return ResponseEntity.ok().build();
     }
 
     /**
-     * POST  /disease-xi-ans : Create a new diseaseXiAn.
+     * POST /disease-xi-ans : Create a new diseaseXiAn.
      *
      * @param diseaseXiAn the diseaseXiAn to create
-     * @return the ResponseEntity with status 201 (Created) and with body the new diseaseXiAn, or with status 400 (Bad Request) if the diseaseXiAn has already an ID
+     * @return the ResponseEntity with status 201 (Created) and with body the new
+     *         diseaseXiAn, or with status 400 (Bad Request) if the diseaseXiAn has
+     *         already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/disease-xi-ans")
-    public ResponseEntity<DiseaseXiAn> createDiseaseXiAn(
-        @Valid @RequestBody DiseaseXiAn diseaseXiAn,
-        @RequestParam Boolean ifGenerate,
-        ProjectNotificatonDTO dto
-) throws URISyntaxException {
+    public ResponseEntity<DiseaseXiAn> createDiseaseXiAn(@Valid @RequestBody DiseaseXiAn diseaseXiAn,
+            @RequestParam Boolean ifGenerate, ProjectNotificatonDTO dto) throws URISyntaxException {
         log.debug("REST request to save DiseaseXiAn : {}", diseaseXiAn);
         if (diseaseXiAn.getId() != null) {
             throw new BadRequestAlertException("A new diseaseXiAn cannot already have an ID", ENTITY_NAME, "idexists");
@@ -109,25 +114,22 @@ public class DiseaseXiAnResource {
             notificationService.generateNotification(result, dto);
         }
         return ResponseEntity.created(new URI("/api/disease-xi-ans/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
-            .body(result);
+                .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString())).body(result);
     }
 
     /**
-     * PUT  /disease-xi-ans : Updates an existing diseaseXiAn.
+     * PUT /disease-xi-ans : Updates an existing diseaseXiAn.
      *
      * @param diseaseXiAn the diseaseXiAn to update
-     * @return the ResponseEntity with status 200 (OK) and with body the updated diseaseXiAn,
-     * or with status 400 (Bad Request) if the diseaseXiAn is not valid,
-     * or with status 500 (Internal Server Error) if the diseaseXiAn couldn't be updated
+     * @return the ResponseEntity with status 200 (OK) and with body the updated
+     *         diseaseXiAn, or with status 400 (Bad Request) if the diseaseXiAn is
+     *         not valid, or with status 500 (Internal Server Error) if the
+     *         diseaseXiAn couldn't be updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/disease-xi-ans")
-    public ResponseEntity<DiseaseXiAn> updateDiseaseXiAn(
-        @Valid @RequestBody DiseaseXiAn diseaseXiAn,
-        @RequestParam Boolean ifGenerate,
-        ProjectNotificatonDTO dto
-        ) throws URISyntaxException {
+    public ResponseEntity<DiseaseXiAn> updateDiseaseXiAn(@Valid @RequestBody DiseaseXiAn diseaseXiAn,
+            @RequestParam Boolean ifGenerate, ProjectNotificatonDTO dto) throws URISyntaxException {
         log.debug("REST request to update DiseaseXiAn : {}", diseaseXiAn);
         if (diseaseXiAn.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
@@ -137,20 +139,18 @@ public class DiseaseXiAnResource {
             notificationService.generateNotification(result, dto);
         }
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, diseaseXiAn.getId().toString()))
-            .body(result);
+                .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, diseaseXiAn.getId().toString())).body(result);
     }
 
     /**
-     * GET  /disease-xi-ans : get all the diseaseXiAns.
+     * GET /disease-xi-ans : get all the diseaseXiAns.
      *
      * @param pageable the pagination information
-     * @return the ResponseEntity with status 200 (OK) and the list of diseaseXiAns in body
+     * @return the ResponseEntity with status 200 (OK) and the list of diseaseXiAns
+     *         in body
      */
     @GetMapping("/disease-xi-ans")
-    public ResponseEntity<List<DiseaseXiAn>> getAllDiseaseXiAns(
-        DiseaseXiAnSearchDTO searchDTO, Pageable page
-        ) {
+    public ResponseEntity<List<DiseaseXiAn>> getAllDiseaseXiAns(DiseaseXiAnSearchDTO searchDTO, Pageable page) {
         Page<DiseaseXiAn> result = diseaseXiAnService.searchDiseases(searchDTO, page);
         log.debug("REST request to get a page of DiseaseXiAns with query: {}", searchDTO);
         // Page<DiseaseXiAn> page = diseaseXiAnRepository.findAll(pageable);
@@ -159,24 +159,28 @@ public class DiseaseXiAnResource {
         return ResponseEntity.ok().headers(headers).body(result.getContent());
     }
 
-    /******************************** Many To Many between disease and user ****************************/
+    /********************************
+     * Many To Many between disease and user
+     ****************************/
 
     @GetMapping("/disease-xi-ans/{diseaseXiAnId}/users")
     public ResponseEntity<List<User>> getUsers(@PathVariable Long diseaseXiAnId) {
         return ResponseEntity.ok().body(diseaseXiAnService.getUsers(diseaseXiAnId));
     }
 
-    /******************************* Many To Many relationship between disease and disease **************/
+    /*******************************
+     * Many To Many relationship between disease and disease
+     **************/
 
     /**
      * Associate a disease xi an with a disease xi an
+     *
      * @param ownId
      * @param inversedId
      * @return ok 200
      */
     @GetMapping("/disease-xi-ans/associate-with-disease/{ownId}/{inversedId}")
-    public ResponseEntity<Void> associateWithDiseaseXiAn(@PathVariable Long ownId
-        , @PathVariable Long inversedId) {
+    public ResponseEntity<Void> associateWithDiseaseXiAn(@PathVariable Long ownId, @PathVariable Long inversedId) {
 
         diseaseXiAnService.associateWithDiseaseXiAn(ownId, inversedId);
         return ResponseEntity.ok().build();
@@ -184,13 +188,13 @@ public class DiseaseXiAnResource {
 
     /**
      * De associate a disease with a disease xi an
+     *
      * @param diseaseId
      * @param qarobotId
      * @return ok 200
      */
     @GetMapping("/disease-xi-ans/deassociate-with-disease/{diseaseId}/{qarobotId}")
-    public ResponseEntity<Void> deassociateWithDiseaseXiAn(@PathVariable Long diseaseId
-        , @PathVariable Long qarobotId) {
+    public ResponseEntity<Void> deassociateWithDiseaseXiAn(@PathVariable Long diseaseId, @PathVariable Long qarobotId) {
 
         diseaseXiAnService.deassociateWithDiseaseXiAn(diseaseId, qarobotId);
         return ResponseEntity.ok().build();
@@ -198,6 +202,7 @@ public class DiseaseXiAnResource {
 
     /**
      * get associated diseasexian of disease
+     *
      * @param id id of disease
      * @return ok 200
      */
@@ -206,17 +211,19 @@ public class DiseaseXiAnResource {
         return ResponseEntity.ok().body(diseaseXiAnService.findDiseaseXiAnsOfDiseaseXiAn(id));
     }
 
-    /******************************* Many To Many relationship between disease and application **************/
+    /*******************************
+     * Many To Many relationship between disease and application
+     **************/
 
     /**
      * Associate a QA with a disease xi an
+     *
      * @param diseaseId
      * @param qarobotId
      * @return ok 200
      */
     @GetMapping("/disease-xi-ans/associate/{diseaseId}/{qarobotId}")
-    public ResponseEntity<Void> associateWithQArobot(@PathVariable Long diseaseId
-        , @PathVariable Long qarobotId) {
+    public ResponseEntity<Void> associateWithQArobot(@PathVariable Long diseaseId, @PathVariable Long qarobotId) {
 
         diseaseXiAnService.associateWithQArobot(diseaseId, qarobotId);
         return ResponseEntity.ok().build();
@@ -224,13 +231,13 @@ public class DiseaseXiAnResource {
 
     /**
      * De associate a QA with a disease xi an
+     *
      * @param diseaseId
      * @param qarobotId
      * @return ok 200
      */
     @GetMapping("/disease-xi-ans/deassociate/{diseaseId}/{qarobotId}")
-    public ResponseEntity<Void> deassociateWithQArobot(@PathVariable Long diseaseId
-        , @PathVariable Long qarobotId) {
+    public ResponseEntity<Void> deassociateWithQArobot(@PathVariable Long diseaseId, @PathVariable Long qarobotId) {
 
         diseaseXiAnService.deassociateWithQArobot(diseaseId, qarobotId);
         return ResponseEntity.ok().build();
@@ -238,6 +245,7 @@ public class DiseaseXiAnResource {
 
     /**
      * get associated qarobots of disease
+     *
      * @param id id of disease
      * @return ok 200
      */
@@ -248,6 +256,7 @@ public class DiseaseXiAnResource {
 
     /**
      * get associated disease of qarobot
+     *
      * @param id id of qarobot
      * @return ok 200
      */
@@ -258,17 +267,20 @@ public class DiseaseXiAnResource {
 
     /**************************************************************************************************** */
 
-    /**************************************** Many to many relationship between disease and applciations***********/
+    /****************************************
+     * Many to many relationship between disease and applciations
+     ***********/
 
     /**
      * Associate a QA with a disease xi an
+     *
      * @param diseaseId
      * @param applicationId
      * @return ok 200
      */
     @GetMapping("/disease-xi-ans/associateWithApplication/{diseaseId}/{applicationId}")
-    public ResponseEntity<Void> associateWithApplication(@PathVariable Long diseaseId
-        , @PathVariable Long applicationId) {
+    public ResponseEntity<Void> associateWithApplication(@PathVariable Long diseaseId,
+            @PathVariable Long applicationId) {
 
         diseaseXiAnService.associateWithApplication(diseaseId, applicationId);
         return ResponseEntity.ok().build();
@@ -276,13 +288,14 @@ public class DiseaseXiAnResource {
 
     /**
      * De associate a QA with a disease xi an
+     *
      * @param diseaseId
      * @param applicationId
      * @return ok 200
      */
     @GetMapping("/disease-xi-ans/deassociateWithApplication/{diseaseId}/{applicationId}")
-    public ResponseEntity<Void> deassociateWithApplication(@PathVariable Long diseaseId
-        , @PathVariable Long applicationId) {
+    public ResponseEntity<Void> deassociateWithApplication(@PathVariable Long diseaseId,
+            @PathVariable Long applicationId) {
 
         diseaseXiAnService.deassociateWithApplication(diseaseId, applicationId);
         return ResponseEntity.ok().build();
@@ -290,6 +303,7 @@ public class DiseaseXiAnResource {
 
     /**
      * get associated applications of disease
+     *
      * @param id id of disease
      * @return ok 200
      */
@@ -300,17 +314,19 @@ public class DiseaseXiAnResource {
 
     /**************************************************************************************************** */
 
-    /**************************************** Many to many relationship between disease and applciations***********/
+    /****************************************
+     * Many to many relationship between disease and applciations
+     ***********/
 
     /**
      * Associate a QA with a disease xi an
+     *
      * @param diseaseId
      * @param suppliesId
      * @return ok 200
      */
     @GetMapping("/disease-xi-ans/associateWithSupplies/{diseaseId}/{suppliesId}")
-    public ResponseEntity<Void> associateWithSupplies(@PathVariable Long diseaseId
-        , @PathVariable Long suppliesId) {
+    public ResponseEntity<Void> associateWithSupplies(@PathVariable Long diseaseId, @PathVariable Long suppliesId) {
 
         diseaseXiAnService.associateWithSupplies(diseaseId, suppliesId);
         return ResponseEntity.ok().build();
@@ -318,13 +334,13 @@ public class DiseaseXiAnResource {
 
     /**
      * De associate a QA with a disease xi an
+     *
      * @param diseaseId
      * @param suppliesId
      * @return ok 200
      */
     @GetMapping("/disease-xi-ans/deassociateWithSupplies/{diseaseId}/{suppliesId}")
-    public ResponseEntity<Void> deassociateWithSupplies(@PathVariable Long diseaseId
-        , @PathVariable Long suppliesId) {
+    public ResponseEntity<Void> deassociateWithSupplies(@PathVariable Long diseaseId, @PathVariable Long suppliesId) {
 
         diseaseXiAnService.deassociateWithSupplies(diseaseId, suppliesId);
         return ResponseEntity.ok().build();
@@ -332,6 +348,7 @@ public class DiseaseXiAnResource {
 
     /**
      * get associated suppliess of disease
+     *
      * @param id id of disease
      * @return ok 200
      */
@@ -340,14 +357,16 @@ public class DiseaseXiAnResource {
         return ResponseEntity.ok().body(diseaseXiAnService.findSuppliessOfDiseaseXiAn(id));
     }
 
-    /********************************************** Disease Xi An ************************************/
-
+    /**********************************************
+     * Disease Xi An
+     ************************************/
 
     /**
-     * GET  /disease-xi-ans/:id : get the "id" diseaseXiAn.
+     * GET /disease-xi-ans/:id : get the "id" diseaseXiAn.
      *
      * @param id the id of the diseaseXiAn to retrieve
-     * @return the ResponseEntity with status 200 (OK) and with body the diseaseXiAn, or with status 404 (Not Found)
+     * @return the ResponseEntity with status 200 (OK) and with body the
+     *         diseaseXiAn, or with status 404 (Not Found)
      */
     @GetMapping("/disease-xi-ans/{id}")
     public ResponseEntity<DiseaseXiAn> getDiseaseXiAn(@PathVariable Long id) {
@@ -355,9 +374,9 @@ public class DiseaseXiAnResource {
         return ResponseUtil.wrapOrNotFound(diseaseXiAnService.getDiseaseXiAn(id));
     }
 
-
     /**
      * Request /disease-xi-ans/getPrice/{id} : get price with a specified id.
+     *
      * @param id the id of price
      * @return response entity with price as response
      */
@@ -368,11 +387,11 @@ public class DiseaseXiAnResource {
         return ResponseEntity.ok().body(result);
     }
 
-
     /**
      * Request /disease-xi-ans/addPrice/{id} : add price to a diseaseXiAn
+     *
      * @param price Price to be added
-     * @param id the id of diseaseXiAn
+     * @param id    the id of diseaseXiAn
      * @return ok with 200 status code.
      */
     @PostMapping("/disease-xi-ans/addPrice/{id}")
@@ -386,8 +405,9 @@ public class DiseaseXiAnResource {
 
     /**
      * Request to update a price
+     *
      * @param price the price to be updated
-     * @param id the id of price
+     * @param id    the id of price
      * @return response entity with price as its body.
      */
     @PutMapping("/disease-xi-ans/updatePrice")
@@ -399,31 +419,26 @@ public class DiseaseXiAnResource {
 
     /**
      * Delete price
+     *
      * @param priceId the id of price to be deleted
      * @return 200 ok.
      */
     @DeleteMapping("/disease-xi-ans/deletePrice/{priceId}")
-    public ResponseEntity<Void> deletePrice(
-        @PathVariable Long priceId
-        ) {
+    public ResponseEntity<Void> deletePrice(@PathVariable Long priceId) {
         log.debug("REST request to delete Price: {}", priceId);
         priceRepository.deleteById(priceId);
         return ResponseEntity.ok().build();
     }
 
-
     /**
-     * DELETE  /disease-xi-ans/:id : delete the "id" diseaseXiAn.
+     * DELETE /disease-xi-ans/:id : delete the "id" diseaseXiAn.
      *
      * @param id the id of the diseaseXiAn to delete
      * @return the ResponseEntity with status 200 (OK)
      */
     @DeleteMapping("/disease-xi-ans/{id}")
-    public ResponseEntity<Void> deleteDiseaseXiAn(
-        @PathVariable Long id,
-        @RequestParam Boolean ifGenerate,
-        ProjectNotificatonDTO dto
-        ) {
+    public ResponseEntity<Void> deleteDiseaseXiAn(@PathVariable Long id, @RequestParam Boolean ifGenerate,
+            ProjectNotificatonDTO dto) {
         log.debug("REST request to delete DiseaseXiAn : {}", id);
         diseaseXiAnRepository.deleteById(id);
         if (ifGenerate) {
@@ -432,18 +447,75 @@ public class DiseaseXiAnResource {
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 
-    /******************************* One To Many relationship between disease xi an and linkCard  */
+    /*******************************
+     * One To Many relationship between disease xi an and linkCard
+     */
 
     @PostMapping("/disease-xi-ans/attach-link-card/{diseaseXiAnId}")
-    public ResponseEntity<Void> attachLinkCard(@Valid @RequestBody LinkCard linkCard, @PathVariable Long diseaseXiAnId) {
+    public ResponseEntity<Void> attachLinkCard(@Valid @RequestBody LinkCard linkCard,
+            @PathVariable Long diseaseXiAnId) {
         diseaseXiAnService.attachLinkCardToDiseaseXiAn(linkCard, diseaseXiAnId);
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("/disease-xi-ans/deattach-link-card/{diseaseXiAnId}")
-    public ResponseEntity<Void> deattachLinkCard(@Valid @RequestBody LinkCard linkCard, @PathVariable Long diseaseXiAnId) {
+    public ResponseEntity<Void> deattachLinkCard(@Valid @RequestBody LinkCard linkCard,
+            @PathVariable Long diseaseXiAnId) {
         diseaseXiAnService.deattachLinkCardToDiseaseXiAn(linkCard, diseaseXiAnId);
         return ResponseEntity.ok().build();
     }
 
+    /******************************
+     * Comments
+     *********************************************/
+
+    @GetMapping("/disease-xi-ans/{id}/comments")
+    public ResponseEntity<Comment> getComments(@PathVariable Long id) {
+        log.debug("REST request to get comment: {}", id);
+
+        return ResponseEntity.ok().body(result);
+    }
+
+    /**
+     * Request /disease-xi-ans/addPrice/{id} : add comment to a diseaseXiAn
+     *
+     * @param comment Price to be added
+     * @param id    the id of diseaseXiAn
+     * @return ok with 200 status code.
+     */
+    @PostMapping("/disease-xi-ans/{id}/comments")
+    public ResponseEntity<Void> createComment(@Valid @RequestBody Comment comment, @PathVariable Long id) {
+        log.debug("REST request to add new comment: {}", comment);
+        DiseaseXiAn disease = diseaseXiAnRepository.findById(id).get();
+        disease.getPrices().add(comment);
+        diseaseXiAnRepository.save(disease);
+        return ResponseEntity.ok().build();
+    }
+
+    /**
+     * Request to update a comment
+     *
+     * @param comment the comment to be updated
+     * @param id    the id of comment
+     * @return response entity with comment as its body.
+     */
+    @PutMapping("/disease-xi-ans/{id}/comments/{cId}")
+    public ResponseEntity<Comment> updateComment(@Valid @RequestBody Comment comment) {
+        log.debug("REST request to update comment: {}", comment);
+        Comment result = commentRepository.save(comment);
+        return ResponseEntity.ok().body(result);
+    }
+
+    /**
+     * Delete comment
+     *
+     * @param commentId the id of comment to be deleted
+     * @return 200 ok.
+     */
+    @DeleteMapping("/disease-xi-ans/{id}/comments/{cId}")
+    public ResponseEntity<Void> deleteComment(@PathVariable Long commentId) {
+        log.debug("REST request to delete Price: {}", commentId);
+        commentRepository.deleteById(commentId);
+        return ResponseEntity.ok().build();
+    }
 }
