@@ -13,8 +13,8 @@
     <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
 
     <!-- Add subsidiary column to price table -->
-    <changeSet author="niudai" id="2019090101">
-        <addColumn tableName="disease_xi_an">
+    <changeSet author="niudai" id="2019090401">
+        <addColumn tableName="feedback">
             <column name="created_by" type="varchar(50)" defaultValue="ADMIN">
                 <constraints nullable="true"/>
             </column>

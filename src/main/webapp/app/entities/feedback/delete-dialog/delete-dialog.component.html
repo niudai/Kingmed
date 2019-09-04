@@ -1,0 +1,12 @@
+<!-- <h1 mat-dialog-title>Hi {{data.qArobot}}</h1> -->
+<div mat-dialog-content>
+    <p>确定要删除 <span class = "text-primary">{{data.feedback.comment}} </span> 吗?</p>
+    <!-- <mat-form-field> -->
+      <!-- <input matInput [(ngModel)]="data.qArobot"> -->
+    <!-- </mat-form-field> -->
+  </div>
+
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">取消</button>
+    <button mat-button (click)="confirmDelete()" cdkFocusInitial>确定</button>
+  </div>

@@ -5,10 +5,14 @@
         <mat-panel-description>
             {{feedback.comment | trimIfTooLong}}
         </mat-panel-description>
+        <button mat-mini-fab color="warn" *jhiHasAnyAuthority="['ROLE_ADMIN']" style = "margin-left: 50px" (click) = "onDelete(feedback)"><fa-icon [icon]="'times'"></fa-icon></button>
     </mat-expansion-panel-header>
 
     {{feedback.comment}}
     <div *jhiHideIfNull="feedback.phoneNumber">
         联系电话：{{feedback.phoneNumber}}
     </div>
+    <br>
+    <span style = "float: right;">{{feedback.lastModifiedDate | date}}</span>
+
 </mat-expansion-panel>

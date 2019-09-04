@@ -1,8 +1,11 @@
 export interface IFeedback {
     comment?: string;
     phoneNumber?: string;
+    lastModifiedDate?: Date;
     _links?: {
-        self?: any
+        self?: {
+            href?: string;
+        }
     };
 }
 

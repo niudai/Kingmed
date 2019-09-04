@@ -3,6 +3,7 @@ import { IFeedback } from 'app/shared/model/feedback.model';
 import { HttpResponse, HttpClient } from '@angular/common/http';
 import { SERVER_API_URL } from 'app/app.constants';
 import { Observable } from 'rxjs';
+import { createRequestOption } from 'app/shared/util/request-util';
 
 type FeedbackResponse = HttpResponse<IFeedback>;
 type FeedbackArrayResponse = HttpResponse<IFeedback[]>;
@@ -19,13 +20,13 @@ export class FeedbackService {
         return this.http.put<IFeedback>(this.resourceUrl, label, { observe: 'response' });
     }
     find(id: number): Observable<FeedbackResponse> {
-        return this.http.get<IFeedback>(`${this.resourceUrl}/id`, { observe: 'response' });
+        return this.http.get<IFeedback>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }
     query(req?: any): Observable<any> {
-        // const options = createRequestOption(req);
-        return this.http.get<any>(this.resourceUrl, { observe: 'response' });
+        const options = createRequestOption(req);
+        return this.http.get<any>(this.resourceUrl, { params: options, observe: 'response' });
     }
-    delete(id: number): Observable<FeedbackResponse> {
-        return this.http.delete<any>(`${this.resourceUrl}/id`, { observe: 'response' });
+    delete(feedback: IFeedback): Observable<FeedbackResponse> {
+        return this.http.delete<any>(feedback._links.self.href, { observe: 'response' });
     }
 }

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { FeedbackComponent } from './index/feedback.component';
+import { FeedbackComponent } from './view/feedback.component';
 import { UserRouteAccessService } from 'app/core';
 import { JhipsterElasticsearchSampleApplicationSharedModule } from 'app/shared/shared.module';
 
