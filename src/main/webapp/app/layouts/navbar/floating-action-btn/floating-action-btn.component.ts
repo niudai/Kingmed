@@ -43,7 +43,9 @@ export class FloatingActionBtnComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
             console.log('The dialog was closed');
             this.feedback = result;
-            this.service.create(this.feedback).subscribe(any => this.snackBar.open(this.feedbackSuccessMsg));
+            this.service.create(this.feedback).subscribe(
+                any => this.snackBar.open(this.feedbackSuccessMsg, null, { duration: 1000})
+                );
         });
     }
 

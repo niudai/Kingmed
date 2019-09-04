@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { IndexComponent } from './index/index.component';
+import { FeedbackComponent } from './index/feedback.component';
 import { UserRouteAccessService } from 'app/core';
 import { JhipsterElasticsearchSampleApplicationSharedModule } from 'app/shared/shared.module';
 
 const routes: Routes = [
   {
     path: '',
-    component: IndexComponent,
+    component: FeedbackComponent,
     // canActivate: [UserRouteAccessService],
     // data: {
     //   authorities: ['ROLE_ADMIN']

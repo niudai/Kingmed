@@ -9,11 +9,14 @@ import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 /**
+ *
  * Comment
  */
 @Entity
 @Table(name = "feedback")
-public class Feedback {
+public class Feedback extends AbstractAuditingEntity {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -80,5 +83,5 @@ public class Feedback {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-    
+
 }

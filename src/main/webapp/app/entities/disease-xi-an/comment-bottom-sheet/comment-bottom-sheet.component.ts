@@ -35,7 +35,7 @@ export class CommentBottomSheetComponent {
 
             this.diseaseXiAnService
                 .createComment(this.data.diseaseXiAn.id, result)
-                .subscribe(any => this._snackBar.open(this.feedbackSuccessMsg));
+                .subscribe(any => this._snackBar.open(this.feedbackSuccessMsg, null, { duration: 1000}));
             this.diseaseXiAnService
                 .queryComment(this.data.diseaseXiAn.id)
                 .subscribe(res => this.data.comments = res.body);
