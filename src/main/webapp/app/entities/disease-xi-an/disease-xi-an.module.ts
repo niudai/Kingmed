@@ -32,6 +32,8 @@ import { DiseaseXiAnDiseasesComponent, DiseaseDeleteDialogComponent, DiseaseAsso
 import { DiseaseXiAnGiveDialogComponent } from './disease-xi-an-give-dialog/disease-xi-an-give-dialog.component';
 import { DiseaseXiAnDetailBottomSheetComponent } from './disease-xi-an-detail-bottom-sheet/disease-xi-an-detail-bottom-sheet.component';
 import { FeedbackDialogComponent } from 'app/layouts/navbar/feedback-dialog/feedback-dialog.component';
+import { CommentDialogComponent } from './comment-dialog/comment-dialog.component';
+import { CommentBottomSheetComponent } from './comment-bottom-sheet/comment-bottom-sheet.component';
 
 const ENTITY_STATES = [...diseaseXiAnRoute, ...diseaseXiAnPopupRoute];
 
@@ -63,6 +65,8 @@ const ENTITY_STATES = [...diseaseXiAnRoute, ...diseaseXiAnPopupRoute];
         ArticleMatCreateDialogComponent,
         DiseaseXiAnGiveDialogComponent,
         DiseaseXiAnDetailBottomSheetComponent,
+        CommentDialogComponent,
+        CommentBottomSheetComponent,
     ],
     entryComponents: [
         DiseaseXiAnComponent,
@@ -76,6 +80,8 @@ const ENTITY_STATES = [...diseaseXiAnRoute, ...diseaseXiAnPopupRoute];
         ArticleMatCreateDialogComponent,
         DiseaseXiAnGiveDialogComponent,
         DiseaseXiAnDetailBottomSheetComponent,
+        CommentDialogComponent,
+        CommentBottomSheetComponent
     ],
     providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }
      , {provide: MatPaginatorIntl, useClass: Paginator}],

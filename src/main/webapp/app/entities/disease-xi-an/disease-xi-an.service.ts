@@ -160,15 +160,15 @@ export class DiseaseXiAnService {
 
     //////////////////////////////// Comments /////////////////////
     createComment(diseaseId: number, comment: IComment): Observable<CommentResponse> {
-        return this.http.post<IComment>(`this.resourceUrl/${diseaseId}/comments`, comment, { observe: 'response' });
+        return this.http.post<IComment>(`${this.resourceUrl}/${diseaseId}/comments`, comment, { observe: 'response' });
     }
     updateComment(diseaseId: number, comment: IComment): Observable<CommentResponse> {
-        return this.http.put<IComment>(`this.resourceUrl/${diseaseId}/comments`, comment, { observe: 'response' });
+        return this.http.put<IComment>(`${this.resourceUrl}/${diseaseId}/comments`, comment, { observe: 'response' });
     }
     queryComment(diseaseId: number): Observable<CommentArrayResponse> {
-        return this.http.get<IComment[]>(`this.resourceUrl/${diseaseId}/comments`, { observe: 'response' });
+        return this.http.get<IComment[]>(`${this.resourceUrl}/${diseaseId}/comments`, { observe: 'response' });
     }
     deleteComment(diseaseId: number, commentId: number): Observable<CommentResponse> {
-        return this.http.delete<any>(`this.resourceUrl/${diseaseId}/comments/${commentId}`, { observe: 'response' });
+        return this.http.delete<any>(`${this.resourceUrl}/${diseaseId}/comments/${commentId}`, { observe: 'response' });
     }
 }

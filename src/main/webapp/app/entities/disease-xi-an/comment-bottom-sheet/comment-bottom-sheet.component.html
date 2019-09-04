@@ -1,0 +1,10 @@
+<mat-card *ngFor="let comment of data.comments">
+    <mat-card-content>
+      <p>
+        {{comment.comment}}
+      </p>
+    </mat-card-content>
+</mat-card>
+<mat-card-actions>
+    <button mat-raised-button (click) = "openCommentDialog()">发表评论</button>
+</mat-card-actions>

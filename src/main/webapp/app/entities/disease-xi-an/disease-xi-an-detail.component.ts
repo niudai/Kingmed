@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar, MatBottomSheet } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Account } from 'app/core/user/account.model';
 import { DiseaseXiAnService } from 'app/entities/disease-xi-an/disease-xi-an.service';
@@ -7,6 +7,9 @@ import { IDiseaseXiAn, diseaseXiAnToString } from 'app/shared/model/disease-xi-a
 import { ILinkCard, LinkCard } from 'app/shared/model/link-card.model';
 import { PriceXiAn } from './../../shared/model/price-xi-an.model';
 import { FeedbackDialogComponent } from 'app/layouts/navbar/feedback-dialog/feedback-dialog.component';
+import { CommentDialogComponent } from './comment-dialog/comment-dialog.component';
+import { IComment } from 'app/shared/model/comment.model';
+import { CommentBottomSheetComponent } from './comment-bottom-sheet/comment-bottom-sheet.component';
 
 export interface ButtonInfo {
     content?: string;
@@ -21,6 +24,7 @@ export interface ButtonInfo {
     styleUrls: ['disease-xi-an-detail.component.css']
 })
 export class DiseaseXiAnDetailComponent implements OnInit {
+    comments: IComment[];
     activatedToggleLabel: string;
     diseaseAboutIsOpen: boolean;
     projectAndPriceIsOpen: boolean;
@@ -50,7 +54,8 @@ export class DiseaseXiAnDetailComponent implements OnInit {
         protected activatedRoute: ActivatedRoute,
         protected diseaseXiAnService: DiseaseXiAnService,
         protected dialog: MatDialog,
-        private _snackBar: MatSnackBar
+        private _snackBar: MatSnackBar,
+        private _bottomSheet: MatBottomSheet
     ) { }
 
     copyDetail(disease: IDiseaseXiAn) {
@@ -113,16 +118,17 @@ export class DiseaseXiAnDetailComponent implements OnInit {
             .subscribe();
     }
 
-    openCommentDialog(): void {
-        const dialogRef = this.dialog.open(FeedbackDialogComponent, {
-            width: '600px',
-            data: { content: '', phone: '' }
+    openCommentBottomSheet(): void {
+        const sheetRef = this._bottomSheet.open(CommentBottomSheetComponent, {
+            data: {
+                comments: this.comments,
+                diseaseXiAn: this.diseaseXiAn
+            }
         });
-
-        dialogRef.afterClosed().subscribe(result => {
-            console.log('The dialog was closed');
-            this.diseaseXiAnService.createComment(this.diseaseXiAn.id, result).subscribe(any => this._snackBar.open(this.feedbackSuccessMsg));
-        });
+        sheetRef.afterDismissed()
+            .subscribe(
+                any => this.fetchComments()
+            );
     }
 
     ngOnInit() {
@@ -132,12 +138,19 @@ export class DiseaseXiAnDetailComponent implements OnInit {
             this.stringExp = diseaseXiAnToString(this.diseaseXiAn);
             this.diseaseXiAnService.getUsers(this.diseaseXiAn.id)
                 .subscribe( res => this.users = res.body);
+            this.fetchComments();
+
         });
         this.activatedToggleLabel = this.diseaseXiAn.activated ? '运行' : '已停用';
         this.currentChargeCode = this.diseaseXiAn.chargeCode;
         this.currentPrice = this.diseaseXiAn.tollStandard;
         this.currentReportingTime = this.diseaseXiAn.reportingTime;
         this.currentSubseries = this.currentSubseries;
+    }
+
+    private fetchComments() {
+        this.diseaseXiAnService.queryComment(this.diseaseXiAn.id)
+        .subscribe( res => this.comments = res.body);
     }
 
     openDeleteDialog(link: ILinkCard): void {
