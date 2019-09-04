@@ -57,10 +57,11 @@ public class DiseaseXiAn  extends AbstractViewsEntity implements Serializable {
     @JoinColumn(name = "disease_xi_an_id")
     private List<Comment> comments = new ArrayList<Comment>();
 
+    @Column(name = "subsidiary_id")
+    private Long subsidiaryId;
 
-    @ManyToOne
-    @JoinColumn(name = "subsidiary_id")
-    private Subsidiary realSubsidiary;
+    @Column(name = "concourse_id")
+    private Long ConcourseId;
 
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
