@@ -23,6 +23,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import org.hibernate.annotations.BatchSize;
@@ -48,6 +49,7 @@ public class DiseaseXiAn  extends AbstractViewsEntity implements Serializable {
     private List<PriceXiAn> prices = new ArrayList<PriceXiAn>();
 
 
+    @JsonIgnore
     @OneToMany(cascade =  CascadeType.REMOVE)
     @JoinColumn(name = "disease_xi_an_id")
     private List<ProjectNotification> ntfs;
@@ -61,7 +63,7 @@ public class DiseaseXiAn  extends AbstractViewsEntity implements Serializable {
     private Long subsidiaryId;
 
     @Column(name = "concourse_id")
-    private Long ConcourseId;
+    private Long concourseId;
 
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
@@ -87,7 +89,6 @@ public class DiseaseXiAn  extends AbstractViewsEntity implements Serializable {
     private Set<DiseaseXiAn> reversedDiseaseXiAns = new HashSet<>();
 
     @ManyToMany
-
     @JoinTable(name = "disease_map_disease_xi_an"
         , joinColumns = @JoinColumn(name = "disease_xi_an_id", referencedColumnName = "id")
         , inverseJoinColumns = @JoinColumn(name = "disease_map_id", referencedColumnName = "id"))
@@ -615,13 +616,8 @@ public class DiseaseXiAn  extends AbstractViewsEntity implements Serializable {
         return this;
     }
 
-    public Subsidiary getRealSubsidiary() {
-        return realSubsidiary;
-    }
 
-    public void setRealSubsidiary(Subsidiary realSubsidiary) {
-        this.realSubsidiary = realSubsidiary;
-    }
+
 
     public List<Comment> getComments() {
         return comments;
@@ -629,5 +625,21 @@ public class DiseaseXiAn  extends AbstractViewsEntity implements Serializable {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public Long getSubsidiaryId() {
+        return subsidiaryId;
+    }
+
+    public void setSubsidiaryId(Long subsidiaryId) {
+        this.subsidiaryId = subsidiaryId;
+    }
+
+    public Long getConcourseId() {
+        return concourseId;
+    }
+
+    public void setConcourseId(Long concourseId) {
+        this.concourseId = concourseId;
     }
 }

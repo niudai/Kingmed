@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>子公司注册</h1>
+<div mat-dialog-content>
+  <p>输入子公司名：</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.subsidiary.name">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">取消</button>
+  <button mat-button [mat-dialog-close]="data.subsidiary" cdkFocusInitial>确定</button>
+</div>

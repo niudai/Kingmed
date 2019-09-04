@@ -2,10 +2,22 @@
     color: yellow;
 }
 
+.jh-create-entity {
+    margin: 3px;
+}
+
 .search-restric {
     max-width: 30%;
     display: inline;
-    margin: 5px;
+    margin: px;
+}
+
+.mat-form-field {
+    font-size: 15px;
+}
+
+.row {
+    margin: 0;
 }
 
 fa-icon {
@@ -24,3 +36,4 @@ table {
     width: 100%;
     margin: 0;
 }
+

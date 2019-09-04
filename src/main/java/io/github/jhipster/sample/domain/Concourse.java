@@ -2,7 +2,11 @@ package io.github.jhipster.sample.domain;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.GeneratorType;
+
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Column;
@@ -20,19 +24,12 @@ public class Concourse implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @NotNull
-    @Size(max = 50)
     @Id
-    @Column(length = 50)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "name")
     private String name;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     @Override
     public int hashCode() {
@@ -44,5 +41,21 @@ public class Concourse implements Serializable {
         return "Subsidiary {" +
             "name='" + name + '\'' +
             "}";
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

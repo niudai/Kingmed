@@ -1,4 +1,4 @@
-import { ISubsidiary as string, Subsidiary } from './../../shared/model/subsidiary.model';
+import { ISubsidiary as string, Subsidiary, ISubsidiary } from './../../shared/model/subsidiary.model';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Component, OnInit, OnDestroy, HostListener, Inject } from '@angular/core';
 import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
@@ -16,6 +16,11 @@ import { DiseaseXiAnGiveDialogComponent } from './disease-xi-an-give-dialog/dise
 import { DiseaseXiAnDetailBottomSheetComponent } from './disease-xi-an-detail-bottom-sheet/disease-xi-an-detail-bottom-sheet.component';
 import { DiseaseXiAnMatDeleteDialogComponent } from '.';
 import { ISort, DiseaseSorts } from 'app/shared/util/disease-util';
+import { IConcourse } from 'app/shared/model/concourse.model';
+import { CreateComponent } from './concourse/create-dialog/create-dialog.component';
+import { CreateDialogComponent } from './subsidiary/create/create.component';
+import { ConcourseService } from './concourse/concourse.service';
+import { SubsidiaryService } from './subsidiary/subsidiary.service';
 
 @Component({
     selector: 'jhi-disease-xi-an',
@@ -23,8 +28,7 @@ import { ISort, DiseaseSorts } from 'app/shared/util/disease-util';
     styleUrls: ['./disease-xi-an.component.css']
 })
 export class DiseaseXiAnComponent implements OnInit {
-    PC_COL: string[] = ['ID', 'namePC', 'price', 'projectConcourse', 'applications', 'suppliess',
-        'qarobot', 'give'];
+    PC_COL: string[] = ['ID', 'namePC', 'price', 'projectConcourse', 'applications', 'suppliess', 'qarobot', 'give'];
     MOBILE_COL: string[] = ['nameMobile', 'projectConcourse'];
     displayedColumns: string[];
     NO_SPECIFIED = '不限定';
@@ -32,8 +36,10 @@ export class DiseaseXiAnComponent implements OnInit {
     currentAccount: any;
     diseaseSorts: ISort[];
     selectedSort: string;
+    selectedConcourse: string;
     diseaseXiAns: IDiseaseXiAn[];
     subsidiaries: string[];
+    concourses: string[];
     selectedSub: string;
     error: any;
     success: any;
@@ -60,9 +66,10 @@ export class DiseaseXiAnComponent implements OnInit {
         protected matDialog: MatDialog,
         protected modalService: NgbModal,
         protected dialog: MatDialog,
-        private _bottomSheet: MatBottomSheet
-    ) {
-    }
+        private _bottomSheet: MatBottomSheet,
+        private concourseService: ConcourseService,
+        private subsidiaryService: SubsidiaryService
+    ) {}
 
     @HostListener('window:resize', ['$event'])
     onResize(event) {
@@ -81,7 +88,8 @@ export class DiseaseXiAnComponent implements OnInit {
     }
 
     loadAll() {
-        this.router.navigate(['/disease-xi-an',
+        this.router.navigate([
+            '/disease-xi-an',
             {
                 search: this.currentSearch,
                 size: this.itemsPerPage,
@@ -91,24 +99,30 @@ export class DiseaseXiAnComponent implements OnInit {
             }
         ]);
 
-        this.diseaseXiAnService.query({
-            page: this.pageEvent.pageIndex,
-            query: this.currentSearch ? this.currentSearch : '',
-            subsidiary: this.selectedSub === this.NO_SPECIFIED ? '' : this.selectedSub,
-            size: this.pageEvent.pageSize,
-            sort: [this.selectedSort],
-        }).subscribe(
+        this.diseaseXiAnService
+            .query({
+                page: this.pageEvent.pageIndex,
+                query: this.currentSearch ? this.currentSearch : '',
+                subsidiary: this.selectedSub === this.NO_SPECIFIED ? '' : this.selectedSub,
+                size: this.pageEvent.pageSize,
+                sort: [this.selectedSort]
+            })
+            .subscribe(
                 (res: HttpResponse<IDiseaseXiAn[]>) => this.paginateDiseaseXiAns(res.body, res.headers),
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
         console.log('Diseases fetched');
 
-        this.diseaseXiAnService.getAllSubsidiary().subscribe(
-            res => {
-                this.subsidiaries = res.map(sub => sub.name);
-                this.subsidiaries.push(this.NO_SPECIFIED);
-            }
-        );
+        this.diseaseXiAnService.getAllSubsidiary().subscribe(res => {
+            this.subsidiaries = res.map(sub => sub.name);
+            this.subsidiaries.push(this.NO_SPECIFIED);
+        });
+
+        this.concourseService.query().subscribe(res => {
+
+            this.concourses = res.body._embedded.concourse.map(con => con.name);
+            this.concourses.push(this.NO_SPECIFIED);
+        });
         return;
     }
 
@@ -140,6 +154,35 @@ export class DiseaseXiAnComponent implements OnInit {
             this.loadAll();
         });
     }
+
+    openConcourseDialog(): void {
+        const dialogRef = this.dialog.open(CreateComponent, {
+            width: '500px',
+            data: { concourse: { name: ''} }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            this.concourseService.create(result)
+                .subscribe(
+                    any => this.loadAll()
+
+                );
+        });
+    }
+
+    openSubsidiaryDialog(): void {
+        const dialogRef = this.dialog.open(CreateDialogComponent, {
+            width: '500px',
+            data: { subsidiary: { name: ''} }
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            this.subsidiaryService.create(result).subscribe(
+              any =>  this.loadAll()
+            );
+        });
+    }
+
+    openSubsidiaryCreateDialog(): void {}
 
     openGiveDialog(disease: IDiseaseXiAn): void {
         const dialogRef = this.dialog.open(DiseaseXiAnGiveDialogComponent, {
@@ -186,11 +229,11 @@ export class DiseaseXiAnComponent implements OnInit {
                 : this.NO_SPECIFIED;
         this.pageEvent = new PageEvent();
         this.pageEvent.pageIndex =
-            this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['page']
-                ? +this.activatedRoute.snapshot.params['page']
-                : 0;
-        this.selectedSort = this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['sort'] ?
-                 this.activatedRoute.snapshot.params['sort'] : this.diseaseSorts[0].sort;
+            this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['page'] ? +this.activatedRoute.snapshot.params['page'] : 0;
+        this.selectedSort =
+            this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['sort']
+                ? this.activatedRoute.snapshot.params['sort']
+                : this.diseaseSorts[0].sort;
         this.pageEvent.pageSize = ITEMS_PER_PAGE;
         this.loadAll();
         this.accountService.identity().then(account => {

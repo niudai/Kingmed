@@ -20,7 +20,7 @@ export class ConcourseService {
     find(id: number): Observable<ConcourseResponse> {
         return this.http.get<IConcourse>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }
-    query(req?: any): Observable<ConcourseArrayResponse> {
+    query(req?: any): Observable<any> {
         const options = createRequestOption(req);
         return this.http.get<IConcourse[]>(this.resourceUrl, { params: options, observe: 'response' });
     }
