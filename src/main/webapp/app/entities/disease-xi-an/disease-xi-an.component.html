@@ -1,76 +1,65 @@
 <div class="container col-sm-12">
-        <mat-card>
-            <div class = "row">
-                    <form name="searchForm" class="form-inline col-sm-6">
-                            <div class="input-group w-100 mt-3 ">
-                                <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch"
-                                    name="currentSearch" value=""
-                                    placeholder="{{ 'jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.home.search' | translate }}">
-                                <button mat-raised-button class="input-group-append" color="warn" (click)="search()">
-                                    <fa-icon [icon]="'search'"></fa-icon>
-                                </button>
-                            </div>
-                            <mat-form-field class="search-restric">
-                                <mat-label>子公司</mat-label>
-                                <mat-select [(value)]="selectedSub" (selectionChange)="loadAll()">
-                                    <mat-option *ngFor="let sub of subsidiaries" [value]="sub">
-                                        {{sub}}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                            <mat-form-field class="search-restric">
-                                <mat-label>排序</mat-label>
-                                <mat-select [(value)]="selectedSort" (selectionChange)="loadAll()">
-                                    <mat-option *ngFor="let sort of diseaseSorts" [value]="sort.sort">
-                                        {{sort.chinese}}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </form>
-                        <div class="col-sm-12">
-                            <button mat-raised-button color="accent" *jhiHasAnyAuthority="'ROLE_ADMIN'" id="jh-create-entity"
-                                class="float-right jh-create-entity" (click)="openSubsidiaryDialog()">
-                                <fa-icon [icon]="'plus'"></fa-icon>
-                                <span class="hidden-sm-down"
-                                    >
-                                    新子公司
-                                </span>
-                            </button><button mat-raised-button color="accent" *jhiHasAnyAuthority="'ROLE_ADMIN'"
-                                id="jh-create-entity" class="float-right jh-create-entity"
-                                (click)="openConcourseDialog()">
-                                <fa-icon [icon]="'plus'"></fa-icon>
-                                <span class="hidden-sm-down"
-                                    >
-                                    新科室
-                                </span>
-                            </button>
-                            <button mat-raised-button color="accent" *jhiHasAnyAuthority="'ROLE_ADMIN'" id="jh-create-entity"
-                                class="float-right jh-create-entity" [routerLink]="['/disease-xi-an/new']">
-                                <fa-icon [icon]="'plus'"></fa-icon>
-                                <span class="hidden-sm-down"
-                                    >
-                                    新项目
-                                </span>
-                            </button>
-                        </div>
+    <mat-card>
+        <div class="row">
+            <form name="searchForm" class="form-inline col-sm-6">
+                <div class="input-group w-100 mt-3 ">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch"
+                        name="currentSearch" value=""
+                        placeholder="{{ 'jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.home.search' | translate }}">
+                    <button mat-raised-button class="input-group-append" color="warn" (click)="search()">
+                        <fa-icon [icon]="'search'"></fa-icon>
+                    </button>
+                </div>
+                <mat-form-field class="search-restric">
+                    <mat-label>子公司</mat-label>
+                    <mat-select [(value)]="selectedSub" (selectionChange)="loadDiseases()">
+                        <mat-option *ngFor="let sub of subsidiaries" [value]="sub">
+                            {{sub}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="search-restric">
+                    <mat-label>排序</mat-label>
+                    <mat-select [(value)]="selectedSort" (selectionChange)="loadDiseases()">
+                        <mat-option *ngFor="let sort of diseaseSorts" [value]="sort.sort">
+                            {{sort.chinese}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </form>
+            <div class="col-sm-12">
+                <button mat-raised-button color="accent" *jhiHasAnyAuthority="'ROLE_ADMIN'" id="jh-create-entity"
+                    class="float-right jh-create-entity" (click)="openSubsidiaryDialog()">
+                    <fa-icon [icon]="'plus'"></fa-icon>
+                    <span class="hidden-sm-down">
+                        新子公司
+                    </span>
+                </button><button mat-raised-button color="accent" *jhiHasAnyAuthority="'ROLE_ADMIN'"
+                    id="jh-create-entity" class="float-right jh-create-entity" (click)="openConcourseDialog()">
+                    <fa-icon [icon]="'plus'"></fa-icon>
+                    <span class="hidden-sm-down">
+                        新科室
+                    </span>
+                </button>
+                <button mat-raised-button color="accent" *jhiHasAnyAuthority="'ROLE_ADMIN'" id="jh-create-entity"
+                    class="float-right jh-create-entity" [routerLink]="['/disease-xi-an/new']">
+                    <fa-icon [icon]="'plus'"></fa-icon>
+                    <span class="hidden-sm-down">
+                        新项目
+                    </span>
+                </button>
             </div>
+        </div>
 
-            <div class = "row">
-                    <mat-chip-list>
-                        <a
-                           *ngFor="let concourse of concourses">
-                            <mat-chip [color]="concourse.isSelected ? 'warn' : 'accent'" selected
-                                (selectionChange)="selectConcourse($event)"
-                                [value]="concourse"
-                                >
-                                {{concourse.name}}
-                            </mat-chip>
-                        </a>
-                    </mat-chip-list>
-            </div>
-        </mat-card>
-
-    </div>
+        <div class="row">
+                <button class="concourse-chip" (click)="selectConcourse(concourse)" *ngFor="let concourse of concourses"
+                    [style.background-color]="concourse.isSelected ? 'aquamarine' : 'darksalmon'">
+                    <span>
+                        {{concourse.name}}
+                    </span>
+                </button>
+        </div>
+    </mat-card>
 
     <div *ngIf="diseaseXiAns">
         <table mat-table [dataSource]="diseaseXiAns" class="mat-elevation-z8">

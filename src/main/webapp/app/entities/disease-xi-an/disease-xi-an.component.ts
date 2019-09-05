@@ -1,7 +1,7 @@
 import { ISubsidiary as string, Subsidiary, ISubsidiary } from './../../shared/model/subsidiary.model';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Component, OnInit, OnDestroy, HostListener, Inject } from '@angular/core';
-import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpHeaders, HttpResponse, HttpParams } from '@angular/common/http';
 import { ActivatedRoute, Router, UrlSegment } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
@@ -87,7 +87,7 @@ export class DiseaseXiAnComponent implements OnInit {
         }
     }
 
-    loadAll() {
+    transition() {
         this.router.navigate([
             '/disease-xi-an',
             {
@@ -102,26 +102,44 @@ export class DiseaseXiAnComponent implements OnInit {
                     this.selectedConcourse.name : null
             }
         ]);
+    }
 
+    loadDiseases() {
+        let params = new HttpParams();
+        params = params.set('page', this.pageEvent.pageIndex.toString());
+        params = params.set('size', this.pageEvent.pageSize.toString());
+        if (this.currentSearch) {
+            params = params.set('query', this.currentSearch);
+        }
+        if (this.selectedSub && this.selectedSub !== this.NO_SPECIFIED) {
+            params = params.set('subsidiary', this.selectedSub);
+        }
+        if (this.selectedSort) {
+            params = params.set('sort', this.selectedSort);
+        }
+        if (this.selectedConcourse && this.selectedConcourse.name !== this.NO_SPECIFIED) {
+            params = params.set('concourse.pseudoId', this.selectedConcourse.pseudoId.toString());
+        }
+        console.log(`params = ||||||||||||||||||||||||||`);
+        console.log(params);
         this.diseaseXiAnService
-            .query({
-                page: this.pageEvent.pageIndex,
-                query: this.currentSearch ? this.currentSearch : '',
-                subsidiary: this.selectedSub === this.NO_SPECIFIED ? '' : this.selectedSub,
-                size: this.pageEvent.pageSize,
-                sort: [this.selectedSort]
-            })
+            .query(params)
             .subscribe(
                 (res: HttpResponse<IDiseaseXiAn[]>) => this.paginateDiseaseXiAns(res.body, res.headers),
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
         console.log('Diseases fetched');
+        return;
+    }
 
+    loadSubsidiaries() {
         this.diseaseXiAnService.getAllSubsidiary().subscribe(res => {
             this.subsidiaries = res.map(sub => sub.name);
             this.subsidiaries.push(this.NO_SPECIFIED);
         });
+    }
 
+    loadConcourses() {
         this.concourseService.query().subscribe(res => {
 
             this.concourses = res.body._embedded.concourse.map(
@@ -130,31 +148,30 @@ export class DiseaseXiAnComponent implements OnInit {
                     return c;
                 }
             );
-            this.concourses.push({ name: '不指定'});
+            this.selectedConcourse = { name: this.NO_SPECIFIED, isSelected: true };
+            this.concourses.push(this.selectedConcourse);
         });
-        return;
     }
 
-    loadPage(page: number) {
-        if (page !== this.previousPage) {
-            this.previousPage = page;
-            this.loadAll();
-        }
-    }
-
-    loadDiseases($event: PageEvent) {
+    onPagination($event: PageEvent) {
         this.pageEvent = $event;
-        this.loadAll();
+        this.transition();
+        this.loadDiseases();
     }
 
     search() {
-        this.page = 0;
-        this.loadAll();
+        this.pageEvent.pageIndex = 0;
+        this.transition();
+        this.loadDiseases();
     }
 
-    selectConcourse($event: MatChipSelectionChange) {
-        this.selectedConcourse = $event.source.value;
-        this.loadAll();
+    selectConcourse(concourse: IConcourse) {
+        console.log('The selected concourse is :');
+        console.log(this.selectedConcourse);
+        this.selectedConcourse.isSelected = false;
+        this.selectedConcourse = concourse;
+        this.selectedConcourse.isSelected = true;
+        this.loadDiseases();
     }
 
     openDeleteDialog(disease: IDiseaseXiAn): void {
@@ -165,7 +182,7 @@ export class DiseaseXiAnComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe(result => {
             //   console.log('The dialog was closed');
-            this.loadAll();
+            this.loadDiseases();
         });
     }
 
@@ -178,7 +195,7 @@ export class DiseaseXiAnComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
             this.concourseService.create(result)
                 .subscribe(
-                    any => this.loadAll()
+                    any => this.loadConcourses()
 
                 );
         });
@@ -191,7 +208,7 @@ export class DiseaseXiAnComponent implements OnInit {
         });
         dialogRef.afterClosed().subscribe(result => {
             this.subsidiaryService.create(result).subscribe(
-              any =>  this.loadAll()
+              any =>  this.loadSubsidiaries()
             );
         });
     }
@@ -206,7 +223,7 @@ export class DiseaseXiAnComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe(result => {
             //   console.log('The dialog was closed');
-            this.loadAll();
+            this.loadDiseases();
         });
     }
 
@@ -249,7 +266,9 @@ export class DiseaseXiAnComponent implements OnInit {
                 ? this.activatedRoute.snapshot.params['sort']
                 : this.diseaseSorts[0].sort;
         this.pageEvent.pageSize = ITEMS_PER_PAGE;
-        this.loadAll();
+        this.loadConcourses();
+        this.loadSubsidiaries();
+        this.loadDiseases();
         this.accountService.identity().then(account => {
             this.currentAccount = account;
         });
