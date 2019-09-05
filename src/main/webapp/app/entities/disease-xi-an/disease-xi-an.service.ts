@@ -53,9 +53,8 @@ export class DiseaseXiAnService {
         return this.http.put<any>(`${this.resourceUrl}/activate/${id}/${activated}`, { observe: 'response' });
     }
 
-    query(req?: any): Observable<EntityArrayResponseType> {
-        const options = createRequestOption(req);
-        return this.http.get<IDiseaseXiAn[]>(this.resourceUrl, { params: options, observe: 'response' });
+    query(req?: HttpParams): Observable<EntityArrayResponseType> {
+        return this.http.get<IDiseaseXiAn[]>(this.resourceUrl, { params: req, observe: 'response' });
     }
 
     addNewPrice(id: number, price: IPriceXiAn): Observable<PriceResponseType> {
