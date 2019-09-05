@@ -11,7 +11,7 @@ import { AccountService } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { DiseaseXiAnService } from './disease-xi-an.service';
-import { PageEvent, MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatBottomSheet } from '@angular/material';
+import { PageEvent, MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatBottomSheet, MatChipSelectionChange } from '@angular/material';
 import { DiseaseXiAnGiveDialogComponent } from './disease-xi-an-give-dialog/disease-xi-an-give-dialog.component';
 import { DiseaseXiAnDetailBottomSheetComponent } from './disease-xi-an-detail-bottom-sheet/disease-xi-an-detail-bottom-sheet.component';
 import { DiseaseXiAnMatDeleteDialogComponent } from '.';
@@ -36,10 +36,10 @@ export class DiseaseXiAnComponent implements OnInit {
     currentAccount: any;
     diseaseSorts: ISort[];
     selectedSort: string;
-    selectedConcourse: string;
+    selectedConcourse: IConcourse;
     diseaseXiAns: IDiseaseXiAn[];
     subsidiaries: string[];
-    concourses: string[];
+    concourses: IConcourse[];
     selectedSub: string;
     error: any;
     success: any;
@@ -95,7 +95,11 @@ export class DiseaseXiAnComponent implements OnInit {
                 size: this.itemsPerPage,
                 page: this.pageEvent.pageIndex ? this.pageEvent.pageIndex : 0,
                 sort: this.selectedSort,
-                subsidiary: this.selectedSub
+                subsidiary: this.selectedSub,
+                'concourse.pseudoId': this.selectedConcourse ?
+                    this.selectedConcourse.pseudoId : null,
+                'concourse.name': this.selectedConcourse ?
+                    this.selectedConcourse.name : null
             }
         ]);
 
@@ -120,8 +124,13 @@ export class DiseaseXiAnComponent implements OnInit {
 
         this.concourseService.query().subscribe(res => {
 
-            this.concourses = res.body._embedded.concourse.map(con => con.name);
-            this.concourses.push(this.NO_SPECIFIED);
+            this.concourses = res.body._embedded.concourse.map(
+                c => {
+                    c.isSelected = false;
+                    return c;
+                }
+            );
+            this.concourses.push({ name: '不指定'});
         });
         return;
     }
@@ -140,6 +149,11 @@ export class DiseaseXiAnComponent implements OnInit {
 
     search() {
         this.page = 0;
+        this.loadAll();
+    }
+
+    selectConcourse($event: MatChipSelectionChange) {
+        this.selectedConcourse = $event.source.value;
         this.loadAll();
     }
 

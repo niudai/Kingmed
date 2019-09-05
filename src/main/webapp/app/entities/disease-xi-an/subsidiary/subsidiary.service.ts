@@ -9,7 +9,7 @@ type SubsidiaryResponse = HttpResponse<ISubsidiary>;
 type SubsidiaryArrayResponse = HttpResponse<ISubsidiary[]>;
 @Injectable({ providedIn: 'root' })
 export class SubsidiaryService {
-    resourceUrl = SERVER_API_URL + 'api/subsidiary';
+    resourceUrl = SERVER_API_URL + 'api/subsidiaries';
     constructor(private http: HttpClient) {}
     create(subsidiary: ISubsidiary): Observable<SubsidiaryResponse> {
         return this.http.post<ISubsidiary>(this.resourceUrl, subsidiary, { observe: 'response' });

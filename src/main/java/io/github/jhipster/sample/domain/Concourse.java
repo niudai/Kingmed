@@ -51,6 +51,14 @@ public class Concourse implements Serializable {
         this.id = id;
     }
 
+    public Long getPseudoId() {
+        return id;
+    }
+
+    public void setPseudoId(Long id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }

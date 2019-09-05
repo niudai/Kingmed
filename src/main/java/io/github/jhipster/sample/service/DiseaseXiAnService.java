@@ -249,6 +249,7 @@ public class DiseaseXiAnService {
         diseaseQuery.orderBy(orders.toArray(new javax.persistence.criteria.Order[orders.size()]));
 
         String subsidiary = searchDTO.getSubsidiary();
+        Long concourseId = searchDTO.getConcourse() == null ?  null : searchDTO.getConcourse().getPseudoId();
         String projectConcourse = searchDTO.getProjectConcourse();
         String query = searchDTO.getQuery();
 
@@ -258,6 +259,9 @@ public class DiseaseXiAnService {
         }
         if (projectConcourse != null && projectConcourse.length() > 0) {
             restrictions.add(cb.equal(disease.get("projectConcourse"), projectConcourse));
+        }
+        if (concourseId != null) {
+            restrictions.add(cb.equal(disease.get("concourseId"), concourseId));
         }
         Predicate termPredicate = cb.and(restrictions.toArray(new Predicate[restrictions.size()]));
         // restrictions for query string

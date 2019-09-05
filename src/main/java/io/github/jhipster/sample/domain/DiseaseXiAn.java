@@ -65,7 +65,6 @@ public class DiseaseXiAn  extends AbstractViewsEntity implements Serializable {
     @Column(name = "concourse_id")
     private Long concourseId;
 
-
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "disease_xi_an_id")
     @BatchSize(size = 10)

@@ -57,9 +57,15 @@
 
             <div class = "row">
                     <mat-chip-list>
-                        <mat-chip *ngFor="let concourse of concourses">
-                            {{concourse}}
-                        </mat-chip>
+                        <a
+                           *ngFor="let concourse of concourses">
+                            <mat-chip [color]="concourse.isSelected ? 'warn' : 'accent'" selected
+                                (selectionChange)="selectConcourse($event)"
+                                [value]="concourse"
+                                >
+                                {{concourse.name}}
+                            </mat-chip>
+                        </a>
                     </mat-chip-list>
             </div>
         </mat-card>

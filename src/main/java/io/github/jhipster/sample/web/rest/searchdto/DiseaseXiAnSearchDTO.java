@@ -1,5 +1,6 @@
 package io.github.jhipster.sample.web.rest.searchdto;
 
+import io.github.jhipster.sample.domain.Concourse;
 
 /**
  * DiseaseXiAnSearchDTO
@@ -7,6 +8,8 @@ package io.github.jhipster.sample.web.rest.searchdto;
 public class DiseaseXiAnSearchDTO {
 
     private String subsidiary;
+
+    private Concourse concourse;
 
     private String projectConcourse;
 
@@ -36,10 +39,19 @@ public class DiseaseXiAnSearchDTO {
         this.query = query;
     }
 
+
     @Override
     public String toString() {
         return "DiseaseXiAnSearchDTO [projectConcourse=" + projectConcourse + ", query=" + query + ", subsidiary="
                 + subsidiary + "]";
-    }  
-    
+    }
+
+    public Concourse getConcourse() {
+        return concourse;
+    }
+
+    public void setConcourse(Concourse concourse) {
+        this.concourse = concourse;
+    }
+
 }
