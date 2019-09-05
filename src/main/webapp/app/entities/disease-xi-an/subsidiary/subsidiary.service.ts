@@ -24,7 +24,7 @@ export class SubsidiaryService {
         const options = createRequestOption(req);
         return this.http.get<ISubsidiary[]>(this.resourceUrl, { params: options, observe: 'response' });
     }
-    delete(id: number): Observable<SubsidiaryResponse> {
+    delete(id: string): Observable<SubsidiaryResponse> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }
 }

@@ -1,0 +1,12 @@
+
+Todo:
+  ☐ Implement concourse update and delete function.
+  ☐ Implement subsidiary restrictive query
+  ☐ Implement auto-completion in disease searching box.
+  ☐ Implement auto-completion in qarobots searching box.
+  ☐ Create Index for searching criteria column.
+  ☐ Implement views for qarobots.
+  ☐ Implement views sorting for qarobots.
+  ☐ Write basic sql quries for data migrating for disease.
+  ☐ Write one article about spring-boot.
+

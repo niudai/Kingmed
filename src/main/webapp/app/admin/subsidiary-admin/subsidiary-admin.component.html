@@ -1,0 +1,21 @@
+<mat-list>
+    <button mat-raised-button color="accent" *jhiHasAnyAuthority="'ROLE_ADMIN'" id="jh-create-entity"
+        class="float-right jh-create-entity" (click)="openCreateDialog()">
+        <fa-icon [icon]="'plus'"></fa-icon>
+        <span class="hidden-sm-down">
+            新科室
+        </span>
+    </button>
+
+    <mat-list-item *ngFor="let subsidiary of subsidiaries">
+        {{subsidiary.name}}
+        <button mat-mini-fab color="warn" *jhiHasAnyAuthority="['ROLE_ADMIN']" style="margin-left: 50px"
+            (click)="openDeletDialog(subsidiary)">
+            <fa-icon [icon]="'times'"></fa-icon>
+        </button>
+        <button mat-mini-fab color="accent" *jhiHasAnyAuthority="['ROLE_ADMIN']" style="margin-left: 50px"
+            (click)="openUpdateDialog(subsidiary)">
+            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+        </button>
+    </mat-list-item>
+</mat-list>

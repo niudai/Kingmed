@@ -201,20 +201,6 @@ export class DiseaseXiAnComponent implements OnInit {
         });
     }
 
-    openSubsidiaryDialog(): void {
-        const dialogRef = this.dialog.open(CreateDialogComponent, {
-            width: '500px',
-            data: { subsidiary: { name: ''} }
-        });
-        dialogRef.afterClosed().subscribe(result => {
-            this.subsidiaryService.create(result).subscribe(
-              any =>  this.loadSubsidiaries()
-            );
-        });
-    }
-
-    openSubsidiaryCreateDialog(): void {}
-
     openGiveDialog(disease: IDiseaseXiAn): void {
         const dialogRef = this.dialog.open(DiseaseXiAnGiveDialogComponent, {
             width: '250px',

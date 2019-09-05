@@ -77,9 +77,7 @@ public class SubsidiaryResource {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         Subsidiary result = subsidiaryRepository.save(subsidiary);
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, subsidiary.toString()))
-            .body(result);
+        return ResponseEntity.ok().body(result);
     }
 
     /**
@@ -115,7 +113,7 @@ public class SubsidiaryResource {
     @DeleteMapping("/{name}")
     public ResponseEntity<Void> deleteSubsidiary(@PathVariable String name) {
         log.debug("REST request to delete Subsidiary : {}", name);
-        subsidiaryRepository.deleteByName(name);
+        subsidiaryRepository.deleteById(name);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, name.toString())).build();
     }
 

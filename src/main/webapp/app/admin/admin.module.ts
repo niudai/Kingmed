@@ -19,6 +19,12 @@ import {
     JhiConfigurationComponent,
     JhiDocsComponent
 } from './';
+import { SubsidiaryAdminComponent } from './subsidiary-admin/subsidiary-admin.component';
+import { ConcourseAdminComponent } from './concourse-admin/concourse-admin.component';
+import { CreateComponent } from 'app/entities/disease-xi-an/concourse/create-dialog/create-dialog.component';
+import { CreateDialogComponent } from 'app/entities/disease-xi-an/subsidiary/create/create.component';
+import { DeleteDialogComponent } from './subsidiary-admin/delete-dialog/delete-dialog.component';
+import { UpdateComponent } from './subsidiary-admin/update/update.component';
 
 @NgModule({
     imports: [
@@ -37,10 +43,23 @@ import {
         JhiHealthCheckComponent,
         JhiHealthModalComponent,
         JhiDocsComponent,
-        JhiMetricsMonitoringComponent
+        JhiMetricsMonitoringComponent,
+        SubsidiaryAdminComponent,
+        ConcourseAdminComponent,
+        CreateComponent,
+        CreateDialogComponent,
+        DeleteDialogComponent,
+        UpdateComponent
     ],
     providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }],
-    entryComponents: [UserMgmtDeleteDialogComponent, JhiHealthModalComponent],
+    entryComponents: [
+        UserMgmtDeleteDialogComponent,
+        JhiHealthModalComponent,
+        CreateComponent,
+        CreateDialogComponent,
+        DeleteDialogComponent,
+        UpdateComponent
+    ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class JhipsterElasticsearchSampleApplicationAdminModule {

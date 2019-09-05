@@ -41,6 +41,7 @@
             "admin": {
                 "main": "管理",
                 "userManagement": "用户管理",
+                "subsidiary": "子公司管理",
                 "tracker": "用户记录",
                 "metrics": "Metrics",
                 "health": "Health",

@@ -52,12 +52,15 @@
         </div>
 
         <div class="row">
-                <button class="concourse-chip" (click)="selectConcourse(concourse)" *ngFor="let concourse of concourses"
+            <div class="chips" style = "display: inline-block; width: 100%">
+                    <button class="concourse-chip" (click)="selectConcourse(concourse)"
+                    *ngFor="let concourse of concourses"
                     [style.background-color]="concourse.isSelected ? 'aquamarine' : 'darksalmon'">
                     <span>
                         {{concourse.name}}
                     </span>
-                </button>
+                    </button>
+            </div>
         </div>
     </mat-card>
 
