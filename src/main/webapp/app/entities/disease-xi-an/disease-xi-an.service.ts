@@ -35,14 +35,12 @@ export class DiseaseXiAnService {
         return this.http.get<ISubsidiary[]>(this.subsidiaryUrl);
     }
 
-    create(req: any, diseaseXiAn: IDiseaseXiAn): Observable<EntityResponseType> {
-        const options = createRequestOption(req);
-        return this.http.post<IDiseaseXiAn>(this.resourceUrl, diseaseXiAn, { params: options, observe: 'response' });
+    create(req: HttpParams, diseaseXiAn: IDiseaseXiAn): Observable<EntityResponseType> {
+        return this.http.post<IDiseaseXiAn>(this.resourceUrl, diseaseXiAn, { params: req, observe: 'response' });
     }
 
-    update(req: any, diseaseXiAn: IDiseaseXiAn): Observable<EntityResponseType> {
-        const param: HttpParams = createRequestOption(req);
-        return this.http.put<IDiseaseXiAn>(this.resourceUrl, diseaseXiAn, { params: param, observe: 'response' });
+    update(req: HttpParams, diseaseXiAn: IDiseaseXiAn): Observable<EntityResponseType> {
+        return this.http.put<IDiseaseXiAn>(this.resourceUrl, diseaseXiAn, { params: req, observe: 'response' });
     }
 
     find(id: number): Observable<EntityResponseType> {

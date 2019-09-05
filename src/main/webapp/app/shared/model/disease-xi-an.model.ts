@@ -29,11 +29,13 @@ export interface IDiseaseXiAn {
     series?: string;
     subSeries?: string;
     remarks?: string;
-    createdBy: string;
-    createdDate: Date;
-    lastModifiedBy: string;
-    lastModifiedDate: Date;
-    views: number;
+    createdBy?: string;
+    createdDate?: Date;
+    lastModifiedBy?: string;
+    lastModifiedDate?: Date;
+    views?: number;
+    concourseId?: number;
+    subsidiaryId?: string;
 }
 
 export class DiseaseXiAn implements IDiseaseXiAn {
@@ -68,7 +70,9 @@ export class DiseaseXiAn implements IDiseaseXiAn {
         public clinicalApplication?: string,
         public series?: string,
         public subSeries?: string,
-        public remarks?: string
+        public remarks?: string,
+        public concourseId?: number,
+        public subsidiaryId?: string
     ) {}
 
 }

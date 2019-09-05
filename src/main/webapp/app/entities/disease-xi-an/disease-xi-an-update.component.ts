@@ -9,6 +9,9 @@ import { Observable } from 'rxjs';
 import { DiseaseXiAnService } from './disease-xi-an.service';
 import { createRequestOption } from 'app/shared';
 import { NTF_TYPE_FOR_DISEASE } from 'app/shared/util/disease-ntf-util';
+import { SubsidiaryService } from './subsidiary/subsidiary.service';
+import { ConcourseService } from './concourse/concourse.service';
+import { IConcourse } from 'app/shared/model/concourse.model';
 
 @Component({
     selector: 'jhi-disease-xi-an-update',
@@ -21,12 +24,17 @@ export class DiseaseXiAnUpdateComponent implements OnInit {
     isSaving: boolean;
     ifGenerateNtf = false;
     subsidiaries: ISubsidiary[];
+    concourses: IConcourse[];
     types: INtfType[];
-    selectedSub: ISubsidiary;
+    selectedNtfSub: ISubsidiary;
     selectedNtfType: INtfType;
+    selectedSub: ISubsidiary;
+    selectedConcourse: IConcourse;
     constructor(
         protected diseaseXiAnService: DiseaseXiAnService,
-        protected activatedRoute: ActivatedRoute) {}
+        protected activatedRoute: ActivatedRoute,
+        protected subsidiaryService: SubsidiaryService,
+        protected concourseService: ConcourseService) {}
 
     ngOnInit() {
         this.isSaving = false;
@@ -34,15 +42,40 @@ export class DiseaseXiAnUpdateComponent implements OnInit {
             this.diseaseXiAn = diseaseXiAn;
         });
         this.ntf = { title: '', description: ''};
+        this.types = NTF_TYPE_FOR_DISEASE;
+        this.selectedNtfType = this.types[0];
+        this.loadConcourses();
+        this.loadSubsidiaries();
+    }
+
+    loadConcourses() {
+        this.concourseService.query().subscribe(res => {
+            this.concourses = res.body._embedded.concourse;
+            this.concourses.forEach(
+                c => {
+                    if (c.pseudoId === this.diseaseXiAn.concourseId) {
+                        this.selectedConcourse = c;
+                    }
+                }
+            );
+        });
+    }
+
+    loadSubsidiaries() {
         this.diseaseXiAnService.getAllSubsidiary().subscribe(
             res => {
                 this.subsidiaries = res;
                 console.log(this.subsidiaries);
-                this.selectedSub = this.subsidiaries[0];
+                this.subsidiaries.forEach(
+                    sub => {
+                        if (sub.name === this.diseaseXiAn.subsidiaryId) {
+                            this.selectedSub = sub;
+                            this.selectedNtfSub = sub;
+                        }
+                    }
+                );
             }
         );
-        this.types = NTF_TYPE_FOR_DISEASE;
-        this.selectedNtfType = this.types[0];
     }
 
     previousState() {
@@ -51,17 +84,20 @@ export class DiseaseXiAnUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
-        const params = {
-            'ifGenerate': this.ifGenerateNtf,
-            'subsidiary.name': this.selectedSub.name,
-            'title': this.ntf.title,
-            'type': this.selectedNtfType.type,
-            'description': this.ntf.description
-        };
+        let prms = new HttpParams();
+        prms = prms.set('ifGenerate', this.ifGenerateNtf ? 'true' : 'false');
+        if (this.ifGenerateNtf) {
+            prms.set('subsidiary.name', this.selectedNtfSub.name);
+            prms.set('title', this.ntf.title);
+            prms.set('type', this.selectedNtfType.type);
+            prms.set('description', this.ntf.description);
+        }
+        this.diseaseXiAn.subsidiaryId = this.selectedSub.name;
+        this.diseaseXiAn.concourseId = this.selectedConcourse.pseudoId;
         if (this.diseaseXiAn.id !== undefined) {
-            this.subscribeToSaveResponse(this.diseaseXiAnService.update(params, this.diseaseXiAn));
+            this.subscribeToSaveResponse(this.diseaseXiAnService.update(prms, this.diseaseXiAn));
         } else {
-            this.subscribeToSaveResponse(this.diseaseXiAnService.create(params, this.diseaseXiAn));
+            this.subscribeToSaveResponse(this.diseaseXiAnService.create(prms, this.diseaseXiAn));
         }
     }
 

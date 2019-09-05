@@ -24,6 +24,18 @@
                     [value]="diseaseXiAn.subsidiary"
                 ></textarea>
             </mat-form-field>
+            <mat-form-field>
+                    <mat-label>子公司</mat-label>
+                    <mat-select [(value)]="selectedSub">
+                        <mat-option [value]="subsidiary" *ngFor="let subsidiary of subsidiaries">{{ subsidiary.name }} </mat-option>
+                    </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                    <mat-label>科室</mat-label>
+                    <mat-select [(value)]="selectedConcourse">
+                        <mat-option [value]="concourse" *ngFor="let concourse of concourses">{{ concourse.name }} </mat-option>
+                    </mat-select>
+            </mat-form-field>
 
             <mat-form-field>
                 <textarea
@@ -235,7 +247,7 @@
 
                 <mat-form-field>
                     <mat-label>子公司</mat-label>
-                    <mat-select [(value)]="selectedSub">
+                    <mat-select [(value)]="selectedNtfSub">
                         <mat-option [value]="subsidiary" *ngFor="let subsidiary of subsidiaries">{{ subsidiary.name }} </mat-option>
                     </mat-select>
                 </mat-form-field>

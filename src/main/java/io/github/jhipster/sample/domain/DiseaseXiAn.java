@@ -60,7 +60,7 @@ public class DiseaseXiAn  extends AbstractViewsEntity implements Serializable {
     private List<Comment> comments = new ArrayList<Comment>();
 
     @Column(name = "subsidiary_id")
-    private Long subsidiaryId;
+    private String subsidiaryId;
 
     @Column(name = "concourse_id")
     private Long concourseId;
@@ -593,6 +593,8 @@ public class DiseaseXiAn  extends AbstractViewsEntity implements Serializable {
         this.setLastModifiedDate(diseaseXiAn.getLastModifiedDate());
         this.id = diseaseXiAn.id;
         this.subsidiary = diseaseXiAn.subsidiary;
+        this.subsidiaryId = diseaseXiAn.subsidiaryId;
+        this.concourseId = diseaseXiAn.concourseId;
         this.name = diseaseXiAn.name;
         this.activated = diseaseXiAn.activated;
         this.projectCode = diseaseXiAn.projectCode;
@@ -626,11 +628,11 @@ public class DiseaseXiAn  extends AbstractViewsEntity implements Serializable {
         this.comments = comments;
     }
 
-    public Long getSubsidiaryId() {
+    public String getSubsidiaryId() {
         return subsidiaryId;
     }
 
-    public void setSubsidiaryId(Long subsidiaryId) {
+    public void setSubsidiaryId(String subsidiaryId) {
         this.subsidiaryId = subsidiaryId;
     }
 
