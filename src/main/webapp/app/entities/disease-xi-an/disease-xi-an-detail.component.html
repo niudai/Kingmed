@@ -36,23 +36,20 @@
                     </div>
 
                     <div *jhiHideIfHasAnyAuthority="'ROLE_DOCTOR'">
-                        <div *jhiHideIfNull="currentChargeCode">
+                        <div *jhiHideIfNull="diseaseXiAn.chargeCode">
                             <mat-list-item>
                                 <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
                                     jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.chargeCode">Charge
                                     Code</span><span> :</span>
                             </mat-list-item>
                             <mat-card>
-                                <p> {{ currentChargeCode }}</p>
+                                <p> {{ diseaseXiAn.chargeCode }}</p>
                             </mat-card>
                         </div>
                     </div>
 
-                    <!-- <div *jhiHideIfNull="currentChargeCode">
-
-                        </div> -->
                     <div *jhiHideIfHasAnyAuthority="'ROLE_DOCTOR'">
-                        <div *jhiHideIfNull="currentPrice">
+                        <div *jhiHideIfNull="diseaseXiAn.tollStandard">
                             <div *jhiHasAnyAuthority="'ROLE_USER'">
                                 <mat-list-item>
                                     <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
@@ -60,7 +57,7 @@
                                         Standard</span><span> : </span>
                                 </mat-list-item>
                                 <mat-card>
-                                    <p> {{ currentPrice }}</p>
+                                    <p> {{ diseaseXiAn.tollStandard }}</p>
                                 </mat-card>
                             </div>
                         </div>
@@ -211,14 +208,14 @@
                             </mat-card>
                         </div>
                     </div>
-                    <div *jhiHideIfNull="currentReportingTime">
+                    <div *jhiHideIfNull="diseaseXiAn.reportingTime">
                         <mat-list-item>
                             <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
                                 jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.reportingTime">Reporting
                                 Time</span><span> :</span>
                         </mat-list-item>
                         <mat-card>
-                            <p><span>{{currentReportingTime}}</span></p>
+                            <p><span>{{diseaseXiAn.reportingTime}}</span></p>
                         </mat-card>
                     </div>
 
@@ -257,14 +254,14 @@
 
                     </div>
 
-                    <div *jhiHideIfNull="currentSubseries">
+                    <div *jhiHideIfNull="diseaseXiAn.subSeries">
                         <mat-list-item>
                             <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
                                 jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.subSeries">Sub
                                 Series</span><span> : </span>
                         </mat-list-item>
                         <mat-card>
-                            <p><span>{{ currentSubseries }}</span></p>
+                            <p><span>{{ diseaseXiAn.subSeries }}</span></p>
                         </mat-card>
                     </div>
 
@@ -288,8 +285,8 @@
                     <tbody>
                         <tr>
                             <td *ngFor="let price of prices">
-                                <button mat-raised-button color="accent"
-                                    (click)="currentToggle(price)">{{ price.subsidiary }}</button>
+                                <button mat-raised-button [color]="price.isSelected ? 'primary' : 'accent'"
+                                    (click)="togglePrice(price)">{{ price.subsidiary }}</button>
                             </td>
                         </tr>
                     </tbody>

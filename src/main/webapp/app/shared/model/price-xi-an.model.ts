@@ -5,6 +5,7 @@ export interface IPriceXiAn {
     reportingTime?: string;
     chargeCode?: string;
     subseries?: string;
+    isSelected?: boolean;
 }
 
 export class PriceXiAn implements IPriceXiAn {
@@ -14,6 +15,7 @@ export class PriceXiAn implements IPriceXiAn {
         public reportingTime?: string,
         public tollStandard?: string,
         public chargeCode?: string,
-        public subseries?: string
+        public subseries?: string,
+        public isSelected?: boolean
     ) {}
 }

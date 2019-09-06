@@ -26,20 +26,12 @@ export interface ButtonInfo {
 export class DiseaseXiAnDetailComponent implements OnInit {
     comments: IComment[];
     prices: IPriceXiAn[];
+    selectedPrice: IPriceXiAn;
     activatedToggleLabel: string;
-    diseaseAboutIsOpen: boolean;
-    projectAndPriceIsOpen: boolean;
-    checkDemandsIsOpen: boolean;
-    tatAboutIsOpen: boolean;
     remarkIsOpen: boolean;
     clinicalApplicationIsOpen: boolean; // 临床应用
     diseaseXiAn: IDiseaseXiAn;
     users: Account[];
-    currentPrice: string;
-    currentChargeCode: string;
-    currentReportingTime: string;
-    currentSubseries: string;
-    stringExp: string;
     feedbackSuccessMsg = '反馈成功';
 
     buttonInfos: ButtonInfo[] = [
@@ -88,28 +80,8 @@ export class DiseaseXiAnDetailComponent implements OnInit {
         document.body.removeChild(textarea);
     }
 
-    projectAndPriceIsOpenToggle() {
-        this.projectAndPriceIsOpen = !this.projectAndPriceIsOpen;
-    }
-
-    checkDemandsIsOpenToggle() {
-        this.checkDemandsIsOpen = !this.checkDemandsIsOpen;
-    }
-
-    tatAboutIsOpenToggle() {
-        this.tatAboutIsOpen = !this.tatAboutIsOpen;
-    }
-
-    remarkIsOpenToggle() {
-        this.remarkIsOpen = !this.remarkIsOpen;
-    }
-
     clinicalApplicationIsOpenToggle() {
         this.clinicalApplicationIsOpen = !this.clinicalApplicationIsOpen;
-    }
-
-    diseaseAboutIsOpenToggle() {
-        this.diseaseAboutIsOpen = !this.diseaseAboutIsOpen;
     }
 
     activateDiseaseXiAn() {
@@ -133,29 +105,25 @@ export class DiseaseXiAnDetailComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.projectAndPriceIsOpen = true;
         this.activatedRoute.data.subscribe(({ diseaseXiAn }) => {
             this.diseaseXiAn = diseaseXiAn;
-            this.stringExp = diseaseXiAnToString(this.diseaseXiAn);
             this.prices = this.diseaseXiAn.prices;
-            this.prices.push(
-                { subsidiary: this.diseaseXiAn.subsidiary,
-                    tollStandard: this.diseaseXiAn.tollStandard,
-                    reportingTime: this.diseaseXiAn.reportingTime,
-                    chargeCode: this.diseaseXiAn.chargeCode,
-                    subseries: this.diseaseXiAn.subSeries
-                },
-                 );
+            this.prices.forEach( p => p.isSelected = false);
+            this.selectedPrice = {
+                subsidiary: this.diseaseXiAn.subsidiary,
+                tollStandard: this.diseaseXiAn.tollStandard,
+                reportingTime: this.diseaseXiAn.reportingTime,
+                chargeCode: this.diseaseXiAn.chargeCode,
+                subseries: this.diseaseXiAn.subSeries,
+                isSelected: true
+            };
+            this.prices.push(this.selectedPrice);
             this.diseaseXiAnService.getUsers(this.diseaseXiAn.id)
                 .subscribe( res => this.users = res.body);
             this.fetchComments();
 
         });
         this.activatedToggleLabel = this.diseaseXiAn.activated ? '运行' : '已停用';
-        this.currentChargeCode = this.diseaseXiAn.chargeCode;
-        this.currentPrice = this.diseaseXiAn.tollStandard;
-        this.currentReportingTime = this.diseaseXiAn.reportingTime;
-        this.currentSubseries = this.currentSubseries;
     }
 
     private fetchComments() {
@@ -202,20 +170,15 @@ export class DiseaseXiAnDetailComponent implements OnInit {
     }
 
     public togglePrice(price: PriceXiAn): void {
-        this.diseaseXiAn.subsidiary =   price.subsidiary;
-        this.diseaseXiAn.tollStandard = price.tollStandard;
-        this.diseaseXiAn.reportingTime = price.reportingTime;
-        this.diseaseXiAn.chargeCode  = price.chargeCode;
-        this.diseaseXiAn.subSeries =   price.subseries;
+        this.selectedPrice.isSelected = false;
+        this.selectedPrice = price;
+        this.selectedPrice.isSelected = true;
+        this.diseaseXiAn.subsidiary =   this.selectedPrice.subsidiary;
+        this.diseaseXiAn.tollStandard = this.selectedPrice.tollStandard;
+        this.diseaseXiAn.reportingTime = this.selectedPrice.reportingTime;
+        this.diseaseXiAn.chargeCode  = this.selectedPrice.chargeCode;
+        this.diseaseXiAn.subSeries =   this.selectedPrice.subseries;
         this._snackBar.open(`当前价格已切换至${price.subsidiary}`, null, { duration: 1000});
-    }
-
-    public currentDefault(): void {
-        this.currentPrice = this.diseaseXiAn.tollStandard;
-        this.currentChargeCode = this.diseaseXiAn.chargeCode;
-        this.currentReportingTime = this.diseaseXiAn.reportingTime;
-        this.currentSubseries = this.diseaseXiAn.subSeries;
-        this._snackBar.open(`当前价格已切换至${this.diseaseXiAn.subsidiary}`, null, { duration: 1000});
     }
 
     previousState() {
