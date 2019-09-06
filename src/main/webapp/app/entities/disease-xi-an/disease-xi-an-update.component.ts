@@ -87,12 +87,13 @@ export class DiseaseXiAnUpdateComponent implements OnInit {
         let prms = new HttpParams();
         prms = prms.set('ifGenerate', this.ifGenerateNtf ? 'true' : 'false');
         if (this.ifGenerateNtf) {
-            prms.set('subsidiary.name', this.selectedNtfSub.name);
-            prms.set('title', this.ntf.title);
-            prms.set('type', this.selectedNtfType.type);
-            prms.set('description', this.ntf.description);
+            prms = prms.set('subsidiary.name', this.selectedNtfSub.name);
+            prms = prms.set('subsidiary.id', this.selectedNtfSub.id.toString());
+            prms = prms.set('title', this.ntf.title);
+            prms = prms.set('type', this.selectedNtfType.type);
+            prms = prms.set('description', this.ntf.description);
         }
-        this.diseaseXiAn.subsidiaryId = this.selectedSub.name;
+        this.diseaseXiAn.subsidiaryId = this.selectedSub.id;
         this.diseaseXiAn.concourseId = this.selectedConcourse.pseudoId;
         if (this.diseaseXiAn.id !== undefined) {
             this.subscribeToSaveResponse(this.diseaseXiAnService.update(prms, this.diseaseXiAn));

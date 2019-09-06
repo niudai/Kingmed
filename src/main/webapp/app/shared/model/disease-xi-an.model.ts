@@ -35,7 +35,7 @@ export interface IDiseaseXiAn {
     lastModifiedDate?: Date;
     views?: number;
     concourseId?: number;
-    subsidiaryId?: string;
+    subsidiaryId?: number;
 }
 
 export class DiseaseXiAn implements IDiseaseXiAn {
@@ -72,7 +72,7 @@ export class DiseaseXiAn implements IDiseaseXiAn {
         public subSeries?: string,
         public remarks?: string,
         public concourseId?: number,
-        public subsidiaryId?: string
+        public subsidiaryId?: number
     ) {}
 
 }

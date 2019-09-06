@@ -25,6 +25,8 @@ import { CreateComponent } from 'app/entities/disease-xi-an/concourse/create-dia
 import { CreateDialogComponent } from 'app/entities/disease-xi-an/subsidiary/create/create.component';
 import { DeleteDialogComponent } from './subsidiary-admin/delete-dialog/delete-dialog.component';
 import { UpdateComponent } from './subsidiary-admin/update/update.component';
+import { ConcourseUpdateComponent } from './concourse-admin/update/concourse-update/concourse-update.component';
+import { ConcourseDeleteDialogComponent } from './concourse-admin/delete-dialog/concourse-delete-dialog/concourse-delete-dialog.component';
 
 @NgModule({
     imports: [
@@ -49,7 +51,9 @@ import { UpdateComponent } from './subsidiary-admin/update/update.component';
         CreateComponent,
         CreateDialogComponent,
         DeleteDialogComponent,
-        UpdateComponent
+        UpdateComponent,
+        ConcourseUpdateComponent,
+        ConcourseDeleteDialogComponent
     ],
     providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }],
     entryComponents: [
@@ -58,7 +62,9 @@ import { UpdateComponent } from './subsidiary-admin/update/update.component';
         CreateComponent,
         CreateDialogComponent,
         DeleteDialogComponent,
-        UpdateComponent
+        UpdateComponent,
+        ConcourseUpdateComponent,
+        ConcourseDeleteDialogComponent
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

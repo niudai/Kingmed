@@ -1,6 +1,6 @@
 
 Todo:
-  ☐ Implement concourse update and delete function.
+  ✔ Implement concourse update and delete admin page. @done(19-09-06 11:10)
   ☐ Implement subsidiary restrictive query
   ☐ Implement auto-completion in disease searching box.
   ☐ Implement auto-completion in qarobots searching box.
@@ -9,4 +9,30 @@ Todo:
   ☐ Implement views sorting for qarobots.
   ☐ Write basic sql quries for data migrating for disease.
   ☐ Write one article about spring-boot.
+  ☐ Implement snackbar ntf in prices info toggle.
+  ✔ Implement subdidiary admin page @done(19-09-05 22:04)
+
+
+
+DROP TABLE IF EXISTS JHI_SUBSIDIARY ;
+
+
+DELETE FROM DATABASECHANGELOG WHERE id = '20190817-1';
+
+
+ALTER TABLE DISEASE_XI_AN  DROP COLUMN subsidiary_id;
+
+DROP TABLE IF EXISTS JHI_CONCOURSE ;
+
+
+DELETE FROM DATABASECHANGELOG WHERE id = '2019090402';
+
+
+ALTER TABLE DISEASE_XI_AN  DROP COLUMN concourse_id;
+
+DROP TABLE IF EXISTS PROJECT_NOTIFICATION;
+
+DELETE FROM DATABASECHANGELOG WHERE id = '2019081901';
+
+
 

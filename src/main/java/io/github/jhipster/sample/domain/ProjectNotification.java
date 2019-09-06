@@ -31,7 +31,7 @@ public class ProjectNotification {
     private String title;
 
     @ManyToOne
-    @JoinColumn(name = "subsidiary_name")
+    @JoinColumn(name = "subsidiary_id")
     private Subsidiary subsidiary;
 
     private String description; // name of notification

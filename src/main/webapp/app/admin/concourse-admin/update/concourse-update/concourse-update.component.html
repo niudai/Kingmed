@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>修改科室名</h1>
+<div mat-dialog-content>
+    <p>输入修改后的科室名：</p>
+    <mat-form-field>
+        <input matInput [(ngModel)]="data.concourse.name">
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">取消</button>
+    <button mat-button [mat-dialog-close]="data.concourse" cdkFocusInitial>确定</button>
+</div>

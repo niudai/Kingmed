@@ -11,7 +11,7 @@ public final class HeaderUtil {
 
     private static final Logger log = LoggerFactory.getLogger(HeaderUtil.class);
 
-    private static final String APPLICATION_NAME = "jhipsterElasticsearchSampleApplicationApp";
+    private static final String APPLICATION_NAME = "kingmed";
 
     private HeaderUtil() {
     }

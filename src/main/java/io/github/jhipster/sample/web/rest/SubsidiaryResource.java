@@ -56,9 +56,7 @@ public class SubsidiaryResource {
             throw new BadRequestAlertException("Subsidiary has already been created", ENTITY_NAME, "exists");
         }
         Subsidiary result = subsidiaryRepository.save(subsidiary);
-        return ResponseEntity.created(new URI("/api/subsidiarys/" + result.getName()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getName().toString()))
-            .body(result);
+        return ResponseEntity.created(new URI("/api/subsidiarys/" + result.getName())).body(result);
     }
 
     /**
@@ -107,14 +105,14 @@ public class SubsidiaryResource {
     /**
      * DELETE  /subsidiarys/:id : delete the "id" subsidiary.
      *
-     * @param name the id of the subsidiary to delete
+     * @param id the id of the subsidiary to delete
      * @return the ResponseEntity with status 200 (OK)
      */
-    @DeleteMapping("/{name}")
-    public ResponseEntity<Void> deleteSubsidiary(@PathVariable String name) {
-        log.debug("REST request to delete Subsidiary : {}", name);
-        subsidiaryRepository.deleteById(name);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, name.toString())).build();
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteSubsidiary(@PathVariable Long id) {
+        log.debug("REST request to delete Subsidiary : {}", id);
+        subsidiaryRepository.deleteById(id);
+        return ResponseEntity.ok().build();
     }
 
 }

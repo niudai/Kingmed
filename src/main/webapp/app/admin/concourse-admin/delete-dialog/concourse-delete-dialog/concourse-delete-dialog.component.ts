@@ -1,17 +1,18 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { SubsidiaryService } from 'app/entities/disease-xi-an/subsidiary/subsidiary.service';
+import { ConcourseService } from 'app/entities/disease-xi-an/concourse/concourse.service';
 
-@Component({
-    selector: 'jhi-delete-dialog',
-    templateUrl: './delete-dialog.component.html',
-    styles: []
+@Component ({
+  selector: 'jhi-concourse-delete-dialog',
+  templateUrl: './concourse-delete-dialog.component.html',
+  styles: []
 })
-export class DeleteDialogComponent {
+export class ConcourseDeleteDialogComponent {
+
     constructor(
-        public dialogRef: MatDialogRef<DeleteDialogComponent>,
+        public dialogRef: MatDialogRef<ConcourseDeleteDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data,
-        public service: SubsidiaryService) {}
+        public service: ConcourseService) {}
 
     onNoClick(): void {
         this.dialogRef.close();

@@ -20,12 +20,12 @@
                     cdkTextareaAutosize
                     matInput
                     [(ngModel)]="diseaseXiAn.subsidiary"
-                    placeholder="子公司"
+                    placeholder="子公司（旧）"
                     [value]="diseaseXiAn.subsidiary"
                 ></textarea>
             </mat-form-field>
             <mat-form-field>
-                    <mat-label>子公司</mat-label>
+                    <mat-label>子公司（新）</mat-label>
                     <mat-select [(value)]="selectedSub">
                         <mat-option [value]="subsidiary" *ngFor="let subsidiary of subsidiaries">{{ subsidiary.name }} </mat-option>
                     </mat-select>

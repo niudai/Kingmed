@@ -28,7 +28,7 @@
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
         <addColumn tableName="disease_xi_an">
-            <column name="concourse_id" type="varchar(50)"/>
+            <column name="concourse_id" type="bigint"/>
         </addColumn>
 
     </changeSet>

@@ -28,7 +28,7 @@
             <column name="title" type = "varchar(80)">
                 <constraints nullable="false" />
             </column>
-            <column name="subsidiary_name" type="varchar(50)">
+            <column name="subsidiary_id" type="bigint">
                 <constraints nullable="false" />
             </column>
 
@@ -41,13 +41,13 @@
             </column>
 
             <column name="disease_xi_an_id" type="bigint">
-                <constraints nullable="false" />
+                <constraints nullable="true" />
             </column>
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
 
-        <addForeignKeyConstraint baseColumnNames="subsidiary_name"
+        <!-- <addForeignKeyConstraint baseColumnNames="subsidiary_name"
                                  baseTableName="project_notification"
                                  constraintName="fk_subsidiary_name"
                                  referencedColumnNames="name"
@@ -57,7 +57,7 @@
                                  baseTableName="project_notification"
                                  constraintName="fk_disease_xi_an"
                                  referencedColumnNames="id"
-                                 referencedTableName="disease_xi_an"/>
+                                 referencedTableName="disease_xi_an"/> -->
 
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->

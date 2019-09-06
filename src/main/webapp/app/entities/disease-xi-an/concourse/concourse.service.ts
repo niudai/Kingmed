@@ -15,7 +15,7 @@ export class ConcourseService {
         return this.http.post<IConcourse>(this.resourceUrl, concourse, { observe: 'response' });
     }
     update(concourse: IConcourse): Observable<ConcourseResponse> {
-        return this.http.put<IConcourse>(this.resourceUrl, concourse, { observe: 'response' });
+        return this.http.put<IConcourse>(concourse._links.self.href, concourse, { observe: 'response' });
     }
     find(id: number): Observable<ConcourseResponse> {
         return this.http.get<IConcourse>(`${this.resourceUrl}/${id}`, { observe: 'response' });

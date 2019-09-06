@@ -11,10 +11,8 @@ import io.github.jhipster.sample.domain.Subsidiary;
  * RobotRepository
  */
 @Repository
-public interface SubsidiaryRepository extends JpaRepository<Subsidiary, String> {
+public interface SubsidiaryRepository extends JpaRepository<Subsidiary, Long> {
 
     public Optional<Subsidiary> findByName(String name);
-
-    public void deleteByName(String name);
 
 }

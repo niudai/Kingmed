@@ -1,14 +1,16 @@
 package io.github.jhipster.sample.domain;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
+import java.io.Serializable;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Column;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.io.Serializable;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  *  All Subsidia
@@ -20,10 +22,11 @@ public class Subsidiary implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @NotNull
-    @Size(max = 50)
     @Id
-    @Column(length = 50)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "name")
     private String name;
 
     public String getName() {
@@ -44,5 +47,13 @@ public class Subsidiary implements Serializable {
         return "Subsidiary {" +
             "name='" + name + '\'' +
             "}";
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

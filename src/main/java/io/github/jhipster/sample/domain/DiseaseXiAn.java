@@ -17,7 +17,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -60,7 +59,7 @@ public class DiseaseXiAn  extends AbstractViewsEntity implements Serializable {
     private List<Comment> comments = new ArrayList<Comment>();
 
     @Column(name = "subsidiary_id")
-    private String subsidiaryId;
+    private Long subsidiaryId;
 
     @Column(name = "concourse_id")
     private Long concourseId;
@@ -82,7 +81,6 @@ public class DiseaseXiAn  extends AbstractViewsEntity implements Serializable {
     private Set<DiseaseXiAn> diseaseXiAns = new HashSet<>();
 
     @ManyToMany
-
     @JoinTable(name = "disease_xi_an_disease_xi_an", joinColumns = @JoinColumn(name = "related_disease_xi_an_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "disease_xi_an_id", referencedColumnName = "id"))
     @JsonIgnoreProperties({ "diseaseXiAns", "reversedDiseaseXiAns" })
     private Set<DiseaseXiAn> reversedDiseaseXiAns = new HashSet<>();
@@ -628,11 +626,11 @@ public class DiseaseXiAn  extends AbstractViewsEntity implements Serializable {
         this.comments = comments;
     }
 
-    public String getSubsidiaryId() {
+    public Long getSubsidiaryId() {
         return subsidiaryId;
     }
 
-    public void setSubsidiaryId(String subsidiaryId) {
+    public void setSubsidiaryId(Long subsidiaryId) {
         this.subsidiaryId = subsidiaryId;
     }
 
