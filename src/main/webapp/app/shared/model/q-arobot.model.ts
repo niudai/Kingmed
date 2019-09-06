@@ -11,6 +11,7 @@ export interface IQArobot {
     qaSubsidiary?: string;
     specialProcess?: string;
     qaClass?: string;
+    views?: number;
 }
 
 export class QArobot implements IQArobot {
@@ -26,6 +27,7 @@ export class QArobot implements IQArobot {
         public submitter?: string,
         public qaSubsidiary?: string,
         public specialProcess?: string,
-        public qaClass?: string
+        public qaClass?: string,
+        public views?: number
     ) {}
 }

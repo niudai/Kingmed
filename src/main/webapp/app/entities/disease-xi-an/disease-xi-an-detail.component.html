@@ -287,10 +287,7 @@
                     <thead></thead>
                     <tbody>
                         <tr>
-                            <!--  -->
-                            <td><button mat-raised-button color="accent"
-                                    (click)="currentDefault()">{{diseaseXiAn.subsidiary}}</button></td>
-                            <td *ngFor="let price of diseaseXiAn.prices">
+                            <td *ngFor="let price of prices">
                                 <button mat-raised-button color="accent"
                                     (click)="currentToggle(price)">{{ price.subsidiary }}</button>
                             </td>

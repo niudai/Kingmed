@@ -5,7 +5,7 @@ import { Account } from 'app/core/user/account.model';
 import { DiseaseXiAnService } from 'app/entities/disease-xi-an/disease-xi-an.service';
 import { IDiseaseXiAn, diseaseXiAnToString } from 'app/shared/model/disease-xi-an.model';
 import { ILinkCard, LinkCard } from 'app/shared/model/link-card.model';
-import { PriceXiAn } from './../../shared/model/price-xi-an.model';
+import { PriceXiAn, IPriceXiAn } from './../../shared/model/price-xi-an.model';
 import { FeedbackDialogComponent } from 'app/layouts/navbar/feedback-dialog/feedback-dialog.component';
 import { CommentDialogComponent } from './comment-dialog/comment-dialog.component';
 import { IComment } from 'app/shared/model/comment.model';
@@ -25,6 +25,7 @@ export interface ButtonInfo {
 })
 export class DiseaseXiAnDetailComponent implements OnInit {
     comments: IComment[];
+    prices: IPriceXiAn[];
     activatedToggleLabel: string;
     diseaseAboutIsOpen: boolean;
     projectAndPriceIsOpen: boolean;
@@ -72,7 +73,7 @@ export class DiseaseXiAnDetailComponent implements OnInit {
         const t = window.pageYOffset || document.documentElement.scrollTop;
         textarea.style.top = t + 'px';
         textarea.setAttribute('readonly', '');
-        textarea.value = this.stringExp;
+        textarea.value = diseaseXiAnToString(disease);
         document.body.appendChild(textarea);
         textarea.select();
         textarea.setSelectionRange(0, textarea.value.length);
@@ -136,6 +137,15 @@ export class DiseaseXiAnDetailComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ diseaseXiAn }) => {
             this.diseaseXiAn = diseaseXiAn;
             this.stringExp = diseaseXiAnToString(this.diseaseXiAn);
+            this.prices = this.diseaseXiAn.prices;
+            this.prices.push(
+                { subsidiary: this.diseaseXiAn.subsidiary,
+                    tollStandard: this.diseaseXiAn.tollStandard,
+                    reportingTime: this.diseaseXiAn.reportingTime,
+                    chargeCode: this.diseaseXiAn.chargeCode,
+                    subseries: this.diseaseXiAn.subSeries
+                },
+                 );
             this.diseaseXiAnService.getUsers(this.diseaseXiAn.id)
                 .subscribe( res => this.users = res.body);
             this.fetchComments();
@@ -191,11 +201,13 @@ export class DiseaseXiAnDetailComponent implements OnInit {
         );
     }
 
-    public currentToggle(price: PriceXiAn): void {
-        this.currentPrice = price.tollStandard;
-        this.currentChargeCode = price.chargeCode;
-        this.currentReportingTime = price.reportingTime;
-        this.currentSubseries = price.subseries;
+    public togglePrice(price: PriceXiAn): void {
+        this.diseaseXiAn.subsidiary =   price.subsidiary;
+        this.diseaseXiAn.tollStandard = price.tollStandard;
+        this.diseaseXiAn.reportingTime = price.reportingTime;
+        this.diseaseXiAn.chargeCode  = price.chargeCode;
+        this.diseaseXiAn.subSeries =   price.subseries;
+        this._snackBar.open(`当前价格已切换至${price.subsidiary}`, null, { duration: 1000});
     }
 
     public currentDefault(): void {
@@ -203,6 +215,7 @@ export class DiseaseXiAnDetailComponent implements OnInit {
         this.currentChargeCode = this.diseaseXiAn.chargeCode;
         this.currentReportingTime = this.diseaseXiAn.reportingTime;
         this.currentSubseries = this.diseaseXiAn.subSeries;
+        this._snackBar.open(`当前价格已切换至${this.diseaseXiAn.subsidiary}`, null, { duration: 1000});
     }
 
     previousState() {

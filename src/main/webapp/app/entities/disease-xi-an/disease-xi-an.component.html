@@ -14,7 +14,7 @@
                     <mat-label>子公司</mat-label>
                     <mat-select [(value)]="selectedSub" (selectionChange)="loadDiseases()">
                         <mat-option *ngFor="let sub of subsidiaries" [value]="sub">
-                            {{sub}}
+                            {{sub.name}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
@@ -28,19 +28,6 @@
                 </mat-form-field>
             </form>
             <div class="col-sm-12">
-                <button mat-raised-button color="accent" *jhiHasAnyAuthority="'ROLE_ADMIN'" id="jh-create-entity"
-                    class="float-right jh-create-entity" (click)="openSubsidiaryDialog()">
-                    <fa-icon [icon]="'plus'"></fa-icon>
-                    <span class="hidden-sm-down">
-                        新子公司
-                    </span>
-                </button><button mat-raised-button color="accent" *jhiHasAnyAuthority="'ROLE_ADMIN'"
-                    id="jh-create-entity" class="float-right jh-create-entity" (click)="openConcourseDialog()">
-                    <fa-icon [icon]="'plus'"></fa-icon>
-                    <span class="hidden-sm-down">
-                        新科室
-                    </span>
-                </button>
                 <button mat-raised-button color="accent" *jhiHasAnyAuthority="'ROLE_ADMIN'" id="jh-create-entity"
                     class="float-right jh-create-entity" [routerLink]="['/disease-xi-an/new']">
                     <fa-icon [icon]="'plus'"></fa-icon>
@@ -86,6 +73,7 @@
                             <span *jhiHasAnyAuthority="'ROLE_ADMIN'">
                                 <button mat-fab color="warn" *ngIf="!diseaseXiAn.activated">停用</button>
                             </span>
+                            <span style = "float: right"><span style = "color: orange;">{{diseaseXiAn.views}}</span>人看过</span>
                             <!-- <button mat-raised-button color="warn" *ngIf="diseaseXiAn.activated">运行</button> -->
                         </a>
                         <br>
@@ -117,6 +105,7 @@
                         </span>
                         <button mat-fab color="warn" *ngIf="!diseaseXiAn.activated">停用</button>
                         <!-- <button mat-raised-button color="warn" *ngIf="diseaseXiAn.activated">运行</button> -->
+                        <span style = "float: right"><span style = "color: orange;">{{diseaseXiAn.views}}</span>人看过</span>
                     </a>
                 </td>
             </ng-container>

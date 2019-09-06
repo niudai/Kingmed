@@ -25,7 +25,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @Table(name = "q_arobot")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class QArobot implements Serializable {
+public class QArobot extends AbstractViewsEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

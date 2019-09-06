@@ -10,6 +10,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,6 +19,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import io.github.jhipster.sample.domain.QArobot;
+import io.github.jhipster.sample.repository.QArobotRepository;
 import io.github.jhipster.sample.web.rest.searchdto.QarobotSearchDTO;
 import static io.github.jhipster.sample.web.rest.util.SearchUtil.*;
 
@@ -30,6 +32,16 @@ public class QArobotService {
     @Autowired
     private EntityManager entityManager;
 
+    @Autowired
+    private QArobotRepository qArobotRepository;
+
+    @Transactional
+    public QArobot getQArobot(Long id) {
+        QArobot qa = this.qArobotRepository.findById(id).get();
+        qa.setViews(qa.getViews() + 1);
+        return qa;
+    }
+
     public Page<QArobot> searchQArobot(
         QarobotSearchDTO searchDTO, Pageable pageable
     ) {
@@ -41,6 +53,7 @@ public class QArobotService {
 
         List<Predicate> restrictions = new ArrayList<Predicate>();
         qarobotQuery.select(qarobot);
+        qarobotQuery.orderBy(cb.desc(qarobot.get("views")));
         countQuery.select(cb.count(count));
 
         String query = searchDTO.getQuery();
@@ -52,10 +65,10 @@ public class QArobotService {
             restrictions.add(cb.like(qarobot.get("question"), "%" + query + "%"));
         }
 
-        Predicate queryPredicate = 
-            restrictions.size() > 0 ? 
+        Predicate queryPredicate =
+            restrictions.size() > 0 ?
                 cb.or(restrictions.toArray(new Predicate[restrictions.size()])) : cb.and();
-        
+
         qarobotQuery.where(queryPredicate);
 
         // get qarobots satisfied with criterias

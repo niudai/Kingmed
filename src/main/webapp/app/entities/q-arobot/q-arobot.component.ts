@@ -1,6 +1,6 @@
 import { PageEvent, MatDialog } from '@angular/material';
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
-import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpHeaders, HttpResponse, HttpParams } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
@@ -19,7 +19,7 @@ import { QArobotDeleteDialogComponent } from '.';
     styleUrls: ['./q-arobot.component.css']
 })
 export class QArobotComponent implements OnInit, OnDestroy {
-    PC_COL: string[] =  ['ID', 'questionPC', 'disease', 'diseaseSeries', 'projectSeries'];
+    PC_COL: string[] = ['ID', 'questionPC', 'disease', 'diseaseSeries', 'projectSeries'];
     MOBILE_COL: string[] = ['questionMobile', 'disease'];
     displayedColumns: string[];
     currentAccount: any;
@@ -80,42 +80,45 @@ export class QArobotComponent implements OnInit, OnDestroy {
 
     openDialog(qA: IQArobot): void {
         const dialogRef = this.dialog.open(QArobotDeleteDialogComponent, {
-          width: '250px',
-          data: {qArobot: qA}
+            width: '250px',
+            data: { qArobot: qA }
         });
 
         dialogRef.afterClosed().subscribe(result => {
-        //   console.log('The dialog was closed');
+            //   console.log('The dialog was closed');
             this.loadAll();
         });
     }
 
     loadAll() {
-        this.router.navigate(['/q-arobot', {
-            page: this.pageEvent && this.pageEvent.pageIndex ? this.pageEvent.pageIndex : 0,
-            size: this.pageEvent && this.pageEvent.pageSize ? this.pageEvent.pageSize : 10,
-            search: this.currentSearch}],
-            { queryParams: {
-                page: this.pageEvent && this.pageEvent.pageIndex ? this.pageEvent.pageIndex : 0,
-                size: this.pageEvent && this.pageEvent.pageSize ? this.pageEvent.pageSize : 10,
-            }}
+        this.router.navigate(
+            [
+                '/q-arobot',
+                {
+                    page: this.pageEvent && this.pageEvent.pageIndex ? this.pageEvent.pageIndex : 0,
+                    size: this.pageEvent && this.pageEvent.pageSize ? this.pageEvent.pageSize : 10,
+                    search: this.currentSearch
+                }
+            ],
+            {
+                queryParams: {
+                    page: this.pageEvent && this.pageEvent.pageIndex ? this.pageEvent.pageIndex : 0,
+                    size: this.pageEvent && this.pageEvent.pageSize ? this.pageEvent.pageSize : 10
+                }
+            }
         );
-        if (this.currentSearch) {
-            this.qArobotService
-                .search({
-                    page: this.pageEvent ? this.pageEvent.pageIndex : 0,
-                    query: this.currentSearch,
-                    size: this.pageEvent ? this.pageEvent.pageSize : 10,
-                    // sort: this.sort()
-                })
-                .subscribe(
-                    (res: HttpResponse<IQArobot[]>) => this.paginateQArobots(res.body, res.headers),
-                    (res: HttpErrorResponse) => this.onError(res.message)
-                );
-            return;
-        } else {
-            this.qArobots = null;
-        }
+        this.qArobotService
+            .search({
+                page: this.pageEvent ? this.pageEvent.pageIndex : 0,
+                query: this.currentSearch,
+                size: this.pageEvent ? this.pageEvent.pageSize : 10
+                // sort: this.sort()
+            })
+            .subscribe(
+                (res: HttpResponse<IQArobot[]>) => this.paginateQArobots(res.body, res.headers),
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+        return;
     }
 
     loadPage($event: PageEvent) {
@@ -130,12 +133,13 @@ export class QArobotComponent implements OnInit, OnDestroy {
         }
         this.pageEvent = new PageEvent();
         this.columnToggle();
-        this.currentSearch = this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['search']
-            ? this.activatedRoute.snapshot.params['search'] : '';
+        this.currentSearch =
+            this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['search']
+                ? this.activatedRoute.snapshot.params['search']
+                : '';
         // this.currentSearch = 'test';
-        this.pageEvent.pageIndex = this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['page']
-        ? this.activatedRoute.snapshot.params['page']
-            : '';
+        this.pageEvent.pageIndex =
+            this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['page'] ? this.activatedRoute.snapshot.params['page'] : '';
         this.loadAll();
         this.accountService.identity().then(account => {
             this.currentAccount = account;

@@ -54,5 +54,5 @@
     <include file="config/liquibase/changelog/20190901_ add_column_disease_xi_an.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190904_add_column_feedback.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190904_create_table_concourse.xml" relativeToChangelogFile="false"/>
-
+    <include file="config/liquibase/changelog/20190906_add_audit_column_to_qarobot.xml" relativeToChangelogFile="false"/>
 </databaseChangeLog>

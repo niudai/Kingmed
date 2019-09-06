@@ -7,7 +7,7 @@ import io.github.jhipster.sample.domain.Concourse;
  */
 public class DiseaseXiAnSearchDTO {
 
-    private String subsidiary;
+    private Long subsidiaryId;
 
     private Concourse concourse;
 
@@ -15,13 +15,7 @@ public class DiseaseXiAnSearchDTO {
 
     private String query;
 
-    public String getSubsidiary() {
-        return subsidiary;
-    }
 
-    public void setSubsidiary(String subsidiary) {
-        this.subsidiary = subsidiary;
-    }
 
     public String getProjectConcourse() {
         return projectConcourse;
@@ -43,7 +37,7 @@ public class DiseaseXiAnSearchDTO {
     @Override
     public String toString() {
         return "DiseaseXiAnSearchDTO [projectConcourse=" + projectConcourse + ", query=" + query + ", subsidiary="
-                + subsidiary + "]";
+                + subsidiaryId + "]";
     }
 
     public Concourse getConcourse() {
@@ -52,6 +46,14 @@ public class DiseaseXiAnSearchDTO {
 
     public void setConcourse(Concourse concourse) {
         this.concourse = concourse;
+    }
+
+    public Long getSubsidiaryId() {
+        return subsidiaryId;
+    }
+
+    public void setSubsidiaryId(Long subsidiaryId) {
+        this.subsidiaryId = subsidiaryId;
     }
 
 }

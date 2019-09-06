@@ -132,10 +132,10 @@ public class QArobotResource {
      * @return the ResponseEntity with status 200 (OK) and with body the qArobot, or with status 404 (Not Found)
      */
     @GetMapping("/q-arobots/{id}")
-    public ResponseEntity<QArobot> getQArobot(@PathVariable Long id) {
+    public QArobot getQArobot(@PathVariable Long id) {
         log.debug("REST request to get QArobot : {}", id);
-        Optional<QArobot> qArobot = qArobotRepository.findById(id);
-        return ResponseUtil.wrapOrNotFound(qArobot);
+        QArobot qArobot = qArobotService.getQArobot(id);
+        return qArobot;
     }
 
     /**

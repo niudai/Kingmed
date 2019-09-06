@@ -46,10 +46,11 @@
             <ng-container matColumnDef="questionMobile">
                 <th mat-header-cell *matHeaderCellDef> 问题 </th>
                 <td mat-cell *matCellDef="let qArobot">
-                    <mat-card matRipple style = "margin: 0; padding: 1%">
+                    <mat-card matRipple style="margin: 0; padding: 1%">
                         <a [routerLink]="[qArobot.id, 'view' ]">{{qArobot.question}}
                             - <strong>{{qArobot.qaSubsidiary}}</strong>
                         </a>
+                        <span style="float: right"><span style="color: orange;">{{qArobot.views}}</span>人看过</span>
                         <br>
                     </mat-card>
                 </td>
@@ -59,38 +60,39 @@
             <ng-container matColumnDef="questionPC">
                 <th mat-header-cell *matHeaderCellDef> 问题 </th>
                 <td mat-cell *matCellDef="let qArobot">
-                            <a [routerLink]="[qArobot.id, 'view' ]">{{qArobot.question}}
-                                - <strong>{{qArobot.qaSubsidiary}}</strong>
-                            </a>
-                            <br>
+                    <a [routerLink]="[qArobot.id, 'view' ]">{{qArobot.question}}
+                        - <strong>{{qArobot.qaSubsidiary}}</strong>
+                    </a>
+                    <span style="float: right"><span style="color: orange;">{{qArobot.views}}</span>人看过</span>
+                    <br>
                 </td>
             </ng-container>
 
             <!-- Disease Column -->
             <ng-container matColumnDef="disease">
-                    <th mat-header-cell *matHeaderCellDef> 相关项目 </th>
-                    <td mat-cell *matCellDef="let qArobot">
-                            <button type="submit" mat-mini-fab [routerLink]="['/q-arobot', qArobot.id, 'disease']"
-                            color = "accent">
-                            <fa-icon [icon]="'book-medical'"></fa-icon>
-                            <!-- <span class="d-none d-md-inline"></span> -->
+                <th mat-header-cell *matHeaderCellDef> 相关项目 </th>
+                <td mat-cell *matCellDef="let qArobot">
+                    <button type="submit" mat-mini-fab [routerLink]="['/q-arobot', qArobot.id, 'disease']"
+                        color="accent">
+                        <fa-icon [icon]="'book-medical'"></fa-icon>
+                        <!-- <span class="d-none d-md-inline"></span> -->
                     </button>
                 </td>
             </ng-container>
 
-             <!-- DiseaseSeries Column -->
-             <ng-container matColumnDef="diseaseSeries">
-                    <th mat-header-cell *matHeaderCellDef> 疾病系列 </th>
-                    <td mat-cell *matCellDef="let qArobot">
-                          {{qArobot.diseaseSeries}}
+            <!-- DiseaseSeries Column -->
+            <ng-container matColumnDef="diseaseSeries">
+                <th mat-header-cell *matHeaderCellDef> 疾病系列 </th>
+                <td mat-cell *matCellDef="let qArobot">
+                    {{qArobot.diseaseSeries}}
                 </td>
             </ng-container>
 
             <!-- ProjectType Column -->
             <ng-container matColumnDef="projectSeries">
-                    <th mat-header-cell *matHeaderCellDef> 项目类型 </th>
-                    <td mat-cell *matCellDef="let qArobot">
-                          {{qArobot.projectSeries}}
+                <th mat-header-cell *matHeaderCellDef> 项目类型 </th>
+                <td mat-cell *matCellDef="let qArobot">
+                    {{qArobot.projectSeries}}
                 </td>
             </ng-container>
 
@@ -112,8 +114,8 @@
                 <th mat-header-cell *matHeaderCellDef> 删除 </th>
                 <td mat-cell *matCellDef="let element">
                     <div class="btn-group flex-btn-group-container">
-                        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" mat-mini-fab type="submit" (click)="openDialog(element)"
-                              style="background-color: rgb(243, 26, 26);">
+                        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" mat-mini-fab type="submit"
+                            (click)="openDialog(element)" style="background-color: rgb(243, 26, 26);">
                             <fa-icon [icon]="'times'"></fa-icon>
                         </button>
                     </div>
@@ -123,8 +125,8 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageIndex]="page" [pageSize]="10" [length]="totalItems" showFirstLastButtons
-            (page)="loadPage($event)">
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageIndex]="page" [pageSize]="10" [length]="totalItems"
+            showFirstLastButtons (page)="loadPage($event)">
         </mat-paginator>
     </div>
 </div>

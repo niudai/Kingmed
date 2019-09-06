@@ -4,7 +4,6 @@ import static io.github.jhipster.sample.web.rest.util.SearchUtil.queryKeywordPar
 
 import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -26,8 +25,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort.Order;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -248,14 +245,14 @@ public class DiseaseXiAnService {
 
         diseaseQuery.orderBy(orders.toArray(new javax.persistence.criteria.Order[orders.size()]));
 
-        String subsidiary = searchDTO.getSubsidiary();
+        Long subsidiaryId = searchDTO.getSubsidiaryId();
         Long concourseId = searchDTO.getConcourse() == null ?  null : searchDTO.getConcourse().getPseudoId();
         String projectConcourse = searchDTO.getProjectConcourse();
         String query = searchDTO.getQuery();
 
         // restrictions for properties
-        if (subsidiary != null && subsidiary.length() > 0) {
-            restrictions.add(cb.equal(disease.get("subsidiary"), subsidiary));
+        if (subsidiaryId != null) {
+            restrictions.add(cb.equal(disease.get("subsidiaryId"), subsidiaryId));
         }
         if (projectConcourse != null && projectConcourse.length() > 0) {
             restrictions.add(cb.equal(disease.get("projectConcourse"), projectConcourse));

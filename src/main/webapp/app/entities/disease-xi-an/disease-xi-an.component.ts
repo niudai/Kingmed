@@ -38,9 +38,9 @@ export class DiseaseXiAnComponent implements OnInit {
     selectedSort: string;
     selectedConcourse: IConcourse;
     diseaseXiAns: IDiseaseXiAn[];
-    subsidiaries: string[];
+    subsidiaries: ISubsidiary[];
     concourses: IConcourse[];
-    selectedSub: string;
+    selectedSub: ISubsidiary;
     error: any;
     success: any;
     eventSubscriber: Subscription;
@@ -111,8 +111,8 @@ export class DiseaseXiAnComponent implements OnInit {
         if (this.currentSearch) {
             params = params.set('query', this.currentSearch);
         }
-        if (this.selectedSub && this.selectedSub !== this.NO_SPECIFIED) {
-            params = params.set('subsidiary', this.selectedSub);
+        if (this.selectedSub && this.selectedSub.id) {
+            params = params.set('subsidiaryId', this.selectedSub.id.toString());
         }
         if (this.selectedSort) {
             params = params.set('sort', this.selectedSort);
@@ -134,8 +134,8 @@ export class DiseaseXiAnComponent implements OnInit {
 
     loadSubsidiaries() {
         this.diseaseXiAnService.getAllSubsidiary().subscribe(res => {
-            this.subsidiaries = res.map(sub => sub.name);
-            this.subsidiaries.push(this.NO_SPECIFIED);
+            this.subsidiaries = res;
+            this.subsidiaries.push({ name: this.NO_SPECIFIED });
         });
     }
 
@@ -218,10 +218,10 @@ export class DiseaseXiAnComponent implements OnInit {
             data: { diseaseXiAn: disease }
         });
 
-        // bottomSheetRef.afterDismissed().subscribe(result => {
-        //     //   console.log('The dialog was closed');
-        //     this.loadAll();
-        // });
+        bottomSheetRef.afterDismissed().subscribe(result => {
+            //   console.log('The dialog was closed');
+            this.loadDiseases();
+        });
     }
 
     ngOnInit() {
