@@ -28,8 +28,8 @@ import { SubsidiaryService } from './subsidiary/subsidiary.service';
     styleUrls: ['./disease-xi-an.component.css']
 })
 export class DiseaseXiAnComponent implements OnInit {
-    PC_COL: string[] = ['ID', 'namePC', 'price', 'projectConcourse', 'applications', 'suppliess', 'qarobot', 'give'];
-    MOBILE_COL: string[] = ['nameMobile', 'projectConcourse'];
+    PC_COL: string[] = ['ID', 'namePC', 'price', 'projectConcourse', 'applications', 'suppliess', 'qarobot'];
+    MOBILE_COL: string[] = ['nameMobile'];
     displayedColumns: string[];
     NO_SPECIFIED = '不限定';
     windowWidth = 1000;
@@ -58,6 +58,7 @@ export class DiseaseXiAnComponent implements OnInit {
     isFocus = false;
     currentTimer: number; // used to count down to make search request to server
     protected ngbModalRef: NgbModalRef;
+    isInArea = false;
     constructor(
         protected diseaseXiAnService: DiseaseXiAnService,
         protected parseLinks: JhiParseLinks,
@@ -95,10 +96,19 @@ export class DiseaseXiAnComponent implements OnInit {
         this.isFocus = true;
     }
 
+    onMouseEnter() {
+        console.log('mouse enters the search box area');
+        this.isInArea = true;
+    }
+
+    onMouseLeave() {
+        console.log('mouse leaves the search box area');
+        this.isInArea = false;
+    }
+
     onBlurSearchBox() {
         console.log('search box is blured');
         this.isFocus = false;
-        this.autoCompleteDiseases = null;
     }
 
     // auto-complete query
@@ -266,6 +276,7 @@ export class DiseaseXiAnComponent implements OnInit {
     ngOnInit() {
         this.diseaseSorts = DiseaseSorts;
         if (this.accountService.hasAnyAuthority(['ROLE_ADMIN'])) {
+            this.PC_COL.push('give');
             this.PC_COL.push('edit');
             this.PC_COL.push('delete');
         }

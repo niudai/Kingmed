@@ -1,11 +1,11 @@
-<div class="container col-sm-12">
+<div>
     <mat-card>
         <div class="row">
             <form name="searchForm" class="form-inline col-sm-6">
-                <div class="input-group w-100 mt-3 search-div"
-                    (blur)="onBlurSearchBox()">
+                <div class="input-group w-100 mt-3 search-div" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
                     <input type="text" class="form-control search-input" [(ngModel)]="currentSearch" id="currentSearch"
                         (focus)="onFocusSearchBox()"
+                        (blur)="onBlurSearchBox()"
                         (keydown)="onKeyDown()"
                         name="currentSearch" value=""
                         autocomplete="off"
@@ -13,7 +13,7 @@
                     <button mat-raised-button class="input-group-append search-btn" color="warn" (click)="search()">
                         <fa-icon [icon]="'search'"></fa-icon>
                     </button>
-                    <mat-nav-list class="auto-complete-list">
+                    <mat-nav-list *ngIf="isInArea" class="auto-complete-list">
                         <mat-list-item *ngFor="let disease of autoCompleteDiseases"
                         [routerLink]="[disease.id, 'view' ]">
                             <p>{{disease.name | trimIfTooLong}}</p>
@@ -80,6 +80,7 @@
                     <mat-card matRipple style="margin: 0; padding: 1%">
                         <a [routerLink]="[diseaseXiAn.id, 'view' ]">{{diseaseXiAn.name}}
                             - <strong>{{diseaseXiAn.subsidiary}}</strong>
+                            <button class="concourse-chip">{{diseaseXiAn.projectConcourse}}</button>
                             <span *jhiHasAnyAuthority="'ROLE_ADMIN'">
                                 <button mat-fab color="warn" *ngIf="!diseaseXiAn.activated">停用</button>
                             </span>
