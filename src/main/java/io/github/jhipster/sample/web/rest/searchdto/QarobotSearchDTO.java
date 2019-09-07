@@ -17,8 +17,8 @@ public class QarobotSearchDTO {
 
     @Override
     public String toString() {
-        return "QarobotSearchDTO [query=" + query + "]";
+        return (query!=null) ? "QarobotSearchDTO [query=" + query + "]" : "null query";
     }
 
-    
+
 }

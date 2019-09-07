@@ -2,13 +2,23 @@
     <mat-card>
         <div class="row">
             <form name="searchForm" class="form-inline col-sm-6">
-                <div class="input-group w-100 mt-3 ">
-                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch"
+                <div class="input-group w-100 mt-3 search-div"
+                    (blur)="onBlurSearchBox()">
+                    <input type="text" class="form-control search-input" [(ngModel)]="currentSearch" id="currentSearch"
+                        (focus)="onFocusSearchBox()"
+                        (keydown)="onKeyDown()"
                         name="currentSearch" value=""
+                        autocomplete="off"
                         placeholder="{{ 'jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.home.search' | translate }}">
-                    <button mat-raised-button class="input-group-append" color="warn" (click)="search()">
+                    <button mat-raised-button class="input-group-append search-btn" color="warn" (click)="search()">
                         <fa-icon [icon]="'search'"></fa-icon>
                     </button>
+                    <mat-nav-list class="auto-complete-list">
+                        <mat-list-item *ngFor="let disease of autoCompleteDiseases"
+                        [routerLink]="[disease.id, 'view' ]">
+                            <p>{{disease.name | trimIfTooLong}}</p>
+                        </mat-list-item>
+                    </mat-nav-list>
                 </div>
                 <mat-form-field class="search-restric">
                     <mat-label>子公司</mat-label>

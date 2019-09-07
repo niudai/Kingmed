@@ -37,6 +37,9 @@ export class QArobotComponent implements OnInit, OnDestroy {
     previousPage: any;
     reverse: any;
     pageEvent: PageEvent;
+    isFocus: boolean;
+    currentTimer: any;
+    autoCompleteQArobots: IQArobot[];
 
     constructor(
         protected qArobotService: QArobotService,
@@ -78,6 +81,44 @@ export class QArobotComponent implements OnInit, OnDestroy {
         }
     }
 
+    onFocusSearchBox() {
+        console.log('search box is focused');
+        this.isFocus = true;
+    }
+
+    onBlurSearchBox() {
+        console.log('search box is blured');
+        this.isFocus = false;
+        this.autoCompleteQArobots = null;
+    }
+
+    // auto-complete query
+    onKeyDown() {
+        if (this.isFocus) {
+            if (this.currentTimer) {
+                window.clearTimeout(this.currentTimer);
+            }
+            this.currentTimer = window.setTimeout(
+                any => {
+                    console.log('auto completion query invoked!!');
+                    console.log('Current search equals: ', this.currentSearch);
+                    let params = new HttpParams();
+                    params = params.set('size', '5');
+                    if (this.currentSearch) {
+                        params = params.set('query', this.currentSearch);
+                    }
+                    this.qArobotService
+                    .search(params)
+                    .subscribe(
+                        (res: HttpResponse<IQArobot[]>) => this.autoCompleteQArobots = res.body,
+                        (res: HttpErrorResponse) => this.onError(res.message)
+                    );
+                },
+                300
+            );
+        }
+    }
+
     openDialog(qA: IQArobot): void {
         const dialogRef = this.dialog.open(QArobotDeleteDialogComponent, {
             width: '250px',
@@ -107,13 +148,14 @@ export class QArobotComponent implements OnInit, OnDestroy {
                 }
             }
         );
+        let params = new HttpParams();
+        params = params.set('page', this.pageEvent.pageIndex.toString());
+        params = params.set('size', this.pageEvent.pageSize.toString());
+        if (this.currentSearch) {
+            params = params.set('query', this.currentSearch);
+        }
         this.qArobotService
-            .search({
-                page: this.pageEvent ? this.pageEvent.pageIndex : 0,
-                query: this.currentSearch,
-                size: this.pageEvent ? this.pageEvent.pageSize : 10
-                // sort: this.sort()
-            })
+            .search(params)
             .subscribe(
                 (res: HttpResponse<IQArobot[]>) => this.paginateQArobots(res.body, res.headers),
                 (res: HttpErrorResponse) => this.onError(res.message)
@@ -139,7 +181,8 @@ export class QArobotComponent implements OnInit, OnDestroy {
                 : '';
         // this.currentSearch = 'test';
         this.pageEvent.pageIndex =
-            this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['page'] ? this.activatedRoute.snapshot.params['page'] : '';
+            this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['page'] ? this.activatedRoute.snapshot.params['page'] : 0;
+        this.pageEvent.pageSize = ITEMS_PER_PAGE;
         this.loadAll();
         this.accountService.identity().then(account => {
             this.currentAccount = account;

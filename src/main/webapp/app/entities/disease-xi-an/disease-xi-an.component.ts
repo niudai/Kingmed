@@ -38,6 +38,7 @@ export class DiseaseXiAnComponent implements OnInit {
     selectedSort: string;
     selectedConcourse: IConcourse;
     diseaseXiAns: IDiseaseXiAn[];
+    autoCompleteDiseases: IDiseaseXiAn[];
     subsidiaries: ISubsidiary[];
     concourses: IConcourse[];
     selectedSub: ISubsidiary;
@@ -54,6 +55,8 @@ export class DiseaseXiAnComponent implements OnInit {
     previousPage: any;
     reverse: any;
     pageEvent: PageEvent;
+    isFocus = false;
+    currentTimer: number; // used to count down to make search request to server
     protected ngbModalRef: NgbModalRef;
     constructor(
         protected diseaseXiAnService: DiseaseXiAnService,
@@ -84,6 +87,44 @@ export class DiseaseXiAnComponent implements OnInit {
             this.displayedColumns = this.MOBILE_COL;
         } else {
             this.displayedColumns = this.PC_COL;
+        }
+    }
+
+    onFocusSearchBox() {
+        console.log('search box is focused');
+        this.isFocus = true;
+    }
+
+    onBlurSearchBox() {
+        console.log('search box is blured');
+        this.isFocus = false;
+        this.autoCompleteDiseases = null;
+    }
+
+    // auto-complete query
+    onKeyDown() {
+        if (this.isFocus) {
+            if (this.currentTimer) {
+                window.clearTimeout(this.currentTimer);
+            }
+            this.currentTimer = window.setTimeout(
+                any => {
+                    console.log('auto completion query invoked!!');
+                    console.log('Current search equals: ', this.currentSearch);
+                    let params = new HttpParams();
+                    params = params.set('size', '5');
+                    if (this.currentSearch) {
+                        params = params.set('query', this.currentSearch);
+                    }
+                    this.diseaseXiAnService
+                    .query(params)
+                    .subscribe(
+                        (res: HttpResponse<IDiseaseXiAn[]>) => this.autoCompleteDiseases = res.body,
+                        (res: HttpErrorResponse) => this.onError(res.message)
+                    );
+                },
+                300
+            );
         }
     }
 
@@ -120,8 +161,6 @@ export class DiseaseXiAnComponent implements OnInit {
         if (this.selectedConcourse && this.selectedConcourse.name !== this.NO_SPECIFIED) {
             params = params.set('concourse.pseudoId', this.selectedConcourse.pseudoId.toString());
         }
-        console.log(`params = ||||||||||||||||||||||||||`);
-        console.log(params);
         this.diseaseXiAnService
             .query(params)
             .subscribe(

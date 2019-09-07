@@ -2,15 +2,16 @@
 Todo:
   ✔ Implement concourse update and delete admin page. @done(19-09-06 11:10)
   ✔ Implement subsidiary restrictive query @done(19-09-06 15:00)
-  ☐ Implement auto-completion in disease searching box.
-  ☐ Implement auto-completion in qarobots searching box.
+  ✔ Implement auto-completion in disease searching box. @done(19-09-07 17:05)
+  ✔ Implement auto-completion in qarobots searching box. @done(19-09-07 17:30)
   ✔ Implement views for qarobots. @done(19-09-06 21:31)
   ✔ Implement views sorting for qarobots. @done(19-09-06 21:40)
   ☐ Write basic sql quries for data migrating for disease.
   ☐ Write one article about spring-boot.
   ✔ Implement snackbar ntf in prices info toggle. @done(19-09-06 21:40)
-  ☐ Implement views customization for admin.
-  ☐ Copy text info to clipboard in terms of current price info.
+  ✔ Implement views customization for admin. @done(19-09-06 22:22)
+  ✔ Copy text info to clipboard in terms of current price info. @done(19-09-06 22:18)
+  ✔ Make price toggle noticiable by adding snacbar and color toggle. @done(19-09-06 22:18)
   ✔ Implement subdidiary admin page @done(19-09-05 22:04)
 
 

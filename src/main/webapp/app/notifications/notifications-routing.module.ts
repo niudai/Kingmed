@@ -5,7 +5,10 @@ import { ViewComponent } from './view/view.component';
 const routes: Routes = [
     {
         path: '',
-        component: ViewComponent
+        component: ViewComponent,
+        data: {
+            pageTitle: 'notification.title',
+        }
     }
 ];
 

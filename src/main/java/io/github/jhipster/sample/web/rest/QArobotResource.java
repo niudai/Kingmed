@@ -4,7 +4,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -33,7 +32,6 @@ import io.github.jhipster.sample.web.rest.errors.BadRequestAlertException;
 import io.github.jhipster.sample.web.rest.searchdto.QarobotSearchDTO;
 import io.github.jhipster.sample.web.rest.util.HeaderUtil;
 import io.github.jhipster.sample.web.rest.util.PaginationUtil;
-import io.github.jhipster.web.util.ResponseUtil;
 
 /**
  * REST controller for managing QArobot.
@@ -163,7 +161,7 @@ public class QArobotResource {
     public ResponseEntity<List<QArobot>> searchQArobots(QarobotSearchDTO dto, Pageable pageable) {
         log.debug("REST request to search for a page of QArobots for query {}", dto);
         Page<QArobot> page = qArobotService.searchQArobot(dto, pageable);
-        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(dto.getQuery(), page, "/api/_search/q-arobots");
+        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(dto.toString(), page, "/api/_search/q-arobots");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 

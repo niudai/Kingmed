@@ -6,6 +6,25 @@
     margin: 3px;
 }
 
+mat-nav-list.auto-complete-list.mat-nav-list.mat-list-base {
+    position: absolute;
+    top: 45px;
+    z-index: 1000;
+    background: aliceblue;
+}
+
+button.input-group-append.search-btn.mat-raised-button.mat-warn {
+    display: inline-block;
+}
+
+input#currentSearch {
+    /* position: absolute; */
+    top: 0;
+    height: 45px;
+    left: 0;
+    display: inline-block;
+}
+
 .search-restric {
     max-width: 30%;
     display: inline;

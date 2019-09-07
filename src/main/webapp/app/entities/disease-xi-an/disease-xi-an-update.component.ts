@@ -68,7 +68,7 @@ export class DiseaseXiAnUpdateComponent implements OnInit {
                 console.log(this.subsidiaries);
                 this.subsidiaries.forEach(
                     sub => {
-                        if (sub.name === this.diseaseXiAn.subsidiaryId) {
+                        if (sub.id === this.diseaseXiAn.subsidiaryId) {
                             this.selectedSub = sub;
                             this.selectedNtfSub = sub;
                         }

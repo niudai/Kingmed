@@ -2,17 +2,30 @@
     <div class="row">
         <mat-card class="col-sm-12">
             <form name="searchForm" class="form-inline col-sm-6">
-                <div class="input-group w-100 mt-3">
-                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch"
-                        name="currentSearch"
-                        placeholder="{{ 'jhipsterElasticsearchSampleApplicationApp.qArobot.home.search' | translate }}">
+                <div class="input-group w-100 mt-3"
+                    (blur)="onBlurSearchBox()">
+                    <input
+                    (focus)="onFocusSearchBox()"
+                    type="text"
+                    class="form-control search-input"
+                    [(ngModel)]="currentSearch"
+                    id="currentSearch"
+                    (keydown)="onKeyDown()"
+                    name="currentSearch"
+                    autocomplete="off"
+                    placeholder="{{ 'jhipsterElasticsearchSampleApplicationApp.qArobot.home.search' | translate }}">
                     <!-- <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
                                     <fa-icon [icon]="'trash-alt'"></fa-icon>
                                 </button>                    -->
                     <button mat-raised-button class="input-group-append" color="warn" (click)="loadAll()">
                         <fa-icon [icon]="'search'"></fa-icon>
                     </button>
-
+                    <mat-nav-list class="auto-complete-list">
+                            <mat-list-item *ngFor="let qArobot of autoCompleteQArobots"
+                            [routerLink]="[qArobot.id, 'view' ]">
+                                <p>{{qArobot.question | trimIfTooLong}}</p>
+                            </mat-list-item>
+                    </mat-nav-list>
                 </div>
             </form>
             <div>
