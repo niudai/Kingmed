@@ -2,22 +2,23 @@
     <mat-card>
         <div class="row">
             <form name="searchForm" class="form-inline col-sm-6">
-                <div class="input-group w-100 mt-3 search-div" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
+                <div class="input-group w-100 mt-3 search-div" (mouseenter)="onMouseEnter()"
+                    (mouseleave)="onMouseLeave()">
                     <input type="text" class="form-control search-input" [(ngModel)]="currentSearch" id="currentSearch"
-                        (focus)="onFocusSearchBox()"
-                        (blur)="onBlurSearchBox()"
-                        (keydown)="onKeyDown()"
-                        name="currentSearch" value=""
-                        autocomplete="off"
+                        (focus)="onFocusSearchBox()" (blur)="onBlurSearchBox()" (keydown)="onKeyDown()"
+                        name="currentSearch" value="" autocomplete="off"
                         placeholder="{{ 'jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.home.search' | translate }}">
                     <button mat-raised-button class="input-group-append search-btn" color="warn" (click)="search()">
                         <fa-icon [icon]="'search'"></fa-icon>
                     </button>
                     <mat-nav-list *ngIf="isInArea" class="auto-complete-list">
-                        <mat-list-item *ngFor="let disease of autoCompleteDiseases"
-                        [routerLink]="[disease.id, 'view' ]">
-                            <p>{{disease.name | trimIfTooLong}}</p>
-                        </mat-list-item>
+                        <div *ngFor="let disease of autoCompleteDiseases">
+                            <mat-list-item [routerLink]="[disease.id, 'view' ]">
+                                <p>{{disease.name | trimIfTooLong}}</p>
+                            </mat-list-item>
+                            <mat-divider></mat-divider>
+                        </div>
+
                     </mat-nav-list>
                 </div>
                 <mat-form-field class="search-restric">
@@ -49,14 +50,13 @@
         </div>
 
         <div class="row">
-            <div class="chips" style = "display: inline-block; width: 100%">
-                    <button class="concourse-chip" (click)="selectConcourse(concourse)"
-                    *ngFor="let concourse of concourses"
+            <div class="chips" style="display: inline-block; width: 100%">
+                <button class="concourse-chip" (click)="selectConcourse(concourse)" *ngFor="let concourse of concourses"
                     [style.background-color]="concourse.isSelected ? 'aquamarine' : 'darksalmon'">
                     <span>
                         {{concourse.name}}
                     </span>
-                    </button>
+                </button>
             </div>
         </div>
     </mat-card>
@@ -84,7 +84,8 @@
                             <span *jhiHasAnyAuthority="'ROLE_ADMIN'">
                                 <button mat-fab color="warn" *ngIf="!diseaseXiAn.activated">停用</button>
                             </span>
-                            <span style = "float: right"><span style = "color: orange;">{{diseaseXiAn.views}}</span>人看过</span>
+                            <span style="float: right"><span
+                                    style="color: orange;">{{diseaseXiAn.views}}</span>人看过</span>
                             <!-- <button mat-raised-button color="warn" *ngIf="diseaseXiAn.activated">运行</button> -->
                         </a>
                         <br>
@@ -116,7 +117,7 @@
                         </span>
                         <button mat-fab color="warn" *ngIf="!diseaseXiAn.activated">停用</button>
                         <!-- <button mat-raised-button color="warn" *ngIf="diseaseXiAn.activated">运行</button> -->
-                        <span style = "float: right"><span style = "color: orange;">{{diseaseXiAn.views}}</span>人看过</span>
+                        <span style="float: right"><span style="color: orange;">{{diseaseXiAn.views}}</span>人看过</span>
                     </a>
                 </td>
             </ng-container>

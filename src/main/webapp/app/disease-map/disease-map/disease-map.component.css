@@ -6,6 +6,14 @@
     float: right;
 }
 
+.mat-expansion-panel-body {
+    padding: 0;
+}
+
+.mat-expansion-panel-body {
+    padding: 0 100px 16px;
+}
+
 /* .container {
     overflow: auto;
     white-space: nowrap;

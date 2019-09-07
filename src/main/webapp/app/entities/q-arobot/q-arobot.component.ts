@@ -40,6 +40,7 @@ export class QArobotComponent implements OnInit, OnDestroy {
     isFocus: boolean;
     currentTimer: any;
     autoCompleteQArobots: IQArobot[];
+    isInArea = false;
 
     constructor(
         protected qArobotService: QArobotService,
@@ -89,7 +90,6 @@ export class QArobotComponent implements OnInit, OnDestroy {
     onBlurSearchBox() {
         console.log('search box is blured');
         this.isFocus = false;
-        this.autoCompleteQArobots = null;
     }
 
     // auto-complete query
@@ -117,6 +117,16 @@ export class QArobotComponent implements OnInit, OnDestroy {
                 300
             );
         }
+    }
+
+    onMouseEnter() {
+        console.log('mouse enters the search box area');
+        this.isInArea = true;
+    }
+
+    onMouseLeave() {
+        console.log('mouse leaves the search box area');
+        this.isInArea = false;
     }
 
     openDialog(qA: IQArobot): void {

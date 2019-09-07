@@ -1,11 +1,12 @@
 <div>
     <div class="row">
         <mat-card class="col-sm-12">
-            <form name="searchForm" class="form-inline col-sm-6">
-                <div class="input-group w-100 mt-3"
-                    (blur)="onBlurSearchBox()">
+            <form name="searchForm" class="form-inline col-sm-6"
+            (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
+                <div class="input-group w-100 mt-3">
                     <input
                     (focus)="onFocusSearchBox()"
+                    (blur)="onBlurSearchBox()"
                     type="text"
                     class="form-control search-input"
                     [(ngModel)]="currentSearch"
@@ -21,10 +22,13 @@
                         <fa-icon [icon]="'search'"></fa-icon>
                     </button>
                     <mat-nav-list class="auto-complete-list">
-                            <mat-list-item *ngFor="let qArobot of autoCompleteQArobots"
+                        <div *ngFor="let qArobot of autoCompleteQArobots">
+                            <mat-list-item
                             [routerLink]="[qArobot.id, 'view' ]">
                                 <p>{{qArobot.question | trimIfTooLong}}</p>
                             </mat-list-item>
+                            <mat-divider></mat-divider>
+                        </div>
                     </mat-nav-list>
                 </div>
             </form>
