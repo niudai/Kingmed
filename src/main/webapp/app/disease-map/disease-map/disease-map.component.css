@@ -6,12 +6,12 @@
     float: right;
 }
 
-.mat-expansion-panel-body {
-    padding: 0;
+.mat-tree {
+    background: inherit;
 }
 
 .mat-expansion-panel-body {
-    padding: 0 100px 16px;
+    padding: 0;
 }
 
 /* .container {

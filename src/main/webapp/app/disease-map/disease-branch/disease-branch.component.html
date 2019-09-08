@@ -25,20 +25,17 @@
 
     </div>
     <div class="row">
-        <div *ngFor="let diseaseMap of diseaseMaps" class="card col-sm-3">
-            <mat-card class="example-card">
-                <mat-card-header>
-                    <div mat-card-avatar class="example-header-image"></div>
-                    <mat-card-title>{{diseaseMap.name}}</mat-card-title>
-                </mat-card-header>
-                <mat-card-actions>
-                    <button mat-raised-button color="accent"
-                        [routerLink]="['view-disease-map', diseaseMap.id]">进入</button>
-                </mat-card-actions>
-            </mat-card>
-        </div>
-        <div *ngFor="let diseaseBranch of diseaseBranches" class="card col-sm-3">
-            <mat-card class="example-card">
+        <mat-card class="example-card" *ngFor="let diseaseMap of diseaseMaps" class = "card col-sm-3"
+            style = "margin: 10px" >
+            <mat-card-header>
+                <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title>{{diseaseMap.name}}</mat-card-title>
+            </mat-card-header>
+            <mat-card-actions>
+                <button mat-raised-button color="accent" [routerLink]="['view-disease-map', diseaseMap.id]">进入</button>
+            </mat-card-actions>
+        </mat-card>
+            <mat-card class="example-card" *ngFor="let diseaseBranch of diseaseBranches" class="card col-sm-3" style = "margin: 10px">
                 <mat-card-header>
                     <div mat-card-avatar class="example-header-image"></div>
                     <mat-card-title>{{diseaseBranch.name}}</mat-card-title>
@@ -59,12 +56,6 @@
                         *jhiHasAnyAuthority="'ROLE_ADMIN'">编辑</button>
                 </mat-card-actions>
             </mat-card>
-            <!-- <div class="card-body">
-                <h5 class="card-title">{{diseaseBranch.name}}</h5>
-                <a href="#" class="btn btn-success" [routerLink]="['view-disease-map', diseaseBranch.id]"><fa-icon [icon]="'arrow-right'"></fa-icon>进入</a>
-                <button class="btn btn-danger" *jhiHasAnyAuthority="'ROLE_ADMIN'" (click)="open(diseaseBranch)"><fa-icon [icon]="'times'"></fa-icon>删除</button>
-            </div> -->
-        </div>
     </div>
     <div *ngIf="currentSearch">
         <mat-paginator [pageSizeOptions]="[8]" [pageSize]="DEFAULT_PAGESIZE" [length]="totalItems" showFirstLastButtons
