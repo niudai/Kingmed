@@ -44,6 +44,7 @@ import io.github.jhipster.sample.repository.QArobotRepository;
 import io.github.jhipster.sample.repository.UserRepository;
 import io.github.jhipster.sample.security.SecurityUtils;
 import io.github.jhipster.sample.web.rest.searchdto.DiseaseXiAnSearchDTO;
+
 /**
  * DiseaseXiAnService
  */
@@ -59,14 +60,10 @@ public class DiseaseXiAnService {
     private final CommentRepository commentRepository;
 
     @Autowired
-    public DiseaseXiAnService(DiseaseXiAnRepository diseaseXiAnRepository
-        , QArobotRepository qArobotRepository
-        , ImageApplicationRepository imageApplicationRepository
-        , ImageSuppliesRepository imageSuppliesRepository
-        , LinkCardRepository linkCardRepository
-        , UserRepository userRepository
-        , EntityManager entityManager
-        , CommentRepository commentRepository) {
+    public DiseaseXiAnService(DiseaseXiAnRepository diseaseXiAnRepository, QArobotRepository qArobotRepository,
+            ImageApplicationRepository imageApplicationRepository, ImageSuppliesRepository imageSuppliesRepository,
+            LinkCardRepository linkCardRepository, UserRepository userRepository, EntityManager entityManager,
+            CommentRepository commentRepository) {
         this.entityManager = entityManager;
         this.userRepository = userRepository;
         this.imageSuppliesRepository = imageSuppliesRepository;
@@ -178,6 +175,7 @@ public class DiseaseXiAnService {
 
     /**
      * deattach link card to a disease branch
+     *
      * @param linkcard
      * @param diseaseXiAnId
      */
@@ -188,20 +186,20 @@ public class DiseaseXiAnService {
 
     /**
      * deattach link card to a disease branch
+     *
      * @param linkcard
      * @param diseaseXiAnId
      */
     public void attachLinkCardToDiseaseXiAn(LinkCard linkcard, Long diseaseXiAnId) {
         DiseaseXiAn diseaseXiAn = diseaseXiAnRepository.findById(diseaseXiAnId).get();
         Set<LinkCard> links = diseaseXiAn.getLinkCards();
-       if (links.contains(linkcard)) {
-           linkCardRepository.save(linkcard);
-       } else {
+        if (links.contains(linkcard)) {
+            linkCardRepository.save(linkcard);
+        } else {
             diseaseXiAn.getLinkCards().add(linkcard);
             diseaseXiAnRepository.save(diseaseXiAn);
-       }
+        }
     }
-
 
     /********************* DiseaseXiAn ***********/
     @Transactional
@@ -209,7 +207,8 @@ public class DiseaseXiAnService {
         DiseaseXiAn diseaseXiAn = diseaseXiAnRepository.findById(id).get();
         diseaseXiAn.getDiseaseXiAns().size();
         diseaseXiAn.getReversedDiseaseXiAns().size();
-        return Lists.newArrayList(Iterables.concat(diseaseXiAn.getDiseaseXiAns(), diseaseXiAn.getReversedDiseaseXiAns()));
+        return Lists
+                .newArrayList(Iterables.concat(diseaseXiAn.getDiseaseXiAns(), diseaseXiAn.getReversedDiseaseXiAns()));
     }
 
     @Transactional
@@ -232,8 +231,7 @@ public class DiseaseXiAnService {
     }
 
     /********************** Search *****************/
-    public Page<DiseaseXiAn> searchDiseases(
-        DiseaseXiAnSearchDTO searchDTO, Pageable pageable) {
+    public Page<DiseaseXiAn> searchDiseases(DiseaseXiAnSearchDTO searchDTO, Pageable pageable) {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<DiseaseXiAn> diseaseQuery = cb.createQuery(DiseaseXiAn.class);
         CriteriaQuery<Long> countQuery = cb.createQuery(Long.class);
@@ -242,16 +240,15 @@ public class DiseaseXiAnService {
         List<Predicate> restrictions = new ArrayList<Predicate>();
         diseaseQuery.select(disease);
         countQuery.select(cb.count(count));
-        List<javax.persistence.criteria.Order> orders = pageable.getSort().stream().map(
-            springSort -> springSort.isDescending() ?
-                    cb.desc(disease.get(springSort.getProperty())) :
-                    cb.asc(disease.get(springSort.getProperty()))
-        ).collect(Collectors.toList());
+        List<javax.persistence.criteria.Order> orders = pageable.getSort().stream()
+                .map(springSort -> springSort.isDescending() ? cb.desc(disease.get(springSort.getProperty()))
+                        : cb.asc(disease.get(springSort.getProperty())))
+                .collect(Collectors.toList());
 
         diseaseQuery.orderBy(orders.toArray(new javax.persistence.criteria.Order[orders.size()]));
 
         Long subsidiaryId = searchDTO.getSubsidiaryId();
-        Long concourseId = searchDTO.getConcourse() == null ?  null : searchDTO.getConcourse().getPseudoId();
+        Long concourseId = searchDTO.getConcourse() == null ? null : searchDTO.getConcourse().getPseudoId();
         String projectConcourse = searchDTO.getProjectConcourse();
         String query = searchDTO.getQuery();
 
@@ -273,39 +270,48 @@ public class DiseaseXiAnService {
             if (keywords.size() > 1) {
                 restrictions.addAll(keywords.stream().map(
 
-                    keyword -> cb.like(cb.upper(disease.get("name")) , "%" + keyword.toUpperCase() + "%")
-
-                    ).collect(Collectors.toList()));
-                restrictions.addAll(keywords.stream().map(
-
-                    keyword -> cb.like(cb.upper(disease.get("projectCode")) , "%" + keyword.toUpperCase() + "%")
+                        keyword -> cb.like(cb.upper(disease.get("name")), "%" + keyword.toUpperCase() + "%")
 
                 ).collect(Collectors.toList()));
-                    restrictions.addAll(keywords.stream().map(
+                restrictions.addAll(keywords.stream().map(
 
-                        keyword -> cb.like(cb.upper(disease.get("clinicalApplication")) , "%" + keyword.toUpperCase() + "%")
+                        keyword -> cb.like(cb.upper(disease.get("projectCode")), "%" + keyword.toUpperCase() + "%")
 
-                        ).collect(Collectors.toList()));
-                    restrictions.addAll(keywords.stream().map(
+                ).collect(Collectors.toList()));
+                restrictions.addAll(keywords.stream().map(
 
-                        keyword -> cb.like(cb.upper(disease.get("series")) , "%" + keyword.toUpperCase() + "%")
+                        keyword -> cb.like(cb.upper(disease.get("clinicalApplication")),
+                                "%" + keyword.toUpperCase() + "%")
 
-                        ).collect(Collectors.toList()));
-                        restrictions.addAll(keywords.stream().map(
+                ).collect(Collectors.toList()));
+                restrictions.addAll(keywords.stream().map(
 
-                        keyword -> cb.like(cb.upper(disease.get("subSeries")) , "%" + keyword.toUpperCase() + "%")
+                        keyword -> cb.like(cb.upper(disease.get("series")), "%" + keyword.toUpperCase() + "%")
 
-                        ).collect(Collectors.toList()));
+                ).collect(Collectors.toList()));
+                restrictions.addAll(keywords.stream().map(
+
+                        keyword -> cb.like(cb.upper(disease.get("subSeries")), "%" + keyword.toUpperCase() + "%")
+
+                ).collect(Collectors.toList()));
+                restrictions.addAll(keywords.stream().map(
+
+                    keyword -> cb.like(cb.upper(disease.get("projectConcourse")), "%" + keyword.toUpperCase() + "%")
+
+                ).collect(Collectors.toList()));
             }
             restrictions.add(cb.like(cb.upper(disease.get("name")), "%" + query.toUpperCase() + "%"));
             restrictions.add(cb.like(cb.upper(disease.get("projectCode")), "%" + query.toUpperCase() + "%"));
             restrictions.add(cb.like(cb.upper(disease.get("clinicalApplication")), "%" + query.toUpperCase() + "%"));
             restrictions.add(cb.like(cb.upper(disease.get("series")), "%" + query.toUpperCase() + "%"));
             restrictions.add(cb.like(cb.upper(disease.get("subSeries")), "%" + query.toUpperCase() + "%"));
+            restrictions.add(cb.like(cb.upper(disease.get("projectConcourse")), "%" + query.toUpperCase() + "%"));
+
 
         }
-        Predicate queryPredicate = restrictions.size() > 0 ? cb.or(restrictions.toArray(new Predicate[restrictions.size()])) :
-            cb.and();
+        Predicate queryPredicate = restrictions.size() > 0
+                ? cb.or(restrictions.toArray(new Predicate[restrictions.size()]))
+                : cb.and();
         // create final Predicate with term and query predicate
         Predicate finalPredicate = cb.and(termPredicate, queryPredicate);
 
@@ -314,8 +320,8 @@ public class DiseaseXiAnService {
 
         // get diseases satisfied with criterias
         TypedQuery<DiseaseXiAn> typedDiseaseQuery = entityManager.createQuery(diseaseQuery);
-        typedDiseaseQuery.setFirstResult((int)pageable.getOffset());
-        typedDiseaseQuery.setMaxResults((int)pageable.getPageSize());
+        typedDiseaseQuery.setFirstResult((int) pageable.getOffset());
+        typedDiseaseQuery.setMaxResults((int) pageable.getPageSize());
 
         List<DiseaseXiAn> allDis = typedDiseaseQuery.getResultList();
 
@@ -345,15 +351,16 @@ public class DiseaseXiAnService {
     /**
      * Request /disease-xi-ans/addPrice/{id} : add comment to a diseaseXiAn
      *
-     * @param comment Price to be added
-     * @param diseaseId    the id of diseaseXiAn
+     * @param comment   Price to be added
+     * @param diseaseId the id of diseaseXiAn
      * @return ok with 200 status code.
      */
     @Transactional
     public Comment createComment(Comment comment, @PathVariable Long diseaseId) {
         DiseaseXiAn disease = new DiseaseXiAn();
         disease.setId(diseaseId);
-        comment.setDiseaseXiAnId(diseaseId);;
+        comment.setDiseaseXiAnId(diseaseId);
+        ;
         return commentRepository.save(comment);
     }
 
@@ -361,7 +368,7 @@ public class DiseaseXiAnService {
      * Request to update a comment
      *
      * @param comment the comment to be updated
-     * @param id    the id of comment
+     * @param id      the id of comment
      * @return response entity with comment as its body.
      */
     @Transactional

@@ -24,17 +24,20 @@ Todo:
 
 TODO:
     ✔ 1.检索功能，不能只能检索项目名称，需要新增项目代码，临床意义，集团疾病线分类，子公司系列划分. @done(19-09-10 19:58)
-    ☐ 2.新增项目无法编辑，且生成通知那里有问题
+    ✔ 2.新增项目无法编辑，且生成通知那里有问题 @done(19-09-10 20:44)
     ☐ 2.1，还有一个问题需今晚修复，就是申请单信息，之前没有，现在编辑添加保存后，却没有任何反应
-    ☐ 3.项目迁移，先按照子公司迁移，再按照科室迁移
-    ☐ 4.不输入任何检索字眼，页面无法翻页
+    ✔ 3.项目迁移，先按照子公司迁移，再按照科室迁移 @done(19-09-10 22:11)
+    ✔ 4.不输入任何检索字眼，页面无法翻页 @done(19-09-10 20:44)
     ✔ 5.在个人中心新建项目还是旧格式，且新建项目在个人中心新建还是在主界面新建，有没有区别 @done(19-09-10 20:17)
     ✔ 6.停做项目，手机端不显示停做 @done(19-09-10 20:26)
     ✔ 7.输入小写字母，检索不到大写字母的项目 @done(19-09-10 19:58)
+    ☐ Enhance notification properties.
     ☐ 8，项目评论能否有个提示功能，这样管理员好及时处理信息
     ☐ 9.这个字段显示太短了
     ☐ Implement security API filter
     ☐ Fix disease not showing properly in profile page.
+    ☐ SEO for kingmed.online
+
     DROP TABLE IF EXISTS COMMENT ;
 
 
@@ -72,3 +75,9 @@ delete from disease_xi_an_disease_xi_an where related_disease_xi_an_id=?
 delete from disease_xi_an_image_supplies where disease_xi_an_id=?     Hibernate: delete from disease_xi_an_user where disease_xi_an_id=?
 delete from price_xi_an where id=?
 delete from disease_xi_an where id=?
+
+
+UPDATE DISEASE_XI_AN
+SET SUBSIDIARY_ID =  7
+WHERE  SUBSIDIARY =  '内蒙';
+

@@ -14,7 +14,7 @@
                     <mat-nav-list *ngIf="isInArea && autoCompleteDiseases && autoCompleteDiseases.length > 0" class="auto-complete-list">
                         <div *ngFor="let disease of autoCompleteDiseases">
                             <mat-list-item [routerLink]="[disease.id, 'view' ]">
-                                <p>{{disease.name | trimIfTooLong}}</p>
+                                <p>{{disease.name | trimIfTooLong: windowWidth/10}}</p>
                             </mat-list-item>
                             <mat-divider></mat-divider>
                         </div>
@@ -82,9 +82,7 @@
                         <a [routerLink]="[diseaseXiAn.id, 'view' ]">{{diseaseXiAn.name}}
                             - <strong>{{diseaseXiAn.subsidiary}}</strong>
                             <button class="concourse-chip">{{diseaseXiAn.projectConcourse}}</button>
-                            <span>
                                 <button mat-fab color="warn" *ngIf="!diseaseXiAn.activated">停用</button>
-                            </span>
                             <span style="float: right"><span
                                     style="color: orange;">{{diseaseXiAn.views}}</span>人看过</span>
                         </a>
@@ -104,9 +102,7 @@
 
                     <a [routerLink]="[diseaseXiAn.id, 'view' ]">{{diseaseXiAn.name}}
                         - <strong>{{diseaseXiAn.subsidiary}}</strong>
-                        <span *jhiHasAnyAuthority="'ROLE_ADMIN'">
-
-                        </span>
+                        <button class="concourse-chip">{{diseaseXiAn.projectConcourse}}</button>
                         <button mat-fab color="warn" *ngIf="!diseaseXiAn.activated">停用</button>
                         <!-- <button mat-raised-button color="warn" *ngIf="diseaseXiAn.activated">运行</button> -->
                         <span style="float: right"><span style="color: orange;">{{diseaseXiAn.views}}</span>人看过</span>
@@ -227,9 +223,7 @@
                                     <a [routerLink]="[diseaseXiAn.id, 'view' ]">{{diseaseXiAn.name}}
                                         - <strong>{{diseaseXiAn.subsidiary}}</strong>
                                         <button class="concourse-chip">{{diseaseXiAn.projectConcourse}}</button>
-                                        <span *jhiHasAnyAuthority="'ROLE_ADMIN'">
-                                            <button mat-fab color="warn" *ngIf="!diseaseXiAn.activated">停用</button>
-                                        </span>
+                                        <button mat-fab color="warn" *ngIf="!diseaseXiAn.activated">停用</button>
                                         <span style="float: right"><span
                                                 style="color: orange;">{{diseaseXiAn.views}}</span>人看过</span>
                                         <!-- <button mat-raised-button color="warn" *ngIf="diseaseXiAn.activated">运行</button> -->
@@ -246,7 +240,7 @@
 
             </table>
         <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageIndex]="pageEvent.pageIndex" [pageSize]="pageEvent.pageSize"
-            [length]="totalItems" showFirstLastButtons (page)="loadDiseases()">
+            [length]="totalItems" showFirstLastButtons (page)="onPagination($event)">
         </mat-paginator>
     </div>
 </div>
