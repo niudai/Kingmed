@@ -5,7 +5,7 @@
           <!-- <input matInput [(ngModel)]="data.qArobot"> -->
         <!-- </mat-form-field> -->
       </div>
-      <mat-slide-toggle [checked]="ifGenerateNtf" (change)="generateNtfToggle($event)">是否生成通知</mat-slide-toggle>
+      <mat-slide-toggle [checked]="ifGenerateNtf" (change)="generateNtfToggle()">是否生成通知</mat-slide-toggle>
         <div class="register-list ntf-form">
             <div [style.height]="ifGenerateNtf ? 'auto' : '0'" [style.visibility]="ifGenerateNtf ? 'visible' : 'hidden'">
                 <h4 mat-subheader>

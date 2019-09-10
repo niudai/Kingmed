@@ -24,7 +24,7 @@ export class FloatingActionBtnComponent implements OnInit {
         this.widthOfQRCode = 0;
     }
 
-    @HostListener('window:scroll', ['$event'])
+    @HostListener('window:scroll')
     onScroll() {
         if (window.pageYOffset < window.innerHeight) {
             this.topBtnHeight = '0';

@@ -102,20 +102,20 @@ export class DiseaseXiAnUpdateComponent implements OnInit {
         }
     }
 
-    protected subscribeToSaveResponse(result: Observable<HttpResponse<IDiseaseXiAn>>) {
+    subscribeToSaveResponse(result: Observable<HttpResponse<IDiseaseXiAn>>) {
         result.subscribe((res: HttpResponse<IDiseaseXiAn>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
     }
 
-    protected onSaveSuccess() {
+    onSaveSuccess() {
         this.isSaving = false;
         this.previousState();
     }
 
-    protected onSaveError() {
+    onSaveError() {
         this.isSaving = false;
     }
 
-    protected generateNtfToggle() {
+    generateNtfToggle() {
         this.ifGenerateNtf = ! this.ifGenerateNtf;
     }
 }

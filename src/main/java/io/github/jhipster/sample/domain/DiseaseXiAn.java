@@ -54,7 +54,7 @@ public class DiseaseXiAn  extends AbstractViewsEntity implements Serializable {
     private List<ProjectNotification> ntfs;
 
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn(name = "disease_xi_an_id")
     private List<Comment> comments = new ArrayList<Comment>();
 

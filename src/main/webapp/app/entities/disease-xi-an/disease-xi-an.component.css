@@ -17,14 +17,34 @@ mat-nav-list.auto-complete-list.mat-nav-list.mat-list-base {
 
 button.input-group-append.search-btn.mat-raised-button.mat-warn {
     display: inline-block;
+    width: 15%;
+    border-radius: 10px;
+}
+
+button.jh-create-entity {
+    float: right;
 }
 
 input#currentSearch {
-    /* position: absolute; */
-    top: 0;
+    /* top: 0; */
+    width: 80%;
     height: 45px;
     left: 0;
     display: inline-block;
+    border-radius: 10px;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+    border-style: none;
+    padding-left: 5px;
+}
+
+
+.table-disease-mobile {
+    font-size: 15px;
+    background-color: rgb(243, 193, 174);
+}
+
+table.mat-table {
+    border-spacing: 0;
 }
 
 .search-restric {
@@ -39,6 +59,8 @@ td.mat-cell:last-of-type, td.mat-footer-cell:last-of-type, th.mat-header-cell:la
 
 td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:first-of-type {
     padding-left: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 button.concourse-chip {

@@ -1,4 +1,4 @@
-<div class="register-form" *ngIf="!success">
+<div class="register-form">
     <mat-list>
         <h3 mat-subheader>
             <fa-icon icon="book-medical"></fa-icon>
@@ -231,7 +231,7 @@
                 ></textarea>
             </mat-form-field>
         </div>
-        <mat-slide-toggle [checked]="ifGenerateNtf" (change)="generateNtfToggle($event)">是否生成通知</mat-slide-toggle>
+        <mat-slide-toggle [checked]="ifGenerateNtf" (change)="generateNtfToggle()">是否生成通知</mat-slide-toggle>
         <div class="register-list ntf-form">
             <div [style.height]="ifGenerateNtf ? 'auto' : '0'" [style.visibility]="ifGenerateNtf ? 'visible' : 'hidden'">
                 <h3 mat-subheader>

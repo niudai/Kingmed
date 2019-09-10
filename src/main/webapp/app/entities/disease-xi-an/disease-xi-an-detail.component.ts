@@ -10,6 +10,7 @@ import { FeedbackDialogComponent } from 'app/layouts/navbar/feedback-dialog/feed
 import { CommentDialogComponent } from './comment-dialog/comment-dialog.component';
 import { IComment } from 'app/shared/model/comment.model';
 import { CommentBottomSheetComponent } from './comment-bottom-sheet/comment-bottom-sheet.component';
+import { DiseaseXiAnMatDeleteDialogComponent } from './disease-xi-an-delete-dialog.component';
 
 export interface ButtonInfo {
     content?: string;
@@ -35,12 +36,11 @@ export class DiseaseXiAnDetailComponent implements OnInit {
     feedbackSuccessMsg = '反馈成功';
 
     buttonInfos: ButtonInfo[] = [
-        { content: '价格详情', faIcon: 'dollar-sign', relativeUrl: 'prices', color: ''},
-        { content: '相关问题', faIcon: 'question', relativeUrl: 'qarobots', color: ''},
-        { content: '申请单', faIcon: 'file-alt', relativeUrl: 'applications', color: ''},
-        { content: '耗材图片', faIcon: 'magic', relativeUrl: 'suppliess', color: ''},
-        { content: '相关项目', faIcon: 'book-medical', relativeUrl: 'diseases', color: ''},
-
+        { content: '价格详情', faIcon: 'dollar-sign', relativeUrl: 'prices', color: '' },
+        { content: '相关问题', faIcon: 'question', relativeUrl: 'qarobots', color: '' },
+        { content: '申请单', faIcon: 'file-alt', relativeUrl: 'applications', color: '' },
+        { content: '耗材图片', faIcon: 'magic', relativeUrl: 'suppliess', color: '' },
+        { content: '相关项目', faIcon: 'book-medical', relativeUrl: 'diseases', color: '' }
     ];
 
     constructor(
@@ -49,7 +49,7 @@ export class DiseaseXiAnDetailComponent implements OnInit {
         protected dialog: MatDialog,
         private _snackBar: MatSnackBar,
         private _bottomSheet: MatBottomSheet
-    ) { }
+    ) {}
 
     copyDetail(disease: IDiseaseXiAn) {
         // const para = document.createElement('textarea');
@@ -73,7 +73,7 @@ export class DiseaseXiAnDetailComponent implements OnInit {
         // copyTextarea.focus();
         // copyTextarea.select();
         try {
-            this._snackBar.open(document.execCommand('copy') ? '已复制至剪贴板' : '复制失败', '', { duration: 1000} );
+            this._snackBar.open(document.execCommand('copy') ? '已复制至剪贴板' : '复制失败', '', { duration: 1000 });
         } catch (err) {
             console.log('Oops, unable to copy');
         }
@@ -87,8 +87,7 @@ export class DiseaseXiAnDetailComponent implements OnInit {
     activateDiseaseXiAn() {
         this.diseaseXiAn.activated = !this.diseaseXiAn.activated;
         this.activatedToggleLabel = this.diseaseXiAn.activated ? '正常运行' : '暂停运行';
-        this.diseaseXiAnService.activate(this.diseaseXiAn.id, this.diseaseXiAn.activated)
-            .subscribe();
+        this.diseaseXiAnService.activate(this.diseaseXiAn.id, this.diseaseXiAn.activated).subscribe();
     }
 
     openCommentBottomSheet(): void {
@@ -98,17 +97,14 @@ export class DiseaseXiAnDetailComponent implements OnInit {
                 diseaseXiAn: this.diseaseXiAn
             }
         });
-        sheetRef.afterDismissed()
-            .subscribe(
-                any => this.fetchComments()
-            );
+        sheetRef.afterDismissed().subscribe(any => this.fetchComments());
     }
 
     ngOnInit() {
         this.activatedRoute.data.subscribe(({ diseaseXiAn }) => {
             this.diseaseXiAn = diseaseXiAn;
             this.prices = this.diseaseXiAn.prices;
-            this.prices.forEach( p => p.isSelected = false);
+            this.prices.forEach(p => (p.isSelected = false));
             this.selectedPrice = {
                 subsidiary: this.diseaseXiAn.subsidiary,
                 tollStandard: this.diseaseXiAn.tollStandard,
@@ -118,17 +114,14 @@ export class DiseaseXiAnDetailComponent implements OnInit {
                 isSelected: true
             };
             this.prices.push(this.selectedPrice);
-            this.diseaseXiAnService.getUsers(this.diseaseXiAn.id)
-                .subscribe( res => this.users = res.body);
+            this.diseaseXiAnService.getUsers(this.diseaseXiAn.id).subscribe(res => (this.users = res.body));
             this.fetchComments();
-
         });
         this.activatedToggleLabel = this.diseaseXiAn.activated ? '运行' : '已停用';
     }
 
     private fetchComments() {
-        this.diseaseXiAnService.queryComment(this.diseaseXiAn.id)
-        .subscribe( res => this.comments = res.body);
+        this.diseaseXiAnService.queryComment(this.diseaseXiAn.id).subscribe(res => (this.comments = res.body));
     }
 
     openDeleteDialog(link: ILinkCard): void {
@@ -157,34 +150,30 @@ export class DiseaseXiAnDetailComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
             //   console.log('The dialog was closed');
             this.diseaseXiAnService.addArticle(result, this.diseaseXiAn.id).subscribe(any => {
-                    this.fetchDiseaseXiAn();
-                }
-            );
+                this.fetchDiseaseXiAn();
+            });
         });
     }
 
     fetchDiseaseXiAn() {
-        this.diseaseXiAnService.find(this.diseaseXiAn.id).subscribe(
-            res => this.diseaseXiAn = res.body
-        );
+        this.diseaseXiAnService.find(this.diseaseXiAn.id).subscribe(res => (this.diseaseXiAn = res.body));
     }
 
     public togglePrice(price: PriceXiAn): void {
         this.selectedPrice.isSelected = false;
         this.selectedPrice = price;
         this.selectedPrice.isSelected = true;
-        this.diseaseXiAn.subsidiary =   this.selectedPrice.subsidiary;
+        this.diseaseXiAn.subsidiary = this.selectedPrice.subsidiary;
         this.diseaseXiAn.tollStandard = this.selectedPrice.tollStandard;
         this.diseaseXiAn.reportingTime = this.selectedPrice.reportingTime;
-        this.diseaseXiAn.chargeCode  = this.selectedPrice.chargeCode;
-        this.diseaseXiAn.subSeries =   this.selectedPrice.subseries;
-        this._snackBar.open(`当前价格已切换至${price.subsidiary}`, null, { duration: 1000});
+        this.diseaseXiAn.chargeCode = this.selectedPrice.chargeCode;
+        this.diseaseXiAn.subSeries = this.selectedPrice.subseries;
+        this._snackBar.open(`当前价格已切换至${price.subsidiary}`, null, { duration: 1000 });
     }
 
     previousState() {
         window.history.back();
     }
-
 }
 
 @Component({
@@ -192,21 +181,19 @@ export class DiseaseXiAnDetailComponent implements OnInit {
     templateUrl: './article-delete-dialog.component.html'
 })
 export class ArticleMatDeleteDialogComponent {
-
     constructor(
         public dialogRef: MatDialogRef<ArticleMatDeleteDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data,
         protected service: DiseaseXiAnService,
-        protected router: Router) { }
+        protected router: Router
+    ) {}
 
     onNoClick(): void {
         this.dialogRef.close();
     }
 
     confirmDelete(): void {
-        this.service.deleteArticle(this.data.linkCard, 3).subscribe(
-            any => this.dialogRef.close()
-        );
+        this.service.deleteArticle(this.data.linkCard, 3).subscribe(any => this.dialogRef.close());
     }
 }
 
@@ -215,17 +202,15 @@ export class ArticleMatDeleteDialogComponent {
     templateUrl: './article-create-dialog.component.html'
 })
 export class ArticleMatCreateDialogComponent implements OnInit {
-
     constructor(
         public dialogRef: MatDialogRef<ArticleMatDeleteDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data,
-        protected router: Router) { }
+        protected router: Router
+    ) {}
 
-    ngOnInit(): void {
-    }
+    ngOnInit(): void {}
 
     onNoClick(): void {
         this.dialogRef.close();
     }
-
 }

@@ -49,7 +49,7 @@ export class DiseaseXiAnMatDeleteDialogComponent implements OnInit{
         this.dialogRef.close();
     }
 
-    protected generateNtfToggle() {
+    generateNtfToggle() {
         this.ifGenerateNtf = ! this.ifGenerateNtf;
     }
 

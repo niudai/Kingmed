@@ -42,6 +42,7 @@ export class DiseaseXiAnComponent implements OnInit {
     subsidiaries: ISubsidiary[];
     concourses: IConcourse[];
     selectedSub: ISubsidiary;
+    isBigScreen = true;
     error: any;
     success: any;
     eventSubscriber: Subscription;
@@ -75,7 +76,7 @@ export class DiseaseXiAnComponent implements OnInit {
         private subsidiaryService: SubsidiaryService
     ) {}
 
-    @HostListener('window:resize', ['$event'])
+    @HostListener('window:resize',  ['$event'])
     onResize(event) {
         this.columnToggle();
     }
@@ -85,8 +86,10 @@ export class DiseaseXiAnComponent implements OnInit {
      */
     columnToggle() {
         if (window.innerWidth < 600) {
+            this.isBigScreen = false;
             this.displayedColumns = this.MOBILE_COL;
         } else {
+            this.isBigScreen = true;
             this.displayedColumns = this.PC_COL;
         }
     }

@@ -7,23 +7,41 @@ Todo:
   ✔ Implement views for qarobots. @done(19-09-06 21:31)
   ✔ Implement views sorting for qarobots. @done(19-09-06 21:40)
   ☐ Write basic sql quries for data migrating for disease.
+  ✔ Fix page margin issue. @done(19-09-08 16:37)
+  ✔ Fix search button sink to the bottom issue @done(19-09-08 20:27)
+  ✔ increase margin between login btn and remember password. @done(19-09-08 20:31)
   ☐ Write one article about spring-boot.
+  ✔ Fix ntf type not showing properly issue. @done(19-09-08 17:23)
+  ✔ Fix ntf disease label override date issue. @done(19-09-08 20:31)
+  ✔ Fix issue about not deleting disease properly when generating disease issue. @done(19-09-08 21:27)
+  ☐ Add side-navbar in disease-map page.
+  ☐ Implement auto-completion in disease map searching botx.
   ✔ Implement snackbar ntf in prices info toggle. @done(19-09-06 21:40)
   ✔ Implement views customization for admin. @done(19-09-06 22:22)
   ✔ Copy text info to clipboard in terms of current price info. @done(19-09-06 22:18)
   ✔ Make price toggle noticiable by adding snacbar and color toggle. @done(19-09-06 22:18)
   ✔ Implement subdidiary admin page @done(19-09-05 22:04)
 
+TODO:
+    ✔ 1.检索功能，不能只能检索项目名称，需要新增项目代码，临床意义，集团疾病线分类，子公司系列划分. @done(19-09-10 19:58)
+    ☐ 2.新增项目无法编辑，且生成通知那里有问题
+    ☐ 2.1，还有一个问题需今晚修复，就是申请单信息，之前没有，现在编辑添加保存后，却没有任何反应
+    ☐ 3.项目迁移，先按照子公司迁移，再按照科室迁移
+    ☐ 4.不输入任何检索字眼，页面无法翻页
+    ✔ 5.在个人中心新建项目还是旧格式，且新建项目在个人中心新建还是在主界面新建，有没有区别 @done(19-09-10 20:17)
+    ✔ 6.停做项目，手机端不显示停做 @done(19-09-10 20:26)
+    ✔ 7.输入小写字母，检索不到大写字母的项目 @done(19-09-10 19:58)
+    ☐ 8，项目评论能否有个提示功能，这样管理员好及时处理信息
+    ☐ 9.这个字段显示太短了
+    ☐ Implement security API filter
+    ☐ Fix disease not showing properly in profile page.
+    DROP TABLE IF EXISTS COMMENT ;
 
 
-
-DROP TABLE IF EXISTS JHI_SUBSIDIARY ;
-
-
-DELETE FROM DATABASECHANGELOG WHERE id = '20190817-1';
+DELETE FROM DATABASECHANGELOG WHERE id = '2019082701';
 
 
-ALTER TABLE DISEASE_XI_AN  DROP COLUMN subsidiary_id;
+-- ALTER TABLE DISEASE_XI_AN  DROP COLUMN subsidiary_id;
 
 DROP TABLE IF EXISTS JHI_CONCOURSE ;
 
@@ -45,3 +63,12 @@ Before Index:Average time =  160ms
 
 SELECT COUNT(*) FROM  AS DISEASE_XI_AN
 
+select prices0_.disease_xi_an_id as disease_7_24_1_, prices0_.id as id1_24_1_, prices0_.id as id1_24_0_, prices0_.charge_code as charge_c2_24_0_, prices0_.reporting_time as reportin3_24_0_, prices0_.subseries as subserie4_24_0_, prices0_.subsidiary as subsidia5_24_0_, prices0_.toll_standard as toll_sta6_24_0_ from price_xi_an prices0_ where prices0_.disease_xi_an_id=?
+select linkcards0_.disease_xi_an_id as disease_7_22_1_, linkcards0_.id as id1_22_1_, linkcards0_.id as id1_22_0_, linkcards0_.article_name as article_2_22_0_, linkcards0_.article_url as article_3_22_0_, linkcards0_.image_url as image_ur4_22_0_, linkcards0_.sub_title as sub_titl5_22_0_ from link_card linkcards0_ where linkcards0_.disease_xi_an_id=?
+select comments0_.disease_xi_an_id as disease_3_0_0_, comments0_.id as id1_0_0_, comments0_.id as id1_0_1_, comments0_.comment as comment2_0_1_, comments0_.disease_xi_an_id as disease_3_0_1_ from comment comments0_ where comments0_.disease_xi_an_id=?
+select ntfs0_.disease_xi_an_id as disease_6_25_0_, ntfs0_.id as id1_25_0_, ntfs0_.id as id1_25_1_, ntfs0_.created_date as created_2_25_1_, ntfs0_.description as descript3_25_1_, ntfs0_.disease_xi_an_id as disease_6_25_1_, ntfs0_.subsidiary_id as subsidia7_25_1_, ntfs0_.title as title4_25_1_, ntfs0_.type as type5_25_1_, subsidiary1_.id as id1_19_2_, subsidiary1_.name as name2_19_2_ from project_notification ntfs0_ left outer join jhi_subsidiary subsidiary1_ on ntfs0_.subsidiary_id=subsidiary1_.id where ntfs0_.disease_xi_an_id=?
+delete from disease_xi_an_image_application where disease_xi_an_id=?  Hibernate: delete from disease_map_disease_xi_an where disease_xi_an_id=?        Hibernate: delete from disease_xi_an_disease_xi_an where disease_xi_an_id=?      Hibernate: update price_xi_an set disease_xi_an_id=null where disease_xi_an_id=? Hibernate: delete from disease_xi_an_q_arobot where disease_xi_an_id=?
+delete from disease_xi_an_disease_xi_an where related_disease_xi_an_id=?
+delete from disease_xi_an_image_supplies where disease_xi_an_id=?     Hibernate: delete from disease_xi_an_user where disease_xi_an_id=?
+delete from price_xi_an where id=?
+delete from disease_xi_an where id=?

@@ -1,17 +1,17 @@
 <div>
     <mat-card>
         <div class="row">
-            <form name="searchForm" class="form-inline col-sm-6">
+            <form name="searchForm" class="form-inline">
                 <div class="input-group w-100 mt-3 search-div" (mouseenter)="onMouseEnter()"
                     (mouseleave)="onMouseLeave()">
-                    <input type="text" class="form-control search-input" [(ngModel)]="currentSearch" id="currentSearch"
+                    <input type="text" class="search-input" [(ngModel)]="currentSearch" id="currentSearch"
                         (focus)="onFocusSearchBox()" (blur)="onBlurSearchBox()" (keydown)="onKeyDown()"
                         name="currentSearch" value="" autocomplete="off"
                         placeholder="{{ 'jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.home.search' | translate }}">
                     <button mat-raised-button class="input-group-append search-btn" color="warn" (click)="search()">
                         <fa-icon [icon]="'search'"></fa-icon>
                     </button>
-                    <mat-nav-list *ngIf="isInArea" class="auto-complete-list">
+                    <mat-nav-list *ngIf="isInArea && autoCompleteDiseases && autoCompleteDiseases.length > 0" class="auto-complete-list">
                         <div *ngFor="let disease of autoCompleteDiseases">
                             <mat-list-item [routerLink]="[disease.id, 'view' ]">
                                 <p>{{disease.name | trimIfTooLong}}</p>
@@ -37,22 +37,22 @@
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
-            </form>
-            <div class="col-sm-12">
-                <button mat-raised-button color="accent" *jhiHasAnyAuthority="'ROLE_ADMIN'" id="jh-create-entity"
+                <button
+                style="float: right"
+                mat-raised-button color="accent" *jhiHasAnyAuthority="'ROLE_ADMIN'" id="jh-create-entity"
                     class="float-right jh-create-entity" [routerLink]="['/disease-xi-an/new']">
                     <fa-icon [icon]="'plus'"></fa-icon>
                     <span class="hidden-sm-down">
                         新项目
                     </span>
                 </button>
-            </div>
+            </form>
         </div>
 
         <div class="row">
             <div class="chips" style="display: inline-block; width: 100%">
                 <button class="concourse-chip" (click)="selectConcourse(concourse)" *ngFor="let concourse of concourses"
-                    [style.background-color]="concourse.isSelected ? 'aquamarine' : 'darksalmon'">
+                    [style.background-color]="concourse.isSelected ? 'aquamarine' : 'rgb(86, 177, 201)'">
                     <span>
                         {{concourse.name}}
                     </span>
@@ -61,8 +61,9 @@
         </div>
     </mat-card>
 
-    <div *ngIf="diseaseXiAns">
-        <table mat-table [dataSource]="diseaseXiAns" class="mat-elevation-z8">
+    <div>
+        <table mat-table [dataSource]="diseaseXiAns" class="mat-elevation-z8"
+            *ngIf="isBigScreen">
 
             <!--- Note that these columns can be defined in any order.
                                   The actual rendered columns are set as a property on the row definition" -->
@@ -81,23 +82,14 @@
                         <a [routerLink]="[diseaseXiAn.id, 'view' ]">{{diseaseXiAn.name}}
                             - <strong>{{diseaseXiAn.subsidiary}}</strong>
                             <button class="concourse-chip">{{diseaseXiAn.projectConcourse}}</button>
-                            <span *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                            <span>
                                 <button mat-fab color="warn" *ngIf="!diseaseXiAn.activated">停用</button>
                             </span>
                             <span style="float: right"><span
                                     style="color: orange;">{{diseaseXiAn.views}}</span>人看过</span>
-                            <!-- <button mat-raised-button color="warn" *ngIf="diseaseXiAn.activated">运行</button> -->
                         </a>
                         <br>
                         <div>
-                            <!-- <button [routerLink]="[diseaseXiAn.id, 'qarobots']" mat-mini-fab color="accent">
-                                <fa-icon [icon]="'question'"></fa-icon>
-                                <span class="d-none d-md-inline"></span>
-                            </button>
-                            <button [routerLink]="[diseaseXiAn.id, 'prices']" mat-mini-fab color="primary">
-                                <fa-icon class="dollar-sign" [icon]="'dollar-sign'"></fa-icon>
-                                <span class="d-none d-md-inline"></span>
-                            </button> -->
                             <button (click)="openDetailBottomSheet(diseaseXiAn)" mat-mini-fab color="accent">
                                 <fa-icon [icon]="'plus'"></fa-icon>
                             </button>
@@ -228,8 +220,33 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
+        <table *ngIf="!isBigScreen" class="table-disease-mobile">
+                <tr *ngFor="let diseaseXiAn of diseaseXiAns">
+                        <td>
+                                <mat-card matRipple style="margin: 0; margin-top: 5px; padding: 1%">
+                                    <a [routerLink]="[diseaseXiAn.id, 'view' ]">{{diseaseXiAn.name}}
+                                        - <strong>{{diseaseXiAn.subsidiary}}</strong>
+                                        <button class="concourse-chip">{{diseaseXiAn.projectConcourse}}</button>
+                                        <span *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                                            <button mat-fab color="warn" *ngIf="!diseaseXiAn.activated">停用</button>
+                                        </span>
+                                        <span style="float: right"><span
+                                                style="color: orange;">{{diseaseXiAn.views}}</span>人看过</span>
+                                        <!-- <button mat-raised-button color="warn" *ngIf="diseaseXiAn.activated">运行</button> -->
+                                    </a>
+                                    <br>
+                                    <div>
+                                        <button (click)="openDetailBottomSheet(diseaseXiAn)" mat-mini-fab color="accent">
+                                            <fa-icon [icon]="'plus'"></fa-icon>
+                                        </button>
+                                    </div>
+                                </mat-card>
+                            </td>
+                </tr>
+
+            </table>
         <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageIndex]="pageEvent.pageIndex" [pageSize]="pageEvent.pageSize"
-            [length]="totalItems" showFirstLastButtons (page)="loadDiseases($event)">
+            [length]="totalItems" showFirstLastButtons (page)="loadDiseases()">
         </mat-paginator>
     </div>
 </div>

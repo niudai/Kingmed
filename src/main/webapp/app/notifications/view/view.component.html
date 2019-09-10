@@ -21,7 +21,7 @@
             <button mat-button
             [routerLink]="['/disease-xi-an', notification.diseaseXiAn.id, 'view']"
             style ="background-color: antiquewhite">
-                {{notification.diseaseXiAn.name | trimIfTooLong}}
+                {{notification.diseaseXiAn.name | trimIfTooLong:innerWidth/50}}
             </button>
           </mat-card-actions>
     </mat-card>

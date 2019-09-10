@@ -38,7 +38,6 @@ export class MyDiseaseCreateComponent implements OnInit {
     save() {
         this.isSaving = true;
         this.subscribeToSaveResponse(this.userService.postDiseases(this.account.login, this.diseaseXiAn));
-
     }
 
     protected subscribeToSaveResponse(result: Observable<HttpResponse<IDiseaseXiAn[]>>) {

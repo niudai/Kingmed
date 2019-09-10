@@ -8,7 +8,7 @@
                     (focus)="onFocusSearchBox()"
                     (blur)="onBlurSearchBox()"
                     type="text"
-                    class="form-control search-input"
+                    class="search-input"
                     [(ngModel)]="currentSearch"
                     id="currentSearch"
                     (keydown)="onKeyDown()"
@@ -21,7 +21,7 @@
                     <button mat-raised-button class="input-group-append" color="warn" (click)="loadAll()">
                         <fa-icon [icon]="'search'"></fa-icon>
                     </button>
-                    <mat-nav-list class="auto-complete-list">
+                    <mat-nav-list class="auto-complete-list" *ngIf="isInArea && autoCompleteQArobots && autoCompleteQArobots.length > 0">
                         <div *ngFor="let qArobot of autoCompleteQArobots">
                             <mat-list-item
                             [routerLink]="[qArobot.id, 'view' ]">

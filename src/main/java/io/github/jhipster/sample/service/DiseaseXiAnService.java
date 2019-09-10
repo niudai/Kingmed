@@ -42,6 +42,7 @@ import io.github.jhipster.sample.repository.ImageSuppliesRepository;
 import io.github.jhipster.sample.repository.LinkCardRepository;
 import io.github.jhipster.sample.repository.QArobotRepository;
 import io.github.jhipster.sample.repository.UserRepository;
+import io.github.jhipster.sample.security.SecurityUtils;
 import io.github.jhipster.sample.web.rest.searchdto.DiseaseXiAnSearchDTO;
 /**
  * DiseaseXiAnService
@@ -86,9 +87,13 @@ public class DiseaseXiAnService {
     }
 
     @Transactional
-    public DiseaseXiAn postDiseaseXiAn(DiseaseXiAn disease) {
-        disease.setLastModifiedDate(Instant.now());
-        return diseaseXiAnRepository.save(disease);
+    public DiseaseXiAn postDiseaseXiAn(DiseaseXiAn diseaseXiAn) {
+        String login = SecurityUtils.getCurrentUserLogin().get();
+        User user = userRepository.findOneByLogin(login).get();
+        diseaseXiAn.setLastModifiedDate(Instant.now());
+        DiseaseXiAn result = diseaseXiAnRepository.save(diseaseXiAn);
+        user.getDiseaseXiAns().add(result);
+        return result;
     }
 
     /********************* QArobot ***********/
@@ -264,10 +269,40 @@ public class DiseaseXiAnService {
         // restrictions for query string
         if (query != null && query.length() > 0) {
             restrictions.clear();
-            restrictions.addAll(queryKeywordParser(query).stream().map(
-                keyword -> cb.like(disease.get("name"), "%" + keyword + "%")
+            List<String> keywords = queryKeywordParser(query);
+            if (keywords.size() > 1) {
+                restrictions.addAll(keywords.stream().map(
+
+                    keyword -> cb.like(cb.upper(disease.get("name")) , "%" + keyword.toUpperCase() + "%")
+
+                    ).collect(Collectors.toList()));
+                restrictions.addAll(keywords.stream().map(
+
+                    keyword -> cb.like(cb.upper(disease.get("projectCode")) , "%" + keyword.toUpperCase() + "%")
+
                 ).collect(Collectors.toList()));
-            restrictions.add(cb.like(disease.get("name"), "%" + query + "%"));
+                    restrictions.addAll(keywords.stream().map(
+
+                        keyword -> cb.like(cb.upper(disease.get("clinicalApplication")) , "%" + keyword.toUpperCase() + "%")
+
+                        ).collect(Collectors.toList()));
+                    restrictions.addAll(keywords.stream().map(
+
+                        keyword -> cb.like(cb.upper(disease.get("series")) , "%" + keyword.toUpperCase() + "%")
+
+                        ).collect(Collectors.toList()));
+                        restrictions.addAll(keywords.stream().map(
+
+                        keyword -> cb.like(cb.upper(disease.get("subSeries")) , "%" + keyword.toUpperCase() + "%")
+
+                        ).collect(Collectors.toList()));
+            }
+            restrictions.add(cb.like(cb.upper(disease.get("name")), "%" + query.toUpperCase() + "%"));
+            restrictions.add(cb.like(cb.upper(disease.get("projectCode")), "%" + query.toUpperCase() + "%"));
+            restrictions.add(cb.like(cb.upper(disease.get("clinicalApplication")), "%" + query.toUpperCase() + "%"));
+            restrictions.add(cb.like(cb.upper(disease.get("series")), "%" + query.toUpperCase() + "%"));
+            restrictions.add(cb.like(cb.upper(disease.get("subSeries")), "%" + query.toUpperCase() + "%"));
+
         }
         Predicate queryPredicate = restrictions.size() > 0 ? cb.or(restrictions.toArray(new Predicate[restrictions.size()])) :
             cb.and();
