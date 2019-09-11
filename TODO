@@ -35,9 +35,9 @@ TODO:
     ☐ 8，项目评论能否有个提示功能，这样管理员好及时处理信息
     ✔ 9.这个字段显示太短了 @done(19-09-11 09:20)
     ☐ Implement security API filter
-    ☐ Fix disease not showing properly in profile page.
+    ✔ Fix disease not showing properly in profile page. @done(19-09-11 09:39)
     ☐ SEO for kingmed.online
-    ☐ Update for
+    ☐ Give diseases to according users.
 
     DROP TABLE IF EXISTS COMMENT ;
 

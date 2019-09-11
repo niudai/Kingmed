@@ -44,8 +44,9 @@
 
 
     <br />
-    <div *ngIf="diseaseXiAns" class = "row">
-        <table mat-table [dataSource]="diseaseXiAns" class="mat-elevation-z8 col-sm-8">
+    <div>
+            <table mat-table [dataSource]="diseaseXiAns" class="mat-elevation-z8"
+            *ngIf="isBigScreen">
 
             <!--- Note that these columns can be defined in any order.
                                   The actual rendered columns are set as a property on the row definition" -->
@@ -60,23 +61,18 @@
             <ng-container matColumnDef="nameMobile">
                 <th mat-header-cell *matHeaderCellDef> 项目名 </th>
                 <td mat-cell *matCellDef="let diseaseXiAn">
-                    <mat-card matRipple style = "margin: 0; padding: 1%">
-                        <a [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'view' ]">{{diseaseXiAn.name}}
+                    <mat-card matRipple style="margin: 0; padding: 1%">
+                        <a [routerLink]="[diseaseXiAn.id, 'view' ]">{{diseaseXiAn.name}}
                             - <strong>{{diseaseXiAn.subsidiary}}</strong>
-                            <span *jhiHasAnyAuthority="'ROLE_ADMIN'">
-                                    <button mat-fab color="warn" *ngIf="!diseaseXiAn.activated">停用</button>
-                            </span>
-                            <!-- <button mat-raised-button color="warn" *ngIf="diseaseXiAn.activated">运行</button> -->
+                            <button class="concourse-chip">{{diseaseXiAn.projectConcourse}}</button>
+                                <button mat-fab color="warn" *ngIf="!diseaseXiAn.activated">停用</button>
+                            <span style="float: right"><span
+                                    style="color: orange;">{{diseaseXiAn.views}}</span>人看过</span>
                         </a>
                         <br>
                         <div>
-                            <button [routerLink]="[diseaseXiAn.id, 'qarobots']" mat-mini-fab color="accent">
-                                <fa-icon [icon]="'question'"></fa-icon>
-                                <span class="d-none d-md-inline"></span>
-                            </button>
-                            <button [routerLink]="[diseaseXiAn.id, 'prices']" mat-mini-fab color="primary">
-                                <fa-icon class="dollar-sign" [icon]="'dollar-sign'"></fa-icon>
-                                <span class="d-none d-md-inline"></span>
+                            <button (click)="openDetailBottomSheet(diseaseXiAn)" mat-mini-fab color="accent">
+                                <fa-icon [icon]="'plus'"></fa-icon>
                             </button>
                         </div>
                     </mat-card>
@@ -89,14 +85,11 @@
 
                     <a [routerLink]="[diseaseXiAn.id, 'view' ]">{{diseaseXiAn.name}}
                         - <strong>{{diseaseXiAn.subsidiary}}</strong>
-                        <span *jhiHasAnyAuthority="'ROLE_ADMIN'">
-
-                        </span>
+                        <button class="concourse-chip">{{diseaseXiAn.projectConcourse}}</button>
                         <button mat-fab color="warn" *ngIf="!diseaseXiAn.activated">停用</button>
                         <!-- <button mat-raised-button color="warn" *ngIf="diseaseXiAn.activated">运行</button> -->
+                        <span style="float: right"><span style="color: orange;">{{diseaseXiAn.views}}</span>人看过</span>
                     </a>
-
-
                 </td>
             </ng-container>
 
@@ -106,7 +99,7 @@
                 <td mat-cell *matCellDef="let element">
                     <div class="btn-group flex-btn-group-container">
                         <button [routerLink]="[element.id, 'prices']" mat-mini-fab color="primary">
-                            <fa-icon class="dollar-sign" [icon]="'dollar-sign'"></fa-icon>
+                            <fa-icon [icon]="'dollar-sign'"></fa-icon>
                             <span class="d-none d-md-inline"></span>
                         </button>
                     </div>
@@ -155,7 +148,7 @@
                 <td mat-cell *matCellDef="let element">
                     <div class="btn-group flex-btn-group-container">
                         <button [routerLink]="[element.id, 'qarobots']" mat-mini-fab
-                            style="background-colrgb(248, 160, 28)aqua">
+                            style="background-color:rgb(248, 160, 28)">
                             <fa-icon [icon]="'question'"></fa-icon>
                             <span class="d-none d-md-inline"></span>
                         </button>
@@ -182,7 +175,7 @@
                 <td mat-cell *matCellDef="let element">
                     <div class="btn-group flex-btn-group-container">
                         <button *jhiHasAnyAuthority="'ROLE_ADMIN'" mat-mini-fab type="submit"
-                            (click)="openDialog(element)" style="background-color: rgb(243, 26, 26);">
+                            (click)="openDeleteDialog(element)" style="background-color: rgb(243, 26, 26);">
                             <fa-icon [icon]="'times'"></fa-icon>
                         </button>
                     </div>
@@ -192,6 +185,29 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
+        <table *ngIf="!isBigScreen" class="table-disease-mobile">
+                <tr *ngFor="let diseaseXiAn of diseaseXiAns">
+                        <td>
+                                <mat-card matRipple style="margin: 0; margin-top: 5px; padding: 1%">
+                                    <a [routerLink]="[diseaseXiAn.id, 'view' ]">{{diseaseXiAn.name}}
+                                        - <strong>{{diseaseXiAn.subsidiary}}</strong>
+                                        <button class="concourse-chip">{{diseaseXiAn.projectConcourse}}</button>
+                                        <button mat-fab color="warn" *ngIf="!diseaseXiAn.activated">停用</button>
+                                        <span style="float: right"><span
+                                                style="color: orange;">{{diseaseXiAn.views}}</span>人看过</span>
+                                        <!-- <button mat-raised-button color="warn" *ngIf="diseaseXiAn.activated">运行</button> -->
+                                    </a>
+                                    <br>
+                                    <div>
+                                        <button (click)="openDetailBottomSheet(diseaseXiAn)" mat-mini-fab color="accent">
+                                            <fa-icon [icon]="'plus'"></fa-icon>
+                                        </button>
+                                    </div>
+                                </mat-card>
+                            </td>
+                </tr>
+
+            </table>
         <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="10" [length]="totalItems" showFirstLastButtons
             (page)="loadDiseases($event)">
         </mat-paginator>

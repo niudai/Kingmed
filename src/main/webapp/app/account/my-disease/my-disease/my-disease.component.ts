@@ -10,8 +10,9 @@ import { IDiseaseXiAn } from 'app/shared/model/disease-xi-an.model';
 import { AccountService, UserService } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
-import { PageEvent, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { PageEvent, MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatBottomSheet } from '@angular/material';
 import { MyDiseaseDeleteDialogComponent } from '../my-disease-delete-dialog/my-disease-delete-dialog.component';
+import { DiseaseXiAnDetailBottomSheetComponent } from 'app/entities/disease-xi-an/disease-xi-an-detail-bottom-sheet/disease-xi-an-detail-bottom-sheet.component';
 // import { DiseaseXiAnMatDeleteDialogComponent } from 'app/entities/disease-xi-an';
 
 @Component({
@@ -39,6 +40,7 @@ export class MyDiseaseComponent implements OnInit {
     reverse: any;
     pageEvent: PageEvent;
     protected ngbModalRef: NgbModalRef;
+    isBigScreen: boolean;
     constructor(
         protected userService: UserService,
         protected parseLinks: JhiParseLinks,
@@ -48,7 +50,8 @@ export class MyDiseaseComponent implements OnInit {
         protected router: Router,
         protected matDialog: MatDialog,
         protected modalService: NgbModal,
-        protected dialog: MatDialog
+        protected dialog: MatDialog,
+        protected _bottomSheet: MatBottomSheet
     ) {
     }
 
@@ -62,8 +65,10 @@ export class MyDiseaseComponent implements OnInit {
      */
     columnToggle() {
         if (window.innerWidth < 600) {
+            this.isBigScreen = false;
             this.displayedColumns = this.MOBILE_COL;
         } else {
+            this.isBigScreen = true;
             this.displayedColumns = this.PC_COL;
         }
     }
@@ -113,7 +118,7 @@ export class MyDiseaseComponent implements OnInit {
         this.loadAll();
     }
 
-    openDialog(disease: IDiseaseXiAn): void {
+    openDeleteDialog(disease: IDiseaseXiAn): void {
         const dialogRef = this.dialog.open(MyDiseaseDeleteDialogComponent, {
             width: '250px',
             data: {
@@ -123,6 +128,17 @@ export class MyDiseaseComponent implements OnInit {
         });
 
         dialogRef.afterClosed().subscribe(result => {
+            //   console.log('The dialog was closed');
+            this.loadAll();
+        });
+    }
+
+    openDetailBottomSheet(disease: IDiseaseXiAn): void {
+        const bottomSheetRef = this._bottomSheet.open(DiseaseXiAnDetailBottomSheetComponent, {
+            data: { diseaseXiAn: disease }
+        });
+
+        bottomSheetRef.afterDismissed().subscribe(result => {
             //   console.log('The dialog was closed');
             this.loadAll();
         });

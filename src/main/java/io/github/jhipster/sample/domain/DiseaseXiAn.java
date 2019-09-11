@@ -605,6 +605,7 @@ public class DiseaseXiAn  extends AbstractViewsEntity implements Serializable {
         this.preservation = diseaseXiAn.preservation;
         this.transportation = diseaseXiAn.transportation;
         this.applicationRemark = diseaseXiAn.applicationRemark;
+        this.applicationUnitType = diseaseXiAn.applicationUnitType;
         this.medicalMethod = diseaseXiAn.medicalMethod;
         this.projectConcourse = diseaseXiAn.projectConcourse;
         this.hurryDepartment = diseaseXiAn.hurryDepartment;

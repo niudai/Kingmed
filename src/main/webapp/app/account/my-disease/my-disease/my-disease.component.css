@@ -3,4 +3,104 @@
     cursor: pointer;
 }
 
+.dollar-sign {
+    color: yellow;
+}
+
+.jh-create-entity {
+    margin: 3px;
+}
+
+mat-nav-list.auto-complete-list.mat-nav-list.mat-list-base {
+    position: absolute;
+    top: 45px;
+    z-index: 1000;
+    background: rgba(244, 248, 250, 0.938);
+    width: 100%;
+    box-shadow: 0 1px 5px rgba(0,0,0,.3);
+}
+
+button.input-group-append.search-btn.mat-raised-button.mat-warn {
+    display: inline-block;
+    width: 15%;
+    border-radius: 10px;
+}
+
+button.jh-create-entity {
+    float: right;
+}
+
+input#currentSearch {
+    /* top: 0; */
+    width: 80%;
+    height: 45px;
+    left: 0;
+    display: inline-block;
+    border-radius: 10px;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+    border-style: none;
+    padding-left: 5px;
+}
+
+
+.table-disease-mobile {
+    font-size: 15px;
+    background-color: #54bdbd;
+}
+
+table.mat-table {
+    border-spacing: 0;
+}
+
+.search-restric {
+    max-width: 30%;
+    display: inline;
+    margin: px;
+}
+
+td.mat-cell:last-of-type, td.mat-footer-cell:last-of-type, th.mat-header-cell:last-of-type {
+    padding-right: 5px;
+}
+
+td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:first-of-type {
+    padding-left: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+button.concourse-chip {
+    border-style: none;
+    font-size: 14px;
+    min-width: 69px;
+    margin: 5px;
+    border-radius: 14px;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+    background-color: deeppink;
+}
+
+.mat-form-field {
+    font-size: 15px;
+}
+
+.row {
+    margin: 0;
+}
+
+fa-icon {
+    color: white;
+}
+
+.activated {
+    color: rgb(122, 233, 122);
+}
+
+.deactivated {
+    color: red;
+}
+
+table {
+    width: 100%;
+    margin: 0;
+}
+
 
