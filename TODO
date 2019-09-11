@@ -6,7 +6,7 @@ Todo:
   ✔ Implement auto-completion in qarobots searching box. @done(19-09-07 17:30)
   ✔ Implement views for qarobots. @done(19-09-06 21:31)
   ✔ Implement views sorting for qarobots. @done(19-09-06 21:40)
-  ☐ Write basic sql quries for data migrating for disease.
+  ✔ Write basic sql quries for data migrating for disease. @done(19-09-11 09:37)
   ✔ Fix page margin issue. @done(19-09-08 16:37)
   ✔ Fix search button sink to the bottom issue @done(19-09-08 20:27)
   ✔ increase margin between login btn and remember password. @done(19-09-08 20:31)
@@ -25,7 +25,7 @@ Todo:
 TODO:
     ✔ 1.检索功能，不能只能检索项目名称，需要新增项目代码，临床意义，集团疾病线分类，子公司系列划分. @done(19-09-10 19:58)
     ✔ 2.新增项目无法编辑，且生成通知那里有问题 @done(19-09-10 20:44)
-    ☐ 2.1，还有一个问题需今晚修复，就是申请单信息，之前没有，现在编辑添加保存后，却没有任何反应
+    ✔ 2.1，还有一个问题需今晚修复，就是申请单信息，之前没有，现在编辑添加保存后，却没有任何反应 @done(19-09-11 09:19)
     ✔ 3.项目迁移，先按照子公司迁移，再按照科室迁移 @done(19-09-10 22:11)
     ✔ 4.不输入任何检索字眼，页面无法翻页 @done(19-09-10 20:44)
     ✔ 5.在个人中心新建项目还是旧格式，且新建项目在个人中心新建还是在主界面新建，有没有区别 @done(19-09-10 20:17)
@@ -33,10 +33,11 @@ TODO:
     ✔ 7.输入小写字母，检索不到大写字母的项目 @done(19-09-10 19:58)
     ☐ Enhance notification properties.
     ☐ 8，项目评论能否有个提示功能，这样管理员好及时处理信息
-    ☐ 9.这个字段显示太短了
+    ✔ 9.这个字段显示太短了 @done(19-09-11 09:20)
     ☐ Implement security API filter
     ☐ Fix disease not showing properly in profile page.
     ☐ SEO for kingmed.online
+    ☐ Update for
 
     DROP TABLE IF EXISTS COMMENT ;
 
