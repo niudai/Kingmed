@@ -21,8 +21,7 @@ import { DiseaseXiAnDetailBottomSheetComponent } from 'app/entities/disease-xi-a
     styleUrls: ['./my-disease.component.css']
 })
 export class MyDiseaseComponent implements OnInit {
-    PC_COL: string[] = ['ID', 'namePC', 'price', 'projectConcourse', 'applications', 'suppliess',
-        'qarobot'];
+    PC_COL: string[] = ['ID', 'namePC', 'price', 'projectConcourse', 'applications', 'suppliess', 'qarobot'];
     MOBILE_COL: string[] = ['nameMobile', 'projectConcourse'];
     displayedColumns: string[];
     windowWidth = 1000;
@@ -52,8 +51,7 @@ export class MyDiseaseComponent implements OnInit {
         protected modalService: NgbModal,
         protected dialog: MatDialog,
         protected _bottomSheet: MatBottomSheet
-    ) {
-    }
+    ) {}
 
     @HostListener('window:resize', ['$event'])
     onResize(event) {
@@ -74,11 +72,10 @@ export class MyDiseaseComponent implements OnInit {
     }
 
     loadAll() {
-        this.transition();
         this.userService
             .getDiseases(this.currentAccount.login, {
                 page: this.pageEvent && this.pageEvent.pageIndex ? this.pageEvent.pageIndex : 0,
-                size: this.pageEvent && this.pageEvent.pageSize ? this.pageEvent.pageSize : ITEMS_PER_PAGE,
+                size: this.pageEvent && this.pageEvent.pageSize ? this.pageEvent.pageSize : ITEMS_PER_PAGE
                 // sort: this.sort()
             })
             .subscribe(
@@ -98,12 +95,13 @@ export class MyDiseaseComponent implements OnInit {
     loadDiseases($event: PageEvent) {
         // if ($event.pageIndex !== this.previousPage) {'
         this.pageEvent = $event;
-        this.loadAll();
+        this.transition();
         // }
     }
 
     transition() {
-        this.router.navigate(['/account/my-disease',
+        this.router.navigate([
+            '/account/my-disease',
             {
                 // search: this.currentSearch,
                 size: this.pageEvent.pageSize ? this.pageEvent.pageSize : ITEMS_PER_PAGE,
@@ -124,11 +122,12 @@ export class MyDiseaseComponent implements OnInit {
             data: {
                 account: this.currentAccount,
                 diseaseXiAn: disease
-             }
+            }
         });
 
         dialogRef.afterClosed().subscribe(result => {
             //   console.log('The dialog was closed');
+            this.transition();
             this.loadAll();
         });
     }
@@ -139,7 +138,6 @@ export class MyDiseaseComponent implements OnInit {
         });
 
         bottomSheetRef.afterDismissed().subscribe(result => {
-            //   console.log('The dialog was closed');
             this.loadAll();
         });
     }
@@ -157,6 +155,7 @@ export class MyDiseaseComponent implements OnInit {
         this.pageEvent = new PageEvent();
         this.accountService.identity().then(account => {
             this.currentAccount = account;
+            this.transition();
             this.loadAll();
         });
         // this.pageEvent.pageIndex =

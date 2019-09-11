@@ -3,7 +3,7 @@
         <mat-panel-title>
         </mat-panel-title>
         <mat-panel-description>
-            {{notification.title}} -
+            {{notification.title | trimIfTooLong: innerWidth/50}} -
             <span style = "color: indianred">{{notification.subsidiary.name}}</span>
             <mat-chip-list>
                 <mat-chip
@@ -15,6 +15,7 @@
         </mat-panel-description>
     </mat-expansion-panel-header>
     <mat-card>
+        <p class="title" style="text-align: center">{{notification.title}}</p>
         {{notification.description}}
         <p style="position: absolute; right: 20px;">{{notification.createdDate | date}}</p>
         <mat-card-actions>

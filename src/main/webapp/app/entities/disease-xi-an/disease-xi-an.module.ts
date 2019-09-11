@@ -83,6 +83,9 @@ const ENTITY_STATES = [...diseaseXiAnRoute, ...diseaseXiAnPopupRoute];
         CommentDialogComponent,
         CommentBottomSheetComponent,
     ],
+    exports: [
+        DiseaseXiAnDetailBottomSheetComponent
+    ],
     providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }
      , {provide: MatPaginatorIntl, useClass: Paginator}],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

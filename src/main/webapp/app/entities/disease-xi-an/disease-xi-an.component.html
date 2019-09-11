@@ -37,19 +37,10 @@
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
-                <button
-                style="float: right"
-                mat-raised-button color="accent" *jhiHasAnyAuthority="'ROLE_ADMIN'" id="jh-create-entity"
-                    class="float-right jh-create-entity" [routerLink]="['/disease-xi-an/new']">
-                    <fa-icon [icon]="'plus'"></fa-icon>
-                    <span class="hidden-sm-down">
-                        新项目
-                    </span>
-                </button>
             </form>
         </div>
 
-        <div class="row">
+        <div>
             <div class="chips" style="display: inline-block; width: 100%">
                 <button class="concourse-chip" (click)="selectConcourse(concourse)" *ngFor="let concourse of concourses"
                     [style.background-color]="concourse.isSelected ? 'aquamarine' : 'rgb(86, 177, 201)'">

@@ -1,53 +1,59 @@
-<mat-card>
-    <form name="searchForm" class="form-inline col-sm-6">
-        <div class="input-group w-100 mt-3">
-            <input type="text" class="search-input" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch"
-                placeholder="搜索疾病地图">
-            <button mat-raised-button class="input-group-append" color="warn" (click)="load()">
-                <fa-icon [icon]="'search'"></fa-icon>
+<div class="disease-map-list">
+    <mat-card style="margin-bottom: 8px">
+        <form name="searchForm" class="form-inline col-sm-6">
+            <div class="input-group w-100 mt-3">
+                <input type="text" class="search-input" [(ngModel)]="currentSearch" id="currentSearch"
+                    name="currentSearch" placeholder="搜索疾病地图">
+                <button mat-raised-button class="input-group-append" color="warn" (click)="load()">
+                    <fa-icon [icon]="'search'"></fa-icon>
+                </button>
+            </div>
+            <button *jhiHasAnyAuthority="'ROLE_ADMIN'" mat-raised-button color="accent" id="jh-create-entity"
+                class="float-right jh-create-entity create-q-arobot" [routerLink]="'attach-disease-branch'">
+                <fa-icon [icon]="'plus'"></fa-icon>
+                <span class="hidden-sm-down">
+                    创建一份新地图
+                </span>
             </button>
-        </div>
-        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" mat-raised-button color="accent" id="jh-create-entity"
-        class="float-right jh-create-entity create-q-arobot" [routerLink]="'attach-disease-branch'">
-        <fa-icon [icon]="'plus'"></fa-icon>
-        <span class="hidden-sm-down">
-            创建一份新地图
-        </span>
-    </button>
-    </form>
-</mat-card>
-<div class="row">
-<mat-card class="example-card" *ngFor="let diseaseMap of diseaseMaps" class="card col-sm-3" style="margin: 10px">
-    <mat-card-header>
-        <div mat-card-avatar class="example-header-image"></div>
-        <mat-card-title>{{diseaseMap.name}}</mat-card-title>
-    </mat-card-header>
-    <mat-card-actions>
-        <button mat-raised-button color="accent" [routerLink]="['view-disease-map', diseaseMap.id]">进入</button>
-    </mat-card-actions>
-</mat-card>
-<mat-card class="example-card" *ngFor="let diseaseBranch of diseaseBranches" class="card col-sm-3" style="margin: 10px">
-    <mat-card-header>
-        <div mat-card-avatar class="example-header-image"></div>
-        <mat-card-title>{{diseaseBranch.name}}</mat-card-title>
-        <mat-card-subtitle>{{diseaseBranch.subsidiary}}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-        <p>
-            {{diseaseBranch.description}}
-        </p>
-    </mat-card-content>
-    <mat-card-actions>
-        <button mat-raised-button color="accent" [routerLink]="['view-disease-branch', diseaseBranch.id]">进入</button>
-        <button mat-raised-button color="warn" (click)="open(diseaseBranch)"
-            *jhiHasAnyAuthority="'ROLE_ADMIN'">删除</button>
-        <button mat-raised-button style="background-color: bisque"
-            [routerLink]="['modify-disease-branch', diseaseBranch.id]" *jhiHasAnyAuthority="'ROLE_ADMIN'">编辑</button>
-    </mat-card-actions>
-</mat-card>
-</div>
-<div *ngIf="currentSearch">
-    <mat-paginator [pageSizeOptions]="[8]" [pageSize]="DEFAULT_PAGESIZE" [length]="totalItems" showFirstLastButtons
-        (page)="paginate($event)">
-    </mat-paginator>
+        </form>
+    </mat-card>
+    <div class="row">
+        <mat-card class="example-card" *ngFor="let diseaseMap of diseaseMaps" class="card col-sm-3"
+            style="margin-bottom: 5px">
+            <mat-card-header>
+                <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title>{{diseaseMap.name}}</mat-card-title>
+            </mat-card-header>
+            <mat-card-actions>
+                <button mat-raised-button color="accent" [routerLink]="['view-disease-map', diseaseMap.id]">进入</button>
+            </mat-card-actions>
+        </mat-card>
+        <mat-card class="example-card" *ngFor="let diseaseBranch of diseaseBranches" class="card col-sm-3"
+            style="margin-bottom: 5px">
+            <mat-card-header>
+                <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title>{{diseaseBranch.name}}</mat-card-title>
+                <mat-card-subtitle>{{diseaseBranch.subsidiary}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <p>
+                    {{diseaseBranch.description}}
+                </p>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-raised-button color="accent"
+                    [routerLink]="['view-disease-branch', diseaseBranch.id]">进入</button>
+                <button mat-raised-button color="warn" (click)="open(diseaseBranch)"
+                    *jhiHasAnyAuthority="'ROLE_ADMIN'">删除</button>
+                <button mat-raised-button style="background-color: bisque"
+                    [routerLink]="['modify-disease-branch', diseaseBranch.id]"
+                    *jhiHasAnyAuthority="'ROLE_ADMIN'">编辑</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+    <div *ngIf="currentSearch">
+        <mat-paginator [pageSizeOptions]="[8]" [pageSize]="DEFAULT_PAGESIZE" [length]="totalItems" showFirstLastButtons
+            (page)="paginate($event)">
+        </mat-paginator>
+    </div>
 </div>

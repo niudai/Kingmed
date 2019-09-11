@@ -3,6 +3,10 @@
     cursor: pointer;
 }
 
+.user-setting-icon {
+    color: rgb(0, 195, 255);
+}
+
 .dollar-sign {
     color: yellow;
 }

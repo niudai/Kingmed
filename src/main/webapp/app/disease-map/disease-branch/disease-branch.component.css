@@ -14,3 +14,7 @@ input#currentSearch {
     border-style: none;
     padding-left: 5px;
 }
+
+.disease-map-list {
+    background: #54bdbd;
+}

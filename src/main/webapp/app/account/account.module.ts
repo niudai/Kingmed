@@ -19,9 +19,15 @@ import { MyDiseaseComponent } from './my-disease/my-disease/my-disease.component
 import { MyDiseaseDeleteDialogComponent } from './my-disease/my-disease-delete-dialog/my-disease-delete-dialog.component';
 import { MyDiseaseCreateComponent } from './my-disease/my-disease-create/my-disease-create.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
+import { JhipsterElasticsearchSampleApplicationDiseaseXiAnModule } from 'app/entities/disease-xi-an/disease-xi-an.module';
+import { DiseaseXiAnDetailBottomSheetComponent } from 'app/entities/disease-xi-an/disease-xi-an-detail-bottom-sheet/disease-xi-an-detail-bottom-sheet.component';
 
 @NgModule({
-    imports: [JhipsterElasticsearchSampleApplicationSharedModule, RouterModule.forChild(accountState)],
+    imports: [
+        JhipsterElasticsearchSampleApplicationSharedModule,
+        RouterModule.forChild(accountState),
+        JhipsterElasticsearchSampleApplicationDiseaseXiAnModule
+    ],
     declarations: [
         ActivateComponent,
         RegisterComponent,
@@ -36,7 +42,8 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
         AccountSettingsComponent
     ],
     entryComponents: [
-        MyDiseaseDeleteDialogComponent
+        MyDiseaseDeleteDialogComponent,
+        DiseaseXiAnDetailBottomSheetComponent
     ],
     providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

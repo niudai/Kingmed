@@ -31,13 +31,16 @@ TODO:
     ✔ 5.在个人中心新建项目还是旧格式，且新建项目在个人中心新建还是在主界面新建，有没有区别 @done(19-09-10 20:17)
     ✔ 6.停做项目，手机端不显示停做 @done(19-09-10 20:26)
     ✔ 7.输入小写字母，检索不到大写字母的项目 @done(19-09-10 19:58)
+    ☐ Fix ntf not showing properly in views component.
     ☐ Enhance notification properties.
+    ☐ 项目通知类型修改
     ☐ 8，项目评论能否有个提示功能，这样管理员好及时处理信息
     ✔ 9.这个字段显示太短了 @done(19-09-11 09:20)
     ☐ Implement security API filter
     ✔ Fix disease not showing properly in profile page. @done(19-09-11 09:39)
     ☐ SEO for kingmed.online
     ☐ Give diseases to according users.
+    ☐ Fix compatible problem with search box
 
     DROP TABLE IF EXISTS COMMENT ;
 
