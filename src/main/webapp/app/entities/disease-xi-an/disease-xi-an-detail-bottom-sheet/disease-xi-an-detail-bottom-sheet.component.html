@@ -1,6 +1,6 @@
 <mat-nav-list>
 
-    <a mat-list-item [routerLink]="['/disease-xi-an', data.diseaseXiAn.id, 'prices']">
+    <a mat-list-item [routerLink]="['/disease-xi-an', data.diseaseXiAn.id, 'prices']" *jhiHasAnyAuthority="'ROLE_ADMIN'">
         <span mat-line>
             <fa-icon [icon]="'dollar-sign'"></fa-icon>
             价格详情
@@ -35,19 +35,19 @@
         </span>
     </a>
 
-    <a mat-list-item (click)="openDeleteDialog()">
+    <a mat-list-item (click)="openDeleteDialog()" *jhiHasAnyAuthority="'ROLE_ADMIN'">
         <span mat-line>
             <fa-icon [icon]="'times'"></fa-icon>
             删除<span class="text-primary">{{data.diseaseXiAn.name}}</span>
         </span>
     </a>
-    <a mat-list-item (click)="openGiveDialog()">
+    <a mat-list-item (click)="openGiveDialog()" *jhiHasAnyAuthority="'ROLE_ADMIN'">
         <span mat-line>
             <fa-icon [icon]="'hand-point-right'"></fa-icon>
             指派
         </span>
     </a>
-    <a mat-list-item [routerLink]="['/disease-xi-an', data.diseaseXiAn.id, 'edit']">
+    <a mat-list-item [routerLink]="['/disease-xi-an', data.diseaseXiAn.id, 'edit']"  *jhiHasAnyAuthority="'ROLE_ADMIN'">
         <span mat-line>
             <fa-icon [icon]="'pencil-alt'"></fa-icon>
             编辑

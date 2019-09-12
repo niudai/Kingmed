@@ -11,6 +11,7 @@ import { CommentDialogComponent } from './comment-dialog/comment-dialog.componen
 import { IComment } from 'app/shared/model/comment.model';
 import { CommentBottomSheetComponent } from './comment-bottom-sheet/comment-bottom-sheet.component';
 import { DiseaseXiAnMatDeleteDialogComponent } from './disease-xi-an-delete-dialog.component';
+import { AccountService } from 'app/core';
 
 export interface ButtonInfo {
     content?: string;
@@ -36,7 +37,6 @@ export class DiseaseXiAnDetailComponent implements OnInit {
     feedbackSuccessMsg = '反馈成功';
 
     buttonInfos: ButtonInfo[] = [
-        { content: '价格详情', faIcon: 'dollar-sign', relativeUrl: 'prices', color: '' },
         { content: '相关问题', faIcon: 'question', relativeUrl: 'qarobots', color: '' },
         { content: '申请单', faIcon: 'file-alt', relativeUrl: 'applications', color: '' },
         { content: '耗材图片', faIcon: 'magic', relativeUrl: 'suppliess', color: '' },
@@ -48,7 +48,8 @@ export class DiseaseXiAnDetailComponent implements OnInit {
         protected diseaseXiAnService: DiseaseXiAnService,
         protected dialog: MatDialog,
         private _snackBar: MatSnackBar,
-        private _bottomSheet: MatBottomSheet
+        private _bottomSheet: MatBottomSheet,
+        private accountService: AccountService
     ) {}
 
     copyDetail(disease: IDiseaseXiAn) {
@@ -101,6 +102,9 @@ export class DiseaseXiAnDetailComponent implements OnInit {
     }
 
     ngOnInit() {
+        if (this.accountService.hasAnyAuthority(['ROLE_ADMIN'])) {
+            this.buttonInfos.push({ content: '价格详情', faIcon: 'dollar-sign', relativeUrl: 'prices', color: '' });
+        }
         this.activatedRoute.data.subscribe(({ diseaseXiAn }) => {
             this.diseaseXiAn = diseaseXiAn;
             this.prices = this.diseaseXiAn.prices;

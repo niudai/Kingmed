@@ -40,6 +40,7 @@ TODO:
     ✔ Fix disease not showing properly in profile page. @done(19-09-11 09:39)
     ☐ SEO for kingmed.online
     ☐ Give diseases to according users.
+    ☐ Fix bug.
     ✔ Fix compatible problem with search box @done(19-09-11 11:02)
 
     DROP TABLE IF EXISTS COMMENT ;
