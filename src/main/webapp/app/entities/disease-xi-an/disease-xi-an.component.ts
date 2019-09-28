@@ -28,7 +28,7 @@ import { SubsidiaryService } from './subsidiary/subsidiary.service';
     styleUrls: ['./disease-xi-an.component.css']
 })
 export class DiseaseXiAnComponent implements OnInit {
-    PC_COL: string[] = ['ID', 'namePC', 'price', 'projectConcourse', 'applications', 'suppliess', 'qarobot'];
+    PC_COL: string[] = ['ID', 'namePC', 'price', 'applications', 'suppliess', 'qarobot'];
     MOBILE_COL: string[] = ['nameMobile'];
     displayedColumns: string[];
     NO_SPECIFIED = '不限定';

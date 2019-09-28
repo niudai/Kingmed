@@ -21,8 +21,8 @@ import { DiseaseXiAnDetailBottomSheetComponent } from 'app/entities/disease-xi-a
     styleUrls: ['./my-disease.component.css']
 })
 export class MyDiseaseComponent implements OnInit {
-    PC_COL: string[] = ['ID', 'namePC', 'price', 'projectConcourse', 'applications', 'suppliess', 'qarobot'];
-    MOBILE_COL: string[] = ['nameMobile', 'projectConcourse'];
+    PC_COL: string[] = ['ID', 'namePC', 'price', 'applications', 'suppliess', 'qarobot'];
+    MOBILE_COL: string[] = ['nameMobile'];
     displayedColumns: string[];
     windowWidth = 1000;
     currentAccount: Account;

@@ -23,12 +23,16 @@ TODO:
     ☐ 按ID号排序
     ☐ 项目评论  管理员通知
     ✔ "血浆甲XX" 项目无法正常进入 @done(19-09-28 22:43)
-    ☐ 地图检索  优化
+    ✔ 地图检索  优化 @done(19-09-28 22:58)
     ☐ 疾病地图分板块
     ☐ 疾病地图设置权限 有的地图不能被 doctor 看到
     ☐ doctor 账号不显示科室
     ☐ user 账号屏蔽 检测科室  加急结果派单单位
     ☐ 申请单/耗材  批量关联  无需记忆 ID 号
+    ✔ 检测科室显示多余 @done(19-09-28 23:01)
+
+TODO:
+    ☐ make disease xi an related api restful
 
 
     DROP TABLE IF EXISTS COMMENT ;

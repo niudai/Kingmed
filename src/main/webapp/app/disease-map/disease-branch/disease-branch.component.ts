@@ -30,14 +30,14 @@ export class DiseaseBranchComponent implements OnInit {
         if (this.currentSearch) {
             this.diseaseMapService.searchDiseaseBranch(
                 {
-                    query: this.currentSearch,
+                    name: this.currentSearch,
                     page: this.pageEvent && this.pageEvent.pageIndex ? this.pageEvent.pageIndex : 0,
                     size: this.pageEvent && this.pageEvent.pageSize ? this.pageEvent.pageSize : this.DEFAULT_PAGESIZE
                 }
             ).subscribe((res: HttpResponse<IDiseaseBranch[]>) => this.branchLoadSuccessHandler(res));
             this.diseaseMapService.searchDiseaseMap(
                 {
-                    query: this.currentSearch,
+                    name: this.currentSearch,
                     page: this.pageEvent && this.pageEvent.pageIndex ? this.pageEvent.pageIndex : 0,
                     size: this.pageEvent && this.pageEvent.pageSize ? this.pageEvent.pageSize : this.DEFAULT_PAGESIZE
                 }
