@@ -194,11 +194,9 @@ public class DiseaseXiAn  extends AbstractViewsEntity implements Serializable {
     @Column(name = "application_remark", length = 500)
     private String applicationRemark;
 
-    @Size(max = 100)
     @Column(name = "medical_method", length = 100)
     private String medicalMethod;
 
-    @Size(max = 100)
     @Column(name = "project_concourse", length = 100)
     private String projectConcourse;
 

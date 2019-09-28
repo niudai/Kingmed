@@ -1,61 +1,45 @@
 
 Todo:
-  ✔ Implement concourse update and delete admin page. @done(19-09-06 11:10)
-  ✔ Implement subsidiary restrictive query @done(19-09-06 15:00)
-  ✔ Implement auto-completion in disease searching box. @done(19-09-07 17:05)
-  ✔ Implement auto-completion in qarobots searching box. @done(19-09-07 17:30)
-  ✔ Implement views for qarobots. @done(19-09-06 21:31)
-  ✔ Implement views sorting for qarobots. @done(19-09-06 21:40)
-  ✔ Write basic sql quries for data migrating for disease. @done(19-09-11 09:37)
-  ✔ Fix page margin issue. @done(19-09-08 16:37)
-  ✔ Fix search button sink to the bottom issue @done(19-09-08 20:27)
-  ✔ increase margin between login btn and remember password. @done(19-09-08 20:31)
   ☐ Write one article about spring-boot.
-  ✔ Fix ntf type not showing properly issue. @done(19-09-08 17:23)
-  ✔ Fix ntf disease label override date issue. @done(19-09-08 20:31)
-  ✔ Fix issue about not deleting disease properly when generating disease issue. @done(19-09-08 21:27)
   ☐ Add side-navbar in disease-map page.
   ☐ Implement auto-completion in disease map searching botx.
-  ✔ Implement snackbar ntf in prices info toggle. @done(19-09-06 21:40)
-  ✔ Implement views customization for admin. @done(19-09-06 22:22)
-  ✔ Copy text info to clipboard in terms of current price info. @done(19-09-06 22:18)
-  ✔ Make price toggle noticiable by adding snacbar and color toggle. @done(19-09-06 22:18)
-  ✔ Implement subdidiary admin page @done(19-09-05 22:04)
 
 TODO:
-    ✔ 1.检索功能，不能只能检索项目名称，需要新增项目代码，临床意义，集团疾病线分类，子公司系列划分. @done(19-09-10 19:58)
-    ✔ 2.新增项目无法编辑，且生成通知那里有问题 @done(19-09-10 20:44)
-    ✔ 2.1，还有一个问题需今晚修复，就是申请单信息，之前没有，现在编辑添加保存后，却没有任何反应 @done(19-09-11 09:19)
-    ✔ 3.项目迁移，先按照子公司迁移，再按照科室迁移 @done(19-09-10 22:11)
-    ✔ 4.不输入任何检索字眼，页面无法翻页 @done(19-09-10 20:44)
-    ✔ 5.在个人中心新建项目还是旧格式，且新建项目在个人中心新建还是在主界面新建，有没有区别 @done(19-09-10 20:17)
-    ✔ 6.停做项目，手机端不显示停做 @done(19-09-10 20:26)
-    ✔ 7.输入小写字母，检索不到大写字母的项目 @done(19-09-10 19:58)
-    ✔ Fix ntf not showing properly in views component. @done(19-09-11 10:52)
     ☐ Enhance notification properties.
     ☐ 项目通知类型修改
     ☐ 8，项目评论能否有个提示功能，这样管理员好及时处理信息
-    ✔ 9.这个字段显示太短了 @done(19-09-11 09:20)
     ☐ Implement security API filter
-    ✔ Fix disease not showing properly in profile page. @done(19-09-11 09:39)
     ☐ SEO for kingmed.online
     ☐ Give diseases to according users.
     ☐ Fix bug.
-    ✔ Fix compatible problem with search box @done(19-09-11 11:02)
+
+TODO:
+    ✔ 一键提取  去掉冒号 @done(19-09-28 22:39)
+    ☐ 个人中心项目无法翻页
+    ☐ 个人中心项目无法查阅项目
+    ☐ 项目克隆功能
+    ☐ 疾病编辑显示必填等规则
+    ☐ 疾病地图显示长度
+    ☐ 按ID号排序
+    ☐ 项目评论  管理员通知
+    ✔ "血浆甲XX" 项目无法正常进入 @done(19-09-28 22:43)
+    ☐ 地图检索  优化
+    ☐ 疾病地图分板块
+    ☐ 疾病地图设置权限 有的地图不能被 doctor 看到
+    ☐ doctor 账号不显示科室
+    ☐ user 账号屏蔽 检测科室  加急结果派单单位
+    ☐ 申请单/耗材  批量关联  无需记忆 ID 号
+
 
     DROP TABLE IF EXISTS COMMENT ;
 
-
 DELETE FROM DATABASECHANGELOG WHERE id = '2019082701';
-
 
 -- ALTER TABLE DISEASE_XI_AN  DROP COLUMN subsidiary_id;
 
 DROP TABLE IF EXISTS JHI_CONCOURSE ;
 
-
 DELETE FROM DATABASECHANGELOG WHERE id = '2019090402';
-
 
 ALTER TABLE DISEASE_XI_AN  DROP COLUMN concourse_id;
 
@@ -63,11 +47,9 @@ DROP TABLE IF EXISTS PROJECT_NOTIFICATION;
 
 DELETE FROM DATABASECHANGELOG WHERE id = '2019081901';
 
-
 // CREATE INDEX DISEASE_XI_AN_VIEWS_INDEX ON DISEASE_XI_AN (VIEWS);
 
 Before Index:Average time =  160ms
-
 
 SELECT COUNT(*) FROM  AS DISEASE_XI_AN
 
@@ -81,8 +63,39 @@ delete from disease_xi_an_image_supplies where disease_xi_an_id=?     Hibernate:
 delete from price_xi_an where id=?
 delete from disease_xi_an where id=?
 
-
 UPDATE DISEASE_XI_AN
 SET SUBSIDIARY_ID =  7
 WHERE  SUBSIDIARY =  '内蒙';
+
+Archive:
+  ✔ Implement concourse update and delete admin page. @done(19-09-06 11:10) @project(Todo)
+  ✔ Implement subsidiary restrictive query @done(19-09-06 15:00) @project(Todo)
+  ✔ Implement auto-completion in disease searching box. @done(19-09-07 17:05) @project(Todo)
+  ✔ Implement auto-completion in qarobots searching box. @done(19-09-07 17:30) @project(Todo)
+  ✔ Implement views for qarobots. @done(19-09-06 21:31) @project(Todo)
+  ✔ Implement views sorting for qarobots. @done(19-09-06 21:40) @project(Todo)
+  ✔ Write basic sql quries for data migrating for disease. @done(19-09-11 09:37) @project(Todo)
+  ✔ Fix page margin issue. @done(19-09-08 16:37) @project(Todo)
+  ✔ Fix search button sink to the bottom issue @done(19-09-08 20:27) @project(Todo)
+  ✔ increase margin between login btn and remember password. @done(19-09-08 20:31) @project(Todo)
+  ✔ Fix ntf type not showing properly issue. @done(19-09-08 17:23) @project(Todo)
+  ✔ Fix ntf disease label override date issue. @done(19-09-08 20:31) @project(Todo)
+  ✔ Fix issue about not deleting disease properly when generating disease issue. @done(19-09-08 21:27) @project(Todo)
+  ✔ Implement snackbar ntf in prices info toggle. @done(19-09-06 21:40) @project(Todo)
+  ✔ Implement views customization for admin. @done(19-09-06 22:22) @project(Todo)
+  ✔ Copy text info to clipboard in terms of current price info. @done(19-09-06 22:18) @project(Todo)
+  ✔ Make price toggle noticiable by adding snacbar and color toggle. @done(19-09-06 22:18) @project(Todo)
+  ✔ Implement subdidiary admin page @done(19-09-05 22:04) @project(Todo)
+  ✔ 1.检索功能，不能只能检索项目名称，需要新增项目代码，临床意义，集团疾病线分类，子公司系列划分. @done(19-09-10 19:58) @project(TODO)
+  ✔ 2.新增项目无法编辑，且生成通知那里有问题 @done(19-09-10 20:44) @project(TODO)
+  ✔ 2.1，还有一个问题需今晚修复，就是申请单信息，之前没有，现在编辑添加保存后，却没有任何反应 @done(19-09-11 09:19) @project(TODO)
+  ✔ 3.项目迁移，先按照子公司迁移，再按照科室迁移 @done(19-09-10 22:11) @project(TODO)
+  ✔ 4.不输入任何检索字眼，页面无法翻页 @done(19-09-10 20:44) @project(TODO)
+  ✔ 5.在个人中心新建项目还是旧格式，且新建项目在个人中心新建还是在主界面新建，有没有区别 @done(19-09-10 20:17) @project(TODO)
+  ✔ 6.停做项目，手机端不显示停做 @done(19-09-10 20:26) @project(TODO)
+  ✔ 7.输入小写字母，检索不到大写字母的项目 @done(19-09-10 19:58) @project(TODO)
+  ✔ Fix ntf not showing properly in views component. @done(19-09-11 10:52) @project(TODO)
+  ✔ 9.这个字段显示太短了 @done(19-09-11 09:20) @project(TODO)
+  ✔ Fix disease not showing properly in profile page. @done(19-09-11 09:39) @project(TODO)
+  ✔ Fix compatible problem with search box @done(19-09-11 11:02) @project(TODO)
 
