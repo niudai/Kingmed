@@ -89,7 +89,7 @@ const ENTITY_STATES = [...diseaseXiAnRoute, ...diseaseXiAnPopupRoute];
     providers: [
         { provide: JhiLanguageService, useClass: JhiLanguageService },
         { provide: MatPaginatorIntl, useClass: Paginator},
-        { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }
+        { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher },
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

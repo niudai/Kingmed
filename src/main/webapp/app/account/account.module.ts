@@ -28,8 +28,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     imports: [
         JhipsterElasticsearchSampleApplicationSharedModule,
         RouterModule.forChild(accountState),
-        JhipsterElasticsearchSampleApplicationDiseaseXiAnModule,
-        ReactiveFormsModule
+        JhipsterElasticsearchSampleApplicationDiseaseXiAnModule
     ],
     declarations: [
         ActivateComponent,

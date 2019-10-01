@@ -1,6 +1,7 @@
 mat-form-field {
     width: 90%;
     margin: 0 auto;
+    margin-bottom: 5px;
 }
 
 .register-list {
@@ -12,6 +13,11 @@ mat-form-field {
 .ntf-form {
     transition: all 1s ease;
     -webkit-transition: all 1s ease;
+}
+
+h3.mat-subheader {
+    font-weight: 800;
+    font-size: 28px;
 }
 
 mat-list-item {

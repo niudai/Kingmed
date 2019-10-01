@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgJhipsterModule } from 'ng-jhipster';
@@ -14,6 +14,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     imports: [
         NgbModule.forRoot(), InfiniteScrollModule, CookieModule.forRoot(), FontAwesomeModule],
     exports: [
+        ReactiveFormsModule,
         FormsModule
         , CommonModule
         , NgbModule

@@ -69,7 +69,7 @@ export class NavbarComponent implements OnInit, OnChanges {
         // rootPath change hook to change the btn color according to the current root path
         const tree: UrlTree = this.router.parseUrl(this.rootPath);
         const g: UrlSegmentGroup = tree.root.children[PRIMARY_OUTLET];
-        this.urlSegment = g.segments;
+        this.urlSegment = g ? g.segments : null;
         this.navButtons
             .forEach(btn => btn.isSelected = (this.urlSegment[0].path === btn.routerLink) ? true : false);
     }

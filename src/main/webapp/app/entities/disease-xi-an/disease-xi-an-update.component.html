@@ -1,74 +1,60 @@
 <div class="register-form">
-    <mat-list>
+    <form [formGroup]="editForm" (ngSubmit)="save()">
         <h3 mat-subheader>
             <fa-icon icon="book-medical"></fa-icon>
             项目开展与收费
         </h3>
         <div class="register-list">
             <mat-form-field>
-                <textarea
-                    cdkTextareaAutosize
-                    matInput
-                    [(ngModel)]="diseaseXiAn.name"
-                    placeholder="项目名"
-                    [value]="diseaseXiAn.name"
-                ></textarea>
+                <textarea cdkTextareaAutosize matInput formControlName="name" placeholder="项目名"></textarea>
+                <mat-error *ngIf="name.hasError('required')">
+                    必填!
+                </mat-error>
             </mat-form-field>
 
             <mat-form-field>
-                <textarea
-                    cdkTextareaAutosize
-                    matInput
-                    [(ngModel)]="diseaseXiAn.subsidiary"
-                    placeholder="子公司（旧）"
-                    [value]="diseaseXiAn.subsidiary"
-                ></textarea>
+                <textarea cdkTextareaAutosize matInput placeholder="子公司（旧）" formControlName="subsidiary"></textarea>
+                <mat-error *ngIf="name.hasError('required')">
+                    必填!
+                </mat-error>
             </mat-form-field>
             <mat-form-field>
-                    <mat-label>子公司（新）</mat-label>
-                    <mat-select [(value)]="selectedSub">
-                        <mat-option [value]="subsidiary" *ngFor="let subsidiary of subsidiaries">{{ subsidiary.name }} </mat-option>
-                    </mat-select>
+                <mat-label>子公司（新）</mat-label>
+                <mat-select formControlName="selectedSubsidiary">
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let subsidiary of subsidiaries" [value]="subsidiary">{{ subsidiary.name }} </mat-option>
+                </mat-select>
+                <mat-error *ngIf="selectedSubsidiary.hasError('required')">
+                    子公司必选!
+                </mat-error>
             </mat-form-field>
             <mat-form-field>
-                    <mat-label>分类</mat-label>
-                    <mat-select [(value)]="selectedConcourse">
-                        <mat-option [value]="concourse" *ngFor="let concourse of concourses">{{ concourse.name }} </mat-option>
-                    </mat-select>
+                <mat-label>分类</mat-label>
+                <mat-select formControlName="selectedConcourse">
+                    <mat-option *ngFor="let concourse of concourses"
+                    [value]="concourse"
+                    >{{ concourse.name }} </mat-option>
+                </mat-select>
+                <mat-error *ngIf="selectedConcourse.hasError('required')">
+                        科室必选!
+                    </mat-error>
             </mat-form-field>
             <mat-form-field>
-                <input
-                    matInput
-                    [(ngModel)]="diseaseXiAn.views"
-                    placeholder="浏览量"
-                    [value]="diseaseXiAn.views"
-                    type="number"
-                >
+                <input matInput formControlName="views" placeholder="浏览量" type="number" />
             </mat-form-field>
             <mat-form-field>
-                <textarea
-                    cdkTextareaAutosize
-                    matInput
-                    [(ngModel)]="diseaseXiAn.projectCode"
-                    placeholder="项目代码"
-                    [value]="diseaseXiAn.projectCode"
-                ></textarea>
+                <textarea cdkTextareaAutosize matInput formControlName="projectCode" placeholder="项目代码"></textarea>
             </mat-form-field>
 
             <mat-form-field>
-                <textarea
-                    cdkTextareaAutosize
-                    matInput
-                    [(ngModel)]="diseaseXiAn.chargeCode"
-                    placeholder="物价代码"
-                    [value]="diseaseXiAn.chargeCode"
-                >
+                <textarea cdkTextareaAutosize matInput placeholder="物价代码" formControlName="chargeCode">
                 </mat-form-field>
 
 
                 <mat-form-field>
-                    <textarea cdkTextareaAutosize matInput [(ngModel)]="diseaseXiAn.tollStandard" placeholder="物价"
-                        [value]="diseaseXiAn.tollStandard"></textarea
+                    <textarea cdkTextareaAutosize matInput  placeholder="物价"
+                    formControlName="tollStandard"
+                    ></textarea
                 >
             </mat-form-field>
         </div>
@@ -78,64 +64,36 @@
         </h3>
         <div class="register-list">
             <mat-form-field>
-                <textarea
-                    cdkTextareaAutosize
-                    matInput
-                    [(ngModel)]="diseaseXiAn.supplement"
-                    placeholder="样本与样本量"
-                    [value]="diseaseXiAn.supplement"
-                ></textarea>
+                <textarea cdkTextareaAutosize matInput placeholder="样本与样本量" formControlName="supplement"></textarea>
             </mat-form-field>
 
             <mat-form-field>
-                <textarea cdkTextareaAutosize matInput [(ngModel)]="diseaseXiAn.sample" placeholder="耗材" [value]="diseaseXiAn.sample">
-                </mat-form-field>
+                <textarea formControlName="sample" cdkTextareaAutosize matInput placeholder="耗材">
+            </mat-form-field>
 
 
                 <mat-form-field>
-                    <textarea cdkTextareaAutosize matInput [(ngModel)]="diseaseXiAn.tutorial" placeholder="分析前培训
-                            " [value]="diseaseXiAn.tutorial"></textarea
+                    <textarea cdkTextareaAutosize matInput
+                    formControlName="tutorial"
+                    placeholder="分析前培训
+                            " ></textarea
                 >
             </mat-form-field>
 
             <mat-form-field>
-                <textarea
-                    cdkTextareaAutosize
-                    matInput
-                    [(ngModel)]="diseaseXiAn.preservation"
-                    placeholder="保存条件与保存时长"
-                    [value]="diseaseXiAn.preservation"
-                ></textarea>
+                <textarea cdkTextareaAutosize matInput formControlName="preservation" placeholder="保存条件与保存时长"></textarea>
             </mat-form-field>
 
             <mat-form-field>
-                <textarea
-                    cdkTextareaAutosize
-                    matInput
-                    [(ngModel)]="diseaseXiAn.transportation"
-                    placeholder="运输条件"
-                    [value]="diseaseXiAn.transportation"
-                ></textarea>
+                <textarea cdkTextareaAutosize matInput formControlName="transportation" placeholder="运输条件"></textarea>
             </mat-form-field>
 
             <mat-form-field>
-                <textarea
-                    cdkTextareaAutosize
-                    matInput
-                    [(ngModel)]="diseaseXiAn.applicationUnitType"
-                    placeholder="申请单"
-                    [value]="diseaseXiAn.applicationUnitType"
-                ></textarea>
+                <textarea cdkTextareaAutosize matInput formControlName="applicationUnitType" placeholder="申请单"></textarea>
             </mat-form-field>
 
             <mat-form-field>
-                <textarea
-                    cdkTextareaAutosize
-                    matInput
-                    [(ngModel)]="diseaseXiAn.applicationRemark"
-                    placeholder="申请单备注"
-                    [value]="diseaseXiAn.applicationRemark"
-                ></textarea>
+                <textarea cdkTextareaAutosize formControlName="applicationRemark" matInput placeholder="申请单备注"></textarea>
             </mat-form-field>
         </div>
 
@@ -145,40 +103,23 @@
         </h3>
         <div class="register-list">
             <mat-form-field>
-                <textarea
-                    cdkTextareaAutosize
-                    matInput
-                    [(ngModel)]="diseaseXiAn.medicalMethod"
-                    placeholder="检测方法"
-                    [value]="diseaseXiAn.medicalMethod"
-                >
+                <textarea cdkTextareaAutosize matInput placeholder="检测方法" formControlName="medicalMethod">
                 </mat-form-field>
 
-
                 <mat-form-field>
-                    <textarea cdkTextareaAutosize matInput [(ngModel)]="diseaseXiAn.projectConcourse" placeholder="检测科室"
-                        [value]="diseaseXiAn.projectConcourse"></textarea
+                    <textarea cdkTextareaAutosize
+                    formControlName="projectConcourse"
+                    matInput  placeholder="检测科室"
+                        ></textarea
                 >
             </mat-form-field>
 
             <mat-form-field>
-                <textarea
-                    cdkTextareaAutosize
-                    matInput
-                    [(ngModel)]="diseaseXiAn.hurryDepartment"
-                    placeholder="加急结果派单岗位"
-                    [value]="diseaseXiAn.hurryDepartment"
-                ></textarea>
+                <textarea cdkTextareaAutosize matInput formControlName="hurryDepartment" placeholder="加急结果派单岗位"></textarea>
             </mat-form-field>
 
             <mat-form-field>
-                <textarea
-                    cdkTextareaAutosize
-                    matInput
-                    [(ngModel)]="diseaseXiAn.reportingTime"
-                    placeholder="出结果时间"
-                    [value]="diseaseXiAn.reportingTime"
-                ></textarea>
+                <textarea cdkTextareaAutosize formControlName="reportingTime" matInput placeholder="出结果时间"></textarea>
             </mat-form-field>
         </div>
         <h3 mat-subheader>
@@ -187,33 +128,15 @@
         </h3>
         <div class="register-list">
             <mat-form-field>
-                <textarea
-                    cdkTextareaAutosize
-                    matInput
-                    [(ngModel)]="diseaseXiAn.clinicalApplication"
-                    placeholder="临床应用"
-                    [value]="diseaseXiAn.clinicalApplication"
-                ></textarea>
+                <textarea cdkTextareaAutosize matInput formControlName="clinicalApplication" placeholder="临床应用"></textarea>
             </mat-form-field>
 
             <mat-form-field>
-                <textarea
-                    cdkTextareaAutosize
-                    matInput
-                    [(ngModel)]="diseaseXiAn.series"
-                    placeholder="集团疾病线分类"
-                    [value]="diseaseXiAn.series"
-                ></textarea>
+                <textarea cdkTextareaAutosize matInput formControlName="series" placeholder="集团疾病线分类"></textarea>
             </mat-form-field>
 
             <mat-form-field>
-                <textarea
-                    cdkTextareaAutosize
-                    matInput
-                    [(ngModel)]="diseaseXiAn.subSeries"
-                    placeholder="子公司系列划分"
-                    [value]="diseaseXiAn.subSeries"
-                ></textarea>
+                <textarea cdkTextareaAutosize formControlName="subSeries" matInput placeholder="子公司系列划分"></textarea>
             </mat-form-field>
         </div>
         <h3 mat-subheader>
@@ -222,13 +145,7 @@
         </h3>
         <div class="register-list">
             <mat-form-field>
-                <textarea
-                    cdkTextareaAutosize
-                    matInput
-                    [(ngModel)]="diseaseXiAn.remarks"
-                    placeholder="备注"
-                    [value]="diseaseXiAn.remarks"
-                ></textarea>
+                <textarea cdkTextareaAutosize matInput formControlName="remarks" placeholder="备注"></textarea>
             </mat-form-field>
         </div>
         <mat-slide-toggle [checked]="ifGenerateNtf" (change)="generateNtfToggle()">是否生成通知</mat-slide-toggle>
@@ -240,34 +157,28 @@
                 </h3>
 
                 <mat-form-field>
-                    <textarea cdkTextareaAutosize matInput [(ngModel)]="ntf.title" placeholder="标题" [value]="ntf.title"></textarea>
+                    <textarea formControlName="ntf.title" cdkTextareaAutosize matInput placeholder="标题"></textarea>
                 </mat-form-field>
 
                 <mat-form-field>
-                    <textarea
-                        cdkTextareaAutosize
-                        matInput
-                        [(ngModel)]="ntf.description"
-                        placeholder="通知内容"
-                        [value]="ntf.description"
-                    ></textarea>
+                    <textarea cdkTextareaAutosize formControlName="ntf.description" matInput placeholder="通知内容"></textarea>
                 </mat-form-field>
 
                 <mat-form-field>
                     <mat-label>子公司</mat-label>
-                    <mat-select [(value)]="selectedNtfSub">
-                        <mat-option [value]="subsidiary" *ngFor="let subsidiary of subsidiaries">{{ subsidiary.name }} </mat-option>
+                    <mat-select formControlName="ntf.selectedNtfSub">
+                        <mat-option *ngFor="let subsidiary of subsidiaries" [value]="subsidiary">{{ subsidiary.name }} </mat-option>
                     </mat-select>
                 </mat-form-field>
 
                 <mat-form-field>
                     <mat-label>通知类型</mat-label>
-                    <mat-select [(value)]="selectedNtfType">
-                        <mat-option [value]="type" *ngFor="let type of types">{{ type.chinese }}</mat-option>
+                    <mat-select formControlName="ntf.selectedNtfType">
+                        <mat-option *ngFor="let type of types" [value]="type">{{ type.chinese }}</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
         </div>
-    </mat-list>
-    <button mat-stroked-button (click)="save()" style = "margin-top: 20px">保存</button>
+        <button mat-stroked-button type="submit" [disabled]="editForm.invalid" style="margin-top: 20px">保存</button>
+    </form>
 </div>

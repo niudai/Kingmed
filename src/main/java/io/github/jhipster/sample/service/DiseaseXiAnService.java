@@ -88,6 +88,9 @@ public class DiseaseXiAnService {
         String login = SecurityUtils.getCurrentUserLogin().get();
         User user = userRepository.findOneByLogin(login).get();
         diseaseXiAn.setLastModifiedDate(Instant.now());
+        if (diseaseXiAn.getViews() == null) {
+            diseaseXiAn.setViews(0l);
+        }
         DiseaseXiAn result = diseaseXiAnRepository.save(diseaseXiAn);
         user.getDiseaseXiAns().add(result);
         return result;
