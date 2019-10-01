@@ -1,4 +1,4 @@
-import { MatPaginatorIntl } from '@angular/material';
+import { MatPaginatorIntl, ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { JhiLanguageService } from 'ng-jhipster';
@@ -86,8 +86,11 @@ const ENTITY_STATES = [...diseaseXiAnRoute, ...diseaseXiAnPopupRoute];
     exports: [
         DiseaseXiAnDetailBottomSheetComponent
     ],
-    providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }
-     , {provide: MatPaginatorIntl, useClass: Paginator}],
+    providers: [
+        { provide: JhiLanguageService, useClass: JhiLanguageService },
+        { provide: MatPaginatorIntl, useClass: Paginator},
+        { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }
+    ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class JhipsterElasticsearchSampleApplicationDiseaseXiAnModule {

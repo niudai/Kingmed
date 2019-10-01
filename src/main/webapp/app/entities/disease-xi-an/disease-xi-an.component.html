@@ -93,7 +93,7 @@
 
                     <a [routerLink]="[diseaseXiAn.id, 'view' ]">{{diseaseXiAn.name}}
                         - <strong>{{diseaseXiAn.subsidiary}}</strong>
-                        <button class="concourse-chip">{{diseaseXiAn.projectConcourse}}</button>
+                        <button class="concourse-chip" *jhiHasAnyAuthority="'ROLE_USER'">{{diseaseXiAn.projectConcourse}}</button>
                         <button mat-fab color="warn" *ngIf="!diseaseXiAn.activated">停用</button>
                         <!-- <button mat-raised-button color="warn" *ngIf="diseaseXiAn.activated">运行</button> -->
                         <span style="float: right"><span style="color: orange;">{{diseaseXiAn.views}}</span>人看过</span>
@@ -203,7 +203,7 @@
                                 <mat-card matRipple style="margin: 0; margin-top: 5px; padding: 1%">
                                     <a [routerLink]="[diseaseXiAn.id, 'view' ]">{{diseaseXiAn.name}}
                                         - <strong>{{diseaseXiAn.subsidiary}}</strong>
-                                        <button class="concourse-chip">{{diseaseXiAn.projectConcourse}}</button>
+                                        <button class="concourse-chip" *jhiHasAnyAuthority="'ROLE_USER'">{{diseaseXiAn.projectConcourse}}</button>
                                         <button mat-fab color="warn" *ngIf="!diseaseXiAn.activated">停用</button>
                                         <span style="float: right"><span
                                                 style="color: orange;">{{diseaseXiAn.views}}</span>人看过</span>

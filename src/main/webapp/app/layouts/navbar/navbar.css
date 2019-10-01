@@ -5,6 +5,11 @@ Navbar
     color: #54bdbd;
 }
 
+button.nav-btn.mat-flat-button.ng-star-inserted {
+    font-weight: 600;
+    font-size: 18px;
+}
+
 /* nav {
     position: fixed;
     bottom: 40px;

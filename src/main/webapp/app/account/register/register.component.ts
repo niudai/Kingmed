@@ -4,8 +4,10 @@ import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { JhiLanguageService } from 'ng-jhipster';
 
 import { EMAIL_ALREADY_USED_TYPE, LOGIN_ALREADY_USED_TYPE } from 'app/shared';
-import { LoginModalService, IUser } from 'app/core';
+import { LoginModalService, IUser, User } from 'app/core';
 import { Register } from './register.service';
+import { Validators, FormControl, FormGroup } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material';
 
 export interface Identity {
     value: string;
@@ -24,7 +26,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         { value: 'admin', viewValue: '公司管理层', fontValue: 'user-tie'}
     ];
     selectedIdentity: Identity;
-    confirmPassword: string;
+    _confirmPassword: string;
     doNotMatch: string;
     error: string;
     errorEmailExists: string;
@@ -34,19 +36,59 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     modalRef: NgbModalRef;
     authorities: String[];
 
+    registerForm: FormGroup;
+
+    get email() { return this.registerForm.get('email'); }
+
+    get login() { return this.registerForm.get('login'); }
+
+    get phoneNumber() { return this.registerForm.get('phoneNumber'); }
+
+    get identity() { return this.registerForm.get('identity'); }
+
+    get password() { return this.registerForm.get('password'); }
+
     constructor(
         private languageService: JhiLanguageService,
         private loginModalService: LoginModalService,
         private registerService: Register,
         private elementRef: ElementRef,
-        private renderer: Renderer
+        private renderer: Renderer,
+        public errorMatcher: ErrorStateMatcher
     ) {}
 
     ngOnInit() {
         this.success = false;
-        this.registerAccount = {};
+        this.registerAccount = new User();
+        this.registerAccount.email = '';
         this.registerService.authorities()
             .subscribe(res => this.authorities = res);
+        this.registerForm = new FormGroup(
+            {
+                'login': new FormControl('', [
+                    Validators.required,
+                    Validators.pattern('[_@a-zA-Z0-9-]*')
+                ]),
+                'email': new FormControl('', [
+                    Validators.required,
+                    Validators.email
+                ]),
+                'identity': new FormControl('', [
+                    Validators.required
+                ]),
+                'firstName': new FormControl(''),
+                'phoneNumber': new FormControl('', [
+                    Validators.pattern('[+0-9]*')
+                ]),
+                'workAddress': new FormControl(''),
+                'workType': new FormControl(''),
+                'selfIntro': new FormControl(''),
+                'password': new FormControl('', [
+                    Validators.minLength(6),
+                    Validators.required
+                ]),
+                'confirmPassword': new FormControl(''),
+            });
     }
 
     ngAfterViewInit() {
@@ -54,20 +96,30 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     }
 
     register() {
-        if (this.registerAccount.password !== this.confirmPassword) {
+        console.log(`${this.registerForm.value['password']} + ${this.registerForm.value['confirmPassword']}`);
+        if (this.registerForm.value['password'] !== this.registerForm.value['confirmPassword']) {
             this.doNotMatch = 'ERROR';
         } else {
             this.doNotMatch = null;
             this.error = null;
             this.errorUserExists = null;
             this.errorEmailExists = null;
-            if (this.selectedIdentity.value === 'doctor') {
+            if (this.registerForm.value['identity'].value === 'doctor') {
                 this.registerAccount.authorities = ['ROLE_USER', 'ROLE_DOCTOR'];
-            } else if (this.selectedIdentity.value === 'admin') {
+            } else if (this.registerForm.value['identity'].value === 'admin') {
                 this.registerAccount.authorities = ['ROLE_USER'];
-            } else if (this.selectedIdentity.value === 'dataAdmin') {
+            } else if (this.registerForm.value['identity'].value === 'dataAdmin') {
                 this.registerAccount.authorities = ['ROLE_ADMIN', 'ROLE_USER'];
             }
+            this.registerAccount.login = this.registerForm.value['login'];
+            this.registerAccount.email = this.registerForm.value['email'];
+            this.registerAccount.firstName = this.registerForm.value['firstName'];
+            this.registerAccount.phoneNumber = this.registerForm.value['phoneNumber'];
+            this.registerAccount.workAddress = this.registerForm.value['workAddress'];
+            this.registerAccount.workType = this.registerForm.value['workType'];
+            this.registerAccount.selfIntro = this.registerForm.value['selfIntro'];
+            this.registerAccount.password = this.registerForm.value['password'];
+
             this.languageService.getCurrent().then(key => {
                 this.registerAccount.langKey = key;
                 this.registerService.save(this.registerAccount).subscribe(

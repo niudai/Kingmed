@@ -21,12 +21,15 @@ import { MyDiseaseCreateComponent } from './my-disease/my-disease-create/my-dise
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { JhipsterElasticsearchSampleApplicationDiseaseXiAnModule } from 'app/entities/disease-xi-an/disease-xi-an.module';
 import { DiseaseXiAnDetailBottomSheetComponent } from 'app/entities/disease-xi-an/disease-xi-an-detail-bottom-sheet/disease-xi-an-detail-bottom-sheet.component';
+import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     imports: [
         JhipsterElasticsearchSampleApplicationSharedModule,
         RouterModule.forChild(accountState),
-        JhipsterElasticsearchSampleApplicationDiseaseXiAnModule
+        JhipsterElasticsearchSampleApplicationDiseaseXiAnModule,
+        ReactiveFormsModule
     ],
     declarations: [
         ActivateComponent,
@@ -45,7 +48,10 @@ import { DiseaseXiAnDetailBottomSheetComponent } from 'app/entities/disease-xi-a
         MyDiseaseDeleteDialogComponent,
         DiseaseXiAnDetailBottomSheetComponent
     ],
-    providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }],
+    providers: [
+        { provide: JhiLanguageService, useClass: JhiLanguageService },
+        { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher },
+    ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class JhipsterElasticsearchSampleApplicationAccountModule {

@@ -10,10 +10,10 @@ import { IDiseaseXiAn } from 'app/shared/model/disease-xi-an.model';
 import { AccountService, UserService } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
-import { PageEvent, MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatBottomSheet } from '@angular/material';
+import { PageEvent, MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatBottomSheet, ErrorStateMatcher } from '@angular/material';
 import { MyDiseaseDeleteDialogComponent } from '../my-disease-delete-dialog/my-disease-delete-dialog.component';
 import { DiseaseXiAnDetailBottomSheetComponent } from 'app/entities/disease-xi-an/disease-xi-an-detail-bottom-sheet/disease-xi-an-detail-bottom-sheet.component';
-// import { DiseaseXiAnMatDeleteDialogComponent } from 'app/entities/disease-xi-an';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
     selector: 'jhi-my-disease',
@@ -40,6 +40,7 @@ export class MyDiseaseComponent implements OnInit {
     pageEvent: PageEvent;
     protected ngbModalRef: NgbModalRef;
     isBigScreen: boolean;
+
     constructor(
         protected userService: UserService,
         protected parseLinks: JhiParseLinks,
@@ -72,6 +73,14 @@ export class MyDiseaseComponent implements OnInit {
     }
 
     loadAll() {
+        this.router.navigate([
+            '/account/my-disease',
+            {
+                // search: this.currentSearch,
+                size: this.pageEvent.pageSize ? this.pageEvent.pageSize : ITEMS_PER_PAGE,
+                page: this.pageEvent.pageIndex ? this.pageEvent.pageIndex : 0
+            }
+        ]);
         this.userService
             .getDiseases(this.currentAccount.login, {
                 page: this.pageEvent && this.pageEvent.pageIndex ? this.pageEvent.pageIndex : 0,
@@ -85,34 +94,13 @@ export class MyDiseaseComponent implements OnInit {
         return;
     }
 
-    // loadPage(page: number) {
-    //     if (page !== this.previousPage) {
-    //         this.previousPage = page;
-    //         this.transition(page);
-    //     }
-    // }
-
     loadDiseases($event: PageEvent) {
-        // if ($event.pageIndex !== this.previousPage) {'
         this.pageEvent = $event;
-        this.transition();
-        // }
-    }
-
-    transition() {
-        this.router.navigate([
-            '/account/my-disease',
-            {
-                // search: this.currentSearch,
-                size: this.pageEvent.pageSize ? this.pageEvent.pageSize : ITEMS_PER_PAGE,
-                page: this.pageEvent.pageIndex ? this.pageEvent.pageIndex : 0
-            }
-        ]);
+        this.loadAll();
     }
 
     search() {
         this.pageEvent.pageIndex = 0;
-        this.transition();
         this.loadAll();
     }
 
@@ -127,7 +115,6 @@ export class MyDiseaseComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe(result => {
             //   console.log('The dialog was closed');
-            this.transition();
             this.loadAll();
         });
     }
@@ -155,7 +142,6 @@ export class MyDiseaseComponent implements OnInit {
         this.pageEvent = new PageEvent();
         this.accountService.identity().then(account => {
             this.currentAccount = account;
-            this.transition();
             this.loadAll();
         });
         // this.pageEvent.pageIndex =

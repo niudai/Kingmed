@@ -12,6 +12,7 @@ import { NTF_TYPE_FOR_DISEASE } from 'app/shared/util/disease-ntf-util';
 import { SubsidiaryService } from './subsidiary/subsidiary.service';
 import { ConcourseService } from './concourse/concourse.service';
 import { IConcourse } from 'app/shared/model/concourse.model';
+import { FormGroup } from '@angular/forms';
 
 @Component({
     selector: 'jhi-disease-xi-an-update',
@@ -30,6 +31,8 @@ export class DiseaseXiAnUpdateComponent implements OnInit {
     selectedNtfType: INtfType;
     selectedSub: ISubsidiary;
     selectedConcourse: IConcourse;
+
+    registerForm: FormGroup;
     constructor(
         protected diseaseXiAnService: DiseaseXiAnService,
         protected activatedRoute: ActivatedRoute,
@@ -46,6 +49,11 @@ export class DiseaseXiAnUpdateComponent implements OnInit {
         this.selectedNtfType = this.types[0];
         this.loadConcourses();
         this.loadSubsidiaries();
+        this.registerForm = new FormGroup(
+            {
+                ''
+            }
+        )
     }
 
     loadConcourses() {

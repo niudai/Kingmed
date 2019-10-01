@@ -181,7 +181,7 @@
                             <p><span>{{diseaseXiAn.medicalMethod}}</span></p>
                         </mat-card>
                     </div>
-                    <div *jhiHideIfHasAnyAuthority="'ROLE_DOCTOR'">
+                    <div *jhiHasAnyAuthority="'ROLE_USER'">
                         <div *jhiHideIfNull="diseaseXiAn.projectConcourse">
                             <mat-list-item>
                                 <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
@@ -195,7 +195,7 @@
                             </mat-card>
                         </div>
                     </div>
-                    <div *jhiHideIfHasAnyAuthority="'ROLE_DOCTOR'">
+                    <div *jhiHasAnyAuthority="'ROLE_ADMIN'">
                         <div *jhiHideIfNull="diseaseXiAn.hurryDepartment">
                             <mat-list-item>
                                 <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span

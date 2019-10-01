@@ -1,25 +1,22 @@
-import { ISubsidiary as string, Subsidiary, ISubsidiary } from './../../shared/model/subsidiary.model';
+import { HttpErrorResponse, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { MatBottomSheet, MatDialog, PageEvent } from '@angular/material';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { Component, OnInit, OnDestroy, HostListener, Inject } from '@angular/core';
-import { HttpErrorResponse, HttpHeaders, HttpResponse, HttpParams } from '@angular/common/http';
-import { ActivatedRoute, Router, UrlSegment } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
-
-import { IDiseaseXiAn } from 'app/shared/model/disease-xi-an.model';
 import { AccountService } from 'app/core';
-
 import { ITEMS_PER_PAGE } from 'app/shared';
-import { DiseaseXiAnService } from './disease-xi-an.service';
-import { PageEvent, MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatBottomSheet, MatChipSelectionChange } from '@angular/material';
-import { DiseaseXiAnGiveDialogComponent } from './disease-xi-an-give-dialog/disease-xi-an-give-dialog.component';
-import { DiseaseXiAnDetailBottomSheetComponent } from './disease-xi-an-detail-bottom-sheet/disease-xi-an-detail-bottom-sheet.component';
-import { DiseaseXiAnMatDeleteDialogComponent } from '.';
-import { ISort, DiseaseSorts } from 'app/shared/util/disease-util';
 import { IConcourse } from 'app/shared/model/concourse.model';
-import { CreateComponent } from './concourse/create-dialog/create-dialog.component';
-import { CreateDialogComponent } from './subsidiary/create/create.component';
+import { IDiseaseXiAn } from 'app/shared/model/disease-xi-an.model';
+import { DiseaseSorts, ISort } from 'app/shared/util/disease-util';
+import { JhiAlertService, JhiEventManager, JhiParseLinks } from 'ng-jhipster';
+import { Subscription } from 'rxjs';
+import { DiseaseXiAnMatDeleteDialogComponent } from '.';
+import { ISubsidiary } from './../../shared/model/subsidiary.model';
 import { ConcourseService } from './concourse/concourse.service';
+import { CreateComponent } from './concourse/create-dialog/create-dialog.component';
+import { DiseaseXiAnDetailBottomSheetComponent } from './disease-xi-an-detail-bottom-sheet/disease-xi-an-detail-bottom-sheet.component';
+import { DiseaseXiAnGiveDialogComponent } from './disease-xi-an-give-dialog/disease-xi-an-give-dialog.component';
+import { DiseaseXiAnService } from './disease-xi-an.service';
 import { SubsidiaryService } from './subsidiary/subsidiary.service';
 
 @Component({
@@ -72,11 +69,10 @@ export class DiseaseXiAnComponent implements OnInit {
         protected modalService: NgbModal,
         protected dialog: MatDialog,
         private _bottomSheet: MatBottomSheet,
-        private concourseService: ConcourseService,
-        private subsidiaryService: SubsidiaryService
+        private concourseService: ConcourseService
     ) {}
 
-    @HostListener('window:resize',  ['$event'])
+    @HostListener('window:resize', ['$event'])
     onResize(event) {
         this.columnToggle();
     }
@@ -120,24 +116,21 @@ export class DiseaseXiAnComponent implements OnInit {
             if (this.currentTimer) {
                 window.clearTimeout(this.currentTimer);
             }
-            this.currentTimer = window.setTimeout(
-                any => {
-                    console.log('auto completion query invoked!!');
-                    console.log('Current search equals: ', this.currentSearch);
-                    let params = new HttpParams();
-                    params = params.set('size', '5');
-                    if (this.currentSearch) {
-                        params = params.set('query', this.currentSearch);
-                    }
-                    this.diseaseXiAnService
+            this.currentTimer = window.setTimeout(any => {
+                console.log('auto completion query invoked!!');
+                console.log('Current search equals: ', this.currentSearch);
+                let params = new HttpParams();
+                params = params.set('size', '5');
+                if (this.currentSearch) {
+                    params = params.set('query', this.currentSearch);
+                }
+                this.diseaseXiAnService
                     .query(params)
                     .subscribe(
-                        (res: HttpResponse<IDiseaseXiAn[]>) => this.autoCompleteDiseases = res.body,
+                        (res: HttpResponse<IDiseaseXiAn[]>) => (this.autoCompleteDiseases = res.body),
                         (res: HttpErrorResponse) => this.onError(res.message)
                     );
-                },
-                300
-            );
+            }, 300);
         }
     }
 
@@ -150,10 +143,8 @@ export class DiseaseXiAnComponent implements OnInit {
                 page: this.pageEvent.pageIndex ? this.pageEvent.pageIndex : 0,
                 sort: this.selectedSort,
                 subsidiary: this.selectedSub,
-                'concourse.pseudoId': this.selectedConcourse ?
-                    this.selectedConcourse.pseudoId : null,
-                'concourse.name': this.selectedConcourse ?
-                    this.selectedConcourse.name : null
+                'concourse.pseudoId': this.selectedConcourse ? this.selectedConcourse.pseudoId : null,
+                'concourse.name': this.selectedConcourse ? this.selectedConcourse.name : null
             }
         ]);
     }
@@ -193,13 +184,10 @@ export class DiseaseXiAnComponent implements OnInit {
 
     loadConcourses() {
         this.concourseService.query().subscribe(res => {
-
-            this.concourses = res.body._embedded.concourse.map(
-                c => {
-                    c.isSelected = false;
-                    return c;
-                }
-            );
+            this.concourses = res.body._embedded.concourse.map(c => {
+                c.isSelected = false;
+                return c;
+            });
             this.selectedConcourse = { name: this.NO_SPECIFIED, isSelected: true };
             this.concourses.push(this.selectedConcourse);
         });
@@ -241,15 +229,11 @@ export class DiseaseXiAnComponent implements OnInit {
     openConcourseDialog(): void {
         const dialogRef = this.dialog.open(CreateComponent, {
             width: '500px',
-            data: { concourse: { name: ''} }
+            data: { concourse: { name: '' } }
         });
 
         dialogRef.afterClosed().subscribe(result => {
-            this.concourseService.create(result)
-                .subscribe(
-                    any => this.loadConcourses()
-
-                );
+            this.concourseService.create(result).subscribe(any => this.loadConcourses());
         });
     }
 
