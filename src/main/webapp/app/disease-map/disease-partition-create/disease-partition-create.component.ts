@@ -15,8 +15,8 @@ export class DiseasePartitionCreateComponent implements OnInit {
         , protected route: ActivatedRoute) { }
 
     ngOnInit() {
-        if (this.route.snapshot.paramMap.get('diseasePartitionId')) {
-            const id = +this.route.snapshot.paramMap.get('diseasePartitionId');
+        if (this.route.snapshot.paramMap.get('id')) {
+            const id = +this.route.snapshot.paramMap.get('id');
             this.diseaseMapService.getDiseaePartition(id)
                 .subscribe(diseasePartition => this.diseasePartition = diseasePartition);
         } else {

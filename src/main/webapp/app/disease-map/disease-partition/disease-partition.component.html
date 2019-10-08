@@ -8,25 +8,18 @@
 
 <div class="row">
     <mat-card *ngFor="let diseasePartition of diseasePartitions" class="card col-sm-3 disease-partition-card"
-        style="margin-bottom: 5px;" [style.background-image]="'url(' + diseasePartition.bgUrl + ')'">
-
+        style="margin-bottom: 5px;" [style.background-image]="'url(' + diseasePartition.bgUrl + ')'"
+        [style.background-size] = "'cover'"
+        >
         <mat-card-header>
-
-            <div mat-card-avatar class="example-header-image"></div>
-
+            <div mat-card-avatar class="kingmed-profile"></div>
             <mat-card-title>{{diseasePartition.name}}</mat-card-title>
-
         </mat-card-header>
-
         {{diseasePartition.description}}
-
         <mat-card-actions>
-
             <button mat-raised-button color="accent"
                 [routerLink]="['view-disease-map', diseasePartition.id]">进入</button>
-
+            <button *jhiHasAnyAuthority="'ROLE_ADMIN'" mat-raised-button color="accent" [routerLink]="[diseasePartition.id + '/update']">编辑</button>
         </mat-card-actions>
-
     </mat-card>
-
 </div>
