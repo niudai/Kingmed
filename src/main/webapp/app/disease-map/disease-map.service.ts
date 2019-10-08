@@ -8,6 +8,7 @@ import { IFile } from 'app/shared/model/file.model';
 import { map } from 'rxjs/operators';
 import { DiseaseMap, IDiseaseMap } from 'app/shared/model/disease-map.model';
 import { createRequestOption } from 'app/shared';
+import { DiseasePartition } from 'app/shared/model/disease-partition.model';
 
 type BranchResponseType = HttpResponse<IDiseaseBranch>;
 type BranchResponseArrayType = HttpResponse<IDiseaseBranch[]>;
@@ -21,6 +22,8 @@ export class DiseaseMapService {
 
     // url for suppliess
     public diseaseMapUrl = SERVER_API_URL + 'api/disease-map';
+
+    public diseasePartitonUrl = SERVER_API_URL + 'api/disease-partitions';
 
     constructor(protected http: HttpClient) { }
 
@@ -133,6 +136,23 @@ export class DiseaseMapService {
     searchDiseaseMap(req: any): Observable<MapResponseArrayType> {
         const _params = createRequestOption(req);
         return this.http.get<IDiseaseMap[]>(`${this.diseaseMapUrl}/_search-disease-map`, { params: _params, observe: 'response' });
+    }
+
+    // Url for partitions:
+    getDiseasePartitions(): Observable<DiseasePartition[]> {
+        return this.http.get<DiseasePartition[]>(`${this.diseasePartitonUrl}`, { observe: 'body' });
+    }
+
+    getDiseaePartition(partitionId: number): Observable<DiseasePartition> {
+        return this.http.get<DiseasePartition>(`${this.diseasePartitonUrl}/${partitionId}`, { observe: 'body' });
+    }
+
+    postDiseasePartition(diseasePartition: DiseasePartition): Observable<void> {
+        return this.http.post<void>(`${this.diseasePartitonUrl}`, { body: diseasePartition });
+    }
+
+    postDiseasePartitionsDiseaseBranch(diseasePartitionId: number, diseaseBranch: DiseaseBranch): Observable<void> {
+        return this.http.post<void>(`${this.diseasePartitonUrl}/${diseasePartitionId}/disease-branches`, { body: diseaseBranch });
     }
 
 }

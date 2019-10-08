@@ -16,7 +16,7 @@ import java.util.Objects;
  * subDisease map.
  */
 @Entity
-@Table(name = "diseae_partition")
+@Table(name = "disease_partition")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class DiseasePartition implements Serializable {
 
@@ -121,5 +121,15 @@ public class DiseasePartition implements Serializable {
         this.description = diseaseBranch.description;
         return this;
     }
+
+    public List<DiseaseBranch> getDiseaseBranches() {
+        return diseaseBranches;
+    }
+
+    public void setDiseaseBranches(List<DiseaseBranch> diseaseBranches) {
+        this.diseaseBranches = diseaseBranches;
+    }
+
+
 
 }

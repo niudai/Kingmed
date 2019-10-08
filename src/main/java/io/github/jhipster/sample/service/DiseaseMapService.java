@@ -72,8 +72,8 @@ public class DiseaseMapService {
      * @param diseaseBranchId
      */
     @Transactional
-    public void attachDiseaseBranch(DiseaseBranch newDiseaseBranch) {
-        diseaseBranchRepository.save(newDiseaseBranch);
+    public DiseaseBranch attachDiseaseBranch(DiseaseBranch newDiseaseBranch) {
+        return diseaseBranchRepository.save(newDiseaseBranch);
     }
 
     /**
@@ -367,10 +367,10 @@ public class DiseaseMapService {
             restrictions.add(cb.like(qarobot.get("name"), "%" + query + "%"));
         }
 
-        Predicate queryPredicate = 
-            restrictions.size() > 0 ? 
+        Predicate queryPredicate =
+            restrictions.size() > 0 ?
                 cb.or(restrictions.toArray(new Predicate[restrictions.size()])) : cb.and();
-        
+
         qarobotQuery.where(queryPredicate);
 
         // get qarobots satisfied with criterias
@@ -410,10 +410,10 @@ public class DiseaseMapService {
             restrictions.add(cb.like(qarobot.get("name"), "%" + query + "%"));
         }
 
-        Predicate queryPredicate = 
-            restrictions.size() > 0 ? 
+        Predicate queryPredicate =
+            restrictions.size() > 0 ?
                 cb.or(restrictions.toArray(new Predicate[restrictions.size()])) : cb.and();
-        
+
         qarobotQuery.where(queryPredicate);
 
         // get qarobots satisfied with criterias

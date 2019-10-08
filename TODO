@@ -35,7 +35,8 @@ TODO:
     ✔ 优化顶部导航栏显示 @done(19-10-01 17:31)
 TODO:
     ☐ make disease xi an related api restful
-
+    ☐ 解决导航栏显示问题
+    ☐ 在原有检测科室上加相关项目名(个人中心和浏览)
 
     DROP TABLE IF EXISTS COMMENT ;
 

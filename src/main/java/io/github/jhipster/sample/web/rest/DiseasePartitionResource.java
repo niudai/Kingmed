@@ -10,6 +10,7 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,9 +20,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.github.jhipster.sample.domain.DiseaseBranch;
 import io.github.jhipster.sample.domain.DiseasePartition;
 import io.github.jhipster.sample.repository.DiseasePartitionRepository;
-import io.github.jhipster.sample.repository.DiseasePartitionRepository;
+import io.github.jhipster.sample.service.DiseaseMapService;
 import io.github.jhipster.sample.web.rest.errors.BadRequestAlertException;
 import io.github.jhipster.sample.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -30,7 +32,7 @@ import io.github.jhipster.web.util.ResponseUtil;
  * REST controller for managing DiseasePartition.
  */
 @RestController
-@RequestMapping("/api/diseasePartitions")
+@RequestMapping("/api/disease-partitions")
 public class DiseasePartitionResource {
 
     private final Logger log = LoggerFactory.getLogger(DiseasePartitionResource.class);
@@ -39,8 +41,12 @@ public class DiseasePartitionResource {
 
     private final DiseasePartitionRepository diseasePartitionRepository;
 
+    private final DiseaseMapService diseaseMapService;
 
-    public DiseasePartitionResource(DiseasePartitionRepository diseasePartitionRepository) {
+    public DiseasePartitionResource(
+        DiseasePartitionRepository diseasePartitionRepository,
+        DiseaseMapService diseaseMapService) {
+        this.diseaseMapService = diseaseMapService;
         this.diseasePartitionRepository = diseasePartitionRepository;
     }
 
@@ -62,6 +68,25 @@ public class DiseasePartitionResource {
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
+
+    /**
+     *
+     * @param diseaseBranch
+     * @return
+     * @throws URISyntaxException
+     */
+    @PostMapping("/{id}/disease-branches")
+    public ResponseEntity<DiseasePartition> createDiseaseBranch(@PathVariable Long id, @Valid @RequestBody DiseaseBranch diseaseBranch) throws URISyntaxException {
+        log.debug("REST request to save DiseasePartition : {}", diseaseBranch);
+        if (diseaseBranch.getId() != null) {
+            throw new BadRequestAlertException("A new diseasePartition cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        diseaseBranch.setDiseasePartitionId(id);
+        diseaseMapService.attachDiseaseBranch(diseaseBranch);
+        return ResponseEntity.ok().build();
+    }
+
+
 
     /**
      * PUT  /diseasePartitions : Updates an existing diseasePartition.
@@ -102,9 +127,11 @@ public class DiseasePartitionResource {
      * @return the ResponseEntity with status 200 (OK) and with body the diseasePartition, or with status 404 (Not Found)
      */
     @GetMapping("/{id}")
+    @Transactional
     public ResponseEntity<DiseasePartition> getDiseasePartition(@PathVariable Long id) {
         log.debug("REST request to get DiseasePartition : {}", id);
         Optional<DiseasePartition> diseasePartition = diseasePartitionRepository.findById(id);
+        log.debug("" + diseasePartition.get().getDiseaseBranches().size());
         return ResponseUtil.wrapOrNotFound(diseasePartition);
     }
 

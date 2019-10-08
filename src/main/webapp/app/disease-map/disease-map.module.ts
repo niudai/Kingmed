@@ -19,6 +19,8 @@ import { Paginator } from 'app/shared/paginator/paginator';
 import { DiseaseBranchCreateLinkDialogComponent } from './disease-branch-create/disease-branch-create-link-dialog/disease-branch-create-link-dialog.component';
 import { DiseaseBranchDeleteLinkDialogComponent } from './disease-branch-create/disease-branch-delete-link-dialog/disease-branch-delete-link-dialog.component';
 import { DiseaseMapDeleteLinkDialogComponent } from './disease-map-create/disease-map-delete-link-dialog/disease-map-delete-link-dialog.component';
+import { DiseasePartitionComponent } from './disease-partition/disease-partition.component';
+import { DiseasePartitionCreateComponent } from './disease-partition-create/disease-partition-create.component';
 
 @NgModule({
     imports: [
@@ -47,7 +49,7 @@ import { DiseaseMapDeleteLinkDialogComponent } from './disease-map-create/diseas
         , DiseaseMapModifyDialogComponent
         , DiseaseBranchCreateLinkDialogComponent
         , DiseaseBranchDeleteLinkDialogComponent
-        , DiseaseMapDeleteLinkDialogComponent
+        , DiseaseMapDeleteLinkDialogComponent, DiseasePartitionComponent, DiseasePartitionCreateComponent
     ],
     entryComponents: [
         DiseaseBranchDeleteModalComponent

@@ -3,12 +3,22 @@ import { DiseaseMapComponent } from './disease-map/disease-map.component';
 import { DiseaseBranchComponent } from './disease-branch/disease-branch.component';
 import { Route, Routes } from '@angular/router';
 import { UserRouteAccessService } from 'app/core';
+import { DiseasePartitionComponent } from './disease-partition/disease-partition.component';
 
 export const SERIVCE_ROUTE: Routes = [
 
     {
         path: '',
         component: DiseaseBranchComponent,
+        data: {
+            authorities: [],
+            pageTitle: 'global.menu.entities.diseaseMap'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'disease-partitions',
+        component: DiseasePartitionComponent,
         data: {
             authorities: [],
             pageTitle: 'global.menu.entities.diseaseMap'

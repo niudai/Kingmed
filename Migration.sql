@@ -5,6 +5,8 @@ set a.SUBSIDIARY_ID  = (select b.id from JHI_SUBSIDIARY b where b.name= a.subsid
 where exists
 (select * from JHI_SUBSIDIARY b where b.name = a.subsidiary);
 
+
+
 update DISEASE_XI_AN a
 set a.CONCOURSE_ID = (select b.id from JHI_CONCOURSE b where b.name= '感染')
 where

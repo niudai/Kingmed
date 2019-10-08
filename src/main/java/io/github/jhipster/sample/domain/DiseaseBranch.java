@@ -50,6 +50,9 @@ public class DiseaseBranch implements Serializable {
     @JoinColumn(name = "disease_branch_id")
     private Set<LinkCard> linkCards = new HashSet<LinkCard>();
 
+    @Column(name = "disease_partition_id")
+    private Long diseasePartitionId;
+
     @Size(max = 50)
     @Column(name = "subsidiary", length = 50)
     private String subsidiary = "待添加";
@@ -163,6 +166,14 @@ public class DiseaseBranch implements Serializable {
         this.subsidiary = diseaseBranch.subsidiary;
         this.description = diseaseBranch.description;
         return this;
+    }
+
+    public Long getDiseasePartitionId() {
+        return diseasePartitionId;
+    }
+
+    public void setDiseasePartitionId(Long diseasePartitionId) {
+        this.diseasePartitionId = diseasePartitionId;
     }
 
 }

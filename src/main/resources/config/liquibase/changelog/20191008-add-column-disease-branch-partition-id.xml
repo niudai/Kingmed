@@ -14,7 +14,7 @@
 
     <!-- Add subsidiary column to price table -->
     <changeSet author="niudai" id="2019100802">
-        <addColumn tableName="disease_partition">
+        <addColumn tableName="disease_branch">
             <column name="disease_partition_id" type="bigint"/>
         </addColumn>
     </changeSet>
