@@ -1,3 +1,32 @@
-<p>
-  disease-partition-create works!
-</p>
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">创建新板块</h4>
+        <form name="editForm" role="form" novalidate (ngSubmit)="submit()" #editForm="ngForm">
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group">
+                    <label>板块名</label>
+                    <input type="text" class="form-control" id="id" name="diseasePartition.name"
+                        [(ngModel)]="diseasePartition.name" [placeholder]="diseasePartition.name" />
+                    <label>描述</label>
+                    <input type="text" class="form-control" id="id" name="diseasePartition.description"
+                        [(ngModel)]="diseasePartition.description" [placeholder]="diseasePartition.description" />
+                    <label>背景图片链接</label>
+                    <input type="text" class="form-control" id="id" name="diseasePartition.description"
+                        [(ngModel)]="diseasePartition.bgUrl" [placeholder]="diseasePartition.description" />
+
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+
+
+</div>

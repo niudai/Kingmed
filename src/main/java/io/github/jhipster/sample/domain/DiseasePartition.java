@@ -30,6 +30,10 @@ public class DiseasePartition implements Serializable {
     @Column(name = "name", length = 50)
     private String name;
 
+    @Size(max = 200)
+    @Column(name = "bg_url", length = 200)
+    private String bgUrl;
+
     @OneToMany(
         cascade = CascadeType.ALL
         , orphanRemoval = true,
@@ -37,6 +41,7 @@ public class DiseasePartition implements Serializable {
     @JoinColumn(name = "disease_partition_id")
     @BatchSize(size = 5)
     private List<DiseaseBranch> diseaseBranches = new ArrayList<DiseaseBranch>();
+
 
 
     @Size(max = 250)
@@ -128,6 +133,14 @@ public class DiseasePartition implements Serializable {
 
     public void setDiseaseBranches(List<DiseaseBranch> diseaseBranches) {
         this.diseaseBranches = diseaseBranches;
+    }
+
+    public String getBgUrl() {
+        return bgUrl;
+    }
+
+    public void setBgUrl(String bgUrl) {
+        this.bgUrl = bgUrl;
     }
 
 

@@ -17,8 +17,8 @@ export class DiseasePartitionCreateComponent implements OnInit {
     ngOnInit() {
         if (this.route.snapshot.paramMap.get('diseasePartitionId')) {
             const id = +this.route.snapshot.paramMap.get('diseasePartitionId');
-            this.diseaseMapService.get(id)
-                .subscribe(diseasePartition => this.diseasePartition = diseasePartition.body);
+            this.diseaseMapService.getDiseaePartition(id)
+                .subscribe(diseasePartition => this.diseasePartition = diseasePartition);
         } else {
             this.diseasePartition = new DiseasePartition();
         }
@@ -26,10 +26,10 @@ export class DiseasePartitionCreateComponent implements OnInit {
 
     submit() {
         if (this.diseasePartition.id === undefined ) {
-            this.diseaseMapService.attachDiseasePartition(this.diseasePartition)
+            this.diseaseMapService.postDiseasePartition(this.diseasePartition)
             .subscribe(any => this.previousState());
         } else {
-            this.diseaseMapService.modifyDiseasePartition(this.diseasePartition)
+            this.diseaseMapService.putDiseasePartition(this.diseasePartition)
             .subscribe(any => this.previousState());
         }
 

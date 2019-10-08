@@ -148,11 +148,14 @@ export class DiseaseMapService {
     }
 
     postDiseasePartition(diseasePartition: DiseasePartition): Observable<void> {
-        return this.http.post<void>(`${this.diseasePartitonUrl}`, { body: diseasePartition });
+        return this.http.post<void>(`${this.diseasePartitonUrl}`, diseasePartition);
     }
 
     postDiseasePartitionsDiseaseBranch(diseasePartitionId: number, diseaseBranch: DiseaseBranch): Observable<void> {
-        return this.http.post<void>(`${this.diseasePartitonUrl}/${diseasePartitionId}/disease-branches`, { body: diseaseBranch });
+        return this.http.post<void>(`${this.diseasePartitonUrl}/${diseasePartitionId}/disease-branches`, diseaseBranch);
     }
 
+    putDiseasePartition(diseasePartition: DiseasePartition): Observable<void> {
+        return this.http.put<void>(`${this.diseasePartitonUrl}`, diseasePartition);
+    }
 }

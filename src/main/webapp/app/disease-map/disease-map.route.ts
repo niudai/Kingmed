@@ -4,9 +4,9 @@ import { DiseaseBranchComponent } from './disease-branch/disease-branch.componen
 import { Route, Routes } from '@angular/router';
 import { UserRouteAccessService } from 'app/core';
 import { DiseasePartitionComponent } from './disease-partition/disease-partition.component';
+import { DiseasePartitionCreateComponent } from './disease-partition-create/disease-partition-create.component';
 
 export const SERIVCE_ROUTE: Routes = [
-
     {
         path: '',
         component: DiseaseBranchComponent,
@@ -25,6 +25,25 @@ export const SERIVCE_ROUTE: Routes = [
         },
         canActivate: [UserRouteAccessService]
     },
+    {
+        path: 'disease-partitions/create',
+        component: DiseasePartitionCreateComponent,
+        data: {
+            authorities: [],
+            pageTitle: 'global.menu.entities.diseaseMap'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'disease-partitions/:id/update',
+        component: DiseasePartitionCreateComponent,
+        data: {
+            authorities: [],
+            pageTitle: 'global.menu.entities.diseaseMap'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+
     {
         path: 'attach-disease-branch',
         component: DiseaseBranchCreateComponent,
@@ -61,5 +80,4 @@ export const SERIVCE_ROUTE: Routes = [
         },
         canActivate: [UserRouteAccessService]
     }
-
 ];

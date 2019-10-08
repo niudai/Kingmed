@@ -6,6 +6,7 @@ export interface IDiseasePartition {
     name?: string;
     description?: string;
     diseaseBranches?: IDiseaseBranch[];
+    bgUrl?: string;
 }
 
 export class DiseasePartition implements IDiseasePartition {
@@ -13,6 +14,7 @@ export class DiseasePartition implements IDiseasePartition {
         public id?: number,
         public name?: string,
         public description?: string,
-        public diseaseBranches?: IDiseaseBranch[]
+        public diseaseBranches?: IDiseaseBranch[],
+        public bgUrl?: string
     ) {}
 }

@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { DiseaseMapService } from '../disease-map.service';
-import { DiseasePartition } from 'app/shared/model/disease-partition.model';
+import { DiseasePartition, IDiseasePartition } from 'app/shared/model/disease-partition.model';
 
 @Component({
     selector: 'jhi-disease-partition',
     templateUrl: './disease-partition.component.html',
-    styles: []
+    styleUrls: ['./disease-partition.component.css']
 })
 export class DiseasePartitionComponent implements OnInit {
-    public diseasePartitions: DiseasePartition[];
+    public diseasePartitions: IDiseasePartition[];
 
     constructor(protected service: DiseaseMapService) {}
 
