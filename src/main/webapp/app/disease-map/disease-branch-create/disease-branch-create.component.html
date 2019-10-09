@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-body">
-        <h4 class="card-title">在<span class = "partition-title">{{diseasePartition.name}}</span>下创建一份新地图</h4>
+        <h4 class="card-title">在<span class = "partition-title">{{diseasePartition.name}}</span> 下{{action}}地图</h4>
         <form name="editForm" role="form" novalidate (ngSubmit)="submit()" #editForm="ngForm">
             <div>
                 <jhi-alert-error></jhi-alert-error>

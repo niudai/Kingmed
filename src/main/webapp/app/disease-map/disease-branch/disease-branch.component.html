@@ -25,7 +25,7 @@
                 <mat-card-title>{{diseaseMap.name}}</mat-card-title>
             </mat-card-header>
             <mat-card-actions>
-                <button mat-raised-button color="accent" [routerLink]="['view-disease-map', diseaseMap.id]">进入</button>
+                <button mat-raised-button color="accent" [routerLink]="['disease-maps', diseaseMap.id]">进入</button>
             </mat-card-actions>
         </mat-card>
         <mat-card class="branch-card" *ngFor="let diseaseBranch of diseaseBranches" class="card col-sm-3"
@@ -42,11 +42,11 @@
             </mat-card-content>
             <mat-card-actions>
                 <button mat-raised-button color="accent"
-                    [routerLink]="['view-disease-branch', diseaseBranch.id]">进入</button>
+                    [routerLink]="[diseaseBranch.id, 'view']">进入</button>
                 <button mat-raised-button color="warn" (click)="open(diseaseBranch)"
                     *jhiHasAnyAuthority="'ROLE_ADMIN'">删除</button>
                 <button mat-raised-button style="background-color: bisque"
-                    [routerLink]="['modify-disease-branch', diseaseBranch.id]"
+                    [routerLink]="[diseaseBranch.id, 'edit']"
                     *jhiHasAnyAuthority="'ROLE_ADMIN'">编辑</button>
             </mat-card-actions>
         </mat-card>

@@ -54,7 +54,7 @@ export const SERIVCE_ROUTE: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'modify-disease-branch/:diseaseBranchId',
+        path: ':id/disease-branches/:diseaseBranchId/edit',
         component: DiseaseBranchCreateComponent,
         data: {
             authorities: ['ROLE_USER'],
@@ -63,7 +63,7 @@ export const SERIVCE_ROUTE: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'view-disease-branch/:diseaseBranchId',
+        path: ':id/disease-branches/:diseaseBranchId/view',
         component: DiseaseMapComponent,
         data: {
             authorities: [],
@@ -72,7 +72,7 @@ export const SERIVCE_ROUTE: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'view-disease-map/:diseaseMapId',
+        path: ':id/disease-branches/disease-maps/:diseaseMapId/view',
         component: DiseaseMapComponent,
         data: {
             authorities: [],

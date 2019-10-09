@@ -12,6 +12,7 @@ import { IDiseasePartition } from 'app/shared/model/disease-partition.model';
 export class DiseaseBranchCreateComponent implements OnInit {
     public diseaseBranch: IDiseaseBranch;
     public diseasePartition: IDiseasePartition;
+    public action: string;
 
     constructor(protected diseaseMapService: DiseaseMapService
         , protected route: ActivatedRoute) { }
@@ -19,9 +20,11 @@ export class DiseaseBranchCreateComponent implements OnInit {
     ngOnInit() {
         if (this.route.snapshot.paramMap.get('diseaseBranchId')) {
             const id = +this.route.snapshot.paramMap.get('diseaseBranchId');
+            this.action = '编辑';
             this.diseaseMapService.getDiseaseBranch(id)
                 .subscribe(diseaseBranch => this.diseaseBranch = diseaseBranch.body);
         } else {
+            this.action = '创建';
             this.diseaseBranch = new DiseaseBranch();
         }
         // disease partition id
