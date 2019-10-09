@@ -1,11 +1,4 @@
 <div class="row">
-    <button *jhiHasAnyAuthority="'ROLE_ADMIN'" mat-raised-button color="accent" id="jh-create-entity"
-    class="float-right jh-create-entity create-q-arobot" [routerLink]="'disease-partitions/create'">
-    <fa-icon [icon]="'plus'"></fa-icon>
-    <span class="hidden-sm-down">
-        创建新板块
-    </span>
-    </button>
     <mat-card *ngFor="let diseasePartition of diseasePartitions" class="card col-sm-3 disease-partition-card"
         style="margin-bottom: 5px;" [style.background-image]="'url(' + diseasePartition.bgUrl + ')'"
         [style.background-size]="'cover'">
@@ -21,4 +14,11 @@
                 [routerLink]="[diseasePartition.id, 'update']">编辑</button>
         </mat-card-actions>
     </mat-card>
+    <button *jhiHasAnyAuthority="'ROLE_ADMIN'" mat-raised-button color="accent" id="jh-create-entity"
+    class="float-right jh-create-entity create-q-arobot" [routerLink]="'disease-partitions/create'">
+    <fa-icon [icon]="'plus'"></fa-icon>
+    <span class="hidden-sm-down">
+        创建新板块
+    </span>
+    </button>
 </div>
