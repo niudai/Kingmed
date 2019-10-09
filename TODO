@@ -6,7 +6,7 @@ Todo:
 
 TODO:
     ☐ Enhance notification properties.
-    ☐ 项目通知类型修改
+    ✔ 项目通知类型修改 @done(19-10-09 14:48)
     ☐ 8，项目评论能否有个提示功能，这样管理员好及时处理信息
     ☐ Implement security API filter
     ☐ SEO for kingmed.online
@@ -18,6 +18,7 @@ TODO:
     ✔ 个人中心项目无法翻页 @done(19-09-29 08:45)
     ☐ 个人中心项目无法查阅项目
     ☐ 项目克隆功能
+    ☐ 通知(日期)检索
     ✔ 疾病编辑显示必填等规则 @done(19-10-01 21:33)
     ☐ 疾病地图显示长度
     ✔ 按ID号排序 @done(19-09-29 08:38)
@@ -30,9 +31,10 @@ TODO:
     ✔ user 账号屏蔽 检测科室  加急结果派单单位 @done(19-09-29 08:33)
     ☐ 申请单/耗材  批量关联  无需记忆 ID 号
     ✔ 检测科室显示多余 @done(19-09-28 23:01)
-    ☐ 新疆数据迁移
+    ✔ 新疆数据迁移 @done(19-10-09 14:49)
     ✔ 注册form data validation @done(19-10-01 17:28)
     ✔ 优化顶部导航栏显示 @done(19-10-01 17:31)
+
 TODO:
     ☐ make disease xi an related api restful
     ☐ 解决导航栏显示问题

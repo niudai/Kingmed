@@ -3,6 +3,10 @@
     background-size: cover;
   }
 
+mat-card.card.col-sm-3.mat-card.ng-star-inserted {
+    width: 33%;
+}
+
 input#currentSearch {
     /* top: 0; */
     width: 80%;

@@ -8,7 +8,7 @@ import { DiseasePartitionCreateComponent } from './disease-partition-create/dise
 
 export const SERIVCE_ROUTE: Routes = [
     {
-        path: '',
+        path: ':id/disease-branches',
         component: DiseaseBranchComponent,
         data: {
             authorities: [],
@@ -17,7 +17,7 @@ export const SERIVCE_ROUTE: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'disease-partitions',
+        path: '',
         component: DiseasePartitionComponent,
         data: {
             authorities: [],
@@ -35,7 +35,7 @@ export const SERIVCE_ROUTE: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'disease-partitions/:id/update',
+        path: ':id/update',
         component: DiseasePartitionCreateComponent,
         data: {
             authorities: [],
@@ -45,7 +45,7 @@ export const SERIVCE_ROUTE: Routes = [
     },
 
     {
-        path: 'attach-disease-branch',
+        path: ':id/disease-branches/create',
         component: DiseaseBranchCreateComponent,
         data: {
             authorities: ['ROLE_USER'],

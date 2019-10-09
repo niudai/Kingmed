@@ -6,6 +6,7 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpResponse } from '@angular/common/http';
 import { IDiseaseMap } from 'app/shared/model/disease-map.model';
+import { IDiseasePartition, DiseasePartition } from 'app/shared/model/disease-partition.model';
 
 @Component({
     selector: 'jhi-disease-branch',
@@ -20,6 +21,7 @@ export class DiseaseBranchComponent implements OnInit {
 
     public diseaseBranches: IDiseaseBranch[];
     public diseaseMaps: IDiseaseMap[];
+    public diseasePartition: IDiseasePartition;
 
     constructor(protected diseaseMapService: DiseaseMapService
         , protected modalService: NgbModal
@@ -44,24 +46,34 @@ export class DiseaseBranchComponent implements OnInit {
             ).subscribe((res: HttpResponse<IDiseaseMap[]>) => this.mapLoadSuccessHandler(res));
         } else {
             this.diseaseMaps = null;
-            this.diseaseMapService.getAllDiseaseBranch(
-                {
-                    page: this.pageEvent && this.pageEvent.pageIndex ? this.pageEvent.pageIndex : 0,
-                    size: this.pageEvent && this.pageEvent.pageSize ? this.pageEvent.pageSize : this.DEFAULT_PAGESIZE
-                }
-            ).subscribe((res: HttpResponse<IDiseaseBranch[]>) => this.branchLoadSuccessHandler(res));
+            // this.diseaseMapService.getAllDiseaseBranch(
+            //     {
+            //         page: this.pageEvent && this.pageEvent.pageIndex ? this.pageEvent.pageIndex : 0,
+            //         size: this.pageEvent && this.pageEvent.pageSize ? this.pageEvent.pageSize : this.DEFAULT_PAGESIZE
+            //     }
+            // ).subscribe((res: HttpResponse<IDiseaseBranch[]>) => this.branchLoadSuccessHandler(res));
+            if (this.route.snapshot.paramMap.get('id')) {
+                const id = +this.route.snapshot.paramMap.get('id');
+                this.diseaseMapService.getDiseaePartition(id)
+                    .subscribe(diseasePartition => {
+                        this.diseasePartition = diseasePartition;
+                        this.diseaseBranches = diseasePartition.diseaseBranches;
+                    });
+            } else {
+                this.diseasePartition = new DiseasePartition();
+            }
         }
         this.transition();
     }
 
     transition() {
-        this.router.navigate(['/disease-map',
+        this.router.navigate(['',
             {
                 search: this.currentSearch,
                 size: this.DEFAULT_PAGESIZE,
                 page: this.pageEvent.pageIndex
             }
-        ]);
+        ], { relativeTo: this.route });
     }
 
     paginate($event: PageEvent) {
@@ -79,13 +91,23 @@ export class DiseaseBranchComponent implements OnInit {
     }
 
     ngOnInit() {
+        if (this.route.snapshot.paramMap.get('id')) {
+            const id = +this.route.snapshot.paramMap.get('id');
+            this.diseaseMapService.getDiseaePartition(id)
+                .subscribe(diseasePartition => {
+                    this.diseasePartition = diseasePartition;
+                    this.diseaseBranches = diseasePartition.diseaseBranches;
+                });
+        } else {
+            this.diseasePartition = new DiseasePartition();
+        }
         this.currentSearch = this.route.snapshot && this.route.snapshot.params['search'] ?
-            this.route.snapshot.paramMap.get('search') : '';
+        this.route.snapshot.paramMap.get('search') : '';
         this.pageEvent = new PageEvent();
         this.pageEvent.pageIndex = this.route.snapshot && this.route.snapshot.params['page'] ?
         +this.route.snapshot.paramMap.get('page') : 0;
         this.pageEvent.pageSize = this.DEFAULT_PAGESIZE;
-        this.load();
+        // this.load();
     }
 
     open(diseaseBranch: IDiseaseBranch) {

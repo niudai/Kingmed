@@ -2,14 +2,16 @@ import { ActivatedRoute } from '@angular/router';
 import { DiseaseMapService } from './../disease-map.service';
 import { IDiseaseBranch, DiseaseBranch } from './../../shared/model/disease-branch.model';
 import { Component, OnInit } from '@angular/core';
+import { IDiseasePartition } from 'app/shared/model/disease-partition.model';
 
 @Component({
     selector: 'jhi-disease-branch-create',
     templateUrl: './disease-branch-create.component.html',
-    styles: []
+    styleUrls: ['./disease-branch-create.component.css']
 })
 export class DiseaseBranchCreateComponent implements OnInit {
     public diseaseBranch: IDiseaseBranch;
+    public diseasePartition: IDiseasePartition;
 
     constructor(protected diseaseMapService: DiseaseMapService
         , protected route: ActivatedRoute) { }
@@ -22,11 +24,19 @@ export class DiseaseBranchCreateComponent implements OnInit {
         } else {
             this.diseaseBranch = new DiseaseBranch();
         }
+        // disease partition id
+        if (this.route.snapshot.paramMap.get('id')) {
+            const id = +this.route.snapshot.paramMap.get('id');
+            this.diseaseMapService.getDiseaePartition(id)
+                .subscribe(diseasePartition => this.diseasePartition = diseasePartition);
+        } else {
+            this.diseaseBranch = new DiseaseBranch();
+        }
    }
 
     submit() {
         if (this.diseaseBranch.id === undefined ) {
-            this.diseaseMapService.attachDiseaseBranch(this.diseaseBranch)
+            this.diseaseMapService.postDiseasePartitionsDiseaseBranch(this.diseasePartition.id, this.diseaseBranch)
             .subscribe(any => this.previousState());
         } else {
             this.diseaseMapService.modifyDiseaseBranch(this.diseaseBranch)
