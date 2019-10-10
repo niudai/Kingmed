@@ -7,6 +7,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpResponse } from '@angular/common/http';
 import { IDiseaseMap } from 'app/shared/model/disease-map.model';
 import { IDiseasePartition, DiseasePartition } from 'app/shared/model/disease-partition.model';
+import { AccountService } from 'app/core';
 
 @Component({
     selector: 'jhi-disease-branch',
@@ -26,7 +27,8 @@ export class DiseaseBranchComponent implements OnInit {
     constructor(protected diseaseMapService: DiseaseMapService
         , protected modalService: NgbModal
         , protected router: Router
-        , protected route: ActivatedRoute) { }
+        , protected route: ActivatedRoute
+        , protected accountService: AccountService) { }
 
     load() {
         if (this.currentSearch) {
@@ -97,6 +99,11 @@ export class DiseaseBranchComponent implements OnInit {
                 .subscribe(diseasePartition => {
                     this.diseasePartition = diseasePartition;
                     this.diseaseBranches = diseasePartition.diseaseBranches;
+                    if (!this.accountService.hasAnyAuthority(['ROLE_ADMIN']) && !this.accountService.hasAnyAuthority(['ROLE_USER'])) {
+                        this.diseaseBranches = diseasePartition.diseaseBranches.filter(b => b.type === 'ROLE_DOCTOR');
+                    } else if (this.accountService.hasAnyAuthority(['ROLE_USER']) && !this.accountService.hasAnyAuthority(['ROLE_ADMIN'])) {
+                        this.diseaseBranches = diseasePartition.
+                    }
                 });
         } else {
             this.diseasePartition = new DiseasePartition();

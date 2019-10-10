@@ -1,24 +1,27 @@
-<div class="row">
-    <mat-card *ngFor="let diseasePartition of diseasePartitions" class="card col-sm-3 disease-partition-card"
-        style="margin-bottom: 5px;" [style.background-image]="'url(' + diseasePartition.bgUrl + ')'"
-        [style.background-size]="'cover'">
-        <mat-card-header>
-            <div mat-card-avatar class="kingmed-profile"></div>
-            <mat-card-title class="card-title">{{diseasePartition.name}}</mat-card-title>
-        </mat-card-header>
-        {{diseasePartition.description}}
-        <mat-card-actions>
-            <button mat-raised-button color="accent"
-                [routerLink]="[diseasePartition.id, 'disease-branches']">进入</button>
-            <button *jhiHasAnyAuthority="'ROLE_ADMIN'" mat-raised-button color="accent"
-                [routerLink]="[diseasePartition.id, 'update']">编辑</button>
-        </mat-card-actions>
-    </mat-card>
+<div class="row disease-partition-div">
+    <div class = "col-sm-6" *ngFor="let diseasePartition of diseasePartitions">
+            <mat-card class="card  disease-partition-card"
+            style="margin-bottom: 5px;"
+            >
+            <mat-card-header>
+                <div mat-card-avatar class="kingmed-profile"></div>
+                <mat-card-title class="card-title">{{diseasePartition.name}}</mat-card-title>
+            </mat-card-header>
+            <img mat-card-image [src]="diseasePartition.bgUrl">
+            {{diseasePartition.description}}
+            <mat-card-actions>
+                <button mat-raised-button color="accent"
+                    [routerLink]="[diseasePartition.id, 'disease-branches']">进入</button>
+                <button *jhiHasAnyAuthority="'ROLE_ADMIN'" mat-raised-button color="accent"
+                    [routerLink]="[diseasePartition.id, 'update']">编辑</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
     <button *jhiHasAnyAuthority="'ROLE_ADMIN'" mat-raised-button color="accent" id="jh-create-entity"
-    class="float-right jh-create-entity create-q-arobot" [routerLink]="'disease-partitions/create'">
-    <fa-icon [icon]="'plus'"></fa-icon>
-    <span class="hidden-sm-down">
-        创建新板块
-    </span>
+        class="float-right jh-create-entity create-q-arobot" [routerLink]="'disease-partitions/create'">
+        <fa-icon [icon]="'plus'"></fa-icon>
+        <span class="hidden-sm-down">
+            创建新板块
+        </span>
     </button>
 </div>

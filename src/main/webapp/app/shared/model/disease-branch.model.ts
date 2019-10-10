@@ -7,6 +7,7 @@ export interface IDiseaseBranch {
     description?: string;
     linkCards?: ILinkCard[];
     diseaseMaps?: IDiseaseBranch[];
+    type?: string;
 }
 
 export class DiseaseBranch implements IDiseaseBranch {
@@ -16,6 +17,7 @@ export class DiseaseBranch implements IDiseaseBranch {
         public subsidiary?: string,
         public description?: string,
         public linkCards?: ILinkCard[],
-        public diseaseMaps?: IDiseaseBranch[]
+        public diseaseMaps?: IDiseaseBranch[],
+        public type?: string
     ) {}
 }

@@ -9,6 +9,8 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -84,6 +86,9 @@ public class DiseaseMap implements Serializable {
     @JoinTable(name = "disease_map_disease_xi_an", joinColumns = @JoinColumn(name = "disease_map_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "disease_xi_an_id", referencedColumnName = "id"))
     @BatchSize(size = 5)
     private Set<DiseaseXiAn> diseaseXiAns = new HashSet<>();
+
+    @Enumerated(EnumType.STRING)
+    private DiseaseMapType type;
 
     public DiseaseMap() {
     }
@@ -241,6 +246,14 @@ public class DiseaseMap implements Serializable {
         this.subsidiary = diseaseMap.subsidiary;
         this.description = diseaseMap.description;
         return this;
+    }
+
+    public DiseaseMapType getType() {
+        return type;
+    }
+
+    public void setType(DiseaseMapType type) {
+        this.type = type;
     }
 
 }

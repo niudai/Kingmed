@@ -53,6 +53,9 @@ public class DiseaseBranch implements Serializable {
     @Column(name = "disease_partition_id")
     private Long diseasePartitionId;
 
+    @Enumerated(EnumType.STRING)
+    private DiseaseMapType type;
+
     @Size(max = 50)
     @Column(name = "subsidiary", length = 50)
     private String subsidiary = "待添加";
@@ -174,6 +177,14 @@ public class DiseaseBranch implements Serializable {
 
     public void setDiseasePartitionId(Long diseasePartitionId) {
         this.diseasePartitionId = diseasePartitionId;
+    }
+
+    public DiseaseMapType getType() {
+        return type;
+    }
+
+    public void setType(DiseaseMapType type) {
+        this.type = type;
     }
 
 }

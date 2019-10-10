@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Disease Map
+    -->
+    <changeSet id="2018-08-06-01" author="niudai">
+        <!-- Create table for many to many relationship of disease_map with q_arobot -->
+
+        <createTable tableName="disease_map_user">
+            <column name="disease_map_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="disease_branch_user">
+            <column name="disease_branch_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <!-- Add primary key and foreign key -->
+
+        <addPrimaryKey columnNames="disease_map_id , user_id" tableName="disease_map_user"/>
+        <addPrimaryKey columnNames="disease_branch_id , user_id" tableName="disease_branch_user"/>
+
+
+        <addForeignKeyConstraint baseColumnNames="disease_map_id"
+                                 baseTableName="disease_map_user"
+                                 constraintName="fk_disease_map_user_disease_map_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="disease_map"/>
+
+         <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="disease_map_user"
+                                 constraintName="fk_disease_map_user_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+         <addForeignKeyConstraint baseColumnNames="disease_branch_id"
+                                 baseTableName="disease_branch_user"
+                                 constraintName="fk_disease_branch_user_disease_branch_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="disease_branch"/>
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="disease_branch_user"
+                                 constraintName="fk_disease_branch_user_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+    </changeSet>
+</databaseChangeLog>

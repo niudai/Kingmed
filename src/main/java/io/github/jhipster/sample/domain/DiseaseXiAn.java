@@ -69,7 +69,6 @@ public class DiseaseXiAn  extends AbstractViewsEntity implements Serializable {
     @BatchSize(size = 10)
     private Set<LinkCard> linkCards = new HashSet<LinkCard>();
 
-
     @ManyToMany
     @JoinTable(name = "disease_xi_an_q_arobot", joinColumns = @JoinColumn(name = "disease_xi_an_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "q_arobot_id", referencedColumnName = "id"))
     private Set<QArobot> qarobots = new HashSet<>();

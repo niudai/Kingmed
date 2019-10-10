@@ -27,6 +27,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.data.rest.webmvc.support.BackendId;
 
 import io.github.jhipster.sample.config.Constants;
 import io.github.jhipster.sample.service.dto.UserDTO;
@@ -130,6 +131,26 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @BatchSize(size = 10)
     private Set<DiseaseXiAn> diseaseXiAns = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(
+        name = "disease_map_user",
+        inverseJoinColumns = @JoinColumn(name = "disease_map_id", referencedColumnName = "id"),
+        joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id")
+    )
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @BatchSize(size = 10)
+    private Set<DiseaseMap> diseaseMaps = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(
+        name = "disease_branch_user",
+        inverseJoinColumns = @JoinColumn(name = "disease_branch_id", referencedColumnName = "id"),
+        joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id")
+    )
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @BatchSize(size = 10)
+    private Set<DiseaseMap> diseaseBranches = new HashSet<>();
 
     public User update(UserDTO dto) {
         this.login = dto.getLogin().toLowerCase();

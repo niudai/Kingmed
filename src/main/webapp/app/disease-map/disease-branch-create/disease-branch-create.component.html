@@ -1,30 +1,38 @@
 <div class="card">
     <div class="card-body">
-        <h4 class="card-title">在<span class = "partition-title">{{diseasePartition.name}}</span> 下{{action}}地图</h4>
+        <h4 class="card-title">在<span class="partition-title">{{diseasePartition.name}}</span> 下{{action}}地图</h4>
         <form name="editForm" role="form" novalidate (ngSubmit)="submit()" #editForm="ngForm">
             <div>
                 <jhi-alert-error></jhi-alert-error>
                 <div class="form-group">
                     <label>地图名</label>
-                    <input type="text" class="form-control" id="id" name="diseaseBranch.name" [(ngModel)]="diseaseBranch.name"
-                        [placeholder]="diseaseBranch.name" />
+                    <input type="text" class="form-control" id="id" name="diseaseBranch.name"
+                        [(ngModel)]="diseaseBranch.name" [placeholder]="diseaseBranch.name" />
                     <label>子公司</label>
-                    <input type="text" class="form-control" id="id" name="diseaseBranch.subsidiary" [(ngModel)]="diseaseBranch.subsidiary"
-                         [placeholder]="diseaseBranch.subsidiary" />
+                    <input type="text" class="form-control" id="id" name="diseaseBranch.subsidiary"
+                        [(ngModel)]="diseaseBranch.subsidiary" [placeholder]="diseaseBranch.subsidiary" />
                     <label>描述</label>
-                    <input type="text" class="form-control" id="id" name="diseaseBranch.description" [(ngModel)]="diseaseBranch.description"
-                        [placeholder]="diseaseBranch.description" />
+                    <input type="text" class="form-control" id="id" name="diseaseBranch.description"
+                        [(ngModel)]="diseaseBranch.description" [placeholder]="diseaseBranch.description" />
+                    <mat-form-field class="search-restric">
+                        <mat-label>地图权限</mat-label>
+                        <mat-select [(value)]="selectedAuth">
+                            <mat-option *ngFor="let sort of authorizations" [value]="sort.auth">
+                                {{sort.ch}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
 
                 </div>
             </div>
-                <div>
-                    <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
-                        <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-                    </button>
-                    <button type="submit" id="save-entity" class="btn btn-primary">
-                        <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
-                    </button>
-                </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
         </form>
     </div>
 

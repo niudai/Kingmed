@@ -13,6 +13,7 @@ export interface IDiseaseMap {
     parentDiseaseBranch?: IDiseaseBranch;
     qarobots?: IQArobot[];
     diseaseXiAns?: IDiseaseXiAn[];
+    type?: string;
 }
 
 export class DiseaseMap implements IDiseaseMap {
@@ -26,6 +27,7 @@ export class DiseaseMap implements IDiseaseMap {
         public parentDiseaseBranch?: IDiseaseBranch,
         public linkCards?: ILinkCard[],
         public qarobots?: IQArobot[],
-        public diseaseXiAns?: IDiseaseXiAn[]
+        public diseaseXiAns?: IDiseaseXiAn[],
+        public type?: string
     ) {}
 }
