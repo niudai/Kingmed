@@ -14,6 +14,7 @@ import { PageEvent, MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatBottomSheet, Er
 import { MyDiseaseDeleteDialogComponent } from '../my-disease-delete-dialog/my-disease-delete-dialog.component';
 import { DiseaseXiAnDetailBottomSheetComponent } from 'app/entities/disease-xi-an/disease-xi-an-detail-bottom-sheet/disease-xi-an-detail-bottom-sheet.component';
 import { FormControl, Validators } from '@angular/forms';
+import { IDiseaseBranch } from 'app/shared/model/disease-branch.model';
 
 @Component({
     selector: 'jhi-my-disease',
@@ -27,6 +28,7 @@ export class MyDiseaseComponent implements OnInit {
     windowWidth = 1000;
     currentAccount: Account;
     diseaseXiAns: IDiseaseXiAn[];
+    diseaseBranches: IDiseaseBranch[];
     error: any;
     success: any;
     eventSubscriber: Subscription;
@@ -90,6 +92,11 @@ export class MyDiseaseComponent implements OnInit {
             .subscribe(
                 (res: HttpResponse<IDiseaseXiAn[]>) => this.paginateDiseaseXiAns(res.body, res.headers),
                 (res: HttpErrorResponse) => this.onError(res.message)
+            );
+        this.userService
+            .getDiseaseBranches(this.currentAccount.login)
+                .subscribe(
+                    res => this.diseaseBranches = res
             );
         return;
     }

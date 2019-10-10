@@ -25,6 +25,14 @@
 
 </div>
 
+<mat-toolbar>
+    <button class="nav-btn" mat-flat-button [routerLink]="btn.routerLink"
+        [style.background-color]="!btn.isSelected ? 'transparent' : 'gainsboro'">
+        <fa-icon [icon]="btn.icon"></fa-icon>
+        {{btn.content}}
+    </button>
+</mat-toolbar>
+
 
 <br />
 <div>

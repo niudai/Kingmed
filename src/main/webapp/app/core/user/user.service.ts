@@ -6,6 +6,7 @@ import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
 import { IUser } from './user.model';
 import { IDiseaseXiAn } from 'app/shared/model/disease-xi-an.model';
+import { IDiseaseBranch } from 'app/shared/model/disease-branch.model';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -47,6 +48,10 @@ export class UserService {
     getDiseases(login: string, req?: any): Observable<HttpResponse<IDiseaseXiAn[]>> {
         const options = createRequestOption(req);
         return this.http.get<IDiseaseXiAn[]>(`${this.resourceUrl}/${login}/diseases`, { params: options, observe: 'response'});
+    }
+
+    getDiseaseBranches(login: string): Observable<IDiseaseBranch[]> {
+        return this.http.get<IDiseaseBranch[]>(`${this.resourceUrl}/${login}/disease-branches`, { observe: 'body' });
     }
 
     postDiseases(login: string, disease: IDiseaseXiAn, req?: any): Observable<HttpResponse<IDiseaseXiAn[]>> {

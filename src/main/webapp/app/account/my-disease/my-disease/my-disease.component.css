@@ -107,4 +107,151 @@ table {
     margin: 0;
 }
 
+/* ==========================================================================
+Navbar
+========================================================================== */
+.nav-link {
+    color: #54bdbd;
+}
+
+button.nav-btn.mat-flat-button.ng-star-inserted {
+    font-weight: 600;
+    font-size: 18px;
+}
+
+/* nav {
+    position: fixed;
+    bottom: 40px;
+} */
+
+mat-toolbar button {
+    background-color: transparent;
+    min-width: 120px;
+}
+
+mat-toolbar button:hover {
+    background-color: gainsboro;
+}
+
+mat-toolbar button:visited {
+    background-color: rgb(117, 138, 36);
+}
+
+mat-toolbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    overflow-x: auto;
+}
+
+.nav-link:hover {
+    color: #336b6b;
+}
+
+.dropdown-item:hover {
+    background-color: white;
+    color: #336b6b;
+}
+
+.dropdown-item:active {
+    background-color: rgb(230, 208, 208);
+}
+
+.navbar-version {
+    font-size: 10px;
+    color: #ccc;
+}
+
+.head {
+    /* width: 100%; */
+    /* height: 60px; */
+    background: white;
+    /* background: url(http://www.kingmed.com.cn/images/bghead.jpg) repeat-x; */
+    /* padding-bottom: 2rem; */
+}
+
+/* .profile-image {
+    height: 2em;
+    width: 2em;
+} */
+
+
+.jh-navbar .profile-image {
+    margin: -10px 0px;
+    height: 20px;
+    width: 40px;
+    border-radius: 50%;
+}
+
+.jh-navbar .dropdown-toggle::after {
+    margin-left: 0.15em;
+}
+
+.jh-navbar ul.navbar-nav {
+    padding: 0.5em;
+}
+
+.jh-navbar .navbar-nav .nav-item {
+    margin-left: 1.5rem;
+}
+
+.jh-navbar a.nav-link {
+    font-weight: 400;
+}
+
+.jh-navbar .jh-navbar-toggler {
+    color: #ccc;
+    font-size: 1.5em;
+    padding: 10px;
+}
+
+.jh-navbar .jh-navbar-toggler:hover {
+    color: #fff;
+}
+
+@media screen and (min-width: 768px) {
+    .jh-navbar-toggler {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .jh-logo-container {
+        width: 100%;
+    }
+}
+
+.navbar-title {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* ==========================================================================
+Logo styles
+========================================================================== */
+/* .navbar-brand.logo {
+    padding: 5px 15px;
+}
+
+.logo-img {
+    height: 100%;
+    background: url('../../../content/images/logo-jhipster.png') no-repeat center center;
+    background-size: contain;
+    width: 100%;
+}
+
+.logo .logo-img {
+    height: 45px;
+    display: inline-block;
+    vertical-align: middle;
+    width: 70px;
+} */
+
+.navbar {
+    background-color:white;
+}
+
+
 
