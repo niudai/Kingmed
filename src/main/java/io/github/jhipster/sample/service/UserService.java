@@ -30,9 +30,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import io.github.jhipster.sample.config.Constants;
 import io.github.jhipster.sample.domain.Authority;
+import io.github.jhipster.sample.domain.DiseaseBranch;
+import io.github.jhipster.sample.domain.DiseaseMap;
 import io.github.jhipster.sample.domain.DiseaseXiAn;
 import io.github.jhipster.sample.domain.User;
 import io.github.jhipster.sample.repository.AuthorityRepository;
+import io.github.jhipster.sample.repository.DiseaseBranchRepository;
+import io.github.jhipster.sample.repository.DiseaseMapRepository;
 import io.github.jhipster.sample.repository.DiseaseXiAnRepository;
 import io.github.jhipster.sample.repository.UserRepository;
 import io.github.jhipster.sample.security.AuthoritiesConstants;
@@ -58,6 +62,10 @@ public class UserService {
 
     private final DiseaseXiAnRepository diseaseXiAnRepository;
 
+    private final DiseaseMapRepository diseaseMapRepository;
+
+    private final DiseaseBranchRepository diseaseBranchRepository;
+
     private final PasswordEncoder passwordEncoder;
 
     private final AuthorityRepository authorityRepository;
@@ -68,10 +76,17 @@ public class UserService {
 
     private final EntityManager entityManager;
 
+    private final DiseaseMapService diseaseMapService;
+
+
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder,
             AuthorityRepository authorityRepository, CacheManager cacheManager,
             DiseaseXiAnRepository diseaseXiAnRepository,
-            DiseaseXiAnService diseaseXiAnService, EntityManager entityManager) {
+            DiseaseXiAnService diseaseXiAnService,
+            EntityManager entityManager,
+            DiseaseMapRepository diseaseMapRepository,
+            DiseaseBranchRepository diseaseBranchRepository,
+            DiseaseMapService diseaseMapService) {
         this.entityManager = entityManager;
         this.diseaseXiAnRepository = diseaseXiAnRepository;
         this.userRepository = userRepository;
@@ -79,6 +94,9 @@ public class UserService {
         this.authorityRepository = authorityRepository;
         this.cacheManager = cacheManager;
         this.diseaseXiAnService = diseaseXiAnService;
+        this.diseaseMapRepository = diseaseMapRepository;
+        this.diseaseBranchRepository = diseaseBranchRepository;
+        this.diseaseMapService = diseaseMapService;
     }
 
     public Optional<User> activateRegistration(String key) {
@@ -160,6 +178,33 @@ public class UserService {
         } else {
             user.getDiseaseXiAns().add(diseaseXiAnRepository.findById(diseaseXiAn.getId()).get());
         }
+    }
+
+    public List<DiseaseMap> getDiseaseMaps(String login) {
+        return diseaseMapRepository.findAllByUsersLogin(login);
+    }
+
+    public void postDiseaseMapToDiseaseBranch(String login, DiseaseMap diseaseMap, Long diseaseBranchId) {
+        User user = userRepository.findOneByLogin(login).get();
+        DiseaseMap result = diseaseMapService.attachDiseaseMapToDiseaseBranch(diseaseMap, diseaseBranchId);
+        user.getDiseaseMaps().add(result);
+    }
+
+    public void postDiseaseMapToDiseaseMap(String login, DiseaseMap diseaseMap, Long diseaseMapId) {
+        User user = userRepository.findOneByLogin(login).get();
+        DiseaseMap result = diseaseMapService.attachDiseaseMapToDiseaseMap(diseaseMap, diseaseMapId);
+        user.getDiseaseMaps().add(result);
+    }
+
+    public List<DiseaseBranch> getDiseaseBranches(String login) {
+        return diseaseBranchRepository.findAllByUsersLogin(login);
+    }
+
+
+    public void postDiseaseBranch(String login, DiseaseBranch diseaseBranch) {
+        User user = userRepository.findOneByLogin(login).get();
+        DiseaseBranch result = diseaseMapService.attachDiseaseBranch(diseaseBranch);
+        user.getDiseaseBranches().add(result);
     }
 
     @Transactional

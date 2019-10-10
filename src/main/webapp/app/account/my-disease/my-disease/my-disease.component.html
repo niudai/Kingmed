@@ -11,13 +11,13 @@
                     <fa-icon icon="chevron-right"></fa-icon>
                 </span>
                 <button mat-raised-button color="accent" *jhiHasAnyAuthority="'ROLE_ADMIN'" id="jh-create-entity"
-                class="float-right jh-create-entity create-disease-xi-an" [routerLink]="['/disease-xi-an', 'new']">
-                <fa-icon [icon]="'plus'"></fa-icon>
-                <span class="hidden-sm-down"
-                    jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.home.createLabel">
-                    Create new Disease Xi An
-                </span>
-            </button>
+                    class="float-right jh-create-entity create-disease-xi-an" [routerLink]="['/disease-xi-an', 'new']">
+                    <fa-icon [icon]="'plus'"></fa-icon>
+                    <span class="hidden-sm-down"
+                        jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.home.createLabel">
+                        Create new Disease Xi An
+                    </span>
+                </button>
             </mat-card-title>
             <mat-card-subtitle>{{currentAccount.email}}</mat-card-subtitle>
         </mat-card-header>
@@ -182,4 +182,38 @@
     <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="10" [length]="totalItems" showFirstLastButtons
         (page)="loadDiseases($event)">
     </mat-paginator>`
+</div>
+
+
+<div class="row">
+    <mat-card class="branch-card" *ngFor="let diseaseMap of diseaseMaps" class="card col-sm-3"
+        style="margin-bottom: 5px">
+        <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>{{diseaseMap.name}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-actions>
+            <button mat-raised-button color="accent" [routerLink]="['disease-maps', diseaseMap.id]">进入</button>
+        </mat-card-actions>
+    </mat-card>
+    <mat-card class="branch-card" *ngFor="let diseaseBranch of diseaseBranches" class="card col-sm-3"
+        style="margin-bottom: 5px">
+        <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>{{diseaseBranch.name}}</mat-card-title>
+            <mat-card-subtitle>{{diseaseBranch.subsidiary}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <p>
+                {{diseaseBranch.description}}
+            </p>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button color="accent" [routerLink]="[diseaseBranch.id, 'view']">进入</button>
+            <button mat-raised-button color="warn" (click)="open(diseaseBranch)"
+                *jhiHasAnyAuthority="'ROLE_ADMIN'">删除</button>
+            <button mat-raised-button style="background-color: bisque" [routerLink]="[diseaseBranch.id, 'edit']"
+                *jhiHasAnyAuthority="'ROLE_ADMIN'">编辑</button>
+        </mat-card-actions>
+    </mat-card>
 </div>

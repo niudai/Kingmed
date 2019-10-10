@@ -1,4 +1,7 @@
 package io.github.jhipster.sample.repository;
+
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import io.github.jhipster.sample.domain.DiseaseMap;
@@ -8,4 +11,5 @@ import io.github.jhipster.sample.domain.DiseaseMap;
  */
 @Repository
 public interface DiseaseMapRepository extends JpaRepository<DiseaseMap, Long> {
+    List<DiseaseMap> findAllByUsersLogin(String login);
 }

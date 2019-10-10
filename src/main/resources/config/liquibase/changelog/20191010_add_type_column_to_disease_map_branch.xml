@@ -15,10 +15,10 @@
     <!-- Add subsidiary column to price table -->
     <changeSet author="niudai" id="2019101001">
         <addColumn tableName="disease_map">
-            <column name="type" type="varchar(50)" defaultValue="ROLE_ADMIN"/>
+            <column name="type" type="varchar(50)" defaultValue="PUBLIC"/>
         </addColumn>
         <addColumn tableName="disease_branch">
-            <column name="type" type="varchar(50)" defaultValue="ROLE_ADMIN"/>
+            <column name="type" type="varchar(50)" defaultValue="PUBLIC"/>
         </addColumn>
     </changeSet>
 

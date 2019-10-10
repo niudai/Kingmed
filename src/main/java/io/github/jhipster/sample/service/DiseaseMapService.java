@@ -25,11 +25,14 @@ import io.github.jhipster.sample.domain.DiseaseMapIndexDTO;
 import io.github.jhipster.sample.domain.DiseaseXiAn;
 import io.github.jhipster.sample.domain.LinkCard;
 import io.github.jhipster.sample.domain.QArobot;
+import io.github.jhipster.sample.domain.User;
 import io.github.jhipster.sample.repository.DiseaseBranchRepository;
 import io.github.jhipster.sample.repository.DiseaseMapRepository;
 import io.github.jhipster.sample.repository.DiseaseXiAnRepository;
 import io.github.jhipster.sample.repository.LinkCardRepository;
 import io.github.jhipster.sample.repository.QArobotRepository;
+import io.github.jhipster.sample.repository.UserRepository;
+import io.github.jhipster.sample.security.SecurityUtils;
 import io.github.jhipster.sample.web.rest.searchdto.DiseaseMapSearchDTO;
 import io.github.jhipster.sample.web.rest.util.SearchUtil;
 
@@ -49,6 +52,8 @@ public class DiseaseMapService {
     private final DiseaseBranchRepository diseaseBranchRepository;
     private final LinkCardRepository linkCardRepository;
     private final EntityManager entityManager;
+    private final UserRepository userRepository;
+
     @Autowired
     public DiseaseMapService(
         DiseaseMapRepository diseaseMapRepository,
@@ -56,13 +61,15 @@ public class DiseaseMapService {
         DiseaseXiAnRepository diseaseXiAnRepository,
         QArobotRepository qArobotRepository,
         LinkCardRepository linkCardRepository,
-        EntityManager entityManager) {
+        EntityManager entityManager,
+        UserRepository userRepository) {
         this.diseaseXiAnRepository = diseaseXiAnRepository;
         this.diseaseMapRepository = diseaseMapRepository;
         this.qArobotRepository = qArobotRepository;
         this.diseaseBranchRepository = diseaseBranchRepository;
         this.linkCardRepository = linkCardRepository;
         this.entityManager = entityManager;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -73,7 +80,10 @@ public class DiseaseMapService {
      */
     @Transactional
     public DiseaseBranch attachDiseaseBranch(DiseaseBranch newDiseaseBranch) {
-        return diseaseBranchRepository.save(newDiseaseBranch);
+        User user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin().get()).get();
+        DiseaseBranch result = diseaseBranchRepository.save(newDiseaseBranch);
+        user.getDiseaseBranches().add(result);
+        return result;
     }
 
     /**
@@ -189,9 +199,12 @@ public class DiseaseMapService {
      * @param diseaseBranchId
      */
     @Transactional
-    public void attachDiseaseMapToDiseaseBranch(DiseaseMap diseaseMap, Long diseaseBranchId) {
+    public DiseaseMap attachDiseaseMapToDiseaseBranch(DiseaseMap diseaseMap, Long diseaseBranchId) {
+        User user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin().get()).get();
         DiseaseMap map = diseaseMapRepository.save(diseaseMap);
+        user.getDiseaseMaps().add(diseaseMap);
         diseaseBranchRepository.findById(diseaseBranchId).get().getDiseaseMaps().add(map);
+        return map;
     }
 
     /**
@@ -285,9 +298,12 @@ public class DiseaseMapService {
      * @param diseaseMapId
      */
     @Transactional
-    public void attachDiseaseMapToDiseaseMap(DiseaseMap newDiseaseMap, Long diseaseMapId) {
+    public DiseaseMap attachDiseaseMapToDiseaseMap(DiseaseMap newDiseaseMap, Long diseaseMapId) {
+        User user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin().get()).get();
         DiseaseMap newMap = diseaseMapRepository.save(newDiseaseMap);
+        user.getDiseaseMaps().add(newDiseaseMap);
         diseaseMapRepository.findById(diseaseMapId).get().getDiseaseMaps().add(newMap);
+        return newMap;
     }
 
     /**

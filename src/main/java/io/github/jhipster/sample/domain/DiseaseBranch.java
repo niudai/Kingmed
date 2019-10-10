@@ -64,6 +64,16 @@ public class DiseaseBranch implements Serializable {
     @Column(name = "description", length = 250)
     private String description = "待添加";
 
+    @ManyToMany
+    @JoinTable(
+        name = "disease_branch_user",
+        joinColumns = @JoinColumn(name = "disease_branch_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id")
+
+    )
+    private Set<User> users = new HashSet<>();
+
+
     public DiseaseBranch() {
     }
 

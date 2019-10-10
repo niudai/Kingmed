@@ -9,6 +9,8 @@ where exists
 DROP DATABASE `db_name`;
 
 
+ALTER TABLE `table` DROP COLUMN `col_name`;
+
 
 
 update DISEASE_XI_AN a

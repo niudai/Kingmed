@@ -150,7 +150,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
     )
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @BatchSize(size = 10)
-    private Set<DiseaseMap> diseaseBranches = new HashSet<>();
+    private Set<DiseaseBranch> diseaseBranches = new HashSet<>();
 
     public User update(UserDTO dto) {
         this.login = dto.getLogin().toLowerCase();
@@ -341,5 +341,21 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     public void setSelfIntro(String selfIntro) {
         this.selfIntro = selfIntro;
+    }
+
+    public Set<DiseaseMap> getDiseaseMaps() {
+        return diseaseMaps;
+    }
+
+    public void setDiseaseMaps(Set<DiseaseMap> diseaseMaps) {
+        this.diseaseMaps = diseaseMaps;
+    }
+
+    public Set<DiseaseBranch> getDiseaseBranches() {
+        return diseaseBranches;
+    }
+
+    public void setDiseaseBranches(Set<DiseaseBranch> diseaseBranches) {
+        this.diseaseBranches = diseaseBranches;
     }
 }

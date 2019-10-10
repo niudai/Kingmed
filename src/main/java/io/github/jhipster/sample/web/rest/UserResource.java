@@ -25,6 +25,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.github.jhipster.sample.config.Constants;
+import io.github.jhipster.sample.domain.DiseaseBranch;
+import io.github.jhipster.sample.domain.DiseaseMap;
 import io.github.jhipster.sample.domain.DiseaseXiAn;
 import io.github.jhipster.sample.domain.User;
 import io.github.jhipster.sample.repository.UserRepository;
@@ -199,6 +201,36 @@ public class UserResource {
     @PostMapping("/users/{login:" + Constants.LOGIN_REGEX + "}" + "/diseases")
     public ResponseEntity<Void> postUserDiseases(@PathVariable String login, @Valid @RequestBody DiseaseXiAn disease) {
         userService.postDiseases(login, disease);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/users/{login:" + Constants.LOGIN_REGEX + "}" + "/disease-maps")
+    public ResponseEntity<List<DiseaseMap>> getUserDiseaseMaps(@PathVariable String login) {
+        List<DiseaseMap> diseaseMaps = userService.getDiseaseMaps(login);
+        return ResponseEntity.ok().body(diseaseMaps);
+    }
+
+    @PostMapping("/users/{login:" + Constants.LOGIN_REGEX + "}" + "/diseases-maps/{diseaseMapId}")
+    public ResponseEntity<Void> postUserDiseaseMapToDiseaseMap(@PathVariable String login, @Valid @RequestBody DiseaseMap map, @PathVariable Long diseaseMapId) {
+        userService.postDiseaseMapToDiseaseMap(login, map, diseaseMapId);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/users/{login:" + Constants.LOGIN_REGEX + "}" + "/disease-branches/{diseaseBranchId}/disease-maps")
+    public ResponseEntity<Void> postUserDiseaseMapToDiseaseBranch(@PathVariable String login, @Valid @RequestBody DiseaseMap map, @PathVariable Long diseaseBranchId) {
+        userService.postDiseaseMapToDiseaseBranch(login, map, diseaseBranchId);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/users/{login:" + Constants.LOGIN_REGEX + "}" + "/disease-branches")
+    public ResponseEntity<List<DiseaseBranch>> getUserDiseaseBranches(@PathVariable String login) {
+        List<DiseaseBranch> branches = userService.getDiseaseBranches(login);
+        return ResponseEntity.ok().body(branches);
+    }
+
+    @PostMapping("/users/{login:" + Constants.LOGIN_REGEX + "}" + "/disease-branches")
+    public ResponseEntity<Void> postUserDiseaseBranch(@PathVariable String login, @Valid @RequestBody DiseaseBranch branch, @PathVariable Long diseaseMapId) {
+        userService.postDiseaseBranch(login, branch);
         return ResponseEntity.ok().build();
     }
 

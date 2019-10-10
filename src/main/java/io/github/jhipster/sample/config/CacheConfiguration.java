@@ -41,6 +41,8 @@ public class CacheConfiguration {
             cm.createCache(io.github.jhipster.sample.domain.Authority.class.getName(), jcacheConfiguration);
             cm.createCache(io.github.jhipster.sample.domain.User.class.getName() + ".authorities", jcacheConfiguration);
             cm.createCache(io.github.jhipster.sample.domain.User.class.getName() + ".diseaseXiAns", jcacheConfiguration);
+            cm.createCache(io.github.jhipster.sample.domain.User.class.getName() + ".diseaseMaps", jcacheConfiguration);
+            cm.createCache(io.github.jhipster.sample.domain.User.class.getName() + ".diseaseBranches", jcacheConfiguration);
             cm.createCache(io.github.jhipster.sample.domain.QArobot.class.getName(), jcacheConfiguration);
             cm.createCache(io.github.jhipster.sample.domain.Prices.class.getName(), jcacheConfiguration);
             cm.createCache(io.github.jhipster.sample.domain.DiseaseXiAn.class.getName(), jcacheConfiguration);

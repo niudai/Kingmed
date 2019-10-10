@@ -40,6 +40,8 @@ TODO:
     ☐ make disease xi an related api restful
     ☐ 解决导航栏显示问题
     ☐ 在原有检测科室上加相关项目名(个人中心和浏览)
+    ☐ 地图私有/共有
+    ☐ 个人中心预览私人收藏夹
 
     DROP TABLE IF EXISTS COMMENT ;
 
