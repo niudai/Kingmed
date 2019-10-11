@@ -27,7 +27,7 @@ export class NavigationBackComponent implements OnInit {
     ngOnInit() {
         this.navButtons = [
             { color: 'white', font: 'home', routerLink: '/'  },
-            { color: 'white', font: 'user-circle', routerLink: '/account/my-disease'}
+            { color: 'white', font: 'user-circle', routerLink: '/account'}
         ];
         if (this.accountService.hasAnyAuthority(['ROLE_ADMIN'])) {
             this.navButtons.push(

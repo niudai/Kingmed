@@ -63,8 +63,6 @@ const ENTITY_STATES = [...diseaseXiAnRoute, ...diseaseXiAnPopupRoute];
         DiseaseXiAnMatDeleteDialogComponent,
         ArticleMatDeleteDialogComponent,
         ArticleMatCreateDialogComponent,
-        DiseaseXiAnGiveDialogComponent,
-        DiseaseXiAnDetailBottomSheetComponent,
         CommentDialogComponent,
         CommentBottomSheetComponent,
     ],

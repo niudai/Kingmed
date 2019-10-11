@@ -1,9 +1,8 @@
-import { diseaseXiAnPopupRoute } from './../disease-xi-an.route';
-import { DiseaseXiAnGiveDialogComponent } from './../disease-xi-an-give-dialog/disease-xi-an-give-dialog.component';
-import { Component, OnInit, Inject } from '@angular/core';
-import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA, MatDialog } from '@angular/material';
-import { DiseaseXiAnService } from '../disease-xi-an.service';
+import { Component, Inject } from '@angular/core';
+import { MatBottomSheetRef, MatDialog, MAT_BOTTOM_SHEET_DATA } from '@angular/material';
 import { DiseaseXiAnMatDeleteDialogComponent } from '..';
+import { DiseaseXiAnService } from '../disease-xi-an.service';
+import { DiseaseXiAnGiveDialogComponent } from './../disease-xi-an-give-dialog/disease-xi-an-give-dialog.component';
 
 @Component({
   selector: 'jhi-disease-xi-an-detail-bottom-sheet',

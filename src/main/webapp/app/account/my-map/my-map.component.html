@@ -1,0 +1,22 @@
+<div class="row">
+    <mat-card class="branch-card" *ngFor="let diseaseBranch of diseaseBranches" class="card col-sm-3"
+        style="margin-bottom: 5px">
+        <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>{{diseaseBranch.name}}</mat-card-title>
+            <mat-card-subtitle>{{diseaseBranch.subsidiary}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <p>
+                {{diseaseBranch.description}}
+            </p>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button color="accent" [routerLink]="[diseaseBranch.id, 'view']">进入</button>
+            <button mat-raised-button color="warn" (click)="open(diseaseBranch)"
+                *jhiHasAnyAuthority="'ROLE_ADMIN'">删除</button>
+            <button mat-raised-button style="background-color: bisque" [routerLink]="[diseaseBranch.id, 'edit']"
+                *jhiHasAnyAuthority="'ROLE_ADMIN'">编辑</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

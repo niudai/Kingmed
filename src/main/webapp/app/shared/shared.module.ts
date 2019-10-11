@@ -11,17 +11,23 @@ import {
 import { HideIfNullDirective } from './pipe/hide-if-null.directive';
 import { HideIfHasAnyAuthorityDirective } from './pipe/hide-if-has-any-authority.directive';
 import { FeedbackDialogComponent } from 'app/layouts/navbar/feedback-dialog/feedback-dialog.component';
+import { DiseaseXiAnDetailBottomSheetComponent } from 'app/entities/disease-xi-an/disease-xi-an-detail-bottom-sheet/disease-xi-an-detail-bottom-sheet.component';
+import { DiseaseXiAnGiveDialogComponent } from 'app/entities/disease-xi-an/disease-xi-an-give-dialog/disease-xi-an-give-dialog.component';
+import { RouterModule } from '@angular/router';
 @NgModule({
     imports: [
         JhipsterElasticsearchSampleApplicationSharedCommonModule,
-        JhipsterElasticsearchSampleApplicationSharedLibsModule
+        JhipsterElasticsearchSampleApplicationSharedLibsModule,
+        RouterModule
     ],
     declarations: [
         JhiLoginModalComponent,
         HasAnyAuthorityDirective,
         HideIfNullDirective,
         HideIfHasAnyAuthorityDirective,
-        FeedbackDialogComponent
+        FeedbackDialogComponent,
+        DiseaseXiAnDetailBottomSheetComponent,
+        DiseaseXiAnGiveDialogComponent
     ],
     providers: [{ provide: NgbDateAdapter, useClass: NgbDateMomentAdapter }],
     entryComponents: [
@@ -35,7 +41,9 @@ import { FeedbackDialogComponent } from 'app/layouts/navbar/feedback-dialog/feed
         FeedbackDialogComponent,
         HasAnyAuthorityDirective,
         HideIfNullDirective,
-        HideIfHasAnyAuthorityDirective
+        HideIfHasAnyAuthorityDirective,
+        DiseaseXiAnDetailBottomSheetComponent,
+        DiseaseXiAnGiveDialogComponent
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
