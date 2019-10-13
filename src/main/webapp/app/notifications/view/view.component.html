@@ -8,11 +8,20 @@
 </mat-form-field>
 <mat-form-field>
     <input matInput [matDatepicker]="endPicker" placeholder="截止日期"
-        (dateInput)="onEndDateChange()"
-        (dateChange)="onEndDateChange()"
+        (dateInput)="onEndDateChange($event)"
+        (dateChange)="onEndDateChange($event)"
     />
     <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
     <mat-datepicker #endPicker></mat-datepicker>
+</mat-form-field>
+
+<mat-form-field class="search-restric">
+    <mat-label>通知类型</mat-label>
+    <mat-select [(value)]="selectedType" (selectionChange)="filter()">
+        <mat-option *ngFor="let type of ntfTypes" [value]="type.type">
+            {{type.chinese}}
+        </mat-option>
+    </mat-select>
 </mat-form-field>
 
 <mat-expansion-panel *ngFor="let notification of filteredNotifications">

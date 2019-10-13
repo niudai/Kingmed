@@ -99,6 +99,11 @@ export class DiseaseBranchComponent implements OnInit {
                 .subscribe(diseasePartition => {
                     this.diseasePartition = diseasePartition;
                     this.diseaseBranches = diseasePartition.diseaseBranches;
+                    if (!this.accountService.hasAuthority('ROLE_ADMIN')) {
+                        this.diseaseBranches = this.diseaseBranches.filter( d => {
+                            return d.type === 'PUBLIC';
+                        });
+                    }
                 });
         } else {
             this.diseasePartition = new DiseasePartition();

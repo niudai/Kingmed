@@ -98,12 +98,13 @@ public class DiseasePartitionResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("")
+    @Transactional
     public ResponseEntity<DiseasePartition> updateDiseasePartition(@Valid @RequestBody DiseasePartition diseasePartition) throws URISyntaxException {
         log.debug("REST request to update DiseasePartition : {}", diseasePartition);
         if (diseasePartition.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        DiseasePartition result = diseasePartitionRepository.save(diseasePartition);
+        DiseasePartition result = diseasePartitionRepository.findById(diseasePartition.getId()).get().update(diseasePartition);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, diseasePartition.getId().toString()))
             .body(result);

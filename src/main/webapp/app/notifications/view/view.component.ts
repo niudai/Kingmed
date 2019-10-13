@@ -3,6 +3,8 @@ import { NotificationService } from '../notifications.service';
 import { INotification } from 'app/shared/model/notification.model';
 import { MatDialogRef, MatDialog, MatDatepickerInput, MatDatepickerInputEvent } from '@angular/material';
 import { DeleteComponent } from '../delete/delete.component';
+import { INtfType } from 'app/shared/model/ntf-type.model';
+import { NTF_TYPE_FOR_DISEASE } from 'app/shared/util/disease-ntf-util';
 
 @Component({
     selector: 'jhi-view',
@@ -14,6 +16,8 @@ export class ViewComponent implements OnInit {
     filteredNotifications: INotification[];
     beginDate: Date;
     endDate: Date;
+    selectedType: string;
+    ntfTypes = NTF_TYPE_FOR_DISEASE;
     innerWidth = window.innerWidth;
     constructor(
         private service: NotificationService,
@@ -26,6 +30,7 @@ export class ViewComponent implements OnInit {
     }
 
     onEndDateChange(event: MatDatepickerInputEvent<Date>) {
+        console.log(`End Date ${event.value.toISOString()}`);
         this.endDate = event.value;
         this.filter();
     }
@@ -37,7 +42,7 @@ export class ViewComponent implements OnInit {
             const isValid = (this.beginDate ? n.createdDate.toString() >= this.beginDate.toISOString() : true)
              && (this.endDate ? n.createdDate.toString() <= this.endDate.toISOString() : true);
             return isValid;
-        });
+        }).filter(n => this.selectedType ? n.type === this.selectedType : true);
     }
 
     btnColor(type: string) {
@@ -46,9 +51,7 @@ export class ViewComponent implements OnInit {
         } else if (type === 'CREATE') {
             return 'green';
         } else if (type === 'STOP') {
-            return 'yellow';
-        } else if (type === 'DELETE') {
-            return 'red';
+            return '#df5b2c';
         } else {
             return 'white';
         }

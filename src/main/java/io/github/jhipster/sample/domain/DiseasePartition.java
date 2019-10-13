@@ -119,6 +119,15 @@ public class DiseasePartition implements Serializable {
                 + name + "]";
     }
 
+    @Override
+    public DiseasePartition clone() {
+        DiseasePartition partition = new DiseasePartition();
+        partition.name = this.name;
+        partition.bgUrl = this.bgUrl;
+        partition.description = this.description;
+        return partition;
+    }
+
 
     public DiseasePartition update(DiseasePartition diseaseBranch) {
         this.id = diseaseBranch.id;
