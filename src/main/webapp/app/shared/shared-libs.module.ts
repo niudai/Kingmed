@@ -8,7 +8,7 @@ import { CookieModule } from 'ngx-cookie';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CdkTableModule } from '@angular/cdk/table';
 import { CdkTreeModule } from '@angular/cdk/tree';
-import { MatButtonModule, MatTreeModule, MatCardModule, MatIconModule, MatListModule, MatBottomSheetModule, MatDialogModule, MatInputModule, MatMenuModule, MatTooltipModule, MatSlideToggleModule, MatGridListModule, MatExpansionModule, MatRippleModule, MatTableModule, MatPaginatorModule, MatToolbarModule, MatSnackBarModule, MatSelectModule, MatChipsModule } from '@angular/material';
+import { MatButtonModule, MatTreeModule, MatCardModule, MatIconModule, MatListModule, MatBottomSheetModule, MatDialogModule, MatInputModule, MatMenuModule, MatTooltipModule, MatSlideToggleModule, MatGridListModule, MatExpansionModule, MatRippleModule, MatTableModule, MatPaginatorModule, MatToolbarModule, MatSnackBarModule, MatSelectModule, MatChipsModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 @NgModule({
     imports: [
@@ -34,7 +34,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
         MatBottomSheetModule,
         MatCardModule,
         // MatCheckboxModule,
-        // MatDatepickerModule,
+        MatDatepickerModule,
         MatDialogModule,
         // MatChipsModule,
         // MatStepperModule,
@@ -44,7 +44,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
         MatListModule,
         MatMenuModule,
         DragDropModule,
-        // MatNativeDateModule,
+        MatNativeDateModule,
         MatPaginatorModule,
         // MatProgressBarModule,
         // MatProgressSpinnerModule,

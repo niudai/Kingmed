@@ -6,6 +6,7 @@ where exists
 (select * from JHI_SUBSIDIARY b where b.name = a.subsidiary);
 
 
+
 DROP DATABASE `db_name`;
 
 

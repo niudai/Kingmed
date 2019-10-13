@@ -1,7 +1,7 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { NotificationService } from '../notifications.service';
 import { INotification } from 'app/shared/model/notification.model';
-import { MatDialogRef, MatDialog } from '@angular/material';
+import { MatDialogRef, MatDialog, MatDatepickerInput, MatDatepickerInputEvent } from '@angular/material';
 import { DeleteComponent } from '../delete/delete.component';
 
 @Component({
@@ -10,12 +10,35 @@ import { DeleteComponent } from '../delete/delete.component';
     styles: []
 })
 export class ViewComponent implements OnInit {
-    fromDate:
     notifications: INotification[];
+    filteredNotifications: INotification[];
+    beginDate: Date;
+    endDate: Date;
     innerWidth = window.innerWidth;
     constructor(
         private service: NotificationService,
         private dialog: MatDialog) {}
+
+    onStartDateChanges(event: MatDatepickerInputEvent<Date>) {
+        console.log(`Begin Date ${event.value.toISOString()}`);
+        this.beginDate = event.value;
+        this.filter();
+    }
+
+    onEndDateChange(event: MatDatepickerInputEvent<Date>) {
+        this.endDate = event.value;
+        this.filter();
+    }
+
+    filter() {
+        this.filteredNotifications = this.notifications.filter(n => {
+            console.log(n.createdDate);
+            console.log(`comparing: ${n.createdDate} and ${this.beginDate} outCome ${n.createdDate > this.beginDate}`);
+            const isValid = (this.beginDate ? n.createdDate.toString() >= this.beginDate.toISOString() : true)
+             && (this.endDate ? n.createdDate.toString() <= this.endDate.toISOString() : true);
+            return isValid;
+        });
+    }
 
     btnColor(type: string) {
         if (type === 'UPDATE') {
@@ -59,7 +82,7 @@ export class ViewComponent implements OnInit {
     loadAll() {
         this.service.query().subscribe(response => {
             this.notifications = response.body;
-            console.log('notification fetch finished!!!!');
+            this.filter();
             console.log(this.notifications);
         });
     }
