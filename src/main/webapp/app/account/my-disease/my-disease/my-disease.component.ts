@@ -72,13 +72,12 @@ export class MyDiseaseComponent implements OnInit {
 
     loadAll() {
         this.router.navigate([
-            '/account/disease',
-            {
-                // search: this.currentSearch,
-                size: this.pageEvent.pageSize ? this.pageEvent.pageSize : ITEMS_PER_PAGE,
-                page: this.pageEvent.pageIndex ? this.pageEvent.pageIndex : 0
-            }
-        ]);
+            '.',
+        ], { relativeTo: this.activatedRoute,  queryParams: {
+            size: this.pageEvent.pageSize ? this.pageEvent.pageSize : ITEMS_PER_PAGE,
+            page: this.pageEvent.pageIndex ? this.pageEvent.pageIndex : 0
+        }});
+
         this.userService
             .getDiseases(this.currentAccount.login, {
                 page: this.pageEvent && this.pageEvent.pageIndex ? this.pageEvent.pageIndex : 0,

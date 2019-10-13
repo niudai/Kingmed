@@ -26,13 +26,11 @@
 </div>
 <mat-toolbar>
     <button class="nav-btn" mat-flat-button
-    [routerLink]="[{ outlets: {subpage: btn.routerLink}}] "
+    [routerLink]="[{ outlets: {subpage: btn.routerLink}}]"
      *ngFor="let btn of navButtons"
-        [style.background-color]="!btn.isSelected ? 'transparent' : 'gainsboro'">
+        [style.background-color]="currentSubpage === btn.routerLink ? 'gainsboro' : 'transparent'">
         <fa-icon [icon]="btn.icon"></fa-icon>
         {{btn.content}}
     </button>
 </mat-toolbar>
-<br />
-
 

@@ -10,6 +10,7 @@ import { DeleteComponent } from '../delete/delete.component';
     styles: []
 })
 export class ViewComponent implements OnInit {
+    fromDate:
     notifications: INotification[];
     innerWidth = window.innerWidth;
     constructor(

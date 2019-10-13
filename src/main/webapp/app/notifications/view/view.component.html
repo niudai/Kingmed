@@ -1,4 +1,21 @@
 <mat-expansion-panel *ngFor="let notification of notifications">
+        <div class="row">
+                <div class="col-md-5">
+                    <h4 jhiTranslate="audits.filter.title">按照日期筛选</h4>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" jhiTranslate="audits.filter.from">from</span>
+                        </div>
+                        <input type="date" class="form-control" name="start" [(ngModel)]="fromDate" (ngModelChange)="transition()" required/>
+
+                        <div class="input-group-append">
+                            <span class="input-group-text" jhiTranslate="audits.filter.to">To</span>
+                        </div>
+                        <input type="date" class="form-control" name="end" [(ngModel)]="toDate" (ngModelChange)="transition()" required/>
+                    </div>
+                </div>
+            </div>
+
     <mat-expansion-panel-header>
         <mat-panel-title>
         </mat-panel-title>

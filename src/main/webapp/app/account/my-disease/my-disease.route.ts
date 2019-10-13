@@ -44,4 +44,9 @@ export const myDiseaseRoute: Route[] = [
         },
         canActivate: [UserRouteAccessService]
     },
+    {
+        path: '',
+        outlet: 'subpage',
+        redirectTo: 'disease'
+    }
 ];
