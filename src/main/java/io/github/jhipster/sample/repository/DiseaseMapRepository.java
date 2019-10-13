@@ -12,4 +12,5 @@ import io.github.jhipster.sample.domain.DiseaseMap;
 @Repository
 public interface DiseaseMapRepository extends JpaRepository<DiseaseMap, Long> {
     List<DiseaseMap> findAllByUsersLogin(String login);
+    List<DiseaseMap> findAllByDiseaseXiAnsId(Long id);
 }

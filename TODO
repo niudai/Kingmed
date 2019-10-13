@@ -44,7 +44,11 @@ TODO:
     ☐ 个人中心预览私人收藏夹
     ☐ 项目详情  相关地图
     ☐ 修复搜索框自动提示手机适配问题
+    ☐ 登录按钮放中间
+    ☐ 地图搜索结果权限控制
 
+TODO:
+    ☐ Jhipster Date bug
     DROP TABLE IF EXISTS COMMENT ;
 
 DELETE FROM DATABASECHANGELOG WHERE id = '2019082701';

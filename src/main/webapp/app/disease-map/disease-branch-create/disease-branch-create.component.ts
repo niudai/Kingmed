@@ -45,6 +45,7 @@ export class DiseaseBranchCreateComponent implements OnInit {
     submit() {
         this.diseaseBranch.type = this.selectedAuth.auth;
         if (this.diseaseBranch.id === undefined ) {
+            console.log(this.diseaseBranch);
             this.diseaseMapService.postDiseasePartitionsDiseaseBranch(this.diseasePartition.id, this.diseaseBranch)
             .subscribe(any => this.previousState());
         } else {

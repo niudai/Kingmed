@@ -22,3 +22,9 @@ input#currentSearch {
 .disease-map-list {
     background: #54bdbd;
 }
+
+span.branch-auth.ng-star-inserted {
+    background-color: blanchedalmond;
+    border-radius: 4px;
+    padding: 5px;
+}

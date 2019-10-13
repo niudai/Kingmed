@@ -29,6 +29,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import io.github.jhipster.sample.domain.Comment;
+import io.github.jhipster.sample.domain.DiseaseMap;
 import io.github.jhipster.sample.domain.DiseaseXiAn;
 import io.github.jhipster.sample.domain.ImageApplication;
 import io.github.jhipster.sample.domain.ImageSupplies;
@@ -36,6 +37,7 @@ import io.github.jhipster.sample.domain.LinkCard;
 import io.github.jhipster.sample.domain.QArobot;
 import io.github.jhipster.sample.domain.User;
 import io.github.jhipster.sample.repository.CommentRepository;
+import io.github.jhipster.sample.repository.DiseaseMapRepository;
 import io.github.jhipster.sample.repository.DiseaseXiAnRepository;
 import io.github.jhipster.sample.repository.ImageApplicationRepository;
 import io.github.jhipster.sample.repository.ImageSuppliesRepository;
@@ -58,12 +60,15 @@ public class DiseaseXiAnService {
     private final LinkCardRepository linkCardRepository;
     private final EntityManager entityManager;
     private final CommentRepository commentRepository;
+    private final DiseaseMapRepository diseaseMapRepository;
 
     @Autowired
     public DiseaseXiAnService(DiseaseXiAnRepository diseaseXiAnRepository, QArobotRepository qArobotRepository,
             ImageApplicationRepository imageApplicationRepository, ImageSuppliesRepository imageSuppliesRepository,
             LinkCardRepository linkCardRepository, UserRepository userRepository, EntityManager entityManager,
-            CommentRepository commentRepository) {
+            CommentRepository commentRepository,
+            DiseaseMapRepository diseaseMapRepository) {
+        this.diseaseMapRepository = diseaseMapRepository;
         this.entityManager = entityManager;
         this.userRepository = userRepository;
         this.imageSuppliesRepository = imageSuppliesRepository;
@@ -342,6 +347,13 @@ public class DiseaseXiAnService {
         DiseaseXiAn diseaseXiAn = diseaseXiAnRepository.findById(id).get();
         diseaseXiAn.setViews(diseaseXiAn.getViews() + 1);
         return Optional.of(diseaseXiAn);
+    }
+
+    /***************************** Comments ***********************/
+
+    @Transactional
+    public List<DiseaseMap> getDiseaseMaps(Long id) {
+        return diseaseMapRepository.findAllByDiseaseXiAnsId(id);
     }
 
     /***************************** Comments ***********************/

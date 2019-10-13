@@ -4,7 +4,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -25,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.github.jhipster.sample.domain.Comment;
+import io.github.jhipster.sample.domain.DiseaseMap;
 import io.github.jhipster.sample.domain.DiseaseXiAn;
 import io.github.jhipster.sample.domain.ImageApplication;
 import io.github.jhipster.sample.domain.ImageSupplies;
@@ -64,6 +64,7 @@ public class DiseaseXiAnResource {
     private final ProjectNotificationService notificationService;
 
     private final CommentRepository commentRepository;
+
     public DiseaseXiAnResource(
         DiseaseXiAnRepository diseaseXiAnRepository,
         PriceXiAnRepository priceXiAnRepository,
@@ -209,6 +210,12 @@ public class DiseaseXiAnResource {
     @GetMapping("/disease-xi-ans/diseases-of-disease/{id}")
     public ResponseEntity<List<DiseaseXiAn>> getDiseaseXiAnsOfDisease(@PathVariable Long id) {
         return ResponseEntity.ok().body(diseaseXiAnService.findDiseaseXiAnsOfDiseaseXiAn(id));
+    }
+
+
+    @GetMapping("/disease-xi-ans/{id}/disease-maps")
+    public ResponseEntity<List<DiseaseMap>> getDiseaseMaps(@PathVariable Long id) {
+        return ResponseEntity.ok().body(diseaseXiAnService.getDiseaseMaps(id));
     }
 
     /*******************************

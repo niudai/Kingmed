@@ -17,7 +17,7 @@
                     <mat-form-field class="search-restric">
                         <mat-label>地图权限</mat-label>
                         <mat-select [(value)]="selectedAuth">
-                            <mat-option *ngFor="let sort of authorizations" [value]="sort.auth">
+                            <mat-option *ngFor="let sort of authorizations" [value]="sort">
                                 {{sort.ch}}
                             </mat-option>
                         </mat-select>

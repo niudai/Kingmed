@@ -99,7 +99,8 @@ export class DiseaseBranchComponent implements OnInit {
                 .subscribe(diseasePartition => {
                     this.diseasePartition = diseasePartition;
                     this.diseaseBranches = diseasePartition.diseaseBranches;
-                    if (!this.accountService.hasAuthority('ROLE_ADMIN')) {
+                    if (!this.accountService.hasAnyAuthority(['ROLE_ADMIN'])) {
+                        console.log('HAS NO ADMIN !!!!!');
                         this.diseaseBranches = this.diseaseBranches.filter( d => {
                             return d.type === 'PUBLIC';
                         });

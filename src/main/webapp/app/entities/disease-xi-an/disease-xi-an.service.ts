@@ -13,6 +13,7 @@ import { IPriceXiAn } from 'app/shared/model/price-xi-an.model';
 import { IFile } from 'app/shared/model/file.model';
 import { LinkCard } from 'app/shared/model/link-card.model';
 import { IComment } from 'app/shared/model/comment.model';
+import { DiseaseMap, IDiseaseMap } from 'app/shared/model/disease-map.model';
 
 type EntityResponseType = HttpResponse<IDiseaseXiAn>;
 type EntityArrayResponseType = HttpResponse<IDiseaseXiAn[]>;
@@ -167,5 +168,10 @@ export class DiseaseXiAnService {
     }
     deleteComment(diseaseId: number, commentId: number): Observable<CommentResponse> {
         return this.http.delete<any>(`${this.resourceUrl}/${diseaseId}/comments/${commentId}`, { observe: 'response' });
+    }
+
+    ////////////////////////////// DiseaseMap ////////////////////
+    queryMap(diseaseId: number): Observable<HttpResponse<IDiseaseMap[]>> {
+        return this.http.get<IDiseaseMap[]>(`${this.resourceUrl}/${diseaseId}/disease-maps`, { observe: 'response'});
     }
 }

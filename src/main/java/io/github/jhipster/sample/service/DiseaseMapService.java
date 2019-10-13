@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 import io.github.jhipster.sample.domain.DiseaseBranch;
 import io.github.jhipster.sample.domain.DiseaseMap;
 import io.github.jhipster.sample.domain.DiseaseMapIndexDTO;
+import io.github.jhipster.sample.domain.DiseaseMapType;
 import io.github.jhipster.sample.domain.DiseaseXiAn;
 import io.github.jhipster.sample.domain.LinkCard;
 import io.github.jhipster.sample.domain.QArobot;
@@ -32,6 +33,7 @@ import io.github.jhipster.sample.repository.DiseaseXiAnRepository;
 import io.github.jhipster.sample.repository.LinkCardRepository;
 import io.github.jhipster.sample.repository.QArobotRepository;
 import io.github.jhipster.sample.repository.UserRepository;
+import io.github.jhipster.sample.security.AuthoritiesConstants;
 import io.github.jhipster.sample.security.SecurityUtils;
 import io.github.jhipster.sample.web.rest.searchdto.DiseaseMapSearchDTO;
 import io.github.jhipster.sample.web.rest.util.SearchUtil;
@@ -55,14 +57,9 @@ public class DiseaseMapService {
     private final UserRepository userRepository;
 
     @Autowired
-    public DiseaseMapService(
-        DiseaseMapRepository diseaseMapRepository,
-        DiseaseBranchRepository diseaseBranchRepository,
-        DiseaseXiAnRepository diseaseXiAnRepository,
-        QArobotRepository qArobotRepository,
-        LinkCardRepository linkCardRepository,
-        EntityManager entityManager,
-        UserRepository userRepository) {
+    public DiseaseMapService(DiseaseMapRepository diseaseMapRepository, DiseaseBranchRepository diseaseBranchRepository,
+            DiseaseXiAnRepository diseaseXiAnRepository, QArobotRepository qArobotRepository,
+            LinkCardRepository linkCardRepository, EntityManager entityManager, UserRepository userRepository) {
         this.diseaseXiAnRepository = diseaseXiAnRepository;
         this.diseaseMapRepository = diseaseMapRepository;
         this.qArobotRepository = qArobotRepository;
@@ -224,8 +221,7 @@ public class DiseaseMapService {
      */
     @Transactional
     public void modifyDiseaseBranch(DiseaseBranch diseaseBranch) {
-        modifyDiseaseBranch(diseaseBranchRepository.findById(diseaseBranch.getId()).get(),
-                diseaseBranch);
+        modifyDiseaseBranch(diseaseBranchRepository.findById(diseaseBranch.getId()).get(), diseaseBranch);
     }
 
     /**
@@ -364,6 +360,7 @@ public class DiseaseMapService {
 
     @Transactional
     public Page<DiseaseBranch> searchDiseaseBranch(DiseaseMapSearchDTO searchDTO, Pageable pageable) {
+        Boolean isAdmin = SecurityUtils.isCurrentUserInRole(AuthoritiesConstants.ADMIN);
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<DiseaseBranch> qarobotQuery = cb.createQuery(DiseaseBranch.class);
         CriteriaQuery<Long> countQuery = cb.createQuery(Long.class);
@@ -377,15 +374,17 @@ public class DiseaseMapService {
         String query = searchDTO.getName();
         if (query != null && query.length() > 0) {
             restrictions.clear();
-            restrictions.addAll(SearchUtil.queryKeywordParser(query).stream().map(
-                keyword -> cb.like(qarobot.get("name"), "%" + keyword + "%")
-                ).collect(Collectors.toList()));
+            restrictions.addAll(SearchUtil.queryKeywordParser(query).stream()
+                    .map(keyword -> cb.like(qarobot.get("name"), "%" + keyword + "%")).collect(Collectors.toList()));
             restrictions.add(cb.like(qarobot.get("name"), "%" + query + "%"));
         }
 
-        Predicate queryPredicate =
-            restrictions.size() > 0 ?
-                cb.or(restrictions.toArray(new Predicate[restrictions.size()])) : cb.and();
+        Predicate queryPredicate = restrictions.size() > 0
+                ? cb.or(restrictions.toArray(new Predicate[restrictions.size()]))
+                : cb.and();
+        if (!isAdmin) {
+            queryPredicate = cb.and(queryPredicate, cb.equal(qarobot.get("type"), DiseaseMapType.PUBLIC));
+        }
 
         qarobotQuery.where(queryPredicate);
 
@@ -407,6 +406,7 @@ public class DiseaseMapService {
 
     @Transactional
     public Page<DiseaseMapIndexDTO> searchDiseaseMap(DiseaseMapSearchDTO searchDTO, Pageable pageable) {
+        Boolean isAdmin = SecurityUtils.isCurrentUserInRole(AuthoritiesConstants.ADMIN);
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<DiseaseMap> qarobotQuery = cb.createQuery(DiseaseMap.class);
         CriteriaQuery<Long> countQuery = cb.createQuery(Long.class);
@@ -420,22 +420,24 @@ public class DiseaseMapService {
         String query = searchDTO.getName();
         if (query != null && query.length() > 0) {
             restrictions.clear();
-            restrictions.addAll(SearchUtil.queryKeywordParser(query).stream().map(
-                keyword -> cb.like(qarobot.get("name"), "%" + keyword + "%")
-                ).collect(Collectors.toList()));
+            restrictions.addAll(SearchUtil.queryKeywordParser(query).stream()
+                    .map(keyword -> cb.like(qarobot.get("name"), "%" + keyword + "%")).collect(Collectors.toList()));
             restrictions.add(cb.like(qarobot.get("name"), "%" + query + "%"));
         }
 
-        Predicate queryPredicate =
-            restrictions.size() > 0 ?
-                cb.or(restrictions.toArray(new Predicate[restrictions.size()])) : cb.and();
+        Predicate queryPredicate = restrictions.size() > 0
+                ? cb.or(restrictions.toArray(new Predicate[restrictions.size()]))
+                : cb.and();
 
+        if (!isAdmin) {
+            queryPredicate = cb.and(queryPredicate, cb.equal(qarobot.get("type"), DiseaseMapType.PUBLIC));
+        }
         qarobotQuery.where(queryPredicate);
 
         // get qarobots satisfied with criterias
         TypedQuery<DiseaseMap> typedDiseaseQuery = entityManager.createQuery(qarobotQuery);
-        typedDiseaseQuery.setFirstResult((int)pageable.getOffset());
-        typedDiseaseQuery.setMaxResults((int)pageable.getPageSize());
+        typedDiseaseQuery.setFirstResult((int) pageable.getOffset());
+        typedDiseaseQuery.setMaxResults((int) pageable.getPageSize());
         List<DiseaseMap> allDis = typedDiseaseQuery.getResultList();
 
         // get totalItems number with criterias
@@ -443,7 +445,8 @@ public class DiseaseMapService {
         Long totalItems = typedCountQuery.getSingleResult();
 
         // create a page in terms of the count and content
-        Page<DiseaseMapIndexDTO> resultPage = new PageImpl<DiseaseMapIndexDTO>(allDis.stream().map(any -> any.toIndexDTO()).collect(Collectors.toList()), pageable, totalItems);
+        Page<DiseaseMapIndexDTO> resultPage = new PageImpl<DiseaseMapIndexDTO>(
+                allDis.stream().map(any -> any.toIndexDTO()).collect(Collectors.toList()), pageable, totalItems);
 
         return resultPage;
     }
