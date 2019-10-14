@@ -14,7 +14,9 @@ import { CreateComponent } from 'app/entities/disease-xi-an/concourse/create-dia
 export class ConcourseAdminComponent implements OnInit {
     concourses: IConcourse[];
 
-    constructor(protected service: ConcourseService, protected dialog: MatDialog, protected snackbar: MatSnackBar) {}
+    constructor(protected service: ConcourseService,
+        protected dialog: MatDialog,
+        protected snackbar: MatSnackBar) {}
 
     loadSubsidiaries() {
         this.service.query().subscribe(res => {
@@ -40,7 +42,6 @@ export class ConcourseAdminComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe(result => {
             //   console.log('The dialog was closed');
-            this.snackbar.open('删除成功', null, { duration: 1000 });
             this.loadSubsidiaries();
         });
     }

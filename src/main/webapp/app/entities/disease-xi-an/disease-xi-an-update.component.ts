@@ -110,7 +110,7 @@ export class DiseaseXiAnUpdateComponent implements OnInit {
                 ]),
                 'subSeries': new FormControl(this.diseaseXiAn.subSeries, [
                 ]),
-                'remarks': new FormControl(this.diseaseXiAn.clinicalApplication, [
+                'remarks': new FormControl(this.diseaseXiAn.remarks, [
                 ]),
                 'ntf.title': new FormControl('', [
                 ]),

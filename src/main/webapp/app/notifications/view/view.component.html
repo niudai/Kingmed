@@ -22,32 +22,32 @@
 
 <mat-form-field class="search-restric">
     <mat-label>子公司</mat-label>
-    <mat-select [(value)]="selectedType" (selectionChange)="filter()">
-        <mat-option *ngFor="let type of ntfTypes" [value]="type.type">
-            {{ type.chinese }}
+    <mat-select [(value)]="selectedSub" (selectionChange)="filter()">
+        <mat-option>--</mat-option>
+        <mat-option *ngFor="let sub of subsidiaries" [value]="sub">
+            {{ sub.name }}
         </mat-option>
     </mat-select>
 </mat-form-field>
 
 <mat-expansion-panel *ngFor="let notification of filteredNotifications">
     <mat-expansion-panel-header>
-        <mat-panel-title> </mat-panel-title>
-        <mat-panel-description>
-            <mat-chip-list>
-                <mat-chip [style.margin-left]="'20px'" [style.background-color]="btnColor(notification.type)"
-                    [style.color]="'white'">{{
-                    btnContent(notification.type)
-                }}</mat-chip>
-                <mat-chip [style.margin-left]="'20px'" [style.background-color]="'#20c997'" [style.color]="'white'">{{
-                        notification.subsidiary.name
-                    }}</mat-chip>
-            </mat-chip-list>
-            {{ notification.title | trimIfTooLong: innerWidth / 50 }}
-            <button mat-mini-fab color="warn" *jhiHasAnyAuthority="['ROLE_ADMIN']" style="margin-left: 50px"
-                (click)="onDelete(notification)">
-                <fa-icon [icon]="'times'"></fa-icon>
-            </button>
-        </mat-panel-description>
+        <mat-panel-title>
+                <mat-chip-list>
+                        <mat-chip [style.margin-left]="'20px'" [style.background-color]="btnColor(notification.type)"
+                            [style.color]="'white'">{{
+                            ntfTranslator[notification.type]
+                        }}</mat-chip>
+                        <mat-chip [style.margin-left]="'20px'" [style.background-color]="'#20c997'" [style.color]="'white'">{{
+                                notification.subsidiary.name
+                            }}</mat-chip>
+                    </mat-chip-list>
+                    <span class = "ntf-title">{{ notification.title | trimIfTooLong: innerWidth / 50 }}</span>
+                    <button mat-mini-fab color="warn" *jhiHasAnyAuthority="['ROLE_ADMIN']" style="margin-left: 50px"
+                        (click)="onDelete(notification)">
+                        <fa-icon [icon]="'times'"></fa-icon>
+                    </button>
+        </mat-panel-title>
     </mat-expansion-panel-header>
     <mat-card>
         <p class="title" style="text-align: center">{{ notification.title }}</p>

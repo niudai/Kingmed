@@ -4,7 +4,9 @@ import { INotification } from 'app/shared/model/notification.model';
 import { MatDialogRef, MatDialog, MatDatepickerInput, MatDatepickerInputEvent } from '@angular/material';
 import { DeleteComponent } from '../delete/delete.component';
 import { INtfType } from 'app/shared/model/ntf-type.model';
-import { NTF_TYPE_FOR_DISEASE } from 'app/shared/util/disease-ntf-util';
+import { NTF_TYPE_FOR_DISEASE, NTF_TYPE_TRANSLATOR } from 'app/shared/util/disease-ntf-util';
+import { ISubsidiary } from 'app/shared/model/subsidiary.model';
+import { DiseaseXiAnService } from 'app/entities/disease-xi-an';
 
 @Component({
     selector: 'jhi-view',
@@ -17,10 +19,15 @@ export class ViewComponent implements OnInit {
     beginDate: Date;
     endDate: Date;
     selectedType: string;
+    selectedSub: ISubsidiary;
     ntfTypes = NTF_TYPE_FOR_DISEASE;
+    ntfTranslator = NTF_TYPE_TRANSLATOR;
     innerWidth = window.innerWidth;
+    subsidiaries: ISubsidiary[];
+
     constructor(
-        private service: NotificationService,
+        private ntfService: NotificationService,
+        private diseaseXiAnService: DiseaseXiAnService,
         private dialog: MatDialog) {}
 
     onStartDateChanges(event: MatDatepickerInputEvent<Date>) {
@@ -42,7 +49,8 @@ export class ViewComponent implements OnInit {
             const isValid = (this.beginDate ? n.createdDate.toString() >= this.beginDate.toISOString() : true)
              && (this.endDate ? n.createdDate.toString() <= this.endDate.toISOString() : true);
             return isValid;
-        }).filter(n => this.selectedType ? n.type === this.selectedType : true);
+        }).filter(n => this.selectedType ? n.type === this.selectedType : true)
+        .filter(n => this.selectedSub ? n.subsidiary.id === this.selectedSub.id : true);
     }
 
     btnColor(type: string) {
@@ -83,7 +91,7 @@ export class ViewComponent implements OnInit {
     }
 
     loadAll() {
-        this.service.query().subscribe(response => {
+        this.ntfService.query().subscribe(response => {
             this.notifications = response.body;
             this.filter();
             console.log(this.notifications);
@@ -92,5 +100,12 @@ export class ViewComponent implements OnInit {
 
     ngOnInit() {
         this.loadAll();
+        this.loadSubsidiaries();
+    }
+
+    loadSubsidiaries() {
+        this.diseaseXiAnService.getAllSubsidiary().subscribe(res => {
+            this.subsidiaries = res;
+        });
     }
 }
