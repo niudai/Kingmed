@@ -26,8 +26,10 @@ import { RouterModule } from '@angular/router';
         HideIfNullDirective,
         HideIfHasAnyAuthorityDirective,
         FeedbackDialogComponent,
+
+        // Disease Related
         DiseaseXiAnDetailBottomSheetComponent,
-        DiseaseXiAnGiveDialogComponent
+        DiseaseXiAnGiveDialogComponent,
     ],
     providers: [{ provide: NgbDateAdapter, useClass: NgbDateMomentAdapter }],
     entryComponents: [

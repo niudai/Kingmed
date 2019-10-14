@@ -6,6 +6,7 @@ import { Account, AccountService, UserService } from 'app/core';
 import { DiseaseBranchDeleteModalComponent } from 'app/disease-map/disease-branch/disease-branch.component';
 import { IDiseaseBranch } from 'app/shared/model/disease-branch.model';
 import { IDiseaseXiAn } from 'app/shared/model/disease-xi-an.model';
+import { MyMapDeleteDialogComponent } from './my-map-delete-dialog/my-map-delete-dialog.component';
 
 @Component({
   selector: 'jhi-my-map',
@@ -45,20 +46,14 @@ export class MyMapComponent implements OnInit {
     }
 
     open(diseaseBranch: IDiseaseBranch) {
-        const modalRef = this.modalService.open(DiseaseBranchDeleteModalComponent as Component, {
-            size: 'lg',
-            backdrop: 'static'
+        const dialogRef = this.dialog.open(MyMapDeleteDialogComponent, {
+            width: '500px',
+            data: { diseaseBranch }
         });
-        modalRef.componentInstance.id = diseaseBranch.id;
-        modalRef.componentInstance.name = diseaseBranch.name;
-        modalRef.result.then(
-            result => {
-                this.loadAll();
-            },
-            reason => {
-                this.loadAll();
-            }
-        );
+        dialogRef.afterClosed().subscribe(result => {
+            //   console.log('The dialog was closed');
+            this.loadAll();
+        });
     }
 
     trackId(index: number, item: IDiseaseXiAn) {

@@ -1,31 +1,19 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { RouterModule } from '@angular/router';
-
-import { JhipsterElasticsearchSampleApplicationSharedModule } from 'app/shared';
-
-import {
-    PasswordStrengthBarComponent,
-    RegisterComponent,
-    ActivateComponent,
-    PasswordComponent,
-    PasswordResetInitComponent,
-    PasswordResetFinishComponent,
-    SettingsComponent,
-    accountState
-} from './';
-import { JhiLanguageService } from 'ng-jhipster';
-import { JhiLanguageHelper } from 'app/core';
-import { MyDiseaseComponent } from './my-disease/my-disease/my-disease.component';
-import { MyDiseaseDeleteDialogComponent } from './my-disease/my-disease-delete-dialog/my-disease-delete-dialog.component';
-import { MyDiseaseCreateComponent } from './my-disease/my-disease-create/my-disease-create.component';
-import { AccountSettingsComponent } from './account-settings/account-settings.component';
-import { JhipsterElasticsearchSampleApplicationDiseaseXiAnModule } from 'app/entities/disease-xi-an/disease-xi-an.module';
-import { DiseaseXiAnDetailBottomSheetComponent } from 'app/entities/disease-xi-an/disease-xi-an-detail-bottom-sheet/disease-xi-an-detail-bottom-sheet.component';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MyMapComponent } from './my-map/my-map.component';
-import { MainComponent } from './main/main.component';
+import { RouterModule } from '@angular/router';
+import { JhiLanguageHelper } from 'app/core';
+import { DiseaseXiAnDetailBottomSheetComponent } from 'app/entities/disease-xi-an/disease-xi-an-detail-bottom-sheet/disease-xi-an-detail-bottom-sheet.component';
+import { JhipsterElasticsearchSampleApplicationSharedModule } from 'app/shared';
+import { JhiLanguageService } from 'ng-jhipster';
+import { accountState, ActivateComponent, PasswordComponent, PasswordResetFinishComponent, PasswordResetInitComponent, PasswordStrengthBarComponent, RegisterComponent, SettingsComponent } from './';
+import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { IndexComponent } from './index/index.component';
+import { MainComponent } from './main/main.component';
+import { MyDiseaseCreateComponent } from './my-disease/my-disease-create/my-disease-create.component';
+import { MyDiseaseDeleteDialogComponent } from './my-disease/my-disease-delete-dialog/my-disease-delete-dialog.component';
+import { MyDiseaseComponent } from './my-disease/my-disease/my-disease.component';
+import { MyMapDeleteDialogComponent } from './my-map/my-map-delete-dialog/my-map-delete-dialog.component';
+import { MyMapComponent } from './my-map/my-map.component';
 
 @NgModule({
     imports: [
@@ -46,10 +34,12 @@ import { IndexComponent } from './index/index.component';
         AccountSettingsComponent,
         MyMapComponent,
         MainComponent,
-        IndexComponent
+        IndexComponent,
+        MyMapDeleteDialogComponent
     ],
     entryComponents: [
         MyDiseaseDeleteDialogComponent,
+        MyMapDeleteDialogComponent,
         DiseaseXiAnDetailBottomSheetComponent
     ],
     bootstrap: [

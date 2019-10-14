@@ -15,7 +15,7 @@
             <button mat-raised-button color="accent" [routerLink]="['/disease-map', 0, 'disease-branches', diseaseBranch.id, 'view']">进入</button>
             <button mat-raised-button color="warn" (click)="open(diseaseBranch)"
                 *jhiHasAnyAuthority="'ROLE_ADMIN'">删除</button>
-            <button mat-raised-button style="background-color: bisque" [routerLink]="[diseaseBranch.id, 'edit']"
+            <button mat-raised-button style="background-color: bisque" [routerLink]="['/disease-map', 0, 'disease-branches', diseaseBranch.id, 'edit']"
                 *jhiHasAnyAuthority="'ROLE_ADMIN'">编辑</button>
         </mat-card-actions>
     </mat-card>
