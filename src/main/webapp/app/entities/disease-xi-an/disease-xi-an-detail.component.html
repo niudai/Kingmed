@@ -7,8 +7,12 @@
                 <button mat-stroked-button disabled="true">{{diseaseXiAn.id}}</button>
                 <span style = "float: right"><span style = "color: orange;">{{diseaseXiAn.views}}</span>人看过</span>
                 <br>
+                <span *ngFor = "let map of diseaseXiAn.diseaseMaps" class = "related-map"
+                    [routerLink] = "['/disease-map', 0, 'disease-maps', map.id, 'view']"
+                >{{map.name}}</span>
+                <br>
                 <fa-icon [icon]="'user-tie'" style="color: cadetblue"></fa-icon>
-                <span style="font-size: 10px">编辑于 <span>{{diseaseXiAn.lastModifiedDate | date}}</span></span>
+                <span style="font-size: 10px" >编辑于 <span>{{diseaseXiAn.lastModifiedDate | date}}</span></span>
                 <button style="
                     margin: 5px;" *ngFor="let user of users" mat-stroked-button
                     [routerLink]="['/admin/user-management', user.login, 'view']">{{user.firstName}}</button>

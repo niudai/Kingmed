@@ -119,6 +119,9 @@ export class DiseaseXiAnDetailComponent implements OnInit {
             };
             this.prices.push(this.selectedPrice);
             this.diseaseXiAnService.getUsers(this.diseaseXiAn.id).subscribe(res => (this.users = res.body));
+            this.diseaseXiAnService.queryMaps(this.diseaseXiAn.id).subscribe(res => {
+                this.diseaseXiAn.diseaseMaps = res;
+            });
             this.fetchComments();
         });
         this.activatedToggleLabel = this.diseaseXiAn.activated ? '运行' : '已停用';

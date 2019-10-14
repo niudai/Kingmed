@@ -42,3 +42,10 @@ set a.CONCOURSE_ID = (select b.id from JHI_CONCOURSE b where b.name= '卫检')
 where a.PROJECT_CONCOURSE = '卫检';
 
 SELECT * FROM DISEASE_XI_AN  WHERE project_concourse = '血液病理室';
+
+
+-- 集团营销运 2
+-- 各子公司自检项目清单 33
+-- 各子公司自检项目清单 34
+
+-- 地图板块迁移

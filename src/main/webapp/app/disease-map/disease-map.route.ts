@@ -72,7 +72,7 @@ export const SERIVCE_ROUTE: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: ':id/disease-branches/disease-maps/:diseaseMapId/view',
+        path: ':id/disease-maps/:diseaseMapId/view',
         component: DiseaseMapComponent,
         data: {
             authorities: [],

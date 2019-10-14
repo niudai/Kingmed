@@ -1,6 +1,7 @@
 import { ILinkCard } from './link-card.model';
 import { IPriceXiAn } from './price-xi-an.model';
 import { IFile } from './file.model';
+import { IDiseaseMap } from './disease-map.model';
 
 export interface IDiseaseXiAn {
     id?: number;
@@ -36,6 +37,7 @@ export interface IDiseaseXiAn {
     views?: number;
     concourseId?: number;
     subsidiaryId?: number;
+    diseaseMaps?: IDiseaseMap[];
 }
 
 export class DiseaseXiAn implements IDiseaseXiAn {
@@ -72,7 +74,8 @@ export class DiseaseXiAn implements IDiseaseXiAn {
         public subSeries?: string,
         public remarks?: string,
         public concourseId?: number,
-        public subsidiaryId?: number
+        public subsidiaryId?: number,
+        public diseaseMaps?: IDiseaseMap[]
     ) {}
 
 }
@@ -82,6 +85,7 @@ export const diseaseXiAnToString = (disease: IDiseaseXiAn) => {
         '【项目代码】 ' + disease.projectCode + ' \n' +
         '【物价编码】 ' + disease.chargeCode + ' \n' +
         '【临床应用】 ' + disease.clinicalApplication + ' \n' +
+        '【出结果时间】' + disease.reportingTime + ' \n' +
         '【样本与样本量】 ' + disease.supplement + ' \n' +
         '【耗材】 ' + disease.sample + ' \n' +
         '【分析前培训】 ' + disease.tutorial + ' \n' +

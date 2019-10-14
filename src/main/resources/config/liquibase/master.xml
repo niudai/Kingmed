@@ -59,5 +59,6 @@
     <include file="config/liquibase/changelog/20191008-add-column-disease-branch-partition-id.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20191010_add_type_column_to_disease_map_branch.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20191010_add_constraint_user_map_branch.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191014_alter_description_column_for_notification.xml" relativeToChangelogFile="false"/>
 
 </databaseChangeLog>

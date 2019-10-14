@@ -171,7 +171,7 @@ export class DiseaseXiAnService {
     }
 
     ////////////////////////////// DiseaseMap ////////////////////
-    queryMap(diseaseId: number): Observable<HttpResponse<IDiseaseMap[]>> {
-        return this.http.get<IDiseaseMap[]>(`${this.resourceUrl}/${diseaseId}/disease-maps`, { observe: 'response'});
+    queryMaps(diseaseId: number): Observable<IDiseaseMap[]> {
+        return this.http.get<IDiseaseMap[]>(`${this.resourceUrl}/${diseaseId}/disease-maps`, { observe: 'body'});
     }
 }
