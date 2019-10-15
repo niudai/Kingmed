@@ -72,17 +72,15 @@
 
                 <a [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'view' ]">{{diseaseXiAn.name}}
                     - <strong>{{diseaseXiAn.subsidiary}}</strong>
-
-                    <button class="concourse-chip" [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'diseases']">
-                        <span class="btn-fa">
-                            <fa-icon [icon]="'book-medical'" class="fa-related"></fa-icon>&nbsp;
-                        </span>
-                    </button>
-
-                    <button mat-fab color="warn" *ngIf="!diseaseXiAn.activated">停用</button>
-                    <!-- <button mat-raised-button color="warn" *ngIf="diseaseXiAn.activated">运行</button> -->
-                    <span style="float: right"><span style="color: orange;">{{diseaseXiAn.views}}</span>人看过</span>
                 </a>
+                <button class="concourse-chip" [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'diseases']">
+                    <span class="btn-fa">
+                        <fa-icon [icon]="'book-medical'" class="fa-related"></fa-icon>&nbsp;
+                    </span>
+                </button>
+                <button mat-fab color="warn" *ngIf="!diseaseXiAn.activated">停用</button>
+                <!-- <button mat-raised-button color="warn" *ngIf="diseaseXiAn.activated">运行</button> -->
+                <span style="float: right"><span style="color: orange;">{{diseaseXiAn.views}}</span>人看过</span>
             </td>
         </ng-container>
 

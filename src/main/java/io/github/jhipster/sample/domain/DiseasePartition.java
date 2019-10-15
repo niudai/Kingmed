@@ -132,6 +132,7 @@ public class DiseasePartition implements Serializable {
     public DiseasePartition update(DiseasePartition diseaseBranch) {
         this.id = diseaseBranch.id;
         this.name = diseaseBranch.name;
+        this.bgUrl = diseaseBranch.bgUrl;
         this.description = diseaseBranch.description;
         return this;
     }

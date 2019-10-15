@@ -49,3 +49,5 @@ SELECT * FROM DISEASE_XI_AN  WHERE project_concourse = '血液病理室';
 -- 各子公司自检项目清单 34
 
 -- 地图板块迁移
+
+update DISEASE_BRANCH  set DISEASE_PARTITION_ID = 1 where id =

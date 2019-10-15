@@ -76,7 +76,6 @@ export class DiseaseXiAnUpdateComponent implements OnInit {
                 'views': new FormControl(this.diseaseXiAn.views, [
                 ]),
                 'projectCode': new FormControl(this.diseaseXiAn.projectCode, [
-                    Validators.required
                 ]),
                 'chargeCode': new FormControl(this.diseaseXiAn.chargeCode, [
                 ]),

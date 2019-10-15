@@ -29,6 +29,7 @@ export class DiseasePartitionCreateComponent implements OnInit {
             this.diseaseMapService.postDiseasePartition(this.diseasePartition)
             .subscribe(any => this.previousState());
         } else {
+            console.log('Updating Disease Partition~~~~');
             this.diseaseMapService.putDiseasePartition(this.diseasePartition)
             .subscribe(any => this.previousState());
         }

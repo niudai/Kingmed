@@ -14,6 +14,7 @@
 <mat-form-field class="search-restric">
     <mat-label>通知类型</mat-label>
     <mat-select [(value)]="selectedType" (selectionChange)="filter()">
+        <mat-option>--</mat-option>
         <mat-option *ngFor="let type of ntfTypes" [value]="type.type">
             {{ type.chinese }}
         </mat-option>
