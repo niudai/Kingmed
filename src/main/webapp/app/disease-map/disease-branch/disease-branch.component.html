@@ -18,38 +18,44 @@
         </form>
     </mat-card>
     <div class="row">
-        <mat-card class="branch-card" *ngFor="let diseaseMap of diseaseMaps" class="card col-sm-3"
+        <mat-card
+            [routerLink]="['/disease-map', 0, 'disease-maps', diseaseMap.id, 'view']"
+            *ngFor="let diseaseMap of diseaseMaps" class="card col-sm-3 branch-card"
+            matRipple
             style="margin-bottom: 5px">
-            <mat-card-header>
-                <div mat-card-avatar class="example-header-image"></div>
-                <mat-card-title>{{diseaseMap.name}}</mat-card-title>
-            </mat-card-header>
-            <mat-card-actions>
-                <button mat-raised-button color="accent" [routerLink]="['disease-maps', diseaseMap.id]">进入</button>
-            </mat-card-actions>
+            <div mat-card-avatar class="kingmed-profile" *ngIf="innerWith > 600"></div>
+            <mat-card-title>{{diseaseMap.name}}</mat-card-title>
         </mat-card>
-        <mat-card class="branch-card" *ngFor="let diseaseBranch of diseaseBranches" class="card col-sm-3"
-            style="margin-bottom: 5px">
-            <mat-card-header>
-                <div mat-card-avatar class="example-header-image"></div>
+        <mat-card  [routerLink]="[diseaseBranch.id, 'view']"
+            matRipple
+            *ngFor="let diseaseBranch of diseaseBranches" class="card col-sm-3 branch-card" style="margin-bottom: 5px">
+            <!-- <mat-card-header>
+                <div *ngIf="innerWith > 600" mat-card-avatar class="kingmed-profile"></div>
                 <mat-card-title>{{diseaseBranch.name}}</mat-card-title>
-                <mat-card-subtitle>{{diseaseBranch.subsidiary}}
-                    <span class = "branch-auth" *jhiHasAnyAuthority="['ROLE_ADMIN']">{{diseaseBranch.type}}</span>
+                <mat-card-subtitle *ngIf="innerWith > 600">{{diseaseBranch.subsidiary}}
+                    <span class="branch-auth" *jhiHasAnyAuthority="['ROLE_ADMIN']">{{diseaseBranch.type}}</span>
                 </mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-content>
+            </mat-card-header> -->
+            <div *ngIf="innerWith > 600" mat-card-avatar class="kingmed-profile"></div>
+            <mat-card-title>{{diseaseBranch.name}}</mat-card-title>
+            <mat-card-subtitle *ngIf="innerWith > 600">{{diseaseBranch.subsidiary}}
+                <span class="branch-auth" *jhiHasAnyAuthority="['ROLE_ADMIN']">{{diseaseBranch.type}}</span>
+            </mat-card-subtitle>
+            <mat-card-content *ngIf="innerWith > 600">
                 <p>
                     {{diseaseBranch.description}}
                 </p>
             </mat-card-content>
             <mat-card-actions>
-                <button mat-raised-button color="accent"
-                    [routerLink]="[diseaseBranch.id, 'view']">进入</button>
-                <button mat-raised-button color="warn" (click)="open(diseaseBranch)"
-                    *jhiHasAnyAuthority="'ROLE_ADMIN'">删除</button>
-                <button mat-raised-button style="background-color: bisque"
-                    [routerLink]="[diseaseBranch.id, 'edit']"
-                    *jhiHasAnyAuthority="'ROLE_ADMIN'">编辑</button>
+                <!-- <button mat-raised-button color="accent"
+                    [routerLink]="[diseaseBranch.id, 'view']">进入</button> -->
+                <button mat-mini-fab color="warn" (click)="open(diseaseBranch)" *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                    <fa-icon [icon]="'times'"></fa-icon>
+                </button>
+                <button mat-mini-fab style="background-color: rgb(22, 155, 133)"
+                    [routerLink]="[diseaseBranch.id, 'edit']" *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                    <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                </button>
             </mat-card-actions>
         </mat-card>
     </div>

@@ -25,6 +25,7 @@ export class DiseaseXiAnUpdateComponent implements OnInit {
     ntf: INotification;
     isSaving: boolean;
     ifGenerateNtf = false;
+    ifClone = false;
     subsidiaries: ISubsidiary[];
     concourses: IConcourse[];
     types: INtfType[];
@@ -201,9 +202,10 @@ export class DiseaseXiAnUpdateComponent implements OnInit {
         this.diseaseXiAn.subSeries = this.editForm.value['subSeries'];
         this.diseaseXiAn.remarks = this.editForm.value['remarks'];
 
-        if (this.diseaseXiAn.id !== undefined) {
+        if (this.diseaseXiAn.id !== undefined && !this.ifClone) {
             this.subscribeToSaveResponse(this.diseaseXiAnService.update(prms, this.diseaseXiAn));
         } else {
+            this.diseaseXiAn.id = undefined;
             this.subscribeToSaveResponse(this.diseaseXiAnService.create(prms, this.diseaseXiAn));
         }
     }
@@ -224,4 +226,9 @@ export class DiseaseXiAnUpdateComponent implements OnInit {
     generateNtfToggle() {
         this.ifGenerateNtf = ! this.ifGenerateNtf;
     }
+
+    ifCloneToggle() {
+        this.ifClone = ! this.ifClone;
+    }
+
 }

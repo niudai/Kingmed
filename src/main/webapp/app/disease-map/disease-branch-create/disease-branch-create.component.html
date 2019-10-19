@@ -16,9 +16,9 @@
                         [(ngModel)]="diseaseBranch.description" [placeholder]="diseaseBranch.description" />
                     <mat-form-field class="search-restric">
                         <mat-label>地图权限</mat-label>
-                        <mat-select [(value)]="selectedAuth">
-                            <mat-option *ngFor="let sort of authorizations" [value]="sort">
-                                {{sort.ch}}
+                        <mat-select [(value)]="diseaseBranch.type">
+                            <mat-option *ngFor="let auth of authorizations" [value]="auth.auth">
+                                {{auth.ch}}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>

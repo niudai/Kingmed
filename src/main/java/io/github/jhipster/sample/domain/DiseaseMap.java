@@ -253,6 +253,7 @@ public class DiseaseMap implements Serializable {
         this.name = diseaseMap.name;
         this.subsidiary = diseaseMap.subsidiary;
         this.description = diseaseMap.description;
+        this.type = diseaseMap.type;
         return this;
     }
 

@@ -1,10 +1,22 @@
-.example-header-image {
+.kingmed-profile {
     background-image: url('../../../content/images/kingmedMiniIcon.png');
     background-size: cover;
   }
 
+.mat-card-header-text {
+    margin: 0;
+}
+
+.branch-card {
+    cursor: pointer;
+}
+
 mat-card.card.col-sm-3.mat-card.ng-star-inserted {
     width: 33%;
+}
+
+fa-icon {
+    color: white;
 }
 
 input#currentSearch {

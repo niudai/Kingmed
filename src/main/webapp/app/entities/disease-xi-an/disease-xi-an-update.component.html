@@ -148,6 +148,7 @@
                 <textarea cdkTextareaAutosize matInput formControlName="remarks" placeholder="备注"></textarea>
             </mat-form-field>
         </div>
+        <mat-slide-toggle [checked]="ifClone" (change)="ifCloneToggle()">是否克隆新项目</mat-slide-toggle>
         <mat-slide-toggle [checked]="ifGenerateNtf" (change)="generateNtfToggle()">是否生成通知</mat-slide-toggle>
         <div class="register-list ntf-form">
             <div [style.height]="ifGenerateNtf ? 'auto' : '0'" [style.visibility]="ifGenerateNtf ? 'visible' : 'hidden'">

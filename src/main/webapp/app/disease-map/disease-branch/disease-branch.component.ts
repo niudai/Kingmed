@@ -19,6 +19,7 @@ export class DiseaseBranchComponent implements OnInit {
     totalItems: number;
     currentSearch: string;
     pageEvent: PageEvent;
+    innerWith: number;
 
     public diseaseBranches: IDiseaseBranch[];
     public diseaseMaps: IDiseaseMap[];
@@ -93,6 +94,7 @@ export class DiseaseBranchComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.innerWith = window.innerWidth;
         if (this.route.snapshot.paramMap.get('id')) {
             const id = +this.route.snapshot.paramMap.get('id');
             this.diseaseMapService.getDiseaePartition(id)

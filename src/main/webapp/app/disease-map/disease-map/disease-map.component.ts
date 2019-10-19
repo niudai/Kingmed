@@ -62,6 +62,7 @@ export class DiseaseMapComponent implements OnInit {
     }
 
     deassociateWithDiseaseXiAn(diseaseXiAnId: number, diseaseMapId: number): void {
+        console.log(`Disease Map Id😊: ${diseaseMapId} Disease Xi An Id ${diseaseXiAnId}`);
         const dialogRef = this.dialog.open(DiseaseXiAnDeleteDialogComponent, {
             data: {
                 input: false,

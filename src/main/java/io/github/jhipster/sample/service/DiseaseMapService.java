@@ -211,7 +211,7 @@ public class DiseaseMapService {
      */
     @Transactional
     public void modifyDiseaseMap(DiseaseMap diseaseMap) {
-        modifyDiseaseMap(diseaseMapRepository.findById(diseaseMap.getId()).get(), diseaseMap);
+        diseaseMapRepository.findById(diseaseMap.getId()).get().update(diseaseMap);
     }
 
     /**
@@ -221,7 +221,7 @@ public class DiseaseMapService {
      */
     @Transactional
     public void modifyDiseaseBranch(DiseaseBranch diseaseBranch) {
-        modifyDiseaseBranch(diseaseBranchRepository.findById(diseaseBranch.getId()).get(), diseaseBranch);
+        diseaseBranchRepository.findById(diseaseBranch.getId()).get().update(diseaseBranch);
     }
 
     /**
@@ -449,22 +449,6 @@ public class DiseaseMapService {
                 allDis.stream().map(any -> any.toIndexDTO()).collect(Collectors.toList()), pageable, totalItems);
 
         return resultPage;
-    }
-
-    private DiseaseMap modifyDiseaseMap(DiseaseMap oldMap, DiseaseMap newMap) {
-        oldMap.setDescription(newMap.getDescription());
-        oldMap.setId(newMap.getId());
-        oldMap.setName(newMap.getName());
-        oldMap.setSubsidiary(newMap.getSubsidiary());
-        return oldMap;
-    }
-
-    private DiseaseBranch modifyDiseaseBranch(DiseaseBranch oldBranch, DiseaseBranch newBranch) {
-        oldBranch.setDescription(newBranch.getDescription());
-        oldBranch.setId(newBranch.getId());
-        oldBranch.setName(newBranch.getName());
-        oldBranch.setSubsidiary(newBranch.getSubsidiary());
-        return oldBranch;
     }
 
     public DiseaseMapIndexDTO diseaseMapIndexConverter(DiseaseMap diseaseMap) {

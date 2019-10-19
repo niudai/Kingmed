@@ -178,6 +178,7 @@ public class DiseaseBranch implements Serializable {
         this.name = diseaseBranch.name;
         this.subsidiary = diseaseBranch.subsidiary;
         this.description = diseaseBranch.description;
+        this.type = diseaseBranch.type;
         return this;
     }
 
