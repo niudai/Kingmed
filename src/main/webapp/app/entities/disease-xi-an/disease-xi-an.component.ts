@@ -34,11 +34,13 @@ export class DiseaseXiAnComponent implements OnInit {
     diseaseSorts: ISort[];
     selectedSort: string;
     selectedConcourse: IConcourse;
+    selectedConcourseId: number;
     diseaseXiAns: IDiseaseXiAn[];
     autoCompleteDiseases: IDiseaseXiAn[];
     subsidiaries: ISubsidiary[];
     concourses: IConcourse[];
     selectedSub: ISubsidiary;
+    selectedSubId: number;
     isBigScreen = true;
     error: any;
     success: any;
@@ -54,7 +56,7 @@ export class DiseaseXiAnComponent implements OnInit {
     reverse: any;
     pageEvent: PageEvent;
     isFocus = false;
-    matrixParams = {}; // matrixParams
+    matrixParams: any = {}; // matrixParams
     currentTimer: number; // used to count down to make search request to server
     protected ngbModalRef: NgbModalRef;
     isInArea = false;
@@ -158,14 +160,14 @@ export class DiseaseXiAnComponent implements OnInit {
         if (this.currentSearch) {
             params = params.set('query', this.currentSearch);
         }
-        if (this.selectedSub && this.selectedSub.id) {
-            params = params.set('subsidiaryId', this.selectedSub.id.toString());
+        if (this.matrixParams['subsidiary']) {
+            params = params.set('subsidiaryId', this.matrixParams['subsidiary'].toString());
         }
         if (this.selectedSort) {
             params = params.set('sort', this.selectedSort);
         }
-        if (this.selectedConcourse && this.selectedConcourse.name !== this.NO_SPECIFIED) {
-            params = params.set('concourse.pseudoId', this.selectedConcourse.pseudoId.toString());
+        if (this.matrixParams['concourse.pseudoId']) {
+            params = params.set('concourse.pseudoId', this.matrixParams['concourse.pseudoId'].toString());
         }
         this.diseaseXiAnService
             .query(params)
@@ -173,7 +175,6 @@ export class DiseaseXiAnComponent implements OnInit {
                 (res: HttpResponse<IDiseaseXiAn[]>) => this.paginateDiseaseXiAns(res.body, res.headers),
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
-        console.log('Diseases fetched');
         return;
     }
 
@@ -181,6 +182,9 @@ export class DiseaseXiAnComponent implements OnInit {
         this.diseaseXiAnService.getAllSubsidiary().subscribe(res => {
             this.subsidiaries = res;
             this.subsidiaries.push({ name: this.NO_SPECIFIED });
+            if (this.matrixParams['subsidiary']) {
+                this.selectedSub = this.subsidiaries.find( s => s.id === +this.matrixParams['subsidiary']);
+            }
         });
     }
 
@@ -190,14 +194,6 @@ export class DiseaseXiAnComponent implements OnInit {
                 c.isSelected = false;
                 return c;
             });
-            const undefinedConcourse = { name: this.NO_SPECIFIED, isSelected: true };
-            this.selectedConcourse =
-            this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['concourse.pseudoId']
-                ?
-                this.concourses.find(c => c.pseudoId === this.activatedRoute.snapshot.params['concourse.pseudoId'])
-                : undefinedConcourse;
-            console.log(`this selectedConcourse is ${this.selectedConcourse}`);
-            this.concourses.push(undefinedConcourse);
         });
     }
 
@@ -217,7 +213,11 @@ export class DiseaseXiAnComponent implements OnInit {
     }
 
     selectSub() {
-        this.matrixParams.subsidiary = this.selectedSub;
+        if (this.selectedSub.id) {
+            this.matrixParams.subsidiary = this.selectedSub.id;
+        } else {
+            delete this.matrixParams.subsidiary;
+        }
         this.transition();
         this.loadDiseases();
     }
@@ -229,12 +229,14 @@ export class DiseaseXiAnComponent implements OnInit {
     }
 
     selectConcourse(concourse: IConcourse) {
-        console.log('The selected concourse is :');
         console.log(this.selectedConcourse);
-        this.selectedConcourse.isSelected = false;
-        this.selectedConcourse = concourse;
-        this.selectedConcourse.isSelected = true;
-        this.matrixParams['concourse.pseudoId'] = concourse.pseudoId;
+        if (concourse) {
+            this.selectedConcourseId = concourse.pseudoId;
+            this.matrixParams['concourse.pseudoId'] = concourse.pseudoId;
+        } else {
+            delete this.matrixParams['concourse.pseudoId'];
+
+        }
         this.transition();
         this.loadDiseases();
     }
@@ -298,14 +300,24 @@ export class DiseaseXiAnComponent implements OnInit {
         }
         this.columnToggle();
         this.itemsPerPage = ITEMS_PER_PAGE;
+        const params = this.activatedRoute.snapshot.params;
+        Object.keys(params).forEach(
+            key => {
+                this.matrixParams[key] = params[key];
+            }
+        );
         this.currentSearch =
             this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['search']
                 ? this.activatedRoute.snapshot.params['search']
                 : '';
-        this.selectedSub =
-            this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['subsidiary']
-                ? this.activatedRoute.snapshot.params['subsidiary']
-                : this.NO_SPECIFIED;
+        // this.selectedSubId =
+        //     this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['subsidiary']
+        //         ? this.activatedRoute.snapshot.params['subsidiary']
+        //         : undefined;
+        // this.selectedConcourseId =
+        // this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['concourse.pseudoId']
+        //     ? +this.activatedRoute.snapshot.params['concourse.pseudoId']
+        //     : undefined;
         this.pageEvent = new PageEvent();
         this.pageEvent.pageIndex =
             this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['page'] ? +this.activatedRoute.snapshot.params['page'] : 0;
@@ -314,6 +326,7 @@ export class DiseaseXiAnComponent implements OnInit {
                 ? this.activatedRoute.snapshot.params['sort']
                 : this.diseaseSorts[2].sort;
         this.pageEvent.pageSize = ITEMS_PER_PAGE;
+
         this.loadConcourses();
         this.loadSubsidiaries();
         this.loadDiseases();

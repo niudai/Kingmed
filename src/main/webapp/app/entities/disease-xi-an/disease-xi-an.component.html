@@ -43,9 +43,15 @@
         <div>
             <div class="chips" style="display: inline-block; width: 100%">
                 <button class="concourse-chip" (click)="selectConcourse(concourse)" *ngFor="let concourse of concourses"
-                    [style.background-color]="concourse.isSelected ? 'aquamarine' : 'rgb(86, 177, 201)'">
+                    [style.background-color]="concourse.pseudoId === matrixParams['concourse.pseudoId'] ? 'aquamarine' : 'rgb(86, 177, 201)'">
                     <span>
                         {{concourse.name}}
+                    </span>
+                </button>
+                <button class="concourse-chip" (click)="selectConcourse()"
+                    [style.background-color]="!matrixParams['concourse.pseudoId'] ? 'aquamarine' : 'rgb(86, 177, 201)'">
+                    <span >
+                        不限定
                     </span>
                 </button>
             </div>
