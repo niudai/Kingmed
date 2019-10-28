@@ -34,7 +34,7 @@
 <mat-expansion-panel *ngFor="let notification of filteredNotifications">
     <mat-expansion-panel-header>
         <mat-panel-title>
-                <mat-chip-list>
+                <mat-chip-list *ngIf="innerWidth >= 500">
                         <mat-chip [style.margin-left]="'20px'" [style.background-color]="btnColor(notification.type)"
                             [style.color]="'white'">{{
                             ntfTranslator[notification.type]
@@ -43,6 +43,12 @@
                                 notification.subsidiary.name
                             }}</mat-chip>
                     </mat-chip-list>
+                    <mat-chip *ngIf="innerWidth <= 500"  [style.color]="'white'" [style.background-color]="btnColor(notification.type)">
+                        {{
+                            ntfTranslator[notification.type] + '/'
+                            + notification.subsidiary.name
+                        }}
+                    </mat-chip>
                     <span class = "ntf-title">{{ notification.title | trimIfTooLong: innerWidth / 50 }}</span>
                     <button mat-mini-fab color="warn" *jhiHasAnyAuthority="['ROLE_ADMIN']" style="margin-left: 50px"
                         (click)="onDelete(notification)">

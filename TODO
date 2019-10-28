@@ -141,3 +141,18 @@ Archive:
   ✔ Fix disease not showing properly in profile page. @done(19-09-11 09:39) @project(TODO)
   ✔ Fix compatible problem with search box @done(19-09-11 11:02) @project(TODO)
 
+Bug 修复:
+    ☐ 有的项目无法克隆 (EMA流式检测 阿立哌锉)
+    ☐ 排序首选 ID 号
+    ☐ 项目筛选条件   路由中不包含子公司等筛选条件
+    ✔ 域知项情 显示bug @done(19-10-28 15:48)
+    ☐ 搜索关键词   底色
+    ✔ 搜索自动提示  字体溢出 @done(19-10-28 15:54)
+    ☐ 无法删除地图  (心血管病 = 迪格奥尔格)
+    ☐ 问题分板块
+    ☐ 问题迁移
+    ☐ 服务平台  文字描述
+    ☐ 项目通知  真搜索
+
+
+

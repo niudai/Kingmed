@@ -29,7 +29,7 @@ export class DiseaseXiAnComponent implements OnInit {
     MOBILE_COL: string[] = ['nameMobile'];
     displayedColumns: string[];
     NO_SPECIFIED = '不限定';
-    windowWidth = 1000;
+    windowWidth = window.innerWidth;
     currentAccount: any;
     diseaseSorts: ISort[];
     selectedSort: string;

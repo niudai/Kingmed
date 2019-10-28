@@ -14,7 +14,7 @@
                     <mat-nav-list *ngIf="isInArea && autoCompleteDiseases && autoCompleteDiseases.length > 0" class="auto-complete-list">
                         <div *ngFor="let disease of autoCompleteDiseases">
                             <mat-list-item [routerLink]="[disease.id, 'view' ]">
-                                <p>{{disease.name | trimIfTooLong: windowWidth/10}}</p>
+                                <p>{{disease.name | trimIfTooLong: windowWidth/15}}</p>
                             </mat-list-item>
                             <mat-divider></mat-divider>
                         </div>
