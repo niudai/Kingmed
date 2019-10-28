@@ -204,8 +204,12 @@ export class DiseaseXiAnUpdateComponent implements OnInit {
 
         if (this.diseaseXiAn.id !== undefined && !this.ifClone) {
             this.subscribeToSaveResponse(this.diseaseXiAnService.update(prms, this.diseaseXiAn));
-        } else {
+        } else if (this.diseaseXiAn.id !== undefined && this.ifClone) {
             this.diseaseXiAn.id = undefined;
+            this.diseaseXiAn.linkCards = undefined;
+            this.diseaseXiAn.prices = undefined;
+            this.subscribeToSaveResponse(this.diseaseXiAnService.create(prms, this.diseaseXiAn));
+        } else if (this.diseaseXiAn === undefined) {
             this.subscribeToSaveResponse(this.diseaseXiAnService.create(prms, this.diseaseXiAn));
         }
     }

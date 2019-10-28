@@ -23,7 +23,7 @@
                 </div>
                 <mat-form-field class="search-restric">
                     <mat-label>子公司</mat-label>
-                    <mat-select [(value)]="selectedSub" (selectionChange)="loadDiseases()">
+                    <mat-select [(value)]="selectedSub" (selectionChange)="selectSub()">
                         <mat-option *ngFor="let sub of subsidiaries" [value]="sub">
                             {{sub.name}}
                         </mat-option>
@@ -31,7 +31,7 @@
                 </mat-form-field>
                 <mat-form-field class="search-restric">
                     <mat-label>排序</mat-label>
-                    <mat-select [(value)]="selectedSort" (selectionChange)="loadDiseases()">
+                    <mat-select [(value)]="selectedSort" (selectionChange)="selectSort()">
                         <mat-option *ngFor="let sort of diseaseSorts" [value]="sort.sort">
                             {{sort.chinese}}
                         </mat-option>

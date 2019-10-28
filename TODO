@@ -142,8 +142,8 @@ Archive:
   ✔ Fix compatible problem with search box @done(19-09-11 11:02) @project(TODO)
 
 Bug 修复:
-    ☐ 有的项目无法克隆 (EMA流式检测 阿立哌锉)
-    ☐ 排序首选 ID 号
+    ✔ 有的项目无法克隆 (EMA流式检测 阿立哌锉) @done(19-10-28 16:33)
+    ✔ 排序首选 ID 号 @done(19-10-28 16:35)
     ☐ 项目筛选条件   路由中不包含子公司等筛选条件
     ✔ 域知项情 显示bug @done(19-10-28 15:48)
     ☐ 搜索关键词   底色

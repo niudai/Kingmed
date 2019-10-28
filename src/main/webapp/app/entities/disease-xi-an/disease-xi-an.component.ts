@@ -54,6 +54,7 @@ export class DiseaseXiAnComponent implements OnInit {
     reverse: any;
     pageEvent: PageEvent;
     isFocus = false;
+    matrixParams = {}; // matrixParams
     currentTimer: number; // used to count down to make search request to server
     protected ngbModalRef: NgbModalRef;
     isInArea = false;
@@ -135,17 +136,18 @@ export class DiseaseXiAnComponent implements OnInit {
     }
 
     transition() {
+        // this.matrixParams = {
+        //     search: this.currentSearch,
+        //     size: this.itemsPerPage,
+        //     page: this.pageEvent.pageIndex ? this.pageEvent.pageIndex : 0,
+        //     sort: this.selectedSort,
+        //     subsidiary: this.selectedSub,
+        //     'concourse.pseudoId': this.selectedConcourse ? this.selectedConcourse.pseudoId : null,
+        //     'concourse.name': this.selectedConcourse ? this.selectedConcourse.name : null
+        // };
         this.router.navigate([
             '/disease-xi-an',
-            {
-                search: this.currentSearch,
-                size: this.itemsPerPage,
-                page: this.pageEvent.pageIndex ? this.pageEvent.pageIndex : 0,
-                sort: this.selectedSort,
-                subsidiary: this.selectedSub,
-                'concourse.pseudoId': this.selectedConcourse ? this.selectedConcourse.pseudoId : null,
-                'concourse.name': this.selectedConcourse ? this.selectedConcourse.name : null
-            }
+            this.matrixParams
         ]);
     }
 
@@ -188,19 +190,40 @@ export class DiseaseXiAnComponent implements OnInit {
                 c.isSelected = false;
                 return c;
             });
-            this.selectedConcourse = { name: this.NO_SPECIFIED, isSelected: true };
-            this.concourses.push(this.selectedConcourse);
+            const undefinedConcourse = { name: this.NO_SPECIFIED, isSelected: true };
+            this.selectedConcourse =
+            this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['concourse.pseudoId']
+                ?
+                this.concourses.find(c => c.pseudoId === this.activatedRoute.snapshot.params['concourse.pseudoId'])
+                : undefinedConcourse;
+            console.log(`this selectedConcourse is ${this.selectedConcourse}`);
+            this.concourses.push(undefinedConcourse);
         });
     }
 
     onPagination($event: PageEvent) {
         this.pageEvent = $event;
+        this.matrixParams.size = this.itemsPerPage;
+        this.matrixParams.page = this.pageEvent.pageIndex ? this.pageEvent.pageIndex : 0;
         this.transition();
         this.loadDiseases();
     }
 
     search() {
         this.pageEvent.pageIndex = 0;
+        this.matrixParams.search = this.currentSearch;
+        this.transition();
+        this.loadDiseases();
+    }
+
+    selectSub() {
+        this.matrixParams.subsidiary = this.selectedSub;
+        this.transition();
+        this.loadDiseases();
+    }
+
+    selectSort() {
+        this.matrixParams.sort = this.selectedSort;
         this.transition();
         this.loadDiseases();
     }
@@ -211,6 +234,8 @@ export class DiseaseXiAnComponent implements OnInit {
         this.selectedConcourse.isSelected = false;
         this.selectedConcourse = concourse;
         this.selectedConcourse.isSelected = true;
+        this.matrixParams['concourse.pseudoId'] = concourse.pseudoId;
+        this.transition();
         this.loadDiseases();
     }
 
@@ -287,7 +312,7 @@ export class DiseaseXiAnComponent implements OnInit {
         this.selectedSort =
             this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['sort']
                 ? this.activatedRoute.snapshot.params['sort']
-                : this.diseaseSorts[0].sort;
+                : this.diseaseSorts[2].sort;
         this.pageEvent.pageSize = ITEMS_PER_PAGE;
         this.loadConcourses();
         this.loadSubsidiaries();
