@@ -241,6 +241,10 @@ export class DiseaseXiAnComponent implements OnInit {
         this.loadDiseases();
     }
 
+    stopBubbling($event: Event) {
+        $event.stopPropagation();
+    }
+
     openDeleteDialog(disease: IDiseaseXiAn): void {
         const dialogRef = this.dialog.open(DiseaseXiAnMatDeleteDialogComponent, {
             width: '500px',
@@ -276,7 +280,8 @@ export class DiseaseXiAnComponent implements OnInit {
         });
     }
 
-    openDetailBottomSheet(disease: IDiseaseXiAn): void {
+    openDetailBottomSheet(event: Event, disease: IDiseaseXiAn): void {
+        event.stopPropagation();
         const bottomSheetRef = this._bottomSheet.open(DiseaseXiAnDetailBottomSheetComponent, {
             data: { diseaseXiAn: disease }
         });

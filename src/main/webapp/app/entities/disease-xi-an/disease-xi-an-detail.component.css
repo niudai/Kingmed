@@ -13,6 +13,13 @@ dt {
     cursor: pointer;
 }
 
+span.sub-label {
+    background-color: #31c3e4;
+    padding: 5px;
+    border-radius: 15px;
+    color: white;
+}
+
 .subItem {
     font-size: 20px;
     margin: 3px;

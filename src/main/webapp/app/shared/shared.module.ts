@@ -14,6 +14,7 @@ import { FeedbackDialogComponent } from 'app/layouts/navbar/feedback-dialog/feed
 import { DiseaseXiAnDetailBottomSheetComponent } from 'app/entities/disease-xi-an/disease-xi-an-detail-bottom-sheet/disease-xi-an-detail-bottom-sheet.component';
 import { DiseaseXiAnGiveDialogComponent } from 'app/entities/disease-xi-an/disease-xi-an-give-dialog/disease-xi-an-give-dialog.component';
 import { RouterModule } from '@angular/router';
+import { ClickStopPropagationDirective } from './pipe/click-stop-propagation.directive';
 @NgModule({
     imports: [
         JhipsterElasticsearchSampleApplicationSharedCommonModule,
@@ -26,6 +27,7 @@ import { RouterModule } from '@angular/router';
         HideIfNullDirective,
         HideIfHasAnyAuthorityDirective,
         FeedbackDialogComponent,
+        ClickStopPropagationDirective,
 
         // Disease Related
         DiseaseXiAnDetailBottomSheetComponent,
