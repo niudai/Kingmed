@@ -35,6 +35,7 @@ export class DiseaseXiAnDetailComponent implements OnInit {
     diseaseXiAn: IDiseaseXiAn;
     users: Account[];
     feedbackSuccessMsg = '反馈成功';
+    keyword: string;
 
     buttonInfos: ButtonInfo[] = [
         { content: '相关问题', faIcon: 'question', relativeUrl: 'qarobots', color: '' },
@@ -102,6 +103,7 @@ export class DiseaseXiAnDetailComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.keyword = this.activatedRoute.snapshot.queryParams['keyword'];
         if (this.accountService.hasAnyAuthority(['ROLE_ADMIN'])) {
             this.buttonInfos.push({ content: '价格详情', faIcon: 'dollar-sign', relativeUrl: 'prices', color: '' });
         }

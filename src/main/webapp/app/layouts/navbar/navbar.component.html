@@ -2,11 +2,11 @@
 
     <button class="nav-btn" mat-flat-button [routerLink]="btn.routerLink" *ngFor="let btn of navButtons"
         [style.background-color]="!btn.isSelected ? 'transparent' : 'gainsboro'">
-        <fa-icon [icon]="btn.icon"></fa-icon>
+        <fa-icon class = "nav-fa" [icon]="btn.icon"></fa-icon>
         {{btn.content}}
     </button>
     <button class="nav-button" mat-flat-button [matMenuTriggerFor]="appMenu" *jhiHasAnyAuthority="'ROLE_ADMIN'">
-        <fa-icon [icon] = "'user-tie'"></fa-icon>
+        <fa-icon class = "nav-fa" [icon] = "'user-tie'"></fa-icon>
         管理
     </button>
     <mat-menu #appMenu="matMenu">

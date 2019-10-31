@@ -6,7 +6,7 @@
     margin: 3px;
 }
 
-::slotted(strong) {
+:host span.project-name::ng-deep strong {
     color: red;
     font-size: medium;
 }

@@ -108,10 +108,10 @@
                             [style.color]="'white'">{{
                                             diseaseXiAn.subsidiary
                                         }}</mat-chip>
-                        <span [innerHTML]="diseaseXiAn.name | keywordHighlight: currentSearch"></span>
+                        <span class = "project-name" [innerHTML]="diseaseXiAn.name | keywordHighlight: currentSearch"></span>
                         <button class="concourse-chip" (click) = "stopBubbling($event)" [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'diseases']">
                             <span class="btn-fa">
-                                <fa-icon [icon]="'book-medical'" class="fa-related"></fa-icon>&nbsp;
+                                <fa-icon [icon]="'book-medical'" class="disease-fa fa-related"></fa-icon>&nbsp;
                             </span>
                         </button>
                         <button mat-fab color="warn" *ngIf="!diseaseXiAn.activated">停用</button>
@@ -224,14 +224,14 @@
             <tr *ngFor="let diseaseXiAn of diseaseXiAns">
                 <td>
                     <mat-card matRipple style="margin: 0; margin-top: 5px; padding: 1%"
-                        [routerLink]="[diseaseXiAn.id, 'view' ]"
+                        [routerLink]="[diseaseXiAn.id, 'view']" [queryParams]="{keyword: currentSearch}"
                     >
                         <mat-chip-list>
                             <mat-chip [style.margin-left]="'20px'" [style.background-color]="'#20c997'"
                                 [style.color]="'white'">{{
                                                         diseaseXiAn.subsidiary
                                                     }}</mat-chip>
-                            <span [innerHTML]="diseaseXiAn.name | keywordHighlight: currentSearch"></span>
+                            <span class = "project-name" [innerHTML]="diseaseXiAn.name | keywordHighlight: currentSearch"></span>
                             <button class="concourse-chip"
                                 (click) = "stopBubbling($event)"
                                 [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'diseases']">
@@ -254,7 +254,7 @@
                         <br>
                         <div>
                             <button (click)="openDetailBottomSheet($event, diseaseXiAn)" jhiClickStopPropagation mat-mini-fab color="accent">
-                                <fa-icon [icon]="'plus'"></fa-icon>
+                                <fa-icon [icon]="'plus'" class = "plus"></fa-icon>
                             </button>
                         </div>
                     </mat-card>
