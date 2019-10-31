@@ -15,7 +15,7 @@
                         class="auto-complete-list">
                         <div *ngFor="let disease of autoCompleteDiseases">
                             <mat-list-item [routerLink]="[disease.id, 'view' ]">
-                                <p>{{disease.name | trimIfTooLong: windowWidth/15}}</p>
+                                <p>{{disease.name | trimIfTooLong: windowWidth/15 | keywordHighlight: currentSearch }}</p>
                             </mat-list-item>
                             <mat-divider></mat-divider>
                         </div>
@@ -108,7 +108,7 @@
                             [style.color]="'white'">{{
                                             diseaseXiAn.subsidiary
                                         }}</mat-chip>
-                        <span>{{diseaseXiAn.name}}</span>
+                        <span [innerHTML]="diseaseXiAn.name | keywordHighlight: currentSearch"></span>
                         <button class="concourse-chip" (click) = "stopBubbling($event)" [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'diseases']">
                             <span class="btn-fa">
                                 <fa-icon [icon]="'book-medical'" class="fa-related"></fa-icon>&nbsp;
@@ -231,7 +231,7 @@
                                 [style.color]="'white'">{{
                                                         diseaseXiAn.subsidiary
                                                     }}</mat-chip>
-                            <span>{{diseaseXiAn.name}}</span>
+                            <span [innerHTML]="diseaseXiAn.name | keywordHighlight: currentSearch"></span>
                             <button class="concourse-chip"
                                 (click) = "stopBubbling($event)"
                                 [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'diseases']">

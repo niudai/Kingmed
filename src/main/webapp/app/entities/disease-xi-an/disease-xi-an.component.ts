@@ -1,5 +1,5 @@
 import { HttpErrorResponse, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatBottomSheet, MatDialog, PageEvent } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
@@ -22,7 +22,8 @@ import { SubsidiaryService } from './subsidiary/subsidiary.service';
 @Component({
     selector: 'jhi-disease-xi-an',
     templateUrl: './disease-xi-an.component.html',
-    styleUrls: ['./disease-xi-an.component.css']
+    styleUrls: ['./disease-xi-an.component.css'],
+    // encapsulation: ViewEncapsulation.None
 })
 export class DiseaseXiAnComponent implements OnInit {
     PC_COL: string[] = ['ID', 'namePC', 'price', 'applications', 'suppliess', 'qarobot'];

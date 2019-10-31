@@ -6,6 +6,11 @@
     margin: 3px;
 }
 
+::slotted(strong) {
+    color: red;
+    font-size: medium;
+}
+
 mat-nav-list.auto-complete-list.mat-nav-list.mat-list-base {
     position: absolute;
     top: 45px;
