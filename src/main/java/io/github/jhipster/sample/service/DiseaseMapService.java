@@ -232,6 +232,8 @@ public class DiseaseMapService {
      */
     @Transactional
     public void deleteDiseaseMap(Long diseaseMapId) {
+        diseaseMapRepository.findById(diseaseMapId)
+        .get().setParentDiseaseMap(null);
         diseaseMapRepository.deleteById(diseaseMapId);
     }
 

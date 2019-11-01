@@ -69,9 +69,9 @@ public class DiseaseMap implements Serializable {
     private Set<LinkCard> linkCards = new HashSet<LinkCard>();
 
     @ManyToOne
-    @JsonIgnoreProperties("diseaseMaps")
+    @JsonIgnoreProperties({"diseaseMaps", "parentDiseaseMap"})
     @JoinColumn(name = "disease_map_id")
-    private DiseaseMap parentDiseaseMap;
+    private DiseaseMap parentDiseaseMap; // cannot delete current map unless this is null
 
     @ManyToOne
     @JoinColumn(name = "disease_branch_id")
@@ -83,7 +83,9 @@ public class DiseaseMap implements Serializable {
     private Set<QArobot> qarobots = new HashSet<>();
 
     @ManyToMany
-    @JoinTable(name = "disease_map_disease_xi_an", joinColumns = @JoinColumn(name = "disease_map_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "disease_xi_an_id", referencedColumnName = "id"))
+    @JoinTable(name = "disease_map_disease_xi_an"
+        , joinColumns = @JoinColumn(name = "disease_map_id", referencedColumnName = "id")
+        , inverseJoinColumns = @JoinColumn(name = "disease_xi_an_id", referencedColumnName = "id"))
     @BatchSize(size = 5)
     private Set<DiseaseXiAn> diseaseXiAns = new HashSet<>();
 
@@ -140,6 +142,8 @@ public class DiseaseMap implements Serializable {
     public void setParentDiseaseMap(DiseaseMap parentDiseaseMap) {
         this.parentDiseaseMap = parentDiseaseMap;
     }
+
+
 
     public DiseaseMap id(Long id) {
         this.id = id;
@@ -263,6 +267,14 @@ public class DiseaseMap implements Serializable {
 
     public void setType(DiseaseMapType type) {
         this.type = type;
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 
 }

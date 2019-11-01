@@ -1,4 +1,4 @@
-<div>
+<div class="row">
     <div class="col-sm-8">
         <mat-card class="example-card" *ngIf="!diseaseMap">
             <mat-card-header>
@@ -118,7 +118,7 @@
                             </mat-panel-title>
                         </mat-expansion-panel-header>
                         <button *jhiHasAnyAuthority="'ROLE_ADMIN'" mat-mini-fab color="primary"
-                        (click)="openMapBottomSheet(node)" class="add" style="display: inline-block">+</button>
+                            (click)="openMapBottomSheet(node)" class="add" style="display: inline-block">+</button>
                         <mat-nav-list *ngFor="let diseaseXiAn of node.diseaseXiAns">
                             <mat-card matRipple>
                                 <button mat-raised-button style="background-color: cornsilk" disabled><span
@@ -154,6 +154,22 @@
                                 </button>
                             </mat-card>
                         </mat-nav-list>
+                        <mat-nav-list *ngFor="let link of node.linkCards">
+                            <mat-card class="example-card">
+                                <mat-card-header>
+                                    <div mat-card-avatar class="kingmed-profile"></div>
+                                    <mat-card-title>{{link.articleName}}</mat-card-title>
+                                    <mat-card-subtitle>{{link.subTitle}}</mat-card-subtitle>
+                                </mat-card-header>
+                                <a [href]="link.articleUrl">
+                                    <img mat-card-image [src]="link.imageUrl">
+                                </a>
+                                <mat-card-actions>
+                                    <button mat-button (click)="deleteLinkToBranch(link)">删除</button>
+                                    <button mat-button (click)="createLinkToBranch(link)">编辑</button>
+                                </mat-card-actions>
+                            </mat-card>
+                        </mat-nav-list>
                     </mat-expansion-panel>
                 </li>
             </mat-tree-node>
@@ -163,10 +179,10 @@
                 <li style="padding-bottom: 5px; width: 100%">
                     <mat-expansion-panel style="margin: 5px;" (click)="loadMapEagerly(node)">
                         <button mat-mini-fab color="accent" (click)="goDownTreeControl(node)" class="arrow-right">
-                            <fa-icon [icon]="'arrow-right'"></fa-icon>
+                            <fa-icon [icon]="'arrow-right'" style="color: white;"></fa-icon>
                         </button>
                         <button *jhiHasAnyAuthority="'ROLE_ADMIN'" mat-mini-fab color="primary"
-                    (click)="openMapBottomSheet(node)" class="add" style="display: inline-block">+</button>
+                            (click)="openMapBottomSheet(node)" class="add" style="display: inline-block">+</button>
                         <mat-expansion-panel-header>
                             <mat-panel-title>
                                 <span>{{node.name}}</span>
@@ -208,6 +224,22 @@
                                 </button>
                             </mat-card>
                         </mat-nav-list>
+                        <mat-nav-list *ngFor="let link of node.linkCards">
+                            <mat-card class="example-card">
+                                <mat-card-header>
+                                    <div mat-card-avatar class="kingmed-profile"></div>
+                                    <mat-card-title>{{link.articleName}}</mat-card-title>
+                                    <mat-card-subtitle>{{link.subTitle}}</mat-card-subtitle>
+                                </mat-card-header>
+                                <a [href]="link.articleUrl">
+                                    <img mat-card-image [src]="link.imageUrl">
+                                </a>
+                                <mat-card-actions>
+                                    <button mat-button (click)="deleteLinkToBranch(link)">删除</button>
+                                    <button mat-button (click)="createLinkToBranch(link)">编辑</button>
+                                </mat-card-actions>
+                            </mat-card>
+                        </mat-nav-list>
                     </mat-expansion-panel>
                     <!-- <ul [class.example-tree-invisible]="!treeControl.isExpanded(node)">
                                     <ng-container matTreeNodeOutlet></ng-container>
@@ -216,40 +248,41 @@
             </mat-tree-node>
         </mat-tree>
     </div>
-</div>
-<div class="col-sm-3" *ngIf="!diseaseMap && diseaseBranch">
-    <div *ngFor="let link of diseaseBranch.linkCards">
-        <mat-card class="example-card">
-            <mat-card-header>
-                <div mat-card-avatar class="kingmed-profile"></div>
-                <mat-card-title>{{link.articleName}}</mat-card-title>
-                <mat-card-subtitle>{{link.subTitle}}</mat-card-subtitle>
-            </mat-card-header>
-            <a [href]="link.articleUrl">
-                <img mat-card-image [src]="link.imageUrl" alt="Photo of a Shiba Inu">
-            </a>
-            <mat-card-actions>
-                <button mat-button (click)="deleteLinkToBranch(link)">删除</button>
-                <button mat-button (click)="createLinkToBranch(link)">编辑</button>
-            </mat-card-actions>
-        </mat-card>
+    <div class="col-sm-3" *ngIf="!diseaseMap && diseaseBranch">
+        <div *ngFor="let link of diseaseBranch.linkCards">
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <div mat-card-avatar class="kingmed-profile"></div>
+                    <h2>Hello</h2>
+                    <mat-card-title>{{link.articleName}}</mat-card-title>
+                    <mat-card-subtitle>{{link.subTitle}}</mat-card-subtitle>
+                </mat-card-header>
+                <a [href]="link.articleUrl">
+                    <img mat-card-image [src]="link.imageUrl">
+                </a>
+                <mat-card-actions>
+                    <button mat-button (click)="deleteLinkToBranch(link)">删除</button>
+                    <button mat-button (click)="createLinkToBranch(link)">编辑</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
     </div>
-</div>
-<div class="col-sm-3" *ngIf="diseaseMap">
-    <div *ngFor="let link of diseaseMap.linkCards">
-        <mat-card class="example-card">
-            <mat-card-header>
-                <div mat-card-avatar class="kingmed-profile"></div>
-                <mat-card-title>{{link.articleName}}</mat-card-title>
-                <mat-card-subtitle>{{link.subTitle}}</mat-card-subtitle>
-            </mat-card-header>
-            <a [href]="link.articleUrl">
-                <img mat-card-image [src]="link.imageUrl" alt="Photo of a Shiba Inu">
-            </a>
-            <mat-card-actions>
-                <button mat-button (click)="deleteLinkToMap(link)">删除</button>
-                <button mat-button (click)="createLinkToMap(link)">编辑</button>
-            </mat-card-actions>
-        </mat-card>
+    <div class="col-sm-3" *ngIf="diseaseMap">
+        <div *ngFor="let link of diseaseMap.linkCards">
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <div mat-card-avatar class="kingmed-profile"></div>
+                    <mat-card-title>{{link.articleName}}</mat-card-title>
+                    <mat-card-subtitle>{{link.subTitle}}</mat-card-subtitle>
+                </mat-card-header>
+                <a [href]="link.articleUrl">
+                    <img mat-card-image [src]="link.imageUrl">
+                </a>
+                <mat-card-actions>
+                    <button mat-button (click)="deleteLinkToMap(link)">删除</button>
+                    <button mat-button (click)="createLinkToMap(link)">编辑</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
     </div>
 </div>
