@@ -21,7 +21,7 @@ export class DiseaseBranchDeleteLinkDialogComponent {
     }
 
     confirmDelete(): void {
-        this.service.deleteLinkToBranch(this.data.linkCard, this.data.diseaseBranch).subscribe(
+        this.service.deleteLink(this.data.linkCard).subscribe(
             any => this.dialogRef.close()
         );
     }

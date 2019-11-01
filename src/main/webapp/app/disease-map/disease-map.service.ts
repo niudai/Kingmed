@@ -82,6 +82,10 @@ export class DiseaseMapService {
         return this.http.put<any>(`${this.linkCardUrl}`, link);
     }
 
+    deleteLink(id: number) {
+        return this.http.delete<any>(`${this.linkCardUrl}/${id}`);
+    }
+
     deleteLinkToMap(link: ILinkCard, _map: IDiseaseMap) {
         return this.http.post<any>(`${this.diseaseMapUrl}/deattach-link-card-to-disease-map/${_map.id}`, link);
     }

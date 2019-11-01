@@ -21,7 +21,7 @@ export class DiseaseMapDeleteLinkDialogComponent {
     }
 
     confirmDelete(): void {
-        this.service.deleteLinkToMap(this.data.linkCard, this.data.diseaseMap).subscribe(
+        this.service.deleteLink(this.data.linkCard.id).subscribe(
             any => this.dialogRef.close()
         );
     }
