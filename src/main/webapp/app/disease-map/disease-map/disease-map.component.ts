@@ -199,11 +199,16 @@ export class DiseaseMapComponent implements OnInit {
         });
 
         dialogRef.afterClosed().subscribe(result => {
-            //   console.log('The dialog was closed');
-            this.diseaseMapService.addLinkToBranch(result, this.diseaseBranch).subscribe(any => {
-                    this.fetchDiseaseMap(this.diseaseMap, this.diseaseBranch);
-                }
-            );
+            if (result.id === undefined) {
+                //   console.log('The dialog was closed');
+                this.diseaseMapService.addLinkToBranch(result, this.diseaseBranch).subscribe(any => {
+                this.fetchDiseaseMap(this.diseaseMap, this.diseaseBranch);
+                });
+            } else {
+                this.diseaseMapService.updateLink(result).subscribe(
+                    any => this.fetchDiseaseMap(this.diseaseMap, this.diseaseBranch)
+                );
+            }
         });
     }
 
@@ -218,6 +223,23 @@ export class DiseaseMapComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
             //   console.log('The dialog was closed');
             this.diseaseMapService.addLinkToMap(result, this.diseaseMap).subscribe(any => {
+                this.fetchDiseaseMap(this.diseaseMap, this.diseaseBranch);
+                }
+            );
+        });
+    }
+
+    updateLink(link: ILinkCard): void {
+        const dialogRef = this.dialog.open(DiseaseBranchCreateLinkDialogComponent, {
+            width: '250px',
+            data: {
+                linkCard: link ? link : new LinkCard()
+            }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            //   console.log('The dialog was closed');
+            this.diseaseMapService.updateLink(result).subscribe(any => {
                 this.fetchDiseaseMap(this.diseaseMap, this.diseaseBranch);
                 }
             );

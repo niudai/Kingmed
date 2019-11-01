@@ -25,6 +25,8 @@ export class DiseaseMapService {
 
     public diseasePartitonUrl = SERVER_API_URL + 'api/disease-partitions';
 
+    public linkCardUrl = SERVER_API_URL + 'api/link-cards';
+
     constructor(protected http: HttpClient) { }
 
     attachDiseaseBranch(diseaseBranch: IDiseaseBranch) {
@@ -74,6 +76,10 @@ export class DiseaseMapService {
 
     addLinkToMap(link: ILinkCard, _map: IDiseaseMap) {
         return this.http.post<any>(`${this.diseaseMapUrl}/attach-link-card-to-disease-map/${_map.id}`, link);
+    }
+
+    updateLink(link: ILinkCard) {
+        return this.http.put<any>(`${this.linkCardUrl}`, link);
     }
 
     deleteLinkToMap(link: ILinkCard, _map: IDiseaseMap) {

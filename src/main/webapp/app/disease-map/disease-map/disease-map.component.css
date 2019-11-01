@@ -10,6 +10,18 @@
     background: inherit;
 }
 
+mat-expansion-panel.mat-expansion-panel.mat-expanded {
+    background-color: gainsboro;
+}
+
+mat-card.mat-card {
+    margin-bottom: 5px;
+}
+
+mat-card.link-card {
+    margin-left: 8px;
+}
+
 .mat-expansion-panel-body {
     padding: 0;
 }
