@@ -1,8 +1,14 @@
-img {
+/* img {
     object-fit: cover;
     display: inline-block;
     width: 300px;
     height: 450px;
-    /* background: url('../../content/images/1.jpg') no-repeat center top;
-    background-size: contain; */
+} */
+
+mat-card.title-card.mat-card {
+    margin-bottom: 5px;
+}
+
+mat-card.platform-card {
+    margin: 5px;
 }

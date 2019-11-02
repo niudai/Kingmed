@@ -68,7 +68,7 @@ public class ImageUploadController {
 
      /**
      * GET /images/:filename get image with name :filename.
-     * 
+     *
      * @throws MalformedURLException
      */
     @GetMapping("/images/application/{path}")
@@ -216,12 +216,12 @@ public class ImageUploadController {
 
      /**
      * GET /images/:filename get image with name :filename.
-     * 
+     *
      * @throws Exception
      */
-    @GetMapping("/images/platform/{id}")
-    public ResponseEntity<Resource> servePlatform(@PathVariable Long id) throws Exception {
-        return imagePlatformService.loadAsResource(id);
+    @GetMapping("/images/platform/{path}")
+    public ResponseEntity<Resource> servePlatform(@PathVariable String path) throws Exception {
+        return imagePlatformService.loadAsResource(path);
     }
 
      /**
@@ -247,15 +247,15 @@ public class ImageUploadController {
 
     /**
      * POST /api/images/ : upload a new image
-     * 
+     *
      * @param image to be uploaded which is multipart file
      * @return responsebody with 200.
      * @throws Exception
      */
     @PostMapping("/images/platform")
     public ResponseEntity<Resource> handlePlatformUpload(@RequestParam("image") MultipartFile file,
-            @RequestParam("name") String name) throws Exception {
-        imagePlatformService.store(file, name);
+            @RequestParam("name") String name, @RequestParam("description") String description) throws Exception {
+        imagePlatformService.store(file, name, description);
         return ResponseEntity.ok().build();
     }
 

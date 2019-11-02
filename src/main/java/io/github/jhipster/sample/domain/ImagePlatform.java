@@ -26,8 +26,12 @@ public class ImagePlatform implements MediaFile {
 
     public String path = " Default Path ";
 
+    public String description;
+
     public ImagePlatform() {
     }
+
+
 
     public ImagePlatform(Long id, String name, String path) {
         this.id = id;
@@ -97,6 +101,14 @@ public class ImagePlatform implements MediaFile {
             ", name='" + getName() + "'" +
             ", path='" + getPath() + "'" +
             "}";
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
 

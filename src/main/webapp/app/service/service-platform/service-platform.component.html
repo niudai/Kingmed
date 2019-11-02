@@ -1,33 +1,30 @@
-<div class="main container col-sm-12">
-        <button [routerLink]="['/']" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-q-arobot">
-            <fa-icon [icon]="'arrow-left'"></fa-icon>
-            <span class="hidden-sm-down" jhiTranslate="global.navigation.back">
-                返回主页
-            </span>
-        </button>
+<div class="row">
+    <mat-card class="col-sm-12 title-card">
+        <mat-card-header>
+            <div mat-card-avatar class="kingmed-profile"></div>
+            <mat-card-title>服务平台</mat-card-title>
+            <mat-card-subtitle>金域旗下其他服务板块</mat-card-subtitle>
+            <button *jhiHasAnyAuthority="'ROLE_ADMIN'" mat-raised-button color="accent" id="jh-create-entity"
+                class="float-right jh-create-entity create-q-arobot" [routerLink]="['create']">
+                <fa-icon [icon]="'plus'" style = "color: white;"></fa-icon>
+                <span class="hidden-sm-down">
+                    上传新图片
+                </span>
+            </button>
+        </mat-card-header>
+    </mat-card>
 
-        <!-- Showing all the images uploaded -->
-        <span *ngFor = "let image of images">
-            <img class = "hipster" src="{{image.path}}">
-                <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit" class="btn btn-danger" (click)="confirmDelete(image.name)">
-                    <fa-icon [icon]="'times'"></fa-icon>
-                    <span jhiTranlate="entity.action.delete">删除</span>
-                </button>
-        </span>
+    <mat-card *ngFor="let image of images" class="col-sm-3 platform-card">
+        <img class="platfrom-img" mat-card-image [src]="[platformUrl + '/' + image.path]">
+        <mat-card-header>
+            <div mat-card-avatar class="kingmed-profile"></div>
+            <mat-card-title>{{image.name}}</mat-card-title>
+            <mat-card-subtitle>{{image.description}}</mat-card-subtitle>
+            <button *jhiHasAnyAuthority="'ROLE_ADMIN'" mat-mini-fab color="warn"
+                [routerLink]="['delete' , image.id]">
+                <fa-icon [icon]="'times'" style = "color: white"></fa-icon>
+            </button>
+        </mat-card-header>
+    </mat-card>
 
-        <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">服务平台图片上传</h4>
-                  <form *jhiHasAnyAuthority="'ROLE_ADMIN'" [formGroup]="fileForm" (ngSubmit)="onSubmit()" name="uploadForm">
-                        <label>
-                            <input type="file" formControlName="image" value="上传图片" (change)="onFileChange($event)">
-                        </label>
-                        <button class="btn btn-primary" type="submit" [disabled]="!fileForm.valid">
-                            <fa-icon [icon]="'save'"></fa-icon><span jhiTranslate="entity.action.upload">upload</span>
-                        </button>
-                    </form>
-                </div>
-        </div>
-        <!-- Showing the upload button -->
-
-    </div>
+</div>

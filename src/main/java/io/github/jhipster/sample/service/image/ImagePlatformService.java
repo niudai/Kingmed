@@ -43,7 +43,7 @@ public class ImagePlatformService {
         this.rootLocation = Paths.get(properties.getImagePlatformLocation());
     }
 
-    public Long store(MultipartFile file, String name) throws java.lang.Exception {
+    public Long store(MultipartFile file, String name, String description) throws java.lang.Exception {
         ImagePlatform image = new ImagePlatform();
 
         String filename = StringUtils.cleanPath(file.getOriginalFilename());
@@ -53,6 +53,7 @@ public class ImagePlatformService {
         image.setPath(
             generatedId.toString() + '.' + extension);
         image.setName(name);
+        image.setDescription(description);
         try {
             if (file.isEmpty()) {
                 throw new Exception("Failed to store empty file " + filename);
@@ -106,8 +107,8 @@ public class ImagePlatformService {
         imagePlatformRepository.deleteById(id);
     }
 
-    public ResponseEntity<Resource> loadAsResource(Long id) throws java.lang.Exception {
-        ImagePlatform image = imagePlatformRepository.findById(id).get();
+    public ResponseEntity<Resource> loadAsResource(String path) throws java.lang.Exception {
+        ImagePlatform image = imagePlatformRepository.findOneByPath(path).get();
         try {
             Path file = rootLocation.resolve(image.getPath());
             Resource resource = new UrlResource(file.toUri());

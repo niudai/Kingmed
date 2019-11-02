@@ -6,6 +6,9 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { servicePlatformRoute } from './service-platform.route';
 import { JhiLanguageService } from 'ng-jhipster';
 import { JhipsterElasticsearchSampleApplicationSharedModule } from 'app/shared';
+import { ServicePlatformCreateComponent } from './service-platform-create/service-platform-create.component';
+import { ServicePlatformDeleteComponent } from './service-platform-delete/service-platform-delete.component';
+import { ServicePlatformUpdateComponent } from './service-application-update/service-platform-update.component';
 
 @NgModule (
     {
@@ -13,7 +16,10 @@ import { JhipsterElasticsearchSampleApplicationSharedModule } from 'app/shared';
             , RouterModule.forChild(servicePlatformRoute)
             , ReactiveFormsModule],
         declarations: [
-            ServicePlatformComponent
+            ServicePlatformComponent,
+            ServicePlatformCreateComponent,
+            ServicePlatformDeleteComponent,
+            ServicePlatformUpdateComponent
         ],
         providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }],
         schemas: [CUSTOM_ELEMENTS_SCHEMA]

@@ -1,0 +1,38 @@
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">图片上传</h4>
+        <form name="editForm" role="form" novalidate (ngSubmit)="onPlatformSubmit()" #editForm="ngForm">
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group">
+                    <label>图片名称</label>
+                    <input type="text" class="form-control" id="id" name="id" [(ngModel)]="fileName" />
+                </div>
+                <div class="form-group">
+                    <label>子标题(描述)</label>
+                    <input type="text" class="form-control" id="id" name="id" [(ngModel)]="description" />
+                </div>
+                <div class="form-group">
+                    <label>文件上传</label>
+                    <input type="file" class="form-control" formControlName="image" (change)="onFileChange($event)" />
+                </div>
+                <div class="form-group" *ngIf="isSaving" >
+                    <label>上传进度</label>
+                    <ngb-progressbar type="info" [value]="uploadResponse.message"></ngb-progressbar>
+                    <ngb-alert *ngIf="uploadResponse.message == '100'" [type]="'info'">上传成功<button type="button" class = "btn btn-primary" (click)="previousState()">返回</button></ngb-alert>
+                </div>
+            </div>
+
+                <div>
+                    <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                        <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                    </button>
+                    <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving || !isAttached" class="btn btn-primary">
+                        <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                    </button>
+                </div>
+        </form>
+    </div>
+
+
+</div>

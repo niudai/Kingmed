@@ -1,18 +1,14 @@
-<div class = "container col-sm-12">
-        <button class = "btn btn-primary" (click)="previousState()">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>返回</button>
-                <button class = "btn btn-primary">
-                        <fa-icon [icon]="'download'"></fa-icon>
-                    <a [href] = "[applicationUrl + '/' + path]">下载</a>
-                </button>
+<div class="container col-sm-12">
+    <button class="btn btn-primary" (click)="previousState()">
+        <fa-icon [icon]="'arrow-left'"></fa-icon>返回
+    </button>
+    <button class="btn btn-primary">
+        <fa-icon [icon]="'download'"></fa-icon>
+        <a [href]="[applicationUrl + '/' + path]">下载</a>
+    </button>
 </div>
-<div *ngIf="isPdf" style = "width: 95%; margin: 0 auto">
-        <iframe
-        [src] = "[applicationUrl + '/' + path] | safe"
-        width="95%"
-        height="600px"
-        ></iframe>
+<div *ngIf="isPdf" style="width: 95%; margin: 0 auto">
+    <iframe [src]="[applicationUrl + '/' + path] | safe" width="95%" height="600px"></iframe>
 </div>
 
-<img *ngIf="!isPdf" [src] = "[applicationUrl + '/' + path]" class = "application col-sm-12">
-
+<img *ngIf="!isPdf" [src]="[applicationUrl + '/' + path]" class="application col-sm-12">
