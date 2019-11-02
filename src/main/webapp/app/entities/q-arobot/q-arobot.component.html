@@ -1,31 +1,27 @@
 <div class="background-div">
     <div class="row">
         <mat-card class="col-sm-12">
-            <form name="searchForm" class="form-inline col-sm-6"
-            (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
+            <form name="searchForm" class="form-inline col-sm-6" (mouseenter)="onMouseEnter()"
+                (mouseleave)="onMouseLeave()">
                 <div class="input-group w-100 mt-3">
-                    <input
-                    (focus)="onFocusSearchBox()"
-                    (blur)="onBlurSearchBox()"
-                    type="text"
-                    class="search-input"
-                    [(ngModel)]="currentSearch"
-                    id="currentSearch"
-                    (keydown)="onKeyDown()"
-                    name="currentSearch"
-                    autocomplete="off"
-                    placeholder="{{ 'jhipsterElasticsearchSampleApplicationApp.qArobot.home.search' | translate }}">
+                    <input (focus)="onFocusSearchBox()" (blur)="onBlurSearchBox()" type="text" class="search-input"
+                        [(ngModel)]="currentSearch" id="currentSearch" (keydown)="onKeyDown()" name="currentSearch"
+                        autocomplete="off"
+                        placeholder="{{ 'jhipsterElasticsearchSampleApplicationApp.qArobot.home.search' | translate }}">
                     <!-- <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
                                     <fa-icon [icon]="'trash-alt'"></fa-icon>
                                 </button>                    -->
                     <button mat-raised-button class="input-group-append" color="warn" (click)="loadAll()">
                         <fa-icon [icon]="'search'"></fa-icon>
                     </button>
-                    <mat-nav-list class="auto-complete-list" *ngIf="isInArea && autoCompleteQArobots && autoCompleteQArobots.length > 0">
+                    <mat-nav-list class="auto-complete-list"
+                        *ngIf="isInArea && autoCompleteQArobots && autoCompleteQArobots.length > 0">
                         <div *ngFor="let qArobot of autoCompleteQArobots">
-                            <mat-list-item
-                            [routerLink]="[qArobot.id, 'view' ]">
-                                <p>{{qArobot.question | trimIfTooLong}}</p>
+                            <mat-list-item [routerLink]="[qArobot.id, 'view' ]">
+                                <span class = "highlight-span project-name"
+                                [innerHTML]="qArobot.question | trimIfTooLong: windowWidth/15 | keywordHighlight: currentSearch"
+                                >{{qArobot.question | trimIfTooLong}}</span
+                                    >
                             </mat-list-item>
                             <mat-divider></mat-divider>
                         </div>
@@ -59,17 +55,22 @@
                 <td mat-cell *matCellDef="let element"> {{element.id}} </td>
             </ng-container>
 
+
             <!-- Question Mobile Column -->
             <ng-container matColumnDef="questionMobile">
                 <th mat-header-cell *matHeaderCellDef> 问题 </th>
                 <td mat-cell *matCellDef="let qArobot">
-                    <mat-card matRipple style="margin: 0; padding: 1%">
-                        <a [routerLink]="[qArobot.id, 'view' ]">{{qArobot.question}}
-                            - <strong>{{qArobot.qaSubsidiary}}</strong>
-                        </a>
+                    <mat-chip-list [routerLink]="[qArobot.id, 'view' ]">
+                        <mat-chip [style.margin-left]="'20px'" [style.background-color]="'#20c997'"
+                            [style.color]="'white'">{{
+                                                        qArobot.qaSubsidiary
+                                                    }}</mat-chip>
+                        <span class="highlight-span project-name"
+                            [innerHTML]="qArobot.question | keywordHighlight: currentSearch"></span>
+                        <!-- <button mat-raised-button color="warn" *ngIf="diseaseXiAn.activated">运行</button> -->
                         <span style="float: right"><span style="color: orange;">{{qArobot.views}}</span>人看过</span>
-                        <br>
-                    </mat-card>
+
+                    </mat-chip-list>
                 </td>
             </ng-container>
 
@@ -77,11 +78,23 @@
             <ng-container matColumnDef="questionPC">
                 <th mat-header-cell *matHeaderCellDef> 问题 </th>
                 <td mat-cell *matCellDef="let qArobot">
-                    <a [routerLink]="[qArobot.id, 'view' ]">{{qArobot.question}}
+                    <!-- <a [routerLink]="[qArobot.id, 'view' ]">{{qArobot.question}}
                         - <strong>{{qArobot.qaSubsidiary}}</strong>
                     </a>
                     <span style="float: right"><span style="color: orange;">{{qArobot.views}}</span>人看过</span>
-                    <br>
+                    <br> -->
+                    <mat-chip-list [routerLink]="[qArobot.id, 'view' ]">
+                        <mat-chip [style.margin-left]="'20px'" [style.background-color]="'#20c997'"
+                            [style.color]="'white'">{{
+                                                qArobot.qaSubsidiary
+                                            }}</mat-chip>
+                        <span class="project-name highlight-span"
+                            [innerHTML]="qArobot.question | keywordHighlight: currentSearch"></span>
+                        <!-- <button mat-raised-button color="warn" *ngIf="diseaseXiAn.activated">运行</button> -->
+                        <span style="float: right"><span style="color: orange;">{{qArobot.views}}</span>人看过</span>
+
+                    </mat-chip-list>
+
                 </td>
             </ng-container>
 
@@ -142,8 +155,12 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageIndex]="page" [pageSize]="10" [length]="totalItems"
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageIndex]="pageEvent.pageIndex" [pageSize]="10" [length]="totalItems"
             showFirstLastButtons (page)="loadPage($event)">
         </mat-paginator>
+        <mat-form-field class="page-jump">
+            <input matInput placeholder="跳转至" type="number" (change)="loadPage()" [value]="pageEvent.pageIndex"
+                [(ngModel)]="pageEvent.pageIndex">
+        </mat-form-field>
     </div>
 </div>

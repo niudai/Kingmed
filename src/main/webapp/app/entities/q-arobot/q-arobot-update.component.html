@@ -67,7 +67,7 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jhipsterElasticsearchSampleApplicationApp.qArobot.answer" for="field_answer">Answer</label>
                     <textarea rows="6" class="form-control" name="answer" id="field_answer"
-                        [(ngModel)]="qArobot.answer" maxlength="1500"></textarea>
+                        [(ngModel)]="qArobot.answer"></textarea>
                     <div [hidden]="!(editForm.controls.answer?.dirty && editForm.controls.answer?.invalid)">
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.answer?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 1500 }">

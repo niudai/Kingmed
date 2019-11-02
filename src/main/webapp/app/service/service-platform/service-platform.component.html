@@ -6,7 +6,7 @@
             <mat-card-subtitle>金域旗下其他服务板块</mat-card-subtitle>
             <button *jhiHasAnyAuthority="'ROLE_ADMIN'" mat-raised-button color="accent" id="jh-create-entity"
                 class="float-right jh-create-entity create-q-arobot" [routerLink]="['create']">
-                <fa-icon [icon]="'plus'" style = "color: white;"></fa-icon>
+                <fa-icon [icon]="'plus'" style="color: white;"></fa-icon>
                 <span class="hidden-sm-down">
                     上传新图片
                 </span>
@@ -14,17 +14,18 @@
         </mat-card-header>
     </mat-card>
 
-    <mat-card *ngFor="let image of images" class="col-sm-3 platform-card">
-        <img class="platfrom-img" mat-card-image [src]="[platformUrl + '/' + image.path]">
-        <mat-card-header>
-            <div mat-card-avatar class="kingmed-profile"></div>
-            <mat-card-title>{{image.name}}</mat-card-title>
-            <mat-card-subtitle>{{image.description}}</mat-card-subtitle>
-            <button *jhiHasAnyAuthority="'ROLE_ADMIN'" mat-mini-fab color="warn"
-                [routerLink]="['delete' , image.id]">
-                <fa-icon [icon]="'times'" style = "color: white"></fa-icon>
-            </button>
-        </mat-card-header>
-    </mat-card>
-
+    <div class="col-sm-3" *ngFor="let image of images">
+        <mat-card  class="platform-card">
+            <img class="platfrom-img" mat-card-image [src]="[platformUrl + '/' + image.path]">
+            <mat-card-header>
+                <div mat-card-avatar class="kingmed-profile"></div>
+                <mat-card-title>{{image.name}}</mat-card-title>
+                <mat-card-subtitle>{{image.description}}</mat-card-subtitle>
+                <button *jhiHasAnyAuthority="'ROLE_ADMIN'" mat-mini-fab color="warn"
+                    [routerLink]="['delete' , image.id]">
+                    <fa-icon [icon]="'times'" style="color: white"></fa-icon>
+                </button>
+            </mat-card-header>
+        </mat-card>
+    </div>
 </div>

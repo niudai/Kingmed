@@ -3,6 +3,13 @@ fa-icon {
     color: rgb(243, 209, 13);
 }
 
+span.sub-label {
+    background-color: #31c3e4;
+    padding: 5px;
+    border-radius: 15px;
+    color: white;
+}
+
 /* .subList {
     margin-left: 10px;
     font-size: 15px;

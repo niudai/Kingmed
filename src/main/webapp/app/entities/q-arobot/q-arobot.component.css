@@ -11,6 +11,49 @@ mat-nav-list.auto-complete-list.mat-nav-list.mat-list-base {
     box-shadow: 0 1px 5px rgba(0,0,0,.3);
 }
 
+:host span.highlight-span::ng-deep strong {
+    color: red;
+    font-size: medium;
+}
+
+fa-icon {
+    color: white;
+}
+
+span.sub-label {
+    background-color: rgb(32, 201, 151);
+    color: white;
+    width: 30px;
+    display: inline-block;
+    border-style: none;
+    font-size: 14px;
+    min-width: 69px;
+    margin: 5px;
+    border-radius: 14px;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+    background-color: deeppink;
+}
+
+span.project-name {
+    display: inline-block;
+    width: 70%;
+}
+
+mat-chip.mat-chip.mat-primary.mat-standard-chip {
+    display: inline-block;
+    width: fit-content;
+}
+
+div.question-name-div {
+    display: inline-block;
+    width: 90%;
+}
+
+mat-form-field.page-jump {
+    float: right;
+    font-size: 15px;
+}
+
 input#currentSearch {
     /* top: 0; */
     width: 80%;

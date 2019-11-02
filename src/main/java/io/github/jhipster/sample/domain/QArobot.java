@@ -75,8 +75,8 @@ public class QArobot extends AbstractViewsEntity implements Serializable {
     @Column(name = "question", length = 400)
     private String question;
 
-    @Size(max = 1500)
-    @Column(name = "answer", length = 1500)
+    @Size(max = 30000)
+    @Column(name = "answer", length = 30000)
     private String answer;
 
     @Size(max = 40)

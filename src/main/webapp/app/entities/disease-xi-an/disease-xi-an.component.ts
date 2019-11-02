@@ -199,7 +199,9 @@ export class DiseaseXiAnComponent implements OnInit {
     }
 
     onPagination($event: PageEvent) {
-        this.pageEvent = $event;
+        if ($event) {
+            this.pageEvent = $event;
+        }
         this.matrixParams.size = this.itemsPerPage;
         this.matrixParams.page = this.pageEvent.pageIndex ? this.pageEvent.pageIndex : 0;
         this.transition();

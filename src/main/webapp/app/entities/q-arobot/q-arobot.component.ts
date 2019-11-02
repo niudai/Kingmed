@@ -41,6 +41,7 @@ export class QArobotComponent implements OnInit, OnDestroy {
     currentTimer: any;
     autoCompleteQArobots: IQArobot[];
     isInArea = false;
+    windowWidth = window.innerWidth;
 
     constructor(
         protected qArobotService: QArobotService,
@@ -174,8 +175,14 @@ export class QArobotComponent implements OnInit, OnDestroy {
     }
 
     loadPage($event: PageEvent) {
-        this.pageEvent = $event;
+        if ($event) {
+            this.pageEvent = $event;
+        }
         this.loadAll();
+    }
+
+    stopBubbling($event: Event) {
+        $event.stopPropagation();
     }
 
     ngOnInit() {

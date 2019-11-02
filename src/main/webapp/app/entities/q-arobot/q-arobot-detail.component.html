@@ -6,12 +6,13 @@
             </h3> -->
             <mat-card>
                 <fa-icon class="question" [icon]="'question'"></fa-icon>
-                {{qArobot.question}} - <span class = "text-primary">{{qArobot.qaSubsidiary}}</span>
+                {{qArobot.question}}
+                <span class="sub-label">{{qArobot.qaSubsidiary}}</span>
                 <span style = "float: right"><span style = "color: orange;">{{qArobot.views}}</span>人看过</span>
             </mat-card>
             <hr>
             <mat-accordion>
-                    <mat-expansion-panel>
+                    <mat-expansion-panel [expanded]="true">
                             <mat-expansion-panel-header>
                                 <mat-panel-title>
                                     <fa-icon class="answer" [icon]="'lightbulb'"></fa-icon>答案
@@ -19,7 +20,7 @@
                                 <mat-panel-description>
                                 </mat-panel-description>
                             </mat-expansion-panel-header>
-                            <p>{{qArobot.answer}} </p>
+                            <span [innerHTML]="qArobot.answer"></span>
                         </mat-expansion-panel>
                         <mat-expansion-panel>
                                 <mat-expansion-panel-header>

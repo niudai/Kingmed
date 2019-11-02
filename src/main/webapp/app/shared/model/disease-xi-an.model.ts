@@ -84,7 +84,6 @@ export const diseaseXiAnToString = (disease: IDiseaseXiAn) => {
     const str = '【项目名】 ' + disease.name + ' \n' +
         '【项目代码】 ' + disease.projectCode + ' \n' +
         '【物价编码】 ' + disease.chargeCode + ' \n' +
-        '【临床应用】 ' + disease.clinicalApplication + ' \n' +
         '【出结果时间】' + disease.reportingTime + ' \n' +
         '【样本与样本量】 ' + disease.supplement + ' \n' +
         '【耗材】 ' + disease.sample + ' \n' +
@@ -93,6 +92,7 @@ export const diseaseXiAnToString = (disease: IDiseaseXiAn) => {
         '【保存条件与保存时长】 ' + disease.preservation + ' \n' +
         '【检测方法】 ' + disease.medicalMethod + ' \n' +
         '【申请单】 ' + disease.applicationUnitType + ' \n' +
-        '【申请单填写注意事项】 ' + disease.applicationRemark + ' \n';
+        '【申请单填写注意事项】 ' + disease.applicationRemark + ' \n' +
+        '【临床应用】 ' + disease.clinicalApplication + ' \n';
     return str;
 };

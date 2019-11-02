@@ -53,5 +53,11 @@ a:active {
     background-image: url("../../content/images/service_supplies.png");
 }
 
+mat-card {
+    margin: 20px;
+    margin-top: 30px;
+    cursor: pointer;
+}
+
 
 

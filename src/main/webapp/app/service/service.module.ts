@@ -33,7 +33,7 @@ import { UserRouteAccessService } from 'app/core';
                 },
                 canActivate: [UserRouteAccessService]
             }
-        ]), ReactiveFormsModule],
+        ]), ReactiveFormsModule, JhipsterElasticsearchSampleApplicationSharedModule],
         declarations: [ServiceComponent],
         schemas: [CUSTOM_ELEMENTS_SCHEMA]
     // declarations: [ServiceComponent, ServiceApplicationComponent, ServiceSuppliesComponent, ServicePlatformComponent]

@@ -6,6 +6,10 @@
     margin: 3px;
 }
 
+mat-form-field.page-jump {
+    float: right;
+}
+
 :host span.project-name::ng-deep strong {
     color: red;
     font-size: medium;

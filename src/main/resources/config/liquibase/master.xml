@@ -61,5 +61,6 @@
     <include file="config/liquibase/changelog/20191010_add_constraint_user_map_branch.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20191014_alter_description_column_for_notification.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20191102_add_column_description_image_platform.xml" relativeToChangelogFile="false"/>
-
+    <include file="config/liquibase/changelog/20191102_alter_clinical_application.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191102_alter_answer.xml" relativeToChangelogFile="false"/>
 </databaseChangeLog>
