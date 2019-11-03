@@ -17,6 +17,7 @@ import { HttpParams, HttpResponse, HttpHeaders, HttpErrorResponse } from '@angul
     styleUrls: ['./view.component.css']
 })
 export class ViewComponent implements OnInit {
+    windowWidth = window.innerWidth;
     notifications: INotification[];
     filteredNotifications: INotification[];
     beginDate: Date;
@@ -55,12 +56,20 @@ export class ViewComponent implements OnInit {
     }
 
     onSelectType(event: MatSelectChange) {
-        this.matrixParams['type'] = event.value.toString();
+        if (event.value) {
+            this.matrixParams['type'] = event.value.toString();
+        } else {
+            delete this.matrixParams['type'];
+        }
         this.transitionAndLoadNtfs();
     }
 
     onSelectSubsidiary(event: MatSelectChange) {
-        this.matrixParams['subsidiary'] = event.value;
+        if (event.value) {
+            this.matrixParams['subsidiary'] = event.value;
+        } else {
+            delete this.matrixParams['subsidiary'];
+        }
         this.transitionAndLoadNtfs();
     }
 

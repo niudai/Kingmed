@@ -1,17 +1,15 @@
-<mat-card class="row filter-card">
+<mat-card class="row filter-card" *ngIf="windowWidth > 600">
 
-    <mat-form-field class = "col-sm-3">
+
+    <mat-form-field class="col-sm-1">
         <input matInput [matDatepicker]="startPicker" placeholder="起始日期" (dateInput)="onStartDateChanges($event)"
-        [value]="matrixParams['lowerBound']"
-        (dateChange)="onStartDateChanges($event)" />
+            [value]="matrixParams['lowerBound']" (dateChange)="onStartDateChanges($event)" />
         <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
         <mat-datepicker #startPicker></mat-datepicker>
     </mat-form-field>
-    <mat-form-field class = "col-sm-3">
-        <input matInput [matDatepicker]="endPicker" placeholder="截止日期"
-            [value]="matrixParams['upperBound']"
-        (dateInput)="onEndDateChange($event)"
-            (dateChange)="onEndDateChange($event)" />
+    <mat-form-field class="col-sm-1">
+        <input matInput [matDatepicker]="endPicker" placeholder="截止日期" [value]="matrixParams['upperBound']"
+            (dateInput)="onEndDateChange($event)" (dateChange)="onEndDateChange($event)" />
         <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
         <mat-datepicker #endPicker></mat-datepicker>
     </mat-form-field>
@@ -38,6 +36,48 @@
 
 </mat-card>
 
+<mat-card class="row filter-card" *ngIf="windowWidth < 600">
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <span>按日期/子公司/类别筛选</span>
+        </mat-expansion-panel-header>
+        <mat-form-field class="col-sm-1">
+            <input matInput [matDatepicker]="startPicker" placeholder="起始日期" (dateInput)="onStartDateChanges($event)"
+                [value]="matrixParams['lowerBound']" (dateChange)="onStartDateChanges($event)" />
+            <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+            <mat-datepicker #startPicker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="col-sm-1">
+            <input matInput [matDatepicker]="endPicker" placeholder="截止日期" [value]="matrixParams['upperBound']"
+                (dateInput)="onEndDateChange($event)" (dateChange)="onEndDateChange($event)" />
+            <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+            <mat-datepicker #endPicker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="search-restric col-sm-3">
+            <mat-label>通知类型</mat-label>
+            <mat-select [value]="matrixParams['type']" (selectionChange)="onSelectType($event)">
+                <mat-option>--</mat-option>
+                <mat-option *ngFor="let type of ntfTypes" [value]="type.type">
+                    {{ type.chinese }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="search-restric col-sm-3">
+            <mat-label>子公司</mat-label>
+            <mat-select [value]="matrixParams['subsidiary']" (selectionChange)="onSelectSubsidiary($event)">
+                <mat-option>--</mat-option>
+                <mat-option *ngFor="let sub of subsidiaries" [value]="sub.id">
+                    {{ sub.name }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </mat-expansion-panel>
+
+</mat-card>
+
+
 <mat-expansion-panel *ngFor="let notification of notifications">
     <mat-expansion-panel-header>
         <mat-panel-title>
@@ -50,13 +90,13 @@
                                 notification.subsidiary.name
                             }}</mat-chip>
             </mat-chip-list>
-            <mat-chip *ngIf="innerWidth <= 500" [style.color]="'white'"
-                [style.background-color]="btnColor(notification.type)">
-                {{
-                            ntfTranslator[notification.type] + '/'
-                            + notification.subsidiary.name
-                        }}
-            </mat-chip>
+            <mat-chip-list *ngIf="innerWidth <= 500">
+                <mat-chip [style.color]="'white'" [style.background-color]="btnColor(notification.type)">
+                    {{ntfTranslator[notification.type] + '/'
+                        + notification.subsidiary.name}}
+                </mat-chip>
+            </mat-chip-list>
+
             <span class="ntf-title">{{ notification.title | trimIfTooLong: innerWidth / 50 }}</span>
             <button mat-mini-fab color="warn" *jhiHasAnyAuthority="['ROLE_ADMIN']" style="margin-left: 50px"
                 (click)="onDelete(notification)">
