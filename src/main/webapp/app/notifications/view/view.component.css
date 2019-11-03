@@ -1,0 +1,8 @@
+mat-form-field.page-jump {
+    float: right;
+    font-size: 15px;
+}
+
+mat-card.filter-card {
+    display: flex;
+}

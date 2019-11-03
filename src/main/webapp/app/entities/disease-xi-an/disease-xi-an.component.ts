@@ -139,15 +139,6 @@ export class DiseaseXiAnComponent implements OnInit {
     }
 
     transition() {
-        // this.matrixParams = {
-        //     search: this.currentSearch,
-        //     size: this.itemsPerPage,
-        //     page: this.pageEvent.pageIndex ? this.pageEvent.pageIndex : 0,
-        //     sort: this.selectedSort,
-        //     subsidiary: this.selectedSub,
-        //     'concourse.pseudoId': this.selectedConcourse ? this.selectedConcourse.pseudoId : null,
-        //     'concourse.name': this.selectedConcourse ? this.selectedConcourse.name : null
-        // };
         this.router.navigate([
             '/disease-xi-an',
             this.matrixParams
@@ -202,7 +193,7 @@ export class DiseaseXiAnComponent implements OnInit {
         if ($event) {
             this.pageEvent = $event;
         }
-        this.matrixParams.size = this.itemsPerPage;
+        this.matrixParams.size = this.pageEvent.pageSize;
         this.matrixParams.page = this.pageEvent.pageIndex ? this.pageEvent.pageIndex : 0;
         this.transition();
         this.loadDiseases();

@@ -9,6 +9,9 @@ import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,8 +24,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.github.jhipster.sample.domain.ProjectNotification;
 import io.github.jhipster.sample.repository.ProjectNotificationRepository;
+import io.github.jhipster.sample.service.ProjectNotificationService;
 import io.github.jhipster.sample.web.rest.errors.BadRequestAlertException;
+import io.github.jhipster.sample.web.rest.searchdto.ProjectNotificationSearchDTO;
 import io.github.jhipster.sample.web.rest.util.HeaderUtil;
+import io.github.jhipster.sample.web.rest.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 
 /**
@@ -36,12 +42,15 @@ public class ProjectNotificationResource {
 
     private static final String ENTITY_NAME = "ProjectNotification";
 
-    private final ProjectNotificationRepository ProjectNotificationRepository;
+    private final ProjectNotificationRepository projectNotificationRepository;
 
+    private final ProjectNotificationService projectNotificationService;
 
     public ProjectNotificationResource(
-        ProjectNotificationRepository ProjectNotificationRepository) {
-        this.ProjectNotificationRepository = ProjectNotificationRepository;
+        ProjectNotificationRepository ProjectNotificationRepository,
+        ProjectNotificationService projectNotificationService) {
+        this.projectNotificationService = projectNotificationService;
+        this.projectNotificationRepository = ProjectNotificationRepository;
     }
 
     /**
@@ -57,7 +66,7 @@ public class ProjectNotificationResource {
         if (projectNotification.getId() != null) {
             throw new BadRequestAlertException("A new ProjectNotification cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        ProjectNotification result = ProjectNotificationRepository.save(projectNotification);
+        ProjectNotification result = projectNotificationRepository.save(projectNotification);
         return ResponseEntity.created(new URI("/api/ProjectNotifications/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -78,7 +87,7 @@ public class ProjectNotificationResource {
         if (ProjectNotification.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        ProjectNotification result = ProjectNotificationRepository.save(ProjectNotification);
+        ProjectNotification result = projectNotificationRepository.save(ProjectNotification);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, ProjectNotification.getId().toString()))
             .body(result);
@@ -92,7 +101,7 @@ public class ProjectNotificationResource {
     @GetMapping("")
     public List<ProjectNotification> getAllProjectNotifications() {
         log.debug("REST request to get all ProjectNotifications");
-        return ProjectNotificationRepository.findByOrderByCreatedDateDesc();
+        return projectNotificationRepository.findByOrderByCreatedDateDesc();
     }
 
     /**
@@ -104,7 +113,7 @@ public class ProjectNotificationResource {
     @GetMapping("{id}")
     public ResponseEntity<ProjectNotification> getProjectNotification(@PathVariable Long id) {
         log.debug("REST request to get ProjectNotification : {}", id);
-        Optional<ProjectNotification> ProjectNotification = ProjectNotificationRepository.findById(id);
+        Optional<ProjectNotification> ProjectNotification = projectNotificationRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(ProjectNotification);
     }
 
@@ -117,8 +126,24 @@ public class ProjectNotificationResource {
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteProjectNotification(@PathVariable Long id) {
         log.debug("REST request to delete ProjectNotification : {}", id);
-        ProjectNotificationRepository.deleteById(id);
+        projectNotificationRepository.deleteById(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+
+    /**
+     * SEARCH  /_search/q-arobots?query=:query : search for the ProjectNotification corresponding
+     * to the query.
+     *
+     * @param query the query of the ProjectNotification search
+     * @param pageable the pagination information
+     * @return the result of the search
+     */
+    @GetMapping("/_search")
+    public ResponseEntity<List<ProjectNotification>> searchProjectNotifications(ProjectNotificationSearchDTO dto, Pageable pageable) {
+        log.debug("REST request to search for a page of ProjectNotifications for query {}", dto);
+        Page<ProjectNotification> page = projectNotificationService.searchntfs(dto, pageable);
+        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(dto.toString(), page, "/api/_search/q-arobots");
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
 }

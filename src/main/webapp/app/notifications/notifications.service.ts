@@ -1,4 +1,4 @@
-import { HttpResponse, HttpClient } from '@angular/common/http';
+import { HttpResponse, HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { SERVER_API_URL } from 'app/app.constants';
 import { Observable } from 'rxjs';
@@ -25,6 +25,9 @@ export class NotificationService {
     query(req?: any): Observable<NotificationArrayResponse> {
         const options = createRequestOption(req);
         return this.http.get<INotification[]>(this.resourceUrl, { params: options, observe: 'response' });
+    }
+    search(params?: HttpParams): Observable<NotificationArrayResponse> {
+        return this.http.get<INotification[]>(`${this.resourceUrl}/_search`, { params, observe: 'response' });
     }
     delete(id: number): Observable<NotificationResponse> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
