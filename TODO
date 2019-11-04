@@ -162,9 +162,11 @@ Bug 修复:
 Feature:
     ✔ 常见问题  上传图片 @done(19-11-02 17:03)
     ☐ 相关项目 / 相同项目区分
+    ☐ HTTPS
     ☐ 新增使用说明栏目
     ✔ 分页新增跳转功能 @done(19-11-02 15:56)
     ✔ 美化常见问题搜索页 @done(19-11-02 15:56)
-Handle concourse
+
+    Handle concourse
 
 1

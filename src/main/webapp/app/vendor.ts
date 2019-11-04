@@ -7,6 +7,7 @@ import '../content/css/vendor.css';
 import { library } from '@fortawesome/fontawesome-svg-core';
 
 import {
+    faInfoCircle,
     faClipboard,
     faHandPointRight,
     faPhone,
@@ -98,6 +99,7 @@ library.add(faTimes);
 library.add(faArrowLeft);
 library.add(faSave);
 library.add(faPlus);
+library.add(faInfoCircle);
 library.add(faChevronUp)
 library.add(faPencilAlt);
 library.add(faBars);

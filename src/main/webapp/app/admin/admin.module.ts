@@ -27,6 +27,7 @@ import { DeleteDialogComponent } from './subsidiary-admin/delete-dialog/delete-d
 import { UpdateComponent } from './subsidiary-admin/update/update.component';
 import { ConcourseUpdateComponent } from './concourse-admin/update/concourse-update/concourse-update.component';
 import { ConcourseDeleteDialogComponent } from './concourse-admin/delete-dialog/concourse-delete-dialog/concourse-delete-dialog.component';
+import { HelpLinkComponent } from './help-link/help-link.component';
 
 @NgModule({
     imports: [
@@ -53,7 +54,8 @@ import { ConcourseDeleteDialogComponent } from './concourse-admin/delete-dialog/
         DeleteDialogComponent,
         UpdateComponent,
         ConcourseUpdateComponent,
-        ConcourseDeleteDialogComponent
+        ConcourseDeleteDialogComponent,
+        HelpLinkComponent
     ],
     providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }],
     entryComponents: [
