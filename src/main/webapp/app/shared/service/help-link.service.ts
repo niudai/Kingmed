@@ -16,7 +16,7 @@ export class HelpLinkService {
         return this.http.put<IHelpLink>(this.resourceUrl , concourse, { observe: 'response' });
     }
     get(): Observable<any> {
-        return this.http.get<IHelpLink[]>(this.resourceUrl, { observe: 'response' });
+        return this.http.get<IHelpLink[]>(this.resourceUrl, { observe: 'body' });
     }
     delete(id: number): Observable<HelpLinkResponse> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });

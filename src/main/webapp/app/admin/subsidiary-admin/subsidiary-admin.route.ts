@@ -1,9 +1,7 @@
-import { Routes } from '@angular/router';
+import { Route } from '@angular/router';
 import { SubsidiaryAdminComponent } from './subsidiary-admin.component';
 
-export const subsidiaryRoute: Routes = [
-    {
-        path: 'subsidiary',
-        component: SubsidiaryAdminComponent,
-    }
-];
+export const subsidiaryRoute: Route = {
+    path: 'subsidiary',
+    component: SubsidiaryAdminComponent
+};

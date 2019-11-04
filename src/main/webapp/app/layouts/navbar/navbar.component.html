@@ -2,19 +2,26 @@
 
     <button class="nav-btn" mat-flat-button [routerLink]="btn.routerLink" *ngFor="let btn of navButtons"
         [style.background-color]="!btn.isSelected ? 'transparent' : 'gainsboro'">
-        <fa-icon class = "nav-fa" [icon]="btn.icon"></fa-icon>
+        <fa-icon class="nav-fa" [icon]="btn.icon"></fa-icon>
         {{btn.content}}
     </button>
+    <a [href]="helpLink.articleUrl" target="_blank">
+        <button class="nav-btn" mat-flat-button
+            [style.background-color]="'transparent'">
+            <fa-icon class="nav-fa" [icon]="'info-circle'"></fa-icon>
+            使用手册
+        </button>
+    </a>
     <button class="nav-button" mat-flat-button [matMenuTriggerFor]="appMenu" *jhiHasAnyAuthority="'ROLE_ADMIN'">
-        <fa-icon class = "nav-fa" [icon] = "'user-tie'"></fa-icon>
+        <fa-icon class="nav-fa" [icon]="'user-tie'"></fa-icon>
         管理
     </button>
     <mat-menu #appMenu="matMenu">
-        <button mat-menu-item [routerLink] = "btn.routerLink" *ngFor = "let btn of adminMenuBtns">
+        <button mat-menu-item [routerLink]="btn.routerLink" *ngFor="let btn of adminMenuBtns">
             {{btn.content}}
         </button>
-        <button mat-menu-item >
-            <a target = "_blank" href="h2-console">数据库</a>
+        <button mat-menu-item>
+            <a target="_blank" href="h2-console">数据库</a>
         </button>
     </mat-menu>
 
@@ -23,4 +30,3 @@
     </a>
 
 </mat-toolbar>
-

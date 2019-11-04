@@ -37,10 +37,6 @@ import { HelpLinkComponent } from './help-link/help-link.component';
     ],
     declarations: [
         AuditsComponent,
-        UserMgmtComponent,
-        UserMgmtDetailComponent,
-        UserMgmtUpdateComponent,
-        UserMgmtDeleteDialogComponent,
         LogsComponent,
         JhiConfigurationComponent,
         JhiHealthCheckComponent,
@@ -59,7 +55,6 @@ import { HelpLinkComponent } from './help-link/help-link.component';
     ],
     providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }],
     entryComponents: [
-        UserMgmtDeleteDialogComponent,
         JhiHealthModalComponent,
         CreateComponent,
         CreateDialogComponent,

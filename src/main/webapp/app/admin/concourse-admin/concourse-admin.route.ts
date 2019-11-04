@@ -1,9 +1,7 @@
-import { Routes } from '@angular/router';
+import { Route } from '@angular/router';
 import { ConcourseAdminComponent } from './concourse-admin.component';
 
-export const concourseRoute: Routes = [
-    {
+export const concourseRoute: Route = {
         path: 'concourse',
         component: ConcourseAdminComponent,
-    }
-];
+    };

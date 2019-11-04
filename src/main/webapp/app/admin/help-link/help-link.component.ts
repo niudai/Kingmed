@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ConcourseService } from 'app/entities/disease-xi-an/concourse/concourse.service';
 import { MatDialog, MatSnackBar } from '@angular/material';
-import { IConcourse } from 'app/shared/model/concourse.model';
 import { CreateComponent } from 'app/entities/disease-xi-an/concourse/create-dialog/create-dialog.component';
+import { IHelpLink } from 'app/shared/model/help-link.model';
+import { HelpLinkService } from 'app/shared/service/help-link.service';
 
 @Component({
     selector: 'jhi-help-link',
@@ -10,29 +10,25 @@ import { CreateComponent } from 'app/entities/disease-xi-an/concourse/create-dia
     styles: []
 })
 export class HelpLinkComponent implements OnInit {
-    concourses: IConcourse[];
+    helpLinks: IHelpLink[];
 
-    constructor(protected service: ConcourseService,
+    constructor(protected service: HelpLinkService,
         protected dialog: MatDialog,
         protected snackbar: MatSnackBar) {}
 
-    loadSubsidiaries() {
-        this.service.query().subscribe(res => {
-            this.concourses = res.body._embedded.concourse;
+    loadHelpLinks() {
+        this.service.get().subscribe(res => {
+            this.helpLinks = res;
         });
     }
 
-    openCreateDialog(): void {
-        const dialogRef = this.dialog.open(CreateComponent, {
-            width: '500px',
-            data: { concourse: { name: '' } }
-        });
-        dialogRef.afterClosed().subscribe(result => {
-            this.service.create(result).subscribe(any => this.loadSubsidiaries());
-        });
+    save() {
+        this.service.update(this.helpLinks[0]).subscribe(
+            any => this.snackbar.open('更新成功', null, { duration: 1000 })
+        );
     }
 
     ngOnInit() {
-        this.loadSubsidiaries();
+        this.loadHelpLinks();
     }
 }

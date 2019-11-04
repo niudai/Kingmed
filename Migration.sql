@@ -7,6 +7,7 @@ where exists
 
 
 
+
 DROP DATABASE `db_name`;
 
 

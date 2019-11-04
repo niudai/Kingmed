@@ -5,6 +5,7 @@ import { auditsRoute, configurationRoute, docsRoute, healthRoute, logsRoute, met
 import { UserRouteAccessService } from 'app/core';
 import { subsidiaryRoute } from './subsidiary-admin/subsidiary-admin.route';
 import { concourseRoute } from './concourse-admin/concourse-admin.route';
+import { helpLinkRoute } from './help-link/help-link.route';
 
 const ADMIN_ROUTES = [
     auditsRoute,
@@ -12,10 +13,14 @@ const ADMIN_ROUTES = [
     docsRoute,
     healthRoute,
     logsRoute,
-    ...userMgmtRoute,
+    helpLinkRoute,
+    {
+        path: 'user-management',
+        loadChildren: './user-management/user-management.module#JhipsterElasticsearchSampleApplicationUserManagementModule'
+    },
     metricsRoute,
-    ...subsidiaryRoute,
-    ...concourseRoute
+    subsidiaryRoute,
+    concourseRoute
 ];
 
 export const adminState: Routes = [

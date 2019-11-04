@@ -1,9 +1,9 @@
 export interface IHelpLink {
-    article_url?: string;
+    articleUrl?: string;
 }
 
 export class HelpLink implements IHelpLink {
     constructor(
-        public article_url?: string,
+        public articleUrl?: string,
     ) {}
 }

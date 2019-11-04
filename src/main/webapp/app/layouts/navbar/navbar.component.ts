@@ -1,13 +1,14 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { Router, ActivatedRoute, UrlSegment, UrlTree, UrlSegmentGroup, PRIMARY_OUTLET } from '@angular/router';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { ActivatedRoute, PRIMARY_OUTLET, Router, UrlSegment, UrlSegmentGroup, UrlTree } from '@angular/router';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { VERSION } from 'app/app.constants';
+import { AccountService, JhiLanguageHelper, LoginModalService, LoginService } from 'app/core';
+import { ProfileService } from 'app/layouts/profiles/profile.service';
+import { IHelpLink } from 'app/shared/model/help-link.model';
+import { NavButton } from 'app/shared/model/nav-button.model';
+import { HelpLinkService } from 'app/shared/service/help-link.service';
 import { JhiLanguageService } from 'ng-jhipster';
 import { SessionStorageService } from 'ngx-webstorage';
-
-import { VERSION } from 'app/app.constants';
-import { JhiLanguageHelper, AccountService, LoginModalService, LoginService } from 'app/core';
-import { ProfileService } from 'app/layouts/profiles/profile.service';
-import { NavButton } from 'app/shared/model/nav-button.model';
 
 @Component({
     selector: 'jhi-navbar',
@@ -25,13 +26,8 @@ export class NavbarComponent implements OnInit, OnChanges {
     version: string;
     testNum: number;
     urlSegment: UrlSegment[];
-    navButtons: NavButton[] = [
-        { routerLink: 'disease-xi-an', isSelected: false, content: '集团项目', icon: 'book-medical' },
-        { routerLink: 'disease-map', isSelected: false, content: '疾病地图', icon: 'map-signs' },
-        { routerLink: 'service', isSelected: false, content: '服务平台', icon: 'user-friends' },
-        { routerLink: 'q-arobot', isSelected: false, content: '常见问题', icon: 'question' },
-        { routerLink: 'notification', isSelected: false, content: '域知项情', icon: 'bullhorn'}
-    ];
+    helpLink: IHelpLink;
+    navButtons: NavButton[];
     adminMenuBtns: NavButton[] = [
         { routerLink: '/admin/user-management', content: '用户管理' },
         { routerLink: '/admin/jhi-metrics', content: '监控指标' },
@@ -43,7 +39,7 @@ export class NavbarComponent implements OnInit, OnChanges {
         { routerLink: '/admin/subsidiary', content: '子公司管理' },
         { routerLink: '/admin/concourse', content: '科室管理'},
         { routerLink: '/feedback', content: '反馈中心'},
-        { routerLink: '/admin/help-links', content: '使用手册'},
+        { routerLink: '/admin/help-link', content: '使用手册'},
     ];
 
     constructor(
@@ -54,6 +50,7 @@ export class NavbarComponent implements OnInit, OnChanges {
         private accountService: AccountService,
         private loginModalService: LoginModalService,
         private profileService: ProfileService,
+        private helpLinkService: HelpLinkService,
         private router: Router,
         private route: ActivatedRoute
     ) {
@@ -71,6 +68,16 @@ export class NavbarComponent implements OnInit, OnChanges {
     }
 
     ngOnInit() {
+        this.navButtons = [
+            { routerLink: 'disease-xi-an', isSelected: false, content: '集团项目', icon: 'book-medical' },
+            { routerLink: 'disease-map', isSelected: false, content: '疾病地图', icon: 'map-signs' },
+            { routerLink: 'service', isSelected: false, content: '服务平台', icon: 'user-friends' },
+            { routerLink: 'q-arobot', isSelected: false, content: '常见问题', icon: 'question' },
+            { routerLink: 'notification', isSelected: false, content: '域知项情', icon: 'bullhorn'},
+        ];
+        this.helpLinkService.get().subscribe(
+            links => this.helpLink = links[0]
+        );
         this.currentUrl =
             this.router.url.substr(1,
                 Math.min(this.router.url.indexOf(';'), this.router.url.indexOf('/', 1)));
