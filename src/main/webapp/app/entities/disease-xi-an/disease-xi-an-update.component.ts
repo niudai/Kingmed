@@ -209,7 +209,7 @@ export class DiseaseXiAnUpdateComponent implements OnInit {
             this.diseaseXiAn.linkCards = undefined;
             this.diseaseXiAn.prices = undefined;
             this.subscribeToSaveResponse(this.diseaseXiAnService.create(prms, this.diseaseXiAn));
-        } else if (this.diseaseXiAn === undefined) {
+        } else if (this.diseaseXiAn.id === undefined) {
             this.subscribeToSaveResponse(this.diseaseXiAnService.create(prms, this.diseaseXiAn));
         }
     }

@@ -103,7 +103,7 @@
                 <td mat-cell *matCellDef="let diseaseXiAn" matRipple
                     style="cursor: pointer;"
                 >
-                    <mat-chip-list [routerLink]="[diseaseXiAn.id, 'view' ]">
+                    <mat-card [routerLink]="[diseaseXiAn.id, 'view' ]" [queryParams]="{keyword: currentSearch}">
                         <mat-chip [style.margin-left]="'20px'" [style.background-color]="'#20c997'"
                             [style.color]="'white'">{{
                                             diseaseXiAn.subsidiary
@@ -118,7 +118,7 @@
                         <!-- <button mat-raised-button color="warn" *ngIf="diseaseXiAn.activated">运行</button> -->
                         <span style="float: right"><span style="color: orange;">{{diseaseXiAn.views}}</span>人看过</span>
 
-                    </mat-chip-list>
+                    </mat-card>
                 </td>
             </ng-container>
 

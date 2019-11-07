@@ -166,7 +166,7 @@
                                     <a [href]="link.articleUrl">
                                         <img mat-card-image [src]="link.imageUrl">
                                     </a>
-                                    <mat-card-actions>
+                                    <mat-card-actions *jhiHasAnyAuthority="'ROLE_ADMIN'">
                                         <button mat-button (click)="deleteLinkToMap(link)">删除</button>
                                         <button mat-button (click)="updateLink(link)">编辑</button>
                                     </mat-card-actions>
@@ -237,7 +237,7 @@
                                     <a [href]="link.articleUrl">
                                         <img mat-card-image [src]="link.imageUrl">
                                     </a>
-                                    <mat-card-actions>
+                                    <mat-card-actions *jhiHasAnyAuthority="'ROLE_ADMIN'">
                                         <button mat-button (click)="deleteLinkToMap(link)">删除</button>
                                         <button mat-button (click)="updateLink(link)">编辑</button>
                                     </mat-card-actions>
@@ -264,7 +264,7 @@
                 <a [href]="link.articleUrl">
                     <img mat-card-image [src]="link.imageUrl">
                 </a>
-                <mat-card-actions>
+                <mat-card-actions *jhiHasAnyAuthority="'ROLE_ADMIN'">
                     <button mat-button (click)="deleteLinkToBranch(link)">删除</button>
                     <button mat-button (click)="updateLink(link)">编辑</button>
                 </mat-card-actions>
@@ -282,7 +282,7 @@
                 <a [href]="link.articleUrl">
                     <img mat-card-image [src]="link.imageUrl" alt="image">
                 </a>
-                <mat-card-actions>
+                <mat-card-actions *jhiHasAnyAuthority="'ROLE_ADMIN'">
                     <button mat-button (click)="deleteLinkToMap(link)">删除</button>
                     <button mat-button (click)="updateLink(link)">编辑</button>
                 </mat-card-actions>

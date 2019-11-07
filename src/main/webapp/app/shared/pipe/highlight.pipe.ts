@@ -14,7 +14,8 @@ export class KeywordHighlightPipe implements PipeTransform {
     constructor(private sanitizer: DomSanitizer) {}
     transform(value: string, keyword?: string) {
         console.log(`*******************TEST************* ${keyword} ${value}`);
-        console.log(value.replace(keyword, `<strong style="color: red; font-size: medium">${keyword}</strong>`));
-        return value.replace(keyword, `<strong class = "keyword" style = "color: red; font-size: medium">${keyword}</strong>`);
+        const reg = new RegExp(keyword, 'ig');
+        console.log(value.replace(reg, subStr => `<strong style="color: red; font-size: medium">${subStr}</strong>`));
+        return value.replace(reg, subStr => `<strong style="color: red; font-size: medium">${subStr}</strong>`);
     }
 }

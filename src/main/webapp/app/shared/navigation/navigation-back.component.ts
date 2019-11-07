@@ -6,7 +6,7 @@ import { MethodCall } from '@angular/compiler';
 export interface INavButton {
     color?: string;
     font?: string;
-    routerLink: string;
+    routerLink: string | any;
 }
 
 @Component({
@@ -27,7 +27,8 @@ export class NavigationBackComponent implements OnInit {
     ngOnInit() {
         this.navButtons = [
             { color: 'white', font: 'home', routerLink: '/'  },
-            { color: 'white', font: 'user-circle', routerLink: '/account'}
+            { color: 'white', font: 'user-circle', routerLink: ['/', 'account', { outlets: { subpage: 'disease' }}]}
+            // [routerLink]="['/', 'operation', { outlets: { popup: operation.id + '/delete'} }]"
         ];
         if (this.accountService.hasAnyAuthority(['ROLE_ADMIN'])) {
             this.navButtons.push(

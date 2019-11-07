@@ -13,7 +13,6 @@ export const servicePlatformRoute: Routes = [
             authorities: ['ROLE_USER'],
             pageTitle: 'service.platform'
         },
-        canActivate: [UserRouteAccessService]
     },
     {
         path: 'update/:id',
@@ -22,7 +21,6 @@ export const servicePlatformRoute: Routes = [
             authorities: ['ROLE_USER'],
             pageTitle: 'service.platform'
         },
-        canActivate: [UserRouteAccessService]
     },
     {
         path: 'delete/:id',
@@ -31,7 +29,6 @@ export const servicePlatformRoute: Routes = [
             authorities: ['ROLE_USER'],
             pageTitle: 'service.platform'
         },
-        canActivate: [UserRouteAccessService]
     },
     {
         path: 'create',
@@ -40,6 +37,5 @@ export const servicePlatformRoute: Routes = [
             authorities: ['ROLE_USER'],
             pageTitle: 'service.platform'
         },
-        canActivate: [UserRouteAccessService]
     }
 ];

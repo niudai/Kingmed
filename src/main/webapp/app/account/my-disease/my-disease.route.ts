@@ -43,10 +43,10 @@ export const myDiseaseRoute: Route[] = [
             pageTitle: 'global.menu.account.my-disease'
         },
         canActivate: [UserRouteAccessService]
-    },
-    {
-        path: '',
-        outlet: 'subpage',
-        redirectTo: 'disease'
     }
+    // {
+    //     path: '',
+    //     outlet: 'subpage',
+    //     redirectTo: 'disease'
+    // }
 ];

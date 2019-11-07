@@ -16,6 +16,10 @@ mat-nav-list.auto-complete-list.mat-nav-list.mat-list-base {
     font-size: medium;
 }
 
+mat-card.mat-card.mat-ripple {
+    cursor: pointer;
+}
+
 fa-icon {
     color: white;
 }

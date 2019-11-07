@@ -60,17 +60,17 @@
             <ng-container matColumnDef="questionMobile">
                 <th mat-header-cell *matHeaderCellDef> 问题 </th>
                 <td mat-cell *matCellDef="let qArobot">
-                    <mat-chip-list [routerLink]="[qArobot.id, 'view' ]">
-                        <mat-chip [style.margin-left]="'20px'" [style.background-color]="'#20c997'"
+                    <mat-card matRipple [routerLink]="[qArobot.id, 'view' ]">
+                        <!-- <mat-chip [style.margin-left]="'20px'" [style.background-color]="'#20c997'"
                             [style.color]="'white'">{{
                                                         qArobot.qaSubsidiary
-                                                    }}</mat-chip>
+                                                    }}</mat-chip> -->
                         <span class="highlight-span project-name"
                             [innerHTML]="qArobot.question | keywordHighlight: currentSearch"></span>
                         <!-- <button mat-raised-button color="warn" *ngIf="diseaseXiAn.activated">运行</button> -->
                         <span style="float: right"><span style="color: orange;">{{qArobot.views}}</span>人看过</span>
 
-                    </mat-chip-list>
+                    </mat-card>
                 </td>
             </ng-container>
 
@@ -83,17 +83,17 @@
                     </a>
                     <span style="float: right"><span style="color: orange;">{{qArobot.views}}</span>人看过</span>
                     <br> -->
-                    <mat-chip-list [routerLink]="[qArobot.id, 'view' ]">
-                        <mat-chip [style.margin-left]="'20px'" [style.background-color]="'#20c997'"
+                    <mat-card matRipple [routerLink]="[qArobot.id, 'view' ]">
+                        <!-- <mat-chip [style.margin-left]="'20px'" [style.background-color]="'#20c997'"
                             [style.color]="'white'">{{
                                                 qArobot.qaSubsidiary
-                                            }}</mat-chip>
+                                            }}</mat-chip> -->
                         <span class="project-name highlight-span"
                             [innerHTML]="qArobot.question | keywordHighlight: currentSearch"></span>
                         <!-- <button mat-raised-button color="warn" *ngIf="diseaseXiAn.activated">运行</button> -->
                         <span style="float: right"><span style="color: orange;">{{qArobot.views}}</span>人看过</span>
 
-                    </mat-chip-list>
+                    </mat-card>
 
                 </td>
             </ng-container>
