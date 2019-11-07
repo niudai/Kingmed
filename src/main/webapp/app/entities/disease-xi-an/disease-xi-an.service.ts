@@ -88,9 +88,7 @@ export class DiseaseXiAnService {
     }
 
     deassociateWithDisease(ownId: number, reversedId: number) {
-        if (ownId !== reversedId) {
-            return this.http.get<any>(`${this.resourceUrl}/deassociate-with-disease/${ownId}/${reversedId}`, { observe: 'response' });
-        }
+        return this.http.get<any>(`${this.resourceUrl}/deassociate-with-disease/${ownId}/${reversedId}`, { observe: 'response' });
     }
 
     ////////////// QArobot ////////////////////////

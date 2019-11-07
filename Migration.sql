@@ -24,6 +24,11 @@ where
 a.id = 39;
 
 update DISEASE_XI_AN a
+set a.CONCOURSE_ID = (select b.id from JHI_CONCOURSE b where b.name= '金惟安')
+where
+(a.NAME LIKE 'JWA%');
+
+update DISEASE_XI_AN a
 set a.CONCOURSE_ID = (select b.id from JHI_CONCOURSE b where b.name= '感染')
 where
 ( a.PROJECT_CONCOURSE = '微生物室'
@@ -45,6 +50,10 @@ OR a.PROJECT_CONCOURSE = '肾脏病理室/组织病理');
 update DISEASE_XI_AN a
 set a.CONCOURSE_ID = (select b.id from JHI_CONCOURSE b where b.name= '血液')
 where a.PROJECT_CONCOURSE = '血液病理室';
+
+update DISEASE_XI_AN a
+set a.CONCOURSE_ID = (select b.id from JHI_CONCOURSE b where b.name= '过敏')
+where a.SERIES = '过敏原检测系列';
 
 update DISEASE_XI_AN a
 set a.CONCOURSE_ID = (select b.id from JHI_CONCOURSE b where b.name= '卫检')

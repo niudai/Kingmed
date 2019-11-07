@@ -112,7 +112,7 @@
             <mat-tree-node *matTreeNodeDef="let node">
                 <li style="padding-bottom: 5px; width: 100%;">
                     <mat-expansion-panel style="margin: 5px;" (click)="loadMapEagerly(node)">
-                        <mat-expansion-panel-header>
+                        <mat-expansion-panel-header >
                             <mat-panel-title>
                                 <span>{{node.name}}</span>
                             </mat-panel-title>
@@ -134,6 +134,7 @@
                                             style="color: cadetblue">{{diseaseXiAn.subsidiary}}</span> -
                                         {{diseaseXiAn.projectCode}}
                                     </button>
+                                    <button mat-fab color="warn" *ngIf="!diseaseXiAn.activated">停用</button>
                                     <button mat-mini-fab color="warn" *jhiHasAnyAuthority="'ROLE_ADMIN'"
                                         (click)="deassociateWithDiseaseXiAn(diseaseXiAn.id, node.id)">
                                         <fa-icon [icon]="'times'"></fa-icon>
@@ -180,8 +181,12 @@
             <!-- This is the tree node template for expandable nodes -->
             <mat-tree-node *matTreeNodeDef="let node; when: hasChild" style="display: flex">
                 <li style="padding-bottom: 5px; width: 100%">
-                    <mat-expansion-panel style="margin: 5px;" (click)="loadMapEagerly(node)">
-                        <mat-expansion-panel-header>
+                    <mat-card  (click)="goDownTreeControl(node)" class = "expandable-node-card">
+                        <fa-icon [icon] = "'chevron-right'"></fa-icon>
+                        <span>{{node.name}}</span>
+                    </mat-card>
+                    <!-- <mat-expansion-panel style="margin: 5px;" (click)="goDownTreeControl(node)">
+                        <mat-expansion-panel-header (click)="goDownTreeControl(node)">
                             <mat-panel-title>
                                 <span>{{node.name}}</span>
                             </mat-panel-title>
@@ -245,7 +250,7 @@
                             </div>
                         </div>
 
-                    </mat-expansion-panel>
+                    </mat-expansion-panel> -->
                     <!-- <ul [class.example-tree-invisible]="!treeControl.isExpanded(node)">
                                     <ng-container matTreeNodeOutlet></ng-container>
                                 </ul> -->
