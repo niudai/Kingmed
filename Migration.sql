@@ -13,6 +13,11 @@ DROP DATABASE `db_name`;
 
 ALTER TABLE `table` DROP COLUMN `col_name`;
 
+INSERT INTO ``(``) VALUES
+(),
+;
+
+
 update DISEASE_MAP a
 set a.DISEASE_BRANCH_ID = 35
 where

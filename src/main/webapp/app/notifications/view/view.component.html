@@ -120,6 +120,6 @@
     [length]="totalItems" showFirstLastButtons (page)="onPagination($event)">
 </mat-paginator>
 <mat-form-field class="page-jump">
-    <input matInput placeholder="跳转至" type="number" (change)="onPagination()" [value]="pageEvent.pageIndex"
+    <input matInput placeholder="跳转至" type="number" (change)="onPagination(null)" [value]="pageEvent.pageIndex"
         [(ngModel)]="pageEvent.pageIndex">
 </mat-form-field>

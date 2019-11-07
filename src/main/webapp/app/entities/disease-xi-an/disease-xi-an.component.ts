@@ -222,7 +222,7 @@ export class DiseaseXiAnComponent implements OnInit {
         this.loadDiseases();
     }
 
-    selectConcourse(concourse: IConcourse) {
+    selectConcourse(concourse: IConcourse | void) {
         console.log(this.selectedConcourse);
         if (concourse) {
             this.selectedConcourseId = concourse.pseudoId;

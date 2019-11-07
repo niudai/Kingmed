@@ -64,5 +64,5 @@
     <include file="config/liquibase/changelog/20191102_alter_clinical_application.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20191102_alter_answer.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20191104-create-table-help-link.xml" relativeToChangelogFile="false"/>
-
+    <include file="config/liquibase/changelog/20191105_help_link_load.xml" relativeToChangelogFile="false"/>
 </databaseChangeLog>
