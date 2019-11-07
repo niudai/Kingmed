@@ -2,6 +2,7 @@
     color: yellow;
 }
 
+
 .jh-create-entity {
     margin: 3px;
 }
@@ -13,6 +14,13 @@ mat-form-field.page-jump {
 :host span.project-name::ng-deep strong {
     color: red;
     font-size: medium;
+}
+
+span.sub-label {
+    background: #3bbbb7;
+    border-radius: 9px;
+    color: white;
+    padding: 8px;
 }
 
 mat-nav-list.auto-complete-list.mat-nav-list.mat-list-base {

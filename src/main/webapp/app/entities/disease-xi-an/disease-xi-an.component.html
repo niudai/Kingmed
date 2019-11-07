@@ -104,10 +104,7 @@
                     style="cursor: pointer;"
                 >
                     <mat-card [routerLink]="[diseaseXiAn.id, 'view' ]" [queryParams]="{keyword: currentSearch}">
-                        <mat-chip [style.margin-left]="'20px'" [style.background-color]="'#20c997'"
-                            [style.color]="'white'">{{
-                                            diseaseXiAn.subsidiary
-                                        }}</mat-chip>
+                        <span class = "sub-label">{{diseaseXiAn.subsidiary}}</span>
                         <span class = "project-name" [innerHTML]="diseaseXiAn.name | keywordHighlight: currentSearch"></span>
                         <button class="concourse-chip" (click) = "stopBubbling($event)" [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'diseases']">
                             <span class="btn-fa">
@@ -226,11 +223,9 @@
                     <mat-card matRipple style="margin: 0; margin-top: 5px; padding: 1%"
                         [routerLink]="[diseaseXiAn.id, 'view']" [queryParams]="{keyword: currentSearch}"
                     >
-                        <mat-chip-list>
-                            <mat-chip [style.margin-left]="'20px'" [style.background-color]="'#20c997'"
-                                [style.color]="'white'">{{
+                            <span class = "sub-label">{{
                                                         diseaseXiAn.subsidiary
-                                                    }}</mat-chip>
+                                                    }}</span>
                             <span class = "project-name" [innerHTML]="diseaseXiAn.name | keywordHighlight: currentSearch"></span>
                             <button class="concourse-chip"
                                 (click) = "stopBubbling($event)"
@@ -244,7 +239,6 @@
                             <span style="float: right"><span
                                     style="color: orange;">{{diseaseXiAn.views}}</span>人看过</span>
 
-                        </mat-chip-list>
                         <!-- <button class="concourse-chip" [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'diseases']">
                             <span class="btn-fa">
                                 <fa-icon [icon]="'book-medical'" class="fa-related"></fa-icon>&nbsp;
