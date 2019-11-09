@@ -4,20 +4,19 @@
             <form name="searchForm" class="form-inline">
                 <div class="input-group w-100 mt-3 search-div">
                     <input type="text" class="search-input" [(ngModel)]="currentSearch" id="currentSearch"
-                         (keydown)="onKeyDown()"
-                         (focus)="onFocusSearchBox()" (blur)="onBlurSearchBox()"
+                        (keydown)="onKeyDown()" (focus)="onFocusSearchBox()" (blur)="onBlurSearchBox()"
                         name="currentSearch" value="" autocomplete="off"
                         placeholder="{{ 'jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.home.search' | translate }}">
                     <button mat-raised-button class="input-group-append search-btn" color="warn" (click)="search()">
                         <fa-icon [icon]="'search'"></fa-icon>
                     </button>
                     <mat-nav-list
-                        [style.display] = "isFocus && autoCompleteDiseases && autoCompleteDiseases.length > 0 ? 'block' : 'none'"
+                        [style.display]="isFocus && autoCompleteDiseases && autoCompleteDiseases.length > 0 ? 'block' : 'none'"
                         class="auto-complete-list">
                         <div *ngFor="let disease of autoCompleteDiseases">
                             <mat-list-item [routerLink]="[disease.id, 'view' ]">
-                                <span class = "project-name"
-                                [innerHTML]="disease.name | trimIfTooLong: windowWidth/15 | keywordHighlight: currentSearch"></span>
+                                <span class="project-name"
+                                    [innerHTML]="disease.name | trimIfTooLong: windowWidth/15 | keywordHighlight: currentSearch"></span>
                             </mat-list-item>
                             <mat-divider></mat-divider>
                         </div>
@@ -101,13 +100,13 @@
 
             <ng-container matColumnDef="namePC" style="max-width: 15%">
                 <th mat-header-cell *matHeaderCellDef> 项目名 </th>
-                <td mat-cell *matCellDef="let diseaseXiAn" matRipple
-                    style="cursor: pointer;"
-                >
+                <td mat-cell *matCellDef="let diseaseXiAn" matRipple style="cursor: pointer;">
                     <mat-card [routerLink]="[diseaseXiAn.id, 'view' ]" [queryParams]="{keyword: currentSearch}">
-                        <span class = "sub-label">{{diseaseXiAn.subsidiary}}</span>
-                        <span class = "project-name" [innerHTML]="diseaseXiAn.name | keywordHighlight: currentSearch"></span>
-                        <button class="concourse-chip" (click) = "stopBubbling($event)" [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'diseases']">
+                        <span class="sub-label">{{diseaseXiAn.subsidiary}}</span>
+                        <span class="project-name"
+                            [innerHTML]="diseaseXiAn.name | keywordHighlight: currentSearch"></span>
+                        <button class="concourse-chip" (click)="stopBubbling($event)"
+                            [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'diseases']">
                             <span class="btn-fa">
                                 <fa-icon [icon]="'book-medical'" class="disease-fa fa-related"></fa-icon>&nbsp;
                             </span>
@@ -126,8 +125,7 @@
                 <td mat-cell *matCellDef="let element">
                     <div class="btn-group flex-btn-group-container">
                         <button [routerLink]="[element.id, 'prices']" mat-mini-fab
-                            style="background-color: rgb(33, 241, 95)"
-                        >
+                            style="background-color: rgb(33, 241, 95)">
                             <fa-icon [icon]="'dollar-sign'"></fa-icon>
                             <span class="d-none d-md-inline"></span>
                         </button>
@@ -222,14 +220,14 @@
             <tr *ngFor="let diseaseXiAn of diseaseXiAns">
                 <td>
                     <mat-card matRipple style="margin: 0; margin-top: 5px; padding: 1%"
-                        [routerLink]="[diseaseXiAn.id, 'view']" [queryParams]="{keyword: currentSearch}"
-                    >
-                            <span class = "sub-label">{{
-                                                        diseaseXiAn.subsidiary
-                                                    }}</span>
-                            <span class = "project-name" [innerHTML]="diseaseXiAn.name | keywordHighlight: currentSearch"></span>
-                            <button class="concourse-chip"
-                                (click) = "stopBubbling($event)"
+                        [routerLink]="[diseaseXiAn.id, 'view']" [queryParams]="{keyword: currentSearch}">
+                        <mat-card-content>
+                            <span class="sub-label">{{
+                                        diseaseXiAn.subsidiary
+                                    }}</span>
+                            <span class="project-name"
+                                [innerHTML]="diseaseXiAn.name | keywordHighlight: currentSearch"></span>
+                            <button class="concourse-chip" (click)="stopBubbling($event)"
                                 [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'diseases']">
                                 <span class="btn-fa">
                                     <fa-icon [icon]="'book-medical'" class="fa-related"></fa-icon>&nbsp;
@@ -239,6 +237,15 @@
                             <!-- <button mat-raised-button color="warn" *ngIf="diseaseXiAn.activated">运行</button> -->
                             <span style="float: right"><span
                                     style="color: orange;">{{diseaseXiAn.views}}</span>人看过</span>
+                            <br>
+                            <div>
+                                <button (click)="openDetailBottomSheet($event, diseaseXiAn)" jhiClickStopPropagation
+                                    mat-mini-fab color="accent">
+                                    <fa-icon [icon]="'plus'" class="plus"></fa-icon>
+                                </button>
+                            </div>
+                        </mat-card-content>
+
 
                         <!-- <button class="concourse-chip" [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'diseases']">
                             <span class="btn-fa">
@@ -246,12 +253,7 @@
                             </span>
                         </button> <button mat-fab color="warn" *ngIf="!diseaseXiAn.activated">停用</button>
                         <span style="float: right"><span style="color: orange;">{{diseaseXiAn.views}}</span>人看过</span> -->
-                        <br>
-                        <div>
-                            <button (click)="openDetailBottomSheet($event, diseaseXiAn)" jhiClickStopPropagation mat-mini-fab color="accent">
-                                <fa-icon [icon]="'plus'" class = "plus"></fa-icon>
-                            </button>
-                        </div>
+
                     </mat-card>
                 </td>
             </tr>
@@ -260,8 +262,9 @@
         <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageIndex]="pageEvent.pageIndex" [pageSize]="pageEvent.pageSize"
             [length]="totalItems" showFirstLastButtons (page)="onPagination($event)">
         </mat-paginator>
-        <mat-form-field class = "page-jump">
-            <input matInput placeholder="跳转至" type="number" (change) = "onPagination(null)" [value]="pageEvent.pageIndex" [(ngModel)]="pageEvent.pageIndex">
+        <mat-form-field class="page-jump">
+            <input matInput placeholder="跳转至" type="number" (change)="onPagination(null)" [value]="pageEvent.pageIndex"
+                [(ngModel)]="pageEvent.pageIndex">
         </mat-form-field>
     </div>
 </div>
