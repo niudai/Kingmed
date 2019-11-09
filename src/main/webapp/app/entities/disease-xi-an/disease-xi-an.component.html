@@ -2,16 +2,17 @@
     <mat-card>
         <div class="row">
             <form name="searchForm" class="form-inline">
-                <div class="input-group w-100 mt-3 search-div" (mouseenter)="onMouseEnter()"
-                    (mouseleave)="onMouseLeave()">
+                <div class="input-group w-100 mt-3 search-div">
                     <input type="text" class="search-input" [(ngModel)]="currentSearch" id="currentSearch"
-                        (focus)="onFocusSearchBox()" (blur)="onBlurSearchBox()" (keydown)="onKeyDown()"
+                         (keydown)="onKeyDown()"
+                         (focus)="onFocusSearchBox()" (blur)="onBlurSearchBox()"
                         name="currentSearch" value="" autocomplete="off"
                         placeholder="{{ 'jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.home.search' | translate }}">
                     <button mat-raised-button class="input-group-append search-btn" color="warn" (click)="search()">
                         <fa-icon [icon]="'search'"></fa-icon>
                     </button>
-                    <mat-nav-list *ngIf="isInArea && autoCompleteDiseases && autoCompleteDiseases.length > 0"
+                    <mat-nav-list
+                        [style.display] = "isFocus && autoCompleteDiseases && autoCompleteDiseases.length > 0 ? 'block' : 'none'"
                         class="auto-complete-list">
                         <div *ngFor="let disease of autoCompleteDiseases">
                             <mat-list-item [routerLink]="[disease.id, 'view' ]">

@@ -97,6 +97,7 @@ export class DiseaseXiAnComponent implements OnInit {
     onFocusSearchBox() {
         console.log('search box is focused');
         this.isFocus = true;
+        this.fetchAutoComplete();
     }
 
     onMouseEnter() {
@@ -111,7 +112,7 @@ export class DiseaseXiAnComponent implements OnInit {
 
     onBlurSearchBox() {
         console.log('search box is blured');
-        this.isFocus = false;
+        setTimeout(any => this.isFocus = false, 100);
     }
 
     // auto-complete query
@@ -121,20 +122,24 @@ export class DiseaseXiAnComponent implements OnInit {
                 window.clearTimeout(this.currentTimer);
             }
             this.currentTimer = window.setTimeout(any => {
-                console.log('auto completion query invoked!!');
-                console.log('Current search equals: ', this.currentSearch);
-                let params = new HttpParams();
-                params = params.set('size', '5');
-                if (this.currentSearch) {
-                    params = params.set('query', this.currentSearch);
-                }
-                this.diseaseXiAnService
-                    .query(params)
-                    .subscribe(
-                        (res: HttpResponse<IDiseaseXiAn[]>) => (this.autoCompleteDiseases = res.body),
-                        (res: HttpErrorResponse) => this.onError(res.message)
-                    );
+                this.fetchAutoComplete();
             }, 300);
+        }
+    }
+
+    fetchAutoComplete() {
+        let params = new HttpParams();
+        params = params.set('size', '5');
+        if (this.currentSearch) {
+            params = params.set('query', this.currentSearch);
+            this.diseaseXiAnService
+            .query(params)
+            .subscribe(
+                (res: HttpResponse<IDiseaseXiAn[]>) => (this.autoCompleteDiseases = res.body),
+                (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        } else {
+            this.autoCompleteDiseases = null;
         }
     }
 
