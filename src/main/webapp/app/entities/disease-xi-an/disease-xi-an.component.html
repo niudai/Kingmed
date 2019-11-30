@@ -216,49 +216,39 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
-        <table *ngIf="!isBigScreen" class="table-disease-mobile">
-            <tr *ngFor="let diseaseXiAn of diseaseXiAns">
-                <td>
-                    <mat-card matRipple style="margin: 0; margin-top: 5px; padding: 1%"
-                        [routerLink]="[diseaseXiAn.id, 'view']" [queryParams]="{keyword: currentSearch}">
-                        <mat-card-content>
-                            <span class="sub-label">{{
-                                        diseaseXiAn.subsidiary
-                                    }}</span>
-                            <span class="project-name"
-                                [innerHTML]="diseaseXiAn.name | keywordHighlight: currentSearch"></span>
-                            <button class="concourse-chip" (click)="stopBubbling($event)"
-                                [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'diseases']">
-                                <span class="btn-fa">
-                                    <fa-icon [icon]="'book-medical'" class="fa-related"></fa-icon>&nbsp;
-                                </span>
-                            </button>
-                            <button mat-fab color="warn" *ngIf="!diseaseXiAn.activated">停用</button>
-                            <!-- <button mat-raised-button color="warn" *ngIf="diseaseXiAn.activated">运行</button> -->
-                            <span style="float: right"><span
-                                    style="color: orange;">{{diseaseXiAn.views}}</span>人看过</span>
-                            <br>
-                            <div>
-                                <button (click)="openDetailBottomSheet($event, diseaseXiAn)" jhiClickStopPropagation
-                                    mat-mini-fab color="accent">
-                                    <fa-icon [icon]="'plus'" class="plus"></fa-icon>
-                                </button>
-                            </div>
-                        </mat-card-content>
-
-
-                        <!-- <button class="concourse-chip" [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'diseases']">
+        <div *ngIf="!isBigScreen" class="table-disease-mobile">
+            <mat-card matRipple style="margin: 0; margin-top: 5px; padding: 1%" *ngFor="let diseaseXiAn of diseaseXiAns"
+                [routerLink]="[diseaseXiAn.id, 'view']" [queryParams]="{keyword: currentSearch}">
+                    <span class="sub-label">{{
+                        diseaseXiAn.subsidiary
+                    }}</span>
+                    <span class="project-name" [innerHTML]="diseaseXiAn.name | keywordHighlight: currentSearch"></span>
+                    <button class="concourse-chip" (click)="stopBubbling($event)"
+                        [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'diseases']">
+                        <span class="btn-fa">
+                            <fa-icon [icon]="'book-medical'" class="fa-related"></fa-icon>&nbsp;
+                        </span>
+                    </button>
+                    <button mat-fab color="warn" *ngIf="!diseaseXiAn.activated">停用</button>
+                    <!-- <button mat-raised-button color="warn" *ngIf="diseaseXiAn.activated">运行</button> -->
+                    <span style="float: right"><span style="color: orange;">{{diseaseXiAn.views}}</span>人看过</span>
+                <br>
+                <div>
+                    <button (click)="openDetailBottomSheet($event, diseaseXiAn)" jhiClickStopPropagation mat-mini-fab
+                        color="accent">
+                        <fa-icon [icon]="'plus'" class="plus"></fa-icon>
+                    </button>
+                </div>
+                <!-- <button class="concourse-chip" [routerLink]="['/disease-xi-an', diseaseXiAn.id, 'diseases']">
                             <span class="btn-fa">
                                 <fa-icon [icon]="'book-medical'" class="fa-related"></fa-icon>&nbsp;
                             </span>
                         </button> <button mat-fab color="warn" *ngIf="!diseaseXiAn.activated">停用</button>
                         <span style="float: right"><span style="color: orange;">{{diseaseXiAn.views}}</span>人看过</span> -->
 
-                    </mat-card>
-                </td>
-            </tr>
+            </mat-card>
 
-        </table>
+        </div>
         <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageIndex]="pageEvent.pageIndex" [pageSize]="pageEvent.pageSize"
             [length]="totalItems" showFirstLastButtons (page)="onPagination($event)">
         </mat-paginator>

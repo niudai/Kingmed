@@ -1,6 +1,9 @@
 <div class="row disease-partition-div">
     <div class = "col-sm-6" *ngFor="let diseasePartition of diseasePartitions">
             <mat-card class="card  disease-partition-card"
+            [routerLink]="[diseasePartition.id, 'disease-branches']"
+            style = "cursor: pointer;"
+            matRipple
             style="margin-bottom: 5px;"
             >
             <mat-card-header>
@@ -9,11 +12,11 @@
             </mat-card-header>
             <img mat-card-image [src]="diseasePartition.bgUrl">
             {{diseasePartition.description}}
-            <mat-card-actions>
-                <button mat-raised-button color="accent"
-                    [routerLink]="[diseasePartition.id, 'disease-branches']">进入</button>
+            <mat-card-actions *jhiHasAnyAuthority="'ROLE_ADMIN'">
                 <button *jhiHasAnyAuthority="'ROLE_ADMIN'" mat-raised-button color="accent"
-                    [routerLink]="[diseasePartition.id, 'update']">编辑</button>
+                    [routerLink]="[diseasePartition.id, 'update']">
+                    <fa-icon icon = "pencil-alt" style = "color: white;"></fa-icon>
+                </button>
             </mat-card-actions>
         </mat-card>
     </div>
