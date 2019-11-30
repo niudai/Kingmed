@@ -7,7 +7,7 @@
         },
         "price": {
             "addNewPrice": "添加新价格",
-            "subseries": "子公司系列划分",
+            "subseries": "营销套餐代码及命名",
             "tollStandard": "标准收费",
             "reportingTime": "出报告时间",
             "chargeCode": "物价编码",

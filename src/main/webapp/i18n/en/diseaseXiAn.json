@@ -35,7 +35,7 @@
             "reportingTime": "出结果时间",
             "clinicalApplication": "临床应用",
             "series": "集团疾病线分类",
-            "subSeries": "子公司系列划分",
+            "subseries": "营销套餐代码及命名",
             "remarks": "备注"
         }
     }

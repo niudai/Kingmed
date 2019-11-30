@@ -128,7 +128,7 @@ Archive:
   ✔ Copy text info to clipboard in terms of current price info. @done(19-09-06 22:18) @project(Todo)
   ✔ Make price toggle noticiable by adding snacbar and color toggle. @done(19-09-06 22:18) @project(Todo)
   ✔ Implement subdidiary admin page @done(19-09-05 22:04) @project(Todo)
-  ✔ 1.检索功能，不能只能检索项目名称，需要新增项目代码，临床意义，集团疾病线分类，子公司系列划分. @done(19-09-10 19:58) @project(TODO)
+  ✔ 1.检索功能，不能只能检索项目名称，需要新增项目代码，临床意义，集团疾病线分类，营销套餐代码及命名. @done(19-09-10 19:58) @project(TODO)
   ✔ 2.新增项目无法编辑，且生成通知那里有问题 @done(19-09-10 20:44) @project(TODO)
   ✔ 2.1，还有一个问题需今晚修复，就是申请单信息，之前没有，现在编辑添加保存后，却没有任何反应 @done(19-09-11 09:19) @project(TODO)
   ✔ 3.项目迁移，先按照子公司迁移，再按照科室迁移 @done(19-09-10 22:11) @project(TODO)
