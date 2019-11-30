@@ -22,7 +22,7 @@ import { SubsidiaryService } from './subsidiary/subsidiary.service';
 @Component({
     selector: 'jhi-disease-xi-an',
     templateUrl: './disease-xi-an.component.html',
-    styleUrls: ['./disease-xi-an.component.css'],
+    styleUrls: ['./disease-xi-an.component.css']
     // encapsulation: ViewEncapsulation.None
 })
 export class DiseaseXiAnComponent implements OnInit {
@@ -97,6 +97,7 @@ export class DiseaseXiAnComponent implements OnInit {
     onFocusSearchBox() {
         console.log('search box is focused');
         this.isFocus = true;
+        this.fetchAutoComplete();
     }
 
     onMouseEnter() {
@@ -111,7 +112,7 @@ export class DiseaseXiAnComponent implements OnInit {
 
     onBlurSearchBox() {
         console.log('search box is blured');
-        this.isFocus = false;
+        setTimeout(any => (this.isFocus = false), 100);
     }
 
     // auto-complete query
@@ -121,28 +122,29 @@ export class DiseaseXiAnComponent implements OnInit {
                 window.clearTimeout(this.currentTimer);
             }
             this.currentTimer = window.setTimeout(any => {
-                console.log('auto completion query invoked!!');
-                console.log('Current search equals: ', this.currentSearch);
-                let params = new HttpParams();
-                params = params.set('size', '5');
-                if (this.currentSearch) {
-                    params = params.set('query', this.currentSearch);
-                }
-                this.diseaseXiAnService
-                    .query(params)
-                    .subscribe(
-                        (res: HttpResponse<IDiseaseXiAn[]>) => (this.autoCompleteDiseases = res.body),
-                        (res: HttpErrorResponse) => this.onError(res.message)
-                    );
+                this.fetchAutoComplete();
             }, 300);
         }
     }
 
+    fetchAutoComplete() {
+        let params = new HttpParams();
+        params = params.set('size', '5');
+        if (this.currentSearch) {
+            params = params.set('query', this.currentSearch);
+            this.diseaseXiAnService
+                .query(params)
+                .subscribe(
+                    (res: HttpResponse<IDiseaseXiAn[]>) => (this.autoCompleteDiseases = res.body),
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+        } else {
+            this.autoCompleteDiseases = null;
+        }
+    }
+
     transition() {
-        this.router.navigate([
-            '/disease-xi-an',
-            this.matrixParams
-        ]);
+        this.router.navigate(['/disease-xi-an', this.matrixParams]);
     }
 
     loadDiseases() {
@@ -175,7 +177,7 @@ export class DiseaseXiAnComponent implements OnInit {
             this.subsidiaries = res;
             this.subsidiaries.push({ name: this.NO_SPECIFIED });
             if (this.matrixParams['subsidiary']) {
-                this.selectedSub = this.subsidiaries.find( s => s.id === +this.matrixParams['subsidiary']);
+                this.selectedSub = this.subsidiaries.find(s => s.id === +this.matrixParams['subsidiary']);
             }
         });
     }
@@ -222,14 +224,13 @@ export class DiseaseXiAnComponent implements OnInit {
         this.loadDiseases();
     }
 
-    selectConcourse(concourse: IConcourse) {
+    selectConcourse(concourse: IConcourse | void) {
         console.log(this.selectedConcourse);
         if (concourse) {
             this.selectedConcourseId = concourse.pseudoId;
             this.matrixParams['concourse.pseudoId'] = concourse.pseudoId;
         } else {
             delete this.matrixParams['concourse.pseudoId'];
-
         }
         this.transition();
         this.loadDiseases();
@@ -300,11 +301,9 @@ export class DiseaseXiAnComponent implements OnInit {
         this.columnToggle();
         this.itemsPerPage = ITEMS_PER_PAGE;
         const params = this.activatedRoute.snapshot.params;
-        Object.keys(params).forEach(
-            key => {
-                this.matrixParams[key] = params[key];
-            }
-        );
+        Object.keys(params).forEach(key => {
+            this.matrixParams[key] = params[key];
+        });
         this.currentSearch =
             this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['search']
                 ? this.activatedRoute.snapshot.params['search']

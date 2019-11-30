@@ -23,8 +23,6 @@ logging:
         io.github.jhipster.sample: DEBUG
         io.searchbox.client: INFO
 
-    file: dev1.log
-
 spring:
 
     servlet:
@@ -98,6 +96,7 @@ spring:
 server:
     port: 80
 
+
 # ===================================================================
 # JHipster specific properties
 #
@@ -106,7 +105,7 @@ server:
 
 jhipster:
     http:
-        version: V_1_1 # To use HTTP/2 you will need to activate TLS (see application-tls.yml)
+        version: V_2_0 # To use HTTP/2 you will need to activate TLS (see application-tls.yml)
     cache: # Cache configuration
         ehcache: # Ehcache configuration
             time-to-live-seconds: 3600 # By default objects stay 1 hour in the cache

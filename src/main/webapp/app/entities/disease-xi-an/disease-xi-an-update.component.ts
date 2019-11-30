@@ -39,7 +39,8 @@ export class DiseaseXiAnUpdateComponent implements OnInit {
         protected activatedRoute: ActivatedRoute,
         protected subsidiaryService: SubsidiaryService,
         protected concourseService: ConcourseService,
-        protected errorMatcher: ErrorStateMatcher) {}
+        protected errorMatcher: ErrorStateMatcher
+    ) {}
 
     ngOnInit() {
         this.isSaving = false;
@@ -49,117 +50,84 @@ export class DiseaseXiAnUpdateComponent implements OnInit {
             this.loadConcourses();
             this.loadSubsidiaries();
         });
-        this.ntf = { title: '', description: ''};
+        this.ntf = { title: '', description: '' };
         this.types = NTF_TYPE_FOR_DISEASE;
     }
 
-    get name() { return this.editForm.get('name'); }
-    get subsidiary() { return this.editForm.get('subsidiary'); }
-    get selectedSubsidiary() { return this.editForm.get('selectedSubsidiary'); }
-    get selectedConcourse() { return this.editForm.get('selectedConcourse'); }
-    get projectCode() { return this.editForm.get('projectCode'); }
+    get name() {
+        return this.editForm.get('name');
+    }
+    get subsidiary() {
+        return this.editForm.get('subsidiary');
+    }
+    get selectedSubsidiary() {
+        return this.editForm.get('selectedSubsidiary');
+    }
+    get selectedConcourse() {
+        return this.editForm.get('selectedConcourse');
+    }
+    get projectCode() {
+        return this.editForm.get('projectCode');
+    }
 
     initEditForm() {
-        this.editForm = new FormGroup(
-            {
-                'name': new FormControl(this.diseaseXiAn.name, [
-                    Validators.required
-                ]),
-                'subsidiary': new FormControl(this.diseaseXiAn.subsidiary, [
-                    Validators.required
-                ]),
-                'selectedSubsidiary': new FormControl('', [
-                    Validators.required
-                ]),
-                'selectedConcourse': new FormControl('', [
-                    Validators.required
-                ]),
-                'views': new FormControl(this.diseaseXiAn.views, [
-                ]),
-                'projectCode': new FormControl(this.diseaseXiAn.projectCode, [
-                ]),
-                'chargeCode': new FormControl(this.diseaseXiAn.chargeCode, [
-                ]),
-                'tollStandard': new FormControl(this.diseaseXiAn.tollStandard, [
-                ]),
-                'supplement': new FormControl(this.diseaseXiAn.supplement, [
-                ]),
-                'sample': new FormControl(this.diseaseXiAn.sample, [
-                ]),
-                'tutorial': new FormControl(this.diseaseXiAn.tutorial, [
-                ]),
-                'preservation': new FormControl(this.diseaseXiAn.preservation, [
-                ]),
-                'transportation': new FormControl(this.diseaseXiAn.transportation, [
-                ]),
-                'applicationUnitType': new FormControl(this.diseaseXiAn.applicationUnitType, [
-                ]),
-                'applicationRemark': new FormControl(this.diseaseXiAn.applicationRemark, [
-                ]),
-                'medicalMethod': new FormControl(this.diseaseXiAn.medicalMethod, [
-                ]),
-                'projectConcourse': new FormControl(this.diseaseXiAn.projectConcourse, [
-                ]),
-                'hurryDepartment': new FormControl(this.diseaseXiAn.hurryDepartment, [
-                ]),
-                'reportingTime': new FormControl(this.diseaseXiAn.reportingTime, [
-                ]),
-                'clinicalApplication': new FormControl(this.diseaseXiAn.clinicalApplication, [
-                ]),
-                'series': new FormControl(this.diseaseXiAn.series, [
-                ]),
-                'subSeries': new FormControl(this.diseaseXiAn.subSeries, [
-                ]),
-                'remarks': new FormControl(this.diseaseXiAn.remarks, [
-                ]),
-                'ntf.title': new FormControl('', [
-                ]),
-                'ntf.description': new FormControl('', [
-                ]),
-                'ntf.selectedNtfSub': new FormControl(this.selectedNtfSub, [
-                ]),
-                'ntf.selectedNtfType': new FormControl(this.selectedNtfType, [
-                ]),
-            }
-        );
+        this.editForm = new FormGroup({
+            name: new FormControl(this.diseaseXiAn.name, [Validators.required]),
+            subsidiary: new FormControl(this.diseaseXiAn.subsidiary, [Validators.required]),
+            selectedSubsidiary: new FormControl('', [Validators.required]),
+            selectedConcourse: new FormControl('', [Validators.required]),
+            views: new FormControl(this.diseaseXiAn.views, []),
+            projectCode: new FormControl(this.diseaseXiAn.projectCode, []),
+            chargeCode: new FormControl(this.diseaseXiAn.chargeCode, []),
+            tollStandard: new FormControl(this.diseaseXiAn.tollStandard, []),
+            supplement: new FormControl(this.diseaseXiAn.supplement, []),
+            sample: new FormControl(this.diseaseXiAn.sample, []),
+            tutorial: new FormControl(this.diseaseXiAn.tutorial, []),
+            preservation: new FormControl(this.diseaseXiAn.preservation, []),
+            transportation: new FormControl(this.diseaseXiAn.transportation, []),
+            applicationUnitType: new FormControl(this.diseaseXiAn.applicationUnitType, []),
+            applicationRemark: new FormControl(this.diseaseXiAn.applicationRemark, []),
+            medicalMethod: new FormControl(this.diseaseXiAn.medicalMethod, []),
+            projectConcourse: new FormControl(this.diseaseXiAn.projectConcourse, []),
+            hurryDepartment: new FormControl(this.diseaseXiAn.hurryDepartment, []),
+            reportingTime: new FormControl(this.diseaseXiAn.reportingTime, []),
+            clinicalApplication: new FormControl(this.diseaseXiAn.clinicalApplication, []),
+            series: new FormControl(this.diseaseXiAn.series, []),
+            subSeries: new FormControl(this.diseaseXiAn.subSeries, []),
+            remarks: new FormControl(this.diseaseXiAn.remarks, []),
+            'ntf.title': new FormControl('', []),
+            'ntf.description': new FormControl('', []),
+            'ntf.selectedNtfSub': new FormControl(this.selectedNtfSub, []),
+            'ntf.selectedNtfType': new FormControl(this.selectedNtfType, [])
+        });
     }
 
     loadConcourses() {
         this.concourseService.query().subscribe(res => {
             this.concourses = res.body._embedded.concourse;
-            this.concourses.forEach(
-                c => {
-                    if (c.pseudoId === this.diseaseXiAn.concourseId) {
-                        this.editForm.patchValue(
-                            {
-                                'selectedConcourse': c
-                            }
-                        );
-                    }
+            this.concourses.forEach(c => {
+                if (c.pseudoId === this.diseaseXiAn.concourseId) {
+                    this.editForm.patchValue({
+                        selectedConcourse: c
+                    });
                 }
-            );
+            });
         });
     }
 
     loadSubsidiaries() {
-        this.diseaseXiAnService.getAllSubsidiary().subscribe(
-            res => {
-                this.subsidiaries = res;
-                console.log(this.subsidiaries);
-                this.subsidiaries.forEach(
-                    sub => {
-                        if (sub.id === this.diseaseXiAn.subsidiaryId) {
-                            this.editForm.patchValue(
-                                {
-                                    'selectedSubsidiary': sub,
-                                    'ntf.selectedNtfSub': sub
-                                }
-                            );
-                        }
-                    }
-                );
-            }
-        );
+        this.diseaseXiAnService.getAllSubsidiary().subscribe(res => {
+            this.subsidiaries = res;
+            console.log(this.subsidiaries);
+            this.subsidiaries.forEach(sub => {
+                if (sub.id === this.diseaseXiAn.subsidiaryId) {
+                    this.editForm.patchValue({
+                        selectedSubsidiary: sub,
+                        'ntf.selectedNtfSub': sub
+                    });
+                }
+            });
+        });
     }
 
     previousState() {
@@ -209,7 +177,7 @@ export class DiseaseXiAnUpdateComponent implements OnInit {
             this.diseaseXiAn.linkCards = undefined;
             this.diseaseXiAn.prices = undefined;
             this.subscribeToSaveResponse(this.diseaseXiAnService.create(prms, this.diseaseXiAn));
-        } else if (this.diseaseXiAn === undefined) {
+        } else if (this.diseaseXiAn.id === undefined) {
             this.subscribeToSaveResponse(this.diseaseXiAnService.create(prms, this.diseaseXiAn));
         }
     }
@@ -228,11 +196,10 @@ export class DiseaseXiAnUpdateComponent implements OnInit {
     }
 
     generateNtfToggle() {
-        this.ifGenerateNtf = ! this.ifGenerateNtf;
+        this.ifGenerateNtf = !this.ifGenerateNtf;
     }
 
     ifCloneToggle() {
-        this.ifClone = ! this.ifClone;
+        this.ifClone = !this.ifClone;
     }
-
 }

@@ -188,7 +188,7 @@
                             <p><span>{{diseaseXiAn.medicalMethod}}</span></p>
                         </mat-card>
                     </div>
-                    <div *jhiHasAnyAuthority="'ROLE_USER'">
+                    <div *jhiHasAnyAuthority="'ROLE_ADMIN'">
                         <div *jhiHideIfNull="diseaseXiAn.projectConcourse">
                             <mat-list-item>
                                 <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
@@ -263,9 +263,7 @@
 
                     <div *jhiHideIfNull="diseaseXiAn.subSeries">
                         <mat-list-item>
-                            <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span
-                                jhiTranslate="jhipsterElasticsearchSampleApplicationApp.diseaseXiAn.subSeries">Sub
-                                Series</span><span> : </span>
+                            <fa-icon class="icon-2" [icon]="'star'"></fa-icon><span>营销套餐代码及命名</span><span> : </span>
                         </mat-list-item>
                         <mat-card>
                             <p><span>{{ diseaseXiAn.subSeries }}</span></p>

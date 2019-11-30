@@ -88,9 +88,7 @@ export class DiseaseXiAnService {
     }
 
     deassociateWithDisease(ownId: number, reversedId: number) {
-        if (ownId !== reversedId) {
-            return this.http.get<any>(`${this.resourceUrl}/deassociate-with-disease/${ownId}/${reversedId}`, { observe: 'response' });
-        }
+        return this.http.get<any>(`${this.resourceUrl}/deassociate-with-disease/${ownId}/${reversedId}`, { observe: 'response' });
     }
 
     ////////////// QArobot ////////////////////////
@@ -172,6 +170,6 @@ export class DiseaseXiAnService {
 
     ////////////////////////////// DiseaseMap ////////////////////
     queryMaps(diseaseId: number): Observable<IDiseaseMap[]> {
-        return this.http.get<IDiseaseMap[]>(`${this.resourceUrl}/${diseaseId}/disease-maps`, { observe: 'body'});
+        return this.http.get<IDiseaseMap[]>(`${this.resourceUrl}/${diseaseId}/disease-maps`, { observe: 'body' });
     }
 }

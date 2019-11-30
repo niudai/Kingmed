@@ -41,7 +41,7 @@ export class DiseaseXiAnDetailComponent implements OnInit {
         { content: '相关问题', faIcon: 'question', relativeUrl: 'qarobots', color: '' },
         { content: '申请单', faIcon: 'file-alt', relativeUrl: 'applications', color: '' },
         { content: '耗材图片', faIcon: 'magic', relativeUrl: 'suppliess', color: '' },
-        { content: '相关项目', faIcon: 'book-medical', relativeUrl: 'diseases', color: '' }
+        { content: '相同项目', faIcon: 'book-medical', relativeUrl: 'diseases', color: '' }
     ];
 
     constructor(

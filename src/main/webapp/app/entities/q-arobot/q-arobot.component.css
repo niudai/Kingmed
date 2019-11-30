@@ -8,12 +8,16 @@ mat-nav-list.auto-complete-list.mat-nav-list.mat-list-base {
     z-index: 1000;
     background: rgba(251, 254, 255, 0.918);
     width: 100%;
-    box-shadow: 0 1px 5px rgba(0,0,0,.3);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
 }
 
 :host span.highlight-span::ng-deep strong {
     color: red;
     font-size: medium;
+}
+
+mat-card.mat-card.mat-ripple {
+    cursor: pointer;
 }
 
 fa-icon {
@@ -30,7 +34,7 @@ span.sub-label {
     min-width: 69px;
     margin: 5px;
     border-radius: 14px;
-    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
     background-color: deeppink;
 }
 
@@ -61,7 +65,7 @@ input#currentSearch {
     left: 0;
     display: inline-block;
     border-radius: 10px;
-    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
     border-style: outset;
     padding-left: 5px;
 }

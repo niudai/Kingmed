@@ -31,7 +31,7 @@ export class UserMgmtResolve implements Resolve<any> {
 
 export const userMgmtRoute: Routes = [
     {
-        path: 'user-management',
+        path: '',
         component: UserMgmtComponent,
         resolve: {
             pagingParams: JhiResolvePagingParams
@@ -42,7 +42,7 @@ export const userMgmtRoute: Routes = [
         }
     },
     {
-        path: 'user-management/:login/view',
+        path: ':login/view',
         component: UserMgmtDetailComponent,
         resolve: {
             user: UserMgmtResolve
@@ -52,14 +52,14 @@ export const userMgmtRoute: Routes = [
         }
     },
     {
-        path: 'user-management/new',
+        path: 'new',
         component: UserMgmtUpdateComponent,
         resolve: {
             user: UserMgmtResolve
         }
     },
     {
-        path: 'user-management/:login/edit',
+        path: ':login/edit',
         component: UserMgmtUpdateComponent,
         resolve: {
             user: UserMgmtResolve

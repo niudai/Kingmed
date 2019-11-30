@@ -37,7 +37,7 @@ export class QArobotComponent implements OnInit, OnDestroy {
     previousPage: any;
     reverse: any;
     pageEvent: PageEvent;
-    isFocus: boolean;
+    isFocus = false;
     currentTimer: any;
     autoCompleteQArobots: IQArobot[];
     isInArea = false;
@@ -84,13 +84,14 @@ export class QArobotComponent implements OnInit, OnDestroy {
     }
 
     onFocusSearchBox() {
-        console.log('search box is focused');
         this.isFocus = true;
+        console.log(`search box is focused ${this.isFocus}`);
+        this.fetchAutoComplete();
     }
 
     onBlurSearchBox() {
-        console.log('search box is blured');
-        this.isFocus = false;
+        console.log('Not Focused!');
+        setTimeout(any => (this.isFocus = false), 200);
     }
 
     // auto-complete query
@@ -99,24 +100,27 @@ export class QArobotComponent implements OnInit, OnDestroy {
             if (this.currentTimer) {
                 window.clearTimeout(this.currentTimer);
             }
-            this.currentTimer = window.setTimeout(
-                any => {
-                    console.log('auto completion query invoked!!');
-                    console.log('Current search equals: ', this.currentSearch);
-                    let params = new HttpParams();
-                    params = params.set('size', '5');
-                    if (this.currentSearch) {
-                        params = params.set('query', this.currentSearch);
-                    }
-                    this.qArobotService
-                    .search(params)
-                    .subscribe(
-                        (res: HttpResponse<IQArobot[]>) => this.autoCompleteQArobots = res.body,
-                        (res: HttpErrorResponse) => this.onError(res.message)
-                    );
-                },
-                300
-            );
+            this.currentTimer = window.setTimeout(any => {
+                this.fetchAutoComplete();
+            }, 300);
+        }
+    }
+
+    fetchAutoComplete() {
+        if (this.currentSearch) {
+            console.log(`Fetching AutoCoplete!!!!!! ${this.isFocus}`);
+            let params = new HttpParams();
+            params = params.set('size', '5');
+            params = params.set('query', this.currentSearch);
+            this.qArobotService
+                .search(params)
+                .subscribe(
+                    (res: HttpResponse<IQArobot[]>) => (this.autoCompleteQArobots = res.body),
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+        } else {
+            console.log("Can't Fetching AutoCoplete!!!!!!");
+            this.autoCompleteQArobots = null;
         }
     }
 

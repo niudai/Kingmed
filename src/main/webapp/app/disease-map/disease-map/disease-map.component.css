@@ -10,6 +10,11 @@
     background: inherit;
 }
 
+mat-card.expandable-node-card.mat-card {
+    margin: 10px;
+    cursor: pointer;
+}
+
 mat-expansion-panel.mat-expansion-panel.mat-expanded {
     background-color: gainsboro;
 }
@@ -31,24 +36,23 @@ mat-card.link-card {
     white-space: nowrap;
 } */
 
-.container li, ul {
+.container li,
+ul {
     display: inline-block;
 }
 
-
-
 .example-tree-invisible {
     display: none;
-  }
+}
 
-  .example-tree ul,
-  .example-tree li {
+.example-tree ul,
+.example-tree li {
     margin-top: 0;
     margin-bottom: 0;
     list-style-type: none;
-  }
+}
 
-  .ng-fa-icon {
-      cursor: pointer;
-      display: inline;
-  }
+.ng-fa-icon {
+    cursor: pointer;
+    display: inline;
+}

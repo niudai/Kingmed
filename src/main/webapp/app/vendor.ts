@@ -7,6 +7,7 @@ import '../content/css/vendor.css';
 import { library } from '@fortawesome/fontawesome-svg-core';
 
 import {
+    faInfoCircle,
     faClipboard,
     faHandPointRight,
     faPhone,
@@ -80,7 +81,6 @@ import {
     faAmbulance
 } from '@fortawesome/free-solid-svg-icons';
 
-
 // Adds the SVG icon to the library so you can use it in your page
 library.add(faBuilding);
 library.add(faAmbulance);
@@ -98,7 +98,8 @@ library.add(faTimes);
 library.add(faArrowLeft);
 library.add(faSave);
 library.add(faPlus);
-library.add(faChevronUp)
+library.add(faInfoCircle);
+library.add(faChevronUp);
 library.add(faPencilAlt);
 library.add(faBars);
 library.add(faHome);
